@@ -11,3 +11,7 @@ images (inspired from
 won't be as versatile: they won't install npm packages depending on their
 `config.json`, nor pip packages depending on their `requirements.txt` at launch,
 all installs should be done at image building).
+
+## Contributing
+
+All contributing instructions are in [CONTRIBUTING](CONTRIBUTING.md).
