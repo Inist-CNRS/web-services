@@ -5,5 +5,3 @@
 !config.json
 !docker-entrypoint.sh
 !generate-dotenv.js
-!chmod-all
-!chmod-one
