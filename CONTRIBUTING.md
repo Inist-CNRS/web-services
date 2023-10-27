@@ -15,3 +15,74 @@ git clone git@github.com:Inist-CNRS/web-services.git github-web-services
 Ainsi, votre répertoire se nommera `github-web-services`, et sera facilement
 distingué du répertoire `web-services` correspondant au dépôt `tdm/web-services`
 sur le GitBucket de l'Inist.
+
+## Création d'un service
+
+### Création du répertoire
+
+Tous les services sont dans le répertoire `services`.  
+Chacun dans son propre répertoire.  
+Son nom suit la convention de nommage des instances ezmaster: au moins deux
+parties composées de lettres minuscules (et éventuellement de chiffres, mais ce
+n'est pas conseillé, à cause de la confusion avec le numéro de version de
+l'instance). Par exemple :`base-line`, `astro-ner`, ...
+
+### Fichiers du service
+
+Chaque répertoire de service contient :
+
+- un répertoire `v1` (ou `v2`, ...) contenant son code source (contenant les
+  `.ini`, dans un arbre plus ou moins profond qui détermine les futures routes
+  du service).
+- un fichier `Dockerfile` qui part d'une image `ezs-python-server`
+- un fichier `.dockerignore` (le même que celui de `ezs-python-server`, mais
+  dans lequel on ajoute les fichiers sources)
+- le cas échéant, un fichier `config.json` contenant la configuration par défaut
+  de l'image (quand le service a besoin d'une configuration particulière).
+- un fichier `package.json`, sur le modèle de [celui de
+  `ezs-python-server`](./ezs-python-server/Dockerfile), où `ezs-python-server`
+  est remplacé par le nom du service (celui du répertoire, précédé de `ws-`;
+  exemple: `ws-base-line`), et où on réinitialise la version à `1.0.0`.
+- un fichier `swagger.json` dans lequel on modifie le title (devant commencer
+  par le nom du service, par exemple `base-line -`, c'est ce qui déterminera le
+  tri d'affichage des services dans l'OpenAPI).
+- un fichier `README.md` expliquant en quoi consiste le service.
+- un fichier `examples.http` avec un exemple de requête pour chaque route
+- un fichier `tests.hurl` généré à partir des exemples, pour éviter les
+  régressions du service
+
+### Développement
+
+#### Sans docker
+
+Pour lancer le serveur ezs en dehors de docker:
+
+- se placer à la racine du dépôt
+- lancer `npx ezs -v -d services/nom-du-service/`
+
+Évidemment, il faut avoir au préalable lancé `npm install` depuis la racine du
+dépôt.
+
+Dans le cas d'un service écrit en python, ne pas oublier d'activer
+l'environnement virtuel où sont installées les dépendances.
+
+#### Avec docker
+
+Pour construire l'image avec le tag `latest`:
+
+```bash
+npm run build:dev
+```
+
+Pour lancer l'image:
+
+```bash
+npm run start:dev
+```
+
+Pour arrêter le serveur: Contrôle-C.
+
+### Ajout dans la liste du README
+
+Une fois que le nouveau service est créé, il faut l'ajouter à la liste du README
+de la racine du dépôt.
