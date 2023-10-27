@@ -12,6 +12,7 @@ RUN mkdir -p /app/public && \
     "dataPath": "/app/public" \
     }' > /etc/ezmaster.json
 RUN su - pn -c "cd /app/public && \
+    npm install dotenv-cli@7.3.0 && \
     npm install @ezs/core@3.2.1 && \
     npm install @ezs/analytics@2.2.1 && \
     npm install @ezs/basics@2.5.5 && \
