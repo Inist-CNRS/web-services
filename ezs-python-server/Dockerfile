@@ -2,14 +2,13 @@ FROM nikolaik/python-nodejs:python3.9-nodejs20-slim
 
 WORKDIR /app
 # See .dockerignore to see what files are copied
-RUN mkdir -p /app/public && \
-    chown -R pn:pn /app && \
-    apt update && apt install -y tini && \
+RUN apt update && apt install -y tini && \
     echo '{ \
     "httpPort": 31976, \
     "configPath": "/app/config.json", \
     "dataPath": "/app/public" \
-    }' > /etc/ezmaster.json
+    }' > /etc/ezmaster.json && \
+    chmod a+w /app
 USER pn
 WORKDIR /app/public
 RUN npm install dotenv-cli@7.3.0 && \
