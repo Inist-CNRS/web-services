@@ -40,7 +40,7 @@ Chaque répertoire de service contient :
 - le cas échéant, un fichier `config.json` contenant la configuration par défaut
   de l'image (quand le service a besoin d'une configuration particulière).
 - un fichier `package.json`, sur le modèle de [celui de
-  `ezs-python-server`](./ezs-python-server/Dockerfile), où `ezs-python-server`
+  `ezs-python-server`](./bases/ezs-python-server/package.json), où `ezs-python-server`
   est remplacé par le nom du service (celui du répertoire, précédé de `ws-`;
   exemple: `ws-base-line`), et où on réinitialise la version à `1.0.0`.
 - un fichier `swagger.json` dans lequel on modifie le title (devant commencer
