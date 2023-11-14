@@ -1,0 +1,8 @@
+# Ignore all files by default
+*
+
+# White list only the required files
+!config.json
+!generate-dotenv.js
+!v1
+!swagger.json

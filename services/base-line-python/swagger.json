@@ -1,0 +1,33 @@
+{
+	"openapi": "3.0.0",
+	"info": {
+		"title": "base-line-python - Services en python dédiés aux tests",
+		"summary": "Vérifie la faisabilité de services en python",
+		"version": "0.0.0",
+		"termsOfService": "https://services.istex.fr/",
+		"contact": {
+			"name": "Inist-CNRS",
+			"url": "https://www.inist.fr/nous-contacter/"
+		}
+	},
+	"servers": [
+		{
+			"x-comment": "Will be automatically completed by the ezs server."
+		},
+		{
+			"url": "http://vptdmservices.intra.inist.fr:49225/",
+			"description": "Latest version for production",
+			"#DISABLED#x-profil": "Standard"
+		}
+	],
+	"tags": [
+		{
+			"name": "base-line",
+			"description": "Services dédiés aux tests",
+			"externalDocs": {
+				"description": "Plus de documentation",
+				"url": "https://github.com/Inist-CNRS/web-services/tree/main/services/base-line"
+			}
+		}
+	]
+}
