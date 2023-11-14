@@ -1,0 +1,30 @@
+{
+  "private": true,
+  "name": "web-services",
+  "version": "1.0.0",
+  "description": "Web services at Inist-CNRS",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Inist-CNRS/web-services.git"
+  },
+  "keywords": [
+    "webservices",
+    "tdm"
+  ],
+  "author": "",
+  "license": "CECILL-2.1",
+  "bugs": {
+    "url": "https://github.com/Inist-CNRS/web-services/issues"
+  },
+  "homepage": "https://github.com/Inist-CNRS/web-services#readme",
+  "dependencies": {
+    "@ezs/analytics": "2.2.1",
+    "@ezs/basics": "2.5.5",
+    "@ezs/core": "3.2.0",
+    "@ezs/spawn": "1.4.5"
+  }
+}
