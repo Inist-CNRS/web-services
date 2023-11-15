@@ -86,3 +86,12 @@ Pour arrêter le serveur: Contrôle-C.
 
 Une fois que le nouveau service est créé, il faut l'ajouter à la liste du README
 de la racine du dépôt.
+
+### Création d'une version
+
+Se déplacer dans le répertoire du `Dockerfile` et lancer `npm version` en
+utilisant l'argument `major`, `minor` ou `patch` suivant qu'il y a un changement
+majeur, un ajout de fonctionnalité ou une correction.
+
+Cela va créer un tag, modifier le numéro de version dans le README, et pousser
+le tout à la fois sur GitHub et sur Docker Hub.
