@@ -95,3 +95,13 @@ majeur, un ajout de fonctionnalité ou une correction.
 
 Cela va créer un tag, modifier le numéro de version dans le README, et pousser
 le tout à la fois sur GitHub et sur Docker Hub.
+
+### Les images de base
+
+Le répertoire `bases` contient les images de base, c'est-à-dire celles qui
+simplifie l'écriture de plusieurs services web.
+
+Quand on met à jour les paquets npm de l'image racine `ezs-python-server`, il ne
+faut pas oublier de changer les versions des paquets du `package.json` situé à
+la racine du dépôt (pour que les serveurs lancés localement utilisent les mêmes
+versions que les serveurs sous Docker).
