@@ -24,7 +24,7 @@
   "dependencies": {
     "@ezs/analytics": "2.2.1",
     "@ezs/basics": "2.5.5",
-    "@ezs/core": "3.2.0",
+    "@ezs/core": "3.2.2",
     "@ezs/spawn": "1.4.5"
   }
 }
