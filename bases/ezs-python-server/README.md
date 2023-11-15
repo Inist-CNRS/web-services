@@ -5,3 +5,9 @@ Ce répertoire contient de quoi construire une image Docker lançant un serveur
 scripts python.
 
 C'est l'image de base des web services.
+
+## Versions utilisées
+
+| python | node   |
+| ------ | ------ |
+| 3.9.18 | 20.5.1 |
