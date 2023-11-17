@@ -51,9 +51,65 @@ Chaque répertoire de service contient :
 - un fichier `tests.hurl` généré à partir des exemples, pour éviter les
   régressions du service
 
-### Développement
+### examples.http
 
-#### Sans docker
+Le fichier `examples.http` se situe à la racine d'une instance (et donc de son
+répertoire).
+
+Il contient des exemples de requêtes HTTP, et constitue donc une partie de la
+documentation du service.  
+Il sert de base à la génération de métadonnées d'exemple en notation pointée
+qu'on peut généralement ajouter sans modification dans le `.ini`.  
+De plus, il sert aussi à générer les tests, il est donc doublement important de
+bien le renseigner.
+
+Le début du fichier `examples.http` (attention, ce nom est utilisé dans
+plusieurs scripts, veillez à bien l'orthographier) contient une commentaire
+explicatif, et une variable permettant de changer le serveur cible des requêtes:
+
+```http
+# These examples can be used directly in VSCode, using REST Client extension (humao.rest-client)
+
+# Décommenter/commenter les lignes voulues pour tester localement
+@baseUrl=http://localhost:31976
+# @baseUrl=https://base-line.services.istex.fr
+```
+
+Ensuite viennent les requêtes elles-mêmes.  
+Le début d'une requête est signalé par une ligne contenant uniquement `###`.  
+Puis, on assigne un identifiant (un `name`) à la requête. Cet identifiant doit
+être unique et facile à reconstituer, il est donc conseillé de le construire à
+partir de la route de la requête.  
+Par exemple, la route `/v1/true/json` donnera lieu à un `name` valant
+`v1TrueJson`:
+
+```http
+###
+# @name v1TrueJson
+# On met ici un commentaire décrivant ce que fait la route appelée
+```
+
+Après ces commentaires viennent les lignes décrivant la requête:
+
+```http
+POST {{baseUrl}}/v1/true/json HTTP/1.1
+Content-Type: application/json
+
+[
+  { "value": "à l'école" },
+  { "value": "où" }
+]
+```
+
+En général on utilise la *méthode HTTP* `POST`, et le `Content-Type:
+application/json` (c'est le type du *body* envoyé), puis le tableau JSON envoyé
+(et en général, il contient un ou plusieurs objets avec un champ `value`).  
+Notez que comme ces exemples serviront aussi aux tests, il est utile d'y mettre
+aussi des exemples dont on veut vérifier le comportement.
+
+## Développement
+
+### Sans docker
 
 Pour lancer le serveur ezs en dehors de docker:
 
@@ -66,7 +122,7 @@ dépôt.
 Dans le cas d'un service écrit en python, ne pas oublier d'activer
 l'environnement virtuel où sont installées les dépendances.
 
-#### Avec docker
+### Avec docker
 
 Pour construire l'image avec le tag `latest`:
 
@@ -82,12 +138,12 @@ npm run start:dev
 
 Pour arrêter le serveur: Contrôle-C.
 
-### Ajout dans la liste du README
+## Ajout dans la liste du README
 
 Une fois que le nouveau service est créé, il faut l'ajouter à la liste du README
 de la racine du dépôt.
 
-### Création d'une version
+## Création d'une version
 
 Se déplacer dans le répertoire du `Dockerfile` et lancer `npm version` en
 utilisant l'argument `major`, `minor` ou `patch` suivant qu'il y a un changement
@@ -96,7 +152,7 @@ majeur, un ajout de fonctionnalité ou une correction.
 Cela va créer un tag, modifier le numéro de version dans le README, et pousser
 le tout à la fois sur GitHub et sur Docker Hub.
 
-### Les images de base
+## Les images de base
 
 Le répertoire `bases` contient les images de base, c'est-à-dire celles qui
 simplifie l'écriture de plusieurs services web.

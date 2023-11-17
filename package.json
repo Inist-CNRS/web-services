@@ -5,6 +5,7 @@
   "description": "Web services at Inist-CNRS",
   "main": "index.js",
   "scripts": {
+    "generate:example-metadata": "node bin/generate-example-metadata.mjs",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -25,6 +26,10 @@
     "@ezs/analytics": "2.2.1",
     "@ezs/basics": "2.5.5",
     "@ezs/core": "3.2.2",
-    "@ezs/spawn": "1.4.5"
+    "@ezs/spawn": "1.4.5",
+    "rest-cli": "1.8.13"
+  },
+  "devDependencies": {
+    "@types/node": "20.9.0"
   }
 }
