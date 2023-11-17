@@ -48,8 +48,8 @@ Chaque répertoire de service contient :
   tri d'affichage des services dans l'OpenAPI).
 - un fichier `README.md` expliquant en quoi consiste le service.
 - un fichier `examples.http` avec un exemple de requête pour chaque route
-- un fichier `tests.hurl` généré à partir des exemples, pour éviter les
-  régressions du service
+- deux fichiers `local-tests.hurl` et `remote-tests.hurl` générés à partir des
+  exemples, pour éviter les régressions du service
 
 ### examples.http
 
@@ -104,8 +104,39 @@ Content-Type: application/json
 En général on utilise la *méthode HTTP* `POST`, et le `Content-Type:
 application/json` (c'est le type du *body* envoyé), puis le tableau JSON envoyé
 (et en général, il contient un ou plusieurs objets avec un champ `value`).  
-Notez que comme ces exemples serviront aussi aux tests, il est utile d'y mettre
-aussi des exemples dont on veut vérifier le comportement.
+
+> **Remarque**: comme ces exemples serviront aussi aux tests, il est utile d'y
+> mettre aussi des exemples dont on veut vérifier le comportement.
+
+## local-tests.hurl et remote-tests.hurl
+
+Les fichiers `services/<instance>/local-tests.hurl` et
+`services/<instance>/remote-tests.hurl` sont la plupart du temps générés (sauf
+pour les enchaînements de services qu'on a dans les `data-*`).
+
+Pour ça, il faut d'abord lancer le serveur en local dans un terminal:
+
+```bash
+cd services/<instance>
+npm run start:dev
+```
+
+ou bien
+
+```bash
+npx ezs -v -d services/<instance>/
+```
+
+puis lancer la génération des tests (depuis la racine du dépôt) dans un autre
+terminal:
+
+```bash
+npm run generate:example-tests services/<instance>
+```
+
+> **Remarque**: le fichier `services/<instance>/examples.http` doit exister et
+> contenir au moins un exemple.  
+> Voir [examples.http](#exampleshttp)
 
 ## Développement
 
