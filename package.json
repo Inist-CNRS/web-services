@@ -6,6 +6,7 @@
   "main": "index.js",
   "scripts": {
     "generate:example-metadata": "node bin/generate-example-metadata.mjs",
+    "generate:example-tests": "node bin/generate-example-tests.mjs",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
