@@ -5,7 +5,8 @@
 # @baseUrl=https://base-line.services.istex.fr
 
 ###
-# Parse un flux JSON, et le returne sans modification
+# @name v1NoAccent
+# Enlève les accents dans le champ value
 POST {{baseUrl}}/v1/no-accent?indent=true HTTP/1.1
 Content-Type: application/json
 
@@ -15,3 +16,12 @@ Content-Type: application/json
 ]
 
 ###
+# @name v1NoAccent2
+# Enlément les accents dans le champ value
+POST {{baseUrl}}/v1/no-accent2?indent=true HTTP/1.1
+Content-Type: application/json
+
+[
+	{ "value": "é" },
+	{ "value": "à" }
+]
