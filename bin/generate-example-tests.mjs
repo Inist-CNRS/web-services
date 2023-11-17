@@ -2,7 +2,7 @@
 
 // Generate two files for a service instance:
 // 1. local tests (services/<instance>/local-tests.hurl)
-// 2. remote tests (services/<instance>/services-tests.hurl)
+// 2. remote tests (services/<instance>/remote-tests.hurl)
 //
 // The service should be launched as a local server.
 // URL: http://localhost:31976
@@ -113,7 +113,7 @@ if (process.argv.length === 3) {
     console.log(hurlString);
     await writeFile(`./${instancePath}/local-tests.hurl`, hurlString);
     await writeFile(
-        `./${instancePath}/services-tests.hurl`,
+        `./${instancePath}/remote-tests.hurl`,
         hurlString.replace(/http:\/\/localhost:31976/g, `https://${instanceName}.services.istex.fr`)
     );
     process.exit(0);

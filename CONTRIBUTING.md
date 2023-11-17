@@ -48,8 +48,8 @@ Chaque répertoire de service contient :
   tri d'affichage des services dans l'OpenAPI).
 - un fichier `README.md` expliquant en quoi consiste le service.
 - un fichier `examples.http` avec un exemple de requête pour chaque route
-- un fichier `tests.hurl` généré à partir des exemples, pour éviter les
-  régressions du service
+- deux fichiers `local-tests.hurl` et `remote-tests.hurl` générés à partir des
+  exemples, pour éviter les régressions du service
 
 ### examples.http
 
@@ -106,6 +106,10 @@ application/json` (c'est le type du *body* envoyé), puis le tableau JSON envoy�
 (et en général, il contient un ou plusieurs objets avec un champ `value`).  
 Notez que comme ces exemples serviront aussi aux tests, il est utile d'y mettre
 aussi des exemples dont on veut vérifier le comportement.
+
+## local-tests.hurl et remote-tests.hurl
+
+
 
 ## Développement
 
