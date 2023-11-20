@@ -169,6 +169,34 @@ npm run start:dev
 
 Pour arrêter le serveur: Contrôle-C.
 
+## Tests
+
+Pour tester un service lancé localement, utiliser:
+
+```bash
+npm run test:local service-name
+```
+
+Pour tester un service en production, taper:
+
+```bash
+npm run test:remote service-name
+```
+
+Pour tester tous les services en production qui ont un fichier
+`remote-tests.hurl`:
+
+```bash
+npm run test:remotes services/*
+```
+
+Pour tester uniquement certains services en production (à condition qu'ils aient
+un fichier `remote-tests.hurl`):
+
+```bash
+npm run test:remotes service-name service2-name
+```
+
 ## Ajout dans la liste du README
 
 Une fois que le nouveau service est créé, il faut l'ajouter à la liste du README
