@@ -8,7 +8,10 @@
     "generate:example-metadata": "node bin/generate-example-metadata.mjs",
     "generate:example-tests": "node bin/generate-example-tests.mjs",
     "help": "bat SCRIPTS.md || cat SCRIPTS.md",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "test:local": "bin/test-service.sh local",
+    "test:remote": "bin/test-service.sh remote",
+    "test:remotes": "bin/test-services.sh remote"
   },
   "repository": {
     "type": "git",
@@ -29,6 +32,7 @@
     "@ezs/basics": "2.5.5",
     "@ezs/core": "3.2.2",
     "@ezs/spawn": "1.4.5",
+    "@orangeopensource/hurl": "4.1.0",
     "rest-cli": "1.8.13"
   },
   "devDependencies": {
