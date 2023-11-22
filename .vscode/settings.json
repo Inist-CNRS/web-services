@@ -1,0 +1,7 @@
+{
+    "markdownlint.config": {
+        "MD024": false, // MD024: Duplicate headings
+        "MD028": false, // MD028: Blank line inside blockquote
+        "MD051": false  // MD051: Broken link fragment (ex: #v1/teeft instead of #v1teeft)
+    }
+}

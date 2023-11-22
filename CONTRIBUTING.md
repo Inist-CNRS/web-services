@@ -220,3 +220,54 @@ Quand on met à jour les paquets npm de l'image racine `ezs-python-server`, il n
 faut pas oublier de changer les versions des paquets du `package.json` situé à
 la racine du dépôt (pour que les serveurs lancés localement utilisent les mêmes
 versions que les serveurs sous Docker).
+
+## Nouvelle branche
+
+La branche principale (`main`) du dépôt est protégée.  
+Ça signifie que pour contribuer au dépôt, il faut passer par le mécanisme des
+*pull requests*.  
+
+Et pour créer une *pull request* (ou contribution), il faut d'abord créer une branche.  
+
+Son nom est important, car il permettra aux *GitHub Actions* automatiques
+d'obtenir des informations sur la partie du dépôt qui est travaillée.  
+Par exemple, est-ce qu'on corrige un service, ou bien on l'améliore, ou alors on le chamboule?  
+Ces différents cas donneront lieu à différents numéros de version suivant la
+[gestion sémantique de version](https://semver.org/lang/fr/).
+
+Les noms des branches auront donc 3 parties:
+
+1. le niveau de la contribution (`fix`, `improve`, ou `change`)
+2. le nom du service (ou de l'image de base) concerné(e) (souvent un nom en deux
+   parties séparées par un tiret, suivant la convention de nommage des
+   *containers* dans [ezmaster](https://github.com/Inist-CNRS/ezmaster))
+3. le détail de l'opération
+
+Chacune de ces parties sera écrite en minuscules, sans accent, sans espace, et
+elles seront séparées par le caractère `/`.
+
+Par exemple, pour améliorer le service `base-line`, et lui ajouter une route
+`v1/lowercase`, on pourrait créer une branche nommée
+`improve/base-line/add-route-lowercase`.
+
+Ainsi, si le service était en version `1.0.2` avant l'intégration de cette
+contribution, on peut déterminer automatiquement que c'est la partie mineure de
+la version qui sera incrémentée une fois la contribution intégrée.  
+Cela donnerait la version `1.1.0`.
+
+D'autres exemples de noms de branche:
+
+- `fix/base-line-python/make-python-script-executable`
+- `change/base-line/change-required-input-for-no-accent`
+- `improve/teeft/add-teeft-with-number`
+- `docs/contributing/add-new-branch`
+
+> **Remarque** : pour tout ce qui ne concerne pas les cas précédents (corriger,
+> améliorer, changer), on ne changera pas de numéro de version. Exemple, la
+> branche `docs/contributing/add-new-branch` signale qu'on va modifier la
+> documentation, le fichier [CONTRIBUTING.md](./CONTRIBUTING.md), et lui ajouter
+> une partie sur les nouvelles branches.
+
+> **Remarque** : comme nous construisons des programmes *open source*, tâchons
+> de garder tout ce qui est technique (ça peut exclure la documentation
+> elle-même) en anglais.
