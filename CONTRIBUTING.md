@@ -202,15 +202,6 @@ npm run test:remotes service-name service2-name
 Une fois que le nouveau service est créé, il faut l'ajouter à la liste du README
 de la racine du dépôt.
 
-## Création d'une version
-
-Se déplacer dans le répertoire du `Dockerfile` et lancer `npm version` en
-utilisant l'argument `major`, `minor` ou `patch` suivant qu'il y a un changement
-majeur, un ajout de fonctionnalité ou une correction.
-
-Cela va créer un tag, modifier le numéro de version dans le README, et pousser
-le tout à la fois sur GitHub et sur Docker Hub.
-
 ## Les images de base
 
 Le répertoire `bases` contient les images de base, c'est-à-dire celles qui
@@ -271,3 +262,18 @@ D'autres exemples de noms de branche:
 > **Remarque** : comme nous construisons des programmes *open source*, tâchons
 > de garder tout ce qui est technique (ça peut exclure la documentation
 > elle-même) en anglais.
+
+## Création d'une version
+
+On peut créer une version manuellement. Pour ça il faut se déplacer dans le
+répertoire du `Dockerfile` et lancer `npm version` en utilisant l'argument
+`major`, `minor` ou `patch` suivant qu'il y a un changement majeur, un ajout de
+fonctionnalité ou une correction.
+
+Cela va créer un tag, modifier le numéro de version dans le README, et pousser
+le tout à la fois sur GitHub et sur Docker Hub.
+
+> **Note**: la création d'une version d'un service est faite automatiquement au
+> moment de fusionner (*mergeù) une *pull request*: le nom de la branche
+> associée conditionne ce traitement automatique, faites-y donc très attention
+> (voir [Nouvelle branche](#nouvelle-branche)).
