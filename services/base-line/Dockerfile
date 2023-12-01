@@ -1,4 +1,4 @@
-FROM cnrsinist/ezs-python-server:py3.9-no20-1.0.2
+FROM cnrsinist/ezs-python-server:py3.9-no18-1.0.3
 
 USER pn
 WORKDIR /app/public
