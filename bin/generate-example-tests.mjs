@@ -19,8 +19,10 @@ const usage = (errorNumber = 0) => {
 /** @param {string} s */
 const isInteger = (s) => Number.isInteger(Number(s));
 
-const isText = request => request.headers.has("Content-Type") &&
-    request.headers.get("Content-Type").startsWith("text/");
+const isText = request => Boolean(
+    request.headers.has("Content-Type") &&
+    request.headers.get("Content-Type").startsWith("text/")
+);
 
 const wrapText = text => "```\n" + text + "```\n\n";
 
