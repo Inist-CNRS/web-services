@@ -50,9 +50,6 @@ a,b
 ```
 
 HTTP 200
-```
-a;b
-```
 
 
 POST {{host}}/v1/echo/raw
