@@ -1,4 +1,4 @@
-FROM nikolaik/python-nodejs:python3.9-nodejs20-slim
+FROM nikolaik/python-nodejs:python3.9-nodejs18-slim
 
 WORKDIR /app
 # See .dockerignore to see what files are copied
