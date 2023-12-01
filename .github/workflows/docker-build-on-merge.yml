@@ -36,6 +36,7 @@ jobs:
               shell: bash
               env:
                   GIT_REMOTE_REPO: 'https://${{ github.actor }}:${{ github.token }}@github.com/${{ github.repository }}.git'
+                  GIT_REF: 'HEAD:${{ github.event.pull_request.head.ref }}'
 
               run: |
                   git config --global user.name "${{ github.actor }}"
