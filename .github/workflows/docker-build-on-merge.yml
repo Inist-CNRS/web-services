@@ -9,6 +9,11 @@ on:
 jobs:
     build:
         if: github.event.pull_request.merged == true
+            && (
+            contains(github.event.pull_request.head.ref, '/major/')
+            || contains(github.event.pull_request.head.ref, '/minor/')
+            || contains(github.event.pull_request.head.ref, '/patch/')
+            )
         permissions: write-all
         runs-on: ubuntu-latest
 
