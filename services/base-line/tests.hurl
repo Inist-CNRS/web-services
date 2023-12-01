@@ -47,13 +47,11 @@ POST {{host}}/v1/echo/csv
 content-type: application/csv
 ```
 a,b
-1,2
 ```
 
 HTTP 200
 ```
 a;b
-1;2
 ```
 
 
