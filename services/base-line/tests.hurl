@@ -73,11 +73,6 @@ a,value
 ```
 
 HTTP 200
-```
-a;value
-1;true
-```
-
 
 
 POST {{host}}/v1/true/json
