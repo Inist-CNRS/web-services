@@ -1,14 +1,16 @@
 {
     "private": true,
-    "name": "ezs-python-server",
-    "version": "1.0.3",
-    "description": "ezs server + python",
+    "name": "python-node",
+    "version": "0.0.0",
+    "description": "python + node docker image",
     "repository": {
         "type": "git",
         "url": "git+https://github.com/Inist-CNRS/web-services.git"
     },
     "keywords": [
-        "ezmaster"
+        "python",
+        "node",
+        "docker"
     ],
     "author": "François Parmentier <francois.parmentier@gmail.com>",
     "license": "MIT",
