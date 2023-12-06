@@ -1,7 +1,7 @@
 {
     "private": true,
     "name": "ezs-python-server",
-    "version": "1.0.3",
+    "version": "1.0.4",
     "description": "ezs server + python",
     "repository": {
         "type": "git",

@@ -1,4 +1,4 @@
-FROM cnrsinist/python-node:py3.9-no16-latest
+FROM cnrsinist/python-node:py3.9-no16-1.0.0
 
 RUN apt update && apt install -y tini && \
     echo '{ \
