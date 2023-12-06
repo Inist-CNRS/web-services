@@ -8,6 +8,6 @@ C'est l'image de base des web services.
 
 ## Versions utilisées
 
-| python | node   |
-| ------ | ------ |
-| 3.9.18 | 20.5.1 |
+| python | node    |
+| ------ | ------- |
+| 3.9.18 | 16.20.2 |
