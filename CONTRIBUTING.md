@@ -205,12 +205,19 @@ de la racine du dépôt.
 ## Les images de base
 
 Le répertoire `bases` contient les images de base, c'est-à-dire celles qui
-simplifie l'écriture de plusieurs services web.
+simplifient l'écriture de plusieurs services web.
 
 Quand on met à jour les paquets npm de l'image racine `ezs-python-server`, il ne
 faut pas oublier de changer les versions des paquets du `package.json` situé à
 la racine du dépôt (pour que les serveurs lancés localement utilisent les mêmes
 versions que les serveurs sous Docker).
+
+Il y a plusieurs images de base:
+
+- [`python-node`](./bases/python-node/README.md): image avec python et node,
+  base des serveurs ezs
+- [`ezs-python-server`](./bases/ezs-python-server/README.md): serveur ezs vide,
+  acceptant les scripts ezs et python
 
 ## Nouvelle branche
 
