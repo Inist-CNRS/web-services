@@ -1,5 +1,5 @@
 # Dockerfile
-FROM python:3.9-slim-bookworm
+FROM python:3.9.18-slim-bullseye
 
 ENV NODE_VERSION=16.20.2
 
