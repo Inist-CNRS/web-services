@@ -1,4 +1,4 @@
-# ezs-python-server@1.0.3
+# ezs-python-server@1.0.4
 
 Ce répertoire contient de quoi construire une image Docker lançant un serveur
 [ezs](https://github.com/Inist-CNRS/ezs) ayant la possibilité de lancer des
@@ -8,6 +8,6 @@ C'est l'image de base des web services.
 
 ## Versions utilisées
 
-| python | node   |
-| ------ | ------ |
-| 3.9.18 | 20.5.1 |
+| python | node    |
+| ------ | ------- |
+| 3.9.18 | 16.20.2 |
