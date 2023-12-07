@@ -24,7 +24,7 @@
         "version:tag": "git tag \"${npm_package_name}@${npm_package_version}\" -m \"${npm_package_name}@${npm_package_version}\"",
         "version:push": "git push ${GIT_REMOTE_REPO} && git push --tags ${GIT_REMOTE_REPO}",
         "version": "npm run version:insert && npm run version:commit && npm run version:tag",
-        "postversion": "npm run version:push && npm run build && npm run publish",
+        "postversion": "npm run version:push",
         "build:dev": "docker build -t cnrsinist/${npm_package_name}:latest .",
         "start:dev": "npm run build:dev && docker run --name dev --rm --detach -p 31976:31976 cnrsinist/${npm_package_name}:latest",
         "stop:dev": "docker stop dev",
