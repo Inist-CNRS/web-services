@@ -167,7 +167,17 @@ Pour lancer l'image:
 npm run start:dev
 ```
 
-Pour arrêter le serveur: Contrôle-C.
+Pour arrêter le serveur:
+
+```bash
+npm run stop:dev
+```
+
+ou bien:
+
+```bash
+docker stop dev
+```
 
 ## Tests
 
@@ -229,42 +239,36 @@ Et pour créer une *pull request* (ou contribution), il faut d'abord créer une 
 
 Son nom est important, car il permettra aux *GitHub Actions* automatiques
 d'obtenir des informations sur la partie du dépôt qui est travaillée.  
-Par exemple, est-ce qu'on corrige un service, ou bien on l'améliore, ou alors on le chamboule?  
-Ces différents cas donneront lieu à différents numéros de version suivant la
-[gestion sémantique de version](https://semver.org/lang/fr/).
 
-Les noms des branches auront donc 3 parties:
+Les noms des branches auront 3 parties:
 
-1. le nom du service (ou de l'image de base) concerné(e) (en deux
-   parties séparées par un tiret, suivant la convention de nommage des
-   *containers* dans [ezmaster](https://github.com/Inist-CNRS/ezmaster))
-2. le niveau de la contribution (`major`, `minor`, ou `patch`)
-3. le détail de l'opération
+1. `services` pour indiquer qu'on travaille dans le répertoire des services
+2. le nom du service (ou de l'image de base) concerné(e) (en deux parties
+   séparées par un tiret, suivant la convention de nommage des *containers* dans
+   [ezmaster](https://github.com/Inist-CNRS/ezmaster)), correspondant au nom du
+   répertoire (donc sans `ws-`)
+3. le détail de l'opération. C'est un commentaire (où il faut séparer les mots
+   par des tirets)
 
 Chacune de ces parties sera écrite en minuscules, sans accent, sans espace, et
 elles seront séparées par le caractère `/`.
 
 Par exemple, pour améliorer le service `base-line`, et lui ajouter une route
 `v1/lowercase`, on pourrait créer une branche nommée
-`base-line/minor/add-route-lowercase`.
+`services/base-line/add-route-lowercase`.
 
-Ainsi, si le service était en version `1.0.2` avant l'intégration de cette
-contribution, on peut déterminer automatiquement que c'est la partie mineure de
-la version qui sera incrémentée une fois la contribution intégrée.  
-Cela donnerait la version `1.1.0`.
+Ainsi, c'est le service `base-line` qui sera concerné par les actions
+automatiques.  
 
 D'autres exemples de noms de branche:
 
-- `base-line-python/patch/make-python-script-executable`
-- `base-line/major/change-required-input-for-no-accent`
-- `terms-teeft/minor/add-teeft-with-number`
+- `services/base-line-python/make-python-script-executable`
+- `services/base-line/change-required-input-for-no-accent`
+- `services/terms-teeft/add-teeft-with-number`
 - `docs/contributing/add-new-branch`
 
-> **Remarque** : pour tout ce qui ne concerne pas les cas précédents (corriger,
-> améliorer, changer), on ne changera pas de numéro de version. Exemple, la
-> branche `docs/contributing/add-new-branch` signale qu'on va modifier la
-> documentation, le fichier [CONTRIBUTING.md](./CONTRIBUTING.md), et lui ajouter
-> une partie sur les nouvelles branches.
+> **Remarque** : seules branches commençant par `services/` et contenant deux
+> `/` déclencheront l'action de test du service.
 
 > **Remarque** : comme nous construisons des programmes *open source*, tâchons
 > de garder tout ce qui est technique (ça peut exclure la documentation
@@ -272,15 +276,11 @@ D'autres exemples de noms de branche:
 
 ## Création d'une version
 
-On peut créer une version manuellement. Pour ça il faut se déplacer dans le
+Une version se crée manuellement. Pour ça il faut se déplacer dans le
 répertoire du `Dockerfile` et lancer `npm version` en utilisant l'argument
 `major`, `minor` ou `patch` suivant qu'il y a un changement majeur, un ajout de
 fonctionnalité ou une correction.
 
 Cela va créer un tag, modifier le numéro de version dans le README, et pousser
-le tout à la fois sur GitHub et sur Docker Hub.
-
-> **Note**: la création d'une version d'un service est faite automatiquement au
-> moment de fusionner (*mergeù) une *pull request*: le nom de la branche
-> associée conditionne ce traitement automatique, faites-y donc très attention
-> (voir [Nouvelle branche](#nouvelle-branche)).
+le tout sur GitHub, déclenachant une action de Github qui poussera
+automatiquement l'image sur Docker Hub.

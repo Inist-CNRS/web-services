@@ -5,9 +5,7 @@ name: Docker Build & Test
 on:
     push:
         branches:
-            - '*/major/*'
-            - '*/minor/*'
-            - '*/patch/*'
+            - 'services/*/*'
 
 jobs:
     test:
