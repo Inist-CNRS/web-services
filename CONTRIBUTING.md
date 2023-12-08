@@ -219,7 +219,7 @@ simplifient l'écriture de plusieurs services web.
 
 Quand on met à jour les paquets npm de l'image racine `ezs-python-server`, il ne
 faut pas oublier de changer les versions des paquets du `package.json` situé à
-la racine du dépôt (pour que les serveurs lancés localement utilisent les mêmes>
+la racine du dépôt (pour que les serveurs lancés localement utilisent les mêmes
 versions que les serveurs sous Docker).
 
 Il y a plusieurs images de base:
@@ -257,7 +257,7 @@ Par exemple, pour améliorer le service `base-line`, et lui ajouter une route
 `v1/lowercase`, on pourrait créer une branche nommée
 `services/base-line/add-route-lowercase`.
 
-Ainsi, que c'est le service `base-line` qui sera concerné par les actions
+Ainsi, c'est le service `base-line` qui sera concerné par les actions
 automatiques.  
 
 D'autres exemples de noms de branche:
@@ -282,10 +282,5 @@ répertoire du `Dockerfile` et lancer `npm version` en utilisant l'argument
 fonctionnalité ou une correction.
 
 Cela va créer un tag, modifier le numéro de version dans le README, et pousser
-le tout sur GitHub. Une action de Github poussera automatiquement l'image sur
-Docker Hub.
-
-> **Note**: le fait de pousser le tag de la version va déclencher la
-> construction de l'image et sa publication sur Docker Hub: le nom de la branche
-> associée conditionne ce traitement automatique, faites-y donc très attention
-> (voir [Nouvelle branche](#nouvelle-branche)).
+le tout sur GitHub, déclenachant une action de Github qui poussera
+automatiquement l'image sur Docker Hub.
