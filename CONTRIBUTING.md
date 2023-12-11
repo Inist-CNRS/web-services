@@ -223,7 +223,11 @@ la racine du dépôt (pour que les serveurs lancés localement utilisent les mê
 versions que les serveurs sous Docker).
 
 De même, il faut mettre à jour tous les web services qui utilisent ces images de
-base!
+base! Pour lister les services concernés par une image de base:
+
+```bash
+grep ezs-python-server services/*/Dockerfile
+```
 
 Il y a plusieurs images de base:
 
