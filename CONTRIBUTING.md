@@ -147,8 +147,18 @@ Pour lancer le serveur ezs en dehors de docker:
 - se placer à la racine du dépôt
 - lancer `npx ezs -v -d services/nom-du-service/`
 
-Évidemment, il faut avoir au préalable lancé `npm install` depuis la racine du
+Évidemment, il faut avoir au préalable configuré la bonne version de node (celle
+qui correspond aux images de base) et lancé `npm install` depuis la racine du
 dépôt.
+
+Il est conseillé d'installer node via [nvm](https://github.com/nvm-sh/nvm), et
+de se conformer à la version inscrite dans le fichier [.nvmrc](./.nvmrc).  
+Pour cela: `nvm install`.  
+Pour plus d'information, voir la [documentation de
+nvm](https://github.com/nvm-sh/nvm#nvmrc). Il existe même un moyen de passer
+automatiquement à la version demandée, en arrivant à la racine du répertoire:
+[nvm / Deeper Shell
+integration](https://github.com/nvm-sh/nvm#deeper-shell-integration)~~.~~
 
 Dans le cas d'un service écrit en python, ne pas oublier d'activer
 l'environnement virtuel où sont installées les dépendances.
