@@ -1,4 +1,4 @@
-FROM cnrsinist/ezs-python-server:py3.9-no16-1.0.4
+FROM cnrsinist/ezs-python-server:py3.9-no16-1.0.5
 
 USER root
 RUN pip install unidecode==1.3.7
