@@ -222,6 +222,13 @@ faut pas oublier de changer les versions des paquets du `package.json` situé à
 la racine du dépôt (pour que les serveurs lancés localement utilisent les mêmes
 versions que les serveurs sous Docker).
 
+De même, il faut mettre à jour tous les web services qui utilisent ces images de
+base! Pour lister les services concernés par une image de base:
+
+```bash
+grep ezs-python-server services/*/Dockerfile
+```
+
 Il y a plusieurs images de base:
 
 - [`python-node`](./bases/python-node/README.md): image avec python et node,

@@ -29,13 +29,13 @@
   "homepage": "https://github.com/Inist-CNRS/web-services#readme",
   "dependencies": {
     "@ezs/analytics": "2.2.1",
-    "@ezs/basics": "2.5.5",
-    "@ezs/core": "3.3.0",
+    "@ezs/basics": "2.5.7",
+    "@ezs/core": "3.4.2",
     "@ezs/spawn": "1.4.5",
     "@orangeopensource/hurl": "4.1.0",
     "rest-cli": "1.8.13"
   },
   "devDependencies": {
-    "@types/node": "20.9.4"
+    "@types/node": "20.10.4"
   }
 }
