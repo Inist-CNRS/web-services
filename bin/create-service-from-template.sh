@@ -34,7 +34,11 @@ read -r AUTHOR_NAME
 printf "Author email: "
 read -r AUTHOR_EMAIL
 
+echo -ne "Copying template...    \r"
+
 cp -r template "services/$SERVICE_NAME"
+
+echo -ne "Customizing service... \r"
 
 for FILE in "services/$SERVICE_NAME"/*; do
     if [ -f "$FILE" ]; then
@@ -47,6 +51,8 @@ for FILE in "services/$SERVICE_NAME"/*; do
 done
 
 # Add service to workspaces in package.json
+echo -ne "Adding workspace...    \r"
+
 node <<EOF
 const packageJson = require('./package.json');
 packageJson.workspaces = (packageJson.workspaces ?? [])
@@ -64,6 +70,8 @@ require('fs').writeFileSync(
 EOF
 
 # Add service to list of services in README
+echo -ne "Updating README...     \r"
+
 sed -n '1,/## Services/p' < README.md > README.tmp
 echo "" >> README.tmp
 node <<EOF >> README.tmp
@@ -83,3 +91,5 @@ EOF
 mv README.md README.back
 mv README.tmp README.md
 rm README.back
+
+echo -e "\rDone                    "
