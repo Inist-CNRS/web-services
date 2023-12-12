@@ -27,6 +27,29 @@ parties composées de lettres minuscules (et éventuellement de chiffres, mais c
 n'est pas conseillé, à cause de la confusion avec le numéro de version de
 l'instance). Par exemple :`base-line`, `astro-ner`, ...
 
+Pour profiter du système de *workspaces* de npm, il faut déclarer le répertoire
+du nouveau service dans le `package.json` situé à la racine du dépôt.
+
+Par exemple, voici les services `base-line` et `base-line-python` déclarés dans
+le `package.json`:
+
+```json
+{
+  "workspaces": [
+    "services/base-line",
+    "services/base-line-python"
+  ]
+}
+```
+
+Ainsi, vous serez capable de lancer des scripts d'un service (par exemple
+`base-line`) depuis la racine du dépôt:
+
+```bash
+npm -w services/base-line run start:dev
+npm -w services/base-line run stop:dev
+```
+
 ### Fichiers du service
 
 Chaque répertoire de service contient :
@@ -42,7 +65,7 @@ Chaque répertoire de service contient :
 - un fichier `package.json`, sur le modèle de [celui de
   `ezs-python-server`](./bases/ezs-python-server/package.json), où `ezs-python-server`
   est remplacé par le nom du service (celui du répertoire, précédé de `ws-`;
-  exemple: `ws-base-line`), et où on réinitialise la version à `1.0.0`.
+  exemple: `ws-base-line`), et où on réinitialise la version à `0.0.0`.
 - un fichier `swagger.json` dans lequel on modifie le title (devant commencer
   par le nom du service, par exemple `base-line -`, c'est ce qui déterminera le
   tri d'affichage des services dans l'OpenAPI).
