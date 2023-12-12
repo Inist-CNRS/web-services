@@ -45,3 +45,20 @@ for FILE in "services/$SERVICE_NAME"/*; do
         sed -i "s/{author_email}/$AUTHOR_EMAIL/g" "$FILE"
     fi
 done
+
+# Add service to workspaces in package.json
+node <<EOF
+const packageJson = require('./package.json');
+packageJson.workspaces = (packageJson.workspaces ?? [])
+    .concat(['services/$SERVICE_NAME'])
+    .sort()
+    .reduce(
+        (acc, curr) => acc.includes(curr) ? acc : [...acc, curr],
+        []
+    );
+
+require('fs').writeFileSync(
+    './package.json',
+    JSON.stringify(packageJson, null, 2)
+)
+EOF
