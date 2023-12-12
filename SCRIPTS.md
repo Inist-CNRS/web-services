@@ -6,6 +6,7 @@ Available scripts:
 - generate:example-tests
 - generate:service
 - help
+- publish
 
 ## generate:example-metadata
 
@@ -56,3 +57,14 @@ Display this help (file `SCRIPT.md`).
 Help is colorized if you have `bat` installed.
 
 See <https://github.com/sharkdp/bat>.
+
+## publish
+
+Usage: `npm run publish`
+
+Publish all services to Inist's reverse proxy (at
+`service-name.services.istex.fr`), and to its OpenAPI's documentation
+(<https://openapi.services.istex.fr>).
+
+All services with a `swagger.json` containing an enabled `servers.url` (with a
+`standard` value for `x-profil`).

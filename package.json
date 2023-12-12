@@ -9,6 +9,7 @@
     "generate:example-tests": "node bin/generate-example-tests.mjs",
     "generate:service": "./bin/create-service-from-template.sh",
     "help": "bat SCRIPTS.md || cat SCRIPTS.md",
+    "publish": "./bin/publish.sh",
     "test": "echo \"Error: no test specified\" && exit 1",
     "test:local": "bin/test-service.sh local",
     "test:remote": "bin/test-service.sh remote",
