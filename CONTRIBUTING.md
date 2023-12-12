@@ -27,6 +27,29 @@ parties composées de lettres minuscules (et éventuellement de chiffres, mais c
 n'est pas conseillé, à cause de la confusion avec le numéro de version de
 l'instance). Par exemple :`base-line`, `astro-ner`, ...
 
+Pour profiter du système de *workspaces* de npm, il faut déclarer le répertoire
+du nouveau service dans le `package.json` situé à la racine du dépôt.
+
+Par exemple, voici les services `base-line` et `base-line-python` déclarés dans
+le `package.json`:
+
+```json
+{
+  "workspaces": [
+    "services/base-line",
+    "services/base-line-python"
+  ]
+}
+```
+
+Ainsi, vous serez capable de lancer des scripts d'un service (par exemple
+`base-line`) depuis la racine du dépôt (à condition de disposer de npm 7+):
+
+```bash
+npm -w services/base-line run start:dev
+npm -w services/base-line run stop:dev
+```
+
 ### Fichiers du service
 
 Chaque répertoire de service contient :
@@ -42,14 +65,14 @@ Chaque répertoire de service contient :
 - un fichier `package.json`, sur le modèle de [celui de
   `ezs-python-server`](./bases/ezs-python-server/package.json), où `ezs-python-server`
   est remplacé par le nom du service (celui du répertoire, précédé de `ws-`;
-  exemple: `ws-base-line`), et où on réinitialise la version à `1.0.0`.
+  exemple: `ws-base-line`), et où on réinitialise la version à `0.0.0`.
 - un fichier `swagger.json` dans lequel on modifie le title (devant commencer
   par le nom du service, par exemple `base-line -`, c'est ce qui déterminera le
   tri d'affichage des services dans l'OpenAPI).
 - un fichier `README.md` expliquant en quoi consiste le service.
 - un fichier `examples.http` avec un exemple de requête pour chaque route
-- deux fichiers `local-tests.hurl` et `remote-tests.hurl` générés à partir des
-  exemples, pour éviter les régressions du service
+- un fichier `tests.hurl` généré à partir des exemples, pour éviter les
+  régressions du service
 
 ### examples.http
 
@@ -59,9 +82,11 @@ répertoire).
 Il contient des exemples de requêtes HTTP, et constitue donc une partie de la
 documentation du service.  
 Il sert de base à la génération de métadonnées d'exemple en notation pointée
-qu'on peut généralement ajouter sans modification dans le `.ini`.  
-De plus, il sert aussi à générer les tests, il est donc doublement important de
-bien le renseigner.
+qu'on peut généralement ajouter sans modification dans le `.ini` (via le script
+[`generate:example-metadata`](SCRIPTS.md#generateexample-metadata)).  
+De plus, il sert aussi à générer les tests (via le script
+[`generate:example-tests`](SCRIPTS.md#generateexample-tests)), il est donc
+doublement important de bien le renseigner.
 
 Le début du fichier `examples.http` (attention, ce nom est utilisé dans
 plusieurs scripts, veillez à bien l'orthographier) contient une commentaire
@@ -71,8 +96,8 @@ explicatif, et une variable permettant de changer le serveur cible des requêtes
 # These examples can be used directly in VSCode, using REST Client extension (humao.rest-client)
 
 # Décommenter/commenter les lignes voulues pour tester localement
-@baseUrl=http://localhost:31976
-# @baseUrl=https://base-line.services.istex.fr
+@host=http://localhost:31976
+# @host=https://base-line.services.istex.fr
 ```
 
 Ensuite viennent les requêtes elles-mêmes.  
@@ -92,7 +117,7 @@ Par exemple, la route `/v1/true/json` donnera lieu à un `name` valant
 Après ces commentaires viennent les lignes décrivant la requête:
 
 ```http
-POST {{baseUrl}}/v1/true/json HTTP/1.1
+POST {{host}}/v1/true/json HTTP/1.1
 Content-Type: application/json
 
 [
@@ -117,14 +142,13 @@ pour les enchaînements de services qu'on a dans les `data-*`).
 Pour ça, il faut d'abord lancer le serveur en local dans un terminal:
 
 ```bash
-cd services/<instance>
-npm run start:dev
+npm -w services/<instance> run start:dev
 ```
 
 ou bien
 
 ```bash
-npx ezs -v -d services/<instance>/
+npx ezs -v -m -d services/<instance>/
 ```
 
 puis lancer la génération des tests (depuis la racine du dépôt) dans un autre
@@ -138,6 +162,16 @@ npm run generate:example-tests services/<instance>
 > contenir au moins un exemple.  
 > Voir [examples.http](#exampleshttp)
 
+### Script d'initialisation d'un nouveau service
+
+Pour faciliter la création d'un nouveau service, un script npm est disponible:
+[`generate:service`](SCRIPTS.md#generateservice).
+
+Il prend en paramètre le nom du service (tout en minuscules, en deux parties
+séparées par un tiret).  
+Il crée le répertoire `services/service-name`, l'ajoute dans les *workspaces* du
+dépôt, et dans la liste des services à la fin du [README](./README#services).
+
 ## Développement
 
 ### Sans docker
@@ -145,7 +179,7 @@ npm run generate:example-tests services/<instance>
 Pour lancer le serveur ezs en dehors de docker:
 
 - se placer à la racine du dépôt
-- lancer `npx ezs -v -d services/nom-du-service/`
+- lancer `npx ezs -v -m -d services/nom-du-service/`
 
 Évidemment, il faut avoir au préalable configuré la bonne version de node (celle
 qui correspond aux images de base) et lancé `npm install` depuis la racine du
@@ -158,7 +192,7 @@ Pour plus d'information, voir la [documentation de
 nvm](https://github.com/nvm-sh/nvm#nvmrc). Il existe même un moyen de passer
 automatiquement à la version demandée, en arrivant à la racine du répertoire:
 [nvm / Deeper Shell
-integration](https://github.com/nvm-sh/nvm#deeper-shell-integration)~~.~~
+integration](https://github.com/nvm-sh/nvm#deeper-shell-integration).
 
 Dans le cas d'un service écrit en python, ne pas oublier d'activer
 l'environnement virtuel où sont installées les dépendances.
@@ -168,19 +202,19 @@ l'environnement virtuel où sont installées les dépendances.
 Pour construire l'image avec le tag `latest`:
 
 ```bash
-npm run build:dev
+npm -w services/service-name run build:dev
 ```
 
 Pour lancer l'image:
 
 ```bash
-npm run start:dev
+npm -w services/service-name run start:dev
 ```
 
 Pour arrêter le serveur:
 
 ```bash
-npm run stop:dev
+npm -w services/service-name run stop:dev
 ```
 
 ou bien:
@@ -238,6 +272,8 @@ base! Pour lister les services concernés par une image de base:
 ```bash
 grep ezs-python-server services/*/Dockerfile
 ```
+
+Et il faut changer le `FROM` du `Dockerfile` situé dans `template`.
 
 Il y a plusieurs images de base:
 
@@ -301,3 +337,7 @@ fonctionnalité ou une correction.
 Cela va créer un tag, modifier le numéro de version dans le README, et pousser
 le tout sur GitHub, déclenachant une action de Github qui poussera
 automatiquement l'image sur Docker Hub.
+
+> **Remarque**: on peut aussi utiliser l'option *workspace* `-w` de npm pour
+> créer la version depuis la racine du dépôt: `npm version -w
+> services/service-name patch`.

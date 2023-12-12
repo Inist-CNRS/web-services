@@ -4,6 +4,7 @@ Available scripts:
 
 - generate:example-metadata
 - generate:example-tests
+- generate:service
 - help
 
 ## generate:example-metadata
@@ -26,6 +27,25 @@ Create two files in `services/service-name`:
 2. `remote-tests.hurl`
 
 which can be used to test the service.
+
+## generate:service
+
+Usage: `npm run generate:service service-name`
+
+Scaffold the `services/service-name` directory, and customize all required
+files.
+
+Example:
+
+```bash
+$ npm run generate:service first-test
+Creating service first-test from template
+
+Short description: Premier test
+Long description : Pas vraiment le premier en fait.
+Author name : François Parmentier
+Author email: francois.parmentier@gmail.com
+```
 
 ## help
 

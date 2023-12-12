@@ -7,6 +7,7 @@
   "scripts": {
     "generate:example-metadata": "node bin/generate-example-metadata.mjs",
     "generate:example-tests": "node bin/generate-example-tests.mjs",
+    "generate:service": "./bin/create-service-from-template.sh",
     "help": "bat SCRIPTS.md || cat SCRIPTS.md",
     "test": "echo \"Error: no test specified\" && exit 1",
     "test:local": "bin/test-service.sh local",
@@ -27,6 +28,12 @@
     "url": "https://github.com/Inist-CNRS/web-services/issues"
   },
   "homepage": "https://github.com/Inist-CNRS/web-services#readme",
+  "workspaces": [
+    "bases/ezs-python-server",
+    "bases/python-node",
+    "services/base-line",
+    "services/base-line-python"
+  ],
   "dependencies": {
     "@ezs/analytics": "2.2.1",
     "@ezs/basics": "2.5.7",
