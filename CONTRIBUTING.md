@@ -161,6 +161,16 @@ npm run generate:example-tests services/<instance>
 > contenir au moins un exemple.  
 > Voir [examples.http](#exampleshttp)
 
+### Script d'initialisation d'un nouveau service
+
+Pour faciliter la création d'un nouveau service, un script npm est disponible:
+`generate:service`.
+
+Il prend en paramètre le nom du service (tout en minuscules, en deux parties
+séparées par un tiret).  
+Il crée le répertoire `services/service-name`, l'ajoute dans les *workspaces* du
+dépôt, et dans la liste des services à la fin du [README](./README#services).
+
 ## Développement
 
 ### Sans docker
