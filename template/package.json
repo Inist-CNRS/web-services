@@ -1,6 +1,6 @@
 {
     "private": true,
-    "name": "service-name",
+    "name": "ws-{service}",
     "version": "0.0.0",
     "description": "{short_description}",
     "repository": {
