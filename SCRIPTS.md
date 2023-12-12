@@ -62,9 +62,13 @@ See <https://github.com/sharkdp/bat>.
 
 Usage: `npm run publish`
 
-Publish all services to Inist's reverse proxy (at
-`service-name.services.istex.fr`), and to its OpenAPI's documentation
-(<https://openapi.services.istex.fr>).
+Required: credentials for daf's production machine.
+
+Publish all services:
+
+- to Inist's reverse proxy (at `service-name.services.istex.fr`)
+- to its OpenAPI's documentation (<https://openapi.services.istex.fr>)
+- to its [Prometheus](https://prometheus.io/)
 
 All services with a `swagger.json` containing an enabled `servers.url` (with a
-`standard` value for `x-profil`).
+`standard` value for `x-profil`) are published.
