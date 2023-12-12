@@ -27,6 +27,12 @@
     "url": "https://github.com/Inist-CNRS/web-services/issues"
   },
   "homepage": "https://github.com/Inist-CNRS/web-services#readme",
+  "workspaces": [
+    "bases/python-node",
+    "bases/ezs-python-server",
+    "services/base-line",
+    "services/base-line-python"
+  ],
   "dependencies": {
     "@ezs/analytics": "2.2.1",
     "@ezs/basics": "2.5.7",
