@@ -15,6 +15,11 @@ if [ -d "services/$SERVICE_NAME" ]; then
     exit 2
 fi
 
+if ! [[ $SERVICE_NAME =~ ^[a-z][a-z0-9]*-[a-z][a-z0-9]*$ ]]; then
+    echo "Error: Service name must comply with the pattern (two alphanumeric parts separated by a dash)."
+    exit 3
+fi
+
 printf "Creating service ""%s"" from template\n\n" "$SERVICE_NAME"
 
 printf "Short description: "
