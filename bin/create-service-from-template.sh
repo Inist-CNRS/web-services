@@ -62,3 +62,24 @@ require('fs').writeFileSync(
     JSON.stringify(packageJson, null, 2)
 )
 EOF
+
+# Add service to list of services in README
+sed -n '1,/## Services/p' < README.md > README.tmp
+echo "" >> README.tmp
+node <<EOF >> README.tmp
+const workspaces = require('./package.json').workspaces;
+const services = workspaces.reduce(
+    (acc, curr) => {
+        if (!curr.startsWith('services/')) {
+            return acc;
+        }
+        const service = curr.split('/')[1];
+        return acc +
+            \`- [\${service}](./services/\${service}) [![Docker Pulls](https://img.shields.io/docker/pulls/cnrsinist/ws-\${service}.svg)](https://hub.docker.com/r/cnrsinist/ws-\${service}/)\n\`;
+    }, ''
+);
+console.log(services.substr(0, services.length - 1));
+EOF
+mv README.md README.back
+mv README.tmp README.md
+rm README.back

@@ -16,6 +16,7 @@ all installs should be done at image building).
 
 All contributing instructions are in [CONTRIBUTING](CONTRIBUTING.md).
 
+<!-- This section must be the last one, it's automatically rewritten -->
 ## Services
 
 - [base-line](./services/base-line) [![Docker Pulls](https://img.shields.io/docker/pulls/cnrsinist/ws-base-line.svg)](https://hub.docker.com/r/cnrsinist/ws-base-line/)
