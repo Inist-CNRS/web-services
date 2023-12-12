@@ -1,0 +1,3 @@
+# ws-{service}@0.0.0
+
+DÉCRIVEZ ICI CE QU'EST CENSÉ FAIRE CE SERVICE
