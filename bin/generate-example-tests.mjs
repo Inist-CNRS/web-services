@@ -1,12 +1,19 @@
 #!/usr/bin/env node
 
-// Generate two files for a service instance:
-// 1. local tests (services/<instance>/local-tests.hurl)
-// 2. remote tests (services/<instance>/remote-tests.hurl)
+// Generate one files for a service instance, which can be used for local tests
+// and for remote tests (services/<instance>/tests.hurl)
 //
-// The service should be launched as a local server.
-// URL: http://localhost:31976
-// Just go to the instance's directory and launch: npm run start:dev
+// To test locally, use:
+// hurl --test --variable host=http://localhost:31976 services/<instance>/tests.hurl
+//
+// To test remotely, use:
+// hurl --test --variable host=https://<instance>.services.istex.fr services/<instance>/tests.hurl
+//
+// The service should be launched as a local server. URL: http://localhost:31976
+// Just launch:
+// npm -w services/<instance> run start:dev
+// npm run generate:example-tests services/<instance>
+// npm -w services/<instance> run stop:dev
 
 import { writeFile } from "fs/promises";
 import { RestParser, RestRequest } from "rest-cli";
@@ -33,11 +40,11 @@ const wrapText = text => "```\n" + text + "```\n\n";
  * @return {Promise<string>} The converted Hurl request.
  */
 const restCliRequest2Hurl = async (request) => {
-    let requestString = `${request.method} ${request.url}\n`;
+    let requestString = `${request.method} ${request.url}\n`
+        .replace("http://localhost:31976", "{{host}}");
     request.headers.forEach((value, key) => requestString += `${key}: ${value}\n`);
 
     if (isText(request)) {
-        // requestString += "```\n" + request.body + "```\n\n";
         requestString += wrapText(request.body);
     } else {
         requestString += request.body + '\n';
@@ -113,11 +120,7 @@ console.error(`Instance "${instanceName}" found.`);
 if (process.argv.length === 3) {
     const hurlString = await convertWholeFile(parser);
     console.log(hurlString);
-    await writeFile(`./${instancePath}/local-tests.hurl`, hurlString);
-    await writeFile(
-        `./${instancePath}/remote-tests.hurl`,
-        hurlString.replace(/http:\/\/localhost:31976/g, `https://${instanceName}.services.istex.fr`)
-    );
+    await writeFile(`./${instancePath}/tests.hurl`, hurlString);
     process.exit(0);
 }
 

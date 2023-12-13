@@ -7,6 +7,8 @@ Available scripts:
 - generate:service
 - help
 - publish
+- test:local
+- test:remote
 
 ## generate:example-metadata
 
@@ -22,12 +24,9 @@ Usage: `npm run generate:example-tests services/service-name`
 
 Required: `services/service-name/examples.http` must exist
 
-Create two files in `services/service-name`:
+Create  `services/service-name/tests.hurl`
 
-1. `local-tests.hurl`
-2. `remote-tests.hurl`
-
-which can be used to test the service.
+which can be used to test the service, locally, as well as remotely.
 
 ## generate:service
 
@@ -72,3 +71,17 @@ Publish all services:
 
 All services with a `swagger.json` containing an enabled `servers.url` (with a
 `standard` value for `x-profil`) are published.
+
+## test:local
+
+Usage: `npm run test:local service-name`
+
+Launch the tests from `services/service-name/tests.hurl` to
+<http://localhost:31976>. The service has to be running.
+
+## test:remote
+
+Usage: `npm run test:remote service-name`
+
+Launch the tests from `services/service-name/tests.hurl` to
+<https://service-name.services.istex.fr>. The service has to be running.
