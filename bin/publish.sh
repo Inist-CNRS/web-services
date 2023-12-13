@@ -87,7 +87,7 @@ EOF
     return 0
 }
 
-FILES=$(ls "${ROOT}"/*/swagger.json)
+FILES=$(ls "${ROOT}"/services/*/swagger.json)
 
 echo -n "Login: "
 read -r login
