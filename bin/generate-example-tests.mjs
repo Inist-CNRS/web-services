@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-// Generate one files for a service instance, which can be used for local tests
+// Generate one file for a service instance, which can be used for local tests
 // and for remote tests (services/<instance>/tests.hurl)
 //
 // To test locally, use:
