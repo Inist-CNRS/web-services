@@ -13,7 +13,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "test:local": "bin/test-service.sh local",
     "test:remote": "bin/test-service.sh remote",
-    "test:remotes": "bin/test-services.sh remote"
+    "test:remotes": "bin/test-services.sh"
   },
   "repository": {
     "type": "git",
