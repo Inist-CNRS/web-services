@@ -9,9 +9,9 @@ RUN apt update && apt install -y tini && \
 
 WORKDIR /app
 RUN npm install dotenv-cli@7.3.0 && \
-    npm install @ezs/core@3.4.2 && \
+    npm install @ezs/core@3.4.4 && \
     npm install @ezs/analytics@2.2.1 && \
-    npm install @ezs/basics@2.5.7 && \
+    npm install @ezs/basics@2.5.8 && \
     npm install @ezs/spawn@1.4.5 && \
     chmod a+w /app
 
