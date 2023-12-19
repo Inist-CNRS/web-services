@@ -1,4 +1,4 @@
-# ws-base-line-python@1.0.5
+# ws-base-line-python@1.0.6
 
 Services dédiés aux tests.
 
