@@ -270,7 +270,7 @@ De même, il faut mettre à jour tous les web services qui utilisent ces images 
 base! Pour lister les services concernés par une image de base:
 
 ```bash
-grep ezs-python-server services/*/Dockerfile
+grep ezs-python-server services/*/Dockerfile template/Dockerfile bases/*/Dockerfile
 ```
 
 Et il faut changer le `FROM` du `Dockerfile` situé dans `template`.
