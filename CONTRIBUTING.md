@@ -294,6 +294,9 @@ Il y a plusieurs images de base:
   base des serveurs ezs
 - [`ezs-python-server`](./bases/ezs-python-server/README.md): serveur ezs vide,
   acceptant les scripts ezs et python
+- [`ezs-python-saxon-server`](./bases/ezs-python-saxon-server/README.md):
+  serveur ezs vide, acceptant les scripts ezs et python, embarquant saxon, sous
+  la forme de la commande `xslt`.
 
 ## Nouvelle branche
 
