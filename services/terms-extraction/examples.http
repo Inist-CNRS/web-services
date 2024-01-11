@@ -99,5 +99,5 @@ Content-Type: application/json
 
 [
 	{ "value": "Côte d'Ivoire" },
-	{ "value": "Café !" },
+	{ "value": "Café !" }
 ]

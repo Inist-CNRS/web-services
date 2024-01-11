@@ -185,7 +185,7 @@ POST {{host}}/v1/tools/normalize?indent=true
 content-type: application/json
 [
 	{ "value": "Côte d'Ivoire" },
-	{ "value": "Café !" },
+	{ "value": "Café !" }
 ]
 
 
