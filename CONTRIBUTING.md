@@ -352,7 +352,7 @@ répertoire du `Dockerfile` et lancer `npm version` en utilisant l'argument
 fonctionnalité ou une correction.
 
 Cela va créer un tag, modifier le numéro de version dans le README, et pousser
-le tout sur GitHub, déclenachant une action de Github qui poussera
+le tout sur GitHub, déclenchant une action de Github qui poussera
 automatiquement l'image sur Docker Hub.
 
 > **Remarque**: on peut aussi utiliser l'option *workspace* `-w` de npm pour

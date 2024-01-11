@@ -34,7 +34,8 @@
     "bases/ezs-python-server",
     "bases/python-node",
     "services/base-line",
-    "services/base-line-python"
+    "services/base-line-python",
+    "services/terms-extraction"
   ],
   "dependencies": {
     "@ezs/analytics": "2.2.1",
