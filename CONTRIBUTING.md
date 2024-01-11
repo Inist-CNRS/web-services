@@ -277,13 +277,14 @@ Il faut changer le `FROM` de tous les `Dockerfile` trouvés par la commande, et
 ne pas oublier de:
 
 1. créer une nouvelle version de l'image de base modifiée:
-   
+
    ```bash
    cd bases/image-a-modifier
    npm version patch|minor|major
    ```
+
 2. pour chaque `service-name` modifié, lancer:
-   
+
    ```bash
    npm -w services/service-name version patch
    ```
