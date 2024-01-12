@@ -1,0 +1,33 @@
+{
+	"openapi": "3.0.0",
+	"info": {
+		"title": "pdf-tools - Extration du texte d'un PDF",
+		"summary": "À partir de l'URL d'un fichier PDF, le service extrait le texte contenu",
+		"version": "0.0.0",
+		"termsOfService": "https://services.istex.fr/",
+		"contact": {
+			"name": "Inist-CNRS",
+			"url": "https://www.inist.fr/nous-contacter/"
+		}
+	},
+	"servers": [
+		{
+			"x-comment": "Will be automatically completed by the ezs server."
+		},
+		{
+			"url": "http://vptdmservices.intra.inist.fr:49225/",
+			"description": "Latest version for production",
+			"#DISABLED#x-profil": "Standard"
+		}
+	],
+	"tags": [
+		{
+			"name": "pdf-tools",
+			"description": "Extration du texte d'un PDF",
+			"externalDocs": {
+				"description": "Plus de documentation",
+				"url": "https://github.com/inist-cnrs/web-services/tree/main/services/pdf-tools"
+			}
+		}
+	]
+}

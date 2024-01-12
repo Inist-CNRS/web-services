@@ -1,0 +1,7 @@
+POST {{host}}/v1/pdf2text?indent=true
+content-type: application/json
+[
+  { "id":"1","value": "https://jamanetwork.com/journals/JAMA/articlepdf/1883019/joi140072.pdf" },
+  { "id":"2","value": "https://biblio.ugent.be/publication/8716283/file/8716284.pdf" },
+  { "id":"3","value": "https://hal.inrae.fr/hal-03757709/file/FEBS%20Letters%20-%202022%20-%20Haase%20-%20A%20Hitchhiker%20s%20guide%20through%20the%20bio%25u2010image%20analysis%20software%20universe.pdf" }
+]
