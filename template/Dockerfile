@@ -10,7 +10,6 @@ USER root
 #     @ezs/teeft@2.3.1 \
 #     @ezs/strings@1.0.3
 
-USER daemon
 WORKDIR /app/public
 # Declare files to copy in .dockerignore
-COPY . /app/public/
+COPY --chown=daemon:daemon . /app/public/
