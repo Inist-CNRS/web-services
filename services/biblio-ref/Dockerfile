@@ -1,8 +1,8 @@
 # syntax=docker/dockerfile:1.2
-FROM python:3.9-slim-bullseye as build1
+FROM python:3.8-slim-bullseye as build1
 WORKDIR /app/public
 RUN apt update && apt -y install git
-RUN pip install dvc[webdav]==3.28.0
+RUN pip install dvc[webdav]==3.39.0
 RUN --mount=type=secret,id=webdav_login \
     --mount=type=secret,id=webdav_password \
     --mount=type=secret,id=webdav_url \
