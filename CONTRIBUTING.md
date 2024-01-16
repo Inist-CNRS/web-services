@@ -16,7 +16,25 @@ Ainsi, votre répertoire se nommera `github-web-services`, et sera facilement
 distingué du répertoire `web-services` correspondant au dépôt `tdm/web-services`
 sur le GitBucket de l'Inist.
 
+## Préparation de l'environnement
+
+Les scripts utilisés par ce dépôt sont pour la plupart écrits en node.  
+Pour profiter du système des *workspaces*, il faut npm 7+.  
+Il faut donc s'assurer d'avoir node 16+ (voir [.nvmrc](.nvmrc)).  
+
+Il est conseillé d'installer node via [nvm](https://github.com/nvm-sh/nvm), et
+de se conformer à la version inscrite dans le fichier [.nvmrc](./.nvmrc).  
+Pour cela: `nvm install`.  
+Pour plus d'information, voir la [documentation de
+nvm](https://github.com/nvm-sh/nvm#nvmrc). Il existe même un moyen de passer
+automatiquement à la version demandée, en arrivant à la racine du répertoire:
+[nvm / Deeper Shell
+integration](https://github.com/nvm-sh/nvm#deeper-shell-integration).
+
 ## Création d'un service
+
+Avant toute chose, il faut s'assurer qu'un service qui pourrait accueillir votre
+nouvelle route n'existe pas déjà. Cela évitera de créer un nouveau service.
 
 ### Création du répertoire
 
@@ -41,6 +59,9 @@ le `package.json`:
   ]
 }
 ```
+
+> 📘 Ceci est maintenant automatique quand on utilise le script
+> [`generate:service`](SCRIPTS.md#generateservice).
 
 Ainsi, vous serez capable de lancer des scripts d'un service (par exemple
 `base-line`) depuis la racine du dépôt (à condition de disposer de npm 7+):
@@ -73,6 +94,9 @@ Chaque répertoire de service contient :
 - un fichier `examples.http` avec un exemple de requête pour chaque route
 - un fichier `tests.hurl` généré à partir des exemples, pour éviter les
   régressions du service
+
+> 📘 Ceci est maintenant automatique quand on utilise le script
+> [`generate:service`](SCRIPTS.md#generateservice).
 
 ### examples.http
 
@@ -133,10 +157,13 @@ application/json` (c'est le type du *body* envoyé), puis le tableau JSON envoy�
 > **Remarque**: comme ces exemples serviront aussi aux tests, il est utile d'y
 > mettre aussi des exemples dont on veut vérifier le comportement.
 
-## local-tests.hurl et remote-tests.hurl
+> 📘 Ce fichier est généré automatiquement par le script
+> [`generate:service`](SCRIPTS.md#generateservice).  
+> Il reste nécessaire d'écrire les requêtes pour chaque route créée.
 
-Les fichiers `services/<instance>/local-tests.hurl` et
-`services/<instance>/remote-tests.hurl` sont la plupart du temps générés (sauf
+## tests.hurl
+
+Le fichier `services/<instance>/tests.hurl` est la plupart du temps généré (sauf
 pour les enchaînements de services qu'on a dans les `data-*`).
 
 Pour ça, il faut d'abord lancer le serveur en local dans un terminal:
@@ -161,6 +188,14 @@ npm run generate:example-tests services/<instance>
 > **Remarque**: le fichier `services/<instance>/examples.http` doit exister et
 > contenir au moins un exemple.  
 > Voir [examples.http](#exampleshttp)
+
+Ce fichier servira lors d'un *push* sur GitHub à tester toutes les routes du
+service en question, pour s'assurer de leur non-régression.  
+Pour que ce soit utile, toutes les routes doivent être testées.
+
+On peut aussi [tester le serveur local](#tests).
+
+> 📘 On peut aussi écrire ce fichier à la main, voir [hurl](https://hurl.dev/).
 
 ### Script d'initialisation d'un nouveau service
 
@@ -195,7 +230,16 @@ automatiquement à la version demandée, en arrivant à la racine du répertoire
 integration](https://github.com/nvm-sh/nvm#deeper-shell-integration).
 
 Dans le cas d'un service écrit en python, ne pas oublier d'activer
-l'environnement virtuel où sont installées les dépendances.
+l'environnement virtuel où sont installées les dépendances (à créer à la racine
+du service).
+
+```bash
+cd services/<service-name>
+# Création de l'environnement virtuel
+python3 -m venv .venv
+# Activation de l'environnement virtuel
+source .venv/bin/activate
+```
 
 ### Avec docker
 
@@ -238,14 +282,14 @@ npm run test:remote service-name
 ```
 
 Pour tester tous les services en production qui ont un fichier
-`remote-tests.hurl`:
+`tests.hurl`:
 
 ```bash
 npm run test:remotes services/*
 ```
 
 Pour tester uniquement certains services en production (à condition qu'ils aient
-un fichier `remote-tests.hurl`):
+un fichier `tests.hurl`):
 
 ```bash
 npm run test:remotes service-name service2-name
@@ -256,7 +300,13 @@ npm run test:remotes service-name service2-name
 Une fois que le nouveau service est créé, il faut l'ajouter à la liste du README
 de la racine du dépôt.
 
+> 📘 Ceci est automatique quand on utilise le script
+> [`generate:service`](SCRIPTS.md#generateservice).
+
 ## Les images de base
+
+> ⚠ Cette partie ne concerne pas directement l'écriture des services, mais plus
+> le mainteneur des images de base.
 
 Le répertoire `bases` contient les images de base, c'est-à-dire celles qui
 simplifient l'écriture de plusieurs services web.
