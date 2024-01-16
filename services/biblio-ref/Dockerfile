@@ -1,6 +1,7 @@
 # syntax=docker/dockerfile:1.2
-FROM python:3.8-slim-bullseye as build1
-WORKDIR /app/public
+FROM python:3.9-slim-bullseye as build1
+WORKDIR /dvc
+COPY ./v1/annulled.csv.dvc /dvc
 RUN apt update && apt -y install git
 RUN pip install dvc[webdav]==3.39.0
 RUN --mount=type=secret,id=webdav_login \
@@ -11,7 +12,6 @@ RUN --mount=type=secret,id=webdav_login \
     dvc remote add -d webdav-remote "$(cat /run/secrets/webdav_url)" && \
     dvc remote modify --local webdav-remote user "$(cat /run/secrets/webdav_login)" && \
     dvc remote modify --local webdav-remote password "$(cat /run/secrets/webdav_password)"
-# Need to copy .dvc file (check this): COPY v1/annulled.csv.dvc /app/public/
 RUN dvc pull
 
 
@@ -24,4 +24,7 @@ RUN pip install pandas==2.1.4 requests_ratelimiter==0.4.2
 USER daemon
 WORKDIR /app/public
 # Declare files to copy in .dockerignore
-COPY --from=build1 /app/public/v1/ /app/public/
+# A modifier : (utiliser le .dockerignore)
+COPY ./v1 /app/public/v1
+
+COPY --from=build1 /dvc/annulled.csv /app/public/v1/annulled.csv
