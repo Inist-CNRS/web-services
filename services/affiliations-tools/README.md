@@ -4,8 +4,6 @@ Structuration et enrichissements d'affiliations
 
 Propose plusieurs services autour des affiliations présentes dans les notices bibliographiques
 
-- `netscity`: donne des informations sur les villes envoyées (position
-  géographique, pays, province, ...)
 - `rnsr`: déduit de l'adresse d'une affiliation d'auteur et d'une date de
   publication (l'année suffit) zéro, un ou plusieurs identifiants RNSR
   (correspondant à une ou plusieurs structures de recherche française(s)).
