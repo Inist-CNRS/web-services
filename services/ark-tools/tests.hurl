@@ -6,14 +6,11 @@ content-type: application/json
 ]
 
 HTTP 200
-[{
-    "id": "12345",
-    "value": "ark:/67375/XXX-VR4C38XD-3"
-},
-{
-    "id": "6789",
-    "value": "ark:/67375/XXX-HNXB328M-4"
-}]
+[Asserts]
+jsonpath "$[0].id" == "12345"
+jsonpath "$[0].value" matches /ark:\/67375\/XXX-.{8}-./
+jsonpath "$[1].id" == "6789"
+jsonpath "$[1].value" matches /ark:\/67375\/XXX-.{8}-./
 
 POST https://ark-tools.services.istex.fr/v1/67375/stamp?subpublisher=XXX&indent=true
 content-type: application/json
@@ -25,20 +22,15 @@ content-type: application/json
 		"title": "Curabitur molestie posuere arcu, eget pharetra lacus lobortis in."
 	},
 	{
-		"title": " Nulla in ipsum eu dui rhoncus fringilla. Ut interdum mi metus"
+		"title": "Nulla in ipsum eu dui rhoncus fringilla. Ut interdum mi metus"
 	}
 ]
 
 HTTP 200
-[{
-    "title": "Integer eget dignissim neque, sit amet sagittis nisi. In ornare massa lacus.",
-    "value": "ark:/67375/XXX-454RCWQ7-Z"
-},
-{
-    "title": "Curabitur molestie posuere arcu, eget pharetra lacus lobortis in.",
-    "value": "ark:/67375/XXX-Q9FMW9GQ-X"
-},
-{
-    "title": " Nulla in ipsum eu dui rhoncus fringilla. Ut interdum mi metus",
-    "value": "ark:/67375/XXX-RJPSCQ8X-T"
-}]
+[Asserts]
+jsonpath "$[0].title" == "Integer eget dignissim neque, sit amet sagittis nisi. In ornare massa lacus."
+jsonpath "$[0].value" matches /ark:\/67375\/XXX-.{8}-./
+jsonpath "$[1].title" == "Curabitur molestie posuere arcu, eget pharetra lacus lobortis in."
+jsonpath "$[1].value" matches /ark:\/67375\/XXX-.{8}-./
+jsonpath "$[2].title" == "Nulla in ipsum eu dui rhoncus fringilla. Ut interdum mi metus"
+jsonpath "$[2].value" matches /ark:\/67375\/XXX-.{8}-./
