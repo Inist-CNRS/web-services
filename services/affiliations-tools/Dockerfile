@@ -6,9 +6,9 @@ USER root
 #     unidecode==1.3.7
 
 # Install all node dependencies
-# RUN npm install \
-#     @ezs/teeft@2.3.1 \
-#     @ezs/strings@1.0.3
+RUN npm install \
+    @ezs/libpostal@0.2.3 \
+    @ezs/conditor@2.10.7
 
 WORKDIR /app/public
 # Declare files to copy in .dockerignore
