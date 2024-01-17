@@ -1,16 +1,3 @@
-POST {{host}}/v1/netscity/expand?indent=true
-content-type: application/json
-[
-  { "value": "VANDOEUVRE" },
-  { "value": "SACLAY"},
-  { "value": "ORSAY"},
-  { "value": "TOULOUSE"},
-  { "value": "VILLEURBANNE"},
-  { "value": "NANCY"}
-]
-
-
-
 POST {{host}}/v1/expand?indent=true
 content-type: application/json
 [
