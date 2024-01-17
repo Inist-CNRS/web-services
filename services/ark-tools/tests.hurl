@@ -1,4 +1,4 @@
-POST https://ark-tools.services.istex.fr/v1/67375/stamp?subpublisher=XXX&indent=true
+POST {{host}}/v1/67375/stamp?subpublisher=XXX&indent=true
 content-type: application/json
 [
 	{ "id":"12345","value": true },
@@ -12,7 +12,7 @@ jsonpath "$[0].value" matches /ark:\/67375\/XXX-.{8}-./
 jsonpath "$[1].id" == "6789"
 jsonpath "$[1].value" matches /ark:\/67375\/XXX-.{8}-./
 
-POST https://ark-tools.services.istex.fr/v1/67375/stamp?subpublisher=XXX&indent=true
+POST {{host}}/v1/67375/stamp?subpublisher=XXX&indent=true
 content-type: application/json
 [
 	{
