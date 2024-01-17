@@ -1,0 +1,34 @@
+# These examples can be used directly in VSCode, using REST Client extension (humao.rest-client)
+
+# ⚠ L'utilisation de ce fichier générera le stockage inutile d'identifiants ARK dans la base.
+#   C'est pourquoi il est déconseillé d'exécuter ces exemples.
+
+# Attribution d'ARK aux objets d'une série
+POST https://ark-tools.services.istex.fr/v1/67375/stamp?subpublisher=XXX&indent=true HTTP/1.1
+Content-Type: application/json
+
+[
+	{ "id":"12345","value": true },
+	{ "id":"6789","value": true }
+]
+###
+
+
+
+# Attribution d'ARK aux objets d'une série
+POST https://ark-tools.services.istex.fr/v1/67375/stamp?subpublisher=XXX&indent=true HTTP/1.1
+Content-Type: application/json
+
+[
+	{
+		"title": "Integer eget dignissim neque, sit amet sagittis nisi. In ornare massa lacus."
+	},
+	{
+		"title": "Curabitur molestie posuere arcu, eget pharetra lacus lobortis in."
+	},
+	{
+		"title": " Nulla in ipsum eu dui rhoncus fringilla. Ut interdum mi metus"
+
+	}
+]
+###
