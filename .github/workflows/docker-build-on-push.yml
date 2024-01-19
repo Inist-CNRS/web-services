@@ -30,6 +30,7 @@ jobs:
               shell: bash
               run: |
                   bin/create-env.sh ${{ github.ref_name }} ${{ secrets.WEBDAV_LOGIN }} ${{ secrets.WEBDAV_PASSWORD }} ${{ secrets.WEBDAV_URL }}
+                  ls -l services/*/env.sh
 
             - name: Build Docker Image & Test
               shell: bash
