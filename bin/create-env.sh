@@ -17,12 +17,10 @@ WEBDAV_LOGIN=$2
 WEBDAV_PASSWORD=$3
 WEBDAV_URL=$4
 
-echo "Building env.sh for $SERVICE_NAME"
+echo "Building .env for $SERVICE_NAME"
 
 {
-    echo "#!/usr/bin/env bash"
-    echo
     echo "export WEBDAV_LOGIN=$WEBDAV_LOGIN"
     echo "export WEBDAV_PASSWORD=$WEBDAV_PASSWORD"
     echo "export WEBDAV_URL=$WEBDAV_URL"
-} > "services/$SERVICE_NAME/env.sh"
+} > "services/$SERVICE_NAME/.env"

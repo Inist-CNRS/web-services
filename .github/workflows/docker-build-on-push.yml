@@ -26,11 +26,11 @@ jobs:
                   sudo dpkg -i hurl_4.1.0_amd64.deb
                   hurl --version
 
-            - name: Build env.sh from Github Actions secrets
+            - name: Build .env from Github Actions secrets
               shell: bash
               run: |
                   bin/create-env.sh ${{ github.ref_name }} ${{ secrets.WEBDAV_LOGIN }} ${{ secrets.WEBDAV_PASSWORD }} ${{ secrets.WEBDAV_URL }}
-                  ls -l services/*/env.sh
+                  ls -l services/*/.env
 
             - name: Build Docker Image & Test
               shell: bash
