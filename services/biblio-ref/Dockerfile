@@ -12,6 +12,7 @@ RUN --mount=type=secret,id=webdav_login \
     dvc remote add -d webdav-remote "$(cat /run/secrets/webdav_url)" && \
     dvc remote modify --local webdav-remote user "$(cat /run/secrets/webdav_login)" && \
     dvc remote modify --local webdav-remote password "$(cat /run/secrets/webdav_password)"
+RUN chmod -R a+rwx /dvc
 RUN dvc pull -v
 
 
@@ -25,6 +26,6 @@ USER daemon
 WORKDIR /app/public
 # Declare files to copy in .dockerignore
 # A modifier : (utiliser le .dockerignore)
-COPY ./v1 /app/public/v1
+COPY --chown=daemon:daemon ./v1 /app/public/v1
 
-COPY --from=build1 /dvc/annulled.csv /app/public/v1/annulled.csv
+COPY --chown=daemon:daemon --from=build1 /dvc/annulled.csv /app/public/v1/annulled.csv
