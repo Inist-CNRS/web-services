@@ -12,6 +12,9 @@ RUN --mount=type=secret,id=webdav_login \
     dvc remote add -d webdav-remote "$(cat /run/secrets/webdav_url)" && \
     dvc remote modify --local webdav-remote user "$(cat /run/secrets/webdav_login)" && \
     dvc remote modify --local webdav-remote password "$(cat /run/secrets/webdav_password)"
+# Make sure cache is writable
+RUN mkdir -p /dvc/.dvc/cache/files/md5 && \
+    chmod a+rwx /dvc/.dvc/cache/files/md5
 RUN dvc pull --allow-missing -v
 
 
