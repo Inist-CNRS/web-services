@@ -161,7 +161,7 @@ application/json` (c'est le type du *body* envoyé), puis le tableau JSON envoy�
 > [`generate:service`](SCRIPTS.md#generateservice).  
 > Il reste nécessaire d'écrire les requêtes pour chaque route créée.
 
-## tests.hurl
+### tests.hurl
 
 Le fichier `services/<instance>/tests.hurl` est la plupart du temps généré (sauf
 pour les enchaînements de services qu'on a dans les `data-*`).
@@ -204,8 +204,13 @@ Pour faciliter la création d'un nouveau service, un script npm est disponible:
 
 Il prend en paramètre le nom du service (tout en minuscules, en deux parties
 séparées par un tiret).  
+Il demande le titre du service (*short description*), sa description (*long
+description*), le nom de l'auteur et *mail*.  
 Il crée le répertoire `services/service-name`, l'ajoute dans les *workspaces* du
 dépôt, et dans la liste des services à la fin du [README](./README#services).
+
+> ⚠ Ne pas mettre de caractère `&` dans les réponses, ça provoque un
+> remplacement bizarre.
 
 ## Développement
 
