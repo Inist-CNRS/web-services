@@ -1,7 +1,6 @@
 # syntax=docker/dockerfile:1.2
 FROM python:3.9-slim-bullseye as build1
 WORKDIR /dvc
-COPY ./v1/annulled.csv.dvc /dvc
 RUN apt update && apt -y install git
 RUN pip install dvc[webdav]==3.39.0
 RUN --mount=type=secret,id=webdav_login \
@@ -13,6 +12,7 @@ RUN --mount=type=secret,id=webdav_login \
     dvc remote modify --local webdav-remote user "$(cat /run/secrets/webdav_login)" && \
     dvc remote modify --local webdav-remote password "$(cat /run/secrets/webdav_password)"
 RUN dvc doctor
+COPY ./v1/annulled.csv.dvc /dvc
 RUN dvc pull -v
 
 
