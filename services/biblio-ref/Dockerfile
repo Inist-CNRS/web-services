@@ -14,7 +14,10 @@ RUN apt update && apt -y install git curl
 # RUN dvc doctor
 # COPY ./v1/annulled.csv.dvc /dvc
 # RUN dvc pull -v
-RUN curl -v -u "$(cat /run/secrets/webdav_login):$(cat /run/secrets/webdav_password)" -o annuled.csv -O "$(cat /run/secrets/webdav_url | sed -e 's/webdavs/https/')/files/md5/e8/6afa670ff4bc8199bbee0600deb77c"
+RUN --mount=type=secret,id=webdav_login \
+    --mount=type=secret,id=webdav_password \
+    --mount=type=secret,id=webdav_url \
+    curl -v -u "$(cat /run/secrets/webdav_login):$(cat /run/secrets/webdav_password)" -o annuled.csv -O "$(cat /run/secrets/webdav_url | sed -e 's/webdavs/https/')/files/md5/e8/6afa670ff4bc8199bbee0600deb77c"
 
 FROM cnrsinist/ezs-python-server:py3.9-no16-1.0.6 as release
 
