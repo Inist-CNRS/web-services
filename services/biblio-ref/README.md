@@ -15,7 +15,7 @@ Nécessite les variables d'environnement:
 > **Note:** pour utiliser un *remote* webdav, le protocole de l'URL est `webdavs`.
 > **Note:** n'oubliez pas d'exporter ces variables.
 
-pour appeler `npm run build:dev` or `npm start:dev`.
+`npm run build:dev` et `npm start:dev` importent le fichier `.env` quand il existe.
 
 > 📗 Suggestion: déclarez les variables dans le fichier `.env` de cette manière:
 >
