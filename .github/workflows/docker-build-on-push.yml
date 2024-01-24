@@ -6,8 +6,6 @@ on:
     push:
         branches:
             - 'services/*/*'
-        paths-ignore:
-            - '**.md'
 
 jobs:
     test:
