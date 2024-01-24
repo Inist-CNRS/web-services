@@ -17,5 +17,10 @@ Nécessite les variables d'environnement:
 
 pour appeler `npm run build:dev` or `npm start:dev`.
 
-> 📗 Suggestion: déclarez les variables dans le fichier `.env`  et n'oubliez pas de lancer `source .env`
-> avant d'appeler `npm run build:dev` or `npm start:dev`.
+> 📗 Suggestion: déclarez les variables dans le fichier `.env` de cette manière:
+>
+> ```bash
+> export WEBDAV_URL=webdavs://your.webdav.com/dvc
+> export WEBDAV_LOGIN=yourlogin
+> export WEBDAV_PASSWORD=yourpass
+> ```
