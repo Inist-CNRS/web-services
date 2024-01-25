@@ -6,6 +6,9 @@ on:
     push:
         branches:
             - 'services/*/*'
+        paths-ignore:
+            - '**.md'
+            - '**/swagger.json'
 
 jobs:
     test:
