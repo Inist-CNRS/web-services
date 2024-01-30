@@ -1,0 +1,35 @@
+# These examples can be used directly in VSCode, using REST Client extension (humao.rest-client)
+
+POST http://affiliations-tools-1.tdmservices.intra.inist.fr/v1/rnsr/json?indent=true HTTP/1.1
+Content-Type: application/json
+
+[
+    { "id":1, "value": "CNRS UMR AMAP MONTPELLIER FRA" },
+    { "id":2, "value": "IRD UMR AMAP MONTPELLIER FRA" },
+    { "id":3, "value": "University of Bordeaux, IMS, CNRS UMR5218, Talence, F-33405, France" },
+    { "id":4, "value": "CENBG, CNRS/IN2P3, Chemin du Solarium B. P. 120, Gradignan, F-33175, France" },
+    { "id":5, "value": "Nulle part" }
+]
+
+###
+POST http://affiliations-tools-1.tdmservices.intra.inist.fr/v1/rnsr/csv HTTP/1.1
+Content-Type: text/csv
+
+Année,Adresse
+2015,CNRS UMR AMAP MONTPELLIER FRA
+2015,IRD UMR AMAP MONTPELLIER FRA
+2015,"University of Bordeaux, IMS, CNRS UMR5218, Talence, F-33405, France"
+2015,"CENBG, CNRS/IN2P3, Chemin du Solarium B. P. 120, Gradignan, F-33175, France"
+
+###
+POST http://affiliations-tools-1.tdmservices.intra.inist.fr/v1/rnsr/conditor HTTP/1.1
+Content-Type: application/json
+
+[{
+     "xPublicationDate": ["2012-01-01"],
+     "authors": [{
+         "affiliations": [{
+             "address": "GDR 2989 Université Versailles Saint-Quentin-en-Yvelines, 63009"
+         }]
+     }]
+}]
