@@ -161,7 +161,7 @@ application/json` (c'est le type du *body* envoyé), puis le tableau JSON envoy�
 > [`generate:service`](SCRIPTS.md#generateservice).  
 > Il reste nécessaire d'écrire les requêtes pour chaque route créée.
 
-## tests.hurl
+### tests.hurl
 
 Le fichier `services/<instance>/tests.hurl` est la plupart du temps généré (sauf
 pour les enchaînements de services qu'on a dans les `data-*`).
@@ -204,8 +204,13 @@ Pour faciliter la création d'un nouveau service, un script npm est disponible:
 
 Il prend en paramètre le nom du service (tout en minuscules, en deux parties
 séparées par un tiret).  
+Il demande le titre du service (*short description*), sa description (*long
+description*), le nom de l'auteur et *mail*.  
 Il crée le répertoire `services/service-name`, l'ajoute dans les *workspaces* du
 dépôt, et dans la liste des services à la fin du [README](./README#services).
+
+> ⚠ Ne pas mettre de caractère `&` dans les réponses, ça provoque un
+> remplacement bizarre.
 
 ## Développement
 
@@ -408,3 +413,57 @@ automatiquement l'image sur Docker Hub.
 > **Remarque**: on peut aussi utiliser l'option *workspace* `-w` de npm pour
 > créer la version depuis la racine du dépôt: `npm version -w
 > services/service-name patch`.
+
+## Mise en production
+
+Pour la mise en production d'un service, il faut modifier son fichier
+`swagger.json`.  
+
+Il faut transformer cette partie:
+
+```json
+    "servers": [
+        {
+            "x-comment": "Will be automatically completed by the ezs server."
+        },
+        {
+            "url": "http://vptdmservices.intra.inist.fr:49233/",
+            "description": "Latest version for production",
+            "#DISABLED#x-profil": "Standard"
+        }
+    ],
+```
+
+en
+
+```json
+    "servers": [
+        {
+            "x-comment": "Will be automatically completed by the ezs server."
+        },
+        {
+            "url": "http://vptdmservices.intra.inist.fr:49245/",
+            "description": "Latest version for production",
+            "x-profil": "Standard"
+        }
+    ],
+```
+
+Où:
+
+1. on enlève `#DISABLED#` devant `x-profil`, en vérifiant que la valeur de ce
+   champ est bien `Standard`,
+2. on ajuste le champ `url` du même objet pour pointer sur l'URL interne du
+   container sur la machine de production.
+
+> ⚠ Pendant la phase de transition du code source des services web, on publiera
+> les services en production à partir du dépôt
+> [GitBucket](https://gitbucket.inist.fr/tdm/web-services) où la procédure est
+> la même, mais où on supprimera tous les fichiers du services, excepté
+> `swagger.json`, qui contiendra les mêmes valeurs que sur GitHub.
+
+Puis, on lance `./bin/publish`, qui demande les *login* et mot de passe de la
+machine du *reverse proxy*.
+
+> Le script `./bin/publish` à utiliser pendant la phase de transition est celui
+> du GitBucket.
