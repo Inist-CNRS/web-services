@@ -57,7 +57,7 @@ des virgules.
 #### Exemple CSV
 
 ```bash
-cat <<EOF | curl -X POST --data-binary @- "https://affiliations-tools.services.inist.fr/v1/rnsr/csv"
+cat <<EOF | curl -X POST --data-binary @- "https://affiliations-tools.services.istex.fr/v1/rnsr/csv"
 Année,Adresse
 2015,CNRS UMR AMAP MONTPELLIER FRA
 2015,IRD UMR AMAP MONTPELLIER FRA
@@ -99,7 +99,7 @@ Le champ `value` contient un objet avec deux propriétés:
 #### Exemple JSON
 
 ```bash
-cat <<EOF|curl -X POST --data-binary @- "https://affiliations-tools.services.inist.fr/v1/rnsr/json?indent=true"
+cat <<EOF|curl -X POST --data-binary @- "https://affiliations-tools.services.istex.fr/v1/rnsr/json?indent=true"
 [
 { "id":1, "value": { "year": "2021", "address": "CNRS UMR AMAP MONTPELLIER FRA" } },
 { "id":2, "value": { "year": "2021", "address": "IRD UMR AMAP MONTPELLIER FRA" } },
@@ -149,7 +149,7 @@ Le champ `value` contient un objet avec deux propriétés:
 #### Exemple Info
 
 ```bash
-cat <<EOF|curl -X POST --data-binary @- "https://affiliations-tools.services.inist.fr/v1/rnsr/info?indent=true"
+cat <<EOF|curl -X POST --data-binary @- "https://affiliations-tools.services.istex.fr/v1/rnsr/info?indent=true"
 [
 { "id":7, "value": { "address": "Inist-CNRS, UPS76, 2 rue Jean Zay, Vandoeuvre-lès-Nancy" } }
 ]
@@ -195,7 +195,7 @@ Ajoute un champ `conditorRnsr` au niveau du champ `address`.
 #### Exemple conditor
 
 ```bash
-cat <<EOF|curl -X POST --data-binary @- "https://affiliations-tools.services.inist.fr/v1/rnsr/conditor"
+cat <<EOF|curl -X POST --data-binary @- "https://affiliations-tools.services.istex.fr/v1/rnsr/conditor"
 [
 {
      "xPublicationDate": ["2012-01-01"],
@@ -237,7 +237,7 @@ Sortie :
 #### via curl
 
 ```bash
-cat <<EOF|curl -N --data-binary @- "https://affiliations-tools.services.inist.fr/v1/addresses/parse?indent=true"
+cat <<EOF|curl -N --data-binary @- "https://affiliations-tools.services.istex.fr/v1/addresses/parse?indent=true"
 [
 { "value": "Inist-CNRS 2, rue Jean Zay CS 10310 F-54519 Vandœuvre-lès-Nancy France" },
 { "value": "46th St & 1st Ave, New York, NY 10017" }
