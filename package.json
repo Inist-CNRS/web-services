@@ -35,6 +35,7 @@
     "bases/python-node",
     "services/base-line",
     "services/base-line-python",
+    "services/biblio-ref",
     "services/terms-extraction"
   ],
   "dependencies": {

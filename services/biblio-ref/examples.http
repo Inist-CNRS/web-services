@@ -1,0 +1,18 @@
+# These examples can be used directly in VSCode, using REST Client extension (humao.rest-client)
+# They are important, because used to generate the tests.hurl file.
+
+# Décommenter/commenter les lignes voulues pour tester localement
+@host=http://localhost:31976
+# @host=https://biblio-ref.services.istex.fr
+
+###
+# @name v1validate
+# Valide la référence bibliographique
+POST {{host}}/v1/validate?indent=true HTTP/1.1
+Content-Type: application/json
+
+[
+	{ "value": "Zohuri, B. (2019). A Comparison of Molten Salt Reactors to Light Water Reactors: Pros and Cons. In Molten Salt Reactors and Thorium Energy (pp. 81-98). Woodhead Publishing. https://doi.org/10.1016/B978-0-08-102337-2.00006-9" },
+	{ "value": "RETRACTED > Gerris Caucasicus, Primary Prevention of Cardiovascular Disease with a Mediterranean Diet, 10.1056/nejmoa1200303" },
+	{ "value": "please see 10.1371/journal.pgen.1001111" }
+]
