@@ -45,7 +45,7 @@ function updateBase() {
         TYPE=$(dirname "$IMAGE_DIR")
         if [ "$IMAGE_DIR" = "template" ]; then
             dryRun git add template
-            dryRun git commit -m "Update template"
+            dryRun git commit -m "Update template to $CHANGING_BASE:$BASE_IMAGE_TAG"
             dryRun git push
         else
             dryRun npm -w "$IMAGE_DIR" version patch
