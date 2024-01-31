@@ -11,15 +11,14 @@ RUN --mount=type=secret,id=webdav_login \
     dvc remote add -d webdav-remote "$(cat /run/secrets/webdav_url)" && \
     dvc remote modify --local webdav-remote user "$(cat /run/secrets/webdav_login)" && \
     dvc remote modify --local webdav-remote password "$(cat /run/secrets/webdav_password)"
-RUN dvc doctor
 COPY ./v3/affiliation/models.dvc /dvc
 RUN dvc pull -v
 
-FROM inistcnrs/lodex-workers-python:4.0.11 AS release
+FROM cnrsinist/ezs-python-server:py3.9-no16-1.0.6 AS release
 
 USER root
 # Install all python dependencies
-RUN pip install fasttext==0.9.2
+RUN pip install fasttext-wheel==0.9.2
 
 USER daemon
 WORKDIR /app/public
