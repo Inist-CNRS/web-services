@@ -2,11 +2,21 @@
 
 set -euo pipefail
 
-# branch name should be in the format:
-# services/<service-name>/<comment>
-BRANCH_NAME=$1
-SERVICE_INTERMEDIATE=${BRANCH_NAME#services/} # remove services/ part
-SERVICE_NAME=${SERVICE_INTERMEDIATE%/*}
+ARG=$1
+
+if [[ "$ARG" =~  [^/]+/[^/]+/ ]]; then
+    # branch name should be in the format:
+    # services/<service-name>/<comment>
+    BRANCH_NAME=$ARG
+    SERVICE_INTERMEDIATE=${BRANCH_NAME#services/} # remove services/ part
+    SERVICE_NAME=${SERVICE_INTERMEDIATE%/*}
+else
+    # tag should be in the format:
+    # ws-<service-name>@<version>
+    TAG=$ARG
+    SERVICE_INTERMEDIATE=${TAG#ws-} # remove ws- part
+    SERVICE_NAME=${SERVICE_INTERMEDIATE%@*} # remove version part
+fi
 
 if [ ! -d "services/$SERVICE_NAME" ]; then
     echo "Could not find directory services/$SERVICE_NAME"
