@@ -59,7 +59,8 @@ for line in sys.stdin:
 
     doi = find_doi(ref_biblio)
     if doi:  # doi is True if and only if a doi is found with the regex doi_regex
-        if verify_doi(doi)==200:  # If request return code 200
+        crossref_status_code = verify_doi(doi) # Verify doi using crossref api
+        if crossref_status_code==200:  # If request return code 200
             status = "found"
             if doi in retracted_doi:
                 status = "retracted"
@@ -67,7 +68,7 @@ for line in sys.stdin:
             json.dump(data, sys.stdout)
             sys.stdout.write("\n")
             
-        elif verify_doi(doi)==404:  # If request return code 404
+        elif crossref_status_code==404:  # If request return code 404
             data["value"] = {"doi":"","status": "not_found"}
             json.dump(data, sys.stdout)
             sys.stdout.write("\n")
