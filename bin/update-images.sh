@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 function usage() {
-    printf "Usage: ./bin/update-images.sh [--help | [--dry-run] <service-name>]\n"
+    printf "Usage: ./bin/update-images.sh [--help | [--dry-run] <[bases/]image-name>]\n"
 }
 
 DRY=false
@@ -15,7 +15,7 @@ for arg in "$@"; do
             ;;
         --help)
             usage
-            exit 1
+            exit 0
             ;;
         *)
             TO_UPDATE="$arg"
