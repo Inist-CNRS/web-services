@@ -58,7 +58,7 @@ function updateBase() {
 
     printf "Directly depending images:\n"
 
-    DEPENDING_DOCKERFILES=$(grep -i "^FROM cnrsinist/$CHANGING_BASE:$BASE_IMAGE_TAG" $DOCKERFILES | sed -e 's/:.*$//')
+    DEPENDING_DOCKERFILES=$(grep -i "^FROM cnrsinist/$CHANGING_BASE:" $DOCKERFILES | sed -e 's/:.*$//')
 
     for DOCKERFILE in $DEPENDING_DOCKERFILES
     do
