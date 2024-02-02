@@ -1,4 +1,4 @@
-FROM cnrsinist/ezs-python-server:py3.9-no16-1.0.7
+FROM cnrsinist/ezs-python-server:py3.9-no16-1.0.8
 
 USER root
 # Install all python dependencies
