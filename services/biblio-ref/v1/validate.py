@@ -31,47 +31,58 @@ def find_doi(text):
 
 def verify_doi(doi, mail=mail_adress):
     """
-    check with crossref api if doi is correct.
-    Do not use this function without function "find_doi"
+    Check with crossref API if DOI is correct.
+    Do not use this function without function "find_doi".
+    
+    Returns HTTP code
     """
     url = f"https://api.crossref.org/works/{doi}/agency?mailto={mail}"
 
-    # Return True if DOI exists in crossref api AND if request worked
     try:
-        code_response = session.get(url).status_code
-        return code_response == 200
-    except:
-        return False
+        response = session.get(url)
+        return response.status_code
+
+    except Exception:
+        return 503 # if there is an unexpected error from crossref
 
 
 for line in sys.stdin:
     data = json.loads(line)
     ref_biblio = data["value"]
-    is_found = False
-    is_retracted = False
 
     # check if "value" is a string
     if not isinstance(ref_biblio, str):
-        data["value"] = {"is_found": is_found, "is retracted": is_retracted}
+        data["value"] = {"doi":"","status": "error_data"}
         json.dump(data, sys.stdout)
         sys.stdout.write("\n")
         continue
 
     doi = find_doi(ref_biblio)
     if doi:  # doi is True if and only if a doi is found with the regex doi_regex
-        if verify_doi(doi):  # If request return code 200
-            is_found = True
+        crossref_status_code = verify_doi(doi) # Verify doi using crossref api
+        if crossref_status_code==200:  # If request return code 200
+            status = "found"
             if doi in retracted_doi:
-                is_retracted = True
+                status = "retracted"
+            data["value"] = {"doi":doi,"status": status}
+            json.dump(data, sys.stdout)
+            sys.stdout.write("\n")
+            
+        elif crossref_status_code==404:  # If request return code 404
+            data["value"] = {"doi":"","status": "not_found"}
+            json.dump(data, sys.stdout)
+            sys.stdout.write("\n")
+            
+        else:
+            data["value"] = {"doi":"","status": "error_service"}
+            json.dump(data, sys.stdout)
+            sys.stdout.write("\n")
 
-        data["value"] = {"is_found": is_found, "is retracted": is_retracted}
-        json.dump(data, sys.stdout)
-        sys.stdout.write("\n")
 
     else:
         # C'est dans cette partie que l'on traitera la partie 2 du WS
         # data["value"] = future_function_to_check(ref_biblio)
 
-        data["value"] = {"is_found": is_found, "is retracted": is_retracted}
+        data["value"] = {"doi":"","status": "not_found"}
         json.dump(data, sys.stdout)
         sys.stdout.write("\n")
