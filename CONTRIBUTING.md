@@ -402,6 +402,11 @@ Il y a plusieurs images de base:
   serveur ezs vide, acceptant les scripts ezs et python, embarquant saxon, sous
   la forme de la commande `xslt`.
 
+> **Note:** il existe maintenant un script qui se charge de la mise à jour des
+> images qui dépendent directement d'une image de base: [`npm run update:images
+> <image-name>`](./SCRIPTS.md#updateimages).  Assurez-vous que l'image a été créée (version, build, push)
+> avant de lancer le script.
+
 ## Création d'une version
 
 Une version se crée manuellement. Pour ça il faut se déplacer dans le
