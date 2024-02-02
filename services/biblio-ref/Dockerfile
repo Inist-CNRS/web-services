@@ -15,7 +15,7 @@ RUN dvc doctor
 COPY ./v1/annulled.csv.dvc /dvc
 RUN dvc pull -v
 
-FROM cnrsinist/ezs-python-server:py3.9-no16-1.0.6 as release
+FROM cnrsinist/ezs-python-server:py3.9-no16-1.0.8
 
 USER root
 # Install all python dependencies
