@@ -31,6 +31,54 @@ automatiquement à la version demandée, en arrivant à la racine du répertoire
 [nvm / Deeper Shell
 integration](https://github.com/nvm-sh/nvm#deeper-shell-integration).
 
+Pour VSCode, il est recommnandé d'accepter l'installation de l'extension
+[EditorConfig](https://marketplace.visualstudio.com/items?itemName=EditorConfig.EditorConfig).
+
+## Nouvelle branche
+
+La branche principale (`main`) du dépôt est protégée.  
+Ça signifie que pour contribuer au dépôt, il faut passer par le mécanisme des
+*pull requests*.  
+
+Et pour créer une *pull request* (ou contribution), il faut d'abord créer une branche.  
+
+Son nom est important, car il permettra aux *GitHub Actions* automatiques
+d'obtenir des informations sur la partie du dépôt qui est travaillée.  
+
+Les noms des branches auront 3 parties:
+
+1. `services` pour indiquer qu'on travaille dans le répertoire des services
+2. le nom du service (ou de l'image de base) concerné(e) (en deux parties
+   séparées par un tiret, suivant la convention de nommage des *containers* dans
+   [ezmaster](https://github.com/Inist-CNRS/ezmaster)), correspondant au nom du
+   répertoire (donc sans `ws-`)
+3. le détail de l'opération. C'est un commentaire (où il faut séparer les mots
+   par des tirets)
+
+Chacune de ces parties sera écrite en minuscules, sans accent, sans espace, et
+elles seront séparées par le caractère `/`.
+
+Par exemple, pour améliorer le service `base-line`, et lui ajouter une route
+`v1/lowercase`, on pourrait créer une branche nommée
+`services/base-line/add-route-lowercase`.
+
+Ainsi, c'est le service `base-line` qui sera concerné par les actions
+automatiques.  
+
+D'autres exemples de noms de branche:
+
+- `services/base-line-python/make-python-script-executable`
+- `services/base-line/change-required-input-for-no-accent`
+- `services/terms-teeft/add-teeft-with-number`
+- `docs/contributing/add-new-branch`
+
+> **Remarque** : seules branches commençant par `services/` et contenant deux
+> `/` déclencheront l'action de test du service.
+
+> **Remarque** : comme nous construisons des programmes *open source*, tâchons
+> de garder tout ce qui est technique (ça peut exclure la documentation
+> elle-même) en anglais.
+
 ## Création d'un service
 
 Avant toute chose, il faut s'assurer qu'un service qui pourrait accueillir votre
@@ -354,50 +402,10 @@ Il y a plusieurs images de base:
   serveur ezs vide, acceptant les scripts ezs et python, embarquant saxon, sous
   la forme de la commande `xslt`.
 
-## Nouvelle branche
-
-La branche principale (`main`) du dépôt est protégée.  
-Ça signifie que pour contribuer au dépôt, il faut passer par le mécanisme des
-*pull requests*.  
-
-Et pour créer une *pull request* (ou contribution), il faut d'abord créer une branche.  
-
-Son nom est important, car il permettra aux *GitHub Actions* automatiques
-d'obtenir des informations sur la partie du dépôt qui est travaillée.  
-
-Les noms des branches auront 3 parties:
-
-1. `services` pour indiquer qu'on travaille dans le répertoire des services
-2. le nom du service (ou de l'image de base) concerné(e) (en deux parties
-   séparées par un tiret, suivant la convention de nommage des *containers* dans
-   [ezmaster](https://github.com/Inist-CNRS/ezmaster)), correspondant au nom du
-   répertoire (donc sans `ws-`)
-3. le détail de l'opération. C'est un commentaire (où il faut séparer les mots
-   par des tirets)
-
-Chacune de ces parties sera écrite en minuscules, sans accent, sans espace, et
-elles seront séparées par le caractère `/`.
-
-Par exemple, pour améliorer le service `base-line`, et lui ajouter une route
-`v1/lowercase`, on pourrait créer une branche nommée
-`services/base-line/add-route-lowercase`.
-
-Ainsi, c'est le service `base-line` qui sera concerné par les actions
-automatiques.  
-
-D'autres exemples de noms de branche:
-
-- `services/base-line-python/make-python-script-executable`
-- `services/base-line/change-required-input-for-no-accent`
-- `services/terms-teeft/add-teeft-with-number`
-- `docs/contributing/add-new-branch`
-
-> **Remarque** : seules branches commençant par `services/` et contenant deux
-> `/` déclencheront l'action de test du service.
-
-> **Remarque** : comme nous construisons des programmes *open source*, tâchons
-> de garder tout ce qui est technique (ça peut exclure la documentation
-> elle-même) en anglais.
+> **Note:** il existe maintenant un script qui se charge de la mise à jour des
+> images qui dépendent directement d'une image de base: [`npm run update:images
+> <image-name>`](./SCRIPTS.md#updateimages).  Assurez-vous que l'image a été créée (version, build, push)
+> avant de lancer le script.
 
 ## Création d'une version
 
@@ -411,8 +419,8 @@ le tout sur GitHub, déclenchant une action de Github qui poussera
 automatiquement l'image sur Docker Hub.
 
 > **Remarque**: on peut aussi utiliser l'option *workspace* `-w` de npm pour
-> créer la version depuis la racine du dépôt: `npm version -w
-> services/service-name patch`.
+> créer la version depuis la racine du dépôt: `npm -w services/service-name
+> version patch`.
 
 ## Mise en production
 
