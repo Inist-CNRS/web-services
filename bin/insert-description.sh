@@ -13,7 +13,7 @@ echo "-----------"
 function markdown2line() {
     local input_string
     input_string=$(cat "$1")
-    echo "${input_string//$'\n'/\\\\n}"
+    echo "${input_string//$'\n'/^M}"
 }
 
 DESCRIPTION=$(markdown2line "$MARKDOWN_PATH")
