@@ -260,6 +260,42 @@ dépôt, et dans la liste des services à la fin du [README](./README#services).
 > ⚠ Ne pas mettre de caractère `&` dans les réponses, ça provoque un
 > remplacement bizarre.
 
+### OpenAPI: ajout d'une description multilignes dans les métadonnées du .ini
+
+Pour avoir une documentation OpenAPI complète, on peut écrire la description
+d'un service en Markdown.  
+On peut se contenter d'écrire cette description dans la métadonnée
+`post.description` directement, en mettant les lignes bout-à-bout, séparées par
+`^M`.  
+Mais il est plus simple d'utiliser le script `./bin/insert-description.sh`, qui
+prend en paramètres un ou plusieurs chemins de fichiers Markdown (`.md`).  
+Pour chaque fichier `.md`, il insère le contenu dans le fichier dont le chemin
+correspond au nom du `.md` (en remplaçant les `_` par des `/`).  
+
+Exemples:
+
+```bash
+./bin/insert-description.sh services/terms-extraction/v1*.md
+./bin/insert-description.sh services/terms-extraction/v1_teeft_fr.md
+```
+
+Alternative: utiliser le script npm `insert:description`:
+
+```bash
+$ npm run insert:description services/terms-extraction/v*.md
+
+> web-services@1.0.0 insert:description
+> ./bin/insert-description.sh services/terms-extraction/v1_teeft_en.md services/terms-extraction/v1_teeft_fr.md services/terms-extraction/v1_teeft_with-numbers_en.md services/terms-extraction/v1_teeft_with-numbers_fr.md
+
+ - services/terms-extraction/v1/teeft/en.ini ✓
+ - services/terms-extraction/v1/teeft/fr.ini ✓
+ - services/terms-extraction/v1/teeft/with-numbers/en.ini ✓
+ - services/terms-extraction/v1/teeft/with-numbers/fr.ini ✓
+```
+
+> **Note**: si vous voulez bénéficier de l'auto-complétion des chemins de
+> fichiers, utilisez plutôt `./bin/insert-description.sh`.
+
 ## Développement
 
 ### Sans docker
