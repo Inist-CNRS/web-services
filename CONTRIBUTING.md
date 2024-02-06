@@ -260,6 +260,25 @@ dépôt, et dans la liste des services à la fin du [README](./README#services).
 > ⚠ Ne pas mettre de caractère `&` dans les réponses, ça provoque un
 > remplacement bizarre.
 
+### OpenAPI: ajout d'une description multilignes dans les métadonnées du .ini
+
+Pour avoir une documentation OpenAPI complète, on peut écrire la description
+d'un service en Markdown.  
+On peut se contenter d'écrire cette description dans la métadonnée
+`post.description` directement, en mettant les lignes bout-à-bout, séparées par
+`^M`.  
+Mais il est plus simple d'utiliser le script `./bin/insert-description.sh`, qui
+prend en paramètres un ou plusieurs chemins de fichiers Markdown (`.md`).  
+Pour chaque fichier `.md`, il insère le contenu dans le fichier dont le chemin
+correspond au nom du `.md` (en remplaçant les `_` par des `/`).  
+
+Exemples:
+
+```bash
+./bin/insert-description.sh services/terms-extraction/v1*.md
+./bin/insert-description.sh services/terms-extraction/v1_teeft_fr.md
+```
+
 ## Développement
 
 ### Sans docker
