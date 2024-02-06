@@ -1,5 +1,5 @@
 {
-	"openapi": "3.0.0",
+	"openapi": "3.1.0",
 	"info": {
 		"title": "biblio-ref - Valide une référence bibliographique",
 		"summary": "Si un DOI est trouvé dans la référence bibliographique, valide la référence et indique si elle est rétractée",

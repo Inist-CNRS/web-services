@@ -1,5 +1,5 @@
 {
-	"openapi": "3.0.0",
+	"openapi": "3.1.0",
 	"info": {
 		"title": "base-line-python - Services en python dédiés aux tests",
 		"summary": "Vérifie la faisabilité de services en python",
