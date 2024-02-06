@@ -6,6 +6,7 @@ Available scripts:
 - generate:example-tests
 - generate:service
 - help
+- insert:description
 - publish
 - update:images
 - test:local
@@ -58,6 +59,29 @@ Display this help (file `SCRIPT.md`).
 Help is colorized if you have `bat` installed.
 
 See <https://github.com/sharkdp/bat>.
+
+## insert:description
+
+Usage: `npm run insert:description services/service-name/v1_path.md`
+
+Insert the Markdown description of a route into the matching `.ini` metadata
+(`post.description`).  
+Convert multiline markdown into one-line metadata (using `^M` character).
+Replace the `_` character in the markdown files names with `/`, to match the path of the `.ini`s to be modified.
+
+Example:
+
+```bash
+$ npm run insert:description services/terms-extraction/v*.md
+
+> web-services@1.0.0 insert:description
+> ./bin/insert-description.sh services/terms-extraction/v1_teeft_en.md services/terms-extraction/v1_teeft_fr.md services/terms-extraction/v1_teeft_with-numbers_en.md services/terms-extraction/v1_teeft_with-numbers_fr.md
+
+ - services/terms-extraction/v1/teeft/en.ini ✓
+ - services/terms-extraction/v1/teeft/fr.ini ✓
+ - services/terms-extraction/v1/teeft/with-numbers/en.ini ✓
+ - services/terms-extraction/v1/teeft/with-numbers/fr.ini ✓
+```
 
 ## publish
 

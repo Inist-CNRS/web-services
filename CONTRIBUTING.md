@@ -279,6 +279,23 @@ Exemples:
 ./bin/insert-description.sh services/terms-extraction/v1_teeft_fr.md
 ```
 
+Alternative: utiliser le script npm `insert:description`:
+
+```bash
+$ npm run insert:description services/terms-extraction/v*.md
+
+> web-services@1.0.0 insert:description
+> ./bin/insert-description.sh services/terms-extraction/v1_teeft_en.md services/terms-extraction/v1_teeft_fr.md services/terms-extraction/v1_teeft_with-numbers_en.md services/terms-extraction/v1_teeft_with-numbers_fr.md
+
+ - services/terms-extraction/v1/teeft/en.ini ✓
+ - services/terms-extraction/v1/teeft/fr.ini ✓
+ - services/terms-extraction/v1/teeft/with-numbers/en.ini ✓
+ - services/terms-extraction/v1/teeft/with-numbers/fr.ini ✓
+```
+
+> **Note**: si vous voulez bénéficier de l'auto-complétion des chemins de
+> fichiers, utilisez plutôt `./bin/insert-description.sh`.
+
 ## Développement
 
 ### Sans docker
