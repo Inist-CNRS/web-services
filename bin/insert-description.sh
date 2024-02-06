@@ -7,7 +7,7 @@ echo "$INI_PATH"
 echo "-----------"
 
 # Return the content of the file which path is given, replacing line return with
-# "\n"
+# "^M".
 # @param {string} path of the file to convert
 # @return {string}
 function markdown2line() {
