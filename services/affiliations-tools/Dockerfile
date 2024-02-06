@@ -1,11 +1,11 @@
-FROM cnrsinist/ezs-python-server:py3.9-no16-1.0.6
+FROM cnrsinist/ezs-python-server:py3.9-no16-1.0.8
 
 USER root
 
 # Install libpostal
 ENV LIBPOSTAL_HOME=/usr/share/libpostal
 
-RUN apt install -y curl autoconf automake libtool pkg-config
+RUN apt update && apt install -y unzip curl autoconf automake libtool pkg-config build-essential
 
 ADD \
     https://codeload.github.com/openvenues/libpostal/zip/refs/heads/master \
@@ -15,7 +15,7 @@ WORKDIR ${LIBPOSTAL_HOME}
 
 RUN unzip libpostal.zip && \
     chmod +x libpostal-master && \
-    ch libpostal-master && \
+    cd libpostal-master && \
     ./bootstrap.sh && \
     ./configure --datadir=${LIBPOSTAL_HOME} && \
     make -j4 && \
