@@ -37,4 +37,6 @@ function insert_description() {
     fi
 }
 
-insert_description "$1"
+for file in "$@"; do
+    insert_description "$file"
+done
