@@ -1,0 +1,215 @@
+# data-computer #0.0.0
+
+L'instance `data-computer utilise l'application ezmaster
+[`lodex-workers`](https://github.com/Inist-CNRS/lodex-workers).
+
+Elle offre plusieurs services **asynchrones** pour des calculs et de transformations de données simples.
+
+*Tous les services proposés acceptent uniquement en entrée des fichiers corpus standards au format tar.gz.*
+
+
+## Configuration
+
+Il faut préciser dans le fichier de configuration de l'instance qu'elle utilise les paquets nodejs suivant :
+
+- `@ezs/analytics`
+- `@ezs/basics`
+
+Bien sûr, les dernières versions sont préférables.
+
+Exemple:
+
+```json
+{
+    "packages": [
+		"@ezs/core@3.0.5",
+		"@ezs/analytics@2.1.0",
+		"@ezs/basics@2.5.3",
+		"@ezs/spawn@1.4.4"
+    ]
+}
+```
+
+## Utilisation
+
+- [v1/tree-segment](#v1%2ftree-segment)
+- [v1/graph](#v1%2fgraph-segment)
+- [v1/lda](#v1%2flda)
+
+### v1/tree-segment
+
+Créer des segments glissant 2 à 2 de tous les éléments d'un tableau et agrège ces segments pour les compter.
+
+Le segment étant glissant, ce traitement sert à créer des segments qui représente un arbre hiérachique.
+
+par exemple avec ces données en entrée:
+
+```json
+[
+	{ "value": ["a", "b", "c"] },
+	{ "value": ["a", "c", "d"] },
+	{ "value": ["a", "b", "d"] },
+	{ "value": ["a", "b", "c", "d"] },
+	{ "value": ["a", "c", "d", "e"] }
+]
+
+```
+
+on obtiendra :
+
+```json
+[
+	{"source":"a","target":"b","weight":3,"origin":["#1","#3","#4"]},
+	{"source":"b","target":"c","weight":2,"origin":["#1","#4"]},
+	{"source":"a","target":"c","weight":2,"origin":["#2","#5"]},
+	{"source":"c","target":"d","weight":3,"origin":["#2","#4","#5"]},
+	{"source":"b","target":"d","weight":1,"origin":["#3"]},
+	{"source":"d","target":"e","weight":1,"origin":["#5"]}
+]
+```
+
+> NOTE: Le service accepte des tableaux de tableaux (cas d'usage lodex/istex)
+
+#### Paramètre(s) URL
+
+| nom                 | description                                 |
+| ------------------- | ------------------------------------------- |
+| indent (true/false) | Indenter le résultat renvoyer immédiatement |
+
+#### Entête(s) HTTP
+
+| nom    | description                                                  |
+| ------ | ------------------------------------------------------------ |
+| X-Hook | URL à appeler quand le résultat sera disponible (facultatif) |
+
+#### Exemple en ligne de commande
+
+
+```bash
+# Send data for batch processing
+cat input.tar.gz |curl --data-binary @-  -H "X-Hook: https://webhook.site/dce2fefa-9a72-4f76-96e5-059405a04f6c" "http://localhost:31976/v1/tree-segment" > output.json
+
+# When the corpus is processed, get the result
+cat output.json |curl --data-binary @- "http://localhost:31976/v1/retrieve" > output.tar.gz
+
+```
+
+### v1/graph-segment
+
+Créer des segments 2 à 2 avex tous les éléments d'un tableau et agrège ces segments pour les compter
+Les segments reprsentent toutes la associations possibles, ce traitement sert à créer des segments qui représente un réesau.
+
+par exemple avec ces données en entrée:
+
+```json
+[
+	{ "value": ["a", "b", "c"] },
+	{ "value": ["a", "c", "d"] },
+	{ "value": ["a", "b", "d"] },
+	{ "value": ["a", "b", "c", "d"] },
+	{ "value": ["a", "c", "d", "e"] }
+]
+
+```
+
+on obtiendra :
+
+```json
+[
+	{"source":"a","target":"b","weight":3,"origin":["#1","#3","#4"]},
+	{"source":"a","target":"c","weight":4,"origin":["#1","#2","#4","#5"]},
+	{"source":"b","target":"c","weight":2,"origin":["#1","#4"]},
+	{"source":"a","target":"d","weight":4,"origin":["#2","#3","#4","#5"]},
+	{"source":"c","target":"d","weight":3,"origin":["#2","#4","#5"]},
+	{"source":"b","target":"d","weight":2,"origin":["#3","#4"]},
+	{"source":"a","target":"e","weight":1,"origin":["#5"]},
+	{"source":"c","target":"e","weight":1,"origin":["#5"]},
+	{"source":"d","target":"e","weight":1,"origin":["#5"]}
+]
+```
+
+> NOTE: Le service accepte des tableaux ou des tableaux de tableaux
+
+#### Paramètre(s) URL
+
+| nom                 | description                                 |
+| ------------------- | ------------------------------------------- |
+| indent (true/false) | Indenter le résultat renvoyer immédiatement |
+
+#### Entête(s) HTTP
+
+| nom    | description                                                  |
+| ------ | ------------------------------------------------------------ |
+| X-Hook | URL à appeler quand le résultat sera disponible (facultatif) |
+
+#### Exemple en ligne de commande
+
+
+```bash
+# Send data for batch processing
+cat input.tar.gz |curl --data-binary @-  -H "X-Hook: https://webhook.site/dce2fefa-9a72-4f76-96e5-059405a04f6c" "http://localhost:31976/v1/graph-segment" > output.json
+
+# When the corpus is processed, get the result
+cat output.json |curl --data-binary @- "http://localhost:31976/v1/retrieve" > output.tar.gz
+
+```
+
+
+### v1/lda
+
+Créer à partir de l'ensemble des documents un ensemble de topics. Chaque topic contient un champ "word", qui est composé une liste de 10 mots qui sont les plus caractéristiques du topic, ainsi que d'un champ "weight" qui correspond au poids associé au sujet dans le document. Le texte doit être en anglais. Les topics non exhaustifs (dont la probabilité est inférieure ou égale à 0.05) ne sont pas retournés.
+La liste des topics sont affichés dans le champ "topics" et le topic avec la plus forte probabilité est retourné dans un champ "best_topic"
+
+
+Par exemple, pour un document pris dans un ensemble de document (l'id "83" est totalement arbitraire)
+
+```json
+
+{
+"id":"83",
+"value":"The current status and distribution of the red panda Ailurus fulgens in the wild is poorly known. The subspecies fulgens is found in the Himalaya in Nepal, India, Bhutan, northern Myanmar and southwest China, and the subspecies styani occurs further to the east in south-central China. The red panda is an animal of subtropical and temperate forests, with the exception of Meghalaya in India, where it is also found in tropical forests. In the wild, red pandas take a largely vegetarian diet consisting chiefly of bamboo. The extent of occurrence of the red panda in India is about 170,000 sq km, although its area of occupancy within this may only be about 25,000 sq km. An estimate based on the lowest recorded average density and the total area of potential habitat suggests that the global population of red pandas is about 16,000–20,000. Habitat loss and poaching, in that order, are the major threats. In this paper the distribution, status and conservation problems of the red panda, especially in India, are reviewed, and appropriate conservation measures recommended, including the protection of named areas and the extension of some existing protected areas."
+}
+```
+
+On obtiendra :
+```json
+
+{
+"id":"83",
+"value":{
+	"topics":{
+		"topic_6":{"words":["diet","animal","high","group","level","study","blood","dietary","intake","increase"],"weight":"0.9416929"},
+		"topic_13":{"words":["diet","intake","human","b12","food","level","protein","vitamin","increase","acid"],"weight":"0.05131816"}
+		},
+	"best_topic": {
+		"topic_6":{"words":["diet","animal","high","group","level","study","blood","dietary","intake","increase"],"weight":"0.9416929"}
+	}
+}
+}
+```
+
+NOTE : La qualité des résultats dépend du corpus et les topics doivent être analysés par l'utilisateur avant d'être utilisés.
+
+
+#### Paramètre(s) URL
+
+| nom                 | description                                 |
+| ------------------- | ------------------------------------------- |
+| indent (true/false) | Indenter le résultat renvoyer immédiatement |
+
+#### Entête(s) HTTP
+
+| nom    | description                                                  |
+| ------ | ------------------------------------------------------------ |
+| X-Hook | URL à appeler quand le résultat sera disponible (facultatif) |
+
+#### Exemple en ligne de commande
+
+
+```bash
+# Send data for batch processing
+cat input.tar.gz |curl --data-binary @-  -H "X-Hook: https://webhook.site/dce2fefa-9a72-4f76-96e5-059405a04f6c" "http://localhost:31976/v1/lda" > output.json
+
+# When the corpus is processed, get the result
+cat output.json |curl --data-binary @- "http://localhost:31976/v1/retrieve" > output.tar.gz
+```
