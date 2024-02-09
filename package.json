@@ -1,55 +1,56 @@
 {
-    "private": true,
-    "name": "web-services",
-    "version": "1.0.0",
-    "description": "Web services at Inist-CNRS",
-    "main": "index.js",
-    "scripts": {
-        "generate:example-metadata": "node bin/generate-example-metadata.mjs",
-        "generate:example-tests": "node bin/generate-example-tests.mjs",
-        "generate:service": "./bin/create-service-from-template.sh",
-        "help": "bat SCRIPTS.md || cat SCRIPTS.md",
-        "insert:description": "./bin/insert-description.sh",
-        "publish": "./bin/publish.sh",
-        "update:images": "./bin/update-images.sh",
-        "test": "echo \"Error: no test specified\" && exit 1",
-        "test:local": "bin/test-service.sh local",
-        "test:remote": "bin/test-service.sh remote",
-        "test:remotes": "bin/test-services.sh"
-    },
-    "repository": {
-        "type": "git",
-        "url": "git+https://github.com/Inist-CNRS/web-services.git"
-    },
-    "keywords": [
-        "webservices",
-        "tdm"
-    ],
-    "author": "",
-    "license": "CECILL-2.1",
-    "bugs": {
-        "url": "https://github.com/Inist-CNRS/web-services/issues"
-    },
-    "homepage": "https://github.com/Inist-CNRS/web-services#readme",
-    "workspaces": [
-        "bases/ezs-python-saxon-server",
-        "bases/ezs-python-server",
-        "bases/python-node",
-        "services/affiliation-rnsr",
-        "services/base-line",
-        "services/base-line-python",
-        "services/biblio-ref",
-        "services/terms-extraction"
-    ],
-    "dependencies": {
-        "@ezs/analytics": "2.2.2",
-        "@ezs/basics": "2.6.0",
-        "@ezs/core": "3.6.0",
-        "@ezs/spawn": "1.4.5",
-        "@orangeopensource/hurl": "4.1.0",
-        "rest-cli": "1.8.13"
-    },
-    "devDependencies": {
-        "@types/node": "20.11.16"
-    }
+  "private": true,
+  "name": "web-services",
+  "version": "1.0.0",
+  "description": "Web services at Inist-CNRS",
+  "main": "index.js",
+  "scripts": {
+    "generate:example-metadata": "node bin/generate-example-metadata.mjs",
+    "generate:example-tests": "node bin/generate-example-tests.mjs",
+    "generate:service": "./bin/create-service-from-template.sh",
+    "help": "bat SCRIPTS.md || cat SCRIPTS.md",
+    "insert:description": "./bin/insert-description.sh",
+    "publish": "./bin/publish.sh",
+    "update:images": "./bin/update-images.sh",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "test:local": "bin/test-service.sh local",
+    "test:remote": "bin/test-service.sh remote",
+    "test:remotes": "bin/test-services.sh"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Inist-CNRS/web-services.git"
+  },
+  "keywords": [
+    "webservices",
+    "tdm"
+  ],
+  "author": "",
+  "license": "CECILL-2.1",
+  "bugs": {
+    "url": "https://github.com/Inist-CNRS/web-services/issues"
+  },
+  "homepage": "https://github.com/Inist-CNRS/web-services#readme",
+  "workspaces": [
+    "bases/ezs-python-saxon-server",
+    "bases/ezs-python-server",
+    "bases/python-node",
+    "services/affiliation-rnsr",
+    "services/base-line",
+    "services/base-line-python",
+    "services/biblio-ref",
+    "services/data-computer",
+    "services/terms-extraction"
+  ],
+  "dependencies": {
+    "@ezs/analytics": "2.2.2",
+    "@ezs/basics": "2.6.0",
+    "@ezs/core": "3.6.0",
+    "@ezs/spawn": "1.4.5",
+    "@orangeopensource/hurl": "4.1.0",
+    "rest-cli": "1.8.13"
+  },
+  "devDependencies": {
+    "@types/node": "20.11.16"
+  }
 }
