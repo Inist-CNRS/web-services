@@ -1,4 +1,4 @@
-# data-computer #0.0.0
+# ws-data-computer@2.9.5
 
 L'instance `data-computer utilise l'application ezmaster
 [`lodex-workers`](https://github.com/Inist-CNRS/lodex-workers).
