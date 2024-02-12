@@ -1,9 +1,6 @@
 # ws-data-computer@2.9.5
 
-L'instance `data-computer utilise l'application ezmaster
-[`lodex-workers`](https://github.com/Inist-CNRS/lodex-workers).
-
-Elle offre plusieurs services **asynchrones** pour des calculs et de transformations de données simples.
+Le service `data-computer` offre plusieurs services **asynchrones** pour des calculs et de transformations de données simples.
 
 *Tous les services proposés acceptent uniquement en entrée des fichiers corpus standards au format tar.gz.*
 
