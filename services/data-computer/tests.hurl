@@ -35,6 +35,6 @@ delay: 1000
 ```
 
 HTTP 200
-Content-Type: application/x-tar
+Content-Type: application/x-gzip
 
 # TODO: ajouter les deux autres routes (v1GraphSegment, v1Lda)
