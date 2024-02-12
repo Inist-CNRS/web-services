@@ -5,28 +5,6 @@ Le service `data-computer` offre plusieurs services **asynchrones** pour des cal
 *Tous les services proposés acceptent uniquement en entrée des fichiers corpus standards au format tar.gz.*
 
 
-## Configuration
-
-Il faut préciser dans le fichier de configuration de l'instance qu'elle utilise les paquets nodejs suivant :
-
-- `@ezs/analytics`
-- `@ezs/basics`
-
-Bien sûr, les dernières versions sont préférables.
-
-Exemple:
-
-```json
-{
-    "packages": [
-		"@ezs/core@3.0.5",
-		"@ezs/analytics@2.1.0",
-		"@ezs/basics@2.5.3",
-		"@ezs/spawn@1.4.4"
-    ]
-}
-```
-
 ## Utilisation
 
 - [v1/tree-segment](#v1%2ftree-segment)
