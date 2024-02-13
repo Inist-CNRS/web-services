@@ -19,7 +19,7 @@ FROM cnrsinist/ezs-python-server:py3.9-no16-1.0.8
 
 USER root
 # Install all python dependencies
-RUN pip install pandas==2.1.4 requests_ratelimiter==0.4.2
+RUN pip install pandas==2.1.4 requests_ratelimiter==0.4.2 thefuzz==0.22.1
 
 USER daemon
 WORKDIR /app/public
