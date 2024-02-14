@@ -117,25 +117,6 @@ def get_title_authors_doi(message):
         first_author_given = ""
     return {'title': title, 'first_author_given': first_author_given, 'first_author_name': first_author_name, 'doi': doi}
 
-def match_title(title, ref_biblio):
-    """
-    Match the title of the publication with the title of the biblio reference.
-    
-    Args:
-        title (str): The title of the publication.
-        ref_biblio (str): The biblio reference.
-    
-    Returns:
-        bool: True if the title of the publication matches the title of the biblio reference, False otherwise.
-    """
-    title = uniformize(title)
-    ref_biblio = uniformize(ref_biblio)
-    
-    distance = fuzz.partial_ratio(title, ref_biblio)
-
-    #thereshold here
-    return distance > 90
-
 def compare_pubinfo_refbiblio(item,ref_biblio):
     """
     Compare informations of one of the crossref publis with the biblio
@@ -148,9 +129,9 @@ def compare_pubinfo_refbiblio(item,ref_biblio):
         tuple (bool, str): True if it's match and whith the doi
     """
     # Check first author
-    if item['first_author_name'] not in ref_biblio:
+    if uniformize(item['first_author_name']) not in ref_biblio:
         return False, ""
-    if not match_title(item['title'], ref_biblio):
+    if fuzz.partial_ratio(uniformize(item['title']), ref_biblio)<90:
         return False, ""
     return True, item['doi']
 
@@ -165,6 +146,7 @@ def verify_biblio(ref_biblio, mail=mail_adress):
     Returns : 
         a confidence score about the existence + doi of the biblio ref
     """
+    ref_biblio = uniformize(ref_biblio)
     url = f'https://api.crossref.org/works?query.bibliographic="{ref_biblio}"&mailto={mail}&rows=5'
     try:
         response = session.get(url)
@@ -178,6 +160,8 @@ def verify_biblio(ref_biblio, mail=mail_adress):
             # compare pub_info with ref_biblio
             match_item, doi = compare_pubinfo_refbiblio(item_info,ref_biblio)
             if match_item:
+                if doi in retracted_doi:
+                    return "retracted",doi
                 return "found",doi
             
         return "not_found",""
@@ -207,7 +191,7 @@ for line in sys.stdin:
             json.dump(data, sys.stdout)
             sys.stdout.write("\n")
             
-        elif crossref_status_code==404:  # If request return code 404
+        elif crossref_status_code==404:  # If request return code 404, check the title dans author
             status,doi = verify_biblio(ref_biblio)
             data["value"] = {"doi":doi, "status": status}
             
