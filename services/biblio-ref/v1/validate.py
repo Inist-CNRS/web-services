@@ -17,7 +17,6 @@ dumps_pps = pd.read_csv("./v1/annulled.csv", encoding="cp1252")
 retracted_doi = dumps_pps["DOI"].tolist()
 
 
-# normalize text
 def remove_accents(text):
     """
     Remove accents from the input text and return the text with no accents.
