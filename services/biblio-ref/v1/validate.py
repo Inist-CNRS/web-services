@@ -17,7 +17,6 @@ dumps_pps = pd.read_csv("./v1/annulled.csv", encoding="cp1252")
 retracted_doi = dumps_pps["DOI"].tolist()
 
 
-# normalize text
 def remove_accents(text):
     """
     Remove accents from the input text and return the text with no accents.
@@ -36,7 +35,7 @@ def remove_accents(text):
 
 def uniformize(text):
     """
-    Function to uniformize the given text by removing accents, punctuation, and converting to lowercase.
+    Uniformize the given text by removing accents, punctuation, and converting to lowercase.
     
     Args:
         text (str): a string input text to be uniformized
