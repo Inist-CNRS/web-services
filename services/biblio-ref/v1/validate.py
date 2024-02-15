@@ -35,7 +35,7 @@ def remove_accents(text):
 
 def uniformize(text):
     """
-    Function to uniformize the given text by removing accents, punctuation, and converting to lowercase.
+    Uniformize the given text by removing accents, punctuation, and converting to lowercase.
     
     Args:
         text (str): a string input text to be uniformized
