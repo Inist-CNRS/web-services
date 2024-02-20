@@ -10,7 +10,7 @@ from thefuzz import fuzz
 
 
 mail_adress = "leo.gaillard@cnrs.fr"
-session = LimiterSession(per_second=5)
+session = LimiterSession(per_second=10)
 
 # get a list of retracted DOIs
 dumps_pps = pd.read_csv("./v1/annulled.csv", encoding="cp1252")
