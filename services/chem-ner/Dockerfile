@@ -14,12 +14,16 @@ RUN --mount=type=secret,id=webdav_login \
 COPY ./v1/chem/models.dvc /dvc
 RUN dvc pull -v
 
-FROM inistcnrs/lodex-workers-pytorch:1.0.3 AS release
+FROM cnrsinist/ezs-python-server:py3.9-no16-1.0.8 AS release
+
+USER root
+RUN pip install torch==2.1.0+cpu torchvision==0.16.0+cpu torchaudio==2.1.0+cpu --index-url https://download.pytorch.org/whl/cpu
 RUN pip install transformers==4.30.2 certifi==2024.2.2
+
 USER daemon
 WORKDIR /app/public
 # Declare files to copy in .dockerignore
 # A modifier : (utiliser le .dockerignore)
-COPY --chown=daemon:daemon ./v1 /app/public/v1
+COPY --chown=daemon:daemon . /app/public/
 
 COPY --chown=daemon:daemon --from=build1 /dvc/models /app/public/v1/chem/models
