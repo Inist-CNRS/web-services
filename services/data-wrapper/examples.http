@@ -6,43 +6,43 @@
 # @host=https://data-wrapper.services.istex.fr
 
 ###
-# @name csv
+# @name v1Csv
 # Convertit un CSV en .tar
-POST {{host}}/v1/csv?compress=false HTTP/1.1
+POST {{host}}/v1/csv?id=title&value=rating HTTP/1.1
 Content-Type: text/csv
 
-title,year,director/firstNane,director/LastNane,actors,rating,imdb
+title,year,director/firstName,director/LastName,actors,rating,imdb
 Rocky,1976,John G.,Avildsen,Sylvester Stallone/Talia Shire/Carl Weathers/Burt Young,"8,1",http://www.imdb.com/title/tt0075148/
 Rocky 2,1979,Sylvester,Stallone,Sylvester Stallone/Talia Shire/Carl Weathers/Burt Young/Burgess Meredith/Tony Burton/Frank Stallone/Stu Nahan,"7,2",http://www.imdb.com/title/tt0079817/
 Rocky 3,1982,Sylvester,Stallone,Sylvester Stallone/Talia Shire/Carl Weathers/Burt Young/Burgess Meredith/Mister T./Hulk Hogan/Tony Burton,"6,7",http://www.imdb.com/title/tt0084602/
 Last Action Hero,1993,John,McTierman,Arnold Schwarzenegger/Austin O'Brien/Charles Dance/Bridget Wilson-Sampras,"6,2",http://www.imdb.com/title/tt0107362/
 
 ###
-# @name fields/csv
+# @name v1FieldsCsv
 # Récupère les noms des colonnes du CSV
 POST {{host}}/v1/fields/csv HTTP/1.1
 Content-Type: text/csv
 
-title,year,director/firstNane,director/LastNane,actors,rating,imdb
+title,year,director/firstName,director/LastName,actors,rating,imdb
 Rocky,1976,John G.,Avildsen,Sylvester Stallone/Talia Shire/Carl Weathers/Burt Young,"8,1",http://www.imdb.com/title/tt0075148/
 Rocky 2,1979,Sylvester,Stallone,Sylvester Stallone/Talia Shire/Carl Weathers/Burt Young/Burgess Meredith/Tony Burton/Frank Stallone/Stu Nahan,"7,2",http://www.imdb.com/title/tt0079817/
 Rocky 3,1982,Sylvester,Stallone,Sylvester Stallone/Talia Shire/Carl Weathers/Burt Young/Burgess Meredith/Mister T./Hulk Hogan/Tony Burton,"6,7",http://www.imdb.com/title/tt0084602/
 Last Action Hero,1993,John,McTierman,Arnold Schwarzenegger/Austin O'Brien/Charles Dance/Bridget Wilson-Sampras,"6,2",http://www.imdb.com/title/tt0107362/
 
 ###
-# @name tarTei2json
+# @name v1TarTei2json
 # Convertit un fichier .tar.gz contenant des fichiers TEI en fichier .tar.gz contenant des fichiers JSON
 # @extension tar.gz
-POST {{host}}/v1/tar-tei2json.ini HTTP/1.1
+POST {{host}}/v1/tar-tei2json HTTP/1.1
 Content-Type: application/x-tar
 
 < ./example-tei.tar.gz
 
 ###
-# @name tarTei2xml
+# @name v1TarTei2xml
 # Convertit un fichier .tar.gz contenant des fichiers TEI en fichier .tar.gz contenant des fichiers XML simplifiés
 # @extension tar.gz
-POST {{host}}/v1/tar-tei2xml.ini HTTP/1.1
+POST {{host}}/v1/tar-tei2xml HTTP/1.1
 Content-Type: application/x-tar
 
 < ./example-tei.tar.gz
