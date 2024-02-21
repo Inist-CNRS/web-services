@@ -112,6 +112,7 @@ le `package.json`:
 
 > 📘 Ceci est maintenant automatique quand on utilise le script
 > [`generate:service`](SCRIPTS.md#generateservice).
+> Voir [Script d'initialisation d'un nouveau service](#script-dinitialisation-dun-nouveau-service)
 
 Ainsi, vous serez capable de lancer des scripts d'un service (par exemple
 `base-line`) depuis la racine du dépôt (à condition de disposer de npm 7+):
@@ -258,6 +259,12 @@ Il demande le titre du service (*short description*), sa description (*long
 description*), le nom de l'auteur et *mail*.  
 Il crée le répertoire `services/service-name`, l'ajoute dans les *workspaces* du
 dépôt, et dans la liste des services à la fin du [README](./README#services).
+
+Exemple:
+
+```bash
+npm run generate:service service-name
+```
 
 > ⚠ Ne pas mettre de caractère `&` dans les réponses, ça provoque un
 > remplacement bizarre.
