@@ -1,15 +1,13 @@
 # syntax=docker/dockerfile:1.2
-FROM cnrsinist/ezs-python-server:py3.9-no16-1.0.8
+FROM cnrsinist/ezs-python-saxon-server:py3.9-no16-1.0.2
 
 USER root
-# Install all python dependencies
-# RUN pip install \
-#     unidecode==1.3.7
 
 # Install all node dependencies
-# RUN npm install \
-#     @ezs/teeft@2.3.1 \
-#     @ezs/strings@1.0.3
+RUN npm install \
+    @ezs/conditor@2.10.8 \
+    @ezs/istex@1.5.9 \
+    @ezs/xslt@1.3.31
 
 WORKDIR /app/public
 # Declare files to copy in .dockerignore
