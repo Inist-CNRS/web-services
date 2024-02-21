@@ -1,5 +1,5 @@
 {
-    "openapi": "3.0.0",
+    "openapi": "3.1.0",
     "info": {
         "title": "data-wrapper - Conversions en fichier corpus compressé",
         "summary": "Les fichiers corpus compressés sont compatibles avec tous les traitements TDM dédiés aux corpus (services web asynchrone)",
