@@ -2,4 +2,4 @@
 
 Trouve des entités nommées de Chimie dans un texte
 
-Renvoie un Json composé comportant d'un champs "chemical" et d'un champ "chemical_disambiguisate"
+Renvoie un Json composé comportant d'un champ `chemical` et d'un champ `chemical_disambiguisate`
