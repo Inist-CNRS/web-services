@@ -17,7 +17,7 @@ RUN dvc pull -v
 FROM cnrsinist/ezs-python-server:py3.9-no16-1.0.8 AS release
 
 USER root
-RUN pip install torch==2.1.0+cpu torchvision==0.16.0+cpu torchaudio==2.1.0+cpu --index-url https://download.pytorch.org/whl/cpu
+RUN pip install torch==2.1.0+cpu --index-url https://download.pytorch.org/whl/cpu
 RUN pip install transformers==4.30.2 certifi==2024.2.2
 
 USER daemon
