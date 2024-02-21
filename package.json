@@ -40,6 +40,7 @@
     "services/base-line-python",
     "services/biblio-ref",
     "services/chem-ner",
+    "services/data-computer",
     "services/terms-extraction"
   ],
   "dependencies": {
