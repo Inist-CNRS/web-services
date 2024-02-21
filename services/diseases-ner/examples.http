@@ -6,8 +6,8 @@
 # @host=https://diseases-ner.services.istex.fr
 
 ###
-# @name v1routeInCamelCase
-# Description de la route
+# @name v1diseasesTagger
+# Trouve les entités nommées de maladies
 POST {{host}}/v1/diseases/tagger?indent=true HTTP/1.1
 Content-Type: application/json
 

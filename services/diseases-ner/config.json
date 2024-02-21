@@ -1,7 +1,7 @@
 {
     "environnement": {
         "EZS_TITLE": "Trouve des entités nommées de maladies dans un texte",
-        "EZS_DESCRIPTION": "Renvoie un Json composé comportant un champs `diseases` correspondant aux entités nommées de maladies trouvées",
+        "EZS_DESCRIPTION": "Renvoie un Json composé comportant un champ `diseases` correspondant aux entités nommées de maladies trouvées",
         "EZS_METRICS": true,
         "EZS_CONCURRENCY": 2,
         "EZS_CONTINUE_DELAY": 60,
