@@ -31,8 +31,10 @@ automatiquement à la version demandée, en arrivant à la racine du répertoire
 [nvm / Deeper Shell
 integration](https://github.com/nvm-sh/nvm#deeper-shell-integration).
 
-Pour VSCode, il est recommnandé d'accepter l'installation de l'extension
-[EditorConfig](https://marketplace.visualstudio.com/items?itemName=EditorConfig.EditorConfig).
+Pour VSCode, il est recommandé d'accepter l'installation des extensions:
+
+- [EditorConfig](https://marketplace.visualstudio.com/items?itemName=EditorConfig.EditorConfig)
+- [markdownlint](https://marketplace.visualstudio.com/items?itemName=davidanson.vscode-markdownlint)
 
 ## Nouvelle branche
 
