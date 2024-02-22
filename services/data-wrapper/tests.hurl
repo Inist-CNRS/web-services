@@ -9,7 +9,7 @@ Last Action Hero,1993,John,McTierman,Arnold Schwarzenegger/Austin O'Brien/Charle
 ```
 
 HTTP 200
-Content-type: application/x-gzip
+Content-type: application/gzip
 
 ##########################################
 
@@ -53,7 +53,7 @@ content-type: application/x-tar
 file,example-tei.tar.gz;
 
 HTTP 200
-Content-type: application/x-gzip
+Content-type: application/gzip
 
 ##########################################
 
@@ -62,4 +62,4 @@ content-type: application/x-tar
 file,example-tei.tar.gz;
 
 HTTP 200
-Content-type: application/x-gzip
+Content-type: application/gzip
