@@ -31,8 +31,10 @@ automatiquement à la version demandée, en arrivant à la racine du répertoire
 [nvm / Deeper Shell
 integration](https://github.com/nvm-sh/nvm#deeper-shell-integration).
 
-Pour VSCode, il est recommnandé d'accepter l'installation de l'extension
-[EditorConfig](https://marketplace.visualstudio.com/items?itemName=EditorConfig.EditorConfig).
+Pour VSCode, il est recommandé d'accepter l'installation des extensions:
+
+- [EditorConfig](https://marketplace.visualstudio.com/items?itemName=EditorConfig.EditorConfig)
+- [markdownlint](https://marketplace.visualstudio.com/items?itemName=davidanson.vscode-markdownlint)
 
 ## Nouvelle branche
 
@@ -110,6 +112,7 @@ le `package.json`:
 
 > 📘 Ceci est maintenant automatique quand on utilise le script
 > [`generate:service`](SCRIPTS.md#generateservice).
+> Voir [Script d'initialisation d'un nouveau service](#script-dinitialisation-dun-nouveau-service)
 
 Ainsi, vous serez capable de lancer des scripts d'un service (par exemple
 `base-line`) depuis la racine du dépôt (à condition de disposer de npm 7+):
@@ -256,6 +259,12 @@ Il demande le titre du service (*short description*), sa description (*long
 description*), le nom de l'auteur et *mail*.  
 Il crée le répertoire `services/service-name`, l'ajoute dans les *workspaces* du
 dépôt, et dans la liste des services à la fin du [README](./README#services).
+
+Exemple:
+
+```bash
+npm run generate:service service-name
+```
 
 > ⚠ Ne pas mettre de caractère `&` dans les réponses, ça provoque un
 > remplacement bizarre.
