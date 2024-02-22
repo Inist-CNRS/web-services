@@ -10,7 +10,13 @@
     "keywords": [
         "ezmaster"
     ],
-    "author": "François Parmentier <francois.parmentier@gmail.com>",
+    "author": "Nicolas Thouvenin <nthouvenin@gmail.com>",
+    "contributors": [
+        {
+            "name": "François Parmentier <francois.parmentier@gmail.com>",
+            "url": "https://github.com/parmentf"
+        }
+    ],
     "license": "MIT",
     "bugs": {
         "url": "https://github.com/Inist-CNRS/web-services/issues"
