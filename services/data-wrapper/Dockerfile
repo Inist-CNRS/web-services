@@ -12,3 +12,5 @@ RUN npm install \
 WORKDIR /app/public
 # Declare files to copy in .dockerignore
 COPY --chown=daemon:daemon . /app/public/
+# Remove test files from ezs-python-saxon-server
+RUN rm /app/public/parse.*
