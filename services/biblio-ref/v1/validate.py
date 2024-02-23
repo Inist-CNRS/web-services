@@ -143,11 +143,10 @@ def compare_pubinfo_refbiblio(item,ref_biblio):
     Returns:
         tuple (bool, str): True if it's match and whith the doi
     """
-    title_processed = uniformize(remove_retracted_prefix(item['title']))
     # Check first author
     if uniformize(item['first_author_name']) not in ref_biblio:
         return False, ""
-    if fuzz.partial_ratio(title_processed, ref_biblio)<90:
+    if fuzz.partial_ratio(uniformize(remove_retracted_prefix(item['title'])), ref_biblio)<90:
         return False, ""
     return True, item['doi']
 
