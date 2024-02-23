@@ -3,7 +3,7 @@
 	"info": {
 		"title": "biblio-ref - Valide une référence bibliographique",
 		"summary": "Si un DOI est trouvé dans la référence bibliographique, valide la référence et indique si elle est rétractée",
-		"version": "1.2.2",
+		"version": "1.2.3",
 		"termsOfService": "https://services.istex.fr/",
 		"contact": {
 			"name": "Inist-CNRS",
