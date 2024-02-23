@@ -22,10 +22,10 @@ Content-Type: application/json
     "value": "works with just a doi : https://doi.org/10.1016\/b978-0-323-90638-8.00002-3"
   },
   {
-    "value": "Gerris Caucasicus, Primary Prevention of Cardiovascular Disease with a Mediterranean Diet, 10.1056/nejmoa1200303"
+    "value": "RETRACTED > Gerris Caucasicus, Primary Prevention of Cardiovascular Disease with a Mediterranean Diet, 10.1056/nejmoa1200303"
   },
   {
-    "value": "RETRACTED > Zohuri, B. (2019). A Comparison of Molten Salt Reactors to Light Water Reactors: Pros and Cons. In Molten Salt Reactors and Thorium Energy (pp. 81-98). Woodhead Publishing. https://doi.org/10.1016/B978-0-08-102337-2.00006-9"
+    "value": "HALLUCINATED > Zohuri, B. (2019). A Comparison of Molten Salt Reactors to Light Water Reactors: Pros and Cons. In Molten Salt Reactors and Thorium Energy (pp. 81-98). Woodhead Publishing. https://doi.org/10.1016/B978-0-08-102337-2.00006-9"
   },
   {
     "value": ["bad","input","type"]
@@ -34,3 +34,4 @@ Content-Type: application/json
     "value": "nothing here"
   }
 ]
+
