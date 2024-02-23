@@ -116,6 +116,22 @@ def get_title_authors_doi(message):
         first_author_given = ""
     return {'title': title, 'first_author_given': first_author_given, 'first_author_name': first_author_name, 'doi': doi}
 
+def remove_retracted_prefix(text):
+    """
+    Function to delete "retracted" informations from crossref title
+
+    Args:
+        text (str): the title
+
+    Returns:
+        text: the title without retracted informations
+    """
+    pattern = r'^(RETRACT(?:ED)?(?:ION)?\s?(?:ARTICLE)?\s?:\s?)'
+    match = re.match(pattern, text, flags=re.IGNORECASE)
+    if match:
+        text = re.sub(pattern, '', text, count=1, flags=re.IGNORECASE)
+    return text.strip()
+
 def compare_pubinfo_refbiblio(item,ref_biblio):
     """
     Compare informations of one of the crossref publis with the biblio
@@ -127,10 +143,11 @@ def compare_pubinfo_refbiblio(item,ref_biblio):
     Returns:
         tuple (bool, str): True if it's match and whith the doi
     """
+    title_processed = uniformize(remove_retracted_prefix(item['title']))
     # Check first author
     if uniformize(item['first_author_name']) not in ref_biblio:
         return False, ""
-    if fuzz.partial_ratio(uniformize(item['title']), ref_biblio)<90:
+    if fuzz.partial_ratio(title_processed, ref_biblio)<90:
         return False, ""
     return True, item['doi']
 
