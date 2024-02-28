@@ -1,0 +1,16 @@
+# These examples can be used directly in VSCode, using REST Client extension (humao.rest-client)
+# They are important, because used to generate the tests.hurl file.
+
+# Décommenter/commenter les lignes voulues pour tester localement
+@host=http://localhost:31976
+# @host=https://pdf-text.services.istex.fr
+
+###
+# @name v1PdfText
+# Description de la route
+POST {{host}}/v1/pdf2txt?indent=true HTTP/1.1
+Content-Type: application/json
+
+[
+	{"id":1,"value":"https://hal.science/hal-01990444v1/file/EGC_2019.pdf"}
+]

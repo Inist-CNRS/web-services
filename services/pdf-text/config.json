@@ -1,0 +1,14 @@
+{
+    "environnement": {
+        "EZS_TITLE": "Transforme un PDF en texte à partir de l'URL",
+        "EZS_DESCRIPTION": "A partir d'une URL de PDF donnée, ce service retourne le texte contenu dans le fichier PDF",
+        "EZS_METRICS": true,
+        "EZS_CONCURRENCY": 4,
+        "EZS_CONTINUE_DELAY": 60,
+        "EZS_NSHARDS": 32,
+        "EZS_CACHE": true,
+        "EZS_VERBOSE": false,
+        "NODE_OPTIONS": "--max_old_space_size=1024",
+        "NODE_ENV": "production"
+    }
+}
