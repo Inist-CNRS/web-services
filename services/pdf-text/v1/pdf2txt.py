@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
 Created on Mon Jul  3 11:42:06 2023
@@ -42,7 +42,7 @@ def convert_pdf_to_xml(input_path):
         return xml_content
     else:
         # Afficher un message d'erreur en cas d'échec de la conversion
-        line0['value']="La conversion PDF vers XML a échoué."
+        print("La conversion PDF vers XML a échoué.")
         return None
 
 
@@ -136,7 +136,7 @@ for line in sys.stdin:
         p='1'
     
     # Chemin vers le fichier PDF téléchargé
-    pdf_filename = os.path.join('/tmp',name)
+    pdf_filename = '/tmp/'+name
     
     # Chemin vers le fichier XML de sortie
     #xml_filename = 'EGC_2019.xml'
@@ -152,16 +152,17 @@ for line in sys.stdin:
         response.raise_for_status()  # Vérifie si la requête a réussi
     
         # Enregistrer le PDF sur le disque
-        with open(pdf_filename, 'wb') as pdf_file:
+        with open(pdf_filename, 'w+') as pdf_file:
             pdf_file.write(response.content)
-        
+            
+    
         # Exécuter pdftohtml pour la conversion en XML
 
         xml_data = convert_pdf_to_xml(pdf_filename)
-
+    
         # Supprimer le fichier PDF téléchargé
         os.remove(pdf_filename)
-
+    
         #print("Conversion terminée avec succès.")
 
         doc_xml=''
@@ -246,7 +247,7 @@ for line in sys.stdin:
         #print("Erreur lors de l'exécution de pdftohtml:", e)
         line0['value']="Erreur lors de l'execution de pdftohtml"
     
-    except OSError:
+    except OSError :
         #print("Erreur lors de la suppression du fichier PDF:", e)
         line0['value']="Erreur lors de la suppression du fichier PDF"
     
