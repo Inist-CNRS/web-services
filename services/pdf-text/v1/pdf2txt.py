@@ -152,7 +152,7 @@ for line in sys.stdin:
         response.raise_for_status()  # Vérifie si la requête a réussi
     
         # Enregistrer le PDF sur le disque
-        with open(pdf_filename, 'w+') as pdf_file:
+        with open(pdf_filename, 'wb') as pdf_file:
             pdf_file.write(response.content)
             
     
