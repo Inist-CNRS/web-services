@@ -41,8 +41,7 @@ def convert_pdf_to_xml(input_path):
         xml_content = result.stdout
         return xml_content
     else:
-        # Afficher un message d'erreur en cas d'échec de la conversion
-        line0['value']="La conversion PDF vers XML a échoué."
+        # Afficher un message d'erreur en cas d'échec de la conversion (à la sortie de la fonction)
         return None
 
 
