@@ -247,9 +247,9 @@ for line in sys.stdin:
         #print("Erreur lors de l'exécution de pdftohtml:", e)
         line0['value']="Erreur lors de l'execution de pdftohtml"
     
-    except OSError as e:
+    except OSError:
         #print("Erreur lors de la suppression du fichier PDF:", e)
-        line0['value']=f"{e}"
+        line0['value']="Erreur lors de la suppression du fichier PDF"
     
     sys.stdout.write(json.dumps(line0))
     sys.stdout.write('\n')

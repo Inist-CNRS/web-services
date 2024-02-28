@@ -3,7 +3,7 @@
     "info": {
         "title": "pdf-text - Transforme un PDF en texte à partir de l'URL",
         "summary": "A partir d'une URL de PDF donnée, ce service retourne le texte contenu dans le fichier PDF",
-        "version": "1.0.4",
+        "version": "1.0.5",
         "termsOfService": "https://services.istex.fr/",
         "contact": {
             "name": "Inist-CNRS",
