@@ -136,7 +136,7 @@ for line in sys.stdin:
         p='1'
     
     # Chemin vers le fichier PDF téléchargé
-    pdf_filename = '/tmp/'+name
+    pdf_filename = './tmp/'+name
     
     # Chemin vers le fichier XML de sortie
     #xml_filename = 'EGC_2019.xml'
