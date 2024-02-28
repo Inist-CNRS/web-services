@@ -1,5 +1,21 @@
-FROM cnrsinist/ezs-python-server:py3.9-no16-1.0.8
+# syntax=docker/dockerfile:1.2
+FROM python:3.9-slim-bullseye as build1
+WORKDIR /dvc
+RUN apt update && apt -y install git
+RUN pip install dvc[webdav]==3.39.0
+RUN --mount=type=secret,id=webdav_login \
+    --mount=type=secret,id=webdav_password \
+    --mount=type=secret,id=webdav_url \
+    git init && \
+    dvc init && \
+    dvc remote add -d webdav-remote "$(cat /run/secrets/webdav_url)" && \
+    dvc remote modify --local webdav-remote user "$(cat /run/secrets/webdav_login)" && \
+    dvc remote modify --local webdav-remote password "$(cat /run/secrets/webdav_password)"
+RUN dvc doctor
+COPY ./v1/all-MiniLM-L6-v2.dvc /dvc
+RUN dvc pull -v
 
+FROM cnrsinist/ezs-python-server:py3.9-no16-1.0.8
 USER root
 # Install all python dependencies
 RUN pip install \
@@ -9,7 +25,11 @@ RUN pip install \
     en-core-web-sm@https://github.com/explosion/spacy-models/releases/download/en_core_web_sm-3.6.0/en_core_web_sm-3.6.0.tar.gz \
     pandas==1.4.0 \
     lxml==4.7.1 \
-    fr_core_news_sm@https://github.com/explosion/spacy-models/releases/download/fr_core_news_sm-3.6.0/fr_core_news_sm-3.6.0-py3-none-any.whl 
+    fr_core_news_sm@https://github.com/explosion/spacy-models/releases/download/fr_core_news_sm-3.6.0/fr_core_news_sm-3.6.0-py3-none-any.whl \
+    sentence-transformers==2.2.2 \
+    scikit-learn==1.3.1 \
+    umap-learn==0.5.5
+
 # Install all node dependencies
 RUN npm install \
     "@ezs/analytics@2.2.2" \
@@ -23,4 +43,8 @@ RUN mkdir /usr/local/lib/python3.9/site-packages/spacy_lefff/data/tagger
 RUN tar -xf model.tar.gz -C /usr/local/lib/python3.9/site-packages/spacy_lefff/data/tagger
 WORKDIR /app/public
 # Declare files to copy in .dockerignore
+
+USER daemon
 COPY --chown=daemon:daemon . /app/public/
+
+COPY --chown=daemon:daemon --from=build1 /dvc/all-MiniLM-L6-v2 /app/public/v1/all-MiniLM-L6-v2
