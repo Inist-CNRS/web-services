@@ -41,7 +41,8 @@ def convert_pdf_to_xml(input_path):
         xml_content = result.stdout
         return xml_content
     else:
-        # Afficher un message d'erreur en cas d'échec de la conversion (à la sortie de la fonction)
+        # Afficher un message d'erreur en cas d'échec de la conversion
+        line0['value']="La conversion PDF vers XML a échoué."
         return None
 
 
@@ -153,16 +154,11 @@ for line in sys.stdin:
         # Enregistrer le PDF sur le disque
         with open(pdf_filename, 'wb') as pdf_file:
             pdf_file.write(response.content)
-            
+        
         # Exécuter pdftohtml pour la conversion en XML
 
         xml_data = convert_pdf_to_xml(pdf_filename)
-        if xml_data == None:
-            line0['value']="La conversion PDF vers XML a échoué."
-            sys.stdout.write(json.dumps(line0))
-            sys.stdout.write('\n')
-            continue
-    
+
         # Supprimer le fichier PDF téléchargé
         os.remove(pdf_filename)
 
