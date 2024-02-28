@@ -137,8 +137,8 @@ for line in sys.stdin:
     
     # Chemin vers le fichier PDF téléchargé
     pdf_filename = os.path.join('/tmp',name)
-    line0['value'] = {}
-    line0['value']['pdf_filename']=pdf_filename
+    check_dict = {}
+    check_dict['pdf_filename']=pdf_filename
     # Chemin vers le fichier XML de sortie
     #xml_filename = 'EGC_2019.xml'
     
@@ -152,23 +152,28 @@ for line in sys.stdin:
         response = requests.get(url)
         response.raise_for_status()  # Vérifie si la requête a réussi
     
-        line0['value']['before_opening']="True"
+        check_dict['before_opening']="True"
 
         # Enregistrer le PDF sur le disque
         with open(pdf_filename, 'wb') as pdf_file:
             pdf_file.write(response.content)
             
-        line0['value']['after_opening']="True"
+        check_dict['after_opening']="True"
 
         # Exécuter pdftohtml pour la conversion en XML
 
         xml_data = convert_pdf_to_xml(pdf_filename)
+        if xml_data == None:
+            sys.stdout.write(json.dumps(line0))
+            sys.stdout.write('\n')
+            line0['value']="La conversion PDF vers XML a échoué."
+            continue
     
-        line0['value']['before_removing']="True"
+        check_dict['before_removing']="True"
 
         # Supprimer le fichier PDF téléchargé
         os.remove(pdf_filename)
-        line0['value']['after_removing']="True"
+        check_dict['after_removing']="True"
 
         #print("Conversion terminée avec succès.")
 
@@ -257,7 +262,7 @@ for line in sys.stdin:
     except OSError:
         #print("Erreur lors de la suppression du fichier PDF:", e)
         # line0['value']="Erreur lors de la suppression du fichier PDF"
-        line0['value']['error'] = 'Erreur lors de la suppression du fichier PDF'
+        line0['value'] = check_dict
     
     sys.stdout.write(json.dumps(line0))
     sys.stdout.write('\n')
