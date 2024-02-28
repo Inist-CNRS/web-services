@@ -42,7 +42,7 @@ def convert_pdf_to_xml(input_path):
         return xml_content
     else:
         # Afficher un message d'erreur en cas d'échec de la conversion
-        print("La conversion PDF vers XML a échoué.")
+        line0['value']="La conversion PDF vers XML a échoué."
         return None
 
 
