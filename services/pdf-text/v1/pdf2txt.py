@@ -136,7 +136,7 @@ for line in sys.stdin:
         p='1'
     
     # Chemin vers le fichier PDF téléchargé
-    pdf_filename = './tmp/'+name
+    pdf_filename = '/tmp/'+name
     
     # Chemin vers le fichier XML de sortie
     #xml_filename = 'EGC_2019.xml'
@@ -247,9 +247,9 @@ for line in sys.stdin:
         #print("Erreur lors de l'exécution de pdftohtml:", e)
         line0['value']="Erreur lors de l'execution de pdftohtml"
     
-    except OSError :
+    except OSError as e:
         #print("Erreur lors de la suppression du fichier PDF:", e)
-        line0['value']="Erreur lors de la suppression du fichier PDF"
+        line0['value']=f"{e}"
     
     sys.stdout.write(json.dumps(line0))
     sys.stdout.write('\n')
