@@ -14,9 +14,7 @@ RUN apt update && apt install -y pdftohtml
 
 WORKDIR /app/public
 
-RUN mkdir /app/public/tmp && chmod 777 /app/public/tmp
-
 # Declare files to copy in .dockerignore
 USER daemon
-
+RUN mkdir /app/public/tmp
 COPY --chown=daemon:daemon . /app/public/
