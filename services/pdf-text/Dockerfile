@@ -13,6 +13,9 @@ RUN pip install \
 RUN apt update && apt install -y pdftohtml 
 
 WORKDIR /app/public
+
+RUN mkdir /app/public/tmp && chmod 777 /app/public/tmp
+
 # Declare files to copy in .dockerignore
 USER daemon
 
