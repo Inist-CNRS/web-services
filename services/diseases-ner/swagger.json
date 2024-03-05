@@ -1,0 +1,33 @@
+{
+	"openapi": "3.0.0",
+	"info": {
+		"title": "diseases-ner - Trouve des entités nommées de maladies dans un texte",
+		"summary": "Renvoie un Json composé comportant un champs `diseases` correspondant aux entités nommées de maladies trouvées",
+		"version": "1.0.9",
+		"termsOfService": "https://services.istex.fr/",
+		"contact": {
+			"name": "Inist-CNRS",
+			"url": "https://www.inist.fr/nous-contacter/"
+		}
+	},
+	"servers": [
+		{
+			"x-comment": "Will be automatically completed by the ezs server."
+		},
+		{
+			"url": "http://vptdmservices.intra.inist.fr:49250/",
+			"description": "Latest version for production",
+			"x-profil": "Standard"
+		}
+	],
+	"tags": [
+		{
+			"name": "diseases-ner",
+			"description": "Trouve des entités nommées de maladies dans un texte",
+			"externalDocs": {
+				"description": "Plus de documentation",
+				"url": "https://github.com/inist-cnrs/web-services/tree/main/services/diseases-ner"
+			}
+		}
+	]
+}
