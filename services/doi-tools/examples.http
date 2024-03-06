@@ -1,0 +1,42 @@
+# These examples can be used directly in VSCode, using REST Client extension (humao.rest-client)
+# They are important, because used to generate the tests.hurl file.
+
+# Décommenter/commenter les lignes voulues pour tester localement
+@host=http://localhost:31976
+# @host=https://doi-tools.services.istex.fr
+
+# ###
+# # @name v1/check
+# # Description de la route
+# POST {{host}}/v1/check?indent=true HTTP/1.1
+# Content-Type: application/json
+
+# [
+# 	{ 
+# 		"id":1,
+# 		"value": "10.1056/nejmoa1200303,10.1016/b978-0-323-90638-8.00002-3,10.2586/wrong-doi" 
+# 	},
+# 	{ 
+# 		"id":2,
+# 		"value": ["10.1056/nejmoa1200303","10.1016/b978-0-323-90638-8.00002-3","10.2586/wrong-doi"] 
+# 	}
+# ]
+
+
+###
+# @name v1/tagger
+# Description de la route
+POST {{host}}/v1/tagger?indent=true HTTP/1.1
+Content-Type: application/json
+
+[
+	{ 
+		"id":1,
+		"value": "This text contains two DOI : 10.1056\/nejmoa1200303 and 10.1016/b978-0-323-90638-8.00002-3" 
+	},
+	{ 
+		"id":2,
+		"value": "Please see https://doi.org/10.1016/b978-0-323-90638-8.00002-3" 
+	}
+]
+

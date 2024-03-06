@@ -42,6 +42,7 @@
     "services/chem-ner",
     "services/data-computer",
     "services/data-wrapper",
+    "services/doi-tools",
     "services/terms-extraction"
   ],
   "dependencies": {

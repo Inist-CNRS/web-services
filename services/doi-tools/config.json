@@ -1,0 +1,14 @@
+{
+    "environnement": {
+        "EZS_TITLE": "simples operations with DOI",
+        "EZS_DESCRIPTION": "Extract DOI from text ; verify if DOI does exists in Crossref",
+        "EZS_METRICS": true,
+        "EZS_CONCURRENCY": 4,
+        "EZS_CONTINUE_DELAY": 60,
+        "EZS_NSHARDS": 32,
+        "EZS_CACHE": true,
+        "EZS_VERBOSE": false,
+        "NODE_OPTIONS": "--max_old_space_size=1024",
+        "NODE_ENV": "production"
+    }
+}
