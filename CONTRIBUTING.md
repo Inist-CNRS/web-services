@@ -323,14 +323,12 @@ En plus du reste, il faut suivre ces étapes lorsqu'on utilise DVC :
 - Créer un fichier .env à la racine **du service** (./services/\<service-name\>/.env) qui ressemblera à ça :
 
   ```bash
-  #!/usr/bin/env bash
-
   export WEBDAV_URL=webdavs://YOUR_WEBDAV_URL.fr
   export WEBDAV_LOGIN=YOUR_LOGIN
   export WEBDAV_PASSWORD=YOUR_PASSWORD 
   ```
 
-- modifier les scripts `build:dev` et `build` du fichier `package.json`
+- modifier les scripts `build:dev` et `build` du fichier `package.json` du service
   - pour `build:dev` :
 
     ```txt
@@ -343,7 +341,7 @@ En plus du reste, il faut suivre ces étapes lorsqu'on utilise DVC :
      ". ./.env 2> /dev/null; DOCKER_BUILDKIT=1 docker build -t cnrsinist/${npm_package_name}:${npm_package_version} --secret id=webdav_login,env=WEBDAV_LOGIN --secret id=webdav_password,env=WEBDAV_PASSWORD --secret id=webdav_url,env=WEBDAV_URL ."
      ```
 
-- modifier le dockerfile en conséquent, en s'inspirant du dockerfile de `biblio-ref`
+- modifier le `Dockerfile` en conséquence, en s'inspirant du [Dockerfile de `biblio-ref`](https://github.com/Inist-CNRS/web-services/blob/main/services/biblio-ref/Dockerfile)
 
 ## Développement
 
