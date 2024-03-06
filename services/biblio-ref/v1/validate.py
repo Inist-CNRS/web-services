@@ -4,7 +4,6 @@ import re
 from requests_ratelimiter import LimiterSession
 import sys
 import json
-import pandas as pd
 import unicodedata
 from thefuzz import fuzz
 
@@ -13,8 +12,8 @@ mail_adress = "leo.gaillard@cnrs.fr"
 session = LimiterSession(per_second=10)
 
 # get a list of retracted DOIs
-dumps_pps = pd.read_csv("./v1/annulled.csv", encoding="cp1252")
-retracted_doi = dumps_pps["DOI"].tolist()
+with open("./v1/annulled.csv", "r") as annulled_file:
+    retracted_doi = [line.rstrip() for line in annulled_file]
 
 
 def remove_accents(text):
@@ -162,7 +161,7 @@ def verify_biblio(ref_biblio, mail=mail_adress):
         a confidence score about the existence + doi of the biblio ref
     """
     ref_biblio = uniformize(ref_biblio)
-    url = f'https://api.crossref.org/works?query.bibliographic="{ref_biblio}"&mailto={mail}&rows=5'
+    url = f'https://api.crossref.org/works?query.bibliographic="{ref_biblio}"&mailto={mail}&rows=5' #take only the 5 first results
     try:
         response = session.get(url)
         data = response.json()
