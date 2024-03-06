@@ -312,7 +312,7 @@ En plus du reste, il faut suivre ces étapes lorsqu'on utilise DVC :
 
 - S'assurer d'avoir déposé les données sur le webdav du service TDM en ayant préalablement utilisé DVC (pour cela : )
   - mettre son fichier nommé `DOSSIER_OU_FICHIER_A_PUSH` dans un autre dossier.
-  - Initier un dépot DVC en faisant `git init` puis `dvc init`.
+  - Initier un dépot DVC en faisant `dvc init` (nécessite d'être dans un dépot git).
   - se connecter au webdav du service (pour cela : )
     - spécifier l'url du webdav (en utilisant le protocole webdavs): `dvc remote add -d webdav-remote webdavs://YOUR_WEBDAV_URL.fr`
     - entrer le login : `dvc remote modify --local webdav-remote login YOUR_LOGIN`
