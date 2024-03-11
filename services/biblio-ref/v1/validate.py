@@ -15,7 +15,7 @@ session = LimiterSession(per_second=10)
 with open("./v1/annulled.csv", "r") as annulled_file:
     retracted_doi = [line.rstrip() for line in annulled_file]
 
-
+# Preliminary functions
 def remove_accents(text):
     """
     Remove accents from the input text and return the text with no accents.
@@ -44,10 +44,11 @@ def uniformize(text):
     """
     text = remove_accents(text) #if text is not a string, it's return ""
 
-    # remove punctuation except " ' "
+    # remove punctuation
     text = ''.join(char if char.isalpha() else ' ' for char in text)
 
     return ' '.join(text.lower().split())
+
 
 # DOI funtions
 def find_doi(text):
@@ -82,17 +83,34 @@ def verify_doi(doi, mail=mail_adress):
     Returns:
         int: The HTTP status code of the API response, or 503 if an exception occurs.
     """
-    url = f"https://api.crossref.org/works/{doi}/agency?mailto={mail}"
+    url = f"https://api.crossref.org/works/{doi}?mailto={mail}"
 
     try:
         response = session.get(url)
-        return response.status_code
+        status_code = response.status_code
+        if status_code != 200 :
+            return (status_code,{'title': "", 'first_author_given': "", 'first_author_name': "", 'doi': ""})
+        message = response.json()["message"]
+        others_biblio_info = {}
+        others_biblio_info["title"] = message["title"] if 'title' in message else ""
+        others_biblio_info["doi"] = message['DOI'] if "DOI" in message else ""
+        try:
+            others_biblio_info["first_author_name"] = message['author'][0]['family']
+        except:
+            others_biblio_info["first_author_name"] = ""
+        try:
+            others_biblio_info["first_author_given"] = message['author'][0]['given']
+        except:
+            others_biblio_info["first_author_given"] = ""
+            
+        return (response.status_code , others_biblio_info)
 
-    except Exception:
-        return 503 # if there is an unexpected error from crossref
+    except:
+        return (503,{'title': "", 'first_author_given': "", 'first_author_name': "", 'doi': ""}) # if there is an unexpected error from crossref
 
 
-# Functions for ref_biblio
+# specially designed functions for crossref API
+## For a response to crossref API, this function is used to get informations from this response.
 def get_title_authors_doi(message):
     """
     Get the title, first author's given name, first author's family name, and DOI from the input message.
@@ -115,6 +133,7 @@ def get_title_authors_doi(message):
         first_author_given = ""
     return {'title': title, 'first_author_given': first_author_given, 'first_author_name': first_author_name, 'doi': doi}
 
+## Sometimes, title starts with "RETRACTED >" or "retracted article" or "retraction" : this delete this to clean title for comparison
 def remove_retracted_prefix(text):
     """
     Function to delete "retracted" informations from crossref title
@@ -131,6 +150,8 @@ def remove_retracted_prefix(text):
         text = re.sub(pattern, '', text, count=1, flags=re.IGNORECASE)
     return text.strip()
 
+# THE function to be : it returns true if the biblio_ref match with the items in the crossref
+## this is the function to change if we want to update matches criterias
 def compare_pubinfo_refbiblio(item,ref_biblio):
     """
     Compare informations of one of the crossref publis with the biblio
@@ -149,6 +170,8 @@ def compare_pubinfo_refbiblio(item,ref_biblio):
         return False, ""
     return True, item['doi']
 
+
+## In this function, we check if the biblio ref exist if no doi is found : we use as critera the compare_pubinfo_refbiblio function
 def verify_biblio(ref_biblio, mail=mail_adress):
     """
     check with crossref api if a biblio ref is correct.
@@ -168,7 +191,7 @@ def verify_biblio(ref_biblio, mail=mail_adress):
         items = data["message"]["items"] #to check
         for item in items:
             item_info = get_title_authors_doi(item)
-            # If no authors name in Crossref, return "not_found"
+            # If no authors name or title in Crossref, return "not_found"
             if item_info['first_author_name'] == "" or item_info['title']=="":
                 continue
             # compare pub_info with ref_biblio
@@ -179,7 +202,7 @@ def verify_biblio(ref_biblio, mail=mail_adress):
                 return "found",doi
             
         return "not_found",""
-    except Exception:
+    except:
         return "error_service",""
 
 
@@ -187,7 +210,7 @@ for line in sys.stdin:
     data = json.loads(line)
     ref_biblio = data["value"]
 
-    # check if "value" is a string
+    # check types
     if not isinstance(ref_biblio, str):
         data["value"] = {"doi":"","status": "error_data"}
         json.dump(data, sys.stdout)
@@ -195,29 +218,44 @@ for line in sys.stdin:
         continue
 
     doi = find_doi(ref_biblio)
-    if doi:  # doi is True if and only if a doi is found with the regex doi_regex
-        crossref_status_code = verify_doi(doi) # Verify doi using crossref api
-        if crossref_status_code==200:  # If request return code 200
+    
+    # First case : doi is found
+    if doi:
+        crossref_status_code, others_biblio_info = verify_doi(doi) # Verify doi using crossref api
+        
+        ## If DOI exists
+        if crossref_status_code==200:
             status = "found"
+            
+            ### Can be retracted
             if doi in retracted_doi:
                 status = "retracted"
+                
+            ### can be halucinated
+            if len(doi)*1.5 < len(ref_biblio): 
+                is_not_halucinated,doi = compare_pubinfo_refbiblio(others_biblio_info,ref_biblio)
+                if not is_not_halucinated: # oh really dude
+                    status = "halucinated"
+                
             data["value"] = {"doi":doi,"status": status}
             json.dump(data, sys.stdout)
             sys.stdout.write("\n")
-            
-        elif crossref_status_code==404:  # If request return code 404, check the title dans author
+        
+        ### If DOI doesn't exist
+        elif crossref_status_code==404:
             status,doi = verify_biblio(ref_biblio)
             data["value"] = {"doi":doi, "status": status}
             
             json.dump(data, sys.stdout)
             sys.stdout.write("\n")
-            
+        
+        ### for others errors
         else:
             data["value"] = {"doi":"","status": "error_service"}
             json.dump(data, sys.stdout)
             sys.stdout.write("\n")
 
-
+    # second case : no doi is found
     else:
         status,doi = verify_biblio(ref_biblio)
         data["value"] = {"doi":doi, "status": status}

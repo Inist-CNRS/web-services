@@ -8,7 +8,7 @@ content-type: application/json
     "value":"Y. B. LINHART. L. CHAOUNI-BENABDALLAH, J.-M. PARRY & J. D. THOMPSON - Selective herbivory of thyme chemotypes by a mollusk and a grasshopper"
   },
   {
-    "value": "works with just a doi : https://doi.org/10.1016\/b978-0-323-90638-8.00002-3"
+    "value": "https://doi.org/10.1016\/b978-0-323-90638-8.00002-3"
   },
   {
     "value": "RETRACTED > Gerris Caucasicus, Primary Prevention of Cardiovascular Disease with a Mediterranean Diet, 10.1056/nejmoa1200303"
@@ -46,8 +46,8 @@ HTTP 200
 },
 {
     "value": {
-        "doi": "10.1056/nejmoa1200303",
-        "status": "retracted"
+        "doi": "",
+        "status": "halucinated"
     }
 },
 {
