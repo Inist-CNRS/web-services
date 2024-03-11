@@ -1,12 +1,15 @@
-#!/usr/bin/env bash
+#!/bin/bash
 set +x
-# include library
 
-# shellcheck source=./library.sh
-source ./library.sh
-CLEAN="production"
+# Initialize SDKMAN / Java
+export SDKMAN_DIR="/usr/sbin/.sdkman"
+[[ -s "/usr/sbin/.sdkman/bin/sdkman-init.sh" ]] && source "/usr/sbin/.sdkman/bin/sdkman-init.sh"
 
-while IFS=$'\n' read -r line; do
+while IFS='$\n' read -r line; do
+
+    # include library
+    source library.sh
+    CLEAN="production"
 
     # CLEAN : production mode => PROD / DEV = active / desactive data remove
     if [ -z "${CLEAN}" ] ; then
@@ -15,13 +18,14 @@ while IFS=$'\n' read -r line; do
     echo "$(my_date):CLEAN:${CLEAN}" 1>&2
 
     # data  json stream  receive from collect procedure
-    PROJECT=$(echo "$line"|node -pe 'JSON.parse(fs.readFileSync(0)).project')
-	INPUT_CORPUS=$(echo "$line"|node -pe 'JSON.parse(fs.readFileSync(0)).corpus')
-	LANG=$(echo "$line"|node -pe 'JSON.parse(fs.readFileSync(0)).language')
-	TOPN=$(echo "$line"|node -pe 'JSON.parse(fs.readFileSync(0)).topn')
-    WEBHOOK=$(echo "$line"|node -pe 'JSON.parse(fs.readFileSync(0)).url')
+    PROJECT=$(echo $line|node -pe 'JSON.parse(fs.readFileSync(0)).project')
+	INPUT_CORPUS=$(echo $line|node -pe 'JSON.parse(fs.readFileSync(0)).corpus')
+	TOKEN=$(echo $line|node -pe 'JSON.parse(fs.readFileSync(0)).token')
+	LANG=$(echo $line|node -pe 'JSON.parse(fs.readFileSync(0)).language')
+	TOPN=$(echo $line|node -pe 'JSON.parse(fs.readFileSync(0)).topn')
+    WEBHOOK=$(echo $line|node -pe 'JSON.parse(fs.readFileSync(0)).url')
     PID=$$
-    FILE_RESULT=$(echo "$line"|node -pe 'JSON.parse(fs.readFileSync(0)).file_result')
+    FILE_RESULT=$(echo $line|node -pe 'JSON.parse(fs.readFileSync(0)).file_result')
     # initialize MANIFEST.son
     echo -e "$(cat <<-END
     {
@@ -33,14 +37,14 @@ while IFS=$'\n' read -r line; do
     "RESULT_CODE":"${my_message[0]}"
     }
 END
-)" >| "${PROJECT}/${MANIFEST}"
+)" >| ${PROJECT}/${MANIFEST}
 	cmd="(
-         echo \"$(my_date):TYDI-ID:$WEBHOOK\"  ;
-         (check \"Collect_finished\" ${PROJECT}/${PID} 0 );
+         echo "$(my_date):TYDI-ID:$WEBHOOK"  ;
+         (check "Collect_finished" ${PROJECT}/${PID} 0 );
          (extract $PROJECT $INPUT_CORPUS $FILE_RESULT $LANG $TOPN $PID) ;
          (zip_forward $PROJECT $FILE_RESULT $WEBHOOK $PID) ;
          )
          >> ${PROJECT}/${PID}.log 2>&1"
-    eval "$cmd"
-    clean "$PROJECT" $PID $CLEAN
+    eval $cmd
+    clean $PROJECT $PID $CLEAN
 done < <(cat -)

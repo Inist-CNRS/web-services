@@ -31,7 +31,6 @@ RUN apt install -y zip
 
 # Install TermSuite
 RUN curl -L https://search.maven.org/remotecontent?filepath=fr/univ-nantes/termsuite/termsuite-core/${TERMSUITE_VERSION}/termsuite-core-${TERMSUITE_VERSION}.jar -o /opt/termsuite-core-${TERMSUITE_VERSION}.jar
-# ADD https://search.maven.org/remotecontent?filepath=fr/univ-nantes/termsuite/termsuite-core/${TERMSUITE_VERSION}/termsuite-core-${TERMSUITE_VERSION}.jar /opt/termsuite-core-${TERMSUITE_VERSION}.jar
 
 # Prepare sdkman installation
 RUN chmod a+wx /usr/sbin
