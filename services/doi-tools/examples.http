@@ -33,7 +33,7 @@ Content-Type: application/json
 [
 	{ 
 		"id":1,
-		"value": "This text contains two DOI : 10.1056\/nejmoa1200303 and 10.1016/b978-0-323-90638-8.00002-3" 
+		"value": "This text contains two DOIs : 10.1056\/nejmoa1200303 and 10.1016/b978-0-323-90638-8.00002-3" 
 	},
 	{ 
 		"id":2,

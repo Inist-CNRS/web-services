@@ -25,7 +25,6 @@ def remove_duplicates_preserve_order(list_x):
 def verify_doi(doi, mail=mail_adress):
     """
     Check with crossref API if DOI is correct.
-    Do not use this function without function "find_doi".
     
     Returns HTTP code
     """
