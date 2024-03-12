@@ -35,22 +35,23 @@ nlp_fr=spacy.load("fr_core_news_sm")
 def convert_pdf_to_xml(input_path):
     result = subprocess.run(['pdftohtml','-xml', '-stdout','-hidden','-i','-q','-f',p, input_path], capture_output=True, text=True)
 
-    # Vérifier si la conversion a réussi
+    # Check if conversion was successful
     if result.returncode == 0:
-        # Récupérer le contenu XML dans une variable
+        # Get the XML content in a variable
         xml_content = result.stdout
         return xml_content
     else:
-        # Afficher un message d'erreur en cas d'échec de la conversion
-        print("La conversion PDF vers XML a échoué.")
+        # print error message if needed
+        sys.stderr.write("La conversion PDF vers XML a échoué.")
+        sys.stderr.write("\n")
         return None
 
 
 def remove_xml_tags(xml_string):
-    # Expression régulière pour trouver les balises XML et leurs attributs
+    # Use regex to find all XML tags and attributes
     pattern = r"<[^>]+>"
 
-    # Supprimer les balises XML et leurs attributs en les remplaçant par une chaîne vide
+    # Delete all XML tags and attributes
     cleaned_string = re.sub(pattern, "", xml_string)
 
     return cleaned_string
@@ -71,7 +72,7 @@ def contains_verb(sentence):
     
     return False
 
-def est_prenom_nom(chaine):
+def is_firstname_lastname(chaine):
     doc = nlp_fr(chaine)
     est_personne = False
 
@@ -82,7 +83,7 @@ def est_prenom_nom(chaine):
             break
     return est_personne
 
-def est_organisation(chaine):
+def is_organization(chaine):
     chaine=chaine.replace(',','')
     chaine=chaine.replace('-',' ')
     doc = nlp_fr(chaine)
@@ -92,7 +93,7 @@ def est_organisation(chaine):
             return True
     return False
 
-def est_texte_lisible(chaine):
+def is_readable_text(chaine):
     regex_caracteres_speciaux = r"!@#$%^&*()\":{}|<>]"
     regex_url = r"http[s]?://(?:[a-zA-Z]|[0-9]|[$-_@.&+]|[!*\\(\\),]|(?:%[0-9a-fA-F][0-9a-fA-F]))+"
     regex_doi = r"10\.\d{4,9}/[-._;()/:A-Z0-9]+"
@@ -103,23 +104,22 @@ def est_texte_lisible(chaine):
 
     return not (contient_caracteres_speciaux or contient_url or contient_doi)
 
-def calculer_rapport_alphabetique_numerique(chaine):
-    # Initialiser les compteurs
+def get_alphabetic_numeric_ratio(chaine):
+    # Initlialize count variables
     nb_caracteres_alphabetiques = 0
     nb_caracteres_numeriques = 0
 
-    # Parcourir chaque caractère de la chaîne
     for caractere in chaine:
         if caractere.isalpha():
             nb_caracteres_alphabetiques += 1
         elif caractere.isdigit():
             nb_caracteres_numeriques += 1
 
-    # Vérifier si le dénominateur est différent de zéro
+    # Check if the denominator is not zero
     if nb_caracteres_numeriques != 0:
         rapport = nb_caracteres_alphabetiques / nb_caracteres_numeriques
     else:
-        rapport = float('inf')  # Si le dénominateur est zéro, rapport est infini
+        rapport = float('inf')  # if denominator is zero, set the ratio to infinity
 
     return rapport
 
@@ -127,7 +127,7 @@ def calculer_rapport_alphabetique_numerique(chaine):
 
 for line in sys.stdin:
     line0=json.loads(line)
-    # URL du PDF
+    # URL of PDF
     url=line0['value']
     name=str(round(random.random()*1000))+url.split('/')[-1]
     if 'hal.science' in url:
@@ -135,7 +135,7 @@ for line in sys.stdin:
     else:
         p='1'
     
-    # Chemin vers le fichier PDF téléchargé
+    # path to the PDF
     pdf_filename = './tmp/'+name
     
     # Chemin vers le fichier XML de sortie
@@ -147,20 +147,19 @@ for line in sys.stdin:
 
         
     try:
-        # Télécharger le PDF
+        # dl the PDF
         response = requests.get(url)
-        response.raise_for_status()  # Vérifie si la requête a réussi
+        response.raise_for_status()  # check if request succeeded
     
-        # Enregistrer le PDF sur le disque
+        # save pdf
         with open(pdf_filename, 'wb') as pdf_file:
             pdf_file.write(response.content)
             
     
-        # Exécuter pdftohtml pour la conversion en XML
-
+        # exec pdftohtml for the xml conversion
         xml_data = convert_pdf_to_xml(pdf_filename)
     
-        # Supprimer le fichier PDF téléchargé
+        # dl the PDF file in the /tmp folder
         os.remove(pdf_filename)
     
         #print("Conversion terminée avec succès.")
@@ -171,16 +170,15 @@ for line in sys.stdin:
         
         merged_lines=[]
         
-        # Regex pour extraire la police de caractères
-        
+        # Regex for extracting font informations
         font_regex = re.compile(r'font="([^"]+)"')
         
-        # Variables pour garder la police de caractères précédente
+        # Variable to keep the current font
         previous_font = None
         current_lines = []
         
         for line in lines:#[0:220]:
-            # Extraire la police de caractères de la ligne
+            # Extract font information
         
             match = font_regex.search(line)
             if match:
@@ -189,35 +187,32 @@ for line in sys.stdin:
             else:
                 current_font = None
             if current_font!=None:
-                # Vérifier si la police de caractères a changé
+                # Check if font changed
                 if current_font != previous_font:
-                    # Ajouter les lignes actuelles dans merged_lines si elles existent
+                    # add (existing) line in merged_lines
                     if current_lines:
     
                         merged_lines.append(' '.join(current_lines))
                     current_lines = []
-            
-                # Ajouter la ligne actuelle aux lignes actuelles
        
-                #print(line)
                 current_lines.append(remove_xml_tags(line))
             
-                # Mettre à jour la police de caractères précédente
+                # Update previous font
                 previous_font = current_font
         
-        # Afficher les lignes rassemblées
+        # print merged lines
         t=0
         for linef in merged_lines:
             bal=''
             if linef[0:3].lower()=='fig' or linef[0:3].lower()=='tab':
                 linef=''
-            if calculer_rapport_alphabetique_numerique(linef)<0.8:
+            if get_alphabetic_numeric_ratio(linef)<0.8:
                 linef=''
-            if est_texte_lisible(linef) and len(linef)>8 and 'copyright' not in linef.lower():
+            if is_readable_text(linef) and len(linef)>8 and 'copyright' not in linef.lower():
             #if len(linef)>4:
-                if est_prenom_nom(linef) :
+                if is_firstname_lastname(linef) :
                     bal='Author'
-                if est_organisation(linef) and t<5:
+                if is_organization(linef) and t<5:
                     bal='Affiliation'
                 if contains_verb(linef):
                     if t>0:
