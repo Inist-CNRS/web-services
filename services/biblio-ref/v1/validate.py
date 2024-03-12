@@ -148,11 +148,10 @@ def remove_retracted_prefix(text):
         text = re.sub(pattern, '', text, count=1, flags=re.IGNORECASE)
     return text.strip()
 
-# THE functions to be : it returns true if the biblio_ref match with the items in the crossref
-## this is the function to change if we want to update matches criterias
+# Functions that compare informations between the Crossref metadata and the bibliographic reference given.
 def compare_pubinfo_refbiblio(item,ref_biblio):
     """
-    Compare informations of one of the crossref publis with the biblio
+    Compare informations of one of the crossref publis with the biblio. This is the function to change if we want to update mathces criterias
     criteria : partial title (0.90 using fuzz.partial_ratio), first author name
     Args:
         item (json): title, authors name and doi from a crossref publi
