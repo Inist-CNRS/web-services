@@ -47,7 +47,7 @@ HTTP 200
 {
     "value": {
         "doi": "",
-        "status": "halucinated"
+        "status": "hallucinated"
     }
 },
 {

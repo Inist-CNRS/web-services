@@ -110,11 +110,10 @@ def verify_doi(doi, mail=mail_adress):
 
 
 # specially designed functions for crossref API
-## For a response to crossref API, this function is used to get informations from this response.
 def get_title_authors_doi(message):
     """
     Get the title, first author's given name, first author's family name, and DOI from the input message.
-    
+    Objective : For a response to crossref API, this function is used to get informations from this response.
     Args:
         message (dict): The input message containing information about the publication.
     
@@ -133,11 +132,10 @@ def get_title_authors_doi(message):
         first_author_given = ""
     return {'title': title, 'first_author_given': first_author_given, 'first_author_name': first_author_name, 'doi': doi}
 
-## Sometimes, title starts with "RETRACTED >" or "retracted article" or "retraction" : this delete this to clean title for comparison
 def remove_retracted_prefix(text):
     """
     Function to delete "retracted" informations from crossref title
-
+    Objective : Sometimes, title starts with "RETRACTED >" or "retracted article" or "retraction" ; this function delete this to clean title for comparison
     Args:
         text (str): the title
 
@@ -150,18 +148,18 @@ def remove_retracted_prefix(text):
         text = re.sub(pattern, '', text, count=1, flags=re.IGNORECASE)
     return text.strip()
 
-# THE function to be : it returns true if the biblio_ref match with the items in the crossref
+# THE functions to be : it returns true if the biblio_ref match with the items in the crossref
 ## this is the function to change if we want to update matches criterias
 def compare_pubinfo_refbiblio(item,ref_biblio):
     """
     Compare informations of one of the crossref publis with the biblio
-
+    criteria : partial title (0.90 using fuzz.partial_ratio), first author name
     Args:
         item (json): title, authors name and doi from a crossref publi
         ref_biblio (str): the whole biblio reference
     
     Returns:
-        tuple (bool, str): True if it's match and whith the doi
+        tuple (bool, str): True if it's match with the doi, else false + empty string
     """
     # Check first author
     if uniformize(item['first_author_name']) not in ref_biblio:
@@ -171,11 +169,10 @@ def compare_pubinfo_refbiblio(item,ref_biblio):
     return True, item['doi']
 
 
-## In this function, we check if the biblio ref exist if no doi is found : we use as critera the compare_pubinfo_refbiblio function
 def verify_biblio(ref_biblio, mail=mail_adress):
     """
     check with crossref api if a biblio ref is correct.
-    
+    Objective : In this function, we check if the biblio ref exist if no doi is found : we use as critera the compare_pubinfo_refbiblio function
     Args : 
         ref_biblio :a biblio ref
         mail : a mail adress
@@ -231,11 +228,11 @@ for line in sys.stdin:
             if doi in retracted_doi:
                 status = "retracted"
                 
-            ### can be halucinated
+            ### can be hallucinated
             if len(doi)*1.5 < len(ref_biblio): 
-                is_not_halucinated,doi = compare_pubinfo_refbiblio(others_biblio_info,ref_biblio)
-                if not is_not_halucinated: # oh really dude
-                    status = "halucinated"
+                is_not_hallucinated,doi = compare_pubinfo_refbiblio(others_biblio_info,ref_biblio)
+                if not is_not_hallucinated: # oh really dude
+                    status = "hallucinated"
                 
             data["value"] = {"doi":doi,"status": status}
             json.dump(data, sys.stdout)
