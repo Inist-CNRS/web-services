@@ -27,9 +27,8 @@ RUN pip install \
     lxml==4.7.1 \
     fr_core_news_sm@https://github.com/explosion/spacy-models/releases/download/fr_core_news_sm-3.6.0/fr_core_news_sm-3.6.0-py3-none-any.whl \
     sentence-transformers==2.2.2 \
-    scikit-learn==1.3.1 \
-    umap-learn==0.5.5
-
+    umap-learn==0.5.5 
+    
 # Install all node dependencies
 RUN npm install \
     "@ezs/analytics@2.2.2" \
@@ -45,6 +44,7 @@ WORKDIR /app/public
 # Declare files to copy in .dockerignore
 
 USER daemon
+ENV NUMBA_CACHE_DIR=/tmp/numba_cache
 COPY --chown=daemon:daemon . /app/public/
 
 COPY --chown=daemon:daemon --from=build1 /dvc/all-MiniLM-L6-v2 /app/public/v1/all-MiniLM-L6-v2
