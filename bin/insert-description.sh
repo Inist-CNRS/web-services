@@ -8,6 +8,11 @@
 function markdown2line() {
     local input_string
     input_string=$(cat "$1")
+    input_string=${input_string//\[/\\\[}
+    input_string=${input_string//\]/\\\]}
+    input_string=${input_string//\(/\\\(}
+    input_string=${input_string//\)/\\\)}
+    input_string=${input_string//\//\\\/}
     echo "${input_string//$'\n'/^M}"
 }
 
