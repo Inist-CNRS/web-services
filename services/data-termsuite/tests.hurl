@@ -5,7 +5,7 @@
 # or (from root of the repo)
 #   npm run test:local data-termsuite
 
-POST {{host}}/v1/en
+POST {{host}}/v1/en?nb=10
 content-type: application/x-gzip
 X-Webhook-Success: https://webhook.site/2caab8b5-fc96-4d7a-bb94-bdda20977830
 X-Webhook-Failure: https://webhook.site/2caab8b5-fc96-4d7a-bb94-bdda20977830
