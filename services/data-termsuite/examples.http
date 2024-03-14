@@ -1,5 +1,4 @@
 # These examples can be used directly in VSCode, using HTTPYac extension (anweber.vscode-httpyac)
-# They are important, because used to generate the tests.hurl file.
 
 # Décommenter/commenter les lignes voulues pour tester localement
 @host=http://localhost:31976
@@ -20,8 +19,24 @@ Expect: 100-continue
 # @name v1en
 # Extraction d'une terminologie sur un corpus en anglais (à la manière data-computer)
 POST {{host}}/v1/en HTTP/1.1
-Content-Type: application/gzip
+Content-Type: application/x-gzip
 X-Webhook-Success: https://webhook.site/2caab8b5-fc96-4d7a-bb94-bdda20977830
 X-Webhook-Failure: https://webhook.site/2caab8b5-fc96-4d7a-bb94-bdda20977830
 
 < ./examples/22-txt-en.tar.gz
+
+###
+# @name v1retrieveJsonEn
+# Récupérationde terminologie sur un corpus en anglais (après traitement via v1en)
+# ATTENTION: pour que ça marche, modifier la valeur de value avec celle retournée par v1en
+POST {{host}}/v1/retrieve-json HTTP/1.1
+Content-Type: application/json
+[{"value": "tUTn39pb8"}]
+
+###
+# @name v1retrieveCsvEn
+# Récupérationde terminologie sur un corpus en anglais (après traitement via v1en)
+# ATTENTION: pour que ça marche, modifier la valeur de value avec celle retournée par v1en
+POST {{host}}/v1/retrieve-csv HTTP/1.1
+Content-Type: application/json
+[{"value": "tUTn39pb8"}]
