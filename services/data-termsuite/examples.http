@@ -1,17 +1,27 @@
-# These examples can be used directly in VSCode, using REST Client extension (humao.rest-client)
+# These examples can be used directly in VSCode, using HTTPYac extension (anweber.vscode-httpyac)
 # They are important, because used to generate the tests.hurl file.
 
 # Décommenter/commenter les lignes voulues pour tester localement
 @host=http://localhost:31976
 # @host=https://data-termsuite.services.istex.fr
 
+# Pour voir les webhooks, aller sur https://webhook.site/#!/view/2caab8b5-fc96-4d7a-bb94-bdda20977830
+
 ###
 # @name v1enExtract
-# Extraction d'une terminologie sur un texte en anglais
+# Extraction d'une terminologie sur un corpus en anglais (ancienne manière)
 POST {{host}}/v1/en/extract?topn=10&url=https://webhook.site/2caab8b5-fc96-4d7a-bb94-bdda20977830 HTTP/1.1
-Content-Type: application/application/zip
+Content-Type: application/zip
 Expect: 100-continue
+
+< ./examples/22_txt_en.zip
+
+###
+# @name v1en
+# Extraction d'une terminologie sur un corpus en anglais (à la manière data-computer)
+POST {{host}}/v1/en HTTP/1.1
+Content-Type: application/gzip
 X-Webhook-Success: https://webhook.site/2caab8b5-fc96-4d7a-bb94-bdda20977830
 X-Webhook-Failure: https://webhook.site/2caab8b5-fc96-4d7a-bb94-bdda20977830
 
-< ./examples/22_txt_en.zip
+< ./examples/22-txt-en.tar.gz
