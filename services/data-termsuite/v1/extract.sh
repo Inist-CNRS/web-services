@@ -6,7 +6,7 @@ export SDKMAN_DIR="/usr/sbin/.sdkman"
 [[ -s "/usr/sbin/.sdkman/bin/sdkman-init.sh" ]] && source "/usr/sbin/.sdkman/bin/sdkman-init.sh"
 JAR=/opt/termsuite-core-3.0.10.jar
 language=${1:-en}
-TOPN=${2:-10}
+TOPN=${2:-500}
 
 # Return the current date and time in ISO 8601 format.
 function isoDate () {
