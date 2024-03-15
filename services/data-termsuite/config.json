@@ -8,7 +8,7 @@
         "EZS_PIPELINE_DELAY": 10800,
         "EZS_NSHARDS": 32,
         "EZS_CACHE": true,
-        "EZS_VERBOSE": false,
+        "EZS_VERBOSE": true,
         "NODE_OPTIONS": "--max_old_space_size=1024",
         "NODE_ENV": "production"
     }

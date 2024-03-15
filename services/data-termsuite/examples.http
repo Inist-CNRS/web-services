@@ -7,15 +7,6 @@
 # Pour voir les webhooks, aller sur https://webhook.site/#!/view/2caab8b5-fc96-4d7a-bb94-bdda20977830
 
 ###
-# @name v1enExtract
-# Extraction d'une terminologie sur un corpus en anglais (ancienne manière)
-POST {{host}}/v1/en/extract?topn=10&url=https://webhook.site/2caab8b5-fc96-4d7a-bb94-bdda20977830 HTTP/1.1
-Content-Type: application/zip
-Expect: 100-continue
-
-< ./examples/22_txt_en.zip
-
-###
 # @name v1en
 # Extraction d'une terminologie sur un corpus en anglais (à la manière data-computer)
 POST {{host}}/v1/en?nb=10 HTTP/1.1

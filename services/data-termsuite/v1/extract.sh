@@ -52,7 +52,7 @@ java -Xms1g -Xmx6g -cp "$JAR" fr.univnantes.termsuite.tools.TerminologyExtractor
 
 echo "$(isoDate):en:after extraction" 1>&2
 
-# EZS_METRICS=false npx @ezs/core -m /app/public/v1/tsv2json.cfg < "$result_path"
+# Output the result, in JSON format
 node ./v1/tsv2json.mjs < "$result_path"
 
 # Clean temporary files

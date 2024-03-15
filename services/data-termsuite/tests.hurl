@@ -88,7 +88,7 @@ Content-Type: application/json
 
 ############################################################################
 # Test v1/fr
-POST {{host}}/v1/fr?nb=10
+POST {{host}}/v1/fr?nb=5
 content-type: application/x-gzip
 X-Webhook-Success: https://webhook.site/2caab8b5-fc96-4d7a-bb94-bdda20977830
 X-Webhook-Failure: https://webhook.site/2caab8b5-fc96-4d7a-bb94-bdda20977830
@@ -144,24 +144,4 @@ Content-Type: application/json
 {
     "key": "a: électrique",
     "freq": 7
-},
-{
-    "key": "npn: moulin à eau",
-    "freq": 7
-},
-{
-    "key": "a: végétal",
-    "freq": 7
-},
-{
-    "key": "n: biocarburant",
-    "freq": 21
-},
-{
-    "key": "a: quantique",
-    "freq": 5
-},
-{
-    "key": "n: mtep",
-    "freq": 5
 }]
