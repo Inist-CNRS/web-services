@@ -28,6 +28,9 @@ Content-Type: application/json
     "value": "HALLUCINATED > Zohuri, B. (2019). A Comparison of Molten Salt Reactors to Light Water Reactors: Pros and Cons. In Molten Salt Reactors and Thorium Energy (pp. 81-98). Woodhead Publishing. https://doi.org/10.1056/nejmoa1200303"
   },
   {
+    "value": "HALUCINATED BUT DOI DOESNT EXISTS > Zohuri, B. (2019). A Comparison of Molten Salt Reactors to Light Water Reactors: Pros and Cons. In Molten Salt Reactors and Thorium Energy (pp. 81-98). Woodhead Publishing. https://doi.org/10.1056/doesntexists"
+  },
+  {
     "value": ["bad","input","type"]
   },
   {
