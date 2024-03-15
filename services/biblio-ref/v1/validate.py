@@ -92,7 +92,7 @@ def verify_doi(doi, mail=mail_adress):
             return (status_code,{'title': "", 'first_author_given': "", 'first_author_name': "", 'doi': ""})
         message = response.json()["message"]
         others_biblio_info = {}
-        others_biblio_info["title"] = message["title"] if 'title' in message else ""
+        others_biblio_info["title"] = message["title"][0] if 'title' in message else ""
         others_biblio_info["doi"] = message['DOI'] if "DOI" in message else ""
         try:
             others_biblio_info["first_author_name"] = message['author'][0]['family']
@@ -161,7 +161,7 @@ def compare_pubinfo_refbiblio(item,ref_biblio):
         tuple (bool, str): True if it's match with the doi, else false + empty string
     """
     # Check first author
-    if uniformize(item['first_author_name']) not in ref_biblio:
+    if uniformize(item['first_author_name']) not in uniformize(ref_biblio):
         return False, ""
     if fuzz.partial_ratio(uniformize(remove_retracted_prefix(item['title'])), ref_biblio)<90:
         return False, ""
