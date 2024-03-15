@@ -46,3 +46,23 @@ function insert_description() {
     fi
     printf " ✓\n"
 }
+
+# Generate a JSON string from a string by escaping special characters
+function markdown2string () {
+    local input_string
+    input_string=$(cat "$1")
+    input_string="${input_string//\"/\\\"}"
+    # input_string="${input_string//\\$'\n'/\\\\\n}"
+    # shellcheck disable=SC2001
+    input_string=$(sed 's/\\$//g' <<< "${input_string}")
+    input_string="${input_string//$'\n'/\\\n}"
+    echo "\"${input_string}\""
+}
+
+# reads the file swagger.md, converts its contents to a string, and inserts that
+# string as the description in swagger.json under the key info.description.
+function insert_description_in_swagger() {
+    local DESCRIPTION
+    DESCRIPTION=$(markdown2string swagger.md)
+    node -e 'const swagger = JSON.parse(fs.readFileSync("swagger.json").toString("utf-8")); swagger.info.description = '"$DESCRIPTION"'; fs.writeFileSync("swagger.json", JSON.stringify(swagger, null, 4));'
+}
