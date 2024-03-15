@@ -3,6 +3,7 @@ set +x
 
 # Initialize SDKMAN / Java
 export SDKMAN_DIR="/usr/sbin/.sdkman"
+# shellcheck disable=SC1091
 [[ -s "/usr/sbin/.sdkman/bin/sdkman-init.sh" ]] && source "/usr/sbin/.sdkman/bin/sdkman-init.sh"
 JAR=/opt/termsuite-core-3.0.10.jar
 language=${1:-en}
@@ -54,6 +55,6 @@ echo "$(isoDate):en:after extraction" 1>&2
 # EZS_METRICS=false npx @ezs/core -m /app/public/v1/tsv2json.cfg < "$result_path"
 node ./v1/tsv2json.mjs < "$result_path"
 
-# TODO: uncomment after development
-# rm -rf "$corpus_path"
-# rm -f "$result_path"
+# Clean temporary files
+rm -rf "$corpus_path"
+rm -f "$result_path"
