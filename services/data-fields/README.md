@@ -1,4 +1,4 @@
-# ws-data-fields@0.0.0
+# ws-data-fields@1.0.0
 
 Get the fields associeted with a file
 

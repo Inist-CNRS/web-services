@@ -6,5 +6,7 @@
 !v1
 !swagger.json
 !main.ts
+!lib
 !package.json
 !package-lock.json
+!tsconfig.json

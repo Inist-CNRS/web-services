@@ -1,7 +1,7 @@
 {
     "private": true,
     "name": "ws-data-fields",
-    "version": "0.0.0",
+    "version": "1.0.0",
     "description": "Get the fields associated with a file",
     "repository": {
         "type": "git",
@@ -18,7 +18,7 @@
     "homepage": "https://github.com/Inist-CNRS/web-services/#readme",
     "scripts": {
         "ws:install": "npm install --workspaces false",
-        "ws:run": "NODE_ENV=production node -r ts-node/register --max-old-space-size=1024 main.ts",
+        "ws:run": "NODE_ENV=production NODE_OPTIONS=--max_old_space_size=1024 ts-node-transpile-only main.ts",
         "version:insert:readme": "sed -i \"s#\\(${npm_package_name}.\\)\\([\\.a-z0-9]\\+\\)#\\1${npm_package_version}#g\" README.md && git add README.md",
         "version:insert:swagger": "sed -i \"s/\\\"version\\\": \\\"[0-9]\\+.[0-9]\\+.[0-9]\\+\\\"/\\\"version\\\": \\\"${npm_package_version}\\\"/g\" swagger.json && git add swagger.json",
         "version:insert": "npm run version:insert:readme && npm run version:insert:swagger",
@@ -35,8 +35,15 @@
         "publish": "docker push cnrsinist/${npm_package_name}:${npm_package_version}"
     },
     "dependencies": {
+        "@fastify/multipart": "8.1.0",
+        "csv-string": "4.1.1",
         "fastify": "4.26.2",
         "ts-node": "10.9.2",
         "typescript": "5.4.2"
+    },
+    "devDependencies": {
+        "@draconides/eslint-config-ts": "1.2.0",
+        "eslint": "8.57.0",
+        "openapi-types": "12.1.3"
     }
 }

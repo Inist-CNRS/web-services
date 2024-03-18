@@ -144,3 +144,4 @@ __pycache__/
 
 # Specific web services requirement
 !services/data-fields/package-lock.json
+services/data-fields/dist
