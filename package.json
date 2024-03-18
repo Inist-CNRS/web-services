@@ -39,10 +39,11 @@
     "services/base-line",
     "services/base-line-python",
     "services/biblio-ref",
-    "services/diseases-ner",
     "services/chem-ner",
     "services/data-computer",
+    "services/data-fields",
     "services/data-wrapper",
+    "services/diseases-ner",
     "services/terms-extraction"
   ],
   "dependencies": {

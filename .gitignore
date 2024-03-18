@@ -138,3 +138,9 @@ dist
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
+
+# Jetbrains IDE
+.idea
+
+# Specific web services requirement
+!services/data-fields/package-lock.json

@@ -1,0 +1,33 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "data-fields - Get the fields associated with a file",
+        "summary": "Analyse the file content and output the fields found",
+        "version": "0.0.0",
+        "termsOfService": "https://services.istex.fr/",
+        "contact": {
+            "name": "Inist-CNRS",
+            "url": "https://www.inist.fr/nous-contacter/"
+        }
+    },
+    "servers": [
+        {
+            "x-comment": "Will be automatically completed by the ezs server."
+        },
+        {
+            "url": "http://vptdmservices.intra.inist.fr:49225/",
+            "description": "Latest version for production",
+            "#DISABLED#x-profil": "Standard"
+        }
+    ],
+    "tags": [
+        {
+            "name": "data-fields",
+            "description": "Get the fields associated with a file",
+            "externalDocs": {
+                "description": "Plus de documentation",
+                "url": "https://github.com/inist-cnrs/web-services/tree/main/services/data-fields"
+            }
+        }
+    ]
+}
