@@ -24,9 +24,10 @@ process () {
         return 2
     fi
     SUMMARY=$(jq .info.summary < "${SWAGGER_FILE}")
-    if [ "${SUMMARY:-null}" = "null" ]
+    DESCRIPTION=$(jq .info.description < "${SWAGGER_FILE}")
+    if [ "${SUMMARY:-null}" = "null" ] && [ "${DESCRIPTION:-null}" = "null" ]
     then
-        logger -s "${NAME} - ERROR: swagger has no summary !"
+        logger -s "${NAME} - ERROR: swagger has no summary nor description!"
         return 3
     fi
 	SERVERS=$(jq -r ".servers" < "${SWAGGER_FILE}")
