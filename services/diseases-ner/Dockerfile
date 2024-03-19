@@ -25,5 +25,6 @@ WORKDIR /app/public
 # Declare files to copy in .dockerignore
 # A modifier : (utiliser le .dockerignore)
 COPY --chown=daemon:daemon . /app/public/
+RUN mv ./config.json /app && chmod a+w /app/config.json
 
 COPY --chown=daemon:daemon --from=build1 /dvc/models /app/public/v1/diseases/models
