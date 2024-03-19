@@ -10,6 +10,7 @@
     "generate:service": "./bin/create-service-from-template.sh",
     "help": "bat SCRIPTS.md || cat SCRIPTS.md",
     "insert:description": "./bin/insert-description.sh",
+    "insert:swagger:description": "./bin/insert-swagger-description.sh",
     "publish": "./bin/publish.sh",
     "update:images": "./bin/update-images.sh",
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -42,6 +43,7 @@
     "services/diseases-ner",
     "services/chem-ner",
     "services/data-computer",
+    "services/data-termsuite",
     "services/data-wrapper",
     "services/terms-extraction"
   ],
