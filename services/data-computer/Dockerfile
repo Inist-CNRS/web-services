@@ -41,10 +41,10 @@ RUN curl -L -O https://github.com/sammous/spacy-lefff-model/releases/latest/down
 RUN mkdir /usr/local/lib/python3.9/site-packages/spacy_lefff/data/tagger
 RUN tar -xf model.tar.gz -C /usr/local/lib/python3.9/site-packages/spacy_lefff/data/tagger
 WORKDIR /app/public
-# Declare files to copy in .dockerignore
 
 USER daemon
 ENV NUMBA_CACHE_DIR=/tmp/numba_cache
+# Declare files to copy in .dockerignore
 COPY --chown=daemon:daemon . /app/public/
 RUN mv ./config.json /app && chmod a+w /app/config.json
 
