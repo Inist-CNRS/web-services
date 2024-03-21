@@ -18,3 +18,4 @@ WORKDIR /app/public
 USER daemon
 RUN mkdir /app/public/tmp
 COPY --chown=daemon:daemon . /app/public/
+RUN mv ./config.json /app && chmod a+w /app/config.json

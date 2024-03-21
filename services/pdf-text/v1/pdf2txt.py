@@ -21,16 +21,6 @@ nlp_fr=spacy.load("fr_core_news_sm")
 
 
 
-#fin=json.loads(json.dumps([{
-#       "id":1,
-#        "value":"https://hal.science/hal-01990444v1/file/EGC_2019.pdf"},
-#    {"id":2,
-#    "value":"https://arxiv.org/pdf/2307.03172.pdf"}
-#    ]))
-
-
-
-
 
 def convert_pdf_to_xml(input_path):
     result = subprocess.run(['pdftohtml','-xml', '-stdout','-hidden','-i','-q','-f',p, input_path], capture_output=True, text=True)
@@ -42,7 +32,7 @@ def convert_pdf_to_xml(input_path):
         return xml_content
     else:
         # print error message if needed
-        sys.stderr.write("La conversion PDF vers XML a échoué.")
+        sys.stderr.write(f"Conversion of PDF {input_path} to XML has failed.")
         sys.stderr.write("\n")
         return None
 
@@ -74,14 +64,14 @@ def contains_verb(sentence):
 
 def is_firstname_lastname(chaine):
     doc = nlp_fr(chaine)
-    est_personne = False
+    is_person = False
 
-    for entite in doc.ents:
+    for entity in doc.ents:
 
-        if entite.label_ == "PERSON" and entite.text == chaine:
-            est_personne = True
+        if entity.label_ == "PERSON" and entity.text == chaine:
+            is_person = True
             break
-    return est_personne
+    return is_person
 
 def is_organization(chaine):
     chaine=chaine.replace(',','')
@@ -138,14 +128,6 @@ for line in sys.stdin:
     # path to the PDF
     pdf_filename = './tmp/'+name
     
-    # Chemin vers le fichier XML de sortie
-    #xml_filename = 'EGC_2019.xml'
-    
-    
-    #response = requests.get(url)
-    #pdf_content= response.content
-
-        
     try:
         # dl the PDF
         response = requests.get(url)
@@ -209,7 +191,6 @@ for line in sys.stdin:
             if get_alphabetic_numeric_ratio(linef)<0.8:
                 linef=''
             if is_readable_text(linef) and len(linef)>8 and 'copyright' not in linef.lower():
-            #if len(linef)>4:
                 if is_firstname_lastname(linef) :
                     bal='Author'
                 if is_organization(linef) and t<5:
