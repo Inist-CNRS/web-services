@@ -126,7 +126,7 @@ for line in sys.stdin:
         p='1'
     
     # path to the PDF
-    pdf_filename = './tmp/'+name
+    pdf_filename = '/tmp/'+name
     
     try:
         # dl the PDF
