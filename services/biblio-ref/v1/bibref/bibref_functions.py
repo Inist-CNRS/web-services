@@ -1,12 +1,10 @@
 import re
-import unicodedata
-import re
 from requests_ratelimiter import LimiterSession
 import unicodedata
 from thefuzz import fuzz
 
 
-mail_adress = "leo.gaillard@cnrs.fr"
+mail_address = "leo.gaillard@cnrs.fr"
 session = LimiterSession(per_second=10)
 
 # get a list of retracted DOIs
@@ -79,7 +77,7 @@ def verify_doi(doi, mail=mail_adress):
         mail (str): The email address to be included in the API request. Defaults to the value of mail_address.
 
     Returns:
-        int: The HTTP status code of the API response, or 503 if an exception occurs.
+        (int,dict): HTTP status code of the API response and dict informations found
     """
     url = f"https://api.crossref.org/works/{doi}?mailto={mail}"
 
@@ -146,17 +144,28 @@ def remove_retracted_prefix(text):
         text = re.sub(pattern, '', text, count=1, flags=re.IGNORECASE)
     return text.strip()
 
-# Functions that compare informations between the Crossref metadata and the bibliographic reference given.
+# Functions that compare informations between the Crossref metadata and 
+# the bibliographic reference given.
 def compare_pubinfo_refbiblio(item,ref_biblio):
     """
-    Compare informations of one of the crossref publis with the biblio. This is the function to change if we want to update mathces criterias
-    criteria : partial title (0.90 using fuzz.partial_ratio), first author name
+    Compare informations of one of the crossref publis with the biblio.
+
+    This is the function to change if we want to update matches
+    criterias.
+    
+    criteria : partial title (0.90 using fuzz.partial_ratio), first
+    author name
+    
     Args:
-        item (json): title, authors name and doi from a crossref publi
-        ref_biblio (str): the whole biblio reference
+        item (json): 
+            title, authors name and doi from a crossref publi
+        ref_biblio (str):
+            the whole biblio reference
     
     Returns:
-        tuple (bool, str): True if it's match with the doi, else false + empty string
+        tuple (bool, str): 
+            True if it's match with the doi, else false + empty
+        string
     """
     # Check first author
     if uniformize(item['first_author_name']) not in ref_biblio:
@@ -167,9 +176,11 @@ def compare_pubinfo_refbiblio(item,ref_biblio):
 
 
 def verify_biblio(ref_biblio, mail=mail_adress):
+
     """
     check with crossref api if a biblio ref is correct.
     Objective : In this function, we check if the biblio ref exist if no doi is found : we use as critera the compare_pubinfo_refbiblio function
+    
     Args : 
         ref_biblio :a biblio ref
         mail : a mail adress
@@ -177,6 +188,7 @@ def verify_biblio(ref_biblio, mail=mail_adress):
     Returns : 
         a confidence score about the existence + doi of the biblio ref
     """
+    
     url = f'https://api.crossref.org/works?query.bibliographic="{ref_biblio}"&mailto={mail}&rows=5' #take only the 5 first results
     try:
         response = session.get(url)
