@@ -13,6 +13,7 @@ with open("./v1/annulled.csv", "r") as annulled_file:
 
 
 def remove_accents(text):
+    
     """
     Remove accents from the input text and return the text with no accents.
 
@@ -22,6 +23,7 @@ def remove_accents(text):
     Returns:
         str: The input text with accents removed.
     """
+    
     if text == "" or type(text)!= str:
         return ""
     normalized_text = unicodedata.normalize("NFD", text)
@@ -29,6 +31,7 @@ def remove_accents(text):
     return text_with_no_accent
 
 def uniformize(text):
+    
     """
     Uniformize the given text by removing accents, punctuation, and converting to lowercase.
     
@@ -38,16 +41,18 @@ def uniformize(text):
     Returns:
         str: a string with uniformized text
     """
+    
     text = remove_accents(text) #if text is not a string, it's return ""
 
     # remove punctuation
-    text = ''.join(char if char.isalpha() else ' ' for char in text)
+    text = "".join(char if char.isalpha() else ' ' for char in text)
 
-    return ' '.join(text.lower().split())
+    return " ".join(text.lower().split())
 
 
 # DOI funtions
 def find_doi(text):
+    
     """
     Function to find a DOI (Digital Object Identifier) in the given text.
 
@@ -57,6 +62,7 @@ def find_doi(text):
     Returns
         str: the found DOI, or an empty string if not found
     """
+    
     doi_regex = r"\b10.\d{4,}\/[^\s]+\b"
     doi = re.search(doi_regex, text)
     if doi == None:
@@ -68,7 +74,8 @@ def find_doi(text):
         return ""
 
 
-def verify_doi(doi, mail=mail_adress):
+def verify_doi(doi, mail=mail_address):
+    
     """
     Verify a Digital Object Identifier (DOI) by making a GET request to the Crossref API. 
 
@@ -79,6 +86,7 @@ def verify_doi(doi, mail=mail_adress):
     Returns:
         (int,dict): HTTP status code of the API response and dict informations found
     """
+    
     url = f"https://api.crossref.org/works/{doi}?mailto={mail}"
 
     try:
@@ -107,15 +115,18 @@ def verify_doi(doi, mail=mail_adress):
 
 # specially designed functions for crossref API
 def get_title_authors_doi(message):
+    
     """
     Get the title, first author's given name, first author's family name, and DOI from the input message.
     Objective : For a response to crossref API, this function is used to get informations from this response.
+    
     Args:
         message (dict): The input message containing information about the publication.
     
     Returns:
         dict: A dictionary containing the title, first author's given name, first author's family name, and DOI.
     """
+    
     title = message['title'][0] if 'title' in message else ""
     doi = message['DOI'] if 'DOI' in message else ""
     try:
@@ -129,15 +140,19 @@ def get_title_authors_doi(message):
     return {'title': title, 'first_author_given': first_author_given, 'first_author_name': first_author_name, 'doi': doi}
 
 def remove_retracted_prefix(text):
+    
     """
     Function to delete "retracted" informations from crossref title
-    Objective : Sometimes, title starts with "RETRACTED >" or "retracted article" or "retraction" ; this function delete this to clean title for comparison
+    Objective : Sometimes, title starts with "RETRACTED >" or something similar ; 
+    this function delete this to clean title for comparison
+    
     Args:
         text (str): the title
 
     Returns:
         text: the title without retracted informations
     """
+    
     pattern = r'^(RETRACT(?:ED)?(?:ION)?\s?(?:ARTICLE)?\s?:\s?)'
     match = re.match(pattern, text, flags=re.IGNORECASE)
     if match:
@@ -147,6 +162,7 @@ def remove_retracted_prefix(text):
 # Functions that compare informations between the Crossref metadata and 
 # the bibliographic reference given.
 def compare_pubinfo_refbiblio(item,ref_biblio):
+    
     """
     Compare informations of one of the crossref publis with the biblio.
 
@@ -167,6 +183,7 @@ def compare_pubinfo_refbiblio(item,ref_biblio):
             True if it's match with the doi, else false + empty
         string
     """
+    
     # Check first author
     if uniformize(item['first_author_name']) not in ref_biblio:
         return False, ""
@@ -175,7 +192,7 @@ def compare_pubinfo_refbiblio(item,ref_biblio):
     return True, item['doi']
 
 
-def verify_biblio(ref_biblio, mail=mail_adress):
+def verify_biblio(ref_biblio, mail=mail_address):
 
     """
     check with crossref api if a biblio ref is correct.

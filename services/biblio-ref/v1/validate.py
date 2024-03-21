@@ -1,6 +1,5 @@
 #!/usr/bin/env python3
 
-from requests_ratelimiter import LimiterSession
 import sys
 import json
 from bibref.bibref_functions import *
