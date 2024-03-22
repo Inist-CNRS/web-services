@@ -1,0 +1,14 @@
+{
+    "environnement": {
+        "EZS_TITLE": "Les web services qui se lancent sur le champs 'authors'",
+        "EZS_DESCRIPTION": "Regroupe tous les web services qui traitent des auteurs (noms, affiliations...)",
+        "EZS_METRICS": true,
+        "EZS_CONCURRENCY": 4,
+        "EZS_CONTINUE_DELAY": 60,
+        "EZS_NSHARDS": 32,
+        "EZS_CACHE": true,
+        "EZS_VERBOSE": false,
+        "NODE_OPTIONS": "--max_old_space_size=1024",
+        "NODE_ENV": "production"
+    }
+}
