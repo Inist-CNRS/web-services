@@ -14,7 +14,7 @@ Content-Type: application/x-gzip
 X-Webhook-Success: https://webhook.site/7b9ddc51-b3eb-447a-8eba-1ab13f016bb7
 X-Webhook-Failure: https://webhook.site/7b9ddc51-b3eb-447a-8eba-1ab13f016bb7
 
-< ./examples/22_txt_en.tar.gz
+< ./examples/22-txt-en.tar.gz
 
 ###
 # @name v1fr
@@ -24,7 +24,7 @@ Content-Type: application/x-gzip
 X-Webhook-Success: https://webhook.site/7b9ddc51-b3eb-447a-8eba-1ab13f016bb7
 X-Webhook-Failure: https://webhook.site/7b9ddc51-b3eb-447a-8eba-1ab13f016bb7
 
-< ./examples/8-txt-fr.tar.gz
+< ./examples/7-txt-fr.tar.gz
 
 ###
 # @name v1retrieveJson
@@ -32,7 +32,7 @@ X-Webhook-Failure: https://webhook.site/7b9ddc51-b3eb-447a-8eba-1ab13f016bb7
 # ATTENTION: pour que ça marche, modifier la valeur de value avec celle retournée par v1en ou v1fr
 POST {{host}}/v1/retrieve-json HTTP/1.1
 Content-Type: application/json
-[{"value": "6Gdr63WmV"}]
+[{"value": "VV9idT2RH"}]
 
 ###
 # @name v1retrieveCsv
@@ -40,4 +40,4 @@ Content-Type: application/json
 # ATTENTION: pour que ça marche, modifier la valeur de value avec celle retournée par v1en ou v1fr
 POST {{host}}/v1/retrieve-csv HTTP/1.1
 Content-Type: application/json
-[{"value": "6Gdr63WmV"}]
+[{"value": "VV9idT2RH"}]
