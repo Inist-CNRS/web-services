@@ -24,10 +24,15 @@ do
         corpus_path=/tmp/retrieve/corpus/$corpus
         mkdir -p "$corpus_path"
     fi
-    value=$(echo "$line"|node -pe 'JSON.parse(fs.readFileSync(0).toString("utf-8").slice(0,-1)).value.replace("\n","\\n").replaceAll("\"", "\\\"")')
-    filename=$(echo "$line"|node -pe 'JSON.parse(fs.readFileSync(0).toString("utf-8").slice(0,-1)).id')
-    echo "$value" > "$corpus_path/$filename"
-    ((nbTxt++))
+    value=$(echo "$line"|node -pe 'JSON.parse(fs.readFileSync(0).toString("utf-8").slice(0,-1)).value?.replace("\n","\\n").replaceAll("\"", "\\\"")')
+    filename=$(echo "$line"|node -pe 'JSON.parse(fs.readFileSync(0).toString("utf-8").slice(0,-1)).id').txt
+    filename=${filename//\//} # Remove all '/' in the filename
+    if [ "$value" != "undefined" ] ; then
+        echo "$value" > "$corpus_path/$filename"
+        ((nbTxt++))
+    else
+        echo "Empty value for $corpus/$filename" 1>&2
+    fi
 done
 
 if [ "$nbTxt" -eq 0 ] ; then
