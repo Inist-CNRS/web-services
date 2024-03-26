@@ -1,4 +1,4 @@
-FROM cnrsinist/ezs-python-server:py3.9-no16-1.0.8
+FROM cnrsinist/ezs-python-server:py3.9-no16-1.0.9
 
 USER root
 
