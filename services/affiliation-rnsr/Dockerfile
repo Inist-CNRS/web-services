@@ -26,6 +26,5 @@ WORKDIR /app/public
 # A modifier : (utiliser le .dockerignore)
 COPY --chown=daemon:daemon ./v2/affiliation /app/public/v2/affiliation
 COPY --chown=daemon:daemon ./v3/affiliation /app/public/v3/affiliation
-RUN mv ./config.json /app && chmod a+w /app/config.json
 
 COPY --chown=daemon:daemon --from=build1 /dvc/models /app/public/v3/affiliation/models
