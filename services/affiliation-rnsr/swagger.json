@@ -3,7 +3,7 @@
 	"info": {
 		"title": "affiliation-rnsr - Trouve un RNSR à partir d'une affiliation.",
 		"summary": "Pour chaque affiliation séparées par un point virgule, retourne un RNSR. Retourne n/a si aucun RNSR n'est trouvé.",
-		"version": "2.1.4",
+		"version": "2.1.5",
 		"termsOfService": "https://services.istex.fr/",
 		"contact": {
 			"name": "Inist-CNRS",
