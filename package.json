@@ -45,6 +45,7 @@
     "services/data-computer",
     "services/data-termsuite",
     "services/data-wrapper",
+    "services/pdf-text",
     "services/terms-extraction"
   ],
   "dependencies": {
