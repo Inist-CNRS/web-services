@@ -14,13 +14,12 @@ RUN --mount=type=secret,id=webdav_login \
 COPY ./v1/diseases/models.dvc /dvc
 RUN dvc pull -v
 
-FROM cnrsinist/ezs-python-server:py3.9-no16-1.0.9
+FROM cnrsinist/ezs-python-server:py3.9-no16-1.0.10
 
 USER root
 RUN pip install torch==2.1.0+cpu --index-url https://download.pytorch.org/whl/cpu
 RUN pip install transformers==4.30.2 certifi==2024.2.2
 
-USER daemon
 WORKDIR /app/public
 # Declare files to copy in .dockerignore
 # A modifier : (utiliser le .dockerignore)
