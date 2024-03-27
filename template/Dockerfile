@@ -1,5 +1,5 @@
 # syntax=docker/dockerfile:1.2
-FROM cnrsinist/ezs-python-server:py3.9-no16-1.0.9
+FROM cnrsinist/ezs-python-server:py3.9-no16-1.0.10
 
 USER root
 # Install all python dependencies
