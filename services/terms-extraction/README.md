@@ -1,4 +1,4 @@
-# ws-terms-extraction@1.5.5
+# ws-terms-extraction@1.5.6
 
 Extraction de termes
 
