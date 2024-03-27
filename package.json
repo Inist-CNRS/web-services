@@ -37,14 +37,15 @@
     "bases/ezs-python-server",
     "bases/python-node",
     "services/affiliation-rnsr",
+    "services/authors-tools",
     "services/base-line",
     "services/base-line-python",
     "services/biblio-ref",
-    "services/diseases-ner",
     "services/chem-ner",
     "services/data-computer",
     "services/data-termsuite",
     "services/data-wrapper",
+    "services/diseases-ner",
     "services/terms-extraction"
   ],
   "dependencies": {
