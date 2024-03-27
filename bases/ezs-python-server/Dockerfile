@@ -19,7 +19,6 @@ RUN npm install dotenv-cli@7.4.1 && \
 WORKDIR /usr/sbin/.npm
 RUN chmod -R a+rwx /usr/sbin/.npm
 
-USER daemon
 WORKDIR /app/public
 # See .dockerignore to see what files are copied
 COPY . /app/
