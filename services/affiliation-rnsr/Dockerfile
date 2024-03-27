@@ -14,13 +14,12 @@ RUN --mount=type=secret,id=webdav_login \
 COPY ./v3/affiliation/models.dvc /dvc
 RUN dvc pull -v
 
-FROM cnrsinist/ezs-python-server:py3.9-no16-1.0.9
+FROM cnrsinist/ezs-python-server:py3.9-no16-1.0.10
 
 USER root
 # Install all python dependencies
 RUN pip install fasttext-wheel==0.9.2
 
-USER daemon
 WORKDIR /app/public
 # Declare files to copy in .dockerignore
 # A modifier : (utiliser le .dockerignore)
