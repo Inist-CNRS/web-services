@@ -1,4 +1,4 @@
-FROM cnrsinist/ezs-python-server:py3.9-no16-1.0.9
+FROM cnrsinist/ezs-python-server:py3.9-no16-1.0.10
 
 ARG saxon_ver=10.9
 ENV SAXON_HOME=/usr/share/java/saxon
@@ -30,7 +30,6 @@ ENV PATH="/fop:$PATH"
 WORKDIR /app
 RUN npm install @ezs/xslt@1.3.31
 RUN chown daemon:daemon -R /app
-# RUN chmod a+w /app
 
 WORKDIR /app
 # See .dockerignore to see what files are copied
