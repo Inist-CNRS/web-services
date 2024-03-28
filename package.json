@@ -48,14 +48,14 @@
     "services/terms-extraction"
   ],
   "dependencies": {
-    "@ezs/analytics": "2.2.2",
-    "@ezs/basics": "2.6.0",
-    "@ezs/core": "3.6.0",
-    "@ezs/spawn": "1.4.5",
+    "@ezs/analytics": "2.3.2",
+    "@ezs/basics": "2.6.1",
+    "@ezs/core": "3.8.2",
+    "@ezs/spawn": "1.4.6",
     "@orangeopensource/hurl": "4.1.0",
     "rest-cli": "1.8.13"
   },
   "devDependencies": {
-    "@types/node": "20.11.16"
+    "@types/node": "20.11.30"
   }
 }
