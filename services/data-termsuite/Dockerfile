@@ -1,5 +1,5 @@
 # syntax=docker/dockerfile:1.2
-FROM cnrsinist/ezs-python-server:py3.9-no16-1.0.9
+FROM cnrsinist/ezs-python-server:py3.9-no16-1.0.10
 
 USER root
 
@@ -35,8 +35,6 @@ RUN curl -L https://search.maven.org/remotecontent?filepath=fr/univ-nantes/terms
 # Prepare sdkman installation
 RUN chmod a+wx /usr/sbin
 
-USER daemon
-
 # Use OpenJDK 8: https://github.com/termsuite/termsuite-core/issues/108
 RUN curl -s "https://get.sdkman.io" | bash
 RUN /bin/bash -c "source \"$HOME/.sdkman/bin/sdkman-init.sh\" && sdk install java 8.0.402-zulu "
@@ -44,4 +42,4 @@ RUN /bin/bash -c "source \"$HOME/.sdkman/bin/sdkman-init.sh\" && sdk install jav
 WORKDIR /app/public
 # Declare files to copy in .dockerignore
 COPY --chown=daemon:daemon . /app/public/
-RUN mv ./config.json /app && chmod a+w /app/config.json
+RUN chmod a+w /app/public/config.json && mv /app/public/config.json /app

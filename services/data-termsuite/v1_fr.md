@@ -1,7 +1,7 @@
-Procède à une extraction terminologique en langue anglaise sur un corpus de textes.  
+Procède à une extraction terminologique en langue française sur un corpus de textes.  
 
 Le fichier `.tar.gz` envoyé doit contenir des fichiers `.json` dont chacun
-contient un objet dont le champ `value` contient un texte en anglais et le champ
+contient un objet dont le champ `value` contient un texte en français et le champ
 `id` un identifiant unique pouvant servir de nom de fichier.  
 
 ℹ️ Voir [la commande Unix `tar`](https://tldr.inbrowser.app/pages/common/tar).
