@@ -1,18 +1,215 @@
-#POST {{host}}/v1/expand?indent=true
-#content-type: application/json
-#[
-#  { "value": "Baran, N (reprint author), Univ Zagreb, Dept Phys, Bijenieka Cesta 32, Zagreb 10000, Croatia."},
-#  { "value": "Harikane, Y (reprint author), Univ Tokyo, Inst Cosm Ray Res, 5-1-5 Kashiwanoha, Kashiwa, Chiba 2778582, Japan.; Harikane, Y (reprint author), Univ Tokyo, Grad Sch Sci, Dept Phys, Bunkyo Ku, 7-3-1 Hongo, Tokyo 1130033, Japan."},
-#  { "value": "Davidzon, I (reprint author), Aix Marseille Univ, LAM, CNRS, UMR 7326, F-13388 Marseille, France.; Davidzon, I (reprint author), INAF Osservatorio Astron Bologna, Via Ranzani 1, I-40127 Bologna, Italy."},
-#  { "value": "Zolotukhin, I (reprint author), IRAP, CNRS, 9 Ave Colonel Roche,BP 44346, F-31028 Toulouse 4, France.; Zolotukhin, I (reprint author), Moscow MV Lomonosov State Univ, Sternberg Astron Inst, Univ Skij Pr 13, Moscow 119992, Russia."},
-#  { "value": "Cooke, J (reprint author), Swinburne Univ Technol, Ctr Astrophys & Supercomp, Hawthorn, Vic 3122, Australia."},
-#  { "value": "van Uitert, E (reprint author), Argelander Inst Astron, Hugel 71, D-53121 Bonn, Germany."},
-#  { "value": "Harnois-Deraps, J (reprint author), Univ British Columbia, Dept Phys & Astron, Vancouver, BC V6T 1Z1, Canada."},
-#  { "value": "Ford, J (reprint author), Univ British Columbia, Dept Phys & Astron, 6224 Agr Rd, Vancouver, BC V6T 1Z1, Canada."},
-#  { "value": "Laigle, C (reprint author), Univ Paris 06, Sorbonne Univ, 98b Bd Arago, F-75014 Paris, France.; Laigle, C (reprint author), CNRS, UMR 7095, IAP, 98b Bd Arago, F-75014 Paris, France."}
-#]
+POST {{host}}/v1/expand?indent=true
+content-type: application/json
+[
+  { "value": "Baran, N (reprint author), Univ Zagreb, Dept Phys, Bijenieka Cesta 32, Zagreb 10000, Croatia."},
+  { "value": "Harikane, Y (reprint author), Univ Tokyo, Inst Cosm Ray Res, 5-1-5 Kashiwanoha, Kashiwa, Chiba 2778582, Japan.; Harikane, Y (reprint author), Univ Tokyo, Grad Sch Sci, Dept Phys, Bunkyo Ku, 7-3-1 Hongo, Tokyo 1130033, Japan."},
+  { "value": "Davidzon, I (reprint author), Aix Marseille Univ, LAM, CNRS, UMR 7326, F-13388 Marseille, France.; Davidzon, I (reprint author), INAF Osservatorio Astron Bologna, Via Ranzani 1, I-40127 Bologna, Italy."},
+  { "value": "Zolotukhin, I (reprint author), IRAP, CNRS, 9 Ave Colonel Roche,BP 44346, F-31028 Toulouse 4, France.; Zolotukhin, I (reprint author), Moscow MV Lomonosov State Univ, Sternberg Astron Inst, Univ Skij Pr 13, Moscow 119992, Russia."},
+  { "value": "Cooke, J (reprint author), Swinburne Univ Technol, Ctr Astrophys & Supercomp, Hawthorn, Vic 3122, Australia."},
+  { "value": "van Uitert, E (reprint author), Argelander Inst Astron, Hugel 71, D-53121 Bonn, Germany."},
+  { "value": "Harnois-Deraps, J (reprint author), Univ British Columbia, Dept Phys & Astron, Vancouver, BC V6T 1Z1, Canada."},
+  { "value": "Ford, J (reprint author), Univ British Columbia, Dept Phys & Astron, 6224 Agr Rd, Vancouver, BC V6T 1Z1, Canada."},
+  { "value": "Laigle, C (reprint author), Univ Paris 06, Sorbonne Univ, 98b Bd Arago, F-75014 Paris, France.; Laigle, C (reprint author), CNRS, UMR 7095, IAP, 98b Bd Arago, F-75014 Paris, France."}
+]
 
-
+HTTP 200
+[{
+    "value": {
+        "house": "baran n reprint author univ zagreb dept phys bijenieka",
+        "road": "cesta",
+        "house_number": "32",
+        "city": "zagreb",
+        "postcode": "10000",
+        "country": "n/a",
+        "id": "Baran, N (reprint author), Univ Zagreb, Dept Phys, Bijenieka Cesta 32, Zagreb 10000, Croatia."
+    }
+},
+{
+    "value": {
+        "house": "harikane y reprint author univ tokyo grad sch sci dept phys",
+        "house_number": "5-1-5",
+        "road": "kashiwanoha",
+        "city": "tokyo",
+        "state": "chiba",
+        "postcode": "1130033",
+        "country": {
+            "cartographyCode": "JPN",
+            "about": "http://data.loterre.fr/ark:/67375/9SD-T7D7448F-7",
+            "prefLabel@fr": "Japon",
+            "prefLabel@en": "Japan",
+            "wikidataURI": "https://www.wikidata.org/wiki/Q1490",
+            "geonameURI": "https://www.geonames.org/1861060",
+            "countryCode": "JP",
+            "latitude": "36.019075365944",
+            "longitude": "136.881947315984",
+            "localization@en": [],
+            "localization@fr": []
+        },
+        "city_district": "hongo",
+        "id": "Harikane, Y (reprint author), Univ Tokyo, Inst Cosm Ray Res, 5-1-5 Kashiwanoha, Kashiwa, Chiba 2778582, Japan.; Harikane, Y (reprint author), Univ Tokyo, Grad Sch Sci, Dept Phys, Bunkyo Ku, 7-3-1 Hongo, Tokyo 1130033, Japan."
+    }
+},
+{
+    "value": {
+        "house": "france. davidzon i reprint author inaf osservatorio astron bologna",
+        "house_number": "1",
+        "postcode": "i-40127",
+        "city": "bologna",
+        "road": "via ranzani",
+        "country": {
+            "cartographyCode": "ITA",
+            "about": "http://data.loterre.fr/ark:/67375/9SD-D7887R60-W",
+            "prefLabel@fr": "Italie",
+            "prefLabel@en": "Italy",
+            "wikidataURI": "https://www.wikidata.org/wiki/Q220",
+            "geonameURI": "https://www.geonames.org/3175395",
+            "countryCode": "IT",
+            "latitude": "43.472476107586",
+            "longitude": "12.2194764873985",
+            "localization@en": [],
+            "localization@fr": []
+        },
+        "id": "Davidzon, I (reprint author), Aix Marseille Univ, LAM, CNRS, UMR 7326, F-13388 Marseille, France.; Davidzon, I (reprint author), INAF Osservatorio Astron Bologna, Via Ranzani 1, I-40127 Bologna, Italy."
+    }
+},
+{
+    "value": {
+        "house": "france. zolotukhin i reprint author moscow mv lomonosov state univ sternberg astron inst univ skij",
+        "house_number": "9",
+        "road": "pr 13",
+        "po_box": "bp 44346",
+        "postcode": "119992",
+        "city": "moscow",
+        "country": {
+            "cartographyCode": "RUS",
+            "about": "http://data.loterre.fr/ark:/67375/9SD-MTZLFXTZ-X",
+            "prefLabel@fr": "Russie",
+            "prefLabel@en": "Russia",
+            "wikidataURI": "https://www.wikidata.org/wiki/Q649",
+            "geonameURI": "https://www.geonames.org/2017370",
+            "countryCode": "RU",
+            "latitude": "61.6925647074082",
+            "longitude": "99.2165267869251",
+            "localization@en": [],
+            "localization@fr": []
+        },
+        "id": "Zolotukhin, I (reprint author), IRAP, CNRS, 9 Ave Colonel Roche,BP 44346, F-31028 Toulouse 4, France.; Zolotukhin, I (reprint author), Moscow MV Lomonosov State Univ, Sternberg Astron Inst, Univ Skij Pr 13, Moscow 119992, Russia."
+    }
+},
+{
+    "value": {
+        "house": "cooke j reprint author swinburne univ technol ctr astrophys & supercomp",
+        "suburb": "hawthorn",
+        "state": "vic",
+        "postcode": "3122",
+        "country": {
+            "cartographyCode": "AUS",
+            "about": "http://data.loterre.fr/ark:/67375/9SD-VFP5KTPK-R",
+            "prefLabel@fr": "Australie",
+            "prefLabel@en": "Australia",
+            "wikidataURI": "https://www.wikidata.org/wiki/Q3114",
+            "geonameURI": "https://www.geonames.org/2077456",
+            "countryCode": "AU",
+            "latitude": "-25.5607640622395",
+            "longitude": "134.376078573618",
+            "localization@en": [],
+            "localization@fr": []
+        },
+        "id": "Cooke, J (reprint author), Swinburne Univ Technol, Ctr Astrophys & Supercomp, Hawthorn, Vic 3122, Australia."
+    }
+},
+{
+    "value": {
+        "house": "van uitert e reprint author argelander inst astron",
+        "road": "hugel",
+        "house_number": "71",
+        "postcode": "d-53121",
+        "city": "bonn",
+        "country": {
+            "cartographyCode": "DEU",
+            "about": "http://data.loterre.fr/ark:/67375/9SD-HM2MMZDZ-0",
+            "prefLabel@fr": "Allemagne",
+            "prefLabel@en": "Germany",
+            "wikidataURI": "https://www.wikidata.org/wiki/Q64",
+            "geonameURI": "https://www.geonames.org/2921044",
+            "countryCode": "DE",
+            "latitude": "51.1337226904078",
+            "longitude": "10.2884850927429",
+            "localization@en": [],
+            "localization@fr": []
+        },
+        "id": "van Uitert, E (reprint author), Argelander Inst Astron, Hugel 71, D-53121 Bonn, Germany."
+    }
+},
+{
+    "value": {
+        "house": "harnois-deraps j reprint author univ british columbia dept phys & astron",
+        "city": "vancouver",
+        "state": "bc",
+        "postcode": "v6t 1z1",
+        "country": {
+            "cartographyCode": "CAN",
+            "about": "http://data.loterre.fr/ark:/67375/9SD-QDWJ08N6-7",
+            "prefLabel@fr": "Canada",
+            "prefLabel@en": "Canada",
+            "wikidataURI": "https://www.wikidata.org/wiki/Q1930",
+            "geonameURI": "https://www.geonames.org/6251999",
+            "countryCode": "CA",
+            "latitude": "57.7487688035733",
+            "longitude": "-101.569822125212",
+            "localization@en": [],
+            "localization@fr": []
+        },
+        "id": "Harnois-Deraps, J (reprint author), Univ British Columbia, Dept Phys & Astron, Vancouver, BC V6T 1Z1, Canada."
+    }
+},
+{
+    "value": {
+        "house": "ford j reprint author univ british columbia dept phys & astron",
+        "house_number": "6224",
+        "road": "agr rd",
+        "city": "vancouver",
+        "state": "bc",
+        "postcode": "v6t 1z1",
+        "country": {
+            "cartographyCode": "CAN",
+            "about": "http://data.loterre.fr/ark:/67375/9SD-QDWJ08N6-7",
+            "prefLabel@fr": "Canada",
+            "prefLabel@en": "Canada",
+            "wikidataURI": "https://www.wikidata.org/wiki/Q1930",
+            "geonameURI": "https://www.geonames.org/6251999",
+            "countryCode": "CA",
+            "latitude": "57.7487688035733",
+            "longitude": "-101.569822125212",
+            "localization@en": [],
+            "localization@fr": []
+        },
+        "id": "Ford, J (reprint author), Univ British Columbia, Dept Phys & Astron, 6224 Agr Rd, Vancouver, BC V6T 1Z1, Canada."
+    }
+},
+{
+    "value": {
+        "house": "france. laigle c reprint author cnrs umr 7095",
+        "house_number": "98b",
+        "road": "bd arago",
+        "postcode": "f-75014",
+        "city": "paris",
+        "country": {
+            "cartographyCode": "FRA",
+            "about": "http://data.loterre.fr/ark:/67375/9SD-WNLFZ7TZ-K",
+            "prefLabel@fr": "France",
+            "prefLabel@en": "France",
+            "wikidataURI": "https://www.wikidata.org/wiki/Q90",
+            "geonameURI": "https://www.geonames.org/3017382",
+            "countryCode": "FR",
+            "latitude": "46.6064633728632",
+            "longitude": "2.33908864602935",
+            "localization@en": [],
+            "localization@fr": []
+        },
+        "id": "Laigle, C (reprint author), Univ Paris 06, Sorbonne Univ, 98b Bd Arago, F-75014 Paris, France.; Laigle, C (reprint author), CNRS, UMR 7095, IAP, 98b Bd Arago, F-75014 Paris, France."
+    }
+}]
 
 POST {{host}}/v1/rnsr/json?indent=true
 content-type: application/json
