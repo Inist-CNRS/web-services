@@ -1,4 +1,4 @@
-# ezs-python-server@1.0.7
+# ezs-python-server@1.0.10
 
 Ce répertoire contient de quoi construire une image Docker lançant un serveur
 [ezs](https://github.com/Inist-CNRS/ezs) ayant la possibilité de lancer des

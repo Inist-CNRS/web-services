@@ -8,18 +8,17 @@ RUN apt update && apt install -y tini && \
     }' > /etc/ezmaster.json
 
 WORKDIR /app
-RUN npm install dotenv-cli@7.3.0 && \
-    npm install @ezs/core@3.4.4 && \
-    npm install @ezs/analytics@2.2.1 && \
-    npm install @ezs/basics@2.5.8 && \
-    npm install @ezs/spawn@1.4.5 && \
+RUN npm install dotenv-cli@7.4.1 && \
+    npm install @ezs/core@3.8.2 && \
+    npm install @ezs/analytics@2.3.2 && \
+    npm install @ezs/basics@2.6.1 && \
+    npm install @ezs/spawn@1.4.6 && \
     chmod a+w /app
 
 # Make sure that .npm folder is readable by the daemon user
 WORKDIR /usr/sbin/.npm
 RUN chmod -R a+rwx /usr/sbin/.npm
 
-USER daemon
 WORKDIR /app/public
 # See .dockerignore to see what files are copied
 COPY . /app/

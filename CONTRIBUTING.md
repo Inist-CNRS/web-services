@@ -31,6 +31,56 @@ automatiquement à la version demandée, en arrivant à la racine du répertoire
 [nvm / Deeper Shell
 integration](https://github.com/nvm-sh/nvm#deeper-shell-integration).
 
+Pour VSCode, il est recommandé d'accepter l'installation des extensions:
+
+- [EditorConfig](https://marketplace.visualstudio.com/items?itemName=EditorConfig.EditorConfig)
+- [markdownlint](https://marketplace.visualstudio.com/items?itemName=davidanson.vscode-markdownlint)
+
+## Nouvelle branche
+
+La branche principale (`main`) du dépôt est protégée.  
+Ça signifie que pour contribuer au dépôt, il faut passer par le mécanisme des
+*pull requests*.  
+
+Et pour créer une *pull request* (ou contribution), il faut d'abord créer une branche.  
+
+Son nom est important, car il permettra aux *GitHub Actions* automatiques
+d'obtenir des informations sur la partie du dépôt qui est travaillée.  
+
+Les noms des branches auront 3 parties:
+
+1. `services` pour indiquer qu'on travaille dans le répertoire des services
+2. le nom du service (ou de l'image de base) concerné(e) (en deux parties
+   séparées par un tiret, suivant la convention de nommage des *containers* dans
+   [ezmaster](https://github.com/Inist-CNRS/ezmaster)), correspondant au nom du
+   répertoire (donc sans `ws-`)
+3. le détail de l'opération. C'est un commentaire (où il faut séparer les mots
+   par des tirets)
+
+Chacune de ces parties sera écrite en minuscules, sans accent, sans espace, et
+elles seront séparées par le caractère `/`.
+
+Par exemple, pour améliorer le service `base-line`, et lui ajouter une route
+`v1/lowercase`, on pourrait créer une branche nommée
+`services/base-line/add-route-lowercase`.
+
+Ainsi, c'est le service `base-line` qui sera concerné par les actions
+automatiques.  
+
+D'autres exemples de noms de branche:
+
+- `services/base-line-python/make-python-script-executable`
+- `services/base-line/change-required-input-for-no-accent`
+- `services/terms-teeft/add-teeft-with-number`
+- `docs/contributing/add-new-branch`
+
+> **Remarque** : seules branches commençant par `services/` et contenant deux
+> `/` déclencheront l'action de test du service.
+
+> **Remarque** : comme nous construisons des programmes *open source*, tâchons
+> de garder tout ce qui est technique (ça peut exclure la documentation
+> elle-même) en anglais.
+
 ## Création d'un service
 
 Avant toute chose, il faut s'assurer qu'un service qui pourrait accueillir votre
@@ -62,6 +112,7 @@ le `package.json`:
 
 > 📘 Ceci est maintenant automatique quand on utilise le script
 > [`generate:service`](SCRIPTS.md#generateservice).
+> Voir [Script d'initialisation d'un nouveau service](#script-dinitialisation-dun-nouveau-service)
 
 Ainsi, vous serez capable de lancer des scripts d'un service (par exemple
 `base-line`) depuis la racine du dépôt (à condition de disposer de npm 7+):
@@ -209,8 +260,88 @@ description*), le nom de l'auteur et *mail*.
 Il crée le répertoire `services/service-name`, l'ajoute dans les *workspaces* du
 dépôt, et dans la liste des services à la fin du [README](./README#services).
 
+Exemple:
+
+```bash
+npm run generate:service service-name
+```
+
 > ⚠ Ne pas mettre de caractère `&` dans les réponses, ça provoque un
 > remplacement bizarre.
+
+### OpenAPI: ajout d'une description multilignes dans les métadonnées du .ini
+
+Pour avoir une documentation OpenAPI complète, on peut écrire la description
+d'un service en Markdown.  
+On peut se contenter d'écrire cette description dans la métadonnée
+`post.description` directement, en mettant les lignes bout-à-bout, séparées par
+`^M`.  
+Mais il est plus simple d'utiliser le script `./bin/insert-description.sh`, qui
+prend en paramètres un ou plusieurs chemins de fichiers Markdown (`.md`).  
+Pour chaque fichier `.md`, il insère le contenu dans le fichier dont le chemin
+correspond au nom du `.md` (en remplaçant les `_` par des `/`).  
+
+Exemples:
+
+```bash
+./bin/insert-description.sh services/terms-extraction/v1*.md
+./bin/insert-description.sh services/terms-extraction/v1_teeft_fr.md
+```
+
+Alternative: utiliser le script npm `insert:description`:
+
+```bash
+$ npm run insert:description services/terms-extraction/v*.md
+
+> web-services@1.0.0 insert:description
+> ./bin/insert-description.sh services/terms-extraction/v1_teeft_en.md services/terms-extraction/v1_teeft_fr.md services/terms-extraction/v1_teeft_with-numbers_en.md services/terms-extraction/v1_teeft_with-numbers_fr.md
+
+ - services/terms-extraction/v1/teeft/en.ini ✓
+ - services/terms-extraction/v1/teeft/fr.ini ✓
+ - services/terms-extraction/v1/teeft/with-numbers/en.ini ✓
+ - services/terms-extraction/v1/teeft/with-numbers/fr.ini ✓
+```
+
+> **Note**: si vous voulez bénéficier de l'auto-complétion des chemins de
+> fichiers, utilisez plutôt `./bin/insert-description.sh`.
+
+### Utilisation de DVC (pour charger des données ou des modèles)
+
+[DVC](https://dvc.org/) est un outil de versionnage de données. Lorsqu'on crée un service qui nécessite un modèle ou une table, il est nécessaire de l'utiliser pour ne pas avoir de gros fichiers sur git.
+En plus du reste, il faut suivre ces étapes lorsqu'on utilise DVC :
+
+- S'assurer d'avoir déposé les données sur le webdav du service TDM en ayant préalablement utilisé DVC (pour cela : )
+  - mettre son fichier nommé `DOSSIER_OU_FICHIER_A_PUSH` dans un autre dossier.
+  - Initier un dépot DVC en faisant `dvc init` (nécessite d'être dans un dépot git).
+  - se connecter au webdav du service (à ne faire que la première fois), pour cela :
+    - spécifier l'url du webdav (en utilisant le protocole webdavs): `dvc remote add -d webdav-remote webdavs://YOUR_WEBDAV_URL.fr`
+    - entrer le login : `dvc remote modify --local webdav-remote login YOUR_LOGIN`
+    - entrer le mot de passe : `dvc remote modify --local webdav-remote password YOUR_PASSWORD`
+  - push le fichier sur le webdav : `dvc add DOSSIER_OU_FICHIER_A_PUSH` puis `dvc push`, sans se soucier du nom
+  - Le fichier `DOSSIER_OU_FICHIER_A_PUSH.dvc` est créé et devra être copié à l'endroit où le modèle doit être dans le code
+  - ***remarque** : il est possible de faire tout ça dans le dépôt git directement, cela ajoutera simplement un `.gitignore` qu'il ne faudra pas déplacer ou supprimer. Aussi, les dossiers `.dvc` et `.dvcignore` ne seront ni à ignorer par git, ni a push sur le dépôt*
+- Créer un fichier `.env` à la racine **du service** (`./services/\<service-name\>/.env`) qui ressemblera à ça :
+
+  ```bash
+  export WEBDAV_URL=webdavs://YOUR_WEBDAV_URL.fr
+  export WEBDAV_LOGIN=YOUR_LOGIN
+  export WEBDAV_PASSWORD=YOUR_PASSWORD 
+  ```
+
+- modifier les scripts `build:dev` et `build` du fichier `package.json` du service
+  - pour `build:dev` :
+
+    ```txt
+    ". ./.env 2> /dev/null; DOCKER_BUILDKIT=1 docker build -t cnrsinist/${npm_package_name}:latest --secret id=webdav_login,env=WEBDAV_LOGIN --secret id=webdav_password,env=WEBDAV_PASSWORD --secret id=webdav_url,env=WEBDAV_URL ." 
+    ```
+
+  - pour `build`:
+
+    ```txt
+     ". ./.env 2> /dev/null; DOCKER_BUILDKIT=1 docker build -t cnrsinist/${npm_package_name}:${npm_package_version} --secret id=webdav_login,env=WEBDAV_LOGIN --secret id=webdav_password,env=WEBDAV_PASSWORD --secret id=webdav_url,env=WEBDAV_URL ."
+     ```
+
+- modifier le `Dockerfile` en conséquence, en s'inspirant du [Dockerfile de `biblio-ref`](https://github.com/Inist-CNRS/web-services/blob/main/services/biblio-ref/Dockerfile)
 
 ## Développement
 
@@ -354,50 +485,10 @@ Il y a plusieurs images de base:
   serveur ezs vide, acceptant les scripts ezs et python, embarquant saxon, sous
   la forme de la commande `xslt`.
 
-## Nouvelle branche
-
-La branche principale (`main`) du dépôt est protégée.  
-Ça signifie que pour contribuer au dépôt, il faut passer par le mécanisme des
-*pull requests*.  
-
-Et pour créer une *pull request* (ou contribution), il faut d'abord créer une branche.  
-
-Son nom est important, car il permettra aux *GitHub Actions* automatiques
-d'obtenir des informations sur la partie du dépôt qui est travaillée.  
-
-Les noms des branches auront 3 parties:
-
-1. `services` pour indiquer qu'on travaille dans le répertoire des services
-2. le nom du service (ou de l'image de base) concerné(e) (en deux parties
-   séparées par un tiret, suivant la convention de nommage des *containers* dans
-   [ezmaster](https://github.com/Inist-CNRS/ezmaster)), correspondant au nom du
-   répertoire (donc sans `ws-`)
-3. le détail de l'opération. C'est un commentaire (où il faut séparer les mots
-   par des tirets)
-
-Chacune de ces parties sera écrite en minuscules, sans accent, sans espace, et
-elles seront séparées par le caractère `/`.
-
-Par exemple, pour améliorer le service `base-line`, et lui ajouter une route
-`v1/lowercase`, on pourrait créer une branche nommée
-`services/base-line/add-route-lowercase`.
-
-Ainsi, c'est le service `base-line` qui sera concerné par les actions
-automatiques.  
-
-D'autres exemples de noms de branche:
-
-- `services/base-line-python/make-python-script-executable`
-- `services/base-line/change-required-input-for-no-accent`
-- `services/terms-teeft/add-teeft-with-number`
-- `docs/contributing/add-new-branch`
-
-> **Remarque** : seules branches commençant par `services/` et contenant deux
-> `/` déclencheront l'action de test du service.
-
-> **Remarque** : comme nous construisons des programmes *open source*, tâchons
-> de garder tout ce qui est technique (ça peut exclure la documentation
-> elle-même) en anglais.
+> **Note:** il existe maintenant un script qui se charge de la mise à jour des
+> images qui dépendent directement d'une image de base: [`npm run update:images
+> <image-name>`](./SCRIPTS.md#updateimages).  Assurez-vous que l'image a été créée (version, build, push)
+> avant de lancer le script.
 
 ## Création d'une version
 
@@ -411,8 +502,8 @@ le tout sur GitHub, déclenchant une action de Github qui poussera
 automatiquement l'image sur Docker Hub.
 
 > **Remarque**: on peut aussi utiliser l'option *workspace* `-w` de npm pour
-> créer la version depuis la racine du dépôt: `npm version -w
-> services/service-name patch`.
+> créer la version depuis la racine du dépôt: `npm -w services/service-name
+> version patch`.
 
 ## Mise en production
 

@@ -81,6 +81,7 @@ web_modules/
 .env.test.local
 .env.production.local
 .env.local
+env.sh
 
 # python's virtualenv
 .venv*
@@ -134,3 +135,7 @@ dist
 .yarn/build-state.yml
 .yarn/install-state.gz
 .pnp.*
+
+# Byte-compiled / optimized / DLL files
+__pycache__/
+services/data-termsuite/NOTES.md

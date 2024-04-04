@@ -6,7 +6,10 @@ Available scripts:
 - generate:example-tests
 - generate:service
 - help
+- insert:description
+- insert:swagger:description
 - publish
+- update:images
 - test:local
 - test:remote
 - test:remotes
@@ -58,6 +61,45 @@ Help is colorized if you have `bat` installed.
 
 See <https://github.com/sharkdp/bat>.
 
+## insert:description
+
+Usage: `npm run insert:description services/service-name/v1_path.md`
+
+Insert the Markdown description of a route into the matching `.ini` metadata
+(`post.description`).  
+Convert multiline markdown into one-line metadata (using `^M` character).
+Replace the `_` character in the markdown files names with `/`, to match the path of the `.ini`s to be modified.
+
+Example:
+
+```bash
+$ npm run insert:description services/terms-extraction/v*.md
+
+> web-services@1.0.0 insert:description
+> ./bin/insert-description.sh services/terms-extraction/v1_teeft_en.md services/terms-extraction/v1_teeft_fr.md services/terms-extraction/v1_teeft_with-numbers_en.md services/terms-extraction/v1_teeft_with-numbers_fr.md
+
+ - services/terms-extraction/v1/teeft/en.ini ✓
+ - services/terms-extraction/v1/teeft/fr.ini ✓
+ - services/terms-extraction/v1/teeft/with-numbers/en.ini ✓
+ - services/terms-extraction/v1/teeft/with-numbers/fr.ini ✓
+```
+
+## insert:swagger:description
+
+Usage: `npm run insert:swagger:description services/service-name`
+
+Insert the Markdown content of `services/service-name/swagger.md` into
+`services/service-name/swagger.json` as `info.description`.
+
+Convert multiline markdown into one JSON string.  
+Replace carriage return with `\n` and `"` with `\"`.
+
+Example:
+
+```bash
+npm run insert:swagger:description services/data-termsuite
+```
+
 ## publish
 
 Usage: `npm run publish`
@@ -72,6 +114,89 @@ Publish all services:
 
 All services with a `swagger.json` containing an enabled `servers.url` (with a
 `standard` value for `x-profil`) are published.
+
+## update:images
+
+Usage `npm run update:images -- [--help | [--dry-run] <[bases/]image-name>]`
+
+Required: `image-name` should be a base image name, or a path to a base image
+(`bases/image-name`).
+
+Update all `Dockerfile`s directly depending from a base image.  
+Update the template too, when it is the image used.  
+
+> **Note**: when a base image depends from the given image, it will be updated,
+> but no service depending from the latter will be updated, you have to run the
+> script again, using the name of the latter image.
+
+> **Reminder**: don't forget to build and push the base image before using this
+> script.
+
+### Parameters
+
+- `--dry-run`: allow you to test your parameters, and will not execute any
+  command, only show you what commands would be executed.
+- `--help`: show the usage of the command
+
+> **Note**: you only need `-- ` after script name when you use an option
+> (beginning with `--`)
+
+### Examples
+
+```bash
+$ npm run update:images -- --dry-run bases/ezs-python-server
+
+> web-services@1.0.0 update:images
+> ./bin/update-images.sh --dry-run bases/ezs-python-server
+
+Update images depending from ezs-python-server (level )
+
+Tag of the image: py3.9-no16-1.0.7
+
+Directly depending images:
+ - bases/ezs-python-saxon-server/Dockerfile
+ - services/base-line/Dockerfile
+ - services/base-line-python/Dockerfile
+ - services/terms-extraction/Dockerfile
+ - template/Dockerfile
+
+Updating images:
+
+ - bases/ezs-python-saxon-server/Dockerfile
+sed -i -e "s/cnrsinist\/ezs-python-server:.*$/cnrsinist\/ezs-python-server:py3.9-no16-1.0.7/g" "bases/ezs-python-saxon-server/Dockerfile"
+npm -w "bases/ezs-python-saxon-server" version patch
+npm -w "bases/ezs-python-saxon-server" run build
+npm -w "bases/ezs-python-saxon-server" run publish
+
+***** Don't forget to run "updateBase bases/ezs-python-saxon-server" *******
+
+ - services/base-line/Dockerfile
+sed -i -e "s/cnrsinist\/ezs-python-server:.*$/cnrsinist\/ezs-python-server:py3.9-no16-1.0.7/g" "services/base-line/Dockerfile"
+npm -w "services/base-line" version patch
+
+ - services/base-line-python/Dockerfile
+sed -i -e "s/cnrsinist\/ezs-python-server:.*$/cnrsinist\/ezs-python-server:py3.9-no16-1.0.7/g" "services/base-line-python/Dockerfile"
+npm -w "services/base-line-python" version patch
+
+ - services/terms-extraction/Dockerfile
+sed -i -e "s/cnrsinist\/ezs-python-server:.*$/cnrsinist\/ezs-python-server:py3.9-no16-1.0.7/g" "services/terms-extraction/Dockerfile"
+npm -w "services/terms-extraction" version patch
+
+ - template/Dockerfile
+sed -i -e "s/cnrsinist\/ezs-python-server:.*$/cnrsinist\/ezs-python-server:py3.9-no16-1.0.7/g" "template/Dockerfile"
+git add template
+git commit -m "Update template to ezs-python-server:py3.9-no16-1.0.7"
+git push
+```
+
+```bash
+$ npm run update:images -- --help
+
+> web-services@1.0.0 update:images
+> ./bin/update-images.sh --help
+
+Usage: ./bin/update-images.sh [--help | [--dry-run] <[bases/]image-name>]
+```
 
 ## test:local
 
