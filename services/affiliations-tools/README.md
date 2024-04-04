@@ -1,4 +1,4 @@
-# ws-affiliations-tools@0.0.0
+# ws-affiliations-tools@1.1.2
 
 Structuration et enrichissements d'affiliations
 
@@ -10,35 +10,6 @@ Propose plusieurs services autour des affiliations présentes dans les notices b
 
 Cet appariement suit des [règles
 certaines](https://github.com/Inist-CNRS/ezs/blob/master/packages/conditor/README.md#r%C3%A8gles-certaines).
-
-## Configuration
-
-Il faut préciser dans le fichier de configuration de l'instance qu'elle utilise des paquets nodes:
-
-- `@ezs/analytics`
-- `@ezs/basics`
-- `@ezs/conditor`
-- `@ezs/storage`
-- `@ezs/libpostal`
-
-Bien sûr, les dernières versions sont préférables.
-
-Exemple :
-
-```json
-{
-    "packages": [
-        "@ezs/analytics@1.18.8",
-        "@ezs/basics@1.20.0",
-        "@ezs/conditor@2.8.0",
-        "@ezs/storage@1.6.3",
-        "@ezs/libpostal@0.2.1"
-    ]
-}
-```
-
-> **Attention** : ce serveur doit être une instance de
-> `inistcnrs/ezmaster-libpostal`.
 
 ## Utilisation
 
