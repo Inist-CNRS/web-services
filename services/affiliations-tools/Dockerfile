@@ -26,12 +26,12 @@ RUN unzip libpostal.zip && \
     rm libpostal.zip
 
 # Install all node dependencies
+WORKDIR /app/public
 RUN npm install \
     node-gyp \
     @cymen/node-postal@2.0.5 \
     @ezs/libpostal@0.2.3 \
     @ezs/conditor@2.10.7
 
-WORKDIR /app/public
 # Declare files to copy in .dockerignore
 COPY --chown=daemon:daemon . /app/public/
