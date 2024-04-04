@@ -20,7 +20,19 @@ HTTP 200
         "house_number": "32",
         "city": "zagreb",
         "postcode": "10000",
-        "country": "n/a",
+        "country": {
+            "cartographyCode": "HRV",
+            "about": "http://data.loterre.fr/ark:/67375/9SD-BM4704K2-7",
+            "prefLabel@fr": "Croatie",
+            "prefLabel@en": "Croatia",
+            "wikidataURI": "https://www.wikidata.org/wiki/Q1435",
+            "geonameURI": "https://www.geonames.org/3202326",
+            "countryCode": "HR",
+            "latitude": "45.0162343679711",
+            "longitude": "16.5661911066622",
+            "localization@en": [],
+            "localization@fr": []
+        },
         "id": "Baran, N (reprint author), Univ Zagreb, Dept Phys, Bijenieka Cesta 32, Zagreb 10000, Croatia."
     }
 },
