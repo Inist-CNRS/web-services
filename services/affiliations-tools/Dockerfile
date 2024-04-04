@@ -30,8 +30,8 @@ WORKDIR /app/public
 RUN npm install \
     node-gyp \
     @cymen/node-postal@2.0.5 \
-    @ezs/libpostal@0.2.3 \
-    @ezs/conditor@2.10.7
+    @ezs/libpostal@0.2.4 \
+    @ezs/conditor@2.11.0
 
 # Declare files to copy in .dockerignore
 COPY --chown=daemon:daemon . /app/public/
