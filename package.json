@@ -37,6 +37,7 @@
     "bases/ezs-python-server",
     "bases/python-node",
     "services/affiliation-rnsr",
+    "services/affiliations-tools",
     "services/base-line",
     "services/base-line-python",
     "services/biblio-ref",
