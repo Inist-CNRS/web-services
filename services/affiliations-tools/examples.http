@@ -93,3 +93,14 @@ Content-Type: application/json
 ]
 
 ###
+# @name v1NormalizeParse
+POST {{host}}/v1/addresses/normalize?indent=true HTTP/1.1
+Content-Type: application/json
+
+[
+  {
+    "value": "Barboncino 781 Franklin Ave, Crown Heights, Brooklyn, NY 11238"
+  }
+]
+
+###
