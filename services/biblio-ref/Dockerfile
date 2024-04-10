@@ -3,9 +3,13 @@ FROM cnrsinist/ezs-python-server:py3.9-no16-1.0.10
 
 USER root
 # Install all python dependencies
-RUN pip install \
+RUN apt update && apt install -y poppler-utils libmagic1
+
+RUN pip3 install \
     requests_ratelimiter==0.4.2 \
-    thefuzz==0.22.1
+    thefuzz==0.22.1 \
+    refextract==1.1.4 \
+    python-magic==0.4.27
 
 
 WORKDIR /app/public
@@ -15,6 +19,6 @@ WORKDIR /app/public
 COPY --chown=daemon:daemon ./v1 /app/public/v1
 
 # Download the list of annulled papers from PPS + process it
-RUN curl -go /tmp/pps.csv 'https://dbrech.irit.fr/pls/apex/f?p=9999:300::IR[allproblematicpapers]_CSV'
-RUN awk -F '","' 'index($1,"annulled") {print $2}' /tmp/pps.csv > /app/public/v1/annulled.csv && \
-    rm /tmp/pps.csv
+# RUN curl -go /tmp/pps.csv 'https://dbrech.irit.fr/pls/apex/f?p=9999:300::IR[allproblematicpapers]_CSV'
+# RUN awk -F '","' 'index($1,"annulled") {print $2}' /tmp/pps.csv > /app/public/v1/annulled.csv && \
+#     rm /tmp/pps.csv
