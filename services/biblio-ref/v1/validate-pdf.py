@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
 import os
 import sys
 import json
@@ -5,9 +7,8 @@ from refextract import extract_references_from_file
 from bibref.bibref_functions import *
 
 
-
 for line in sys.stdin:
-    line0 = json.load(line)
+    line0 = json.loads(line)
     pdf_filename = line0["filename"]
     
     try:
@@ -31,6 +32,6 @@ for line in sys.stdin:
         res['reference'] = reference
         all_res.append(res)
         
-    line0['value'] = all_res
-    sys.stdout.write(json.dumps(line0))
+    output = {"id":pdf_filename, "value":all_res}
+    sys.stdout.write(json.dumps(output))
     sys.stdout.write('\n')

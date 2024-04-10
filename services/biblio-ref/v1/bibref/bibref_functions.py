@@ -2,16 +2,15 @@ import re
 from requests_ratelimiter import LimiterSession
 import unicodedata
 from thefuzz import fuzz
-
+import pickle
 
 mail_address = "leo.gaillard@cnrs.fr"
 session = LimiterSession(per_second=10)
 session_pdf = LimiterSession(per_second=10)
 
 # get a list of retracted DOIs
-with open("./v1/annulled.csv", "r") as annulled_file:
-    retracted_doi = [line.rstrip() for line in annulled_file]
-
+with open('v1/annulled.pickle', 'rb') as file:
+    retracted_doi = pickle.load(file)
 
 def remove_accents(text):
     
