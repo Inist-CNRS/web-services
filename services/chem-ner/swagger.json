@@ -3,7 +3,7 @@
 	"info": {
 		"title": "chem-ner - Trouve des entités nommées de Chimie dans un texte",
 		"summary": "Renvoie un Json composé comportant d'un champ \"chemical\" et d'un champ \"chemical_disambiguisate\"",
-		"version": "3.0.6",
+		"version": "3.0.7",
 		"termsOfService": "https://services.istex.fr/",
 		"contact": {
 			"name": "Inist-CNRS",
