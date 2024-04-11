@@ -518,3 +518,38 @@ content-type: application/json
     "value": "Barboncino 781 Franklin Ave, Crown Heights, Brooklyn, NY 11238"
   }
 ]
+
+HTTP 200
+[{
+    "value": {
+        "id": "Barboncino 781 Franklin Ave, Crown Heights, Brooklyn, NY 11238",
+        "value": {
+            "house": "barboncino",
+            "house_number": "781",
+            "road": "franklin ave",
+            "suburb": "crown heights",
+            "city_district": "brooklyn",
+            "state": "ny",
+            "postcode": "11238"
+        }
+    }
+}]
+
+POST {{host}}/v1/addresses/normalize?indent=true
+content-type: application/json
+[
+  {
+    "value": "Barboncino 781 Franklin Ave, Crown Heights, Brooklyn, NY 11238"
+  }
+]
+
+HTTP 200
+[{
+    "value": {
+        "id": "Barboncino 781 Franklin Ave, Crown Heights, Brooklyn, NY 11238",
+        "value": [
+            "barboncino 781 franklin avenue crown heights brooklyn ny 11238",
+            "barboncino 781 franklin avenue crown heights brooklyn new york 11238"
+        ]
+    }
+}]
