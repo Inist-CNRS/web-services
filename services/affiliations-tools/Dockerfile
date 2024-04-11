@@ -47,4 +47,4 @@ COPY --chown=daemon:daemon . /app/public/
 
 # Clean-up
 RUN apt remove -y unzip curl autoconf automake libtool pkg-config build-essential git && \
-    apt autoremove
+    apt autoremove -y
