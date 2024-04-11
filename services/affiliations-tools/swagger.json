@@ -23,7 +23,7 @@
     "tags": [
         {
             "name": "affiliations-tools",
-            "description": "Structuration {short_description} enrichissements d'affiliations",
+            "description": "Structuration et enrichissements d'affiliations",
             "externalDocs": {
                 "description": "Plus de documentation",
                 "url": "https://github.com/inist-cnrs/web-services/tree/main/services/affiliations-tools"
