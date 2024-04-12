@@ -12,6 +12,5 @@ cd /app/public
 
 # Run irc3 daemon
 su -s /bin/bash daemon -c "/app/public/v1/irc3_wrapper.sh ws"
-npm run watcher &
 # Run ezs server as daemon user
 su -s /bin/bash daemon -c "npx dotenv -e ../.env -- npx ezs --daemon ./"

@@ -36,22 +36,6 @@
         "stop:dev": "docker stop dev",
         "build": "docker build -t cnrsinist/${npm_package_name}:${npm_package_version} .",
         "start": "docker run --rm -p 31976:31976 cnrsinist/${npm_package_name}:${npm_package_version}",
-        "publish": "docker push cnrsinist/${npm_package_name}:${npm_package_version}",
-        "watcher": "npm-watch"
-    },
-    "watch": {
-        "mod": {
-            "patterns": [
-                "public"
-            ],
-            "extensions": "pl,pm,json,bin,ini,md",
-            "quiet": true,
-            "silent": true,
-            "verbose": false,
-            "ignore": [
-                ".DAV"
-            ],
-            "runOnChangeOnly": false
-        }
+        "publish": "docker push cnrsinist/${npm_package_name}:${npm_package_version}"
     }
 }
