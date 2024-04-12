@@ -1,7 +1,7 @@
 {
     "private": true,
     "name": "ws-irc3-species",
-    "version": "1.1.1",
+    "version": "1.1.2",
     "description": "IRC3 dédiée à la recherche des noms scientifiques",
     "repository": {
         "type": "git",
@@ -12,10 +12,10 @@
     ],
     "author": "Dominique BESAGNI <>",
     "contributors": [
-      {
-        "name": "Pierre M (AlasDiablo) - Migration",
-        "url": "https://github.com/AlasDiablo"
-      }
+        {
+            "name": "Pierre M (AlasDiablo) - Migration",
+            "url": "https://github.com/AlasDiablo"
+        }
     ],
     "license": "MIT",
     "bugs": {

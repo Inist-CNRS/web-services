@@ -1,4 +1,4 @@
-# ws-irc3-species@1.1.1
+# ws-irc3-species@1.1.2
 
 IRC3 dédiée à la recherche des noms scientifiques
 
