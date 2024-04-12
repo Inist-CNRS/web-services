@@ -1,6 +1,6 @@
 {
     "private": true,
-    "name": "ws-irc3-sp",
+    "name": "ws-irc3-species",
     "version": "1.1.1",
     "description": "IRC3 dédiée à la recherche des noms scientifiques",
     "repository": {
