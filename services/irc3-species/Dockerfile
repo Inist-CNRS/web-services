@@ -5,11 +5,16 @@ USER root
 
 RUN apt update && apt install -y perl libjson-perl
 
+RUN npm install npm-watch@0.11.0
+
 WORKDIR /app/public
 
 # Declare files to copy in .dockerignore
 COPY --chown=daemon:daemon . /app/public/
 RUN mv ./config.json /app && chmod a+w /app/config.json
+RUN mv ./docker-entrypoint.sh /app && chmod a+x /app/docker-entrypoint.sh
+RUN mv ./package.json /app
+
 
 # Extract CoL.txt
 RUN gunzip v1/CoL.txt.gz
