@@ -41,6 +41,7 @@ nohup IRC3sp.pl -t CoL.txt -p /tmp/fifo_irc3 -c &
 
 function lance_irc3_ws
 {
+rm -f /tmp/fifo_irc3
 nohup /app/public/v1/IRC3sp.pl -t /app/public/v1/CoL.txt -p /tmp/fifo_irc3 -c -w > /tmp/logIrc3.txt 2>&1 &
 }
 
