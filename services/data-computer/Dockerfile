@@ -15,7 +15,9 @@ RUN dvc doctor
 COPY ./v1/all-MiniLM-L6-v2.dvc /dvc
 RUN dvc pull -v
 
-FROM cnrsinist/ezs-python-server:py3.9-no16-1.0.9
+
+FROM cnrsinist/ezs-python-server:py3.9-no16-1.0.10
+
 USER root
 # Install all python dependencies
 RUN pip install \
@@ -29,13 +31,13 @@ RUN pip install \
     sentence-transformers==2.2.2 \
     umap-learn==0.5.5 \
     scikit-learn==1.4.1.post1
-    
+
 # Install all node dependencies
 RUN npm install \
     "@ezs/analytics@2.2.2" \
     "@ezs/basics@2.6.0" \
     "@ezs/core@3.6.0" \
-    "@ezs/spawn@1.4.5" 
+    "@ezs/spawn@1.4.5"
 # Install CURL to get spacy_lefff model and put it at the right place
 RUN apt update && apt -y install curl tar
 RUN curl -L -O https://github.com/sammous/spacy-lefff-model/releases/latest/download/model.tar.gz
@@ -43,7 +45,6 @@ RUN mkdir /usr/local/lib/python3.9/site-packages/spacy_lefff/data/tagger
 RUN tar -xf model.tar.gz -C /usr/local/lib/python3.9/site-packages/spacy_lefff/data/tagger
 WORKDIR /app/public
 
-USER daemon
 ENV NUMBA_CACHE_DIR=/tmp/numba_cache
 # Declare files to copy in .dockerignore
 COPY --chown=daemon:daemon . /app/public/
