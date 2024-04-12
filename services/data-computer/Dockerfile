@@ -15,7 +15,9 @@ RUN dvc doctor
 COPY ./v1/all-MiniLM-L6-v2.dvc /dvc
 RUN dvc pull -v
 
+
 FROM cnrsinist/ezs-python-server:py3.9-no16-1.0.10
+
 USER root
 # Install all python dependencies
 RUN pip install \

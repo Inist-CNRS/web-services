@@ -2,9 +2,9 @@
 set +x
 
 # Initialize SDKMAN / Java
-export SDKMAN_DIR="/usr/sbin/.sdkman"
+export SDKMAN_DIR="/root/.sdkman"
 # shellcheck disable=SC1091
-[[ -s "/usr/sbin/.sdkman/bin/sdkman-init.sh" ]] && source "/usr/sbin/.sdkman/bin/sdkman-init.sh"
+[[ -s "/root/.sdkman/bin/sdkman-init.sh" ]] && source "/root/.sdkman/bin/sdkman-init.sh"
 JAR=/opt/termsuite-core-3.0.10.jar
 language=${1:-en}
 TOPN=${2:-500}
@@ -24,19 +24,25 @@ do
         corpus_path=/tmp/retrieve/corpus/$corpus
         mkdir -p "$corpus_path"
     fi
-    value=$(echo "$line"|node -pe 'JSON.parse(fs.readFileSync(0).toString("utf-8").slice(0,-1)).value.replace("\n","\\n").replaceAll("\"", "\\\"")')
-    filename=$(echo "$line"|node -pe 'JSON.parse(fs.readFileSync(0).toString("utf-8").slice(0,-1)).id')
-    echo "$value" > "$corpus_path/$filename"
-    ((nbTxt++))
+    value=$(echo "$line"|node -pe 'JSON.parse(fs.readFileSync(0).toString("utf-8").slice(0,-1)).value?.replace("\n","\\n").replaceAll("\"", "\\\"")')
+    filename=$(echo "$line"|node -pe 'JSON.parse(fs.readFileSync(0).toString("utf-8").slice(0,-1)).id').txt
+    filename=${filename//\//} # Remove all '/' in the filename
+    if [ "$value" != "undefined" ] ; then
+        echo "$value" > "$corpus_path/$filename"
+        ((nbTxt++))
+    else
+        echo "Empty value for $corpus/$filename" 1>&2
+    fi
 done
 
 if [ "$nbTxt" -eq 0 ] ; then
-    echo "$corpus corpus is empty" 1>&2
+    echo "ERROR: corpus $corpus has no value field" 1>&2
+    echo "[{\"id\":\"$corpus\", \"value\":\"Error: Bad file format (should be corpus file)\"}]"
     exit 2
 fi
 
 if [ ! -r $JAR ] ; then
-    echo "JAR not found: $JAR" 1>&2
+    echo "ERROR: JAR not found: $JAR" 1>&2
     exit 3
 fi
 

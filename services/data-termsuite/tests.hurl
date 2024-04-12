@@ -92,7 +92,7 @@ POST {{host}}/v1/fr?nb=5
 content-type: application/x-gzip
 X-Webhook-Success: https://webhook.site/2caab8b5-fc96-4d7a-bb94-bdda20977830
 X-Webhook-Failure: https://webhook.site/2caab8b5-fc96-4d7a-bb94-bdda20977830
-file,./examples/8-txt-fr.tar.gz;
+file,./examples/7-txt-fr.tar.gz;
 
 HTTP 200
 # Capture the computing token
@@ -125,23 +125,32 @@ delay: 10000
 
 HTTP 200
 Content-Type: application/json
-[{
-    "key": "a: thermique",
-    "freq": 12
-},
-{
-    "key": "n: fission",
-    "freq": 12
-},
-{
-    "key": "n: biomasse",
-    "freq": 10
-},
-{
-    "key": "na: énergie éolien",
-    "freq": 7
-},
-{
-    "key": "a: électrique",
-    "freq": 7
-}]
+[Asserts]
+jsonpath "$" count == 5
+jsonpath "$[*].key" includes "a: thermique"
+jsonpath "$[*].key" includes "n: fission"
+jsonpath "$[*].key" includes "n: biomasse"
+jsonpath "$[*].key" includes "na: énergie éolien"
+jsonpath "$[*].key" includes "a: électrique"
+
+# Order is not guaranteed
+#[{
+#    "key": "a: thermique",
+#    "freq": 12
+#},
+#{
+#    "key": "n: fission",
+#    "freq": 12
+#},
+#{
+#    "key": "n: biomasse",
+#    "freq": 10
+#},
+#{
+#    "key": "na: énergie éolien",
+#    "freq": 7
+#},
+#{
+#    "key": "a: électrique",
+#    "freq": 7
+#}]

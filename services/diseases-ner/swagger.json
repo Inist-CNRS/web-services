@@ -3,7 +3,7 @@
 	"info": {
 		"title": "diseases-ner - Trouve des entités nommées de maladies dans un texte",
 		"summary": "Renvoie un Json composé comportant un champs `diseases` correspondant aux entités nommées de maladies trouvées",
-		"version": "1.0.9",
+		"version": "1.0.12",
 		"termsOfService": "https://services.istex.fr/",
 		"contact": {
 			"name": "Inist-CNRS",
@@ -15,7 +15,7 @@
 			"x-comment": "Will be automatically completed by the ezs server."
 		},
 		{
-			"url": "http://vptdmservices.intra.inist.fr:49250/",
+			"url": "http://vptdmservices.intra.inist.fr:49257/",
 			"description": "Latest version for production",
 			"x-profil": "Standard"
 		}

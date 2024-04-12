@@ -2,7 +2,9 @@ Extraction terminologique d'un corpus via [TermSuite](https://termsuite.github.i
 
 Comme ces services s'appliquent à un corpus entier, la réponse finale n'est pas
 donnée immédiatement après l'appel.  
-Au contraire, un service comme [`/v1/en`](#data-termsuite/post-v1-en) renverra une réponse JSON contenant un champ `value` donnant l'identifiant du traitement en cours.  
+Au contraire, un service comme [`/v1/en`](#data-termsuite/post-v1-en) renverra
+une réponse JSON contenant un champ `value` donnant l'identifiant du traitement
+en cours.  
 Et comme on lui passe aussi l'URL d'un *webhook*, cela lui permet, une fois le
 traitement terminé, de signaler qu'on peut dès lors utiliser le service de
 récupération (les routes qui commencent par `/v1/retrieve`).  
@@ -11,34 +13,45 @@ Exemple: traitement d'un corpus de textes en anglais
 
 ### Préparation du corpus
 
-On crée une archive `.tar.gz` de fichiers `.txt`.
+On crée une archive `.tar.gz` de fichiers `.json`.
 
-Si on a un répertoire `corpus` contenant ces fichiers `.txt`:
+Si on a un répertoire `corpus` contenant ces fichiers `.json`:
 
 ```txt
 corpus
-├── W2BVWkiVT.txt
-├── W2CeZqyNR.txt
-├── W77S4YQqx.txt
-├── W8kkWKySy.txt
-├── WcKPMhj3p.txt
-├── WG5aHJqba.txt
-├── Wh3itHprz.txt
-├── WhW6tZ6NH.txt
-├── WjS3eZyG4.txt
-├── Wk6YCLbzZ.txt
-├── WmiHPaEdf.txt
-├── WmJYZipzE.txt
-├── Wn8KqZXeX.txt
-├── WPpTXDTJB.txt
-├── WpRjkUwwB.txt
-├── WtCWN5q5Y.txt
-├── WtJ4NNWhq.txt
-├── WTxTnPGxt.txt
-├── WwzTseBX6.txt
-├── WXer3K9QE.txt
-├── Wymfn7YTm.txt
-└── WzXkqs4zt.txt
+├── W2BVWkiVT.json
+├── W2CeZqyNR.json
+├── W77S4YQqx.json
+├── W8kkWKySy.json
+├── WcKPMhj3p.json
+├── WG5aHJqba.json
+├── Wh3itHprz.json
+├── WhW6tZ6NH.json
+├── WjS3eZyG4.json
+├── Wk6YCLbzZ.json
+├── WmiHPaEdf.json
+├── WmJYZipzE.json
+├── Wn8KqZXeX.json
+├── WPpTXDTJB.json
+├── WpRjkUwwB.json
+├── WtCWN5q5Y.json
+├── WtJ4NNWhq.json
+├── WTxTnPGxt.json
+├── WwzTseBX6.json
+├── WXer3K9QE.json
+├── Wymfn7YTm.json
+└── WzXkqs4zt.json
+```
+
+Chaque fichier `.json` est un objet JSON, sur une seule ligne, contenant deux champs:
+
+1. `id`: le nom du fichier
+2. `value`: le texte à traiter.
+
+Exemple pour `corpus/W2BVWkiVT.json`:
+
+```json
+{"id":"W2BVWkiVT.json","value":" Modeling Slab Temperature: A Reevaluation of the Thermal Parameter . [...]"}
 ```
 
 La commande Linux suivante crée le fichier `corpus.tar.gz` conforme à ce qui est
