@@ -65,7 +65,7 @@ then
      echo "%% FIN JOB") > /tmp/fifo_irc3
 
     cat /tmp/fifo_job_$$
-    rm -f /tmp/fifo_job_$$fi
+    rm -f /tmp/fifo_job_$$
 
 fi
 }
