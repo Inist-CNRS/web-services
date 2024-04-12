@@ -1,7 +1,7 @@
 {
     "openapi": "3.0.0",
     "info": {
-        "title": "irc3-sp - IRC3 dédiée à la recherche des noms scientifiques",
+        "title": "irc3-species - IRC3 dédiée à la recherche des noms scientifiques",
         "description": "IRC3sp est une version de l’outil IRC3 dédiée à la recherche des noms scientifiques — ou noms binominaux — d’espèces animales, végétales ou autres dans un corpus de textes en se référant à une liste finie (mais, aussi exhaustive que possible).",
         "version": "1.1.1",
         "termsOfService": "https://services.istex.fr/",
@@ -22,11 +22,11 @@
     ],
     "tags": [
         {
-            "name": "irc3-sp",
+            "name": "irc3-species",
             "description": "IRC3 dédiée à la recherche des noms scientifiques",
             "externalDocs": {
                 "description": "Plus de documentation",
-                "url": "https://github.com/inist-cnrs/web-services/tree/main/services/irc3-sp"
+                "url": "https://github.com/inist-cnrs/web-services/tree/main/services/irc3-species"
             }
         }
     ]
