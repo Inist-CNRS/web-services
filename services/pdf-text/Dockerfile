@@ -1,6 +1,6 @@
 # syntax=docker/dockerfile:1.2
 
-FROM cnrsinist/ezs-python-server:py3.9-no16-1.0.8
+FROM cnrsinist/ezs-python-server:py3.9-no16-1.0.10
 USER root
 # Install all python dependencies
 RUN pip install \
@@ -15,6 +15,5 @@ RUN apt update && apt install -y pdftohtml
 WORKDIR /app/public
 
 # Declare files to copy in .dockerignore
-USER daemon
 COPY --chown=daemon:daemon . /app/public/
 RUN mv ./config.json /app && chmod a+w /app/config.json
