@@ -11,7 +11,7 @@ from unidecode import unidecode
 def detector(name,my_dict) :
     name = name.replace("'","")
     if re.match(r"^([A-Z][. '-]+){2,}[A-Z]*",name) or re.match(r"\b[A-Z]+\b\.?",name) :
-        return "name error"
+        return "n/a"
     else :
         name = unidecode(name.lower())
         name = name.replace(".","")
@@ -33,9 +33,9 @@ def detector(name,my_dict) :
                 elif my_dict[name[0]] == "?":
                     return u"mixte"
                 else :
-                    return "unknown" 
+                    return "n/a" 
             else :
-                return "unknown"
+                return "n/a"
 ######################## POUR LES PRENOMS COMPOSES : JEAN-CHRISTOPHE OU ERIN NICOLE #########################################
 ########## ON RECHERCHE LE PRENOM COMPOSES EN ENTIER #######################################################################
 ################## SI LE PRENOM COMPOSES N'EST PAS PRESENT ALORS ON REGARDE SEULEMENT LE PREMIER #########################
@@ -53,7 +53,7 @@ def detector(name,my_dict) :
                         return u"mixte_feminin"
                     elif my_dict[key] == "?":
                         return u"mixte"
-            return "unknown"
+            return "n/a"
 ######################### POUR LES PRENOMS TYPES : JAMES A OU JAMES JR ########################################################    
         elif len(name) >= 2 and len(name[0]) > 1 and len(name[1]) <= 2 :
             if name[0] in my_dict.keys() :
@@ -68,11 +68,11 @@ def detector(name,my_dict) :
                 elif my_dict[name[0]] == "?":
                     return u"mixte"
                 else :
-                    return "unknown"
+                    return "n/a"
             else :
-                return "unknown"
+                return "n/a"
         else :
-            return "name error"
+            return "n/a"
 
 
 def main():
