@@ -1,4 +1,4 @@
-#!/usr/bin/python3
+#!/usr/bin/env python3
 import json
 import sys
 import re
@@ -13,7 +13,7 @@ def filter(affiliation) :
     adress = affiliation_lower.replace(",", "")
     words = adress.split(" ")
     private = ["sas", "sarl", "sa", "private", "edf", "orange"]
-    public = ["univ", "hop", "uar", "umr", "cea", "cnrs"]
+    public = ["univ", "hop", "uar", "umr", "cea", "cnrs", "(cnrs)","(cea)","(univ"]
     for word in words :
         if word in private :
             return "private"

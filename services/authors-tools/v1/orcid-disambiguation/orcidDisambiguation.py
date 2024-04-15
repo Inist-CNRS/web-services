@@ -1,4 +1,4 @@
-#!/usr/bin/python3
+#!/usr/bin/env python3
 from disambiguate import disambiguate
 import sys
 import json
