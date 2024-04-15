@@ -57,7 +57,7 @@ variable "computing_token" exists
 # Version 4.1.0 of hurl added a delay option, which value is milliseconds.
 # https://hurl.dev/blog/2023/09/24/announcing-hurl-4.1.0.html#add-delay-between-requests
 
-POST https://data-computer.services.istex.fr/v1/retrieve-json
+POST {{host}}/v1/retrieve-json
 content-type: application/json
 [Options]
 delay: 1000
