@@ -3,7 +3,7 @@
 # Use it to test:
 # npx hurl --test data-computer/tests.hurl
 
-POST https://data-computer.services.istex.fr/v1/tree-segment
+POST {{host}}/v1/tree-segment
 content-type: application/x-tar
 x-hook: https://webhook.site/69300b22-a251-4c16-9905-f7ba218ae7e9
 file,example-json.tar.gz;
@@ -38,7 +38,7 @@ HTTP 200
 Content-Type: application/x-gzip
 
 # stats
-POST https://data-computer.services.istex.fr/v1/statistics
+POST {{host}}/v1/statistics
 content-type: application/x-tar
 x-hook: https://webhook.site/69300b22-a251-4c16-9905-f7ba218ae7e9
 file,example-json-minimal.tar.gz;
@@ -57,7 +57,7 @@ variable "computing_token" exists
 # Version 4.1.0 of hurl added a delay option, which value is milliseconds.
 # https://hurl.dev/blog/2023/09/24/announcing-hurl-4.1.0.html#add-delay-between-requests
 
-POST https://data-computer.services.istex.fr/v1/retrieve
+POST https://data-computer.services.istex.fr/v1/retrieve-json
 content-type: application/json
 [Options]
 delay: 1000
@@ -70,6 +70,6 @@ delay: 1000
 ```
 
 HTTP 200
-Content-Type: application/x-gzip
+Content-Type: application/json
 
 # TODO: ajouter les deux autres routes (v1GraphSegment, v1Lda)
