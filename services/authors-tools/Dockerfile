@@ -1,13 +1,19 @@
 # syntax=docker/dockerfile:1.2
-FROM cnrsinist/ezs-python-server:py3.9-no16-1.0.8
+FROM cnrsinist/ezs-python-server:py3.9-no16-1.0.10
 
 USER root
 # Install all python dependencies
-# RUN pip install \
-#     unidecode==1.3.7
+RUN pip install \
+    backoff==2.2.1 \
+    pandas==2.2.2 \
+    plac==1.4.3 \
+    ratelimit==2.2.1 \
+    requests==2.31.0 \
+    unidecode==1.3.7
 
 # Install all node dependencies
-# RUN npm install \
+RUN npm install \
+@ezs/storage@3.2.3
 #     @ezs/teeft@2.3.1 \
 #     @ezs/strings@1.0.3
 
