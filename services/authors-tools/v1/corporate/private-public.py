@@ -95,7 +95,7 @@ def public_or_private(affiliation,my_dict):
     information = request(name, dept)
     nature = is_private_public(information)
     if nature is None:
-        return {"organisme": "n/a", "statut": "n/a"}
+        return {"organisme": name, "statut": "n/a"}
     return {"organisme": name, "statut": nature}
     
 def main():
