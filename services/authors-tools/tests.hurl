@@ -79,7 +79,7 @@ HTTP 200
 {
     "id": "3",
     "value": {
-        "organisme": "n/a",
+        "organisme": "4g technol",
         "statut": "n/a"
     }
 },
