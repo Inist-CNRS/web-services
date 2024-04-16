@@ -22,7 +22,7 @@ variable "computing_token" exists
 # Version 4.1.0 of hurl added a delay option, which value is milliseconds.
 # https://hurl.dev/blog/2023/09/24/announcing-hurl-4.1.0.html#add-delay-between-requests
 
-POST https://data-computer.services.istex.fr/v1/retrieve
+POST {{host}}/v1/retrieve-json
 content-type: application/json
 [Options]
 delay: 1000
@@ -35,7 +35,7 @@ delay: 1000
 ```
 
 HTTP 200
-Content-Type: application/x-gzip
+[{"source":"a","target":"b","weight":3,"origin":["#1","#3","#4"]},{"source":"b","target":"c","weight":2,"origin":["#1","#4"]},{"source":"a","target":"c","weight":2,"origin":["#2","#5"]},{"source":"c","target":"d","weight":3,"origin":["#2","#4","#5"]},{"source":"b","target":"d","weight":1,"origin":["#3"]},{"source":"d","target":"e","weight":1,"origin":["#5"]}]
 
 # stats
 POST {{host}}/v1/statistics
@@ -70,6 +70,6 @@ delay: 1000
 ```
 
 HTTP 200
-Content-Type: application/json
+[{"id":"#1","value":{"sample":2,"frequency":0.6666666666666666,"percentage":null,"sum":0,"count":5,"min":0,"max":0,"mean":0,"range":0,"midrange":0,"variance":0,"deviation":0,"population":3,"input":"a"}},{"id":"#2","value":{"sample":2,"frequency":0.6666666666666666,"percentage":null,"sum":0,"count":5,"min":0,"max":0,"mean":0,"range":0,"midrange":0,"variance":0,"deviation":0,"population":3,"input":"b"}},{"id":"#3","value":{"sample":1,"frequency":0.3333333333333333,"percentage":null,"sum":0,"count":5,"min":0,"max":0,"mean":0,"range":0,"midrange":0,"variance":0,"deviation":0,"population":3,"input":"c"}},{"id":"#4","value":{"sample":2,"frequency":0.6666666666666666,"percentage":null,"sum":0,"count":5,"min":0,"max":0,"mean":0,"range":0,"midrange":0,"variance":0,"deviation":0,"population":3,"input":"a"}},{"id":"#5","value":{"sample":2,"frequency":0.6666666666666666,"percentage":null,"sum":0,"count":5,"min":0,"max":0,"mean":0,"range":0,"midrange":0,"variance":0,"deviation":0,"population":3,"input":"b"}}]
 
 # TODO: ajouter les deux autres routes (v1GraphSegment, v1Lda)
