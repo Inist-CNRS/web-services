@@ -341,7 +341,15 @@ En plus du reste, il faut suivre ces étapes lorsqu'on utilise DVC :
      ". ./.env 2> /dev/null; DOCKER_BUILDKIT=1 docker build -t cnrsinist/${npm_package_name}:${npm_package_version} --secret id=webdav_login,env=WEBDAV_LOGIN --secret id=webdav_password,env=WEBDAV_PASSWORD --secret id=webdav_url,env=WEBDAV_URL ."
      ```
 
-- modifier le `Dockerfile` en conséquence, en s'inspirant du [Dockerfile de `biblio-ref`](https://github.com/Inist-CNRS/web-services/blob/main/services/biblio-ref/Dockerfile)
+- modifier le `Dockerfile` en conséquence, en s'inspirant du [Dockerfile de `affiliation-rnsr`](https://github.com/Inist-CNRS/web-services/blob/main/services/affiliation-rnsr/Dockerfile)
+- arrêter le conteneur.
+- reconstruire l'image :
+
+    ```bash
+    npm -w services/service-name run build:dev
+    ```
+
+- relancer le conteneur
 
 ## Développement
 
