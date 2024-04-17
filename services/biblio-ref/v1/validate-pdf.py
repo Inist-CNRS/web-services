@@ -14,7 +14,7 @@ for line in sys.stdin:
     try:
         references_structured = extract_references_from_file(pdf_filename)
     except:
-        references_structured = [""]
+        references_structured = []
         
     try:
         os.remove(pdf_filename)

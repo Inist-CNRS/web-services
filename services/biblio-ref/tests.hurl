@@ -139,3 +139,15 @@ HTTP 200
         }
     ]
 }]
+
+POST {{host}}/v1/validate-pdf?indent=true HTTP/1.1
+Content-Type: application/json
+file,./example.pdf;
+
+
+HTTP 200
+# Capture the computing token
+[Captures]
+fr_computing_ref: jsonpath "$[0].value"
+[Asserts]
+variable "fr_computing_ref" exists

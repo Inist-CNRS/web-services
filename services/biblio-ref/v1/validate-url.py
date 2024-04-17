@@ -28,7 +28,7 @@ for line in sys.stdin:
         
         os.remove(pdf_filename)
     except:
-        references_structured = [""]
+        references_structured = []
 
     references = []
     for reference in references_structured:
