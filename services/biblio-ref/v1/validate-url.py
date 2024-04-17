@@ -12,7 +12,7 @@ for line in sys.stdin:
     line0=json.loads(line)
     # get URL of the PDF
     url=line0['value']
-    name=str(round(random.random()*1000))+url.split('/')[-1]
+    name=str(round(random.random()*100000))+url.split('/')[-1]
 
     # get PDF + convert it to txt
     pdf_filename = '/tmp/'+name

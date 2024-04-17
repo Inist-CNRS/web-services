@@ -140,7 +140,7 @@ HTTP 200
     ]
 }]
 
-POST {{host}}/v1/validate-pdf?indent=true HTTP/1.1
+POST {{host}}/v1/validate-pdf?indent=true
 Content-Type: application/json
 file,./example.pdf;
 
