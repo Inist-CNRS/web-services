@@ -3,7 +3,7 @@
 	"info": {
 		"title": "biblio-ref - Valide une référence bibliographique",
 		"summary": "Si un DOI est trouvé dans la référence bibliographique, valide la référence et indique si elle est rétractée",
-		"version": "1.1.0",
+		"version": "1.3.2",
 		"termsOfService": "https://services.istex.fr/",
 		"contact": {
 			"name": "Inist-CNRS",
@@ -15,9 +15,9 @@
 			"x-comment": "Will be automatically completed by the ezs server."
 		},
 		{
-			"url": "http://vptdmservices.intra.inist.fr:49225/",
+			"url": "http://vptdmservices.intra.inist.fr:49251/",
 			"description": "Latest version for production",
-			"#DISABLED#x-profil": "Standard"
+			"x-profil": "Standard"
 		}
 	],
 	"tags": [

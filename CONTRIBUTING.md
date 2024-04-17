@@ -305,6 +305,44 @@ $ npm run insert:description services/terms-extraction/v*.md
 > **Note**: si vous voulez bénéficier de l'auto-complétion des chemins de
 > fichiers, utilisez plutôt `./bin/insert-description.sh`.
 
+### Utilisation de DVC (pour charger des données ou des modèles)
+
+[DVC](https://dvc.org/) est un outil de versionnage de données. Lorsqu'on crée un service qui nécessite un modèle ou une table, il est nécessaire de l'utiliser pour ne pas avoir de gros fichiers sur git.
+En plus du reste, il faut suivre ces étapes lorsqu'on utilise DVC :
+
+- S'assurer d'avoir déposé les données sur le webdav du service TDM en ayant préalablement utilisé DVC (pour cela : )
+  - mettre son fichier nommé `DOSSIER_OU_FICHIER_A_PUSH` dans un autre dossier.
+  - Initier un dépot DVC en faisant `dvc init` (nécessite d'être dans un dépot git).
+  - se connecter au webdav du service (à ne faire que la première fois), pour cela :
+    - spécifier l'url du webdav (en utilisant le protocole webdavs): `dvc remote add -d webdav-remote webdavs://YOUR_WEBDAV_URL.fr`
+    - entrer le login : `dvc remote modify --local webdav-remote login YOUR_LOGIN`
+    - entrer le mot de passe : `dvc remote modify --local webdav-remote password YOUR_PASSWORD`
+  - push le fichier sur le webdav : `dvc add DOSSIER_OU_FICHIER_A_PUSH` puis `dvc push`, sans se soucier du nom
+  - Le fichier `DOSSIER_OU_FICHIER_A_PUSH.dvc` est créé et devra être copié à l'endroit où le modèle doit être dans le code
+  - ***remarque** : il est possible de faire tout ça dans le dépôt git directement, cela ajoutera simplement un `.gitignore` qu'il ne faudra pas déplacer ou supprimer. Aussi, les dossiers `.dvc` et `.dvcignore` ne seront ni à ignorer par git, ni a push sur le dépôt*
+- Créer un fichier `.env` à la racine **du service** (`./services/\<service-name\>/.env`) qui ressemblera à ça :
+
+  ```bash
+  export WEBDAV_URL=webdavs://YOUR_WEBDAV_URL.fr
+  export WEBDAV_LOGIN=YOUR_LOGIN
+  export WEBDAV_PASSWORD=YOUR_PASSWORD 
+  ```
+
+- modifier les scripts `build:dev` et `build` du fichier `package.json` du service
+  - pour `build:dev` :
+
+    ```txt
+    ". ./.env 2> /dev/null; DOCKER_BUILDKIT=1 docker build -t cnrsinist/${npm_package_name}:latest --secret id=webdav_login,env=WEBDAV_LOGIN --secret id=webdav_password,env=WEBDAV_PASSWORD --secret id=webdav_url,env=WEBDAV_URL ." 
+    ```
+
+  - pour `build`:
+
+    ```txt
+     ". ./.env 2> /dev/null; DOCKER_BUILDKIT=1 docker build -t cnrsinist/${npm_package_name}:${npm_package_version} --secret id=webdav_login,env=WEBDAV_LOGIN --secret id=webdav_password,env=WEBDAV_PASSWORD --secret id=webdav_url,env=WEBDAV_URL ."
+     ```
+
+- modifier le `Dockerfile` en conséquence, en s'inspirant du [Dockerfile de `biblio-ref`](https://github.com/Inist-CNRS/web-services/blob/main/services/biblio-ref/Dockerfile)
+
 ## Développement
 
 ### Sans docker

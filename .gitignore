@@ -129,6 +129,9 @@ dist
 # Stores VSCode versions used for testing VSCode extensions
 .vscode-test
 
+# Jetbrains IDEs
+.idea
+
 # yarn v2
 .yarn/cache
 .yarn/unplugged
@@ -138,3 +141,4 @@ dist
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
+services/data-termsuite/NOTES.md

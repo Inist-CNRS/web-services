@@ -7,6 +7,7 @@ Available scripts:
 - generate:service
 - help
 - insert:description
+- insert:swagger:description
 - publish
 - update:images
 - test:local
@@ -81,6 +82,22 @@ $ npm run insert:description services/terms-extraction/v*.md
  - services/terms-extraction/v1/teeft/fr.ini ✓
  - services/terms-extraction/v1/teeft/with-numbers/en.ini ✓
  - services/terms-extraction/v1/teeft/with-numbers/fr.ini ✓
+```
+
+## insert:swagger:description
+
+Usage: `npm run insert:swagger:description services/service-name`
+
+Insert the Markdown content of `services/service-name/swagger.md` into
+`services/service-name/swagger.json` as `info.description`.
+
+Convert multiline markdown into one JSON string.  
+Replace carriage return with `\n` and `"` with `\"`.
+
+Example:
+
+```bash
+npm run insert:swagger:description services/data-termsuite
 ```
 
 ## publish
