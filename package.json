@@ -38,6 +38,7 @@
     "bases/python-node",
     "services/affiliation-rnsr",
     "services/affiliations-tools",
+    "services/astro-ner",
     "services/base-line",
     "services/base-line-python",
     "services/biblio-ref",
@@ -45,9 +46,9 @@
     "services/data-computer",
     "services/data-termsuite",
     "services/data-wrapper",
-    "services/pdf-text",
     "services/diseases-ner",
     "services/irc3-species",
+    "services/pdf-text",
     "services/terms-extraction"
   ],
   "dependencies": {
