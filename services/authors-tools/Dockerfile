@@ -13,6 +13,7 @@ RUN --mount=type=secret,id=webdav_login \
     dvc remote modify --local webdav-remote user "$(cat /run/secrets/webdav_login)" && \
     dvc remote modify --local webdav-remote password "$(cat /run/secrets/webdav_password)"
 COPY ./v1/first-name/name_gender.pickle.dvc /dvc
+COPY ./v1/corporate/abbreviations.json.dvc /dvc
 RUN dvc pull -v
 
 FROM cnrsinist/ezs-python-server:py3.9-no16-1.0.10
@@ -39,3 +40,4 @@ COPY --chown=daemon:daemon . /app/public/
 RUN mv ./config.json /app && chmod a+w /app/config.json
 
 COPY --chown=daemon:daemon --from=dvcfiles /dvc/name_gender.pickle /app/public/v1/first-name/name_gender.pickle
+COPY --chown=daemon:daemon --from=dvcfiles /dvc/abbreviations.json /app/public/v1/corporate/abbreviations.json
