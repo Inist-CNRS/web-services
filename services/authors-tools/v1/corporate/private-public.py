@@ -21,10 +21,11 @@ def filter(affiliation) :
             return "public"
     return 
 
-# requête pour récupérer le fichier json
-def request_abbreviation(url): 
-    response = requests.get(url)
-    return response.json()
+# lire le fichier json des abréviations
+def read_json_file(file_path):
+    with open(file_path, 'r') as file:
+        data = json.load(file)
+    return data
 
 # Normaliser les abréviations
 def expand_abbreviations(affiliation,dict):
@@ -99,7 +100,7 @@ def public_or_private(affiliation,my_dict):
     return {"organisme": name, "statut": nature}
     
 def main():
-    my_dict = request_abbreviation("http://mapping-tables.daf.intra.inist.fr/affiliations-tools-corporate.json")
+    my_dict = read_json_file('./v1/corporate/abbreviation.json')
     for line in sys.stdin:  
         data = json.loads(line)
         texte = data["value"]
