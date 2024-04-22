@@ -100,7 +100,7 @@ def public_or_private(affiliation,my_dict):
     return {"organisme": name, "statut": nature}
     
 def main():
-    my_dict = read_json_file('./v1/corporate/abbreviation.json')
+    my_dict = read_json_file('./v1/corporate/abbreviations.json')
     for line in sys.stdin:  
         data = json.loads(line)
         texte = data["value"]
