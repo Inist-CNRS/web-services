@@ -10,8 +10,9 @@ RUN --mount=type=secret,id=webdav_login \
     dvc remote add -d webdav-remote "$(cat /run/secrets/webdav_url)" && \
     dvc remote modify --local webdav-remote user "$(cat /run/secrets/webdav_login)" && \
     dvc remote modify --local webdav-remote password "$(cat /run/secrets/webdav_password)"
-COPY ./v1/model.pt.dvc /dvc
+COPY ./v1/model.dvc /dvc
 RUN dvc pull -v
+RUN cat model/* > model.pt
 
 FROM cnrsinist/ezs-python-server:py3.9-no16-1.0.10
 
