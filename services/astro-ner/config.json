@@ -1,7 +1,7 @@
 {
     "environnement": {
         "EZS_TITLE": "Cette instance propose un outil de reconnaissance d'entités nommées en astronomie",
-        "EZS_DESCRIPTION": "Ce web-service renvoie la liste des entités nommées en astrophysique",
+        "EZS_DESCRIPTION": "Ce web-service renvoie la liste des entités nommées en astronomie",
         "EZS_METRICS": true,
         "EZS_CONCURRENCY": 4,
         "EZS_CONTINUE_DELAY": 60,
