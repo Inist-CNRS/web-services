@@ -2,7 +2,7 @@
     "openapi": "3.0.0",
     "info": {
         "title": "astro-ner - Cette instance propose un outil de reconnaissance d'entités nommées en astronomie",
-        "description": "Ce web-service renvoie la liste des entités nommées en astrophysique",
+        "description": "Ce web-service renvoie la liste des entités nommées en astronomie",
         "version": "0.0.0",
         "termsOfService": "https://services.istex.fr/",
         "contact": {
