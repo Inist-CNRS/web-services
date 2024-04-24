@@ -10,7 +10,7 @@ import logging
 
 logging.getLogger("flair").handlers[0].stream = sys.stderr
 
-tagger = SequenceTagger.load("v1/model.pt")
+tagger = SequenceTagger.load("./v1/model.pt")
 
 for line in sys.stdin:
     data = json.loads(line)
