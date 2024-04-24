@@ -20,7 +20,8 @@ USER root
 # Install all python dependencies
 RUN pip install \
     flair==0.10 \
-    unidecode==1.3.7
+    unidecode==1.3.7 \
+    scipy==1.10.1
 
 # Install all node dependencies
 RUN npm install \
