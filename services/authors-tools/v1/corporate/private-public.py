@@ -86,8 +86,7 @@ def is_private_public(information):
 def public_or_private(affiliation,my_dict):
     privatePublicOrAffiliation = filter(affiliation)
     if privatePublicOrAffiliation in ["private", "public"]:
-        adress = affiliation.lower().split(",")
-        enterprise = adress[0]
+        enterprise = name_enterprise(affiliation)
         return {"organisme": enterprise, "statut": privatePublicOrAffiliation}
     
     expanded_affiliation = expand_abbreviations(affiliation,my_dict)
