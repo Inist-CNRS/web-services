@@ -7,7 +7,7 @@
 
 ###
 # @name v1Tagger
-# Description de la route
+# Détection d'entités nommées en astronomie
 POST {{host}}/v1/tagger?indent=true HTTP/1.1
 Content-Type: application/json
 
