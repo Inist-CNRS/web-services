@@ -70,7 +70,7 @@ for line in sys.stdin:
         "Constellations": CST,
         "Galaxies et amas de galaxie": GAL,
         unidecode("Astéroïdes"): AST,
-        unidecode("Satue hypotétique"): ST,
+        unidecode("Statut hypothétique"): ST,
         "amas stellaires": AS,
         "supernovas": SN,
         unidecode("exoplanètes"): XPL,
