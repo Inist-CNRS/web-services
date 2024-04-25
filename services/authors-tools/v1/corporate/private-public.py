@@ -19,7 +19,7 @@ def filter(affiliation) :
             return "private"
         elif word in public :
             return "public"
-    return 
+    return None
 
 # lire le fichier json des abréviations
 def read_json_file(file_path):
