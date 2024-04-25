@@ -30,9 +30,9 @@ def read_json_file(file_path):
 # Normaliser les abréviations
 def expand_abbreviations(affiliation,dict):
     affiliation = affiliation.lower()
-    arr = affiliation.split(" ")
+    affiliations = affiliation.split(" ")
     res = []
-    for word in arr :
+    for word in affiliations :
         short_word = word.replace(",","").replace(".","")
         if short_word in dict:
             suffix = ""
