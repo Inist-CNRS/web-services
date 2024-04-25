@@ -69,7 +69,7 @@ for line in sys.stdin:
         unidecode("Nébuleuse et région apparentés"): NRA,
         "Constellations": CST,
         "Galaxies et amas de galaxie": GAL,
-        unidecode("Astèroïdes"): AST,
+        unidecode("Astéroïdes"): AST,
         unidecode("Satue hypotétique"): ST,
         "amas stellaires": AS,
         "supernovas": SN,
