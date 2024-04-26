@@ -30,7 +30,8 @@ RUN pip install \
     fr_core_news_sm@https://github.com/explosion/spacy-models/releases/download/fr_core_news_sm-3.6.0/fr_core_news_sm-3.6.0-py3-none-any.whl \
     sentence-transformers==2.2.2 \
     umap-learn==0.5.5 \
-    scikit-learn==1.4.1.post1
+    scikit-learn==1.4.1.post1 \
+    scipy==1.10.1
 
 # Install all node dependencies
 RUN npm install \
