@@ -1,7 +1,7 @@
 {
     "private": true,
     "name": "ws-authors-tools",
-    "version": "0.0.0",
+    "version": "0.0.1",
     "description": "Les web services qui se lancent sur le champs 'authors'",
     "repository": {
         "type": "git",
