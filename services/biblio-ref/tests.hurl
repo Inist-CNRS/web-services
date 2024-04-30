@@ -141,7 +141,7 @@ HTTP 200
 }]
 
 POST {{host}}/v1/validate-pdf?indent=true
-Content-Type: application/json
+Content-Type: application/pdf
 file,./example.pdf;
 
 
