@@ -7,6 +7,9 @@ import unicodedata
 import re
 import spacy
 
+
+nbTopic = sys.argv[sys.argv.index('-p') + 1] if '-p' in sys.argv else 15
+
 nlp = spacy.load('en_core_web_sm', disable = ['parser','ner'])
 
 #stopwords
@@ -69,16 +72,9 @@ for line in sys.stdin:
 
 # following parameters depends of the size of the corpus : num_topics and num_iterations
 len_data = len(all_data)
-if len_data< 1001:
-    num_topics = 10
-    num_iterations=150
-elif len_data < 20001:
-    num_topics = 15
-    num_iterations=200
-else:
-    num_topics = 20
-    num_iterations=250
-
+num_iterations= max(200,len_data/100)
+if len_data < 200:
+    num_iterations = 100
 
 # training LDA
 texts = []
@@ -98,7 +94,7 @@ dictionary.filter_extremes(no_below=3,no_above=0.5)
 corpus = [dictionary.doc2bow(text) for text in texts]
 
 try:
-    lda_model = models.LdaModel(corpus, num_topics=num_topics, id2word=dictionary,iterations=num_iterations,alpha="symmetric", eta = "auto",minimum_probability=0.1)
+    lda_model = models.LdaModel(corpus, num_topics=nbTopic, id2word=dictionary,iterations=num_iterations,alpha="symmetric", eta = "auto",minimum_probability=0.2)
 except:
     index_without_value = [i for i in range(len_data)]
 
