@@ -16,7 +16,8 @@ WORKDIR /app/public
 
 # Declare files to copy in .dockerignore
 # A modifier : (utiliser le .dockerignore)
-COPY --chown=daemon:daemon ./v1 /app/public/v1
+COPY --chown=daemon:daemon . /app/public
+RUN mv ./config.json /app && chmod a+w /app/config.json
 
 # Download the list of annulled papers from PPS + process it
 RUN curl -go /tmp/pps.csv 'https://dbrech.irit.fr/pls/apex/f?p=9999:300::IR[allproblematicpapers]_CSV'
