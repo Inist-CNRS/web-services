@@ -7,7 +7,7 @@ import unicodedata
 import re
 import spacy
 
-
+# Get the index of "p" param (given by the user) and assign it to "nbTopic". 15 if not found
 nbTopic = sys.argv[sys.argv.index('-p') + 1] if '-p' in sys.argv else 15
 
 nlp = spacy.load('en_core_web_sm', disable = ['parser','ner'])
