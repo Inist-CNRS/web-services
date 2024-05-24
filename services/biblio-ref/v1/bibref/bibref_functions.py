@@ -2,15 +2,15 @@ import re
 from requests_ratelimiter import LimiterSession
 import unicodedata
 from thefuzz import fuzz
-
+import pickle
 
 mail_address = "leo.gaillard@cnrs.fr"
 session = LimiterSession(per_second=10)
+session_pdf = LimiterSession(per_second=10)
 
 # get a list of retracted DOIs
-with open("./v1/annulled.csv", "r") as annulled_file:
-    retracted_doi = [line.rstrip() for line in annulled_file]
-
+with open('v1/annulled.pickle', 'rb') as file:
+    retracted_doi = pickle.load(file)
 
 def remove_accents(text):
     
@@ -226,3 +226,54 @@ def verify_biblio(ref_biblio, mail=mail_address):
         return "not_found",""
     except:
         return "error_service",""
+
+
+def biblio_ref(ref_biblio,retracted_doi=retracted_doi):
+    """
+    The main function of this service : use all previous function to validate a biblio ref.
+    Args:
+        ref_biblio (_type_): _description_
+        retracted_doi (_type_): _description_
+    """
+        # check types
+    if not isinstance(ref_biblio, str):
+        return {"doi":"","status": "error_data"}
+
+    doi = find_doi(ref_biblio)
+    ref_biblio = uniformize(ref_biblio) # Warining : in the rest of code, the biblio ref is uniformize (remove some informations)
+    # First case : doi is found
+    if doi:
+        crossref_status_code, others_biblio_info = verify_doi(doi) # Verify doi using crossref api
+        
+        ## If DOI exists
+        if crossref_status_code==200:
+            status = "found"
+                            
+            ### can be hallucinated
+            if len(doi)*1.5 < len(ref_biblio): 
+                is_not_hallucinated,doi = compare_pubinfo_refbiblio(others_biblio_info,ref_biblio)
+                if not is_not_hallucinated: # oh really dude
+                
+                    return {"doi":"","status": "hallucinated"}
+        
+            ### Can be retracted
+            if doi in retracted_doi:
+                status = "retracted"
+                
+            return {"doi":doi, "status": status}
+
+
+        
+        ### If DOI doesn't exist
+        elif crossref_status_code==404:
+            status,doi = verify_biblio(ref_biblio)
+            return {"doi":doi, "status": status}
+                    
+        ### for others errors
+        else:
+            return {"doi":"","status": "error_service"}
+
+    # second case : no doi is found
+    else:
+        status,doi = verify_biblio(ref_biblio)
+        return {"doi":doi, "status": status}
