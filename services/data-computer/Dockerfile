@@ -28,10 +28,11 @@ RUN pip install \
     pandas==1.4.0 \
     lxml==4.7.1 \
     fr_core_news_sm@https://github.com/explosion/spacy-models/releases/download/fr_core_news_sm-3.6.0/fr_core_news_sm-3.6.0-py3-none-any.whl \
-    sentence-transformers==2.2.2 \
-    umap-learn==0.5.5 \
-    scikit-learn==1.4.1.post1 \
-    scipy==1.10.1
+    # sentence-transformers==2.2.2 \
+    # umap-learn==0.5.5 \
+    # scikit-learn==1.4.1.post1 \
+    scipy==1.10.1 \
+    prometheus-client==0.19.0
 
 # Install all node dependencies
 RUN npm install \

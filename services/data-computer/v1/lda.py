@@ -7,6 +7,13 @@ import unicodedata
 import re
 import spacy
 
+### Test for stats with prometeus 1/2 :
+from prometheus_client import CollectorRegistry, Counter, push_to_gateway
+registry = CollectorRegistry()
+c = Counter('documents', 'Number of documents processed', registry=registry)
+job_name='lda'
+
+
 # Get the index of "p" param (given by the user) and assign it to "nbTopic". 15 if not found
 nbTopic = sys.argv[sys.argv.index('-p') + 1] if '-p' in sys.argv else 15
 
@@ -108,6 +115,10 @@ for i in range(len_data):
         sys.stdout.write(json.dumps(line))
         sys.stdout.write("\n")
     else:
+        #### test for stats with prometeus : (2/2)
+        c.inc()
+        push_to_gateway('jobs-metrics.daf.intra.inist.fr', job=job_name, registry=registry)
+
         line = all_data[i]
         doc = line["value"]
         doc_bow = dictionary.doc2bow(tokenize(uniformize(line["value"])))
