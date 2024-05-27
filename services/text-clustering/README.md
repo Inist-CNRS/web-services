@@ -1,4 +1,4 @@
-# ws-text-clustering@1.0.3
+# ws-text-clustering@1.0.4
 
 Créer différents `clusters` à partir d'un ensemble de textes courts ou d'un ensemble de listes de mots-clés.
 
