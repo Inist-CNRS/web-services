@@ -23,7 +23,7 @@
     "tags": [
         {
             "name": "text-clustering",
-            "description": "Créer différents `clusters` à partir d'un ensemble de textes courts ou d'un ensemble de listes de mots-clés.",
+            "description": "Créer différents clusters à partir d'un ensemble de textes courts ou d'un ensemble de listes de mots-clés.",
             "externalDocs": {
                 "description": "Plus de documentation",
                 "url": "https://github.com/inist-cnrs/web-services/tree/main/services/text-clustering"
