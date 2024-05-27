@@ -31,7 +31,8 @@ RUN pip install \
     sentence-transformers==2.2.2 \
     umap-learn==0.5.5 \
     scikit-learn==1.4.1.post1 \
-    scipy==1.10.1
+    scipy==1.10.1 \
+    prometheus-client==0.19.0
 
 # Install all node dependencies
 RUN npm install \
