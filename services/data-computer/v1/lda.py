@@ -7,7 +7,7 @@ import unicodedata
 import re
 import spacy
 
-### Test for stats with prometeus (0/2) :
+### Test for stats with prometheus :
 from prometheus_client import CollectorRegistry, Counter, push_to_gateway
 registry = CollectorRegistry()
 c = Counter('documents', 'Number of documents processed', registry=registry)
@@ -75,10 +75,6 @@ all_data = []
 for line in sys.stdin:
     data=json.loads(line)
     all_data.append(data)
-    
-    #### test for stats with prometeus : (1/2)
-    c.inc()
-    push_to_gateway('jobs-metrics.daf.intra.inist.fr', job=job_name, registry=registry)
 
 
 
@@ -120,7 +116,7 @@ for i in range(len_data):
         sys.stdout.write(json.dumps(line))
         sys.stdout.write("\n")
     else:
-        #### test for stats with prometeus : (1/2)
+        #### test for stats with prometheus :
         c.inc()
         push_to_gateway('jobs-metrics.daf.intra.inist.fr', job=job_name, registry=registry)
 
