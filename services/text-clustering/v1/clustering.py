@@ -64,7 +64,8 @@ for i in range(len_data):
 # Reduce DIM from 700+ to 10
 embeddings = umap.UMAP(n_neighbors=30,
                        n_components=10,
-                       metric='cosine').fit_transform(center_reduce(texts))
+                       metric='cosine',
+                       init='random').fit_transform(center_reduce(texts))
 
 embeddings = center_reduce(embeddings)
 cosine_dist_matrix = cosine_distances(embeddings, embeddings)
