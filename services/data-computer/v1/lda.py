@@ -7,10 +7,12 @@ import unicodedata
 import re
 import spacy
 
-### Test for stats with prometheus :
+
+# Test for stats with prometheus :
 from prometheus_client import CollectorRegistry, Counter, push_to_gateway
+
 registry = CollectorRegistry()
-c = Counter('documents', 'Number of documents processed', registry=registry)
+c = Counter('epochs', 'Number of epoch when training model', registry=registry)
 job_name='lda'
 
 
@@ -102,8 +104,22 @@ dictionary.filter_extremes(no_below=3,no_above=0.5)
 corpus = [dictionary.doc2bow(text) for text in texts]
 
 try:
-    lda_model = models.LdaModel(corpus, num_topics=nbTopic, id2word=dictionary,iterations=num_iterations,alpha="symmetric", eta = "auto",minimum_probability=0.2)
-except:
+    lda_model = models.LdaModel(corpus,
+                                num_topics=nbTopic,
+                                id2word=dictionary,
+                                alpha="symmetric",
+                                eta = "auto",
+                                minimum_probability=0.2,
+                                passes=1,
+                                iterations=1)
+    
+    for i in range(num_iterations):
+        lda_model.update(corpus)
+        c.inc()
+        push_to_gateway('jobs-metrics.daf.intra.inist.fr', job=job_name, registry=registry)
+
+except Exception as e :
+    print(e)
     index_without_value = [i for i in range(len_data)]
 
 
@@ -116,10 +132,6 @@ for i in range(len_data):
         sys.stdout.write(json.dumps(line))
         sys.stdout.write("\n")
     else:
-        #### test for stats with prometheus :
-        c.inc()
-        push_to_gateway('jobs-metrics.daf.intra.inist.fr', job=job_name, registry=registry)
-
         line = all_data[i]
         doc = line["value"]
         doc_bow = dictionary.doc2bow(tokenize(uniformize(line["value"])))
