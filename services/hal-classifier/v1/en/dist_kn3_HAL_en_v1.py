@@ -1,4 +1,4 @@
-#!/opt/bitnami/python/bin/python3.7
+#!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """
 Created on Thu Aug 12 10:19:31 2021
