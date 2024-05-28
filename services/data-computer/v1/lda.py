@@ -115,7 +115,7 @@ try:
     
     for i in range(num_iterations):
         lda_model.update(corpus)
-        c.inc()
+        c.inc(amount=len_data/num_iterations)
         push_to_gateway('jobs-metrics.daf.intra.inist.fr', job=job_name, registry=registry)
 
 except Exception as e :
