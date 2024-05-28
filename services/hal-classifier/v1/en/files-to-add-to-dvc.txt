@@ -1,3 +1,0 @@
-dico_nd.pkl
-HALen_matrixKDT.npy
-modelhal0EN2.bin
