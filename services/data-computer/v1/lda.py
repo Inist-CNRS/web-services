@@ -77,6 +77,9 @@ all_data = []
 for line in sys.stdin:
     data=json.loads(line)
     all_data.append(data)
+    c.inc()
+    push_to_gateway('jobs-metrics.daf.intra.inist.fr', job=job_name, registry=registry)
+
 
 
 
@@ -103,7 +106,6 @@ dictionary = corpora.Dictionary(texts) # Create a tf dictionary, but replace tex
 dictionary.filter_extremes(no_below=3,no_above=0.5)
 corpus = [dictionary.doc2bow(text) for text in texts]
 
-nb_data_grafana = int(len_data/num_iterations)+1
 try:
     lda_model = models.LdaModel(corpus,
                                 num_topics=nbTopic,
@@ -116,7 +118,7 @@ try:
     
     for i in range(num_iterations):
         lda_model.update(corpus)
-        c.inc(amount=nb_data_grafana)
+        c.inc()
         push_to_gateway('jobs-metrics.daf.intra.inist.fr', job=job_name, registry=registry)
 
 except Exception as e :
@@ -125,6 +127,8 @@ except Exception as e :
 
 # extract infos
 for i in range(len_data):
+    c.inc()
+    push_to_gateway('jobs-metrics.daf.intra.inist.fr', job=job_name, registry=registry)
 
     #return n/a if docs wasn't in model
     if i in index_without_value:
