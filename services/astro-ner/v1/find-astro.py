@@ -60,21 +60,21 @@ for line in sys.stdin:
 
     returnDic = {
         unidecode("Planète"): PL,
-        unidecode("Trou noirs, quasars et apparentés"): TNQ,
-        "Satellite naturel": SNAT,
-        "Objets artificiels": OA,
-        unidecode("Système solaire"): SSO,
-        unidecode("Étoiles binaires (et pulsars)"): EB,
+        unidecode("Trou_noirs,_quasars_et_apparentés"): TNQ,
+        "Satellite_naturel": SNAT,
+        "Objets_artificiels": OA,
+        unidecode("Système_solaire"): SSO,
+        unidecode("Étoiles_binaires_(et_pulsars)"): EB,
         unidecode("Étoiles"): ET,
-        unidecode("Nébuleuse et région apparentés"): NRA,
+        unidecode("Nébuleuse_et_région_apparentés"): NRA,
         "Constellations": CST,
-        "Galaxies et amas de galaxie": GAL,
+        "Galaxies_et_amas_de_galaxie": GAL,
         unidecode("Astéroïdes"): AST,
-        unidecode("Statut hypothétique"): ST,
-        "amas stellaires": AS,
-        "supernovas": SN,
-        unidecode("exoplanètes"): XPL,
-        "sursaut radio, source radio, autres sursauts": SR,
+        unidecode("Statut_hypothétique"): ST,
+        "Asmas_stellaires": AS,
+        "Supernovas": SN,
+        unidecode("Exoplanètes"): XPL,
+        "Sursaut_radio,_source_radio,_autres_sursauts": SR,
     }
 
     data["value"] = {id: value for id, value in returnDic.items() if value != []}

@@ -12,7 +12,7 @@ HTTP 200
 [{
     "id": "1",
     "value": {
-        "Etoiles binaires (et pulsars)": [
+        "Etoiles_binaires_(et_pulsars)": [
             "V643 Orionis"
         ],
         "Constellations": [
@@ -32,11 +32,11 @@ HTTP 200
 {
     "id": "3",
     "value": {
-        "Objets artificiels": [
+        "Objets_artificiels": [
             "Hubble Space Telescope",
             "HST"
         ],
-        "Nebuleuse et region apparentes": [
+        "Nebuleuse_et_region_apparentes": [
             "Carinae"
         ]
     }
@@ -44,7 +44,7 @@ HTTP 200
 {
     "id": "4",
     "value": {
-        "Objets artificiels": [
+        "Objets_artificiels": [
             "Gaia"
         ],
         "Etoiles": [
