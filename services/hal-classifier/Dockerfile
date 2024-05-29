@@ -46,10 +46,6 @@ RUN pip install --no-build-isolation \
 RUN apt remove -y --purge build-essential make gcc && \
     apt autoremove -y
 
-# Install all node dependencies
- RUN npm install \
-     @ezs/storage@3.2.3
-
 WORKDIR /app/public
 # Declare files to copy in .dockerignore
 COPY --chown=daemon:daemon . /app/public/
