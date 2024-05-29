@@ -4,4 +4,5 @@
 # White list only the required files
 !config.json
 !v1
+!requirements.txt
 !swagger.json

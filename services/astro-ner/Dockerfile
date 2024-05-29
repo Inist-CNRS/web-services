@@ -17,15 +17,25 @@ RUN cat model/* > model.pt
 FROM cnrsinist/ezs-python-server:py3.9-no16-1.0.10
 
 USER root
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    build-essential \
+    libopenblas-dev \
+    libatlas-base-dev \
+    liblapack-dev \
+    gfortran \
+    && rm -rf /var/lib/apt/lists/*
+
+ENV HF_HOME=/app/public/.huggingface
+
+COPY --chown=daemon:daemon requirements.txt /app/public/
 # Install all python dependencies
-RUN pip install \
-    flair==0.10 \
-    unidecode==1.3.7 \
-    scipy==1.10.1
+RUN pip install --upgrade pip
+RUN pip install --no-deps -r /app/public/requirements.txt
+RUN pip install torch==1.10.2+cpu torchvision==0.11.3+cpu -f https://download.pytorch.org/whl/cpu/torch_stable.html
 
 # Install all node dependencies
 RUN npm install \
-@ezs/storage@3.2.3
+    @ezs/storage@3.2.3
 #     @ezs/teeft@2.3.1 \
 #     @ezs/strings@1.0.3
 
