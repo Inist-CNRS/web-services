@@ -45,9 +45,10 @@
     "services/data-computer",
     "services/data-termsuite",
     "services/data-wrapper",
-    "services/pdf-text",
     "services/diseases-ner",
     "services/irc3-species",
+    "services/pdf-text",
+    "services/sciencemetrix-classification",
     "services/terms-extraction"
   ],
   "dependencies": {
