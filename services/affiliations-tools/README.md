@@ -1,4 +1,4 @@
-# ws-affiliations-tools@1.1.5
+# ws-affiliations-tools@1.1.6
 
 Structuration et enrichissements d'affiliations
 
