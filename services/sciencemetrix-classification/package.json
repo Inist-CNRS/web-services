@@ -1,7 +1,7 @@
 {
     "private": true,
     "name": "ws-sciencemetrix-classification",
-    "version": "0.0.0",
+    "version": "1.0.0",
     "description": "Classification en domaines scientifiques Science-Metrix",
     "repository": {
         "type": "git",
