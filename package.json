@@ -49,6 +49,7 @@
     "services/hal-classifier",
     "services/irc3-species",
     "services/pdf-text",
+    "services/sciencemetrix-classification",
     "services/terms-extraction"
   ],
   "dependencies": {
