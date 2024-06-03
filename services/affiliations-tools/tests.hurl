@@ -293,7 +293,7 @@ HTTP 200
             "intitule": "botAnique et Modélisation de l'Architecture des Plantes et des végétations",
             "sigle": "AMAP",
             "ville_postale": "MONTPELLIER CEDEX 5",
-            "code_postal": "34398",
+            "code_postal": 34398,
             "etabAssoc": [
                 {
                     "etab": {
@@ -304,7 +304,7 @@ HTTP 200
                     },
                     "label": "UMR",
                     "labelAppauvri": "umr",
-                    "numero": "5120"
+                    "numero": 5120
                 },
                 {
                     "etab": {
@@ -315,7 +315,7 @@ HTTP 200
                     },
                     "label": "UMR",
                     "labelAppauvri": "umr",
-                    "numero": "5120"
+                    "numero": 5120
                 },
                 {
                     "etab": {
@@ -326,7 +326,7 @@ HTTP 200
                     },
                     "label": "UMR",
                     "labelAppauvri": "umr",
-                    "numero": "51"
+                    "numero": 51
                 },
                 {
                     "etab": {
@@ -337,7 +337,7 @@ HTTP 200
                     },
                     "label": "UMR",
                     "labelAppauvri": "umr",
-                    "numero": "5120"
+                    "numero": 5120
                 },
                 {
                     "etab": {
@@ -348,14 +348,14 @@ HTTP 200
                     },
                     "label": "UMR",
                     "labelAppauvri": "umr",
-                    "numero": "0931"
+                    "numero": 931
                 }
             ],
             "intituleAppauvri": "botanique et modelisation de l architecture des plantes et des vegetations",
             "sigleAppauvri": "amap",
             "ville_postale_appauvrie": "montpellier cedex 5",
-            "annee_creation": "2001",
-            "an_fermeture": ""
+            "annee_creation": 2001,
+            "an_fermeture": 0
         }
     ]
 },
@@ -364,10 +364,10 @@ HTTP 200
     "value": [
         {
             "num_nat_struct": "200711887V",
-            "intitule": "LABORATOIRE D'INTEGRATION DU MATERIAU AU SYSTEME",
+            "intitule": "Laboratoire d'intégration du matériau au système",
             "sigle": "IMS",
             "ville_postale": "TALENCE CEDEX",
-            "code_postal": "33405",
+            "code_postal": 33405,
             "etabAssoc": [
                 {
                     "etab": {
@@ -378,7 +378,7 @@ HTTP 200
                     },
                     "label": "UMR",
                     "labelAppauvri": "umr",
-                    "numero": "5218"
+                    "numero": 5218
                 },
                 {
                     "etab": {
@@ -389,7 +389,7 @@ HTTP 200
                     },
                     "label": "UMR",
                     "labelAppauvri": "umr",
-                    "numero": "5218"
+                    "numero": 5218
                 },
                 {
                     "etab": {
@@ -400,14 +400,14 @@ HTTP 200
                     },
                     "label": "UMR",
                     "labelAppauvri": "umr",
-                    "numero": "5218"
+                    "numero": 5218
                 }
             ],
             "intituleAppauvri": "laboratoire d integration du materiau au systeme",
             "sigleAppauvri": "ims",
             "ville_postale_appauvrie": "talence cedex",
-            "annee_creation": "2006",
-            "an_fermeture": ""
+            "annee_creation": 2006,
+            "an_fermeture": 0
         }
     ]
 },
@@ -431,7 +431,7 @@ HTTP 200
             "intitule": "Institut de l'information scientifique et technique",
             "sigle": "INIST",
             "ville_postale": "VANDOEUVRE LES NANCY CEDEX",
-            "code_postal": "54519",
+            "code_postal": 54519,
             "etabAssoc": [
                 {
                     "etab": {
@@ -442,14 +442,14 @@ HTTP 200
                     },
                     "label": "UAR",
                     "labelAppauvri": "uar",
-                    "numero": "76"
+                    "numero": 76
                 }
             ],
             "intituleAppauvri": "institut de l information scientifique et technique",
             "sigleAppauvri": "inist",
             "ville_postale_appauvrie": "vandoeuvre les nancy cedex",
-            "annee_creation": "1988",
-            "an_fermeture": ""
+            "annee_creation": 1988,
+            "an_fermeture": 0
         }
     ]
 }]

@@ -37,7 +37,7 @@ WORKDIR /app/public
 # Install all node dependencies
 RUN npm install \
     @ezs/libpostal@0.3.0 \
-    @ezs/conditor@2.11.0
+    @ezs/conditor@2.12.0
 
 # If issues with bindings with version of node higher than 20, try adding this line
 # RUN cd node_modules/node_postal && npm run install
