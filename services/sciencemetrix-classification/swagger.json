@@ -3,7 +3,7 @@
     "info": {
         "title": "sciencemetrix-classification - Classification en domaines scientifiques Science-Metrix",
         "description": "Le web service classe automatiquement des documents scientifiques en anglais dans le troisième niveau de la classification Science-Metrix",
-        "version": "0.0.0",
+        "version": "1.0.0",
         "termsOfService": "https://services.istex.fr/",
         "contact": {
             "name": "Inist-CNRS",
@@ -17,7 +17,7 @@
         {
             "url": "http://vptdmservices.intra.inist.fr:49225/",
             "description": "Latest version for production",
-            "#DISABLED#x-profil": "Standard"
+            "x-profil": "Standard"
         }
     ],
     "tags": [
