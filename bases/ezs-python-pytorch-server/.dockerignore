@@ -3,3 +3,4 @@
 
 # White list only the required files
 !config.json
+# !public
