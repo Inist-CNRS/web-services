@@ -81,6 +81,7 @@ web_modules/
 .env.test.local
 .env.production.local
 .env.local
+env.sh
 
 # python's virtualenv
 .venv*
@@ -128,9 +129,16 @@ dist
 # Stores VSCode versions used for testing VSCode extensions
 .vscode-test
 
+# Jetbrains IDEs
+.idea
+
 # yarn v2
 .yarn/cache
 .yarn/unplugged
 .yarn/build-state.yml
 .yarn/install-state.gz
 .pnp.*
+
+# Byte-compiled / optimized / DLL files
+__pycache__/
+services/data-termsuite/NOTES.md

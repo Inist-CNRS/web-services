@@ -5,7 +5,7 @@ name: Docker Build & Push
 on:
     push:
         tags:
-            - 'ws-*@*'
+            - "ws-*@*"
 
 jobs:
     build:
@@ -25,6 +25,12 @@ jobs:
               uses: actions/setup-node@v4
               with:
                   node-version: 20
+
+            - name: Build .env from Github Actions secrets
+              shell: bash
+              run: |
+                  bin/create-env.sh ${{ github.ref_name }} ${{ secrets.WEBDAV_LOGIN }} ${{ secrets.WEBDAV_PASSWORD }} ${{ secrets.WEBDAV_URL }}
+                  ls -l services/*/.env
 
             - name: Build & Push Docker Image
               shell: bash

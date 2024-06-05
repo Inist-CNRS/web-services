@@ -1,0 +1,33 @@
+{
+    "openapi": "3.1.0",
+    "info": {
+        "title": "data-wrapper - Conversions en fichier corpus compressé",
+        "summary": "Les fichiers corpus compressés sont compatibles avec tous les traitements TDM dédiés aux corpus (services web asynchrone)",
+        "version": "1.3.4",
+        "termsOfService": "https://services.istex.fr/",
+        "contact": {
+            "name": "Inist-CNRS",
+            "url": "https://www.inist.fr/nous-contacter/"
+        }
+    },
+    "servers": [
+        {
+            "x-comment": "Will be automatically completed by the ezs server."
+        },
+        {
+            "url": "http://vptdmjobs.intra.inist.fr:49164/",
+            "description": "Latest version for production",
+            "x-profil": "Standard"
+        }
+    ],
+    "tags": [
+        {
+            "name": "data-wrapper",
+            "description": "Conversions en fichier corpus compressé",
+            "externalDocs": {
+                "description": "Plus de documentation",
+                "url": "https://github.com/inist-cnrs/web-services/tree/main/services/data-wrapper"
+            }
+        }
+    ]
+}

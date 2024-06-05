@@ -1,0 +1,60 @@
+# These examples can be used directly in VSCode, using REST Client extension (humao.rest-client)
+# They are important, because used to generate the tests.hurl file.
+
+# Décommenter/commenter les lignes voulues pour tester localement
+@host=http://localhost:31976
+# @host=https://biblio-ref.services.istex.fr
+
+###
+# @name v1validate
+# Valide la référence bibliographique
+POST {{host}}/v1/validate?indent=true HTTP/1.1
+Content-Type: application/json
+
+[
+  {
+    "value": "J. A. TORRES, A. GARCIA-FUENTES, C. SALAZAR, E. CANO & F. VALLE - Caracterizacion de los pinares de Pil1l1s halepellsis Mill. en el sur de la Peninsula Iberica"
+  },
+  {
+    "value":"Y. B. LINHART. L. CHAOUNI-BENABDALLAH, J.-M. PARRY & J. D. THOMPSON - Selective herbivory of thyme chemotypes by a mollusk and a grasshopper"
+  },
+  {
+    "value": "https://doi.org/10.1016\/b978-0-323-90638-8.00002-3"
+  },
+  {
+    "value": "RETRACTED > Estruch R., Primary Prevention of Cardiovascular Disease with a Mediterranean Diet, 10.1056/nejmoa1200303"
+  },
+  {
+    "value": "HALLUCINATED > Zohuri, B. (2019). A Comparison of Molten Salt Reactors to Light Water Reactors: Pros and Cons. In Molten Salt Reactors and Thorium Energy (pp. 81-98). Woodhead Publishing. https://doi.org/10.1056/nejmoa1200303"
+  },
+  {
+    "value": "HALUCINATED BUT DOI DOESNT EXISTS > Zohuri, B. (2019). A Comparison of Molten Salt Reactors to Light Water Reactors: Pros and Cons. In Molten Salt Reactors and Thorium Energy (pp. 81-98). Woodhead Publishing. https://doi.org/10.1056/doesntexists"
+  },
+  {
+    "value": ["bad","input","type"]
+  },
+  {
+    "value": "nothing here"
+  }
+]
+
+###
+# @name v1validateUrl
+# Valide la référence bibliographique d'un PDF à partir de son URL
+POST {{host}}/v1/validate-url?indent=true HTTP/1.1
+Content-Type: application/json
+
+[
+  {
+    "value":"https://cnrs.hal.science/hal-04461354/file/anki-gaillard-revol.pdf"
+  }
+]
+
+
+###
+# @name v1validatePdf
+# Valide la référence bibliographique d'un PDF
+POST {{host}}/v1/validate-pdf?indent=true
+Content-Type: application/pdf
+
+< ./example.pdf
