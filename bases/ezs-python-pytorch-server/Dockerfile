@@ -32,7 +32,11 @@ RUN pip install --no-build-isolation \
 RUN apt remove -y --purge build-essential make gcc && \
     apt autoremove -y
 
+RUN mkdir /app/.cache
+
 RUN chown daemon:daemon -R /app
+
+ENV TRANSFORMERS_CACHE=/app/.cache/transformers
 
 EXPOSE 31976
 # See .dockerignore to see what files are copied
