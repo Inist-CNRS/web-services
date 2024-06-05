@@ -16,7 +16,6 @@ RUN dvc pull -v
 
 FROM cnrsinist/ezs-python-pytorch-server:py3.9-no16-1.1.1
 
-USER root
 
 WORKDIR /app/public
 # Declare files to copy in .dockerignore
