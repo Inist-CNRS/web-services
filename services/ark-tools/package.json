@@ -1,8 +1,8 @@
 {
   "private": true,
-  "name": "ws-{service}",
-  "version": "0.0.0",
-  "description": "{short_description}",
+  "name": "ws-ark-tools",
+  "version": "1.28.3",
+  "description": "Apposer sur chaque objet un nouvel identifiant unique ARK",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Inist-CNRS/web-services.git"
@@ -10,7 +10,7 @@
   "keywords": [
     "ezmaster"
   ],
-  "author": "{author_name} <{author_email}>",
+  "author": " <>",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/Inist-CNRS/web-services/issues"
@@ -32,5 +32,5 @@
     "start": "docker run --rm -p 31976:31976 cnrsinist/${npm_package_name}:${npm_package_version}",
     "publish": "docker push cnrsinist/${npm_package_name}:${npm_package_version}"
   },
-  "avoid-testing": false
+  "avoid-testing": true
 }
