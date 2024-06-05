@@ -22,13 +22,13 @@ fi
 if [ "$LOCATION" = "local" ]; then
     HOST="http://localhost:31976"
 else
-    HOST="https://$SERVICE.services.istex.fr"
-fi
+    # Exit if the package.json in the services/$SERVICE directory includes an "avoid-testing" key set to true
+    if grep -q '"avoid-testing": true' "services/$SERVICE/package.json"; then
+        echo "Skipping test for service $SERVICE"
+        exit 0
+    fi
 
-# Exit if the package.json in the services/$SERVICE directory includes an "avoid-testing" key set to true
-if grep -q '"avoid-testing": true' "services/$SERVICE/package.json"; then
-    echo "Skipping test for service $SERVICE"
-    exit 0
+    HOST="https://$SERVICE.services.istex.fr"
 fi
 
 npx hurl --test --variable host="$HOST" "services/$SERVICE/tests.hurl"
