@@ -9,4 +9,9 @@ Accède à des bases bibliographiques variées
 modifiant la configuration du container.
 
 Pour le développement: mettez ces variables d'environnement dans le fichier
-`.env` du répertoire du service.
+`.env` du répertoire du service, sous la forme:
+
+```sh
+export OPENALEX_API_KEY=T1BFTkFMRVhfQVBJX0tFWQo
+export UNPAYWALL_API_KEY=VU5QQVlXQUxMX0FQSV9LRVkK
+```
