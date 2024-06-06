@@ -42,6 +42,7 @@
     "services/base-line",
     "services/base-line-python",
     "services/biblio-ref",
+    "services/biblio-tools",
     "services/chem-ner",
     "services/data-computer",
     "services/data-termsuite",

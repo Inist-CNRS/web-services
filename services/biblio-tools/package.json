@@ -1,0 +1,36 @@
+{
+  "private": true,
+  "name": "ws-biblio-tools",
+  "version": "0.0.0",
+  "description": "Outils pour références bibliographiques",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Inist-CNRS/web-services.git"
+  },
+  "keywords": [
+    "ezmaster"
+  ],
+  "author": "Nicolas Thouvenin <nthouvenin@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Inist-CNRS/web-services/issues"
+  },
+  "homepage": "https://github.com/Inist-CNRS/web-services/#readme",
+  "scripts": {
+    "version:insert:readme": "sed -i \"s#\\(${npm_package_name}.\\)\\([\\.a-z0-9]\\+\\)#\\1${npm_package_version}#g\" README.md && git add README.md",
+    "version:insert:swagger": "sed -i \"s/\\\"version\\\": \\\"[0-9]\\+.[0-9]\\+.[0-9]\\+\\\"/\\\"version\\\": \\\"${npm_package_version}\\\"/g\" swagger.json && git add swagger.json",
+    "version:insert": "npm run version:insert:readme && npm run version:insert:swagger",
+    "version:commit": "git commit -a -m \"release ${npm_package_name}@${npm_package_version}\"",
+    "version:tag": "git tag \"${npm_package_name}@${npm_package_version}\" -m \"${npm_package_name}@${npm_package_version}\"",
+    "version:push": "git push && git push --tags",
+    "version": "npm run version:insert && npm run version:commit && npm run version:tag",
+    "postversion": "npm run version:push",
+    "build:dev": "docker build -t cnrsinist/${npm_package_name}:latest .",
+    "start:dev": ". ./.env 2> /dev/null; npm run build:dev && docker run -e OPENALEX_API_KEY -e UNPAYWALL_API_KEY --name dev --rm --detach -p 31976:31976 cnrsinist/${npm_package_name}:latest",
+    "stop:dev": "docker stop dev",
+    "build": "docker build -t cnrsinist/${npm_package_name}:${npm_package_version} .",
+    "start": "docker run --rm -p 31976:31976 cnrsinist/${npm_package_name}:${npm_package_version}",
+    "publish": "docker push cnrsinist/${npm_package_name}:${npm_package_version}"
+  },
+  "avoid-testing": true
+}
