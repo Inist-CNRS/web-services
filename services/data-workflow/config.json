@@ -1,0 +1,14 @@
+{
+    "environnement": {
+        "EZS_TITLE": "Enchaînement asynchrone de traitements",
+        "EZS_DESCRIPTION": "Les worflows permettent de traiter des fichiers corpus compressés en appelant des webservices d'enrichissement par document de manière asynchrone.",
+        "EZS_METRICS": true,
+        "EZS_CONCURRENCY": 4,
+        "EZS_CONTINUE_DELAY": 60,
+        "EZS_NSHARDS": 32,
+        "EZS_CACHE": true,
+        "EZS_VERBOSE": false,
+        "NODE_OPTIONS": "--max_old_space_size=1024",
+        "NODE_ENV": "production"
+    }
+}
