@@ -33,6 +33,7 @@
   },
   "homepage": "https://github.com/Inist-CNRS/web-services#readme",
   "workspaces": [
+    "bases/ezs-python-pytorch-server",
     "bases/ezs-python-saxon-server",
     "bases/ezs-python-server",
     "bases/python-node",
