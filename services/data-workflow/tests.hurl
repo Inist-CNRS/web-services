@@ -35,7 +35,7 @@ variable "computing_token" exists
 POST {{host}}/v1/retrieve-json
 content-type: application/json
 [Options]
-delay: 20000
+delay: 2000
 ```
 [
 	{
@@ -46,9 +46,7 @@ delay: 20000
 
 HTTP 200
 Content-Type: application/json
-[Asserts]
-jsonpath "$" count == 22
-jsonpath "$[0].value" startsWith "Abstract: The hemlock looper,"
+[{"id":"aridification","value":2},{"id":"mafic","value":2},{"id":"climate change","value":3}]
 
 ############################################################################
 # Test v1/base-line
@@ -83,7 +81,7 @@ Connection: Keep-Alive
 Keep-Alive: 300
 Accept-Encoding: gzip, deflate
 [Options]
-delay: 20000
+delay: 2000
 ```
 [
 	{
@@ -95,5 +93,5 @@ delay: 20000
 HTTP 200
 Content-Type: application/json
 [Asserts]
-jsonpath "$" count >= 1000
-jsonpath "$[0].value" startsWith "Abstract: The hemlock looper,"
+jsonpath "$" count == 22
+jsonpath "$[0].value" startsWith " Paleogene evolution and demise"
