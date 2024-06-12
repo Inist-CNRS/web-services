@@ -8,14 +8,15 @@
 # WARNING: The webhook URLs don't last forever.
 #          Without activity, they expire after one week!
 #          That can be the cause of failing tests, using docker.
+#          Thus, there are commented here.
 
 ############################################################################
 # Test v1/tag-cloud-en
 
 POST {{host}}/v1/tag-cloud-en
 content-type: application/x-gzip
-X-Webhook-Success: https://webhook.site/684dd427-5484-404a-b5a0-80e5b6726a1c
-X-Webhook-Failure: https://webhook.site/684dd427-5484-404a-b5a0-80e5b6726a1c
+# X-Webhook-Success: https://webhook.site/684dd427-5484-404a-b5a0-80e5b6726a1c
+# X-Webhook-Failure: https://webhook.site/684dd427-5484-404a-b5a0-80e5b6726a1c
 file,./22-txt-en.tar.gz;
 
 HTTP 200
@@ -57,8 +58,8 @@ Content-Type: application/json
 
 POST {{host}}/v1/base-line
 content-type: application/x-gzip
-X-Webhook-Success: https://webhook.site/684dd427-5484-404a-b5a0-80e5b6726a1c
-X-Webhook-Failure: https://webhook.site/684dd427-5484-404a-b5a0-80e5b6726a1c
+# X-Webhook-Success: https://webhook.site/684dd427-5484-404a-b5a0-80e5b6726a1c
+# X-Webhook-Failure: https://webhook.site/684dd427-5484-404a-b5a0-80e5b6726a1c
 file,./22-txt-en.tar.gz;
 
 HTTP 200
