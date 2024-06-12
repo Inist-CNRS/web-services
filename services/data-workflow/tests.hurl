@@ -5,6 +5,10 @@
 # or (from root of the repo)
 #   npm run test:local data-termsuite
 
+# WARNING: The webhook URLs don't last forever.
+#          Without activity, they expire after one week!
+#          That can be the cause of failing tests, using docker.
+
 ############################################################################
 # Test v1/tag-cloud-en
 
