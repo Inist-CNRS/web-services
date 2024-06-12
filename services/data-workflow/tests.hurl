@@ -10,8 +10,8 @@
 
 POST {{host}}/v1/tag-cloud-en
 content-type: application/x-gzip
-X-Webhook-Success: https://webhook.site/2caab8b5-fc96-4d7a-bb94-bdda20977830
-X-Webhook-Failure: https://webhook.site/2caab8b5-fc96-4d7a-bb94-bdda20977830
+X-Webhook-Success: https://webhook.site/684dd427-5484-404a-b5a0-80e5b6726a1c
+X-Webhook-Failure: https://webhook.site/684dd427-5484-404a-b5a0-80e5b6726a1c
 file,./22-txt-en.tar.gz;
 
 HTTP 200
@@ -53,8 +53,8 @@ Content-Type: application/json
 
 POST {{host}}/v1/base-line
 content-type: application/x-gzip
-X-Webhook-Success: https://webhook.site/2caab8b5-fc96-4d7a-bb94-bdda20977830
-X-Webhook-Failure: https://webhook.site/2caab8b5-fc96-4d7a-bb94-bdda20977830
+X-Webhook-Success: https://webhook.site/684dd427-5484-404a-b5a0-80e5b6726a1c
+X-Webhook-Failure: https://webhook.site/684dd427-5484-404a-b5a0-80e5b6726a1c
 file,./22-txt-en.tar.gz;
 
 HTTP 200
