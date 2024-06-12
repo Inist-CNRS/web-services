@@ -40,7 +40,7 @@ variable "computing_token" exists
 POST {{host}}/v1/retrieve-json
 content-type: application/json
 [Options]
-delay: 2000
+delay: 4000
 ```
 [
 	{
@@ -86,7 +86,7 @@ Connection: Keep-Alive
 Keep-Alive: 300
 Accept-Encoding: gzip, deflate
 [Options]
-delay: 2000
+delay: 4000
 ```
 [
 	{
