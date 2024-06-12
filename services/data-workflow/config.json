@@ -7,7 +7,7 @@
         "EZS_CONTINUE_DELAY": 60,
         "EZS_NSHARDS": 32,
         "EZS_CACHE": true,
-        "EZS_VERBOSE": true,
+        "EZS_VERBOSE": false,
         "NODE_OPTIONS": "--max_old_space_size=1024",
         "NODE_ENV": "production"
     }
