@@ -19,6 +19,7 @@ All contributing instructions are in [CONTRIBUTING](CONTRIBUTING.md).
 <!-- This section must be the last one, it's automatically rewritten -->
 ## Services
 
+- [address-kit](./services/address-kit) [![Docker Pulls](https://img.shields.io/docker/pulls/cnrsinist/ws-address-kit.svg)](https://hub.docker.com/r/cnrsinist/ws-address-kit/)
 - [affiliation-rnsr](./services/affiliation-rnsr) [![Docker Pulls](https://img.shields.io/docker/pulls/cnrsinist/ws-affiliation-rnsr.svg)](https://hub.docker.com/r/cnrsinist/ws-affiliation-rnsr/)
 - [affiliations-tools](./services/affiliations-tools) [![Docker Pulls](https://img.shields.io/docker/pulls/cnrsinist/ws-affiliations-tools.svg)](https://hub.docker.com/r/cnrsinist/ws-affiliations-tools/)
 - [ark-tools](./services/ark-tools) [![Docker Pulls](https://img.shields.io/docker/pulls/cnrsinist/ws-ark-tools.svg)](https://hub.docker.com/r/cnrsinist/ws-ark-tools/)
