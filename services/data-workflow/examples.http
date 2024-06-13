@@ -1,0 +1,62 @@
+# These examples can be used directly in VSCode, using HTTPYac extension (anweber.vscode-httpyac)
+# They are important, because used to generate the tests.hurl file.
+
+# Décommenter/commenter les lignes voulues pour tester localement
+@host=http://localhost:31976
+# @host=https://data-workflow.services.istex.fr
+
+###
+# @name v1Retrieve
+# @save
+POST {{host}}/v1/retrieve HTTP/1.1
+Content-Type: application/json
+
+[
+	{
+		"value":"8RjaJDej5"
+	}
+]
+
+###
+# @name v1collect
+POST {{host}}/v1/collect?indent=true HTTP/1.1
+Content-Type: application/json
+
+[
+	{
+		"value":"8RjaJDej5"
+	}
+]
+
+###
+# @name v1baseLine
+POST {{host}}/v1/base-line HTTP/1.1
+Content-Type: application/x-tar
+X-Webhook-Success: https://webhook.site/69300b22-a251-4c16-9905-f7ba218ae7e9
+X-Webhook-Failure: https://webhook.site/69300b22-a251-4c16-9905-f7ba218ae7e9
+
+< ./22-txt-en.tar.gz
+
+###
+## @name v1tagCloudEn
+POST {{host}}/v1/tag-cloud-en HTTP/1.1
+Content-Type: application/x-gzip
+X-Webhook-Success: https://webhook.site/46d41346-6919-410f-a635-ae78146c2782
+X-Webhook-Failure: https://webhook.site/46d41346-6919-410f-a635-ae78146c2782
+
+< ./22-txt-en.tar.gz
+
+
+###
+# @name v1RetrieveJson
+# @save
+POST {{host}}/v1/retrieve-json HTTP/1.1
+Content-Type: application/json
+
+[
+	{
+		"value":"9tWhLX8Mr"
+	}
+]
+
+###
