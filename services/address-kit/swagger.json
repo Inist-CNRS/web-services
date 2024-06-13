@@ -3,7 +3,7 @@
     "info": {
         "title": "address-kit - ce service propose des outils de traitement d'adresses d'affiliations",
         "description": "ces services prennent en entrée les affiliations des auteurs sous forme d'adresse et en tirent des informations sur la localisation ou la structure de recherche associée",
-        "version": "2.1.0",
+        "version": "2.1.1",
         "termsOfService": "https://services.istex.fr/",
         "contact": {
             "name": "Inist-CNRS",
