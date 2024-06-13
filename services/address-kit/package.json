@@ -1,7 +1,7 @@
 {
     "private": true,
     "name": "ws-address-kit",
-    "version": "0.0.0",
+    "version": "2.1.0",
     "description": "ce service propose des outils de traitement d'adresses d'affiliations",
     "repository": {
         "type": "git",

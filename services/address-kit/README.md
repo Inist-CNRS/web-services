@@ -1,4 +1,4 @@
-# ws-address-kit@0.0.0
+# ws-address-kit@2.1.0
 
 ce service propose des outils de traitement d'adresses d'affiliations
 
