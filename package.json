@@ -36,6 +36,7 @@
     "bases/ezs-python-saxon-server",
     "bases/ezs-python-server",
     "bases/python-node",
+    "services/address-kit",
     "services/affiliation-rnsr",
     "services/affiliations-tools",
     "services/base-line",
