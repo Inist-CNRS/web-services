@@ -4,6 +4,7 @@
         "EZS_DESCRIPTION": "Les worflows permettent de traiter des fichiers corpus compressés en appelant des webservices d'enrichissement par document de manière asynchrone.",
         "EZS_METRICS": true,
         "EZS_CONCURRENCY": 4,
+        "EZS_PIPELINE_DELAY": 10800,
         "EZS_CONTINUE_DELAY": 60,
         "EZS_NSHARDS": 32,
         "EZS_CACHE": true,
