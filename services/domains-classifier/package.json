@@ -1,8 +1,8 @@
 {
   "private": true,
-  "name": "ws-domaines-classifier",
+  "name": "ws-domains-classifier",
   "version": "0.0.0",
-  "description": "{short_description}",
+  "description": "Classification en domaines scientifiques",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Inist-CNRS/web-services.git"

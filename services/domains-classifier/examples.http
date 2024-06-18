@@ -3,7 +3,7 @@
 
 # Décommenter/commenter les lignes voulues pour tester localement
 @host=http://localhost:31976
-# @host=https://domaines-classifier.services.istex.fr
+# @host=https://domains-classifier.services.istex.fr
 
 ###
 # @name v1EnClassify

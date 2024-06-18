@@ -51,7 +51,7 @@
     "services/data-workflow",
     "services/data-wrapper",
     "services/diseases-ner",
-    "services/domaines-classifier",
+    "services/domains-classifier",
     "services/hal-classifier",
     "services/irc3-species",
     "services/pdf-text",
