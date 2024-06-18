@@ -28,10 +28,10 @@ RUN pip install \
 
 # Install all node dependencies
 RUN npm install \
-    "@ezs/analytics@2.2.2" \
-    "@ezs/basics@2.6.0" \
-    "@ezs/core@3.6.0" \
-    "@ezs/spawn@1.4.5"
+    "@ezs/analytics@2.3.2" \
+    "@ezs/basics@2.6.1" \
+    "@ezs/core@3.9.0" \
+    "@ezs/spawn@1.4.6"
 
 ENV NUMBA_CACHE_DIR=/tmp/numba_cache
 # Declare files to copy in .dockerignore
