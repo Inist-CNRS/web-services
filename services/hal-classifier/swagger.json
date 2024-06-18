@@ -3,7 +3,7 @@
     "info": {
         "title": "hal-classifier - Classification HAL",
         "description": "Cette instance propose des outils de classification pour HAL",
-        "version": "4.0.3",
+        "version": "4.0.4",
         "termsOfService": "https://services.istex.fr/",
         "contact": {
             "name": "Inist-CNRS",
