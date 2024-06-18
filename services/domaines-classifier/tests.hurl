@@ -15,7 +15,7 @@ HTTP 200
         {
             "code": {
                 "id": "001",
-                "value": "001"
+                "value": "Sciences exactes et technologie"
             },
             "confidence": 1.0000077486038208,
             "rang": 1
@@ -23,7 +23,7 @@ HTTP 200
         {
             "code": {
                 "id": "001B",
-                "value": "001B"
+                "value": "Physique"
             },
             "confidence": 0.7340989708900452,
             "rang": 2
@@ -31,7 +31,7 @@ HTTP 200
         {
             "code": {
                 "id": "001B00",
-                "value": "001B00"
+                "value": "Généralités"
             },
             "confidence": 0.9693299531936646,
             "rang": 3

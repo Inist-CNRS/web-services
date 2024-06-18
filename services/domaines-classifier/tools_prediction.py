@@ -9,9 +9,9 @@ from models import list_loaded_models
 result_prediction = []
 listvide = []
 
+
 # function recursive de parcours des modeles pour les predictions sur un document
 def do_predictions(*param, **model_init):
-
     # modele racine
     if model_init["rang"] == 0:
 
@@ -25,7 +25,7 @@ def do_predictions(*param, **model_init):
     # trace print(param[0][0:50])
     predictor.do_one_prediction(param[0])
     pre = predictor.get_predictions()
-    pre["rang"]= (model_init["rang"]+1)
+    pre["rang"] = (model_init["rang"] + 1)
     result_prediction.append(pre)
 
     # recuperation des resultats
@@ -34,7 +34,7 @@ def do_predictions(*param, **model_init):
 
     if model_init["rang"] == param[1]:
         # on sort et on retourne le resultat
-        return(result_prediction)
+        return (result_prediction)
 
     else:
         # niveau n + 1
