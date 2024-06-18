@@ -20,3 +20,16 @@ Content-Type: application/json
     "value":"The COVID-19 pandemic, also known as the coronavirus pandemic, is an ongoing global pandemic of coronavirus disease 2019 (COVID-19) caused by severe acute respiratory syndrome coronavirus2 (SARS-CoV-2). It was first identified in December 2019 in Wuhan, China. The World Health Organization declared the outbreak a Public Health Emergency of International Concern on 20 January 2020, and later a pandemic on 11 March 2020. As of 2 April 2021, more than 129 million cases have been confirmed, with more than 2.82 million deaths attributed to COVID-19, making it one of the deadliest pandemics in history."
   }
 ]
+
+###
+# @name v1EnClasshalfr
+# @description Classification dans les domaines de niveau de la base HAL
+POST {{host}}/v1/fr/classhalfr?indent=true HTTP/1.1
+Content-Type: application/json
+
+[
+  {
+    "id":1,
+    "value":"L’hémochromatose génétique est une maladie fréquente avec une prévalence dans la population caucasienne estimée entre 1,5 et 3 ‰. Sa présentation clinique s’est modiﬁée au cours de ces dernières années et actuellement la cirrhose bronzée avec diabète ne représente plus que 10 % des formes cliniques au moment du diagnostic. Actualités et points forts. – En 1996, la découverte de la mutation C282Y au niveau du gène HFE a transformé la stratégie diagnostique de l’hémochromatose génétique. Actuellement chez un patient ayant une asthénie isolée, des manifestations articulaires inexpliquées ou une cytolyse hépatique modérée, le diagnostic d’hémochromatose génétique doit être envisagé. Dans ces cas, une élévation du coefficient de saturation de la transferrine supérieure à 45 % impose la recherche d’une homozygotie C282Y qui affirme le diagnostic d’hémochromatose. La ponction biopsie hépatique n’est plus nécessaire pour le diagnostic, mais reste utile en cas de suspicion de cirrhose qui constitue le facteur de risque principal du carcinome hépatocellulaire. Le traitement repose toujours sur les saignées réalisées selon un protocole précis. Une enquête familiale doit être réalisée lors de chaque nouveau cas diagnostiqué. Perspectives et projets. – La reconnaissance du gène HFE permet maintenant d’individualiser facilement l’hémochromatose génétique des autres surcharges en fer, au sein desquelles émerge une entité nouvelle, l’hépatosidérose dysmétabolique. L’évolution de certains sujets C282Y homozygotes qui ne présentent aucune surcharge en fer reste à étudier et alimente la controverse sur l’opportunité d’un dépistage systématique."
+  }
+]
