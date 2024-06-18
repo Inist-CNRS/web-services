@@ -86,7 +86,17 @@ D'autres exemples de noms de branche:
 Avant toute chose, il faut s'assurer qu'un service qui pourrait accueillir votre
 nouvelle route n'existe pas déjà. Cela évitera de créer un nouveau service.
 
+À noter: les sous-sections suivantes expliquent la structure du répertoire à
+ créer pour un service, mais le script
+ [`generate:service`](SCRIPTS.md#generateservice) se charge maintenant
+ d'initialiser le répertoire pour vous. Voir [Script d'initialisation d'un
+ nouveau service](#script-dinitialisation-dun-nouveau-service)
+
 ### Création du répertoire
+
+> 📘 Ceci est maintenant automatique quand on utilise le script
+> [`generate:service`](SCRIPTS.md#generateservice).
+> Voir [Script d'initialisation d'un nouveau service](#script-dinitialisation-dun-nouveau-service)
 
 Tous les services sont dans le répertoire `services`.  
 Chacun dans son propre répertoire.  
@@ -110,10 +120,6 @@ le `package.json`:
 }
 ```
 
-> 📘 Ceci est maintenant automatique quand on utilise le script
-> [`generate:service`](SCRIPTS.md#generateservice).
-> Voir [Script d'initialisation d'un nouveau service](#script-dinitialisation-dun-nouveau-service)
-
 Ainsi, vous serez capable de lancer des scripts d'un service (par exemple
 `base-line`) depuis la racine du dépôt (à condition de disposer de npm 7+):
 
@@ -123,6 +129,9 @@ npm -w services/base-line run stop:dev
 ```
 
 ### Fichiers du service
+
+> 📘 Ceci est maintenant automatique quand on utilise le script
+> [`generate:service`](SCRIPTS.md#generateservice).
 
 Chaque répertoire de service contient :
 
@@ -146,13 +155,14 @@ Chaque répertoire de service contient :
 - un fichier `tests.hurl` généré à partir des exemples, pour éviter les
   régressions du service
 
-> 📘 Ceci est maintenant automatique quand on utilise le script
-> [`generate:service`](SCRIPTS.md#generateservice).
-
 ### examples.http
 
 Le fichier `examples.http` se situe à la racine d'une instance (et donc de son
 répertoire).
+
+> 📘 Ce fichier est initialisé automatiquement par le script
+> [`generate:service`](SCRIPTS.md#generateservice).  
+> Il reste nécessaire d'écrire les requêtes pour chaque route créée.
 
 Il contient des exemples de requêtes HTTP, et constitue donc une partie de la
 documentation du service.  
@@ -207,10 +217,6 @@ application/json` (c'est le type du *body* envoyé), puis le tableau JSON envoy�
 
 > **Remarque**: comme ces exemples serviront aussi aux tests, il est utile d'y
 > mettre aussi des exemples dont on veut vérifier le comportement.
-
-> 📘 Ce fichier est généré automatiquement par le script
-> [`generate:service`](SCRIPTS.md#generateservice).  
-> Il reste nécessaire d'écrire les requêtes pour chaque route créée.
 
 ### tests.hurl
 
@@ -430,6 +436,14 @@ un fichier `tests.hurl`):
 ```bash
 npm run test:remotes service-name service2-name
 ```
+
+> 📘 Pour éviter qu'un service soit testé lorsqu'il est en production, on peut
+> positionner la propriété `avoid-testing` du `package.json` du service à
+> `true`.
+>
+> Exemple de cas où c'est utile: `ark-tools`, où on crée des identifiants censés
+> être uniques. Afin de ne pas épuiser les possiblités, on évite de le tester
+> trop souvent.
 
 ## Ajout dans la liste du README
 
