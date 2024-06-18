@@ -1,4 +1,4 @@
-# ws-astro-ner@1.0.7
+# ws-astro-ner@1.0.8
 
 Cette instance propose un outil de reconnaissance d'entités nommées en astronomie
 
