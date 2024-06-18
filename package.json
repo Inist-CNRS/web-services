@@ -41,6 +41,7 @@
     "services/affiliation-rnsr",
     "services/affiliations-tools",
     "services/ark-tools",
+    "services/astro-ner",
     "services/base-line",
     "services/base-line-python",
     "services/biblio-ref",
