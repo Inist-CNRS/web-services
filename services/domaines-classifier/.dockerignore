@@ -1,0 +1,13 @@
+# Ignore all files by default
+*
+
+# White list only the required files
+!config.json
+!v1
+!swagger.json
+!corpus
+!models
+!classify.py
+!tools_prediction.py
+!code-classement.json
+!one_prediction.py

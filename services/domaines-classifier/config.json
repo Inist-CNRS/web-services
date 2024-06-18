@@ -1,0 +1,14 @@
+{
+    "environnement": {
+        "EZS_TITLE": "Classification en domaines scientifiques",
+        "EZS_DESCRIPTION": "Utilise une succession arborescente de modèles de type Fasttext pour prédire un code de classement Pascal/Francis",
+        "EZS_METRICS": true,
+        "EZS_CONCURRENCY": 4,
+        "EZS_CONTINUE_DELAY": 60,
+        "EZS_NSHARDS": 32,
+        "EZS_CACHE": true,
+        "EZS_VERBOSE": true,
+        "NODE_OPTIONS": "--max_old_space_size=1024",
+        "NODE_ENV": "production"
+    }
+}
