@@ -50,7 +50,7 @@
     "services/irc3-species",
     "services/pdf-text",
     "services/terms-extraction",
-    "services/text-clustering"
+    "services/text-clustering",
     "services/sciencemetrix-classification",
     "services/terms-extraction"
   ],
