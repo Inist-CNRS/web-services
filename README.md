@@ -34,6 +34,7 @@ All contributing instructions are in [CONTRIBUTING](CONTRIBUTING.md).
 - [data-workflow](./services/data-workflow) [![Docker Pulls](https://img.shields.io/docker/pulls/cnrsinist/ws-data-workflow.svg)](https://hub.docker.com/r/cnrsinist/ws-data-workflow/)
 - [data-wrapper](./services/data-wrapper) [![Docker Pulls](https://img.shields.io/docker/pulls/cnrsinist/ws-data-wrapper.svg)](https://hub.docker.com/r/cnrsinist/ws-data-wrapper/)
 - [diseases-ner](./services/diseases-ner) [![Docker Pulls](https://img.shields.io/docker/pulls/cnrsinist/ws-diseases-ner.svg)](https://hub.docker.com/r/cnrsinist/ws-diseases-ner/)
+- [domains-classifier](./services/domains-classifier) [![Docker Pulls](https://img.shields.io/docker/pulls/cnrsinist/ws-domains-classifier.svg)](https://hub.docker.com/r/cnrsinist/ws-domains-classifier/)
 - [hal-classifier](./services/hal-classifier) [![Docker Pulls](https://img.shields.io/docker/pulls/cnrsinist/ws-hal-classifier.svg)](https://hub.docker.com/r/cnrsinist/ws-hal-classifier/)
 - [irc3-species](./services/irc3-species) [![Docker Pulls](https://img.shields.io/docker/pulls/cnrsinist/ws-irc3-species.svg)](https://hub.docker.com/r/cnrsinist/ws-irc3-species/)
 - [pdf-text](./services/pdf-text) [![Docker Pulls](https://img.shields.io/docker/pulls/cnrsinist/ws-pdf-text.svg)](https://hub.docker.com/r/cnrsinist/ws-pdf-text/)
