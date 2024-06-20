@@ -14,24 +14,10 @@ COPY ./v1/model.dvc /dvc
 RUN dvc pull -v
 RUN cat model/* > model.pt
 
-FROM cnrsinist/ezs-python-pytorch-server:py3.9-no16-latest
+FROM cnrsinist/ezs-python-pytorch-server:py3.9-no16-1.1.2
 
 USER root
-# RUN apt-get update && apt-get install -y --no-install-recommends \
-#     build-essential \
-#     libopenblas-dev \
-#     libatlas-base-dev \
-#     liblapack-dev \
-#     gfortran \
-#     && rm -rf /var/lib/apt/lists/*
 
-# ENV HF_HOME=/app/public/.huggingface
-
-# COPY --chown=daemon:daemon requirements.txt /app/public/
-# # Install all python dependencies
-# RUN pip install --upgrade pip
-# RUN pip install --no-deps -r /app/public/requirements.txt
-# RUN pip install torch==1.10.2+cpu torchvision==0.11.3+cpu -f https://download.pytorch.org/whl/cpu/torch_stable.html
 RUN pip install Unidecode==1.3.7
 
 # Install all node dependencies
