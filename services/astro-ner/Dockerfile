@@ -14,30 +14,29 @@ COPY ./v1/model.dvc /dvc
 RUN dvc pull -v
 RUN cat model/* > model.pt
 
-FROM cnrsinist/ezs-python-server:py3.9-no16-1.0.10
+FROM cnrsinist/ezs-python-pytorch-server:py3.9-no16-latest
 
 USER root
-RUN apt-get update && apt-get install -y --no-install-recommends \
-    build-essential \
-    libopenblas-dev \
-    libatlas-base-dev \
-    liblapack-dev \
-    gfortran \
-    && rm -rf /var/lib/apt/lists/*
+# RUN apt-get update && apt-get install -y --no-install-recommends \
+#     build-essential \
+#     libopenblas-dev \
+#     libatlas-base-dev \
+#     liblapack-dev \
+#     gfortran \
+#     && rm -rf /var/lib/apt/lists/*
 
-ENV HF_HOME=/app/public/.huggingface
+# ENV HF_HOME=/app/public/.huggingface
 
-COPY --chown=daemon:daemon requirements.txt /app/public/
-# Install all python dependencies
-RUN pip install --upgrade pip
-RUN pip install --no-deps -r /app/public/requirements.txt
-RUN pip install torch==1.10.2+cpu torchvision==0.11.3+cpu -f https://download.pytorch.org/whl/cpu/torch_stable.html
+# COPY --chown=daemon:daemon requirements.txt /app/public/
+# # Install all python dependencies
+# RUN pip install --upgrade pip
+# RUN pip install --no-deps -r /app/public/requirements.txt
+# RUN pip install torch==1.10.2+cpu torchvision==0.11.3+cpu -f https://download.pytorch.org/whl/cpu/torch_stable.html
+RUN pip install Unidecode==1.3.7
 
 # Install all node dependencies
 RUN npm install \
     @ezs/storage@3.2.3
-#     @ezs/teeft@2.3.1 \
-#     @ezs/strings@1.0.3
 
 WORKDIR /app/public
 # Declare files to copy in .dockerignore
