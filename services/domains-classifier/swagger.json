@@ -26,7 +26,7 @@
             "description": "Classification en domaines scientifiques",
             "externalDocs": {
                 "description": "Plus de documentation",
-                "url": "https://github.com/inist-cnrs/web-services/tree/main/services/{service}"
+                "url": "https://github.com/inist-cnrs/web-services/tree/main/services/domains-classifier"
             }
         }
     ]

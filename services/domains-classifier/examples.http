@@ -1,4 +1,4 @@
-# These examples can be used directly in VSCode, using REST Client extension (humao.rest-client)
+# These examples can be used directly in VSCode, using HTTPYac extension (anweber.vscode-httpyac)
 # They are important, because used to generate the tests.hurl file.
 
 # Décommenter/commenter les lignes voulues pour tester localement

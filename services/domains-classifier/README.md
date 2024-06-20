@@ -5,11 +5,11 @@ Classification en domaines scientifiques
 Utilise une succession arborescente de modèles de type Fasttext pour prédire un code de classement Pascal/Francis
 
 Service de **classification de document en domaines scientifiques** qui utilise
-une succession arborescente de modéles de type Fasttext (embeddings et
-classification) pour predire un code de classement.  
-Les domaines scientifique (codes) proposés proviennent du plan de classement
-Pascal/Francis (https://pascal-francis.inist.fr/aide-discipline/).  Les modèles
-ont été entrainé sur 10 années de notices issues de la base **Pascal et
+une succession arborescente de modèles de type Fasttext (*embeddings* et
+classification) pour prédire un code de classement.  
+Les domaines scientifiques (codes) proposés proviennent du plan de classement
+Pascal/Francis (<https://pascal-francis.inist.fr/aide-discipline/>).  Les modèles
+ont été entraînés sur 10 années de notices issues de la base **Pascal et
 Francis** (https://pascal-francis.inist.fr/cms/?lang=fr), soit 2.961.162
 notices.
 
@@ -38,7 +38,7 @@ Produit en sortie un fichier json avec n codes
 
 ### Sollicitation du WebService
 
-<https://domains-classifier-2.services.inist.fr/v1/en/classify?indent=true&deep=2>
+<https://domains-classifier.services.inist.fr/v1/en/classify?indent=true&deep=2>
 
 avec `deep = n`, n est profondeur de la prédiction, fournit n codes, de [ 1 - 3 ] (3 par défaut)
 
