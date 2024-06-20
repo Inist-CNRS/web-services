@@ -1,7 +1,7 @@
 {
     "private": true,
     "name": "ws-astro-ner",
-    "version": "1.0.8",
+    "version": "1.0.9",
     "description": "Cette instance propose un outil de reconnaissance d'entités nommées en astronomie",
     "repository": {
         "type": "git",
