@@ -15,13 +15,13 @@ RUN --mount=type=secret,id=webdav_login \
     dvc remote add -d webdav-remote "$(cat /run/secrets/webdav_url)" && \
     dvc remote modify --local webdav-remote user "$(cat /run/secrets/webdav_login)" && \
     dvc remote modify --local webdav-remote password "$(cat /run/secrets/webdav_password)"
-COPY ./v1/best-model.pt.dvc /dvc
+COPY ./v1/v1.dvc /dvc
 RUN dvc pull -v
 
 ####
 # Build and install web services dependcies en files
 ####
-FROM cnrsinist/ezs-python-pytorch-server:py3.9-no16-1.1.2
+FROM cnrsinist/ezs-python-pytorch-server:py3.9-no16-1.1.3
 
 USER root
 
