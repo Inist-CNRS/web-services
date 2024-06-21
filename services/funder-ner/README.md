@@ -1,4 +1,4 @@
-# ws-funder-ner@0.0.0
+# ws-funder-ner@1.0.2
 
 Detection de financeurs
 
