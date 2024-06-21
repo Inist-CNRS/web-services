@@ -1,7 +1,7 @@
 # syntax=docker/dockerfile:1.2
 
 ####
-# Get all web services dvc files
+# Get all web service's dvc files
 ####
 FROM python:3.9-slim-bullseye as dvc-files
 WORKDIR /dvc
@@ -19,7 +19,7 @@ COPY ./v1/v1.dvc /dvc
 RUN dvc pull -v
 
 ####
-# Build and install web services dependcies en files
+# Build and install web services dependencies files
 ####
 FROM cnrsinist/ezs-python-pytorch-server:py3.9-no16-1.1.3
 
