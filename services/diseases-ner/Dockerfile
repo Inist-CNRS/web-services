@@ -14,7 +14,7 @@ RUN --mount=type=secret,id=webdav_login \
 COPY ./v1/diseases/models.dvc /dvc
 RUN dvc pull -v
 
-FROM cnrsinist/ezs-python-pytorch-server:py3.9-no16-1.1.1
+FROM cnrsinist/ezs-python-pytorch-server:py3.9-no16-1.1.2
 
 
 WORKDIR /app/public
