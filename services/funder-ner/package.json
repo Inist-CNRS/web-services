@@ -2,7 +2,7 @@
   "private": true,
   "name": "ws-funder-ner",
   "version": "1.0.2",
-  "description": "Detection de financeurs",
+  "description": "Détection de financeurs",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Inist-CNRS/web-services.git"
