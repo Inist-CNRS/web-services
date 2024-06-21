@@ -10,7 +10,13 @@
   "keywords": [
     "ezmaster"
   ],
-  "author": " <>",
+  "author": "Lucas Anki",
+  "contributors": [
+    {
+      "name": "Pierre M (AlasDiablo) - Migration",
+      "url": "https://github.com/AlasDiablo"
+    }
+  ],
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/Inist-CNRS/web-services/issues"
