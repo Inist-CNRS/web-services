@@ -10,6 +10,13 @@
   "keywords": [
     "ezmaster"
   ],
+  "author": "SCHNEIDER Stéphane",
+  "contributors": [
+    {
+      "name": "Pierre M (AlasDiablo) - Migration",
+      "url": "https://github.com/AlasDiablo"
+    }
+  ],
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/Inist-CNRS/web-services/issues"
