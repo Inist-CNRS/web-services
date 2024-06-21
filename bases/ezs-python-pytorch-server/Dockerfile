@@ -4,7 +4,7 @@ FROM cnrsinist/ezs-python-server:py3.9-no16-1.0.10
 ARG torch_ver=2.3.0
 ARG torchvision_ver=0.18.0
 ARG torchaudio_ver=2.3.0
-ARG scipy_ver=1.13.1
+ARG scipy_ver=1.10.1
 ARG transformers_ver=4.41.2
 ARG flair_ver=0.10
 
