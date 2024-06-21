@@ -21,7 +21,7 @@ RUN dvc pull -v
 ####
 # Build and install web services dependcies en files
 ####
-FROM cnrsinist/ezs-python-pytorch-server:py3.9-no16-latest
+FROM cnrsinist/ezs-python-pytorch-server:py3.9-no16-1.1.3
 
 USER root
 
