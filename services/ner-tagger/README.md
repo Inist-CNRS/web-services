@@ -1,4 +1,4 @@
-# ws-ner-tagger@0.0.0
+# ws-ner-tagger@1.0.6
 
 Détéction d'entités nommées dans des textes anglais
 
