@@ -19,6 +19,7 @@ RUN dvc pull -v
 FROM cnrsinist/ezs-python-pytorch-server:py3.9-no16-1.1.3
 
 ENV HF_HOME=/app/.cache/huggingface
+ENV NUMBA_CACHE_DIR=/tmp/numba_cache
 
 USER root
 # Install all python dependencies
@@ -30,7 +31,6 @@ RUN pip install --no-build-isolation \
     scikit-learn==1.4.1.post1 \
     prometheus-client==0.19.0
 
-ENV NUMBA_CACHE_DIR=/tmp/numba_cache
 # Declare files to copy in .dockerignore
 COPY --chown=daemon:daemon . /app/public/
 RUN mv /app/public/config.json /app && chmod a+w /app/config.json
