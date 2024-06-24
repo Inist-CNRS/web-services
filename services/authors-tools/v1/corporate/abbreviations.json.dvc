@@ -1,0 +1,5 @@
+outs:
+- md5: df25605b2c81635f62e62a0b191c70cd
+  size: 2326
+  hash: md5
+  path: abbreviations.json
