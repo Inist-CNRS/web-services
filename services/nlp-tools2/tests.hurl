@@ -1,16 +1,5 @@
-# These examples can be used directly in VSCode, using HTTPYac extension (anweber.vscode-httpyac)
-# They are important, because used to generate the tests.hurl file.
-
-# Décommenter/commenter les lignes voulues pour tester localement
-@host=http://localhost:31976
-# @host=https://nlp-tools2.services.istex.fr
-
-###
-# @name v1DetectLang
-# Détection de la langue d'un texte
-POST {{host}}/v1/detect-lang?indent=true HTTP/1.1
-Content-Type: application/json
-
+POST {{host}}/v1/detect-lang?indent=true
+content-type: application/json
 [
   {
     "id":1,
@@ -30,14 +19,51 @@ Content-Type: application/json
   }
 ]
 
-###
-# @name v1Lemma
-# Lemmatization of an english text
-POST {{host}}/v1/lemma?indent=true HTTP/1.1
-Content-Type: application/json
+HTTP 200
+[{
+    "id": 1,
+    "value": "en"
+},
+{
+    "id": 2,
+    "value": "en"
+},
+{
+    "id": 3,
+    "value": "fr"
+},
+{
+    "id": 4,
+    "value": "fr"
+},
+{
+    "id": 5,
+    "value": "fr"
+}]
 
+POST {{host}}/v1/lemma?indent=true
+content-type: application/json
 [
   {"id": 1, "value": ["rocks","are","images analysis"]},
   { "id": 2, "value": "Computers"},
   { "id":3,"value": "As of 2 April 2021, more than 129 million cases have been confirmed, with more than 2.82 million deaths attributed to COVID-19, making it one of the deadliest pandemics in history."}
 ]
+
+
+HTTP 200
+[{
+    "id": 1,
+    "value": [
+        "rock",
+        "be",
+        "image analysis"
+    ]
+},
+{
+    "id": 2,
+    "value": "computer"
+},
+{
+    "id": 3,
+    "value": "as of 2 April 2021 , more than 129 million case have be confirm , with more than 2.82 million death attribute to COVID-19 , make -PRON- one of the deadly pandemic in history ."
+}]
