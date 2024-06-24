@@ -16,13 +16,15 @@ COPY ./v1/all-MiniLM-L6-v2.dvc /dvc
 RUN dvc pull -v
 
 
-FROM cnrsinist/ezs-python-server:py3.9-no16-1.0.10
+FROM cnrsinist/ezs-python-pytorch-server:py3.9-no16-1.1.3
 
 ENV HF_HOME=/app/.cache/huggingface
 
 USER root
 # Install all python dependencies
-RUN pip install \
+RUN pip install --no-build-isolation \
+    --index-url https://download.pytorch.org/whl/cpu \
+    --extra-index-url https://pypi.org/simple \
     sentence-transformers==2.2.2 \
     umap-learn==0.5.5 \
     scikit-learn==1.4.1.post1 \
