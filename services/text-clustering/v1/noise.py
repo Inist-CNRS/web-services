@@ -107,15 +107,20 @@ clusterer.fit(cosine_dist_matrix)
 # extract infos
 res = []
 indice_in_cluster=0
+output = []
 for i in range(len_data):
-    if i in indice_out_cluster :
-        all_data[i]["value"] = {"cluster":0, "weight":0}
+    if i in indice_out_cluster:
+        output.append({"id":all_data[i]["id"], "value": all_data[i]["id"]})
     else:
-        all_data[i]["value"]={"cluster":int(clusterer.labels_[indice_in_cluster]+1), "weight":str(clusterer.probabilities_[indice_in_cluster])}
+        if clusterer.labels_[indice_in_cluster] ==-1:
+            output.append({"id":all_data[indice_in_cluster]["id"], "value": all_data[indice_in_cluster]["id"]})
         indice_in_cluster +=1 # Here we increment only if the row isn't noise, because they aren't count in "clusterer model"
 
-
 # Write all corpus in once
-for line in all_data:
-    sys.stdout.write(json.dumps(line))
+if len(output)==0:
+    sys.stdout.write(json.dumps({"value":"No noise in your datas"}))
     sys.stdout.write("\n")
+else :
+    for line in output:
+        sys.stdout.write(json.dumps(line))
+        sys.stdout.write("\n")

@@ -18,6 +18,8 @@ RUN dvc pull -v
 
 FROM cnrsinist/ezs-python-server:py3.9-no16-1.0.10
 
+ENV HF_HOME=/app/.cache/huggingface
+
 USER root
 # Install all python dependencies
 RUN pip install \
@@ -26,16 +28,10 @@ RUN pip install \
     scikit-learn==1.4.1.post1 \
     prometheus-client==0.19.0
 
-# Install all node dependencies
-RUN npm install \
-    "@ezs/analytics@2.3.2" \
-    "@ezs/basics@2.6.1" \
-    "@ezs/core@3.9.0" \
-    "@ezs/spawn@1.4.6"
-
 ENV NUMBA_CACHE_DIR=/tmp/numba_cache
 # Declare files to copy in .dockerignore
 COPY --chown=daemon:daemon . /app/public/
-RUN mv ./config.json /app && chmod a+w /app/config.json
+RUN mv /app/public/config.json /app && chmod a+w /app/config.json
+RUN mkdir /tmp/retrieve
 
 COPY --chown=daemon:daemon --from=dvc-files /dvc/all-MiniLM-L6-v2 /app/public/v1/all-MiniLM-L6-v2
