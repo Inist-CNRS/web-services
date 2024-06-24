@@ -39,33 +39,24 @@
     "bases/python-node",
     "services/address-kit",
     "services/affiliation-rnsr",
-<<<<<<< services/authors-tools/migrate
-    "services/authors-tools",
-    "services/base-line",
-    "services/base-line-python",
-    "services/biblio-ref",
-=======
     "services/affiliations-tools",
     "services/ark-tools",
     "services/astro-ner",
-    "services/base-line",
+    "services/authors-tools",
     "services/base-line-python",
+    "services/base-line",
     "services/biblio-ref",
     "services/biblio-tools",
->>>>>>> main
     "services/chem-ner",
     "services/data-computer",
     "services/data-termsuite",
     "services/data-workflow",
     "services/data-wrapper",
     "services/diseases-ner",
-<<<<<<< services/authors-tools/migrate
-=======
     "services/hal-classifier",
     "services/irc3-species",
     "services/pdf-text",
     "services/sciencemetrix-classification",
->>>>>>> main
     "services/terms-extraction"
   ],
   "dependencies": {
