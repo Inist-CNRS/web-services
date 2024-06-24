@@ -81,9 +81,7 @@ function updateBase() {
             run "npm -w \"$IMAGE_DIR\" version patch"
         fi
         if [ "$TYPE" = "bases" ]; then
-            run "npm -w \"$IMAGE_DIR\" run build"
-            run "npm -w \"$IMAGE_DIR\" run publish"
-            printf "\n***** Don't forget to run \"%s\" *******\n" "updateBase $IMAGE_DIR"
+            printf "\n***** Don't forget to run \"%s\" *******\n" "npm run update:images -- --dry-run $IMAGE_DIR"
         fi
         printf "\n"
     done

@@ -1,0 +1,33 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "astro-ner - Cette instance propose un outil de reconnaissance d'entités nommées en astronomie",
+        "description": "Ce web-service renvoie la liste des entités nommées en astronomie",
+        "version": "1.0.9",
+        "termsOfService": "https://services.istex.fr/",
+        "contact": {
+            "name": "Inist-CNRS",
+            "url": "https://www.inist.fr/nous-contacter/"
+        }
+    },
+    "servers": [
+        {
+            "x-comment": "Will be automatically completed by the ezs server."
+        },
+        {
+            "url": "http://vptdmservices.intra.inist.fr:49276/",
+            "description": "Latest version for production",
+            "x-profil": "Standard"
+        }
+    ],
+    "tags": [
+        {
+            "name": "astro-ner",
+            "description": "Cette instance propose un outil de reconnaissance d'entités nommées en astronomie",
+            "externalDocs": {
+                "description": "Plus de documentation",
+                "url": "https://github.com/inist-cnrs/web-services/tree/main/services/astro-ner"
+            }
+        }
+    ]
+}

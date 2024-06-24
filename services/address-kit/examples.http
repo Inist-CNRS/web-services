@@ -1,0 +1,39 @@
+# These examples can be used directly in VSCode, using REST Client extension
+# (humao.rest-client) or httpYac (anweber.vscode-httpyac)
+
+# To test locally, replace with
+@host = http://localhost:31976
+#@host = https://address-kit.services.istex.fr
+#@host = http://address-kit.tdmservices.intra.inist.fr
+
+###
+# @name v1Cnrsunit
+# @description Informations sur une adresse cnrs
+POST {{host}}/v1/cnrsunit/cnrsunit?indent=true HTTP/1.1
+Content-Type: application/json
+
+[
+{"id":1, "value":"université sciences et technologies bordeaux 1 institut national de physique nucléaire et de physique des particules du cnrs in2p3 umr5797"},
+{"id":2,"value":"uar76 / ups76 centre national de la recherche scientifique cnrs institut de l'information scientifique et technique inist"},
+{"id":3,"value":"centre de recherches sur la géologie des matières premières minérales et énergétiques cregu université de lorraine ul umr7359 centre national de la recherche scientifique"},
+{"id":4,"value":"umr_d161 institut de recherche pour le développement ird um34 aix marseille université amu umr7330 collège de france cdf institution institut national des sciences de l'univers insu cnrs umr7330 centre national de la recherche scientifique cnrs umr1410 institut national de recherche pour l'agriculture l'alimentation et l'environnement inrae centre européen de recherche et d'enseignement des géosciences de l'environnement cerege europôle méditerranéen de l'arbois"}
+]
+
+###
+# @name v1Affiliationcountry
+# @description détection d'un pays
+POST {{host}}/v1/affiliationcountry/affilcountry?indent=true HTTP/1.1
+Content-Type: application/json
+
+[
+{"id":1,"value":"université sciences et technologies bordeaux 1 institut national de physique nucléaire et de physique des particules du cnrs in2p3 UMR5797"},
+{"id":2,"value":"uar76 / ups76 centre national de la recherche scientifique cnrs institut de l'information scientifique et technique inist"},
+{"id":3,"value":"centre de recherches sur la géologie des matières premières minérales et énergétiques cregu université de lorraine ul umr7359 centre national de la recherche scientifique"},
+{"id":4,"value":"auf der morgenstelle 8, 72076 tuebingen"},
+{"id":5,"value":"z.i. de kermelin,16, rue ampère,  56017 Vannes"},
+{"id":6,"value":"campus de santa apolónia, 5300-253 bragança"},
+{"id":7,"value":"campus romanus de maron"}  ,
+{"id":8,"value":"Inist-CNRS, vandoeuvre les Nancy, France"}
+]
+
+###

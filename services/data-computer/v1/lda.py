@@ -7,6 +7,16 @@ import unicodedata
 import re
 import spacy
 
+### Test for stats with prometeus (0/2) :
+from prometheus_client import CollectorRegistry, Counter, push_to_gateway
+registry = CollectorRegistry()
+c = Counter('documents', 'Number of documents processed', registry=registry)
+job_name='lda'
+
+
+# Get the index of "p" param (given by the user) and assign it to "nbTopic". 15 if not found
+nbTopic = sys.argv[sys.argv.index('-p') + 1] if '-p' in sys.argv else 15
+
 nlp = spacy.load('en_core_web_sm', disable = ['parser','ner'])
 
 #stopwords
@@ -65,20 +75,18 @@ all_data = []
 for line in sys.stdin:
     data=json.loads(line)
     all_data.append(data)
+    
+    #### test for stats with prometeus : (1/2)
+    c.inc()
+    push_to_gateway('jobs-metrics.daf.intra.inist.fr', job=job_name, registry=registry)
+
 
 
 # following parameters depends of the size of the corpus : num_topics and num_iterations
 len_data = len(all_data)
-if len_data< 1001:
-    num_topics = 10
-    num_iterations=150
-elif len_data < 20001:
-    num_topics = 15
-    num_iterations=200
-else:
-    num_topics = 20
-    num_iterations=250
-
+num_iterations= max(200,len_data/100)
+if len_data < 200:
+    num_iterations = 100
 
 # training LDA
 texts = []
@@ -98,7 +106,7 @@ dictionary.filter_extremes(no_below=3,no_above=0.5)
 corpus = [dictionary.doc2bow(text) for text in texts]
 
 try:
-    lda_model = models.LdaModel(corpus, num_topics=num_topics, id2word=dictionary,iterations=num_iterations,alpha="symmetric", eta = "auto",minimum_probability=0.1)
+    lda_model = models.LdaModel(corpus, num_topics=nbTopic, id2word=dictionary,iterations=num_iterations,alpha="symmetric", eta = "auto",minimum_probability=0.2)
 except:
     index_without_value = [i for i in range(len_data)]
 
@@ -112,6 +120,10 @@ for i in range(len_data):
         sys.stdout.write(json.dumps(line))
         sys.stdout.write("\n")
     else:
+        #### test for stats with prometeus : (1/2)
+        c.inc()
+        push_to_gateway('jobs-metrics.daf.intra.inist.fr', job=job_name, registry=registry)
+
         line = all_data[i]
         doc = line["value"]
         doc_bow = dictionary.doc2bow(tokenize(uniformize(line["value"])))
