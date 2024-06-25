@@ -41,7 +41,7 @@ for line in sys.stdin:
         data['value'] = cld3.get_language(text).language  # ,round(cld3.get_language(text).probability,2)
 
     else:
-        data['value'] = 'unknown'
+        data['value'] = ''
 
     sys.stdout.write(json.dumps(data))
     sys.stdout.write('\n')

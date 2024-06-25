@@ -15,7 +15,7 @@ Ce service permet de détecter la langue d'un document
 Prend en entrée du JSON avec deux champs: `id` et `value`, et renvoie un JSON
 avec le code langue dans le champ `value`.
 
-> **Remarque**: quand on ne trouve pas la langue, la valeur est `unknown`
+> **Remarque**: quand on ne trouve pas la langue, la valeur est une chaine de caractère vide `""`
 
 #### Paramètres de v1/detect-lang
 
