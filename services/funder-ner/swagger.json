@@ -1,7 +1,7 @@
 {
     "openapi": "3.0.0",
     "info": {
-        "title": "funder-ner - Detection de financeurs",
+        "title": "funder-ner - Détection de financeurs",
         "description": "Détecte des financeurs dans un article en anglais et renvoie la liste des financeurs repérés.",
         "version": "1.0.2",
         "termsOfService": "https://services.istex.fr/",
@@ -23,7 +23,7 @@
     "tags": [
         {
             "name": "funder-ner",
-            "description": "Detection de financeurs",
+            "description": "Détection de financeurs",
             "externalDocs": {
                 "description": "Plus de documentation",
                 "url": "https://github.com/inist-cnrs/web-services/tree/main/services/funder-ner"
