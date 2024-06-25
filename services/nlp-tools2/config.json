@@ -1,7 +1,7 @@
 {
     "environnement": {
         "EZS_TITLE": "Outils de NLP",
-        "EZS_DESCRIPTION": "Cette instance propose des outils de traitement de la langue",
+        "EZS_DESCRIPTION": "Outils de traitement de la langue",
         "EZS_METRICS": true,
         "EZS_CONCURRENCY": 4,
         "EZS_CONTINUE_DELAY": 60,

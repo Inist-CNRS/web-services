@@ -2,7 +2,7 @@
     "openapi": "3.0.0",
     "info": {
         "title": "nlp-tools2 - Outils de NLP",
-        "description": "Cette instance propose des outils de traitement de la langue",
+        "description": "Outils de traitement de la langue",
         "version": "0.0.0",
         "termsOfService": "https://services.istex.fr/",
         "contact": {
