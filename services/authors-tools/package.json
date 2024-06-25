@@ -1,8 +1,8 @@
 {
     "private": true,
-    "name": "ws-astro-ner",
-    "version": "1.0.9",
-    "description": "Cette instance propose un outil de reconnaissance d'entités nommées en astronomie",
+    "name": "ws-authors-tools",
+    "version": "2.5.3",
+    "description": "Les web services qui se lancent sur le champs 'authors'",
     "repository": {
         "type": "git",
         "url": "git+https://github.com/Inist-CNRS/web-services.git"

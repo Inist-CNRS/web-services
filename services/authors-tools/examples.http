@@ -1,0 +1,60 @@
+# These examples can be used directly in VSCode, using HTTPYac extension (anweber.vscode-httpyac)
+# They are important, because used to generate the tests.hurl file.
+
+# Décommenter/commenter les lignes voulues pour tester localement
+@host=http://localhost:31976
+# @host=https://authors-tools.services.istex.fr
+
+###
+# @name v1OrcidDisambiguation
+# Désambiguisation d'auteur orcid
+POST {{host}}/v1/orcid-disambiguation/orcidDisambiguation?indent=true HTTP/1.1
+Content-Type: application/json
+
+[
+    {
+        "id":"1",
+        "value":[{"firstName" : "Rubén", "lastName" : "Vázquez-Cárdenas", "coAuthors" : ["Juan pablo Martínez-Pastor"]}]
+    }
+]
+
+
+###
+# @name v1FirstNameGender
+# Détection du genre d'un prénom
+POST {{host}}/v1/first-name/gender?indent=true HTTP/1.1
+Content-Type: application/json
+
+[
+    {"id": "1", "value": "Valentyne, Dupont"},
+    {"id": "2", "value": "Amke"},
+    {"id": "3", "value": "Seong-Eun"},
+    {"id": "4", "value": "James A."}
+]
+
+###
+# @name v1CorporatePrivatePublic
+# Détection d'affiliation privé
+POST {{host}}/v1/corporate/private-public?indent=true HTTP/1.1
+Content-Type: application/json
+
+[
+    {
+        "id": "1",
+        "value": "Abeeway, F-06903 Sophia Antipolis, France"
+    },
+    {
+        "id": "2",
+        "value": "AiryLab SARL, 34 Rue Jean Baptiste Malon, F-04800 Greoux Les Bains, France"
+    },
+    {
+        "id": "3",
+        "value": "4G TECHNOL, F-06370 Mouans Sartoux, France"
+    },
+    {
+        "id": "4",
+        "value": "Univ Cote dAzur, INRIA, Ansys, Nice, France"
+    }
+]
+
+###
