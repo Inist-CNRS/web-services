@@ -23,7 +23,7 @@
     "tags": [
         {
             "name": "ner-tagger",
-            "description": "Détéction d'entités nommées dans des textes",
+            "description": "Détection d'entités nommées dans des textes",
             "externalDocs": {
                 "description": "Plus de documentation",
                 "url": "https://github.com/inist-cnrs/web-services/tree/main/services/ner-tagger"
