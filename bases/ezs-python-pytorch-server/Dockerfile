@@ -51,7 +51,7 @@ RUN apt update && apt install -y build-essential make gcc && \
     apt remove -y --purge build-essential make gcc && \
     apt autoremove -y
 
-# Make sure that .npm folder is readable by the daemon user
+# Make sure that .flair folder is readable by the daemon user
 WORKDIR /usr/sbin/.flair
 RUN chmod -R a+rwx /usr/sbin/.flair
 
