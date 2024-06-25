@@ -6,3 +6,10 @@ content-type: application/json
     "value": "This study was funded by the CNRS and INIST."
   }
 ]
+
+
+HTTP 200
+[{
+    "id": 1,
+    "value": "['CNRS', 'INIST']"
+}]
