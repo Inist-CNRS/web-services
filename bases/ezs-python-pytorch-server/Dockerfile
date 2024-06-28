@@ -51,6 +51,11 @@ RUN apt update && apt install -y build-essential make gcc && \
     apt remove -y --purge build-essential make gcc && \
     apt autoremove -y
 
+# Make sure that .flair folder is readable by the daemon user
+WORKDIR /usr/sbin/.flair
+RUN chmod -R a+rwx /usr/sbin/.flair
+
+WORKDIR /app
 # Create a cache directory
 RUN mkdir /app/.cache
 
@@ -58,7 +63,8 @@ RUN mkdir /app/.cache
 RUN chown daemon:daemon -R /app
 
 # Set the transformers cache directory
-ENV TRANSFORMERS_CACHE=/app/.cache/transformers
+# ENV TRANSFORMERS_CACHE=/app/.cache/transformers # Old transformers cache directory environement variables
+ENV HF_HOME=/app/.cache/transformers
 
 EXPOSE 31976
 # See .dockerignore to see what files are copied
