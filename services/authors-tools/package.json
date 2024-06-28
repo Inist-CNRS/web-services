@@ -1,8 +1,8 @@
 {
     "private": true,
-    "name": "ws-diseases-ner",
-    "version": "1.0.13",
-    "description": "Trouve des entités nommées de maladies dans un texte",
+    "name": "ws-authors-tools",
+    "version": "2.5.3",
+    "description": "Les web services qui se lancent sur le champs 'authors'",
     "repository": {
         "type": "git",
         "url": "git+https://github.com/Inist-CNRS/web-services.git"
@@ -10,7 +10,7 @@
     "keywords": [
         "ezmaster"
     ],
-    "author": "Léo GAILLARD <leo.gaillard@inist.fr>",
+    "author": "Justine Revol <justine.revol@inist.fr>",
     "license": "MIT",
     "bugs": {
         "url": "https://github.com/Inist-CNRS/web-services/issues"
