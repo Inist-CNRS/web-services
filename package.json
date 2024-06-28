@@ -54,6 +54,7 @@
     "services/data-wrapper",
     "services/diseases-ner",
     "services/domains-classifier",
+    "services/funder-ner",
     "services/hal-classifier",
     "services/irc3-species",
     "services/nlp-tools2",
