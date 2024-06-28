@@ -38,6 +38,7 @@ All contributing instructions are in [CONTRIBUTING](CONTRIBUTING.md).
 - [domains-classifier](./services/domains-classifier) [![Docker Pulls](https://img.shields.io/docker/pulls/cnrsinist/ws-domains-classifier.svg)](https://hub.docker.com/r/cnrsinist/ws-domains-classifier/)
 - [hal-classifier](./services/hal-classifier) [![Docker Pulls](https://img.shields.io/docker/pulls/cnrsinist/ws-hal-classifier.svg)](https://hub.docker.com/r/cnrsinist/ws-hal-classifier/)
 - [irc3-species](./services/irc3-species) [![Docker Pulls](https://img.shields.io/docker/pulls/cnrsinist/ws-irc3-species.svg)](https://hub.docker.com/r/cnrsinist/ws-irc3-species/)
+- [nlp-tools2](./services/nlp-tools2) [![Docker Pulls](https://img.shields.io/docker/pulls/cnrsinist/ws-nlp-tools2.svg)](https://hub.docker.com/r/cnrsinist/ws-nlp-tools2/)
 - [pdf-text](./services/pdf-text) [![Docker Pulls](https://img.shields.io/docker/pulls/cnrsinist/ws-pdf-text.svg)](https://hub.docker.com/r/cnrsinist/ws-pdf-text/)
 - [sciencemetrix-classification](./services/sciencemetrix-classification) [![Docker Pulls](https://img.shields.io/docker/pulls/cnrsinist/ws-sciencemetrix-classification.svg)](https://hub.docker.com/r/cnrsinist/ws-sciencemetrix-classification/)
 - [terms-extraction](./services/terms-extraction) [![Docker Pulls](https://img.shields.io/docker/pulls/cnrsinist/ws-terms-extraction.svg)](https://hub.docker.com/r/cnrsinist/ws-terms-extraction/)

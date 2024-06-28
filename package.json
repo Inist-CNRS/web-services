@@ -56,6 +56,7 @@
     "services/domains-classifier",
     "services/hal-classifier",
     "services/irc3-species",
+    "services/nlp-tools2",
     "services/pdf-text",
     "services/sciencemetrix-classification",
     "services/terms-extraction"
