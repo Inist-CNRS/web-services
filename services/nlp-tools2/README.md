@@ -1,4 +1,4 @@
-# ws-nlp-tools2@0.0.0
+# ws-nlp-tools2@2.0.4
 
 Outils de NLP
 
