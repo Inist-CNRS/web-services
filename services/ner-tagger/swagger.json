@@ -3,7 +3,7 @@
     "info": {
         "title": "ner-tagger - Détection d'entités nommées dans des textes",
         "description": "Détecter des entités géographiques dans des textes anglais et d'organismes scolaires, de localisation dans des bulletins administratifs de l'instruction publique",
-        "version": "1.0.7",
+        "version": "1.0.8",
         "termsOfService": "https://services.istex.fr/",
         "contact": {
             "name": "Inist-CNRS",
