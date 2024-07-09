@@ -1,4 +1,4 @@
-# ezs-python-pytorch-server@1.1.4
+# ezs-python-pytorch-server@1.1.5
 
 Ce répertoire contient de quoi construire une image Docker lançant un serveur
 [ezs](https://github.com/Inist-CNRS/ezs) ayant la possibilité de lancer des
