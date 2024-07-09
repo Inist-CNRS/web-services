@@ -3,7 +3,7 @@
 	"info": {
 		"title": "base-line - Services dédiés aux tests",
 		"summary": "Propose plusieurs services ne proposant aucun traitement ce qui permet de vérfier ou mesurer les connexions ou les temps de réponse",
-		"version": "1.0.12",
+		"version": "1.0.13",
 		"termsOfService": "https://services.istex.fr/",
 		"contact": {
 			"name": "Inist-CNRS",
