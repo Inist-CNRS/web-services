@@ -1,4 +1,4 @@
-# ws-data-workflow@1.2.8
+# ws-data-workflow@1.3.0
 
 Enchaînement asynchrone de traitements
 
@@ -33,7 +33,7 @@ Script à lancer pour ces tests là, en local:
 ```bash
 $ npm -w services/data-workflow test
 
-> ws-data-workflow@1.2.8 test
+> ws-data-workflow@1.3.0 test
 > hurl --test --variable host=http://localhost:31976 real-tests.hurl
 
 real-tests.hurl: Running [1/1]
