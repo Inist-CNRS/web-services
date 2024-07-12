@@ -1,33 +1,33 @@
 {
-	"openapi": "3.0.0",
-	"info": {
-		"title": "chem-ner - Trouve des entités nommées de Chimie dans un texte",
-		"summary": "Renvoie un Json composé comportant d'un champ \"chemical\" et d'un champ \"chemical_disambiguisate\"",
-		"version": "3.0.8",
-		"termsOfService": "https://services.istex.fr/",
-		"contact": {
-			"name": "Inist-CNRS",
-			"url": "https://www.inist.fr/nous-contacter/"
-		}
-	},
-	"servers": [
-		{
-			"x-comment": "Will be automatically completed by the ezs server."
-		},
-		{
-			"url": "http://vptdmservices.intra.inist.fr:49258/",
-			"description": "Latest version for production",
-			"x-profil": "Standard"
-		}
-	],
-	"tags": [
-		{
-			"name": "chem-ner",
-			"description": "Trouve des entités nommées de Chimie dans un texte",
-			"externalDocs": {
-				"description": "Plus de documentation",
-				"url": "https://github.com/inist-cnrs/web-services/tree/main/services/chem-ner"
-			}
-		}
-	]
+    "openapi": "3.0.0",
+    "info": {
+        "title": "chem-ner - Trouve des entités nommées de Chimie dans un texte",
+        "summary": "Renvoie un Json composé comportant d'un champ \"chemical\" et d'un champ \"chemical_disambiguisate\"",
+        "version": "3.0.8",
+        "termsOfService": "https://services.istex.fr/",
+        "contact": {
+            "name": "Inist-CNRS",
+            "url": "https://www.inist.fr/nous-contacter/"
+        }
+    },
+    "servers": [
+        {
+            "x-comment": "Will be automatically completed by the ezs server."
+        },
+        {
+            "url": "http://vptdmservices.intra.inist.fr:49289/",
+            "description": "Latest version for production",
+            "x-profil": "Standard"
+        }
+    ],
+    "tags": [
+        {
+            "name": "chem-ner",
+            "description": "Trouve des entités nommées de Chimie dans un texte",
+            "externalDocs": {
+                "description": "Plus de documentation",
+                "url": "https://github.com/inist-cnrs/web-services/tree/main/services/chem-ner"
+            }
+        }
+    ]
 }
