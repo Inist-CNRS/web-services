@@ -1,7 +1,7 @@
 {
   "private": true,
   "name": "ws-funder-ner",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Détection de financeurs",
   "repository": {
     "type": "git",

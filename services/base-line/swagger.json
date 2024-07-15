@@ -1,33 +1,33 @@
 {
-	"openapi": "3.1.0",
-	"info": {
-		"title": "base-line - Services dédiés aux tests",
-		"summary": "Propose plusieurs services ne proposant aucun traitement ce qui permet de vérfier ou mesurer les connexions ou les temps de réponse",
-		"version": "1.0.12",
-		"termsOfService": "https://services.istex.fr/",
-		"contact": {
-			"name": "Inist-CNRS",
-			"url": "https://www.inist.fr/nous-contacter/"
-		}
-	},
-	"servers": [
-		{
-			"x-comment": "Will be automatically completed by the ezs server."
-		},
-		{
-			"url": "http://vptdmservices.intra.inist.fr:49225/",
-			"description": "Latest version for production",
-			"#DISABLED#x-profil": "Standard"
-		}
-	],
-	"tags": [
-		{
-			"name": "base-line",
-			"description": "Services dédiés aux tests",
-			"externalDocs": {
-				"description": "Plus de documentation",
-				"url": "https://gitbucket.inist.fr/tdm/web-services/tree/master/base-line"
-			}
-		}
-	]
+    "openapi": "3.1.0",
+    "info": {
+        "title": "base-line - Services dédiés aux tests",
+        "summary": "Propose plusieurs services ne proposant aucun traitement ce qui permet de vérfier ou mesurer les connexions ou les temps de réponse",
+        "version": "1.0.13",
+        "termsOfService": "https://services.istex.fr/",
+        "contact": {
+            "name": "Inist-CNRS",
+            "url": "https://www.inist.fr/nous-contacter/"
+        }
+    },
+    "servers": [
+        {
+            "x-comment": "Will be automatically completed by the ezs server."
+        },
+        {
+            "url": "http://vptdmservices.intra.inist.fr:49282/",
+            "description": "Latest version for production",
+            "x-profil": "Standard"
+        }
+    ],
+    "tags": [
+        {
+            "name": "base-line",
+            "description": "Services dédiés aux tests",
+            "externalDocs": {
+                "description": "Source",
+                "url": "https://github.com/Inist-CNRS/web-services/tree/main/services/base-line"
+            }
+        }
+    ]
 }

@@ -14,7 +14,7 @@ RUN --mount=type=secret,id=webdav_login \
 COPY ./v3/affiliation/models.dvc /dvc
 RUN dvc pull -v
 
-FROM cnrsinist/ezs-python-server:py3.9-no16-1.0.10
+FROM cnrsinist/ezs-python-server:py3.9-no16-1.0.11
 
 USER root
 # Install all python dependencies

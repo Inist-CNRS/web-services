@@ -1,7 +1,7 @@
 {
     "private": true,
     "name": "ws-terms-extraction",
-    "version": "1.6.0",
+    "version": "1.6.1",
     "description": "Extraction de termes",
     "repository": {
         "type": "git",
