@@ -44,6 +44,7 @@ RUN npm install \
 
 # Declare files to copy in .dockerignore
 COPY --chown=daemon:daemon . /app/public/
+RUN chmod a+w /app/public/config.json && mv /app/public/config.json /app
 
 # Clean-up
 RUN apt remove -y unzip curl autoconf automake libtool pkg-config build-essential git && \
