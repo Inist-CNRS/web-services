@@ -3,7 +3,7 @@
     "info": {
         "title": "data-wrapper - Conversions en fichier corpus compressé",
         "summary": "Les fichiers corpus compressés sont compatibles avec tous les traitements TDM dédiés aux corpus (services web asynchrone)",
-        "version": "1.3.5",
+        "version": "1.3.6",
         "termsOfService": "https://services.istex.fr/",
         "contact": {
             "name": "Inist-CNRS",
