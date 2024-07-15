@@ -6,7 +6,8 @@ USER root
 RUN pip install \
     quantulum3==0.9.0 \
     scikit-learn==1.2.2 \
-    stemming==1.0.1
+    stemming==1.0.1 \
+    numpy==1.26.3
 
 # Install all node dependencies
 RUN npm install \
@@ -16,3 +17,5 @@ RUN npm install \
 WORKDIR /app/public
 # Declare files to copy in .dockerignore
 COPY --chown=daemon:daemon . /app/public/
+
+RUN chmod a+w /app/public/config.json && mv /app/public/config.json /app
