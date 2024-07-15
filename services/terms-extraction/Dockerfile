@@ -17,5 +17,4 @@ RUN npm install \
 WORKDIR /app/public
 # Declare files to copy in .dockerignore
 COPY --chown=daemon:daemon . /app/public/
-
-RUN chmod a+rwx /app/config.json
+RUN mv ./config.json /app && chmod a+w /app/config.json
