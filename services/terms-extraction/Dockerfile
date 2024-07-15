@@ -18,4 +18,4 @@ WORKDIR /app/public
 # Declare files to copy in .dockerignore
 COPY --chown=daemon:daemon . /app/public/
 
-RUN chmod a+w /app/public/config.json && mv /app/public/config.json /app
+RUN chmod a+rwx /app/config.json
