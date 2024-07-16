@@ -13,7 +13,7 @@ on:
 
 jobs:
   test-on-branch:
-    if: ${{ ! startsWith(github.ref, 'refs/heads/services/') }}
+    if: ${{ startsWith(github.ref, 'refs/heads/services/') }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout from Git
@@ -42,7 +42,7 @@ jobs:
           bin/test-on-branch.sh ${{ github.ref_name }}
 
   test-on-tag:
-    if: ${{ ! startsWith(github.ref, 'refs/tags/ws-') }}
+    if: ${{ startsWith(github.ref, 'refs/tags/ws-') }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout from Git
@@ -71,7 +71,7 @@ jobs:
           bin/test-on-tag.sh ${{ github.ref_name }}
 
   build-on-tag:
-    if: ${{ ! startsWith(github.ref, 'refs/tags/ws-') }}
+    if: ${{ startsWith(github.ref, 'refs/tags/ws-') }}
     needs:
       - test-on-tag
     runs-on: ubuntu-latest
