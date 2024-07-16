@@ -1,0 +1,103 @@
+name: WS-CI
+
+on:
+  push:
+    branches:
+      - "services/*/*"
+    paths-ignore:
+      - "**.md"
+      - "**/swagger.json"
+    tags:
+      - "ws-*@*"
+
+
+jobs:
+  test-on-branch:
+    if: ${{ ! startsWith(github.ref, 'refs/heads/services/') }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout from Git
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install Hurl
+        run: |
+          curl --location --remote-name https://github.com/Orange-OpenSource/hurl/releases/download/4.1.0/hurl_4.1.0_amd64.deb
+          sudo dpkg -i hurl_4.1.0_amd64.deb
+          hurl --version
+
+      - name: Build .env from Github Actions secrets
+        shell: bash
+        run: |
+          bin/create-env.sh ${{ github.ref_name }} ${{ secrets.WEBDAV_LOGIN }} ${{ secrets.WEBDAV_PASSWORD }} ${{ secrets.WEBDAV_URL }} ${{secrets.OPENALEX_API_KEY}} ${{secrets.UNPAYWALL_API_KEY}}
+          ls -l services/*/.env
+
+      - name: Build Docker Image & Test
+        shell: bash
+        run: |
+          bin/test-on-branch.sh ${{ github.ref_name }}
+
+  test-on-tag:
+    if: ${{ ! startsWith(github.ref, 'refs/tags/ws-') }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout from Git
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install Hurl
+        run: |
+          curl --location --remote-name https://github.com/Orange-OpenSource/hurl/releases/download/4.1.0/hurl_4.1.0_amd64.deb
+          sudo dpkg -i hurl_4.1.0_amd64.deb
+          hurl --version
+
+      - name: Build .env from Github Actions secrets
+        shell: bash
+        run: |
+          bin/create-env.sh ${{ github.ref_name }} ${{ secrets.WEBDAV_LOGIN }} ${{ secrets.WEBDAV_PASSWORD }} ${{ secrets.WEBDAV_URL }} ${{secrets.OPENALEX_API_KEY}} ${{secrets.UNPAYWALL_API_KEY}}
+          ls -l services/*/.env
+
+      - name: Build Docker Image & Test
+        shell: bash
+        run: |
+          bin/test-on-tag.sh ${{ github.ref_name }}
+
+  build-on-tag:
+    if: ${{ ! startsWith(github.ref, 'refs/tags/ws-') }}
+    needs:
+      - test-on-tag
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout from Git
+        uses: actions/checkout@v4
+
+      - name: Docker Login
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Build .env from Github Actions secrets
+        shell: bash
+        run: |
+          bin/create-env.sh ${{ github.ref_name }} ${{ secrets.WEBDAV_LOGIN }} ${{ secrets.WEBDAV_PASSWORD }} ${{ secrets.WEBDAV_URL }} ${{secrets.OPENALEX_API_KEY}} ${{secrets.UNPAYWALL_API_KEY}}
+          ls -l services/*/.env
+
+      - name: Build & Push Docker Image
+        shell: bash
+        run: |
+          echo "Building and pushing image for ${{ github.ref_name }}"
+          bin/build-and-push.sh ${{ github.ref_name }}
