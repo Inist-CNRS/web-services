@@ -10,7 +10,7 @@ HTTP 200
     "value": "a l'ecole"
 },
 {
-    "value": "ou"
+    "value": "ou-"
 }]
 
 POST {{host}}/v1/no-accent2?indent=true
