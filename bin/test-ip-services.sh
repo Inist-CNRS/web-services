@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-# Usage: bin/test-services.sh [service-name]+
+# Usage: bin/test-ip-services.sh [service-name]+
 
 set -u # No uninitialized variable
 set -o pipefail # Fail at first pipe error
@@ -16,7 +16,9 @@ for SERVICE in "${SERVICES[@]}"; do
         continue
     fi
 
-    npx hurl --test --continue-on-error --variable host="https://$SERVICE.services.istex.fr" "services/$SERVICE/tests.hurl"
+    SERVICE_LOCAL_URL=$(jq -r '.servers[1].url' "services/$SERVICE/swagger.json")
+    SERVICE_LOCAL_IP=$(echo "$SERVICE_LOCAL_URL" | sed -e 's|vptdmservices.intra.inist.fr|192.168.128.151|' -e 's|vptdmjobs.intra.inist.fr|192.168.128.74|')
+    npx hurl --test --continue-on-error --variable host="$SERVICE_LOCAL_IP" "services/$SERVICE/tests.hurl"
 done
 
 exit 0
