@@ -38,4 +38,4 @@ jobs:
       - name: Build Docker Image & Test
         shell: bash
         run: |
-          bin/build-and-test.sh ${{ github.ref_name }}
+          bin/test-on-branch.sh ${{ github.ref_name }}
