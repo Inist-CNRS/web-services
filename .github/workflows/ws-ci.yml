@@ -10,13 +10,9 @@ on:
     tags:
       - "ws-*@*"
 
-concurrency:
-  group: ${{ github.sha }}
-  cancel-in-progress: ${{ startsWith(github.ref, 'refs/tags/ws-') }}
-
 jobs:
   test-on-branch:
-    if: ${{ startsWith(github.ref, 'refs/heads/services/') && !startsWith(github.ref, 'refs/tags/ws-') }}
+    if: ${{ startsWith(github.ref, 'refs/heads/services/') }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout from Git
