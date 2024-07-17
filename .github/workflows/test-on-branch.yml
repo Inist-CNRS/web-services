@@ -1,6 +1,6 @@
 # .github/workflows/docker-build-on-push.yml
 
-name: Docker Build & Test
+name: Build & Test
 
 on:
   push:
@@ -11,7 +11,7 @@ on:
       - "**/swagger.json"
 
 jobs:
-  test:
+  test-on-commit:
     runs-on: ubuntu-latest
 
     steps:

@@ -1,6 +1,6 @@
 # .github/workflows/docker-build-on-tag.yml
 
-name: Docker Build & Push
+name: Build, Test & Push
 
 on:
   push:
