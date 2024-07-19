@@ -25,3 +25,5 @@ WORKDIR /app/public
 COPY --chown=daemon:daemon . /app/public
 
 COPY --chown=daemon:daemon --from=build1 /dvc/models /app/public/v3/affiliation/models
+
+RUN chmod a+w /app/public/config.json && mv /app/public/config.json /app
