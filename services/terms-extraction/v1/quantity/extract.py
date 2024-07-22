@@ -1,29 +1,34 @@
-#!/usr/bin/env python3
-from quantulum3 import parser
+from CQE import CQE
 import sys
 import json
+from unidecode import unidecode
+
+parser = CQE.CQE(overload=True)
 
 for line in sys.stdin:
+    output_data = []
     data = json.loads(line)
     text = data['value']
 
     sentences = text.split(". ")
-
-    entity = []
-    quantity = []
-    unit = []
+    
     for sentence in sentences:
         quantities = parser.parse(sentence)
-        for quant in quantities:
-            if quant.unit.name != "dimensionless" :
-                entity.append(quant.surface)
-                quantity.append(quant.value)
-                unit.append(quant.unit.name)
+        for quant in quantities :
+            if quant.unit.scientific == True :
+                referred_concepts = quant.referred_concepts.get_nouns()
+                referred_list = []
+                for concept in referred_concepts:
+                    for element in concept:
+                        referred_list.append(str(element))
 
-    pairs = zip(entity,quantity,unit)
-    result = []
-    for pair in pairs :
-        result.append(pair)
-    data['value'] = result
-    sys.stdout.write(json.dumps(data))
+                quantity_data = {
+                    "quantity": quant.value.get_str_value(),
+                    "unit": str(quant.unit),
+                    "detailed_unit": quant.unit.unit_surfaces_forms,
+                    "related_concept": referred_list
+                }
+                output_data.append(quantity_data)
+    data['value'] = output_data
+    sys.stdout.write(json.dumps(data,ensure_ascii=False))
     sys.stdout.write('\n')
