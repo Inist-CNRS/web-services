@@ -4,7 +4,7 @@ USER root
 
 # Install all python dependencies
 RUN pip install \
-    quantulum3==0.9.0 \
+    CQE==2.0.2 \
     scikit-learn==1.2.2 \
     stemming==1.0.1
 
