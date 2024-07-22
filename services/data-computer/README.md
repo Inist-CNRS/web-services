@@ -261,16 +261,18 @@ cat output.json |curl --data-binary @- "http://localhost:31976/v1/retrieve" > ou
 
 ### v1/corpus-similarity
 
-Compare des petits documents (Titre, phrases, petit abstractes) entre eux, et renvoit pour chaque document les documents qui lui sont similaire. Il est conseillé d'utiliser cette route avec au moins 6-7 documents dans le corpus.
+Compare des petits documents (Titre, phrases, petits *abstracts*) entre eux, et renvoie pour chaque document les documents qui lui sont similaires. 
+Il est conseillé d'utiliser cette route avec au moins 6-7 documents dans le corpus.
 
-Il existe un paramètre optionnel "output" pour choisir le type de sortie en fonction de sa valeur:
-- 0 (par défaut) : L'algorithme choisit automatiquement les documents les plus similaires à chaque document
-- 1 : L'algorithme renvoit pour chaque document tout les documents, classé par ordre de proximité (Les plus similaires en premier)
-- n (avec n un entier plus grand que 1) : L'algorithme renvoit pour chaque document au plus les n documents les plus proches, classé par ordre de proximité (Les plus similaires en premier), ainsi que le score de similarité associé à chaque document.
+Il existe un paramètre optionnel `output` pour choisir le type de sortie en fonction de sa valeur:
+- 0 (par défaut) : l'algorithme choisit automatiquement les documents les plus similaires à chaque document
+- 1 : l'algorithme renvoie pour chaque document tous les documents, classés par ordre de proximité (les plus similaires en premier)
+- *n* (avec *n* un entier plus grand que 1) : l'algorithme renvoie pour chaque document les *n* documents les plus proches, classés par ordre de proximité (les plus similaires en premier), ainsi que le score de similarité associé à chaque document.
+par exemple en utilisant `example-similarity-json.tar.gz` avec le paramètre output par défaut (0), obtiendra :
 
 > **Attention** : Le champ ID est utilisé comme référence de chaque document. 
 
-par exemple en utilisant example-similarity-json.tar.gz avec le paramètre output par défaut (0), obtiendra :
+par exemple en utilisant `example-similarity-json.tar.gz` avec le paramètre output par défaut (0), obtiendra :
 
 ```json
 [
