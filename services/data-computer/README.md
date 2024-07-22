@@ -256,3 +256,157 @@ cat input.tar.gz |curl --data-binary @-  -H "X-Hook: https://webhook.site/dce2fe
 
 # When the corpus is processed, get the result
 cat output.json |curl --data-binary @- "http://localhost:31976/v1/retrieve" > output.tar.gz
+```
+
+
+### v1/similarity
+
+Compare des petits documents (Titre, phrases, petit abstractes) entre eux, et renvoit pour chaque document les documents qui lui sont similaire. Il est conseillé d'utiliser cette route avec au moins 6-7 documents dans le corpus.
+
+Il existe un paramètre optionnel "output" pour choisir le type de sortie en fonction de sa valeur:
+- 0 (par défaut) : L'algorithme choisit automatiquement les documents les plus similaires à chaque document
+- 1 : L'algorithme renvoit pour chaque document tout les documents, classé par ordre de proximité (Les plus similaires en premier)
+- n (avec n un entier plus grand que 1) : L'algorithme renvoit pour chaque document au plus les n documents les plus proches, classé par ordre de proximité (Les plus similaires en premier), ainsi que le score de similarité associé à chaque document.
+
+par exemple en utilisant example-similarity-json.tar.gz avec le paramètre output par défaut (0), obtiendra :
+
+```json
+[
+  {
+    "id": "Titre 1",
+    "value": {
+      "similarity": [
+        "Titre 4",
+        "Titre 2"
+      ],
+      "score": [
+        0.9411764705882353,
+        0.9349112426035503
+      ]
+    }
+  },
+  {
+    "id": "Titre 2",
+    "value": {
+      "similarity": [
+        "Titre 1"
+      ],
+      "score": [
+        0.9349112426035503
+      ]
+    }
+  },
+  {
+    "id": "Titre 3",
+    "value": {
+      "similarity": [
+        "Titre 4"
+      ],
+      "score": [
+        0.8888888888888888
+      ]
+    }
+  },
+  {
+    "id": "Titre 4",
+    "value": {
+      "similarity": [
+        "Titre 1"
+      ],
+      "score": [
+        0.9411764705882353
+      ]
+    }
+  }
+]
+```
+
+Avec le paramètre output=3, on obtiendra : 
+
+```json
+[
+  {
+    "id": "Titre 1",
+    "value": {
+      "similarity": [
+        "Titre 4",
+        "Titre 2",
+        "Titre 3"
+      ],
+      "score": [
+        0.9411764705882353,
+        0.9349112426035503,
+        0.8757396449704142
+      ]
+    }
+  },
+  {
+    "id": "Titre 2",
+    "value": {
+      "similarity": [
+        "Titre 1",
+        "Titre 4",
+        "Titre 3"
+      ],
+      "score": [
+        0.9349112426035503,
+        0.8888888888888888,
+        0.8651685393258427
+      ]
+    }
+  },
+  {
+    "id": "Titre 3",
+    "value": {
+      "similarity": [
+        "Titre 4",
+        "Titre 1",
+        "Titre 2"
+      ],
+      "score": [
+        0.8888888888888888,
+        0.8757396449704142,
+        0.8651685393258427
+      ]
+    }
+  },
+  {
+    "id": "Titre 4",
+    "value": {
+      "similarity": [
+        "Titre 1",
+        "Titre 3",
+        "Titre 2"
+      ],
+      "score": [
+        0.9411764705882353,
+        0.8888888888888888,
+        0.8888888888888888
+      ]
+    }
+  }
+]
+```
+
+#### Paramètre(s) URL
+
+| nom                 | description                                 |
+| ------------------- | ------------------------------------------- |
+| indent (true/false) | Indenter le résultat renvoyer immédiatement |
+|   output  (0,1,n)   |            Choix de la sortie               |
+
+#### Entête(s) HTTP
+
+| nom    | description                                                  |
+| ------ | ------------------------------------------------------------ |
+| X-Hook | URL à appeler quand le résultat sera disponible (facultatif) |
+
+#### Exemple en ligne de commande
+
+
+```bash
+# Send data for batch processing
+cat input.tar.gz |curl --data-binary @-  -H "X-Hook: https://webhook.site/dce2fefa-9a72-4f76-96e5-059405a04f6c" "http://localhost:31976/v1/similarity" > output.json
+
+# When the corpus is processed, get the result
+cat output.json |curl --data-binary @- "http://localhost:31976/v1/retrieve" > output.tar.gz
