@@ -259,7 +259,7 @@ cat output.json |curl --data-binary @- "http://localhost:31976/v1/retrieve" > ou
 ```
 
 
-### v1/similarity
+### v1/corpus-similarity
 
 Compare des petits documents (Titre, phrases, petit abstractes) entre eux, et renvoit pour chaque document les documents qui lui sont similaire. Il est conseillé d'utiliser cette route avec au moins 6-7 documents dans le corpus.
 
@@ -267,6 +267,8 @@ Il existe un paramètre optionnel "output" pour choisir le type de sortie en fon
 - 0 (par défaut) : L'algorithme choisit automatiquement les documents les plus similaires à chaque document
 - 1 : L'algorithme renvoit pour chaque document tout les documents, classé par ordre de proximité (Les plus similaires en premier)
 - n (avec n un entier plus grand que 1) : L'algorithme renvoit pour chaque document au plus les n documents les plus proches, classé par ordre de proximité (Les plus similaires en premier), ainsi que le score de similarité associé à chaque document.
+
+> **Attention** : Le champ ID est utilisé comme référence de chaque document. 
 
 par exemple en utilisant example-similarity-json.tar.gz avec le paramètre output par défaut (0), obtiendra :
 
