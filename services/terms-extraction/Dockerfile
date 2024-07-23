@@ -6,6 +6,7 @@ USER root
 RUN pip install \
     CQE==2.0.2 \
     scikit-learn==1.2.2 \
+    Unidecode==1.3.8 \
     stemming==1.0.1
 
 # Install all node dependencies
