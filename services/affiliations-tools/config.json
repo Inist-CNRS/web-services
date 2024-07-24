@@ -3,7 +3,7 @@
         "EZS_TITLE": "Structuration et enrichissements d'affiliations",
         "EZS_DESCRIPTION": "Propose plusieurs services autour des affiliations présentes dans les notices bibliographiques",
         "EZS_METRICS": true,
-        "EZS_CONCURRENCY": 4,
+        "EZS_CONCURRENCY": 2,
         "EZS_CONTINUE_DELAY": 60,
         "EZS_NSHARDS": 32,
         "EZS_CACHE": true,
