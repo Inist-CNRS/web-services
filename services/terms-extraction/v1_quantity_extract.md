@@ -1,4 +1,9 @@
 Renvoie les quantités repérées dans un texte en anglais.  
-Renvoie la valeur en triplet (entité repérée, quantité, unité).  
+Renvoie les informations suivantes :
 
-Utilise la librairie [`quantulum3`](https://github.com/nielstron/quantulum3#quantulum3)
+- La quantité repérée
+- L'unité associée
+- Le détail de l'unité
+- Les concepts liés à la quantité  
+
+Utilise la librairie [`CQE`](https://github.com/vivkaz/CQE)
