@@ -1,9 +1,9 @@
 {
     "environnement": {
-        "EZS_TITLE": "Crée différents `clusters` à partir d'un ensemble de textes courts ou d'un ensemble de listes de mots-clés.",
-        "EZS_DESCRIPTION": "Crée plusieurs groupes afin d'y classifier les différents textes en fonction de leur similarité.\n\n> - Le nombre de `cluster` est déterminé de manière automatique et des documents peuvent être considérés comme du bruit (dans ce cas précis, le label de leur cluster sera `0` ; les documents appartenant au cluster 0 ne sont pas regroupés).\n> - L'entrée peut être un texte court (type titre ou petit abstract), mais aussi une liste de mots-clés.",
+        "EZS_TITLE": "Crée différents *clusters* à partir d'un ensemble de textes courts ou d'un ensemble de listes de mots-clés.",
+        "EZS_DESCRIPTION": "Crée plusieurs groupes afin d'y classifier les différents textes en fonction de leur similarité.\n\n> - Le nombre de *clusters* est déterminé de manière automatique et des documents peuvent être considérés comme du bruit (dans ce cas précis, le *label* de leur *cluster* sera `0` ; les documents appartenant au *cluster* 0 ne sont pas regroupés).\n> - L'entrée peut être un texte court (type titre ou petit *abstract*), mais aussi une liste de mots-clés.",
         "EZS_METRICS": true,
-        "EZS_CONCURRENCY": 4,
+        "EZS_CONCURRENCY": 2,
         "EZS_CONTINUE_DELAY": 18000,
         "EZS_PIPELINE_DELAY": 10800,
         "EZS_NSHARDS": 32,
