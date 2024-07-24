@@ -1,7 +1,9 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+
 from CQE import CQE
 import sys
 import json
-from unidecode import unidecode
 
 parser = CQE.CQE(overload=True)
 
