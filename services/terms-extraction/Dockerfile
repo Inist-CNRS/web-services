@@ -25,7 +25,7 @@ RUN pip install \
     en_core_web_trf@https://github.com/explosion/spacy-models/releases/download/en_core_web_trf-3.0.0/en_core_web_trf-3.0.0-py3-none-any.whl
 
 # Install all node dependencies
-RUN npm install -g \
+RUN npm install \
     @ezs/teeft@2.3.1 \
     @ezs/strings@1.0.3
 
