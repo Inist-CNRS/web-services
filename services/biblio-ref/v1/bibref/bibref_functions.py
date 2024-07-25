@@ -4,7 +4,7 @@ import unicodedata
 from thefuzz import fuzz
 import pickle
 
-mail_address = "leo.gaillard@cnrs.fr"
+mail_address = "istex@inist.fr"
 session = LimiterSession(per_second=10)
 session_pdf = LimiterSession(per_second=10)
 
