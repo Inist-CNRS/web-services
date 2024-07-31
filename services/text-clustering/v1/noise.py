@@ -6,8 +6,6 @@ import umap.umap_ as umap
 from sentence_transformers import SentenceTransformer
 from sklearn.preprocessing import StandardScaler
 from sklearn.metrics.pairwise import cosine_distances
-# Two hdbscan aglos : normal and from sklearn
-# import hdbscan
 from sklearn.cluster import HDBSCAN
 
 # from prometheus_client import CollectorRegistry, Counter, push_to_gateway
@@ -78,18 +76,6 @@ embeddings = center_reduce(embeddings)
 cosine_dist_matrix = cosine_distances(embeddings, embeddings)
 
 
-## HDBSCAN with hdbscan library
-# clusterer = hdbscan.HDBSCAN(algorithm='best',
-#                             prediction_data=True,
-#                             approx_min_span_tree=True,
-#                             gen_min_span_tree=True,
-#                             min_cluster_size=int(max(10,len_data/50)),
-#                             cluster_selection_epsilon = 0.02,
-#                             min_samples=1,
-#                             p=None,
-#                             metric='precomputed',
-#                             cluster_selection_method='eom')
-
 # HDBSCAN with scikit-learn
 clusterer = HDBSCAN(
     algorithm='auto',
@@ -118,7 +104,7 @@ for i in range(len_data):
 
 # Write all corpus in once
 if len(output)==0:
-    sys.stdout.write(json.dumps({"value":"No noise in your datas"}))
+    sys.stdout.write(json.dumps({"id":"n/a","value":""}))
     sys.stdout.write("\n")
 else :
     for line in output:
