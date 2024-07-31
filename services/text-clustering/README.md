@@ -1,4 +1,4 @@
-# ws-text-clustering@1.1.1
+# ws-text-clustering@1.2.0
 
 Crée différents *clusters* à partir d'un ensemble de textes courts ou d'un ensemble de listes de mots-clés. Ce web service est asynchrone et traite des corpus et non des documents.
 
