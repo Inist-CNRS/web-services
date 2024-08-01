@@ -32,5 +32,5 @@
     "start": "docker run --rm -p 31976:31976 cnrsinist/${npm_package_name}:${npm_package_version}",
     "publish": "docker push cnrsinist/${npm_package_name}:${npm_package_version}"
   },
-  "avoid-testing": true
+  "avoid-testing": false
 }
