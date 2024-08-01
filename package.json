@@ -68,7 +68,7 @@
     "@ezs/basics": "2.7.0",
     "@ezs/core": "3.10.2",
     "@ezs/spawn": "1.4.6",
-    "@orangeopensource/hurl": "4.1.0",
+    "@orangeopensource/hurl": "4.3.2",
     "rest-cli": "1.8.13"
   },
   "devDependencies": {
