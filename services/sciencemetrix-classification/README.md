@@ -1,4 +1,4 @@
-# ws-sciencemetrix-classification@1.0.1
+# ws-sciencemetrix-classification@2.0.2
 
 Classification en domaines scientifiques Science-Metrix
 

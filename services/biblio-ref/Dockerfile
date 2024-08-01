@@ -1,5 +1,5 @@
 # syntax=docker/dockerfile:1.2
-FROM cnrsinist/ezs-python-server:py3.9-no16-1.0.10
+FROM cnrsinist/ezs-python-server:py3.9-no16-1.0.11
 
 USER root
 # Install all python dependencies
@@ -8,7 +8,7 @@ RUN apt update && apt install -y poppler-utils libmagic1
 RUN pip3 install \
     requests_ratelimiter==0.4.2 \
     thefuzz==0.22.1 \
-    refextract==1.1.4 \
+    refextract==1.1.4 \
     python-magic==0.4.27
 
 

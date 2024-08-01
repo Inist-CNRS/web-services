@@ -1,4 +1,4 @@
-FROM python:3.9-slim-bullseye as dvcfiles
+FROM python:3.9-slim-bullseye as dvc-files
 WORKDIR /dvc
 RUN apt update && apt -y install git curl
 RUN pip install dvc[webdav]==3.42.0
@@ -13,15 +13,17 @@ RUN --mount=type=secret,id=webdav_login \
 COPY ./v1/model.bin.dvc /dvc
 RUN dvc pull -v
 
-FROM cnrsinist/ezs-python-server:py3.9-no16-1.0.10
+FROM cnrsinist/ezs-python-server:py3.9-no16-1.0.11
 
 USER root
 # Install pip dependencies
 RUN pip install --upgrade pip
-RUN pip install fasttext-wheel==0.9.2
+RUN pip install \
+    fasttext-wheel==0.9.2 \
+    numpy==1.26.3
 WORKDIR /app/public
 # Declare files to copy in .dockerignore
 COPY --chown=daemon:daemon . /app/public/
 RUN mv ./config.json /app && chmod a+w /app/config.json
 
-COPY --chown=daemon:daemon --from=dvcfiles /dvc/model.bin /app/public/v1/model.bin
+COPY --chown=daemon:daemon --from=dvc-files /dvc/model.bin /app/public/v1/model.bin

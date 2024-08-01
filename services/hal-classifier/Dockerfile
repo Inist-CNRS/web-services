@@ -23,28 +23,27 @@ RUN cat /dvc/v1/en/HALen_matrixKDT.npy.* > /dvc/v1/en/HALen_matrixKDT.npy && \
 ####
 # Build and install web services dependcies en files
 ####
-FROM cnrsinist/ezs-python-server:py3.9-no16-1.0.10
+FROM cnrsinist/ezs-python-server:py3.9-no16-1.0.11
 
 USER root
 
 # Install Cython requirement
-RUN apt update && apt install -y build-essential make gcc
-
-RUN pip install Cython==0.29.37
-
+RUN apt update && \
+    apt install -y build-essential make gcc && \
+    pip install Cython==0.29.37 && \
 # Install all python dependencies
 # Using build isolation to fix compile error
 # https://github.com/numpy/numpy/issues/24377#issuecomment-1671859253
-RUN pip install --no-build-isolation \
-    more-itertools==10.2.0 \
-    numpy==1.19.1 \
-    scipy==1.5.4 \
-    fasttext==0.9.2 \
-    faiss-cpu==1.7.2
-
+    pip install --no-build-isolation \
+        more-itertools==10.2.0 \
+        numpy==1.26.3 \
+        scipy==1.10.1 \
+        fasttext==0.9.2 \
+        faiss-cpu==1.7.2 && \
 # Clean-up
-RUN apt remove -y --purge build-essential make gcc && \
-    apt autoremove -y
+    apt remove -y --purge build-essential make gcc && \
+    apt autoremove -y && \
+    pip uninstall -y Cython
 
 WORKDIR /app/public
 # Declare files to copy in .dockerignore
