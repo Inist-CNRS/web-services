@@ -43,8 +43,8 @@
     "services/ark-tools",
     "services/astro-ner",
     "services/authors-tools",
-    "services/base-line-python",
     "services/base-line",
+    "services/base-line-python",
     "services/biblio-ref",
     "services/biblio-tools",
     "services/chem-ner",
@@ -60,10 +60,10 @@
     "services/ner-tagger",
     "services/nlp-tools2",
     "services/pdf-text",
-    "services/terms-extraction",
-    "services/text-clustering",
+    "services/person-ner",
     "services/sciencemetrix-classification",
-    "services/terms-extraction"
+    "services/terms-extraction",
+    "services/text-clustering"
   ],
   "dependencies": {
     "@ezs/analytics": "2.3.2",
