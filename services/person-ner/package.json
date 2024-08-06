@@ -1,7 +1,7 @@
 {
   "private": true,
   "name": "ws-person-ner",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "description": "Extraction d'entités nommées de noms de personnes",
   "repository": {
     "type": "git",
