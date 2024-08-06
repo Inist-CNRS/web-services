@@ -1,7 +1,7 @@
 {
     "private": true,
     "name": "ws-data-computer",
-    "version": "2.13.0",
+    "version": "2.13.1",
     "description": "Calculs sur fichier corpus compressé",
     "repository": {
         "type": "git",
