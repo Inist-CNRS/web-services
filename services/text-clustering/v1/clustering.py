@@ -68,11 +68,12 @@ for i in range(len_data):
     except:
         indice_out_cluster.append(i)
 
-# Reduce DIM from 700+ to 10
+# Reduce DIM from 700+ to 8
 embeddings = umap.UMAP(n_neighbors=30,
                        n_components=8,
+                       min_dist=0.0,
                        metric='cosine',
-                       init='random').fit_transform(center_reduce(texts))
+                       init='spectral').fit_transform(center_reduce(texts))
 
 embeddings = center_reduce(embeddings)
 cosine_dist_matrix = cosine_distances(embeddings, embeddings)
@@ -109,7 +110,7 @@ res = []
 indice_in_cluster=0
 for i in range(len_data):
     if i in indice_out_cluster :
-        all_data[i]["value"] = {"cluster":0, "weight":0}
+        all_data[i]["value"] = {"cluster":0, "weight":"1.0"}
     else:
         all_data[i]["value"]={"cluster":int(clusterer.labels_[indice_in_cluster]+1), "weight":str(clusterer.probabilities_[indice_in_cluster])}
         indice_in_cluster +=1 # Here we increment only if the row isn't noise, because they aren't count in "clusterer model"
