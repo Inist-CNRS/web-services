@@ -3,6 +3,21 @@
         "MD024": false, // MD024: Duplicate headings
         "MD028": false, // MD028: Blank line inside blockquote
         "MD041": false, // MD041: First line in file should be a top level header
-        "MD051": false  // MD051: Broken link fragment (ex: #v1/teeft instead of #v1teeft)
-    }
+        "MD051": false // MD051: Broken link fragment (ex: #v1/teeft instead of #v1teeft)
+    },
+    "cSpell.enableFiletypes": [
+        "ini",
+        "properties"
+    ],
+    "cSpell.language": "en,fr-FR",
+    "cSpell.words": [
+        "Bigramme",
+        "concat",
+        "inist",
+        "Lodex",
+        "prometheus",
+        "stopwords",
+        "ungroup",
+        "uuid"
+    ]
 }
