@@ -43,8 +43,8 @@
     "services/ark-tools",
     "services/astro-ner",
     "services/authors-tools",
-    "services/base-line-python",
     "services/base-line",
+    "services/base-line-python",
     "services/biblio-ref",
     "services/biblio-tools",
     "services/chem-ner",
@@ -60,15 +60,17 @@
     "services/ner-tagger",
     "services/nlp-tools2",
     "services/pdf-text",
+    "services/person-ner",
     "services/sciencemetrix-classification",
-    "services/terms-extraction"
+    "services/terms-extraction",
+    "services/text-clustering"
   ],
   "dependencies": {
     "@ezs/analytics": "2.3.2",
     "@ezs/basics": "2.7.0",
     "@ezs/core": "3.10.2",
     "@ezs/spawn": "1.4.6",
-    "@orangeopensource/hurl": "4.1.0",
+    "@orangeopensource/hurl": "4.3.2",
     "rest-cli": "1.8.13"
   },
   "devDependencies": {

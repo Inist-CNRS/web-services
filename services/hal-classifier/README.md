@@ -1,4 +1,4 @@
-# ws-hal-classifier@4.0.5
+# ws-hal-classifier@4.0.6
 
 Classification HAL
 

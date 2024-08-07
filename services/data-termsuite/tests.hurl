@@ -10,8 +10,8 @@
 
 POST {{host}}/v1/en?nb=10
 content-type: application/x-gzip
-X-Webhook-Success: https://webhook.site/2caab8b5-fc96-4d7a-bb94-bdda20977830
-X-Webhook-Failure: https://webhook.site/2caab8b5-fc96-4d7a-bb94-bdda20977830
+# X-Webhook-Success: https://webhook.site/2caab8b5-fc96-4d7a-bb94-bdda20977830
+# X-Webhook-Failure: https://webhook.site/2caab8b5-fc96-4d7a-bb94-bdda20977830
 file,./examples/22-txt-en.tar.gz;
 
 HTTP 200
@@ -90,8 +90,8 @@ Content-Type: application/json
 # Test v1/fr
 POST {{host}}/v1/fr?nb=5
 content-type: application/x-gzip
-X-Webhook-Success: https://webhook.site/2caab8b5-fc96-4d7a-bb94-bdda20977830
-X-Webhook-Failure: https://webhook.site/2caab8b5-fc96-4d7a-bb94-bdda20977830
+# X-Webhook-Success: https://webhook.site/2caab8b5-fc96-4d7a-bb94-bdda20977830
+# X-Webhook-Failure: https://webhook.site/2caab8b5-fc96-4d7a-bb94-bdda20977830
 file,./examples/7-txt-fr.tar.gz;
 
 HTTP 200

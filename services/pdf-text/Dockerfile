@@ -5,12 +5,13 @@ USER root
 # Install all python dependencies
 RUN pip install \
     spacy==2.3.5 \
+    numpy==1.26.3 \
     requests==2.31.0 \
     Unidecode==1.3.2 \
     en_core_web_sm@https://github.com/explosion/spacy-models/releases/download/en_core_web_sm-2.3.1/en_core_web_sm-2.3.1.tar.gz \
     fr_core_news_sm@https://github.com/explosion/spacy-models/releases/download/fr_core_news_sm-2.3.0/fr_core_news_sm-2.3.0.tar.gz
 
-RUN apt update && apt install -y pdftohtml 
+RUN apt update && apt install -y pdftohtml
 
 WORKDIR /app/public
 

@@ -10,6 +10,11 @@ from sklearn.metrics.pairwise import cosine_distances
 # import hdbscan
 from sklearn.cluster import HDBSCAN
 
+# from prometheus_client import CollectorRegistry, Counter, push_to_gateway
+# registry = CollectorRegistry()
+# c = Counter('documents', 'Number of documents processed', registry=registry)
+# job_name='clustering'
+
 
 def center_reduce(matrix):
     """
@@ -30,7 +35,6 @@ def center_reduce(matrix):
 
 model = SentenceTransformer('./v1/all-MiniLM-L6-v2')
 
-
 ## WS
 # Datas
 all_data = []
@@ -41,7 +45,11 @@ for line in sys.stdin:
 len_data = len(all_data)
 
 texts=[]
+indice_out_cluster = []
 for i in range(len_data):
+    # c.inc()
+    # push_to_gateway('jobs-metrics.daf.intra.inist.fr', job=job_name, registry=registry)
+
     try:
         line = all_data[i]
         
@@ -50,21 +58,22 @@ for i in range(len_data):
             if type(value)==list:
                 texts.append(model.encode(" ".join(value)))
             elif type(value)==str:
-                texts.append(model.encode(value))
+                    texts.append(model.encode(value))
             else:
-                texts.append("")
+                indice_out_cluster.append(i)
                 
         else:
-            texts.append("")
+            indice_out_cluster.append(i)
 
     except:
-        texts.append("")
+        indice_out_cluster.append(i)
 
-
-# Reduce DIM from 700+ to 10
+# Reduce DIM from 700+ to 8
 embeddings = umap.UMAP(n_neighbors=30,
-                       n_components=10,
-                       metric='cosine').fit_transform(center_reduce(texts))
+                       n_components=8,
+                       min_dist=0.0,
+                       metric='cosine',
+                       init='spectral').fit_transform(center_reduce(texts))
 
 embeddings = center_reduce(embeddings)
 cosine_dist_matrix = cosine_distances(embeddings, embeddings)
@@ -99,7 +108,10 @@ clusterer.fit(cosine_dist_matrix)
 # extract infos
 res = []
 indice_in_cluster=0
-for i in range(len(all_data)):
+for i in range(len_data):
+    if i in indice_out_cluster :
+        all_data[i]["value"] = {"cluster":0, "weight":"1.0"}
+    else:
         all_data[i]["value"]={"cluster":int(clusterer.labels_[indice_in_cluster]+1), "weight":str(clusterer.probabilities_[indice_in_cluster])}
         indice_in_cluster +=1 # Here we increment only if the row isn't noise, because they aren't count in "clusterer model"
 

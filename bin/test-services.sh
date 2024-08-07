@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-# Usage: bin/test-services.sh [<local|remote> [service-name]+]
+# Usage: bin/test-services.sh [service-name]+
 
 set -u # No uninitialized variable
 set -o pipefail # Fail at first pipe error
@@ -12,6 +12,7 @@ for SERVICE in "${SERVICES[@]}"; do
 
     # Exit if the package.json in the services/$SERVICE directory includes an "avoid-testing" key set to true
     if grep -q '"avoid-testing": true' "services/$SERVICE/package.json"; then
+        echo "Skipping test for service $SERVICE"
         continue
     fi
 
