@@ -54,9 +54,9 @@ for i in range(len_data):
         if "value" in line :
             value = line["value"]
             if type(value)==list:
-                texts.append(model.encode(" ".join(value)[:512]))
+                texts.append(model.encode(" ".join(value)))
             elif type(value)==str:
-                    texts.append(model.encode(value[:512]))
+                    texts.append(model.encode(value))
             else:
                 indice_out_cluster.append(i)
                 
