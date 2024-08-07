@@ -25,3 +25,4 @@ COPY --chown=daemon:daemon . /app/public/
 RUN mv ./config.json /app && chmod a+w /app/config.json
 
 COPY --chown=daemon:daemon --from=build1 /dvc/models /app/public/v1/chem/models
+RUN rm /app/public/v1/chem/models/dic-name-iupac-filtered-enrich.pkl
