@@ -6,7 +6,18 @@
         "MD051": false // MD051: Broken link fragment (ex: #v1/teeft instead of #v1teeft)
     },
     "cSpell.enableFiletypes": [
-        "ini"
+        "ini",
+        "properties"
     ],
-    "cSpell.language": "en,fr-FR"
+    "cSpell.language": "en,fr-FR",
+    "cSpell.words": [
+        "Bigramme",
+        "concat",
+        "inist",
+        "Lodex",
+        "prometheus",
+        "stopwords",
+        "ungroup",
+        "uuid"
+    ]
 }
