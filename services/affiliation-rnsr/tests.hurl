@@ -14,16 +14,19 @@ content-type: application/json
 HTTP 200
 [{
     "id": 1,
-    "value": [
-        "198822446E"
-    ]
-},
-{
-    "id": 2,
-    "value": [
-        "200711918D",
-        "201220250N"
-    ]
+       "value": {
+           "rnsr": [
+               "198822446E"
+           ]
+       }
+   },
+   {
+       "id": 2,
+       "value": {
+           "rnsr": [
+               "200711918D",
+               "201220250N"
+           ]
 }]
 
 POST {{host}}/v2/affiliation/rnsr?indent=true
