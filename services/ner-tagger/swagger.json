@@ -3,7 +3,7 @@
     "info": {
         "title": "ner-tagger - Détection d'entités nommées dans des textes",
         "description": "Détecter des entités géographiques dans des textes anglais et d'organismes scolaires, de localisation dans des bulletins administratifs de l'instruction publique",
-        "version": "1.0.8",
+        "version": "1.0.9",
         "termsOfService": "https://services.istex.fr/",
         "contact": {
             "name": "Inist-CNRS",
@@ -15,7 +15,7 @@
             "x-comment": "Will be automatically completed by the ezs server."
         },
         {
-            "url": "http://vptdmservices.intra.inist.fr:49295/",
+            "url": "http://vptdmservices.intra.inist.fr:49307/",
             "description": "Latest version for production",
             "x-profil": "Standard"
         }
