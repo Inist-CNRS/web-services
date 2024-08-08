@@ -6,6 +6,7 @@ USER root
 RUN pip install \
     spacy==3.6.1 \
     xx-ent-wiki-sm@https://github.com/explosion/spacy-models/releases/download/xx_ent_wiki_sm-3.6.0/xx_ent_wiki_sm-3.6.0.tar.gz \
+    en-core-web-sm@https://github.com/explosion/spacy-models/releases/download/en_core_web_sm-3.6.0/en_core_web_sm-3.6.0.tar.gz \
     numpy==1.26.4
 
 
