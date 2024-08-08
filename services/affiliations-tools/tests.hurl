@@ -465,15 +465,19 @@ Année,Adresse
 ```
 
 HTTP 200
-```
-Année;Adresse;RNSR
-2015;CNRS UMR AMAP MONTPELLIER FRA;200317641S
-2015;IRD UMR AMAP MONTPELLIER FRA;200317641S
-2015;University of Bordeaux, IMS, CNRS UMR5218, Talence, F-33405, France;200711887V
-2015;CENBG, CNRS/IN2P3, Chemin du Solarium B. P. 120, Gradignan, F-33175, France;
-```
-
-
+[Asserts]
+body contains "Année;Adresse;RNSR"
+body contains "2015;CNRS UMR AMAP MONTPELLIER FRA;200317641S"
+body contains "2015;IRD UMR AMAP MONTPELLIER FRA;200317641S"
+body contains "2015;University of Bordeaux, IMS, CNRS UMR5218, Talence, F-33405, France;200711887V"
+body contains "2015;CENBG, CNRS/IN2P3, Chemin du Solarium B. P. 120, Gradignan, F-33175, France;"
+#```
+#Année;Adresse;RNSR
+#2015;CNRS UMR AMAP MONTPELLIER FRA;200317641S
+#2015;IRD UMR AMAP MONTPELLIER FRA;200317641S
+#2015;University of Bordeaux, IMS, CNRS UMR5218, Talence, F-33405, France;200711887V
+#2015;CENBG, CNRS/IN2P3, Chemin du Solarium B. P. 120, Gradignan, F-33175, France;
+#```
 
 POST {{host}}/v1/rnsr/conditor
 content-type: application/json
