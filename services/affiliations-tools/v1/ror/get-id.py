@@ -41,7 +41,6 @@ def extract_house(affiliation_data):
 
             for keyword in keywords:
                 if keyword in first_house:
-                    print(keyword)
                     if len(house_list) > 1:
                         found_house = house_list[1].strip()
                         break
@@ -80,15 +79,11 @@ def request(name):
         response = requests.get(url, headers={"Accept": "application/json"})
         response.raise_for_status()
     except HTTPError as http_err:
-        print(
-            f"HTTP error occurred: {http_err}"
-        )  # Erreur HTTP (par exemple, 404, 500, etc.)
+        print(f"HTTP error occurred: {http_err}",file=sys.stderr)  # Erreur HTTP (par exemple, 404, 500, etc.)
     except Timeout as timeout_err:
-        print(f"Timeout error occurred: {timeout_err}")  # La requête a expiré
+        print(f"Timeout error occurred: {timeout_err}",file=sys.stderr)  # La requête a expiré
     except RequestException as req_err:
-        print(
-            f"Error occurred: {req_err}"
-        )  # Autres erreurs (par exemple, problèmes de connexion, etc.)
+        print(f"Error occurred: {req_err}",file=sys.stderr)  # Autres erreurs (par exemple, problèmes de connexion, etc.)
     else:
         return response.json()
 
@@ -105,19 +100,16 @@ def api_ror(affiliation):
 
 # Filtre la sortie de l'API ROR pour ne récupérer que ce qui intéresse
 def filter_api(json, city=None, short=False):
-    if json == "Error affiliation":
-        return "Error affiliation"
+    if json == "Error affiliation" or json == "Error":
+        return "Error affiliation"    
+
     for item in json["items"]:
         id_ror = item["organization"]["id"]
         score_similarity = item["score"]
         name = item["organization"]["name"]
         type = item["organization"]["types"]
-        name_geonames = item["organization"]["addresses"][0]["geonames_city"][
-            "geonames_admin2"
-        ]["name"]
-        id_geonames = item["organization"]["addresses"][0]["geonames_city"][
-            "geonames_admin2"
-        ]["id"]
+        name_geonames = item["organization"]["addresses"][0]["geonames_city"]["geonames_admin2"]["name"]
+        id_geonames = item["organization"]["addresses"][0]["geonames_city"]["geonames_admin2"]["id"]
         # json_dict = {"id_ror": id_ror, "score": score_similarity, "name": name}
         json_dict = {
             "id_ror": id_ror,
