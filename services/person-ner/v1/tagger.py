@@ -13,6 +13,12 @@ for line in sys.stdin:
         value = line["value"]
     except KeyError:
         value = ""
+
+    try:
+        if value[:8].lower() == "abstract":
+            value = value[9:].strip()
+    except:
+        pass
     
     try:
         doc = nlp(value)
