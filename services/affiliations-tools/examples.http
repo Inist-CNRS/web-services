@@ -128,6 +128,11 @@ Content-Type: application/json
     "id": 4,
     "status": "non-existing",
     "value": "Sphere Energy SAS, 250 Bis Boulevard Saint Germain, 75007, Paris, France"
+  },
+  {
+    "id": 5,
+    "status": "non-existing",
+    "value" : "Department of Computational Engineering, CSC — Scientific Computing Ltd, P.O. Box 405, 02101, Espoo, Finland"
   }
 ]
 
