@@ -479,8 +479,6 @@ body contains "2015;CENBG, CNRS/IN2P3, Chemin du Solarium B. P. 120, Gradignan, 
 #2015;CENBG, CNRS/IN2P3, Chemin du Solarium B. P. 120, Gradignan, F-33175, France;
 #```
 
-
-
 POST {{host}}/v1/rnsr/conditor
 content-type: application/json
 [{
@@ -576,6 +574,11 @@ content-type: application/json
     "id": 4,
     "status": "non-existing",
     "value": "Sphere Energy SAS, 250 Bis Boulevard Saint Germain, 75007, Paris, France"
+  },
+  {
+    "id": 5,
+    "status": "non-existing",
+    "value" : "Department of Computational Engineering, CSC — Scientific Computing Ltd, P.O. Box 405, 02101, Espoo, Finland"
   }
 ]
 
@@ -624,6 +627,11 @@ HTTP 200
 },
 {
     "id": 4,
+    "status": "non-existing",
+    "value": "No match found"
+},
+{
+    "id": 5,
     "status": "non-existing",
     "value": "No match found"
 }]
