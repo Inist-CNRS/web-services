@@ -478,3 +478,26 @@ jsonpath "$[3].value" == "n/a"
 # jsonpath "$" count == 2
 # jsonpath "$[0].value.revision_id" >= 96
 # jsonpath "$[1].value" == "n/a"
+
+POST {{host}}/v2/bso/works/expand?indent=true
+content-type: application/json
+[Options]
+skip: false
+```
+[
+  { "id":1,   "value": "10.1103/physrevc.106.024603"},
+  { "id":2,   "value": "10.1016/j.msea.2021.142288"},
+  { "id":3,   "value": "10.1029/2021gc010308"},
+  { "id":4,   "value": ""}
+]
+```
+
+HTTP 200
+[Asserts]
+jsonpath "$" count == 4
+jsonpath "$[0].value.lang" == "en"
+jsonpath "$[1].value.year" == "2022"
+jsonpath "$[2].value.genre" == "journal-article"
+jsonpath "$[3].value" == "n/a"
+
+
