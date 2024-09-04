@@ -42,8 +42,8 @@ build/Release
 node_modules/
 jspm_packages/
 
-# Don't mess with npm versions
-package-lock.json
+## Don't mess with npm versions
+#package-lock.json
 
 # Snowpack dependency directory (https://snowpack.dev/)
 web_modules/

@@ -22,6 +22,12 @@ fi
 if [ "$LOCATION" = "local" ]; then
     HOST="http://localhost:31976"
 else
+    # Exit if the package.json in the services/$SERVICE directory includes an "avoid-testing" key set to true
+    if grep -q '"avoid-testing": true' "services/$SERVICE/package.json"; then
+        echo "Skipping test for service $SERVICE"
+        exit 0
+    fi
+
     HOST="https://$SERVICE.services.istex.fr"
 fi
 

@@ -15,10 +15,6 @@ HTTP 200
             "methanol",
             "2-propanol",
             "CO2"
-        ],
-        "chemical_disambiguisate": [
-            "methanol",
-            "propan-2-ol"
         ]
     }
 }]

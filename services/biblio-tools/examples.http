@@ -1,0 +1,458 @@
+# To test locally, replace with
+@host = http://localhost:31976
+#@host = https://biblio-tools.services.istex.fr
+
+###
+# @name v1UnpaywallIsOa
+# unpaywall/is_oa
+POST {{host}}/v1/unpaywall/is_oa?indent=true HTTP/1.1
+Content-Type: application/json
+
+[
+  {  "id":1, "value": "10.1016/j.fuel.2018.07.071" },
+  {  "id":2, "value": "10.1007/s10980-018-0699-8" },
+  {  "id":3, "value": "10.1159/000490004" },
+  {  "id":4, "value": "10.1016/j.memsci.2018.08.024"},
+  {  "id":5, "value": "10.1029/2018jd029272"},
+  {  "id":6, "value": "10.4000/edc.9014"},
+  {  "id":7, "value": "unknown"}
+]
+
+###
+# @name v1UnpaywallExpand
+# unpaywall/expand
+POST {{host}}/v1/unpaywall/expand?indent=true HTTP/1.1
+Content-Type: application/json
+
+[
+  { "id":1,  "value": "10.1016/j.fuel.2018.07.071" },
+  { "id":2,  "value": "10.1007/s10980-018-0699-8" },
+  { "id":3,  "value": "10.1159/000490004" },
+  { "id":4,  "value": "10.1016/j.memsci.2018.08.024"},
+  { "id":5,  "value": "10.1029/2018jd029272"},
+  { "id":6,  "value": "10.4000/edc.9014"},
+  { "id":7,  "value": "unknown"}
+]
+
+###
+# @name v1UnpaywallCorhal
+# unpaywall/corhal
+POST {{host}}/v1/unpaywall/corhal?indent=true HTTP/1.1
+Content-Type: application/json
+
+[
+  { "id":1, "value": "10.1016/j.fuel.2018.07.071" },
+  { "id":2, "value": "10.1007/s10980-018-0699-8" },
+  { "id":3, "value": "10.1159/000490004" },
+  { "id":4, "value": "10.1016/j.memsci.2018.08.024"},
+  { "id":5, "value": "10.1029/2018jd029272"},
+  { "id":6, "value": "10.4000/edc.9014"},
+  { "id":7, "value": "unknown"}
+]
+
+###
+# @name v1UnpaywallWorksExpand
+# unpaywall/works/expand
+POST {{host}}/v1/unpaywall/works/expand?indent=true HTTP/1.1
+Content-Type: application/json
+
+[
+  {  "id":1, "value": "10.1016/j.fuel.2018.07.071" },
+  {  "id":2, "value": "10.1007/s10980-018-0699-8" },
+  {  "id":3, "value": "10.1159/000490004" },
+  {  "id":4, "value": "10.1016/j.memsci.2018.08.024"},
+  {  "id":5, "value": "10.1029/2018jd029272"},
+  {  "id":6, "value": "10.4000/edc.9014"},
+  {  "id":7, "value": "unknown"}
+]
+
+###
+# @name v1CrossrefPrefixesExpand
+# crossref/prefixes/1
+POST {{host}}/v1/crossref/prefixes/expand?indent=true HTTP/1.1
+Content-Type: application/json
+
+[
+  {  "id":1, "value": "10.3998"},
+  {  "id":2, "value": "10.1016" },
+  {  "id":3, "value": "10.1007" },
+  {  "id":4, "value": "10.1159" },
+  {  "id":5, "value": "10.1037"},
+  {  "id":6, "value": "unknown"}
+]
+
+###
+# @name v1CrossrefWorksExpand2
+# crossref/works/2
+POST {{host}}/v1/crossref/works/expand?indent=true HTTP/1.1
+Content-Type: application/json
+
+[
+  { "id":1,  "value": "10.1016/j.fuel.2018.07.071" },
+  { "id":2,  "value": "10.1007/s10980-018-0699-8" },
+  { "id":3,  "value": "10.1159/000490004" },
+  { "id":4,  "value": "10.1016/j.memsci.2018.08.024"},
+  { "id":5,  "value": "10.1029/2018jd029272"},
+  { "id":6,  "value": "10.4000/edc.9014"},
+  { "id":7,  "value": "unknown"}
+]
+
+###
+# @name v1InspirehepWorksExpand
+# inspirehep/works/expand
+POST {{host}}/v1/inspirehep/works/expand?indent=true HTTP/1.1
+Content-Type: application/json
+
+[
+  { "id":1,  "value": "10.1103/PhysRevLett.19.1264"},
+  { "id":8,  "value": "unknown"}
+]
+
+###
+# @name v1OpenalexWorksExpand
+# openalex/works/expand
+POST {{host}}/v1/openalex/works/expand?indent=true HTTP/1.1
+Content-Type: application/json
+
+[
+  { "id":1,  "value": "10.1103/PhysRevLett.19.1264"},
+  { "id":2,  "value": "10.1016/j.fuel.2018.07.071" },
+  { "id":3,  "value": "10.1007/s10980-018-0699-8" },
+  { "id":4,  "value": "10.1159/000490004" },
+  { "id":5,  "value": "10.1016/j.memsci.2018.08.024"},
+  { "id":6,  "value": "10.1029/2018jd029272"},
+  { "id":7,  "value": "10.4000/edc.9014"},
+  { "id":8,  "value": "unknown"}
+]
+
+###
+# @name v1IstexWorksExpand
+# istex/works/expand
+POST {{host}}/v1/istex/works/expand?indent=true HTTP/1.1
+Content-Type: application/json
+
+[
+  { "id":1,   "value": "10.1016/S0047-6374(98)00099-2"},
+  { "id":2,   "value": "10.1016/S0167-4943(01)00186-8"},
+  { "id":3,   "value": "10.1093/ageing/afm016"},
+  { "id":4,   "value": ""}
+]
+
+###
+# @name v1WosFetch
+# wos/fetch
+POST {{host}}/v1/wos/fetch?indent=true HTTP/1.1
+Content-Type: application/json
+
+[
+  {
+    "query": "0",
+    "value": "XX"
+  },
+  {
+    "query" :"I",
+    "value": {
+      "databaseId": "WOK",
+      "usrQuery": "TS=(cadmium)",
+      "count": "5",
+      "firstRecord": "1"
+    }
+  },
+  {
+    "query" :"II",
+    "value": {
+      "databaseId": "WOK",
+      "usrQuery": "TS=(cadmium)",
+      "count": "5",
+      "firstRecord": "6"
+    }
+  }
+]
+
+###
+# @name v1WosWorksExpand
+# wos/works/expand
+POST {{host}}/v1/wos/works/expand?indent=true HTTP/1.1
+Content-Type: application/json
+
+[
+  { "id":1,   "value": "10.1016/S0047-6374(98)00099-2"},
+  { "id":2,   "value": "10.1016/S0167-4943(01)00186-8"},
+  { "id":3,   "value": "10.1093/ageing/afm016"},
+  { "id":4,   "value": ""}
+]
+
+###
+# @name v1HalWorksExpand
+# hal/works/expand
+POST {{host}}/v1/hal/works/expand?indent=true HTTP/1.1
+Content-Type: application/json
+
+[
+  { "id":1,   "value": "10.1016/S0047-6374(98)00099-2"},
+  { "id":2,   "value": "10.35562/arabesques.1222"},
+  { "id":3,   "value": "10.3324/haematol.2016.148908"},
+  { "id":4,   "value": ""}
+]
+
+###
+# @name v1ConditorWorksExpand
+# conditor/works/expand
+POST {{host}}/v1/conditor/works/expand?indent=true HTTP/1.1
+Content-Type: application/json
+
+[
+  { "id":1,   "value": "10.1016/S0047-6374(98)00099-2"},
+  { "id":2,   "value": "10.35562/arabesques.1222"},
+  { "id":3,   "value": "10.3324/haematol.2016.148908"},
+  { "id":4,   "value": ""}
+]
+
+###
+# @name v1ConditorWorksExpandByHalid
+# conditor/works/expandByHalid
+POST {{host}}/v1/conditor/works/expandByHalid?indent=true HTTP/1.1
+Content-Type: application/json
+
+[
+  { "id":1,   "value": "hal-03008165"},
+  { "id":4,   "value": ""}
+]
+
+###
+
+
+###
+# @name v2UnpaywallIsOa
+# unpaywall/is_oa
+POST {{host}}/v2/unpaywall/is_oa?indent=true HTTP/1.1
+Content-Type: application/json
+
+[
+  {  "id":1, "value": "10.1016/j.fuel.2018.07.071" },
+  {  "id":2, "value": "10.1007/s10980-018-0699-8" },
+  {  "id":3, "value": "10.1159/000490004" },
+  {  "id":4, "value": "10.1016/j.memsci.2018.08.024"},
+  {  "id":5, "value": "10.1029/2018jd029272"},
+  {  "id":6, "value": "10.4000/edc.9014"},
+  {  "id":7, "value": "unknown"}
+]
+
+###
+# @name v2UnpaywallExpand
+# unpaywall/expand
+POST {{host}}/v2/unpaywall/expand?indent=true HTTP/1.1
+Content-Type: application/json
+
+[
+  { "id":1,  "value": "10.1016/j.fuel.2018.07.071" },
+  { "id":2,  "value": "10.1007/s10980-018-0699-8" },
+  { "id":3,  "value": "10.1159/000490004" },
+  { "id":4,  "value": "10.1016/j.memsci.2018.08.024"},
+  { "id":5,  "value": "10.1029/2018jd029272"},
+  { "id":6,  "value": "10.4000/edc.9014"},
+  { "id":7,  "value": "unknown"}
+]
+
+###
+# @name v2UnpaywallCorhal
+# unpaywall/corhal
+POST {{host}}/v2/unpaywall/corhal?indent=true HTTP/1.1
+Content-Type: application/json
+
+[
+  { "id":1, "value": "10.1016/j.fuel.2018.07.071" },
+  { "id":2, "value": "10.1007/s10980-018-0699-8" },
+  { "id":3, "value": "10.1159/000490004" },
+  { "id":4, "value": "10.1016/j.memsci.2018.08.024"},
+  { "id":5, "value": "10.1029/2018jd029272"},
+  { "id":6, "value": "10.4000/edc.9014"},
+  { "id":7, "value": "unknown"}
+]
+
+###
+# @name v2UnpaywallWorksExpand
+# unpaywall/works/expand
+POST {{host}}/v2/unpaywall/works/expand?indent=true HTTP/1.1
+Content-Type: application/json
+
+[
+  {  "id":1, "value": "10.1016/j.fuel.2018.07.071" },
+  {  "id":2, "value": "10.1007/s10980-018-0699-8" },
+  {  "id":3, "value": "10.1159/000490004" },
+  {  "id":4, "value": "10.1016/j.memsci.2018.08.024"},
+  {  "id":5, "value": "10.1029/2018jd029272"},
+  {  "id":6, "value": "10.4000/edc.9014"},
+  {  "id":7, "value": "unknown"}
+]
+
+###
+# @name v2CrossrefPrefixesExpand
+# crossref/prefixes/1
+POST {{host}}/v2/crossref/prefixes/expand?indent=true HTTP/1.1
+Content-Type: application/json
+
+[
+  {  "id":1, "value": "10.3998"},
+  {  "id":2, "value": "10.1016" },
+  {  "id":3, "value": "10.1007" },
+  {  "id":4, "value": "10.1159" },
+  {  "id":5, "value": "10.1037"},
+  {  "id":6, "value": "unknown"}
+]
+
+###
+# @name v2CrossrefWorksExpand2
+# crossref/works/2
+POST {{host}}/v2/crossref/works/expand?indent=true HTTP/1.1
+Content-Type: application/json
+
+[
+  { "id":1,  "value": "10.1016/j.fuel.2018.07.071" },
+  { "id":2,  "value": "10.1007/s10980-018-0699-8" },
+  { "id":3,  "value": "10.1159/000490004" },
+  { "id":4,  "value": "10.1016/j.memsci.2018.08.024"},
+  { "id":5,  "value": "10.1029/2018jd029272"},
+  { "id":6,  "value": "10.4000/edc.9014"},
+  { "id":7,  "value": "unknown"}
+]
+
+###
+# @name v2InspirehepWorksExpand
+# inspirehep/works/expand
+POST {{host}}/v2/inspirehep/works/expand?indent=true HTTP/1.1
+Content-Type: application/json
+
+[
+  { "id":1,  "value": "10.1103/PhysRevLett.19.1264"},
+  { "id":8,  "value": "unknown"}
+]
+
+###
+# @name v2OpenalexWorksExpand
+# openalex/works/expand
+POST {{host}}/v2/openalex/works/expand?indent=true HTTP/1.1
+Content-Type: application/json
+
+[
+  { "id":1,  "value": "10.1103/PhysRevLett.19.1264"},
+  { "id":2,  "value": "10.1016/j.fuel.2018.07.071" },
+  { "id":3,  "value": "10.1007/s10980-018-0699-8" },
+  { "id":4,  "value": "10.1159/000490004" },
+  { "id":5,  "value": "10.1016/j.memsci.2018.08.024"},
+  { "id":6,  "value": "10.1029/2018jd029272"},
+  { "id":7,  "value": "10.4000/edc.9014"},
+  { "id":8,  "value": "unknown"}
+]
+
+###
+# @name v2IstexWorksExpand
+# istex/works/expand
+POST {{host}}/v2/istex/works/expand?indent=true HTTP/1.1
+Content-Type: application/json
+
+[
+  { "id":1,   "value": "10.1016/S0047-6374(98)00099-2"},
+  { "id":2,   "value": "10.1016/S0167-4943(01)00186-8"},
+  { "id":3,   "value": "10.1093/ageing/afm016"},
+  { "id":4,   "value": ""}
+]
+
+###
+# @name v2WosFetch
+# wos/fetch
+POST {{host}}/v2/wos/fetch?indent=true HTTP/1.1
+Content-Type: application/json
+
+[
+  {
+    "query": "0",
+    "value": "XX"
+  },
+  {
+    "query" :"I",
+    "value": {
+      "databaseId": "WOK",
+      "usrQuery": "TS=(cadmium)",
+      "count": "5",
+      "firstRecord": "1"
+    }
+  },
+  {
+    "query" :"II",
+    "value": {
+      "databaseId": "WOK",
+      "usrQuery": "TS=(cadmium)",
+      "count": "5",
+      "firstRecord": "6"
+    }
+  }
+]
+
+###
+# @name v2WosWorksExpand
+# wos/works/expand
+POST {{host}}/v2/wos/works/expand?indent=true HTTP/1.1
+Content-Type: application/json
+
+[
+  { "id":1,   "value": "10.1016/S0047-6374(98)00099-2"},
+  { "id":2,   "value": "10.1016/S0167-4943(01)00186-8"},
+  { "id":3,   "value": "10.1093/ageing/afm016"},
+  { "id":4,   "value": ""}
+]
+
+###
+# @name v2HalWorksExpand
+# hal/works/expand
+POST {{host}}/v2/hal/works/expand?indent=true HTTP/1.1
+Content-Type: application/json
+
+[
+  { "id":1,   "value": "10.1016/S0047-6374(98)00099-2"},
+  { "id":2,   "value": "10.35562/arabesques.1222"},
+  { "id":3,   "value": "10.3324/haematol.2016.148908"},
+  { "id":4,   "value": ""}
+]
+
+###
+# @name v2ConditorWorksExpand
+# conditor/works/expand
+POST {{host}}/v2/conditor/works/expand?indent=true HTTP/1.1
+Content-Type: application/json
+
+[
+  { "id":1,   "value": "10.1016/S0047-6374(98)00099-2"},
+  { "id":2,   "value": "10.35562/arabesques.1222"},
+  { "id":3,   "value": "10.3324/haematol.2016.148908"},
+  { "id":4,   "value": ""}
+]
+
+###
+# @name v2ConditorWorksExpandByHalid
+# conditor/works/expandByHalid
+POST {{host}}/v2/conditor/works/expandByHalid?indent=true HTTP/1.1
+Content-Type: application/json
+
+[
+  { "id":1,   "value": "hal-03008165"},
+  { "id":4,   "value": ""}
+]
+
+###
+
+# @name v2BsoWorksExpand
+# bso/works/expand
+POST {{host}}/v2/bso/works/expand?indent=true HTTP/1.1
+Content-Type: application/json
+
+[
+  { "id":1,   "value": "10.1103/physrevc.106.024603"},
+  { "id":2,   "value": "10.1016/j.msea.2021.142288"},
+  { "id":3,   "value": "10.1029/2021gc010308"},
+  { "id":4,   "value": "rien"},
+  { "id":4,   "value": ""}
+]
+
+###
+

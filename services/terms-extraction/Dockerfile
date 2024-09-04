@@ -1,4 +1,4 @@
-FROM cnrsinist/ezs-python-server:py3.9-no16-1.0.10
+FROM cnrsinist/ezs-python-server:py3.9-no16-1.0.11
 
 USER root
 
@@ -37,3 +37,4 @@ RUN chown -R daemon:daemon /usr/sbin/.local
 WORKDIR /app/public
 # Declare files to copy in .dockerignore
 COPY --chown=daemon:daemon . /app/public/
+RUN mv ./config.json /app && chmod a+w /app/config.json

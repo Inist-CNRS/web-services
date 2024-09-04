@@ -3,7 +3,7 @@
     "info": {
         "title": "affiliations-tools - Structuration et enrichissements d'affiliations",
         "summary": "Propose plusieurs services autour des affiliations présentes dans les notices bibliographiques",
-        "version": "1.1.5",
+        "version": "1.2.2",
         "termsOfService": "https://services.istex.fr/",
         "contact": {
             "name": "Inist-CNRS",
@@ -15,7 +15,7 @@
             "x-comment": "Will be automatically completed by the ezs server."
         },
         {
-            "url": "http://vptdmservices.intra.inist.fr:49256/",
+            "url": "http://vptdmservices.intra.inist.fr:49309/",
             "description": "Latest version for production",
             "x-profil": "Standard"
         }

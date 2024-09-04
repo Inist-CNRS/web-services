@@ -38,3 +38,23 @@ Content-Type: application/json
   }
 ]
 
+###
+# @name v1validateUrl
+# Valide la référence bibliographique d'un PDF à partir de son URL
+POST {{host}}/v1/validate-url?indent=true HTTP/1.1
+Content-Type: application/json
+
+[
+  {
+    "value":"https://cnrs.hal.science/hal-04461354/file/anki-gaillard-revol.pdf"
+  }
+]
+
+
+###
+# @name v1validatePdf
+# Valide la référence bibliographique d'un PDF
+POST {{host}}/v1/validate-pdf?indent=true
+Content-Type: application/pdf
+
+< ./example.pdf

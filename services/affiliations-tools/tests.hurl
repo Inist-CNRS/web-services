@@ -293,7 +293,7 @@ HTTP 200
             "intitule": "botAnique et Modélisation de l'Architecture des Plantes et des végétations",
             "sigle": "AMAP",
             "ville_postale": "MONTPELLIER CEDEX 5",
-            "code_postal": "34398",
+            "code_postal": 34398,
             "etabAssoc": [
                 {
                     "etab": {
@@ -304,7 +304,7 @@ HTTP 200
                     },
                     "label": "UMR",
                     "labelAppauvri": "umr",
-                    "numero": "5120"
+                    "numero": 5120
                 },
                 {
                     "etab": {
@@ -315,7 +315,7 @@ HTTP 200
                     },
                     "label": "UMR",
                     "labelAppauvri": "umr",
-                    "numero": "5120"
+                    "numero": 5120
                 },
                 {
                     "etab": {
@@ -326,7 +326,7 @@ HTTP 200
                     },
                     "label": "UMR",
                     "labelAppauvri": "umr",
-                    "numero": "51"
+                    "numero": 51
                 },
                 {
                     "etab": {
@@ -337,7 +337,7 @@ HTTP 200
                     },
                     "label": "UMR",
                     "labelAppauvri": "umr",
-                    "numero": "5120"
+                    "numero": 5120
                 },
                 {
                     "etab": {
@@ -348,14 +348,14 @@ HTTP 200
                     },
                     "label": "UMR",
                     "labelAppauvri": "umr",
-                    "numero": "0931"
+                    "numero": 931
                 }
             ],
             "intituleAppauvri": "botanique et modelisation de l architecture des plantes et des vegetations",
             "sigleAppauvri": "amap",
             "ville_postale_appauvrie": "montpellier cedex 5",
-            "annee_creation": "2001",
-            "an_fermeture": ""
+            "annee_creation": 2001,
+            "an_fermeture": 0
         }
     ]
 },
@@ -364,10 +364,10 @@ HTTP 200
     "value": [
         {
             "num_nat_struct": "200711887V",
-            "intitule": "LABORATOIRE D'INTEGRATION DU MATERIAU AU SYSTEME",
+            "intitule": "Laboratoire d'intégration du matériau au système",
             "sigle": "IMS",
             "ville_postale": "TALENCE CEDEX",
-            "code_postal": "33405",
+            "code_postal": 33405,
             "etabAssoc": [
                 {
                     "etab": {
@@ -378,7 +378,7 @@ HTTP 200
                     },
                     "label": "UMR",
                     "labelAppauvri": "umr",
-                    "numero": "5218"
+                    "numero": 5218
                 },
                 {
                     "etab": {
@@ -389,7 +389,7 @@ HTTP 200
                     },
                     "label": "UMR",
                     "labelAppauvri": "umr",
-                    "numero": "5218"
+                    "numero": 5218
                 },
                 {
                     "etab": {
@@ -400,14 +400,14 @@ HTTP 200
                     },
                     "label": "UMR",
                     "labelAppauvri": "umr",
-                    "numero": "5218"
+                    "numero": 5218
                 }
             ],
             "intituleAppauvri": "laboratoire d integration du materiau au systeme",
             "sigleAppauvri": "ims",
             "ville_postale_appauvrie": "talence cedex",
-            "annee_creation": "2006",
-            "an_fermeture": ""
+            "annee_creation": 2006,
+            "an_fermeture": 0
         }
     ]
 },
@@ -431,7 +431,7 @@ HTTP 200
             "intitule": "Institut de l'information scientifique et technique",
             "sigle": "INIST",
             "ville_postale": "VANDOEUVRE LES NANCY CEDEX",
-            "code_postal": "54519",
+            "code_postal": 54519,
             "etabAssoc": [
                 {
                     "etab": {
@@ -442,14 +442,14 @@ HTTP 200
                     },
                     "label": "UAR",
                     "labelAppauvri": "uar",
-                    "numero": "76"
+                    "numero": 76
                 }
             ],
             "intituleAppauvri": "institut de l information scientifique et technique",
             "sigleAppauvri": "inist",
             "ville_postale_appauvrie": "vandoeuvre les nancy cedex",
-            "annee_creation": "1988",
-            "an_fermeture": ""
+            "annee_creation": 1988,
+            "an_fermeture": 0
         }
     ]
 }]
@@ -478,8 +478,6 @@ body contains "2015;CENBG, CNRS/IN2P3, Chemin du Solarium B. P. 120, Gradignan, 
 #2015;University of Bordeaux, IMS, CNRS UMR5218, Talence, F-33405, France;200711887V
 #2015;CENBG, CNRS/IN2P3, Chemin du Solarium B. P. 120, Gradignan, F-33175, France;
 #```
-
-
 
 POST {{host}}/v1/rnsr/conditor
 content-type: application/json
@@ -552,4 +550,88 @@ HTTP 200
             "barboncino 781 franklin avenue crown heights brooklyn new york 11238"
         ]
     }
+}]
+
+POST {{host}}/v1/ror/get-id?indent=true
+content-type: application/json
+[
+  {
+    "id": 1,
+    "status": "wrong",
+    "value": "Norwich Medical School, University of East Anglia"
+  },
+  {
+    "id": 2,
+    "status": "correct",
+    "value": "Institut Lumière Matière [Villeurbanne]"
+  },
+  {
+    "id": 3,
+    "status": "correct-2",
+    "value": "NSF's National Optical-Infrared Astronomy Research Laboratory, 950 North Cherry Avenue, Tucson, AZ 85719, USA"
+  },
+  {
+    "id": 4,
+    "status": "non-existing",
+    "value": "Sphere Energy SAS, 250 Bis Boulevard Saint Germain, 75007, Paris, France"
+  },
+  {
+    "id": 5,
+    "status": "non-existing",
+    "value" : "Department of Computational Engineering, CSC — Scientific Computing Ltd, P.O. Box 405, 02101, Espoo, Finland"
+  }
+]
+
+HTTP 200
+[{
+    "id": 1,
+    "status": "wrong",
+    "value": {
+        "id_ror": "https://ror.org/01e0ns064",
+        "score": 1,
+        "name": "University of East",
+        "type": [
+            "Education"
+        ],
+        "name_geonames": null,
+        "id_geonames": null
+    }
+},
+{
+    "id": 2,
+    "status": "correct",
+    "value": {
+        "id_ror": "https://ror.org/0323bey33",
+        "score": 0.79,
+        "name": "Institut Lumière Matière",
+        "type": [
+            "Facility"
+        ],
+        "name_geonames": null,
+        "id_geonames": null
+    }
+},
+{
+    "id": 3,
+    "status": "correct-2",
+    "value": {
+        "id_ror": "https://ror.org/03zmsge54",
+        "score": 1,
+        "name": "NSF’s NOIRLab",
+        "type": [
+            "Facility"
+        ],
+        "name_geonames": "Pima",
+        "id_geonames": 5308878
+    }
+},
+{
+    "id": 4,
+    "status": "non-existing",
+    "value": "No match found"
+},
+{
+    "id": 5,
+    "status": "non-existing",
+    "value": "No match found"
 }]

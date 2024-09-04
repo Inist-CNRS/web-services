@@ -9,7 +9,6 @@ import sys
 import json
 import logging
 import unicodedata
-import pickle
 
 # Remove logs from TF
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'
@@ -27,9 +26,6 @@ def normalizeText(text):
     text = remove_accents(text).replace(" ","")
     return text
 
-
-with open("./v1/chem/models/dic-name-iupac-filtered-enrich.pkl",'rb') as f_dic:
-    dict_name_iupac = pickle.load(f_dic)
 
 ## Predicts developped formulas
 # Load model
@@ -93,35 +89,13 @@ def curate_list(input_list):
                         )
     return output_list
 
-#Disambigusate formulas :
-
-#preprocessing : remove duplicates elements
-def remove_duplicates(input_list):
-    output_list = []
-    normalized_list = []
-    for elt in input_list:
-        if normalizeText(elt) not in normalized_list:
-            output_list.append(elt)
-            normalized_list.append(normalizeText(elt))
-    return output_list
-
-def disambiguisate_formula(input_list):
-    output_list = []
-    for elt in input_list:
-        try:
-            output_list.append(dict_name_iupac[normalizeText(elt)])
-        except:
-            continue
-    return output_list
-
-
 
 # beginning of the ws  
 for line in sys.stdin:
     data = json.loads(line)
     # Use the model to find NER
-    value = remove_duplicates(curate_list(predict_formula_ml_list(split_text(data["value"]))))
+    value = curate_list(predict_formula_ml_list(split_text(data["value"])))
     # Standardization
-    data["value"] = {"chemical":value, "chemical_disambiguisate":remove_duplicates(disambiguisate_formula(value))}
+    data["value"] = {"chemical":value}
     json.dump(data, sys.stdout, ensure_ascii=False)
     sys.stdout.write("\n")

@@ -1,7 +1,7 @@
 {
     "private": true,
     "name": "ws-diseases-ner",
-    "version": "1.0.12",
+    "version": "1.0.14",
     "description": "Trouve des entités nommées de maladies dans un texte",
     "repository": {
         "type": "git",
