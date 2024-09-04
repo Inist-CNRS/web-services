@@ -15,6 +15,7 @@
         "concat",
         "inist",
         "Lodex",
+        "openapi",
         "prometheus",
         "stopwords",
         "ungroup",
