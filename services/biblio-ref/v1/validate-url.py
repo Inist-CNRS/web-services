@@ -33,7 +33,10 @@ for line in sys.stdin:
     references = []
     for reference in references_structured:
         if "author" in reference:
-            references.append(reference['raw_ref'][0])
+            try:
+                references.append(reference['raw_ref'][0])
+            except:
+                continue
     
     all_res = []
     for reference in references:
