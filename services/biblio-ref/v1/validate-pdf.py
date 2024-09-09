@@ -24,14 +24,19 @@ for line in sys.stdin:
     references = []
     for reference in references_structured:
         if "author" in reference:
-            references.append(reference['raw_ref'][0])
+            try:
+                references.append(reference['raw_ref'][0])
+            except:
+                continue
     
-    all_res = []
-    for reference in references:
-        res = biblio_ref(reference)
-        res['reference'] = reference
-        all_res.append(res)
-        
-    output = {"id":pdf_filename, "value":all_res}
-    sys.stdout.write(json.dumps(output))
-    sys.stdout.write('\n')
+    idx = 0
+    if len(references)==0:
+        sys.stdout.write(json.dumps({"id":idx, "value":{"doi":"","status": "error_data"}}))
+        sys.stdout.write('\n')
+    else:
+        for reference in references:
+            idx += 1
+            res = biblio_ref(reference)
+            res['reference'] = reference
+            sys.stdout.write(json.dumps({"id":idx, "value":res}))
+            sys.stdout.write('\n')
