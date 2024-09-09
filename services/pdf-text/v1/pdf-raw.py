@@ -12,7 +12,6 @@ import spacy
 import requests
 import os
 import unidecode
-import random
 import json
 import sys
 from pypdf import PdfReader
@@ -97,7 +96,7 @@ def is_readable_text(chaine):
     return not (contient_caracteres_speciaux or contient_url or contient_doi)
 
 def get_alphabetic_numeric_ratio(chaine):
-    # Initlialize count variables
+    # Initialize count variables
     nb_caracteres_alphabetiques = 0
     nb_caracteres_numeriques = 0
 
@@ -160,7 +159,7 @@ for line in sys.stdin:
     
             else:
                 current_font = None
-            if current_font!=None:
+            if current_font is not None:
                 # Check if font changed
                 if current_font != previous_font:
                     # add (existing) line in merged_lines
