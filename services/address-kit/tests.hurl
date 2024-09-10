@@ -55,63 +55,79 @@ content-type: application/json
 {"id":5,"value":"z.i. de kermelin,16, rue ampère,  56017 Vannes"},
 {"id":6,"value":"campus de santa apolónia, 5300-253 bragança"},
 {"id":7,"value":"campus romanus de maron"}  ,
-{"id":8,"value":"Inist-CNRS, vandoeuvre les Nancy, France"}
+{"id":8,"value":"Inist-CNRS, vandoeuvre les Nancy, France"},
+{"id":9,"value":"Researcher with grant Bocconi University ."},
+{"id":10,"value":" University of Toulouse, INPT, INP‑PURPAN, 75 voie du T.O.E.C., FR‑31076 TOULOUSE. Email: regis.vezian@purpan.fr"} 
 ]
 
 HTTP 200
 [{
     "id": 1,
-    "value": [
-        "France",
-        "FRA"
-    ]
+    "value": {
+        "country": "France",
+        "code": "fr"
+    }
 },
 {
     "id": 2,
-    "value": [
-        "France",
-        "FRA"
-    ]
+    "value": {
+        "country": "France",
+        "code": "fr"
+    }
 },
 {
     "id": 3,
-    "value": [
-        "France",
-        "FRA"
-    ]
+    "value": {
+        "country": "France",
+        "code": "fr"
+    }
 },
 {
     "id": 4,
-    "value": [
-        "Germany",
-        "DEU"
-    ]
+    "value": {
+        "country": "Germany",
+        "code": "de"
+    }
 },
 {
     "id": 5,
-    "value": [
-        "France",
-        "FRA"
-    ]
+    "value": {
+        "country": "France",
+        "code": "fr"
+    }
 },
 {
     "id": 6,
-    "value": [
-        "Portugal",
-        "PRT"
-    ]
+    "value": {
+        "country": "Portugal",
+        "code": "pt"
+    }
 },
 {
     "id": 7,
-    "value": [
-        "Unknown",
-        "N/A"
-    ]
+    "value": {
+        "country": "",
+        "code": ""
+    }
 },
 {
     "id": 8,
-    "value": [
-        "France",
-        "FRA"
-    ]
+    "value": {
+        "country": "France",
+        "code": "fr"
+    }
+},
+{
+    "id": 9,
+    "value": {
+        "country": "Italy",
+        "code": "it"
+    }
+},
+{
+    "id": 10,
+    "value": {
+        "country": "France",
+        "code": "fr"
+    }
 }]
