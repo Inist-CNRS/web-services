@@ -63,7 +63,8 @@
     "services/person-ner",
     "services/sciencemetrix-classification",
     "services/terms-extraction",
-    "services/text-clustering"
+    "services/text-clustering",
+    "services/terms-tools"
   ],
   "dependencies": {
     "@ezs/analytics": "2.3.2",
