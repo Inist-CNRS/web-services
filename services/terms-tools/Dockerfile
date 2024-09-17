@@ -2,6 +2,7 @@
 FROM cnrsinist/ezs-python-server:py3.9-no16-1.0.11
 
 ENV TT_VERSION=1.0.0
+ENV GIT=https://github.com/stephane54/terms-tools.git
 
 USER root
 
@@ -10,7 +11,7 @@ RUN apt update && \
     apt install -y unzip curl autoconf automake libtool pkg-config build-essential git
     # Download libpostal 
 RUN pip install --upgrade pip
-RUN pip install --no-cache-dir git+http://vxgit.intra.inist.fr:60000/git/schneist/terms_tools.git@$TT_VERSION#egg=terms_tools
+RUN pip install --no-cache-dir git+$GIT@$TT_VERSION#egg=terms_tools
 
 # rendre possible installation des ressources stanza lors 1er execution (mkdir en user daemon)
 RUN chmod 777 /usr/sbin/
