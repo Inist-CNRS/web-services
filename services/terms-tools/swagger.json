@@ -3,7 +3,7 @@
     "info": {
         "title": "terms-tools",
         "description": "Boite à outils de POS tagging et d'annotation de terms",
-        "version": "1.0.0",
+        "version": "2.0.0",
         "termsOfService": "https://services.istex.fr/",
         "contact": {
             "name": "Inist-CNRS",
