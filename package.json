@@ -1,80 +1,35 @@
 {
   "private": true,
-  "name": "web-services",
-  "version": "1.0.0",
-  "description": "Web services at Inist-CNRS",
-  "main": "index.js",
-  "scripts": {
-    "generate:example-metadata": "node bin/generate-example-metadata.mjs",
-    "generate:example-tests": "node bin/generate-example-tests.mjs",
-    "generate:service": "./bin/create-service-from-template.sh",
-    "help": "bat SCRIPTS.md || cat SCRIPTS.md",
-    "insert:description": "./bin/insert-description.sh",
-    "insert:swagger:description": "./bin/insert-swagger-description.sh",
-    "publish": "./bin/publish.sh",
-    "update:images": "./bin/update-images.sh",
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "test:local": "bin/test-service.sh local",
-    "test:remote": "bin/test-service.sh remote",
-    "test:remotes": "bin/test-services.sh"
-  },
+  "name": "ws-terms-tools",
+  "version": "0.0.0",
+  "description": "Extraction de termes",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Inist-CNRS/web-services.git"
   },
   "keywords": [
-    "webservices",
-    "tdm"
+    "ezmaster"
   ],
-  "author": "",
-  "license": "CECILL-2.1",
+  "author": "François Parmentier <francois.parmentier@gmail.com>",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/Inist-CNRS/web-services/issues"
   },
-  "homepage": "https://github.com/Inist-CNRS/web-services#readme",
-  "workspaces": [
-    "bases/ezs-python-pytorch-server",
-    "bases/ezs-python-saxon-server",
-    "bases/ezs-python-server",
-    "bases/python-node",
-    "services/address-kit",
-    "services/affiliation-rnsr",
-    "services/affiliations-tools",
-    "services/ark-tools",
-    "services/astro-ner",
-    "services/authors-tools",
-    "services/base-line",
-    "services/base-line-python",
-    "services/biblio-ref",
-    "services/biblio-tools",
-    "services/chem-ner",
-    "services/data-computer",
-    "services/data-termsuite",
-    "services/data-workflow",
-    "services/data-wrapper",
-    "services/diseases-ner",
-    "services/domains-classifier",
-    "services/funder-ner",
-    "services/hal-classifier",
-    "services/irc3-species",
-    "services/ner-tagger",
-    "services/nlp-tools2",
-    "services/pdf-text",
-    "services/person-ner",
-    "services/sciencemetrix-classification",
-    "services/terms-extraction",
-    "services/text-clustering",
-    "services/terms-tools"
-  ],
-  "dependencies": {
-    "@ezs/analytics": "2.3.2",
-    "@ezs/basics": "2.7.0",
-    "@ezs/core": "3.10.2",
-    "@ezs/spawn": "1.4.6",
-    "@orangeopensource/hurl": "4.3.2",
-    "rest-cli": "1.8.13"
-  },
-  "devDependencies": {
-    "@types/node": "20.11.30"
+  "homepage": "https://github.com/Inist-CNRS/web-services/#readme",
+  "scripts": {
+    "version:insert:readme": "sed -i \"s#\\(${npm_package_name}.\\)\\([\\.a-z0-9]\\+\\)#\\1${npm_package_version}#g\" README.md && git add README.md",
+    "version:insert:swagger": "sed -i \"s/\\\"version\\\": \\\"[0-9]\\+.[0-9]\\+.[0-9]\\+\\\"/\\\"version\\\": \\\"${npm_package_version}\\\"/g\" swagger.json && git add swagger.json",
+    "version:insert": "npm run version:insert:readme && npm run version:insert:swagger",
+    "version:commit": "git commit -a -m \"release ${npm_package_name}@${npm_package_version}\"",
+    "version:tag": "git tag \"${npm_package_name}@${npm_package_version}\" -m \"${npm_package_name}@${npm_package_version}\"",
+    "version:push": "git push && git push --tags",
+    "version": "npm run version:insert && npm run version:commit && npm run version:tag",
+    "postversion": "npm run version:push",
+    "build:dev": "docker build -t cnrsinist/${npm_package_name}:latest .",
+    "start:dev": "npm run build:dev && docker run --name dev --rm --detach -p 31976:31976 cnrsinist/${npm_package_name}:latest",
+    "stop:dev": "docker stop dev",
+    "build": "docker build -t cnrsinist/${npm_package_name}:${npm_package_version} .",
+    "start": "docker run --rm -p 31976:31976 cnrsinist/${npm_package_name}:${npm_package_version}",
+    "publish": "docker push cnrsinist/${npm_package_name}:${npm_package_version}"
   }
 }
