@@ -1,35 +1,35 @@
 {
-    "private": true,
-    "name": "ws-terms-tools",
-    "version": "1.0.0",
-    "description": "s",
-    "repository": {
-        "type": "git",
-        "url": "git+https://github.com/Inist-CNRS/web-services.git"
-    },
-    "keywords": [
-        "ezmaster"
-    ],
-    "author": " <>",
-    "license": "MIT",
-    "bugs": {
-        "url": "https://github.com/Inist-CNRS/web-services/issues"
-    },
-    "homepage": "https://github.com/Inist-CNRS/web-services/#readme",
-    "scripts": {
-        "version:insert:readme": "sed -i \"s#\\(${npm_package_name}.\\)\\([\\.a-z0-9]\\+\\)#\\1${npm_package_version}#g\" README.md && git add README.md",
-        "version:insert:swagger": "sed -i \"s/\\\"version\\\": \\\"[0-9]\\+.[0-9]\\+.[0-9]\\+\\\"/\\\"version\\\": \\\"${npm_package_version}\\\"/g\" swagger.json && git add swagger.json",
-        "version:insert": "npm run version:insert:readme && npm run version:insert:swagger",
-        "version:commit": "git commit -a -m \"release ${npm_package_name}@${npm_package_version}\"",
-        "version:tag": "git tag \"${npm_package_name}@${npm_package_version}\" -m \"${npm_package_name}@${npm_package_version}\"",
-        "version:push": "git push && git push --tags",
-        "version": "npm run version:insert && npm run version:commit && npm run version:tag",
-        "postversion": "npm run version:push",
-        "build:dev": "docker build -t cnrsinist/${npm_package_name}:latest .",
-        "start:dev": "npm run build:dev && docker run --name dev --rm --detach -p 31976:31976 cnrsinist/${npm_package_name}:latest",
-        "stop:dev": "docker stop dev",
-        "build": "docker build -t cnrsinist/${npm_package_name}:${npm_package_version} .",
-        "start": "docker run --rm -p 31976:31976 cnrsinist/${npm_package_name}:${npm_package_version}",
-        "publish": "docker push cnrsinist/${npm_package_name}:${npm_package_version}"
-    }
+  "private": true,
+  "name": "ws-terms-tools",
+  "version": "1.0.0",
+  "description": "Extraction de termes",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Inist-CNRS/web-services.git"
+  },
+  "keywords": [
+    "ezmaster"
+  ],
+  "author": "François Parmentier <francois.parmentier@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Inist-CNRS/web-services/issues"
+  },
+  "homepage": "https://github.com/Inist-CNRS/web-services/#readme",
+  "scripts": {
+    "version:insert:readme": "sed -i \"s#\\(${npm_package_name}.\\)\\([\\.a-z0-9]\\+\\)#\\1${npm_package_version}#g\" README.md && git add README.md",
+    "version:insert:swagger": "sed -i \"s/\\\"version\\\": \\\"[0-9]\\+.[0-9]\\+.[0-9]\\+\\\"/\\\"version\\\": \\\"${npm_package_version}\\\"/g\" swagger.json && git add swagger.json",
+    "version:insert": "npm run version:insert:readme && npm run version:insert:swagger",
+    "version:commit": "git commit -a -m \"release ${npm_package_name}@${npm_package_version}\"",
+    "version:tag": "git tag \"${npm_package_name}@${npm_package_version}\" -m \"${npm_package_name}@${npm_package_version}\"",
+    "version:push": "git push && git push --tags",
+    "version": "npm run version:insert && npm run version:commit && npm run version:tag",
+    "postversion": "npm run version:push",
+    "build:dev": "docker build -t cnrsinist/${npm_package_name}:latest .",
+    "start:dev": "npm run build:dev && docker run --name dev --rm --detach -p 31976:31976 cnrsinist/${npm_package_name}:latest",
+    "stop:dev": "docker stop dev",
+    "build": "docker build -t cnrsinist/${npm_package_name}:${npm_package_version} .",
+    "start": "docker run --rm -p 31976:31976 cnrsinist/${npm_package_name}:${npm_package_version}",
+    "publish": "docker push cnrsinist/${npm_package_name}:${npm_package_version}"
+  }
 }
