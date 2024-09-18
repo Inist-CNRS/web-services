@@ -1,7 +1,8 @@
 POST {{host}}/v1/en/dico_pos/postag?input=terms
 content-type: text/csv
 ```
-id	text\nhttp://data.loterre.fr/ark:/67375/P66#xl_en_9278939f	qualities
+id	text
+http://data.loterre.fr/ark:/67375/P66#xl_en_9278939f	qualities
 http://data.loterre.fr/ark:/67375/P66#xl_en_60f6687f	quality
 http://data.loterre.fr/ark:/67375/P66#xl_en_696ab94f	material entities
 http://data.loterre.fr/ark:/67375/P66#xl_en_c0a4dac9	material entit
