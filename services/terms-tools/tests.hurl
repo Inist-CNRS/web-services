@@ -1,5 +1,6 @@
 # WARNING: This file should have CRLF line endings. It is an exception.
 #          See .gitattributes
+
 POST {{host}}/v1/en/dico_pos/postag?input=terms
 Content-Type: text/tab-separated-values
 ```
