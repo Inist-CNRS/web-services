@@ -2,3 +2,5 @@
 # Add any extra files or paths here to make git stop saying they
 # are changed when only line endings change.
 services/**/*.hurl text eol=lf
+# Use CRLF on terms-tools test file.
+services/**/*.hurl text eol=crlf
