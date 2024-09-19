@@ -1,7 +1,8 @@
 terms_tools
 ===============  
 
-Bibliothèque d'outils pour l'etiquettage POS et la reconnaissance de termes (construite au dessus de stanza)  
+Bibliothèque d'outils pour l'étiquetage POS et la reconnaissance de termes (construite au dessus de stanza)  
+
 
 ## POStag et lemmatisation une liste de termes en francais et en anglais  
 
