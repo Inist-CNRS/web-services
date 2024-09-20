@@ -25,7 +25,7 @@ variable "computing_token" exists
 POST {{host}}/v1/retrieve-json
 content-type: application/json
 [Options]
-delay: 1000
+delay: 2000
 ```
 [
 	{
@@ -60,7 +60,7 @@ variable "computing_token" exists
 POST {{host}}/v1/retrieve-json
 content-type: application/json
 [Options]
-delay: 1000
+delay: 2000
 ```
 [
 	{
