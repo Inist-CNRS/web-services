@@ -16,4 +16,4 @@ RUN mv ./docker-entrypoint.sh /app && chmod a+x /app/docker-entrypoint.sh
 RUN gunzip v1/CoL.txt.gz
 
 # Setup env variable
-ENV LANG C.UTF-8
+ENV LANG=C.UTF-8
