@@ -1,8 +1,8 @@
 {
   "private": true,
   "name": "ws-terms-tools",
-  "version": "1.0.0",
-  "description": "Extraction de termes",
+  "version": "0.0.0",
+  "description": "POStagging de termes et annotation",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Inist-CNRS/web-services.git"
@@ -10,7 +10,7 @@
   "keywords": [
     "ezmaster"
   ],
-  "author": "François Parmentier <francois.parmentier@gmail.com>",
+  "author": "Stephane Schneider <stephane54.schneider@gmail.com>",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/Inist-CNRS/web-services/issues"
