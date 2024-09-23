@@ -3,7 +3,7 @@
 ####
 # Get all web services dvc files
 ####
-FROM python:3.9-slim-bullseye as dvc-files
+FROM python:3.9-slim-bullseye AS dvc-files
 WORKDIR /dvc
 RUN apt update && apt -y install git curl
 RUN pip install dvc[webdav]==3.39.0
@@ -31,16 +31,16 @@ USER root
 RUN apt update && \
     apt install -y build-essential make gcc && \
     pip install Cython==0.29.37 && \
-# Install all python dependencies
-# Using build isolation to fix compile error
-# https://github.com/numpy/numpy/issues/24377#issuecomment-1671859253
+    # Install all python dependencies
+    # Using build isolation to fix compile error
+    # https://github.com/numpy/numpy/issues/24377#issuecomment-1671859253
     pip install --no-build-isolation \
-        more-itertools==10.2.0 \
-        numpy==1.26.3 \
-        scipy==1.10.1 \
-        fasttext==0.9.2 \
-        faiss-cpu==1.7.2 && \
-# Clean-up
+    more-itertools==10.2.0 \
+    numpy==1.26.3 \
+    scipy==1.10.1 \
+    fasttext==0.9.2 \
+    faiss-cpu==1.7.2 && \
+    # Clean-up
     apt remove -y --purge build-essential make gcc && \
     apt autoremove -y && \
     pip uninstall -y Cython
