@@ -63,6 +63,7 @@
     "services/person-ner",
     "services/sciencemetrix-classification",
     "services/terms-extraction",
+    "services/terms-tools",
     "services/text-clustering"
   ],
   "dependencies": {
