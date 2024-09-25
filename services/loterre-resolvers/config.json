@@ -1,9 +1,9 @@
 {
     "environnement": {
         "EZS_TITLE": "Résolveurs pour des terminologies Loterre",
-        "EZS_DESCRIPTION": "Fait appel aux vocabulaires Loterre pour obtenir des informations dans différentes domaines.",
+        "EZS_DESCRIPTION": "Fait appel aux vocabulaires Loterre pour obtenir des informations dans différents domaines.",
         "EZS_METRICS": true,
-        "EZS_CONCURRENCY": 4,
+        "EZS_CONCURRENCY": 2,
         "EZS_CONTINUE_DELAY": 60,
         "EZS_NSHARDS": 32,
         "EZS_CACHE": true,
