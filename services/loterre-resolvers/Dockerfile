@@ -27,6 +27,7 @@ RUN npm install \
 # Declare files to copy in .dockerignore
 WORKDIR /app/data
 COPY --chown=daemon:daemon --from=dvcfiles /dvc/*.skos /app/data/
+RUN chmod a+rwx /app/data
 
 WORKDIR /app/public/v1
 COPY --chown=daemon:daemon ./v1 /app/public/v1
