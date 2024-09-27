@@ -798,6 +798,8 @@ HTTP 200
 
 POST {{host}}/v1/D63/expand?indent=true
 content-type: application/json
+[Options]
+skip: true
 [
   { "value": "toto"},
   { "value": "Nancy" },
@@ -1329,6 +1331,8 @@ HTTP 200
 
 POST {{host}}/v1/D63/identify?indent=true
 content-type: application/json
+[Options]
+skip: true
 [
   { "value": "Pompey"}
 ]
