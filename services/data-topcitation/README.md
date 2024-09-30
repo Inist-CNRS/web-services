@@ -2,4 +2,5 @@
 
 Référence phare d'un corpus
 
-à partir d'une information (pour l'instant doi) récupère les citations
+A partir d'une liste de doi renvoie les 10 références les plus citées.
+Utilise l'API OpenAlex pour récupérer les données de citations.
