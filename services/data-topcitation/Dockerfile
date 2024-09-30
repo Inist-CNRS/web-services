@@ -11,11 +11,6 @@ RUN pip install \
     requests==2.32.3 \
     urllib3==2.2.2
 
-# Install all node dependencies
-RUN npm install \
-    @ezs/teeft@2.3.1 \
-    @ezs/strings@1.0.3
-
 WORKDIR /app/public
 # Declare files to copy in .dockerignore
 COPY --chown=daemon:daemon . /app/public/
