@@ -1,7 +1,7 @@
 {
     "environnement": {
         "EZS_TITLE": "Référence phare d'un corpus",
-        "EZS_DESCRIPTION": "à partir d'une information (pour l'instant doi) récupère les citatio",
+        "EZS_DESCRIPTION": "À partir d'une information (pour l'instant doi) récupère les citations",
         "EZS_METRICS": true,
         "EZS_CONCURRENCY": 2,
         "EZS_CONTINUE_DELAY": 60,
