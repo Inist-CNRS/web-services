@@ -45,96 +45,94 @@ delay: 10000
 
 HTTP 200
 Content-Type: application/json
-[
-  {
+[{
     "id": "n/a",
     "value": [
-      {
-        "citation": "https://doi.org/10.1007/bf01303701",
-        "count": 6,
-        "doi": [
-          "https://doi.org/10.1021/ja800073m",
-          "https://doi.org/10.1126/science.235.4793.1196",
-          "https://doi.org/10.1103/physrevlett.58.908",
-          "https://doi.org/10.1103/revmodphys.70.1039",
-          "https://doi.org/10.1103/revmodphys.66.1125",
-          "https://doi.org/10.1103/physrevb.37.3759"
-        ]
-      },
-      {
-        "citation": "https://doi.org/10.1103/physrev.115.2",
-        "count": 3,
-        "doi": [
-          "https://doi.org/10.1126/science.235.4793.1196",
-          "https://doi.org/10.1103/revmodphys.70.1039",
-          "https://doi.org/10.1103/physrevb.37.3759"
-        ]
-      },
-      {
-        "citation": "https://doi.org/10.1126/science.235.4793.1196",
-        "count": 3,
-        "doi": [
-          "https://doi.org/10.1103/revmodphys.70.1039",
-          "https://doi.org/10.1103/revmodphys.66.1125",
-          "https://doi.org/10.1103/physrevb.37.3759"
-        ]
-      },
-      {
-        "citation": "https://doi.org/10.1103/physrevb.40.2254",
-        "count": 2,
-        "doi": [
-          "https://doi.org/10.1021/ja800073m",
-          "https://doi.org/10.1103/revmodphys.70.1039"
-        ]
-      },
-      {
-        "citation": "https://doi.org/10.1103/physrevb.50.6534",
-        "count": 2,
-        "doi": [
-          "https://doi.org/10.1021/ja800073m",
-          "https://doi.org/10.1103/revmodphys.70.1039"
-        ]
-      },
-      {
-        "citation": "https://doi.org/10.1038/372532a0",
-        "count": 2,
-        "doi": [
-          "https://doi.org/10.1021/ja800073m",
-          "https://doi.org/10.1103/revmodphys.70.1039"
-        ]
-      },
-      {
-        "citation": "https://doi.org/10.1126/science.235.4788.567",
-        "count": 2,
-        "doi": [
-          "https://doi.org/10.1126/science.235.4793.1196",
-          "https://doi.org/10.1103/physrevlett.58.908"
-        ]
-      },
-      {
-        "citation": "https://doi.org/10.1088/0370-1298/62/7/303",
-        "count": 2,
-        "doi": [
-          "https://doi.org/10.1126/science.235.4793.1196",
-          "https://doi.org/10.1103/revmodphys.70.1039"
-        ]
-      },
-      {
-        "citation": "https://doi.org/10.1103/physrevlett.58.408",
-        "count": 2,
-        "doi": [
-          "https://doi.org/10.1126/science.235.4793.1196",
-          "https://doi.org/10.1103/physrevlett.58.908"
-        ]
-      },
-      {
-        "citation": "https://doi.org/10.1103/physrevlett.58.405",
-        "count": 2,
-        "doi": [
-          "https://doi.org/10.1126/science.235.4793.1196",
-          "https://doi.org/10.1103/physrevlett.58.908"
-        ]
-      }
+        {
+            "citation": "https://doi.org/10.1007/bf01303701",
+            "count": 6,
+            "doi": [
+                "https://doi.org/10.1021/ja800073m",
+                "https://doi.org/10.1126/science.235.4793.1196",
+                "https://doi.org/10.1103/physrevlett.58.908",
+                "https://doi.org/10.1103/revmodphys.70.1039",
+                "https://doi.org/10.1103/revmodphys.66.1125",
+                "https://doi.org/10.1103/physrevb.37.3759"
+            ]
+        },
+        {
+            "citation": "https://doi.org/10.1103/physrev.115.2",
+            "count": 3,
+            "doi": [
+                "https://doi.org/10.1126/science.235.4793.1196",
+                "https://doi.org/10.1103/revmodphys.70.1039",
+                "https://doi.org/10.1103/physrevb.37.3759"
+            ]
+        },
+        {
+            "citation": "https://doi.org/10.1126/science.235.4793.1196",
+            "count": 3,
+            "doi": [
+                "https://doi.org/10.1103/revmodphys.70.1039",
+                "https://doi.org/10.1103/revmodphys.66.1125",
+                "https://doi.org/10.1103/physrevb.37.3759"
+            ]
+        },
+        {
+            "citation": "https://doi.org/10.1103/physrevb.40.2254",
+            "count": 2,
+            "doi": [
+                "https://doi.org/10.1021/ja800073m",
+                "https://doi.org/10.1103/revmodphys.70.1039"
+            ]
+        },
+        {
+            "citation": "https://doi.org/10.1103/physrevb.50.6534",
+            "count": 2,
+            "doi": [
+                "https://doi.org/10.1021/ja800073m",
+                "https://doi.org/10.1103/revmodphys.70.1039"
+            ]
+        },
+        {
+            "citation": "https://doi.org/10.1038/372532a0",
+            "count": 2,
+            "doi": [
+                "https://doi.org/10.1021/ja800073m",
+                "https://doi.org/10.1103/revmodphys.70.1039"
+            ]
+        },
+        {
+            "citation": "https://doi.org/10.1126/science.235.4788.567",
+            "count": 2,
+            "doi": [
+                "https://doi.org/10.1126/science.235.4793.1196",
+                "https://doi.org/10.1103/physrevlett.58.908"
+            ]
+        },
+        {
+            "citation": "https://doi.org/10.1088/0370-1298/62/7/303",
+            "count": 2,
+            "doi": [
+                "https://doi.org/10.1126/science.235.4793.1196",
+                "https://doi.org/10.1103/revmodphys.70.1039"
+            ]
+        },
+        {
+            "citation": "https://doi.org/10.1103/physrevlett.58.408",
+            "count": 2,
+            "doi": [
+                "https://doi.org/10.1126/science.235.4793.1196",
+                "https://doi.org/10.1103/physrevlett.58.908"
+            ]
+        },
+        {
+            "citation": "https://doi.org/10.1103/physrevlett.58.405",
+            "count": 2,
+            "doi": [
+                "https://doi.org/10.1126/science.235.4793.1196",
+                "https://doi.org/10.1103/physrevlett.58.908"
+            ]
+        }
     ]
-  }
-]
+}]
