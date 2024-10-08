@@ -2,7 +2,7 @@ Extraction des 10 références phares d'un corpus.
 
 Comme ces services s'appliquent à un corpus entier, la réponse finale n'est pas
 donnée immédiatement après l'appel.  
-Au contraire, un service comme [`/v1`](#data-topcitation/v1/topcitation) renverra
+Au contraire, un service comme [`/v1/topcitation`](#data-topcitation/v1/topcitation) renverra
 une réponse JSON contenant un champ `value` donnant l'identifiant du traitement
 en cours.  
 Et comme on lui passe aussi l'URL d'un *webhook*, cela lui permet, une fois le
@@ -46,7 +46,7 @@ corpus
 Chaque fichier `.json` est un objet JSON, sur une seule ligne, contenant deux champs:
 
 1. `id`: un identifiant
-2. `value`: le doi à traiter.
+2. `value`: le doi à traiter
 
 Exemple pour `corpus/W2BVWkiVT.json`:
 
@@ -68,13 +68,15 @@ connaître l'instant où on peut (ou non) récupérer le résultat.
 
 ```bash
 curl -X 'POST' \
-  'http://data-topcitation.services.istex.fr/v1/topcitation' \
+  'https://data-topcitation.services.istex.fr/v1/topcitation' \
   -H 'accept: application/json' \
   -H 'X-Webhook-Success: https://webhook.site/2caab8b5-fc96-4d7a-bb94-bdda20977830' \
   -H 'X-Webhook-Failure: https://webhook.site/2caab8b5-fc96-4d7a-bb94-bdda20977830' \
   -H 'Content-Type: application/x-gzip' \
   --data-binary '@corpus.tar.gz'
 ```
+
+> ⚠️ Attention : Les `webhooks` présents dans cet exemple ne sont plus valides.
 
 L'appel précédent renvoie une réponse du type:
 
@@ -98,7 +100,7 @@ d'adapter `value`:
 
 ```bash
 curl -X 'POST' \
-  'http://localhost:31976/v1/retrieve-csv' \
+  'http://localhost:31976/v1/retrieve-json' \
   -H 'accept: json' \
   -H 'Content-Type: json' \
   -d '[
