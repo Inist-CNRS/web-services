@@ -1,7 +1,7 @@
 {
     "private": true,
     "name": "ws-affiliation-rnsr",
-    "version": "2.1.4",
+    "version": "3.0.0",
     "description": "Trouve un RNSR à partir d'une affiliation.",
     "repository": {
         "type": "git",

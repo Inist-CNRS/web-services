@@ -4,10 +4,14 @@
 
 	// List of extensions which should be recommended for users of this workspace.
 	"recommendations": [
-		"EditorConfig.EditorConfig"
+        "anweber.vscode-httpyac",
+        "davidanson.vscode-markdownlint",
+		"EditorConfig.EditorConfig",
+        "streetsidesoftware.code-spell-checker",
+        "streetsidesoftware.code-spell-checker-french"
 	],
 	// List of extensions recommended by VS Code that should not be recommended for users of this workspace.
 	"unwantedRecommendations": [
-
+        "humao.rest-client"
 	]
 }

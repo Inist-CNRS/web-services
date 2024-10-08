@@ -24,9 +24,10 @@ process () {
         return 2
     fi
     SUMMARY=$(jq .info.summary < "${SWAGGER_FILE}")
-    if [ "${SUMMARY:-null}" = "null" ]
+    DESCRIPTION=$(jq .info.description < "${SWAGGER_FILE}")
+    if [ "${SUMMARY:-null}" = "null" ] && [ "${DESCRIPTION:-null}" = "null" ]
     then
-        logger -s "${NAME} - ERROR: swagger has no summary !"
+        logger -s "${NAME} - ERROR: swagger has no summary nor description!"
         return 3
     fi
 	SERVERS=$(jq -r ".servers" < "${SWAGGER_FILE}")
@@ -53,7 +54,7 @@ process () {
 			;;
 	esac
 	CURL_OUTFILE=$(mktemp)
-    cat <<EOF | curl --silent --user "${LOGIN}:${PASSW}" -T - "http://vpdaf.intra.inist.fr:35270/internal-proxy-1/data/${NAME}.yml" --digest  --write-out %{http_code} --output /dev/null > "${CURL_OUTFILE}"
+    cat <<EOF | curl --silent --user "${LOGIN}:${PASSW}" -T - "http://vpdaf.intra.inist.fr:35270/internal-proxy-1/data/${NAME}.yml" --digest  --write-out "%{http_code}" --output /dev/null > "${CURL_OUTFILE}"
 http:
     routers:
         Router-${NAME}:
@@ -74,7 +75,7 @@ EOF
 	echo -n "${HTTP_CODE} - "
 
 	CURL_OUTFILE=$(mktemp)
-	cat <<EOF | curl --silent --user "${LOGIN}:${PASSW}" -T - "http://vpdaf.intra.inist.fr:35270/internal-metrics-1/data/config/${NAME}.yml" --digest  --write-out %{http_code} --output /dev/null > "${CURL_OUTFILE}"
+	cat <<EOF | curl --silent --user "${LOGIN}:${PASSW}" -T - "http://vpdaf.intra.inist.fr:35270/internal-metrics-1/data/config/${NAME}.yml" --digest  --write-out "%{http_code}" --output /dev/null > "${CURL_OUTFILE}"
   - job_name: '${NAME}'
     scrape_interval: 10s
     scheme: https
@@ -103,7 +104,7 @@ done
 
 echo -n "open-api - Swagger - "
 CURL_OUTFILE=$(mktemp)
-cat <<EOF | curl --silent --user "${login}:${passw}" -T - "http://vpdaf.intra.inist.fr:35270/open-api-1/data/swagger-initializer.js" --digest   --write-out %{http_code} --output /dev/null > "${CURL_OUTFILE}"
+cat <<EOF | curl --silent --user "${login}:${passw}" -T - "http://vpdaf.intra.inist.fr:35270/open-api-1/data/swagger-initializer.js" --digest   --write-out "%{http_code}" --output /dev/null > "${CURL_OUTFILE}"
 window.onload = function() {
   //<editor-fold desc="Changeable Configuration Block">
 

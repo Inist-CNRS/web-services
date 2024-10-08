@@ -188,11 +188,335 @@ content-type: application/json
 	{ "value": "Café !" }
 ]
 
-
 HTTP 200
 [{
     "value": "COTE D IVOIRE"
 },
 {
     "value": "CAFE"
+}]
+
+POST {{host}}/v1/quantity/extract?indent=true
+content-type: application/json
+[
+{"id": 1, "value" : "In this study, three types of treated wastewater were tested for infectious enteroviruses, the enterovirus genome, somatic coliphages, and Bacteroides fragilis phages. The aim of this work was to determine whether the presence of the two types of bacteriophages or of the enterovirus genome was a good indicator of infectious enterovirus contamination. The enterovirus genome was detected by reverse transcription-polymerase chain reaction. Infectious enteroviruses were quantified by cell culturing (BGM cells), and the bacteriophages were quantified by plaque formation on the host bacterium (Escherichia coli or B. fragilis) in agar medium. Forty-eight samples of treated wastewater were analyzed. Sixteen samples had been subjected to a secondary treatment for 8 to 12 h (A), 16 had been subjected to a secondary treatment for 30 h (B1), and 16 had been subjected to both secondary and tertiary treatments (B2). The mean concentrations of somatic coliphages were 4.9 x 10(4) PFU . liter-1 for treatment line A, 9.8 x 10(3) PFU . liter-1 for B1, and 1.4 x 10(3) PFU . liter-1 for B2, with all the samples testing positive (100%). The mean concentrations of B. fragilis phages were 1.7 x 10(3) PFU . liter-1 for A (100% positive samples), 17 to 24 PFU . liter-1 for B1 (44% positive samples), and 0.8 to 13 PFU . liter-1 for B2 (6% positive samples). The mean concentrations of infectious enteroviruses were 4 most probable number of cytopathogenic units (MPNCU) . liter-1 for A (31% positive samples) and <1 MPNCU . liter-1 for B1 and B2 (0% positive samples). The percentages of samples testing positive for the enterovirus genome were 100% for A, 56% for B1, and 19% for B2. The percentages of samples testing positive for the enterovirus genome were significantly higher than those for infectious enteroviruses. This finding may have been due to the presence of noninfectious enteroviruses or to the presence of infectious enteroviruses that do not multiply in BGM cell cultures. However, under our experimental conditions, nondetection of the genome implies the absence of infectious viruses. There was a significant correlation between the concentration of somatic coliphages or B. fragilis phages and the presence of infectious enteroviruses or the presence of the enterovirus genome. However, the somatic coliphage concentration did not lead to fluctuations in the infectious enterovirus concentration, whereas the B. fragilis phage concentration did. "},
+{"id": 2, "value" : "Following a request from the European Commission, the Panel on Plant Health was asked to provide a scientific opinion on the report “Evaluation of Strawberry Nursery Plant Cold Treatments on Survival of the Whitefly, Bemisia tabaci” submitted to the European Commission by the United States Department of Agriculture (USDA) as technical justification for a derogation from requirements listed in Annex IV, Part A, Section 1, point 46 of the Council Directive 2000/29/EC[2]. The Panel reviewed the report to indicate methodological issues of concern and evaluated the effectiveness of the treatment proposed for the elimination of B. tabaci whiteflies from consignments to be shipped to the EU. In addition, the Panel clarified which viruses listed in the Annexes of Council Directive 2000/29/EC can be transmitted by strawberry plants and by B. tabaci. The Panel concludes that due to the poor quality of the report submitted and to serious shortcomings in the experimental design the report does not demonstrate the effectiveness of the cold treatment proposed. Although there is potential for the development of a cold treatment protocol for the elimination of B. tabaci from strawberry plant consignments, reliable mortality estimates for the proposed cold treatment of 28 degrees Fahrenheit (-2.2 degrees Celsius) for 2 weeks cannot be derived from this study. No B.tabaci-transmitted viruses are currently known to infect strawberry and no viruses of Fragaria spp. listed in Directive 2000/29/EC are known to be transmitted by B. tabaci. However, adult whiteflies of B. tabaci on strawberry consignments can carry plant viruses irrespective of whether strawberry is a host plant for these viruses and thus represent a pathway for the introduction of non-European viruses. There is also some uncertainty concerning the extent to which known or unknown B. tabaci-transmitted viruses could infect strawberry. Two whitefly-transmitted viruses have been recently confirmed as associated with strawberry pallidosis disease occurring in the US: Beet pseudo-yellows virus (BPYV) and Strawberry pallidosis associated virus (Spiv) but are only known to be transmitted by the greenhouse whitefly Trialeurodes vaporariorum and not by B. tabaci. Strawberry plants for planting are vegetatively propagated and are thus subject to infection by viruses. Irrespective of the presence of B. tabaci, strawberry transplants from US may represent a pathway for the introduction of any non-European viruses (and other potentially harmful organisms) of Fragaria. This applies for example to SPaV, which is not reported as present in the EU and, if introduced, could be further spread by its vector, the glasshouse whitefly T. vaporariorum, which is widely established in the EU. "}
+]
+
+
+HTTP 200
+[{
+    "id": 1,
+    "value": [
+        {
+            "quantity": "100",
+            "unit": "[%]",
+            "detailed_unit": {
+                "percentage": {
+                    "surfaces": [
+                        "pc",
+                        "percent",
+                        "percentage"
+                    ],
+                    "symbols": [
+                        "%",
+                        "pct",
+                        "pct."
+                    ]
+                }
+            },
+            "related_concept": [
+                "liter-1",
+                "B2"
+            ]
+        },
+        {
+            "quantity": "100",
+            "unit": "[%]",
+            "detailed_unit": {
+                "percentage": {
+                    "surfaces": [
+                        "pc",
+                        "percent",
+                        "percentage"
+                    ],
+                    "symbols": [
+                        "%",
+                        "pct",
+                        "pct."
+                    ]
+                }
+            },
+            "related_concept": [
+                "liter-1"
+            ]
+        },
+        {
+            "quantity": "17",
+            "unit": "[PFU]",
+            "detailed_unit": {
+                "plaque forming units": {
+                    "surfaces": [
+                        "plaque forming units"
+                    ],
+                    "symbols": [
+                        "PFU"
+                    ]
+                }
+            },
+            "related_concept": []
+        },
+        {
+            "quantity": "44",
+            "unit": "[%]",
+            "detailed_unit": {
+                "percentage": {
+                    "surfaces": [
+                        "pc",
+                        "percent",
+                        "percentage"
+                    ],
+                    "symbols": [
+                        "%",
+                        "pct",
+                        "pct."
+                    ]
+                }
+            },
+            "related_concept": [
+                "B1",
+                "positive",
+                "samples"
+            ]
+        },
+        {
+            "quantity": "0.8",
+            "unit": "[PFU]",
+            "detailed_unit": {
+                "plaque forming units": {
+                    "surfaces": [
+                        "plaque forming units"
+                    ],
+                    "symbols": [
+                        "PFU"
+                    ]
+                }
+            },
+            "related_concept": [
+                "liter-1"
+            ]
+        },
+        {
+            "quantity": "6",
+            "unit": "[%]",
+            "detailed_unit": {
+                "percentage": {
+                    "surfaces": [
+                        "pc",
+                        "percent",
+                        "percentage"
+                    ],
+                    "symbols": [
+                        "%",
+                        "pct",
+                        "pct."
+                    ]
+                }
+            },
+            "related_concept": [
+                "B2",
+                "positive",
+                "samples"
+            ]
+        },
+        {
+            "quantity": "31",
+            "unit": "[%]",
+            "detailed_unit": {
+                "percentage": {
+                    "surfaces": [
+                        "pc",
+                        "percent",
+                        "percentage"
+                    ],
+                    "symbols": [
+                        "%",
+                        "pct",
+                        "pct."
+                    ]
+                }
+            },
+            "related_concept": [
+                "liter-1"
+            ]
+        },
+        {
+            "quantity": "0",
+            "unit": "[%]",
+            "detailed_unit": {
+                "percentage": {
+                    "surfaces": [
+                        "pc",
+                        "percent",
+                        "percentage"
+                    ],
+                    "symbols": [
+                        "%",
+                        "pct",
+                        "pct."
+                    ]
+                }
+            },
+            "related_concept": [
+                "B2",
+                "positive",
+                "samples"
+            ]
+        },
+        {
+            "quantity": "100",
+            "unit": "[%]",
+            "detailed_unit": {
+                "percentage": {
+                    "surfaces": [
+                        "pc",
+                        "percent",
+                        "percentage"
+                    ],
+                    "symbols": [
+                        "%",
+                        "pct",
+                        "pct."
+                    ]
+                }
+            },
+            "related_concept": [
+                "enterovirus",
+                "genome"
+            ]
+        },
+        {
+            "quantity": "56",
+            "unit": "[%]",
+            "detailed_unit": {
+                "percentage": {
+                    "surfaces": [
+                        "pc",
+                        "percent",
+                        "percentage"
+                    ],
+                    "symbols": [
+                        "%",
+                        "pct",
+                        "pct."
+                    ]
+                }
+            },
+            "related_concept": [
+                "B1",
+                "enterovirus",
+                "genome"
+            ]
+        },
+        {
+            "quantity": "19",
+            "unit": "[%]",
+            "detailed_unit": {
+                "percentage": {
+                    "surfaces": [
+                        "pc",
+                        "percent",
+                        "percentage"
+                    ],
+                    "symbols": [
+                        "%",
+                        "pct",
+                        "pct."
+                    ]
+                }
+            },
+            "related_concept": [
+                "B2",
+                "percentages",
+                "samples"
+            ]
+        }
+    ]
+},
+{
+    "id": 2,
+    "value": [
+        {
+            "quantity": "28",
+            "unit": "[degrees Fahrenheit]",
+            "detailed_unit": {
+                "fahrenheit": {
+                    "surfaces": [
+                        "Fahrenheit",
+                        "Farenheit",
+                        "deg F",
+                        "deg f",
+                        "deg fahrenheit",
+                        "deg farenheit",
+                        "degf",
+                        "degree F",
+                        "degree Fahrenheit",
+                        "degree Farenheit",
+                        "degree f",
+                        "degree fahrenheit",
+                        "degree farenheit",
+                        "degree-F",
+                        "degree-f",
+                        "degrees F",
+                        "degrees Fahrenheit",
+                        "degrees Farenheit",
+                        "degrees f",
+                        "degrees fahrenheit",
+                        "degrees farenheit",
+                        "degrees-F",
+                        "degrees-f",
+                        "degs fahrenheit",
+                        "degs farenheit",
+                        "fahrenheit",
+                        "farenheit"
+                    ],
+                    "symbols": [
+                        "F",
+                        "degF",
+                        "f",
+                        "°F"
+                    ]
+                }
+            },
+            "related_concept": [
+                "proposed",
+                "cold",
+                "treatment",
+                "tabaci",
+                "-2.2",
+                "degrees Celsius"
+            ]
+        },
+        {
+            "quantity": "2",
+            "unit": "[weeks]",
+            "detailed_unit": {
+                "week": {
+                    "surfaces": [
+                        "week",
+                        "weeks",
+                        "wks"
+                    ],
+                    "symbols": [
+                        "wk"
+                    ]
+                }
+            },
+            "related_concept": [
+                "tabaci",
+                "-2.2",
+                "degrees Celsius"
+            ]
+        }
+    ]
 }]

@@ -26,6 +26,8 @@ fi
 WEBDAV_LOGIN=$2
 WEBDAV_PASSWORD=$3
 WEBDAV_URL=$4
+OPENALEX_API_KEY=$5
+UNPAYWALL_API_KEY=$6
 
 echo "Building .env for $SERVICE_NAME"
 
@@ -33,4 +35,6 @@ echo "Building .env for $SERVICE_NAME"
     echo "export WEBDAV_LOGIN=$WEBDAV_LOGIN"
     echo "export WEBDAV_PASSWORD=$WEBDAV_PASSWORD"
     echo "export WEBDAV_URL=$WEBDAV_URL"
+    echo "export OPENALEX_API_KEY=$OPENALEX_API_KEY"
+    echo "export UNPAYWALL_API_KEY=$UNPAYWALL_API_KEY"
 } > "services/$SERVICE_NAME/.env"

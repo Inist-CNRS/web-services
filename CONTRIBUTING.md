@@ -31,8 +31,10 @@ automatiquement à la version demandée, en arrivant à la racine du répertoire
 [nvm / Deeper Shell
 integration](https://github.com/nvm-sh/nvm#deeper-shell-integration).
 
-Pour VSCode, il est recommnandé d'accepter l'installation de l'extension
-[EditorConfig](https://marketplace.visualstudio.com/items?itemName=EditorConfig.EditorConfig).
+Pour VSCode, il est recommandé d'accepter l'installation des extensions:
+
+- [EditorConfig](https://marketplace.visualstudio.com/items?itemName=EditorConfig.EditorConfig)
+- [markdownlint](https://marketplace.visualstudio.com/items?itemName=davidanson.vscode-markdownlint)
 
 ## Nouvelle branche
 
@@ -84,7 +86,17 @@ D'autres exemples de noms de branche:
 Avant toute chose, il faut s'assurer qu'un service qui pourrait accueillir votre
 nouvelle route n'existe pas déjà. Cela évitera de créer un nouveau service.
 
+À noter: les sous-sections suivantes expliquent la structure du répertoire à
+ créer pour un service, mais le script
+ [`generate:service`](SCRIPTS.md#generateservice) se charge maintenant
+ d'initialiser le répertoire pour vous. Voir [Script d'initialisation d'un
+ nouveau service](#script-dinitialisation-dun-nouveau-service)
+
 ### Création du répertoire
+
+> 📘 Ceci est maintenant automatique quand on utilise le script
+> [`generate:service`](SCRIPTS.md#generateservice).
+> Voir [Script d'initialisation d'un nouveau service](#script-dinitialisation-dun-nouveau-service)
 
 Tous les services sont dans le répertoire `services`.  
 Chacun dans son propre répertoire.  
@@ -108,9 +120,6 @@ le `package.json`:
 }
 ```
 
-> 📘 Ceci est maintenant automatique quand on utilise le script
-> [`generate:service`](SCRIPTS.md#generateservice).
-
 Ainsi, vous serez capable de lancer des scripts d'un service (par exemple
 `base-line`) depuis la racine du dépôt (à condition de disposer de npm 7+):
 
@@ -120,6 +129,9 @@ npm -w services/base-line run stop:dev
 ```
 
 ### Fichiers du service
+
+> 📘 Ceci est maintenant automatique quand on utilise le script
+> [`generate:service`](SCRIPTS.md#generateservice).
 
 Chaque répertoire de service contient :
 
@@ -143,13 +155,14 @@ Chaque répertoire de service contient :
 - un fichier `tests.hurl` généré à partir des exemples, pour éviter les
   régressions du service
 
-> 📘 Ceci est maintenant automatique quand on utilise le script
-> [`generate:service`](SCRIPTS.md#generateservice).
-
 ### examples.http
 
 Le fichier `examples.http` se situe à la racine d'une instance (et donc de son
 répertoire).
+
+> 📘 Ce fichier est initialisé automatiquement par le script
+> [`generate:service`](SCRIPTS.md#generateservice).  
+> Il reste nécessaire d'écrire les requêtes pour chaque route créée.
 
 Il contient des exemples de requêtes HTTP, et constitue donc une partie de la
 documentation du service.  
@@ -205,10 +218,6 @@ application/json` (c'est le type du *body* envoyé), puis le tableau JSON envoy�
 > **Remarque**: comme ces exemples serviront aussi aux tests, il est utile d'y
 > mettre aussi des exemples dont on veut vérifier le comportement.
 
-> 📘 Ce fichier est généré automatiquement par le script
-> [`generate:service`](SCRIPTS.md#generateservice).  
-> Il reste nécessaire d'écrire les requêtes pour chaque route créée.
-
 ### tests.hurl
 
 Le fichier `services/<instance>/tests.hurl` est la plupart du temps généré (sauf
@@ -257,6 +266,12 @@ description*), le nom de l'auteur et *mail*.
 Il crée le répertoire `services/service-name`, l'ajoute dans les *workspaces* du
 dépôt, et dans la liste des services à la fin du [README](./README#services).
 
+Exemple:
+
+```bash
+npm run generate:service service-name
+```
+
 > ⚠ Ne pas mettre de caractère `&` dans les réponses, ça provoque un
 > remplacement bizarre.
 
@@ -295,6 +310,52 @@ $ npm run insert:description services/terms-extraction/v*.md
 
 > **Note**: si vous voulez bénéficier de l'auto-complétion des chemins de
 > fichiers, utilisez plutôt `./bin/insert-description.sh`.
+
+### Utilisation de DVC (pour charger des données ou des modèles)
+
+[DVC](https://dvc.org/) est un outil de versionnage de données. Lorsqu'on crée un service qui nécessite un modèle ou une table, il est nécessaire de l'utiliser pour ne pas avoir de gros fichiers sur git.
+En plus du reste, il faut suivre ces étapes lorsqu'on utilise DVC :
+
+- S'assurer d'avoir déposé les données sur le webdav du service TDM en ayant préalablement utilisé DVC (pour cela : )
+  - mettre son fichier nommé `DOSSIER_OU_FICHIER_A_PUSH` dans un autre dossier.
+  - Initier un dépot DVC en faisant `dvc init` (nécessite d'être dans un dépot git).
+  - se connecter au webdav du service (à ne faire que la première fois), pour cela :
+    - spécifier l'url du webdav (en utilisant le protocole webdavs): `dvc remote add -d webdav-remote webdavs://YOUR_WEBDAV_URL.fr`
+    - entrer le login : `dvc remote modify --local webdav-remote login YOUR_LOGIN`
+    - entrer le mot de passe : `dvc remote modify --local webdav-remote password YOUR_PASSWORD`
+  - push le fichier sur le webdav : `dvc add DOSSIER_OU_FICHIER_A_PUSH` puis `dvc push`, sans se soucier du nom
+  - Le fichier `DOSSIER_OU_FICHIER_A_PUSH.dvc` est créé et devra être copié à l'endroit où le modèle doit être dans le code
+  - ***remarque** : il est possible de faire tout ça dans le dépôt git directement, cela ajoutera simplement un `.gitignore` qu'il ne faudra pas déplacer ou supprimer. Aussi, les dossiers `.dvc` et `.dvcignore` ne seront ni à ignorer par git, ni a push sur le dépôt*
+- Créer un fichier `.env` à la racine **du service** (`./services/\<service-name\>/.env`) qui ressemblera à ça :
+
+  ```bash
+  export WEBDAV_URL=webdavs://YOUR_WEBDAV_URL.fr
+  export WEBDAV_LOGIN=YOUR_LOGIN
+  export WEBDAV_PASSWORD=YOUR_PASSWORD 
+  ```
+
+- modifier les scripts `build:dev` et `build` du fichier `package.json` du service
+  - pour `build:dev` :
+
+    ```txt
+    ". ./.env 2> /dev/null; DOCKER_BUILDKIT=1 docker build -t cnrsinist/${npm_package_name}:latest --secret id=webdav_login,env=WEBDAV_LOGIN --secret id=webdav_password,env=WEBDAV_PASSWORD --secret id=webdav_url,env=WEBDAV_URL ." 
+    ```
+
+  - pour `build`:
+
+    ```txt
+     ". ./.env 2> /dev/null; DOCKER_BUILDKIT=1 docker build -t cnrsinist/${npm_package_name}:${npm_package_version} --secret id=webdav_login,env=WEBDAV_LOGIN --secret id=webdav_password,env=WEBDAV_PASSWORD --secret id=webdav_url,env=WEBDAV_URL ."
+     ```
+
+- modifier le `Dockerfile` en conséquence, en s'inspirant du [Dockerfile de `affiliation-rnsr`](https://github.com/Inist-CNRS/web-services/blob/main/services/affiliation-rnsr/Dockerfile)
+- arrêter le conteneur.
+- reconstruire l'image :
+
+    ```bash
+    npm -w services/service-name run build:dev
+    ```
+
+- relancer le conteneur
 
 ## Développement
 
@@ -383,6 +444,14 @@ un fichier `tests.hurl`):
 ```bash
 npm run test:remotes service-name service2-name
 ```
+
+> 📘 Pour éviter qu'un service soit testé lorsqu'il est en production, on peut
+> positionner la propriété `avoid-testing` du `package.json` du service à
+> `true`.
+>
+> Exemple de cas où c'est utile: `ark-tools`, où on crée des identifiants censés
+> être uniques. Afin de ne pas épuiser les possiblités, on évite de le tester
+> trop souvent.
 
 ## Ajout dans la liste du README
 

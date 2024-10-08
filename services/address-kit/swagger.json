@@ -1,0 +1,33 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "address-kit - ce service propose des outils de traitement d'adresses d'affiliations",
+        "description": "ces services prennent en entrée les affiliations des auteurs sous forme d'adresse et en tirent des informations sur la localisation ou la structure de recherche associée",
+        "version": "2.1.3",
+        "termsOfService": "https://services.istex.fr/",
+        "contact": {
+            "name": "Inist-CNRS",
+            "url": "https://www.inist.fr/nous-contacter/"
+        }
+    },
+    "servers": [
+        {
+            "x-comment": "Will be automatically completed by the ezs server."
+        },
+        {
+            "url": "http://vptdmservices.intra.inist.fr:49315/",
+            "description": "Latest version for production",
+            "x-profil": "Standard"
+        }
+    ],
+    "tags": [
+        {
+            "name": "address-kit",
+            "description": "ce service propose des outils de traitement d'adresses d'affiliations",
+            "externalDocs": {
+                "description": "Plus de documentation",
+                "url": "https://github.com/inist-cnrs/web-services/tree/main/services/address-kit"
+            }
+        }
+    ]
+}
