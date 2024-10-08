@@ -85,9 +85,9 @@ for line in sys.stdin:
 
 # following parameters depends of the size of the corpus : num_topics and num_iterations
 len_data = len(all_data)
-num_iterations= max(200,len_data/100)
-if len_data < 200:
-    num_iterations = 100
+num_iterations= 1000
+if len_data < 400:
+    num_iterations = 500
 
 # training LDA
 texts = []
