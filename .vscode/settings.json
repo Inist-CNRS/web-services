@@ -12,17 +12,18 @@
     "cSpell.language": "en,fr-FR",
     "cSpell.words": [
         "Bigramme",
-        "concat",
         "cnrs",
+        "concat",
         "foaf",
         "inist",
         "Lodex",
         "loterre",
         "Loterre",
-        "skos",
         "openapi",
         "prometheus",
+        "skos",
         "stopwords",
+        "stylesheet",
         "ungroup",
         "uuid"
     ]
