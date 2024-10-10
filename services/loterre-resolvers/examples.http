@@ -120,3 +120,29 @@ Content-Type: application/json
     "value": "Abstract: Qinghai Lake is a large saline lake on the Qinghai\u2013Tibetan Plateau of central Asia that is effected by both the Indian and Asian monsoons. We used reflectance spectroscopy to characterize the sediments in a 795-cm long core taken from the southeastern part of the lake. Sediment redness, which is related to iron oxide content, seems to monitor paleoclimatic changes in the core. Iron oxides appear to be eroded from nearby red beds or loess deposits and are transported by fluvial means into the lake. Thus, redness increases at times of increased precipitation, that is, as monsoon strength increases. Our redness monsoon proxy shows climate changes on several times scales. On a millennial scale, it records humid conditions during the Early and Mid-Holocene. From about 4200 to 2300 yr BP, low redness values suggest a two-millennial long dry period, which in the Late Holocene is followed by a more humid period. On a centennial scale, the redness proxy records not only the Little Ice Age, but also the Medieval Warm Period, the Dark Ages Cool Period and the Roman Warm Period. Time series analysis of the redness record indicates a 200 yr frequency, which corresponds to the de Vries solar cycle suggesting that, in addition to insolation changes resulting from orbital variations, solar forcing also results from cyclic changes in the sun&apos;s luminosity."
 }
 ]
+
+###
+# @name JVR_expand
+POST {{host}}/v1/JVR/expand?indent=true HTTP/1.1
+Content-Type: application/json
+
+[
+  { "value": "toto"},
+  { "value": "diabète" },
+  { "value": "diabetes" },
+  { "value": "cancer" },
+  { "value": "insulin"}
+]
+
+###
+#  @name JVR_identify
+POST {{host}}/v1/JVR/identify?indent=true HTTP/1.1
+Content-Type: application/json
+
+[
+  { "value": "toto"},
+  { "value": "diabète" },
+  { "value": "diabetes" },
+  { "value": "cancer" },
+  { "value": "insulin"}
+]

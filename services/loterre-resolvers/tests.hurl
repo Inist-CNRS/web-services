@@ -5033,3 +5033,1077 @@ HTTP 200
         }
     ]
 }]
+
+POST {{host}}/v1/JVR/expand?indent=true
+content-type: application/json
+
+[
+  { "value": "toto"},
+  { "value": "diabète" },
+  { "value": "diabetes" },
+  { "value": "cancer" },
+  { "value": "insulin"}
+]
+
+HTTP 200
+[{
+    "value": "n/a"
+},
+{
+    "value": {
+        "rdf$about": "http://data.loterre.fr/ark:/67375/JVR-TCJH2250-2",
+        "skos$prefLabel": [
+            {
+                "xml$lang": "en",
+                "xml$t": "Diabetes Mellitus"
+            },
+            {
+                "xml$lang": "fr",
+                "xml$t": "Diabète"
+            }
+        ],
+        "skos$altLabel": {
+            "xml$lang": "fr",
+            "xml$t": "Diabète sucré"
+        },
+        "mesh$allowableQualifier": [
+            {
+                "rdf$resource": "http://data.loterre.fr/ark:/67375/JVR-KRXG97RR-5"
+            },
+            {
+                "rdf$resource": "http://data.loterre.fr/ark:/67375/JVR-ZJBZVRWR-8"
+            },
+            {
+                "rdf$resource": "http://data.loterre.fr/ark:/67375/JVR-S0CS1X5R-5"
+            },
+            {
+                "rdf$resource": "http://data.loterre.fr/ark:/67375/JVR-T1QJHLQ4-J"
+            },
+            {
+                "rdf$resource": "http://data.loterre.fr/ark:/67375/JVR-W6T67RP3-2"
+            },
+            {
+                "rdf$resource": "http://data.loterre.fr/ark:/67375/JVR-WQ00QWRG-J"
+            },
+            {
+                "rdf$resource": "http://data.loterre.fr/ark:/67375/JVR-HPKB70N8-W"
+            },
+            {
+                "rdf$resource": "http://data.loterre.fr/ark:/67375/JVR-J9Z93VFN-9"
+            },
+            {
+                "rdf$resource": "http://data.loterre.fr/ark:/67375/JVR-XVHTZRCG-7"
+            },
+            {
+                "rdf$resource": "http://data.loterre.fr/ark:/67375/JVR-SDXQ5280-F"
+            },
+            {
+                "rdf$resource": "http://data.loterre.fr/ark:/67375/JVR-CSKTXWF5-F"
+            },
+            {
+                "rdf$resource": "http://data.loterre.fr/ark:/67375/JVR-NHL3D2X0-S"
+            },
+            {
+                "rdf$resource": "http://data.loterre.fr/ark:/67375/JVR-BT300B3G-Q"
+            },
+            {
+                "rdf$resource": "http://data.loterre.fr/ark:/67375/JVR-BBD0S71C-R"
+            },
+            {
+                "rdf$resource": "http://data.loterre.fr/ark:/67375/JVR-P31C9JZH-X"
+            },
+            {
+                "rdf$resource": "http://data.loterre.fr/ark:/67375/JVR-W4X1LN61-R"
+            },
+            {
+                "rdf$resource": "http://data.loterre.fr/ark:/67375/JVR-GXVR9QN8-P"
+            },
+            {
+                "rdf$resource": "http://data.loterre.fr/ark:/67375/JVR-BQ3W1P91-F"
+            },
+            {
+                "rdf$resource": "http://data.loterre.fr/ark:/67375/JVR-SDPG013V-D"
+            },
+            {
+                "rdf$resource": "http://data.loterre.fr/ark:/67375/JVR-XV06LPML-W"
+            },
+            {
+                "rdf$resource": "http://data.loterre.fr/ark:/67375/JVR-P1X8SCQ6-K"
+            },
+            {
+                "rdf$resource": "http://data.loterre.fr/ark:/67375/JVR-KFM33PF8-L"
+            },
+            {
+                "rdf$resource": "http://data.loterre.fr/ark:/67375/JVR-SBNWSM1T-R"
+            },
+            {
+                "rdf$resource": "http://data.loterre.fr/ark:/67375/JVR-W6SQV79N-S"
+            },
+            {
+                "rdf$resource": "http://data.loterre.fr/ark:/67375/JVR-CB30NGKB-3"
+            },
+            {
+                "rdf$resource": "http://data.loterre.fr/ark:/67375/JVR-VG20R78F-K"
+            },
+            {
+                "rdf$resource": "http://data.loterre.fr/ark:/67375/JVR-Z9TSGBXH-4"
+            },
+            {
+                "rdf$resource": "http://data.loterre.fr/ark:/67375/JVR-JVKFK2NX-2"
+            },
+            {
+                "rdf$resource": "http://data.loterre.fr/ark:/67375/JVR-MDQBX560-1"
+            },
+            {
+                "rdf$resource": "http://data.loterre.fr/ark:/67375/JVR-RC3PND0F-S"
+            },
+            {
+                "rdf$resource": "http://data.loterre.fr/ark:/67375/JVR-B6C87218-T"
+            },
+            {
+                "rdf$resource": "http://data.loterre.fr/ark:/67375/JVR-DH7H9MJ2-N"
+            },
+            {
+                "rdf$resource": "http://data.loterre.fr/ark:/67375/JVR-L6C0XPHT-4"
+            },
+            {
+                "rdf$resource": "http://data.loterre.fr/ark:/67375/JVR-WWJHCQRB-K"
+            }
+        ],
+        "dct$created": {
+            "rdf$datatype": "http://www.w3.org/2001/XMLSchema#date",
+            "xml$t": "1999-01-01"
+        },
+        "dct$modified": {
+            "rdf$datatype": "http://www.w3.org/2001/XMLSchema#date",
+            "xml$t": "2017-07-17"
+        },
+        "dct$established": {
+            "rdf$datatype": "http://www.w3.org/2001/XMLSchema#date",
+            "xml$t": "1966-01-01"
+        },
+        "owl$sameAs": {
+            "rdf$resource": "http://id.nlm.nih.gov/mesh/D003920"
+        },
+        "skos$inScheme": {
+            "rdf$resource": "http://data.loterre.fr/ark:/67375/JVR"
+        },
+        "skos$definition": {
+            "xml$lang": "en",
+            "xml$t": "A heterogeneous group of disorders characterized by HYPERGLYCEMIA and GLUCOSE INTOLERANCE."
+        },
+        "rdf$type": {
+            "rdf$resource": "http://id.nlm.nih.gov/mesh/vocab#Descriptor"
+        },
+        "skos$broader": [
+            {
+                "skos$prefLabel": [
+                    {
+                        "xml$lang": "en",
+                        "xml$t": "Glucose Metabolism Disorders"
+                    },
+                    {
+                        "xml$lang": "fr",
+                        "xml$t": "Troubles du métabolisme du glucose"
+                    }
+                ],
+                "rdf$about": "http://data.loterre.fr/ark:/67375/JVR-KZBKG48C-P"
+            },
+            {
+                "skos$prefLabel": [
+                    {
+                        "xml$lang": "en",
+                        "xml$t": "Endocrine System Diseases"
+                    },
+                    {
+                        "xml$lang": "fr",
+                        "xml$t": "Maladies endocriniennes"
+                    }
+                ],
+                "rdf$about": "http://data.loterre.fr/ark:/67375/JVR-NJ0CJJ2S-X"
+            }
+        ],
+        "skos$narrower": [
+            {
+                "skos$prefLabel": [
+                    {
+                        "xml$lang": "en",
+                        "xml$t": "Latent Autoimmune Diabetes in Adults"
+                    },
+                    {
+                        "xml$lang": "fr",
+                        "xml$t": "Diabète auto-immun latent de l'adulte"
+                    }
+                ],
+                "rdf$about": "http://data.loterre.fr/ark:/67375/JVR-NS37TZZT-W"
+            },
+            {
+                "skos$prefLabel": [
+                    {
+                        "xml$lang": "en",
+                        "xml$t": "Diabetes Mellitus, Experimental"
+                    },
+                    {
+                        "xml$lang": "fr",
+                        "xml$t": "Diabète expérimental"
+                    }
+                ],
+                "rdf$about": "http://data.loterre.fr/ark:/67375/JVR-G3GL2G0G-B"
+            },
+            {
+                "skos$prefLabel": [
+                    {
+                        "xml$lang": "en",
+                        "xml$t": "Diabetes Mellitus, Type 1"
+                    },
+                    {
+                        "xml$lang": "fr",
+                        "xml$t": "Diabète de type 1"
+                    }
+                ],
+                "rdf$about": "http://data.loterre.fr/ark:/67375/JVR-HMKCSTMC-9"
+            },
+            {
+                "skos$prefLabel": [
+                    {
+                        "xml$lang": "en",
+                        "xml$t": "Diabetes Mellitus, Type 2"
+                    },
+                    {
+                        "xml$lang": "fr",
+                        "xml$t": "Diabète de type 2"
+                    }
+                ],
+                "rdf$about": "http://data.loterre.fr/ark:/67375/JVR-BS3NPRDW-0"
+            },
+            {
+                "skos$prefLabel": [
+                    {
+                        "xml$lang": "en",
+                        "xml$t": "Prediabetic State"
+                    },
+                    {
+                        "xml$lang": "fr",
+                        "xml$t": "État prédiabétique"
+                    }
+                ],
+                "rdf$about": "http://data.loterre.fr/ark:/67375/JVR-V5H9ZFSV-V"
+            },
+            {
+                "skos$prefLabel": [
+                    {
+                        "xml$lang": "en",
+                        "xml$t": "Diabetes, Gestational"
+                    },
+                    {
+                        "xml$lang": "fr",
+                        "xml$t": "Diabète gestationnel"
+                    }
+                ],
+                "rdf$about": "http://data.loterre.fr/ark:/67375/JVR-S6VQDPSN-V"
+            },
+            {
+                "skos$prefLabel": [
+                    {
+                        "xml$lang": "en",
+                        "xml$t": "Diabetes Complications"
+                    },
+                    {
+                        "xml$lang": "fr",
+                        "xml$t": "Complications du diabète"
+                    }
+                ],
+                "rdf$about": "http://data.loterre.fr/ark:/67375/JVR-MWW0VGRB-9"
+            },
+            {
+                "skos$prefLabel": [
+                    {
+                        "xml$lang": "en",
+                        "xml$t": "Donohue Syndrome"
+                    },
+                    {
+                        "xml$lang": "fr",
+                        "xml$t": "Syndrome de Donohue"
+                    }
+                ],
+                "rdf$about": "http://data.loterre.fr/ark:/67375/JVR-XL91ZWZ6-R"
+            }
+        ],
+        "skos$related": [
+            {
+                "rdf$resource": "http://data.loterre.fr/ark:/67375/JVR-LPHQ5JD3-2"
+            },
+            {
+                "rdf$resource": "http://data.loterre.fr/ark:/67375/JVR-LCFR1K84-6"
+            },
+            {
+                "rdf$resource": "http://data.loterre.fr/ark:/67375/JVR-G7FG1FNT-6"
+            },
+            {
+                "rdf$resource": "http://data.loterre.fr/ark:/67375/JVR-G4W446TX-4"
+            },
+            {
+                "rdf$resource": "http://data.loterre.fr/ark:/67375/JVR-BT9FSRRN-X"
+            },
+            {
+                "rdf$resource": "http://data.loterre.fr/ark:/67375/JVR-BXX41DM4-L"
+            }
+        ],
+        "indexKeys": [
+            "diabetesmellitus",
+            "diabete",
+            "diabetesucre"
+        ],
+        "score": 2
+    }
+},
+{
+    "value": "n/a"
+},
+{
+    "value": {
+        "rdf$about": "http://data.loterre.fr/ark:/67375/JVR-LD9NLJGT-3",
+        "skos$prefLabel": [
+            {
+                "xml$lang": "en",
+                "xml$t": "Neoplasms"
+            },
+            {
+                "xml$lang": "fr",
+                "xml$t": "Tumeurs"
+            }
+        ],
+        "skos$altLabel": [
+            {
+                "xml$lang": "en",
+                "xml$t": "Tumor"
+            },
+            {
+                "xml$lang": "en",
+                "xml$t": "Neoplasm"
+            },
+            {
+                "xml$lang": "en",
+                "xml$t": "Tumors"
+            },
+            {
+                "xml$lang": "en",
+                "xml$t": "Neoplasia"
+            }
+        ],
+        "skos$hiddenLabel": [
+            {
+                "xml$lang": "en",
+                "xml$t": "Cancer"
+            },
+            {
+                "xml$lang": "en",
+                "xml$t": "Malignant Neoplasm"
+            },
+            {
+                "xml$lang": "en",
+                "xml$t": "Malignancy"
+            },
+            {
+                "xml$lang": "en",
+                "xml$t": "Malignant Neoplasms"
+            },
+            {
+                "xml$lang": "fr",
+                "xml$t": "Cancer"
+            },
+            {
+                "xml$lang": "fr",
+                "xml$t": "Tumeurs malignes"
+            },
+            {
+                "xml$lang": "en",
+                "xml$t": "Benign Neoplasms"
+            },
+            {
+                "xml$lang": "en",
+                "xml$t": "Benign Neoplasm"
+            },
+            {
+                "xml$lang": "en",
+                "xml$t": "Neoplasms, Benign"
+            },
+            {
+                "xml$lang": "fr",
+                "xml$t": "Tumeurs bénignes"
+            }
+        ],
+        "mesh$allowableQualifier": [
+            {
+                "rdf$resource": "http://data.loterre.fr/ark:/67375/JVR-KRXG97RR-5"
+            },
+            {
+                "rdf$resource": "http://data.loterre.fr/ark:/67375/JVR-ZJBZVRWR-8"
+            },
+            {
+                "rdf$resource": "http://data.loterre.fr/ark:/67375/JVR-S0CS1X5R-5"
+            },
+            {
+                "rdf$resource": "http://data.loterre.fr/ark:/67375/JVR-T1QJHLQ4-J"
+            },
+            {
+                "rdf$resource": "http://data.loterre.fr/ark:/67375/JVR-W6T67RP3-2"
+            },
+            {
+                "rdf$resource": "http://data.loterre.fr/ark:/67375/JVR-WQ00QWRG-J"
+            },
+            {
+                "rdf$resource": "http://data.loterre.fr/ark:/67375/JVR-HPKB70N8-W"
+            },
+            {
+                "rdf$resource": "http://data.loterre.fr/ark:/67375/JVR-J9Z93VFN-9"
+            },
+            {
+                "rdf$resource": "http://data.loterre.fr/ark:/67375/JVR-XVHTZRCG-7"
+            },
+            {
+                "rdf$resource": "http://data.loterre.fr/ark:/67375/JVR-SDXQ5280-F"
+            },
+            {
+                "rdf$resource": "http://data.loterre.fr/ark:/67375/JVR-CSKTXWF5-F"
+            },
+            {
+                "rdf$resource": "http://data.loterre.fr/ark:/67375/JVR-NHL3D2X0-S"
+            },
+            {
+                "rdf$resource": "http://data.loterre.fr/ark:/67375/JVR-BT300B3G-Q"
+            },
+            {
+                "rdf$resource": "http://data.loterre.fr/ark:/67375/JVR-BBD0S71C-R"
+            },
+            {
+                "rdf$resource": "http://data.loterre.fr/ark:/67375/JVR-P31C9JZH-X"
+            },
+            {
+                "rdf$resource": "http://data.loterre.fr/ark:/67375/JVR-W4X1LN61-R"
+            },
+            {
+                "rdf$resource": "http://data.loterre.fr/ark:/67375/JVR-GXVR9QN8-P"
+            },
+            {
+                "rdf$resource": "http://data.loterre.fr/ark:/67375/JVR-BQ3W1P91-F"
+            },
+            {
+                "rdf$resource": "http://data.loterre.fr/ark:/67375/JVR-D0F21513-5"
+            },
+            {
+                "rdf$resource": "http://data.loterre.fr/ark:/67375/JVR-SDPG013V-D"
+            },
+            {
+                "rdf$resource": "http://data.loterre.fr/ark:/67375/JVR-XV06LPML-W"
+            },
+            {
+                "rdf$resource": "http://data.loterre.fr/ark:/67375/JVR-P1X8SCQ6-K"
+            },
+            {
+                "rdf$resource": "http://data.loterre.fr/ark:/67375/JVR-KFM33PF8-L"
+            },
+            {
+                "rdf$resource": "http://data.loterre.fr/ark:/67375/JVR-SBNWSM1T-R"
+            },
+            {
+                "rdf$resource": "http://data.loterre.fr/ark:/67375/JVR-K7J5XX9M-Q"
+            },
+            {
+                "rdf$resource": "http://data.loterre.fr/ark:/67375/JVR-W6SQV79N-S"
+            },
+            {
+                "rdf$resource": "http://data.loterre.fr/ark:/67375/JVR-CB30NGKB-3"
+            },
+            {
+                "rdf$resource": "http://data.loterre.fr/ark:/67375/JVR-VG20R78F-K"
+            },
+            {
+                "rdf$resource": "http://data.loterre.fr/ark:/67375/JVR-Z9TSGBXH-4"
+            },
+            {
+                "rdf$resource": "http://data.loterre.fr/ark:/67375/JVR-JVKFK2NX-2"
+            },
+            {
+                "rdf$resource": "http://data.loterre.fr/ark:/67375/JVR-MDQBX560-1"
+            },
+            {
+                "rdf$resource": "http://data.loterre.fr/ark:/67375/JVR-RC3PND0F-S"
+            },
+            {
+                "rdf$resource": "http://data.loterre.fr/ark:/67375/JVR-B6C87218-T"
+            },
+            {
+                "rdf$resource": "http://data.loterre.fr/ark:/67375/JVR-DH7H9MJ2-N"
+            },
+            {
+                "rdf$resource": "http://data.loterre.fr/ark:/67375/JVR-T2TS0S41-N"
+            },
+            {
+                "rdf$resource": "http://data.loterre.fr/ark:/67375/JVR-L6C0XPHT-4"
+            },
+            {
+                "rdf$resource": "http://data.loterre.fr/ark:/67375/JVR-T6JZ48ZV-N"
+            },
+            {
+                "rdf$resource": "http://data.loterre.fr/ark:/67375/JVR-WWJHCQRB-K"
+            }
+        ],
+        "dct$created": {
+            "rdf$datatype": "http://www.w3.org/2001/XMLSchema#date",
+            "xml$t": "1999-01-01"
+        },
+        "dct$modified": {
+            "rdf$datatype": "http://www.w3.org/2001/XMLSchema#date",
+            "xml$t": "2021-06-30"
+        },
+        "dct$established": {
+            "rdf$datatype": "http://www.w3.org/2001/XMLSchema#date",
+            "xml$t": "1966-01-01"
+        },
+        "owl$sameAs": {
+            "rdf$resource": "http://id.nlm.nih.gov/mesh/D009369"
+        },
+        "skos$inScheme": {
+            "rdf$resource": "http://data.loterre.fr/ark:/67375/JVR"
+        },
+        "skos$definition": {
+            "xml$lang": "en",
+            "xml$t": "New abnormal growth of tissue. Malignant neoplasms show a greater degree of anaplasia and have the properties of invasion and metastasis, compared to benign neoplasms."
+        },
+        "rdf$type": {
+            "rdf$resource": "http://id.nlm.nih.gov/mesh/vocab#Descriptor"
+        },
+        "skos$topConceptOf": {
+            "rdf$resource": "http://data.loterre.fr/ark:/67375/JVR"
+        },
+        "skos$narrower": [
+            {
+                "skos$prefLabel": [
+                    {
+                        "xml$lang": "en",
+                        "xml$t": "Cysts"
+                    },
+                    {
+                        "xml$lang": "fr",
+                        "xml$t": "Kystes"
+                    }
+                ],
+                "rdf$about": "http://data.loterre.fr/ark:/67375/JVR-PVR21P0F-T"
+            },
+            {
+                "skos$prefLabel": [
+                    {
+                        "xml$lang": "en",
+                        "xml$t": "Hamartoma"
+                    },
+                    {
+                        "xml$lang": "fr",
+                        "xml$t": "Hamartomes"
+                    }
+                ],
+                "rdf$about": "http://data.loterre.fr/ark:/67375/JVR-CT9KZKD3-1"
+            },
+            {
+                "skos$prefLabel": [
+                    {
+                        "xml$lang": "en",
+                        "xml$t": "Neoplasms by Histologic Type"
+                    },
+                    {
+                        "xml$lang": "fr",
+                        "xml$t": "Tumeurs par type histologique"
+                    }
+                ],
+                "rdf$about": "http://data.loterre.fr/ark:/67375/JVR-BKQJ5DPJ-6"
+            },
+            {
+                "skos$prefLabel": [
+                    {
+                        "xml$lang": "en",
+                        "xml$t": "Neoplasms by Site"
+                    },
+                    {
+                        "xml$lang": "fr",
+                        "xml$t": "Tumeurs par siège"
+                    }
+                ],
+                "rdf$about": "http://data.loterre.fr/ark:/67375/JVR-LV5JB7W2-V"
+            },
+            {
+                "skos$prefLabel": [
+                    {
+                        "xml$lang": "en",
+                        "xml$t": "Neoplasms, Experimental"
+                    },
+                    {
+                        "xml$lang": "fr",
+                        "xml$t": "Tumeurs expérimentales"
+                    }
+                ],
+                "rdf$about": "http://data.loterre.fr/ark:/67375/JVR-QLS0R1K4-D"
+            },
+            {
+                "skos$prefLabel": [
+                    {
+                        "xml$lang": "en",
+                        "xml$t": "Neoplasms, Hormone-Dependent"
+                    },
+                    {
+                        "xml$lang": "fr",
+                        "xml$t": "Tumeurs hormonodépendantes"
+                    }
+                ],
+                "rdf$about": "http://data.loterre.fr/ark:/67375/JVR-D86VWDFQ-S"
+            },
+            {
+                "skos$prefLabel": [
+                    {
+                        "xml$lang": "en",
+                        "xml$t": "Neoplasms, Multiple Primary"
+                    },
+                    {
+                        "xml$lang": "fr",
+                        "xml$t": "Tumeurs primitives multiples"
+                    }
+                ],
+                "rdf$about": "http://data.loterre.fr/ark:/67375/JVR-CXH27N4L-W"
+            },
+            {
+                "skos$prefLabel": [
+                    {
+                        "xml$lang": "en",
+                        "xml$t": "Neoplasms, Radiation-Induced"
+                    },
+                    {
+                        "xml$lang": "fr",
+                        "xml$t": "Tumeurs radio-induites"
+                    }
+                ],
+                "rdf$about": "http://data.loterre.fr/ark:/67375/JVR-VCPW2XW3-B"
+            },
+            {
+                "skos$prefLabel": [
+                    {
+                        "xml$lang": "en",
+                        "xml$t": "Neoplastic Processes"
+                    },
+                    {
+                        "xml$lang": "fr",
+                        "xml$t": "Processus néoplasiques"
+                    }
+                ],
+                "rdf$about": "http://data.loterre.fr/ark:/67375/JVR-GGZXCB08-0"
+            },
+            {
+                "skos$prefLabel": [
+                    {
+                        "xml$lang": "en",
+                        "xml$t": "Neoplastic Syndromes, Hereditary"
+                    },
+                    {
+                        "xml$lang": "fr",
+                        "xml$t": "Syndromes néoplasiques héréditaires"
+                    }
+                ],
+                "rdf$about": "http://data.loterre.fr/ark:/67375/JVR-V2Z38MHB-L"
+            },
+            {
+                "skos$prefLabel": [
+                    {
+                        "xml$lang": "en",
+                        "xml$t": "Paraneoplastic Syndromes"
+                    },
+                    {
+                        "xml$lang": "fr",
+                        "xml$t": "Syndromes paranéoplasiques"
+                    }
+                ],
+                "rdf$about": "http://data.loterre.fr/ark:/67375/JVR-M1N23R62-0"
+            },
+            {
+                "skos$prefLabel": [
+                    {
+                        "xml$lang": "en",
+                        "xml$t": "Precancerous Conditions"
+                    },
+                    {
+                        "xml$lang": "fr",
+                        "xml$t": "États précancéreux"
+                    }
+                ],
+                "rdf$about": "http://data.loterre.fr/ark:/67375/JVR-TB30QXZX-9"
+            },
+            {
+                "skos$prefLabel": [
+                    {
+                        "xml$lang": "en",
+                        "xml$t": "Pregnancy Complications, Neoplastic"
+                    },
+                    {
+                        "xml$lang": "fr",
+                        "xml$t": "Complications tumorales de la grossesse"
+                    }
+                ],
+                "rdf$about": "http://data.loterre.fr/ark:/67375/JVR-KVVHTB0W-8"
+            },
+            {
+                "skos$prefLabel": [
+                    {
+                        "xml$lang": "en",
+                        "xml$t": "Neoplasms, Second Primary"
+                    },
+                    {
+                        "xml$lang": "fr",
+                        "xml$t": "Seconde tumeur primitive"
+                    }
+                ],
+                "rdf$about": "http://data.loterre.fr/ark:/67375/JVR-ZGLZ0PDN-W"
+            },
+            {
+                "skos$prefLabel": [
+                    {
+                        "xml$lang": "en",
+                        "xml$t": "Neoplasms, Post-Traumatic"
+                    },
+                    {
+                        "xml$lang": "fr",
+                        "xml$t": "Tumeurs post-traumatiques"
+                    }
+                ],
+                "rdf$about": "http://data.loterre.fr/ark:/67375/JVR-CGMSJ25Z-C"
+            }
+        ],
+        "skos$related": {
+            "rdf$resource": "http://data.loterre.fr/ark:/67375/JVR-CM1PMKTP-J"
+        },
+        "indexKeys": [
+            "neoplasms",
+            "tumeurs",
+            "tumor",
+            "neoplasm",
+            "tumors",
+            "neoplasia",
+            "cancer",
+            "malignantneoplasm",
+            "malignancy",
+            "malignantneoplasms",
+            "tumeursmalignes",
+            "benignneoplasms",
+            "benignneoplasm",
+            "neoplasmsbenign",
+            "tumeursbenignes"
+        ],
+        "score": 2,
+        "skos$broader": []
+    }
+},
+{
+    "value": {
+        "rdf$about": "http://data.loterre.fr/ark:/67375/JVR-DPP5ZDP3-H",
+        "skos$prefLabel": [
+            {
+                "xml$lang": "en",
+                "xml$t": "Insulin"
+            },
+            {
+                "xml$lang": "fr",
+                "xml$t": "Insuline"
+            }
+        ],
+        "skos$altLabel": [
+            {
+                "xml$lang": "en",
+                "xml$t": "Insulin, Regular"
+            },
+            {
+                "xml$lang": "en",
+                "xml$t": "Soluble Insulin"
+            },
+            {
+                "xml$lang": "fr",
+                "xml$t": "Insuline ordinaire"
+            },
+            {
+                "xml$lang": "fr",
+                "xml$t": "Insuline soluble"
+            }
+        ],
+        "skos$hiddenLabel": [
+            {
+                "xml$lang": "en",
+                "xml$t": "Insulin A Chain"
+            },
+            {
+                "xml$lang": "fr",
+                "xml$t": "Chaine A de l'insuline"
+            },
+            {
+                "xml$lang": "fr",
+                "xml$t": "Chaîne A de l'insuline"
+            },
+            {
+                "xml$lang": "en",
+                "xml$t": "Sodium Insulin"
+            },
+            {
+                "xml$lang": "en",
+                "xml$t": "Novolin"
+            },
+            {
+                "xml$lang": "fr",
+                "xml$t": "Novolin"
+            },
+            {
+                "xml$lang": "en",
+                "xml$t": "Iletin"
+            },
+            {
+                "xml$lang": "fr",
+                "xml$t": "Iletin"
+            },
+            {
+                "xml$lang": "en",
+                "xml$t": "Insulin B Chain"
+            },
+            {
+                "xml$lang": "fr",
+                "xml$t": "Chaine B de l'insuline"
+            },
+            {
+                "xml$lang": "fr",
+                "xml$t": "Chaîne B de l'insuline"
+            }
+        ],
+        "mesh$pharmacologicalAction": {
+            "rdf$resource": "http://data.loterre.fr/ark:/67375/JVR-PXK478FD-S"
+        },
+        "mesh$allowableQualifier": [
+            {
+                "rdf$resource": "http://data.loterre.fr/ark:/67375/JVR-HQRFT0C6-B"
+            },
+            {
+                "rdf$resource": "http://data.loterre.fr/ark:/67375/JVR-S0CS1X5R-5"
+            },
+            {
+                "rdf$resource": "http://data.loterre.fr/ark:/67375/JVR-WK5F724J-1"
+            },
+            {
+                "rdf$resource": "http://data.loterre.fr/ark:/67375/JVR-G7KXQWSR-5"
+            },
+            {
+                "rdf$resource": "http://data.loterre.fr/ark:/67375/JVR-WZF2ZR3L-B"
+            },
+            {
+                "rdf$resource": "http://data.loterre.fr/ark:/67375/JVR-FWD2BGQ0-9"
+            },
+            {
+                "rdf$resource": "http://data.loterre.fr/ark:/67375/JVR-R0ZCQ8X6-J"
+            },
+            {
+                "rdf$resource": "http://data.loterre.fr/ark:/67375/JVR-NHL3D2X0-S"
+            },
+            {
+                "rdf$resource": "http://data.loterre.fr/ark:/67375/JVR-BT300B3G-Q"
+            },
+            {
+                "rdf$resource": "http://data.loterre.fr/ark:/67375/JVR-THHNVC7V-3"
+            },
+            {
+                "rdf$resource": "http://data.loterre.fr/ark:/67375/JVR-CJXMKG5Q-F"
+            },
+            {
+                "rdf$resource": "http://data.loterre.fr/ark:/67375/JVR-D0F21513-5"
+            },
+            {
+                "rdf$resource": "http://data.loterre.fr/ark:/67375/JVR-XV06LPML-W"
+            },
+            {
+                "rdf$resource": "http://data.loterre.fr/ark:/67375/JVR-H7K65Q8S-Z"
+            },
+            {
+                "rdf$resource": "http://data.loterre.fr/ark:/67375/JVR-SBNWSM1T-R"
+            },
+            {
+                "rdf$resource": "http://data.loterre.fr/ark:/67375/JVR-Q3979798-W"
+            },
+            {
+                "rdf$resource": "http://data.loterre.fr/ark:/67375/JVR-W6SQV79N-S"
+            },
+            {
+                "rdf$resource": "http://data.loterre.fr/ark:/67375/JVR-CB30NGKB-3"
+            },
+            {
+                "rdf$resource": "http://data.loterre.fr/ark:/67375/JVR-Z9TSGBXH-4"
+            },
+            {
+                "rdf$resource": "http://data.loterre.fr/ark:/67375/JVR-NKM836P1-M"
+            },
+            {
+                "rdf$resource": "http://data.loterre.fr/ark:/67375/JVR-R3QWLHRG-V"
+            },
+            {
+                "rdf$resource": "http://data.loterre.fr/ark:/67375/JVR-TJHVZCRZ-0"
+            },
+            {
+                "rdf$resource": "http://data.loterre.fr/ark:/67375/JVR-G4R176S9-J"
+            },
+            {
+                "rdf$resource": "http://data.loterre.fr/ark:/67375/JVR-T9HQD7ST-J"
+            },
+            {
+                "rdf$resource": "http://data.loterre.fr/ark:/67375/JVR-NFTHND7Q-8"
+            },
+            {
+                "rdf$resource": "http://data.loterre.fr/ark:/67375/JVR-NB0XHT3S-N"
+            },
+            {
+                "rdf$resource": "http://data.loterre.fr/ark:/67375/JVR-G30ZJ446-J"
+            },
+            {
+                "rdf$resource": "http://data.loterre.fr/ark:/67375/JVR-L6C0XPHT-4"
+            }
+        ],
+        "dct$created": {
+            "rdf$datatype": "http://www.w3.org/2001/XMLSchema#date",
+            "xml$t": "1999-01-01"
+        },
+        "dct$modified": {
+            "rdf$datatype": "http://www.w3.org/2001/XMLSchema#date",
+            "xml$t": "2011-06-24"
+        },
+        "dct$established": {
+            "rdf$datatype": "http://www.w3.org/2001/XMLSchema#date",
+            "xml$t": "1966-01-01"
+        },
+        "owl$sameAs": {
+            "rdf$resource": "http://id.nlm.nih.gov/mesh/D007328"
+        },
+        "skos$inScheme": {
+            "rdf$resource": "http://data.loterre.fr/ark:/67375/JVR"
+        },
+        "skos$definition": {
+            "xml$lang": "en",
+            "xml$t": "A 51-amino acid pancreatic hormone that plays a major role in the regulation of glucose metabolism, directly by suppressing endogenous glucose production (GLYCOGENOLYSIS; GLUCONEOGENESIS) and indirectly by suppressing GLUCAGON secretion and LIPOLYSIS. Native insulin is a globular protein comprised of a zinc-coordinated hexamer. Each insulin monomer containing two chains, A (21 residues) and B (30 residues), linked by two disulfide bonds. Insulin is used as a drug to control insulin-dependent diabetes mellitus (DIABETES MELLITUS, TYPE 1)."
+        },
+        "rdf$type": {
+            "rdf$resource": "http://id.nlm.nih.gov/mesh/vocab#Descriptor"
+        },
+        "skos$broader": [
+            {
+                "skos$prefLabel": [
+                    {
+                        "xml$lang": "en",
+                        "xml$t": "Proinsulin"
+                    },
+                    {
+                        "xml$lang": "fr",
+                        "xml$t": "Proinsuline"
+                    }
+                ],
+                "rdf$about": "http://data.loterre.fr/ark:/67375/JVR-H34TJ9MG-2"
+            }
+        ],
+        "skos$narrower": [
+            {
+                "skos$prefLabel": [
+                    {
+                        "xml$lang": "en",
+                        "xml$t": "Insulin, Regular, Human"
+                    },
+                    {
+                        "xml$lang": "fr",
+                        "xml$t": "Insuline ordinaire humaine"
+                    }
+                ],
+                "rdf$about": "http://data.loterre.fr/ark:/67375/JVR-C88W4HZW-X"
+            },
+            {
+                "skos$prefLabel": [
+                    {
+                        "xml$lang": "en",
+                        "xml$t": "Insulin, Regular, Pork"
+                    },
+                    {
+                        "xml$lang": "fr",
+                        "xml$t": "Insuline ordinaire de porc"
+                    }
+                ],
+                "rdf$about": "http://data.loterre.fr/ark:/67375/JVR-NR6QB36B-2"
+            }
+        ],
+        "skos$related": [
+            {
+                "rdf$resource": "http://data.loterre.fr/ark:/67375/JVR-Q955ZDVD-0"
+            },
+            {
+                "rdf$resource": "http://data.loterre.fr/ark:/67375/JVR-R0VHZL07-N"
+            },
+            {
+                "rdf$resource": "http://data.loterre.fr/ark:/67375/JVR-P0LBW056-3"
+            }
+        ],
+        "indexKeys": [
+            "insulin",
+            "insuline",
+            "insulinregular",
+            "solubleinsulin",
+            "insulineordinaire",
+            "insulinesoluble",
+            "insulinachain",
+            "chaineadelinsuline",
+            "sodiuminsulin",
+            "novolin",
+            "iletin",
+            "insulinbchain",
+            "chainebdelinsuline"
+        ],
+        "score": 2
+    }
+}]
+
+POST {{host}}/v1/JVR/identify?indent=true
+content-type: application/json
+
+[
+  { "value": "toto"},
+  { "value": "diabète" },
+  { "value": "diabetes" },
+  { "value": "cancer" },
+  { "value": "insulin"}
+]
+
+HTTP 200
+[{
+    "value": "n/a"
+},
+{
+    "value": {
+        "about": "http://data.loterre.fr/ark:/67375/JVR-TCJH2250-2",
+        "prefLabel@fr": "Diabète",
+        "prefLabel@en": "Diabetes Mellitus",
+        "localization@en": [],
+        "localization@fr": []
+    }
+},
+{
+    "value": "n/a"
+},
+{
+    "value": {
+        "about": "http://data.loterre.fr/ark:/67375/JVR-LD9NLJGT-3",
+        "prefLabel@fr": "Tumeurs",
+        "prefLabel@en": "Neoplasms",
+        "localization@en": [],
+        "localization@fr": []
+    }
+},
+{
+    "value": {
+        "about": "http://data.loterre.fr/ark:/67375/JVR-DPP5ZDP3-H",
+        "prefLabel@fr": "Insuline",
+        "prefLabel@en": "Insulin",
+        "localization@en": [],
+        "localization@fr": []
+    }
+}]
