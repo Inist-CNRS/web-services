@@ -141,4 +141,7 @@ dist
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
+
+# Local files
 services/data-termsuite/NOTES.md
+services/loterre-resolvers/D63.hurl
