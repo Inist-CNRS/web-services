@@ -1,4 +1,4 @@
-FROM python:3.9-slim-bullseye as dvcfiles
+FROM python:3.9-slim-bullseye AS dvcfiles
 WORKDIR /dvc
 RUN apt update && apt -y install git curl
 RUN pip install dvc[webdav]==3.42.0

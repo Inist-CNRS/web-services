@@ -15,12 +15,6 @@ RUN pip install \
     scipy==1.10.1 \
     prometheus-client==0.19.0
 
-# Install all node dependencies
-RUN npm install \
-    "@ezs/analytics@2.2.2" \
-    "@ezs/basics@2.6.0" \
-    "@ezs/core@3.6.0" \
-    "@ezs/spawn@1.4.5"
 # Install CURL to get spacy_lefff model and put it at the right place
 RUN apt update && apt -y install curl tar
 RUN curl -L -O https://github.com/sammous/spacy-lefff-model/releases/latest/download/model.tar.gz

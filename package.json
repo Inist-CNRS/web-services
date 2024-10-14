@@ -50,6 +50,7 @@
     "services/chem-ner",
     "services/data-computer",
     "services/data-termsuite",
+    "services/data-topcitation",
     "services/data-workflow",
     "services/data-wrapper",
     "services/diseases-ner",
@@ -63,6 +64,7 @@
     "services/person-ner",
     "services/sciencemetrix-classification",
     "services/terms-extraction",
+    "services/terms-tools",
     "services/text-clustering"
   ],
   "dependencies": {

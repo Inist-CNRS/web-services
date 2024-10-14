@@ -33,7 +33,9 @@ Content-Type: application/json
 {"id":5,"value":"z.i. de kermelin,16, rue ampère,  56017 Vannes"},
 {"id":6,"value":"campus de santa apolónia, 5300-253 bragança"},
 {"id":7,"value":"campus romanus de maron"}  ,
-{"id":8,"value":"Inist-CNRS, vandoeuvre les Nancy, France"}
+{"id":8,"value":"Inist-CNRS, vandoeuvre les Nancy, France"},
+{"id":9,"value":"Researcher with grant Bocconi University ."},
+{"id":10,"value":" University of Toulouse, INPT, INP‑PURPAN, 75 voie du T.O.E.C., FR‑31076 TOULOUSE. Email: regis.vezian@purpan.fr"} 
 ]
 
 ###

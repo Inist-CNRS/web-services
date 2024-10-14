@@ -3,7 +3,7 @@
 ####
 # Get all web service's dvc files
 ####
-FROM python:3.9-slim-bullseye as dvc-files
+FROM python:3.9-slim-bullseye AS dvc-files
 WORKDIR /dvc
 RUN apt update && apt -y install git curl
 RUN pip install dvc[webdav]==3.39.0
