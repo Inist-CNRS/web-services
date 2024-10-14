@@ -1,10 +1,5 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-"""
-Created on Mon Jul  3 11:42:06 2023
-
-@author: cuxac
-"""
 
 import subprocess
 import re
@@ -12,9 +7,10 @@ import spacy
 import requests
 import os
 import unidecode
-import random
 import json
 import sys
+from pypdf import PdfReader
+
 
 nlp_en = spacy.load("en_core_web_sm")
 nlp_fr=spacy.load("fr_core_news_sm")
@@ -85,7 +81,7 @@ def is_readable_text(chaine):
     return not (contient_caracteres_speciaux or contient_url or contient_doi)
 
 def get_alphabetic_numeric_ratio(chaine):
-    # Initlialize count variables
+    # Initialize count variables
     nb_caracteres_alphabetiques = 0
     nb_caracteres_numeriques = 0
 
@@ -106,28 +102,18 @@ def get_alphabetic_numeric_ratio(chaine):
 
 
 for line in sys.stdin:
-    line0=json.loads(line)
-    # URL of PDF
-    url=line0['value']
-    name=str(round(random.random()*1000))+url.split('/')[-1]
-    if 'hal.science' in url:
-        p='2'
-    else:
-        p='1'
+    line0 = json.loads(line)
+    pdf_filename = line0["filename"]
     
-    # path to the PDF
-    pdf_filename = '/tmp/'+name
-    
+    p = '1'
     try:
-        # dl the PDF
-        response = requests.get(url)
-        response.raise_for_status()  # check if request succeeded
+        if 'hal.science' in PdfReader(pdf_filename).pages[0].extract_text():
+            p = '2' 
+    except:
+        pass
+
     
-        # save pdf
-        with open(pdf_filename, 'wb') as pdf_file:
-            pdf_file.write(response.content)
-            
-    
+    try:        
         # exec pdftohtml for the xml conversion
         xml_data = convert_pdf_to_xml(pdf_filename)
     
@@ -158,7 +144,7 @@ for line in sys.stdin:
     
             else:
                 current_font = None
-            if current_font!=None:
+            if current_font is not None:
                 # Check if font changed
                 if current_font != previous_font:
                     # add (existing) line in merged_lines
@@ -219,9 +205,9 @@ for line in sys.stdin:
         
     except Exception :
         line0['value']="Erreur lors de la conversion du PDF en texte"
-    
+        
     if line0['value']=="":
         line0['value']="Erreur lors de la conversion du PDF en texte"
-        
+    
     sys.stdout.write(json.dumps(line0))
     sys.stdout.write('\n')

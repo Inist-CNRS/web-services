@@ -3,7 +3,7 @@
     "info": {
         "title": "pdf-text - Transforme un PDF en texte à partir de l'URL",
         "summary": "À partir d'une URL de PDF donnée, ce service retourne le texte contenu dans le fichier PDF",
-        "version": "1.1.4",
+        "version": "1.2.0",
         "termsOfService": "https://services.istex.fr/",
         "contact": {
             "name": "Inist-CNRS",
@@ -15,7 +15,7 @@
             "x-comment": "Will be automatically completed by the ezs server."
         },
         {
-            "url": "http://vptdmservices.intra.inist.fr:49302/",
+            "url": "http://vptdmservices.intra.inist.fr:49316/",
             "description": "Latest version for production",
             "x-profil": "Standard"
         }
