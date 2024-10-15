@@ -65,7 +65,8 @@
     "services/sciencemetrix-classification",
     "services/terms-extraction",
     "services/terms-tools",
-    "services/text-clustering"
+    "services/text-clustering",
+    "services/thesesul-sudoctohal"
   ],
   "dependencies": {
     "@ezs/analytics": "2.3.2",
