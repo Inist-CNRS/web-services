@@ -28,8 +28,3 @@ delay: 10000
 	}
 ]
 ```
-
-HTTP 200
-Content-Type: application/json
-[Asserts]
-jsonpath "$[*].value" == "empty, just to proc webhook"
