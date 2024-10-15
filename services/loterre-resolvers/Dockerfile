@@ -1,4 +1,3 @@
-# TODO: add a DVC stage to get files to /app/data
 FROM python:3.9-slim-bullseye AS dvcfiles
 WORKDIR /dvc
 RUN apt update && apt -y install git curl
@@ -12,9 +11,11 @@ RUN --mount=type=secret,id=webdav_login \
     dvc remote modify --local webdav-remote user "$(cat /run/secrets/webdav_login)" && \
     dvc remote modify --local webdav-remote password "$(cat /run/secrets/webdav_password)"
 COPY ./data/*.dvc /dvc
+COPY ./dvc.* /dvc
 RUN dvc pull -v
+RUN for tgz in databases/*.tgz; do tar -xf "$tgz"; rm "$tgz"; done
 
-
+##################################################################
 FROM cnrsinist/ezs-python-saxon-server:py3.9-no16-1.0.5 AS build
 
 USER root
@@ -30,6 +31,8 @@ COPY --chown=daemon:daemon --from=dvcfiles /dvc/*.skos /app/data/
 RUN chmod a+rwx /app/data
 
 WORKDIR /app/public/v1
+RUN mkdir /tmp/databases && chown daemon:daemon /tmp/databases
+COPY --chown=daemon:daemon --from=dvcfiles /dvc/databases /tmp/databases
 COPY --chown=daemon:daemon ./v1 /app/public/v1
 COPY --chown=daemon:daemon ./swagger.json /app/public/
 COPY --chown=daemon:daemon ./config.json /app

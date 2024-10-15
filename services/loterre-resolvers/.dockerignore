@@ -6,3 +6,4 @@
 !data
 !swagger.json
 !v1
+!dvc.*
