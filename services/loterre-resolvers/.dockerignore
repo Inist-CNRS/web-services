@@ -4,6 +4,7 @@
 # White list only the required files
 !config.json
 !data
+!docker-entrypoint.sh
+!dvc.*
 !swagger.json
 !v1
-!dvc.*

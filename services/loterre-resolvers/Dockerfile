@@ -12,15 +12,16 @@ RUN --mount=type=secret,id=webdav_login \
     dvc remote add -d webdav-remote "$(cat /run/secrets/webdav_url)" && \
     dvc remote modify --local webdav-remote user "$(cat /run/secrets/webdav_login)" && \
     dvc remote modify --local webdav-remote password "$(cat /run/secrets/webdav_password)"
-COPY ./data/*.dvc /dvc
-COPY ./dvc.* /dvc
+COPY ./data/*.dvc /dvc/
+COPY ./dvc.* /dvc/
 RUN dvc pull -v
-RUN for tgz in databases/*.tgz; do tar -xf "$tgz"; rm "$tgz"; done
 
 ##################################################################
 FROM cnrsinist/ezs-python-saxon-server:py3.9-no16-1.0.5 AS build
 
 USER root
+WORKDIR /app/public/v1
+WORKDIR /app/public
 
 # Install all node dependencies
 RUN npm install \
@@ -28,17 +29,15 @@ RUN npm install \
     @ezs/xslt@1.3.31
 
 # Declare files to copy in .dockerignore
-WORKDIR /app/data
 COPY --chown=daemon:daemon --from=dvcfiles /dvc/*.skos /app/data/
+COPY --chown=daemon:daemon --from=dvcfiles /dvc/databases /tmp/databases/
 RUN chmod a+rwx /app/data
 
-WORKDIR /app/public/v1
-RUN mkdir /tmp/databases && chown daemon:daemon /tmp/databases
-COPY --chown=daemon:daemon --from=dvcfiles /dvc/databases /tmp/databases
-COPY --chown=daemon:daemon ./v1 /app/public/v1
+COPY --chown=daemon:daemon ./docker-entrypoint.sh /app/
+COPY --chown=daemon:daemon ./config.json /app/
+COPY --chown=daemon:daemon ./v1 /app/public/v1/
 COPY --chown=daemon:daemon ./swagger.json /app/public/
-COPY --chown=daemon:daemon ./config.json /app
+RUN chmod a+x /app/docker-entrypoint.sh
 
 # Clean base image example/test files
-WORKDIR /app/public
 RUN rm /app/public/parse.*
