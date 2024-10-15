@@ -63,3 +63,11 @@ file,example-tei.tar.gz;
 
 HTTP 200
 Content-type: application/gzip
+
+##########################################
+POST {{host}}/v1/no-convert
+content-type: application/x-tar
+file,example-tei.tar.gz;
+
+HTTP 200
+Content-type: application/gzip
