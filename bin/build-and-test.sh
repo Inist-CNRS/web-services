@@ -4,6 +4,7 @@ set -eu
 
 wait_for_url () {
     echo "Waiting for $1"
+    sleep 1m
     printf 'GET %s\nHTTP 200' "$1" | hurl --retry "$2" > /dev/null;
     return 0
 }
@@ -19,7 +20,7 @@ cd "services/$SERVICE_NAME"
 npm run start:dev
 
 echo "Waiting server to be ready"
-wait_for_url "http://localhost:31976" 60
+wait_for_url "http://localhost:31976" 10
 
 echo "Running hurl tests"
 hurl --variable host=http://localhost:31976 --test tests.hurl
