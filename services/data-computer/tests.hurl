@@ -4,7 +4,7 @@
 # npx hurl --test data-computer/tests.hurl
 
 POST {{host}}/v1/tree-segment
-content-type: application/x-tar
+content-type: application/gzip
 x-hook: https://webhook.site/69300b22-a251-4c16-9905-f7ba218ae7e9
 file,example-json.tar.gz;
 
@@ -39,7 +39,7 @@ HTTP 200
 
 # stats
 POST {{host}}/v1/statistics
-content-type: application/x-tar
+content-type: application/gzip
 x-hook: https://webhook.site/69300b22-a251-4c16-9905-f7ba218ae7e9
 file,example-json-minimal.tar.gz;
 
@@ -75,7 +75,7 @@ HTTP 200
 #
 # group
 POST {{host}}/v1/group-by
-content-type: application/x-tar
+content-type: application/gzip
 x-hook: https://webhook.site/69300b22-a251-4c16-9905-f7ba218ae7e9
 file,example-json-minimal.tar.gz;
 
