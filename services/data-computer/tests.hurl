@@ -106,7 +106,7 @@ delay: 2000
 ```
 
 HTTP 200
-[{"source":"a","target":"b","weight":3,"origin":["#1","#3","#4"]},{"source":"b","target":"c","weight":2,"origin":["#1","#4"]},{"source":"a","target":"c","weight":2,"origin":["#2","#5"]},{"source":"c","target":"d","weight":3,"origin":["#2","#4","#5"]},{"source":"b","target":"d","weight":1,"origin":["#3"]},{"source":"d","target":"e","weight":1,"origin":["#5"]}]
+[{"id":"#1","value":["#1","#4"]},{"id":"#4","value":["#1","#4"]},{"id":"#2","value":["#2","#5"]},{"id":"#5","value":["#2","#5"]},{"id":"#3","value":["#3"]}]
 
 #
 # TODO: ajouter les deux autres routes (v1GraphSegment, v1Lda)
