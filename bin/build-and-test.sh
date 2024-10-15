@@ -4,7 +4,7 @@ set -eu
 
 wait_for_url () {
     echo "Waiting for $1"
-    sleep 1m
+    sleep 2m
     printf 'GET %s\nHTTP 200' "$1" | hurl --retry "$2" > /dev/null;
     return 0
 }
