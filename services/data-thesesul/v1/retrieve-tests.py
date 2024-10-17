@@ -18,6 +18,6 @@ bash = subprocess.run(list_cmd, shell=True, capture_output=True)
 result = bash.stdout.decode("utf-8").strip().split("\n")
 
 if set(result) == set(["271653795.pdf","271653795.xml","273522590.pdf","273522590.xml"]):
-    sys.stdout.write(json.dumps({"value":True}))
+    sys.stdout.write(json.dumps({"value":"True"}))
 else:
-    sys.stdout.write(json.dumps({"value":False}))
+    sys.stdout.write(json.dumps({"value":"False"}))

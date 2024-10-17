@@ -33,6 +33,6 @@ HTTP 200
 ```
 [
   {
-    "value": true
+    "value": "true"
   }
 ]

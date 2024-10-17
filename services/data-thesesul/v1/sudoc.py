@@ -12,9 +12,8 @@ import re
 TMP_DIR = '/tmp'
 
 retrieve_id = str(sys.argv[sys.argv.index('-p') + 1])
-
-os.makedirs(os.path.join(TMP_DIR, "retrieve", retrieve_id, "datas"), exist_ok=True)
 OUTPUT_DIR = os.path.join(TMP_DIR, "retrieve", retrieve_id, "datas")
+os.makedirs(OUTPUT_DIR, exist_ok=True)
 
 
 def write_error_in_logs(log_file, sudoc_id, error):
@@ -143,7 +142,13 @@ if __name__ == "__main__":
         finally:
             # Suppression des fichiers temporaires
             delete_files()
-    cmd = f'cd /tmp/retrieve/{retrieve_id} && tar -czf /tmp/retrieve/{retrieve_id}.tar.gz . && cd /app/public/ && rm -r /tmp/retrieve/{retrieve_id} && mv /tmp/retrieve/{retrieve_id}.tar.gz /tmp/retrieve/{retrieve_id}'
+    cmd = (
+        f'cd /tmp/retrieve/{retrieve_id} && '
+        f'tar -czf /tmp/retrieve/{retrieve_id}.tar.gz . && '
+        f'cd /app/public/ && '
+        f'rm -r /tmp/retrieve/{retrieve_id} && '
+        f'mv /tmp/retrieve/{retrieve_id}.tar.gz /tmp/retrieve/{retrieve_id}'
+    )    
     result = subprocess.run(cmd, shell=True, capture_output=False)
 
     sys.stdout.write(json.dumps({"value":"empty, just to proc webhook"}))

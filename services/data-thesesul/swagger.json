@@ -1,7 +1,7 @@
 {
     "openapi": "3.0.0",
     "info": {
-        "title": "thesesul-sudoctohal - Transforme des thèses UL en TEI pour import dans HAL",
+        "title": "data-thesesul - Transforme des thèses UL en TEI pour import dans HAL",
         "description": "A partir d'identifiants Sudoc, ce service web télécharge les XML et PDF en provenance du Sudoc. Les XML sont transformés dans un format TEI pour import dans Hal.",
         "version": "0.0.0",
         "termsOfService": "https://services.istex.fr/",
@@ -22,7 +22,7 @@
     ],
     "tags": [
         {
-            "name": "thesesul-sudoctohal",
+            "name": "data-thesesul",
             "description": "Transforme des thèses UL en TEI pour import dans HAL",
             "externalDocs": {
                 "description": "Plus de documentation",
