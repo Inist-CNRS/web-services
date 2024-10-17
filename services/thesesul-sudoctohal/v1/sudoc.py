@@ -143,7 +143,7 @@ if __name__ == "__main__":
         finally:
             # Suppression des fichiers temporaires
             delete_files()
-    cmd = f'tar -czf /tmp/retrieve/{retrieve_id}.tar.gz -C /tmp/retrieve/ {retrieve_id} && rm -r /tmp/retrieve/{retrieve_id} && mv /tmp/retrieve/{retrieve_id}.tar.gz /tmp/retrieve/{retrieve_id}'
+    cmd = f'cd /tmp/retrieve/{retrieve_id} && tar -czf /tmp/retrieve/{retrieve_id}.tar.gz . && cd /app/public/ && rm -r /tmp/retrieve/{retrieve_id} && mv /tmp/retrieve/{retrieve_id}.tar.gz /tmp/retrieve/{retrieve_id}'
     result = subprocess.run(cmd, shell=True, capture_output=False)
 
     sys.stdout.write(json.dumps({"value":"empty, just to proc webhook"}))
