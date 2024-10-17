@@ -34,7 +34,7 @@ Content-Type: application/json
 ```
 [
   {
-    "value": "true"
+    "value": "True"
   }
 ]
 ```
