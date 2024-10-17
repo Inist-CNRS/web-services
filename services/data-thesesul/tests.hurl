@@ -31,6 +31,4 @@ delay: 10000
 
 HTTP 200
 Content-Type: application/json
-```
-[{"value":"True"}]
-```
+`[{"value":"True"}]`
