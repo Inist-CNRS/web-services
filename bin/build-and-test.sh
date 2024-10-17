@@ -5,7 +5,7 @@ set -eu
 # Wait until $1 is available, retrying every $3 milliseconds up to $2 times.
 wait_for_url () {
     echo "Waiting for $1"
-    printf 'GET %s\nHTTP 200' "$1" | hurl --retry "$2" --retry-interval "$3" > /dev/null;
+    printf 'GET %s\nHTTP 200' "$1" | hurl --retry "$2" --retry-interval "$3" --verbose> /dev/null;
     return 0
 }
 
