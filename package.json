@@ -50,6 +50,7 @@
     "services/chem-ner",
     "services/data-computer",
     "services/data-termsuite",
+    "services/data-thesesul",
     "services/data-topcitation",
     "services/data-workflow",
     "services/data-wrapper",
@@ -65,8 +66,7 @@
     "services/sciencemetrix-classification",
     "services/terms-extraction",
     "services/terms-tools",
-    "services/text-clustering",
-    "services/data-thesesul"
+    "services/text-clustering"
   ],
   "dependencies": {
     "@ezs/analytics": "2.3.2",
