@@ -66,7 +66,7 @@
     "services/terms-extraction",
     "services/terms-tools",
     "services/text-clustering",
-    "services/thesesul-sudoctohal"
+    "services/data-thesesul"
   ],
   "dependencies": {
     "@ezs/analytics": "2.3.2",
