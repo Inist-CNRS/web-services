@@ -50,6 +50,7 @@
     "services/chem-ner",
     "services/data-computer",
     "services/data-termsuite",
+    "services/data-thesesul",
     "services/data-topcitation",
     "services/data-workflow",
     "services/data-wrapper",
