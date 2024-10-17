@@ -20,7 +20,7 @@ variable "computing_token" exists
 POST {{host}}/v1/retrieve-tests
 content-type: application/json
 [Options]
-delay: 20000
+delay: 10000
 ```
 [
 	{
@@ -37,3 +37,4 @@ Content-Type: application/json
     "value": "true"
   }
 ]
+```
