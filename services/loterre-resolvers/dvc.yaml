@@ -1,0 +1,25 @@
+stages:
+  tgz:
+    foreach:
+      - 216 # Éducation
+      - QX8 # Paléoclimatologie
+      - 3JP # Sociologie
+      - 73G # Philosophie
+      - 9SD # Pays et subdivisions
+      - P66 # Mémoire
+      - MDL # Astronomie
+      - P21 # Littérature
+      - BVM # NETSCITY
+      - 2XK # Laboratoires
+      - N9J # SAGE
+      - D63 # Communes (France)
+      - JVR # MESH
+    do:
+      cmd:
+      - EZS_PIPELINE_DELAY=1200 loterreID=${item} bunx ezs create-databases.ini <<< '[{}]'
+      - tar -czf databases/${item}.tgz databases/${item}
+      deps:
+      - data/${item}.skos
+      - create-databases.ini
+      outs:
+      - databases/${item}.tgz
