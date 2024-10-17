@@ -17,7 +17,7 @@ computing_token: jsonpath "$[0].value"
 [Asserts]
 variable "computing_token" exists
 
-POST {{host}}/v1/retrieve-xml
+POST {{host}}/v1/retrieve-tests
 content-type: application/json
 [Options]
 delay: 10000
@@ -28,3 +28,11 @@ delay: 10000
 	}
 ]
 ```
+
+HTTP 200
+```
+[
+  {
+    "value": true
+  }
+]
