@@ -3,7 +3,7 @@
     "info": {
         "title": "biblio-tools - Outils pour références bibliographiques",
         "description": "Accède à des bases bibliographiques variées",
-        "version": "4.1.0",
+        "version": "4.2.0",
         "termsOfService": "https://services.istex.fr/",
         "contact": {
             "name": "Inist-CNRS",
@@ -15,7 +15,7 @@
             "x-comment": "Will be automatically completed by the ezs server."
         },
         {
-            "url": "http://vptdmservices.intra.inist.fr:49312/",
+            "url": "http://vptdmservices.intra.inist.fr:49317/",
             "description": "Latest version for production",
             "x-profil": "Standard"
         }

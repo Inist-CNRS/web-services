@@ -359,6 +359,18 @@ Content-Type: application/json
 ]
 
 ###
+# @name v2IstexFullText
+# istex/text
+POST {{host}}/v2/istex/fulltext/raw?indent=true HTTP/1.1
+Content-Type: application/json
+
+[
+  { "id":2,   "value": "10.1016/S0167-4943(01)00186-8"},
+  { "id":3,   "value": "10.1093/ageing/afm016"},
+  { "id":4,   "value": ""}
+]
+
+###
 # @name v2WosFetch
 # wos/fetch
 POST {{host}}/v2/wos/fetch?indent=true HTTP/1.1
