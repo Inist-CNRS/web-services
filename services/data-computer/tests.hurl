@@ -106,7 +106,7 @@ delay: 2000
 ```
 
 HTTP 200
-[{"id":"#1","value":["#1","#4"]},{"id":"#4","value":["#1","#4"]},{"id":"#2","value":["#2","#5"]},{"id":"#5","value":["#2","#5"]},{"id":"#3","value":["#3"]}]
+[{"id":"#1","value":["#4"]},{"id":"#4","value":["#1"]},{"id":"#2","value":["#5"]},{"id":"#5","value":["#2"]},{"id":"#3","value":[]}]
 
 #
 # TODO: ajouter les deux autres routes (v1GraphSegment, v1Lda)
