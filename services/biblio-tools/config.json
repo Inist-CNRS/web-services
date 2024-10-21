@@ -3,7 +3,7 @@
         "EZS_TITLE": "Outils pour références bibliographiques",
         "EZS_DESCRIPTION": "Accède à des bases bibliographiques variées",
         "EZS_METRICS": true,
-        "EZS_CONCURRENCY": 4,
+        "EZS_CONCURRENCY": 2,
         "EZS_CONTINUE_DELAY": 60,
         "EZS_NSHARDS": 32,
         "EZS_CACHE": true,

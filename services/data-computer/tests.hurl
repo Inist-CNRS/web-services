@@ -4,7 +4,7 @@
 # npx hurl --test data-computer/tests.hurl
 
 POST {{host}}/v1/tree-segment
-content-type: application/x-tar
+content-type: application/gzip
 x-hook: https://webhook.site/69300b22-a251-4c16-9905-f7ba218ae7e9
 file,example-json.tar.gz;
 
@@ -25,7 +25,7 @@ variable "computing_token" exists
 POST {{host}}/v1/retrieve-json
 content-type: application/json
 [Options]
-delay: 1000
+delay: 2000
 ```
 [
 	{
@@ -39,7 +39,7 @@ HTTP 200
 
 # stats
 POST {{host}}/v1/statistics
-content-type: application/x-tar
+content-type: application/gzip
 x-hook: https://webhook.site/69300b22-a251-4c16-9905-f7ba218ae7e9
 file,example-json-minimal.tar.gz;
 
@@ -60,7 +60,7 @@ variable "computing_token" exists
 POST {{host}}/v1/retrieve-json
 content-type: application/json
 [Options]
-delay: 1000
+delay: 2000
 ```
 [
 	{
@@ -155,4 +155,41 @@ HTTP 200
 
 
 # TODO: ajouter les deux autres routes (v1GraphSegment, v1Lda)
-# TODO: ajouter la route rapido 
+# TODO: ajouter la route rapido
+
+##################################### group-by ######################
+POST {{host}}/v1/group-by
+content-type: application/gzip
+x-hook: https://webhook.site/69300b22-a251-4c16-9905-f7ba218ae7e9
+file,example-json-minimal.tar.gz;
+
+HTTP 200
+# Capture the computing token
+[Captures]
+computing_token: jsonpath "$[0].value"
+[Asserts]
+variable "computing_token" exists
+
+# There should be a waiting time, representing the time taken to process data.
+# Fortunately, as the data is sparse, and the computing time is small,
+# the need is small.
+
+# Version 4.1.0 of hurl added a delay option, which value is milliseconds.
+# https://hurl.dev/blog/2023/09/24/announcing-hurl-4.1.0.html#add-delay-between-requests
+
+POST {{host}}/v1/retrieve-json
+content-type: application/json
+[Options]
+delay: 2000
+```
+[
+	{
+		"value":"{{computing_token}}"
+	}
+]
+```
+
+HTTP 200
+[{"id":"#1","value":["#1","#4"]},{"id":"#4","value":["#1","#4"]},{"id":"#2","value":["#2","#5"]},{"id":"#5","value":["#2","#5"]},{"id":"#3","value":["#3"]}]
+
+#

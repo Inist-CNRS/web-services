@@ -1,5 +1,9 @@
+# WARNING: The tests server requires an api key
 POST {{host}}/v1/unpaywall/is_oa?indent=true
-content-type: application/json
+Content-type: application/json
+[Options]
+skip: true
+```
 [
   {  "id":1, "value": "10.1016/j.fuel.2018.07.071" },
   {  "id":2, "value": "10.1007/s10980-018-0699-8" },
@@ -9,6 +13,7 @@ content-type: application/json
   {  "id":6, "value": "10.4000/edc.9014"},
   {  "id":7, "value": "unknown"}
 ]
+```
 
 HTTP 200
 [{
@@ -40,8 +45,13 @@ HTTP 200
     "value": "n/a"
 }]
 
+
+# WARNING: The tests server requires an api key
 POST {{host}}/v1/unpaywall/expand?indent=true
 content-type: application/json
+[Options]
+skip: true
+```
 [
   { "id":1,  "value": "10.1016/j.fuel.2018.07.071" },
   { "id":2,  "value": "10.1007/s10980-018-0699-8" },
@@ -51,6 +61,7 @@ content-type: application/json
   { "id":6,  "value": "10.4000/edc.9014"},
   { "id":7,  "value": "unknown"}
 ]
+```
 
 HTTP 200
 [{
@@ -118,8 +129,12 @@ HTTP 200
     "value": "n/a"
 }]
 
+# WARNING: The tests server requires an api key
 POST {{host}}/v1/unpaywall/corhal?indent=true
 content-type: application/json
+[Options]
+skip: true
+```
 [
   { "id":1, "value": "10.1016/j.fuel.2018.07.071" },
   { "id":2, "value": "10.1007/s10980-018-0699-8" },
@@ -129,6 +144,7 @@ content-type: application/json
   { "id":6, "value": "10.4000/edc.9014"},
   { "id":7, "value": "unknown"}
 ]
+```
 
 HTTP 200
 [Asserts]
@@ -159,8 +175,13 @@ jsonpath "$[5].value.oa_locations" count == 1
 jsonpath "$[6].value.oa_locations" not exists
 
 
+# WARNING: The tests server requires an api key
 POST {{host}}/v1/unpaywall/works/expand?indent=true
 content-type: application/json
+content-type: application/json
+[Options]
+skip: true
+```
 [
   {  "id":1, "value": "10.1016/j.fuel.2018.07.071" },
   {  "id":2, "value": "10.1007/s10980-018-0699-8" },
@@ -170,6 +191,7 @@ content-type: application/json
   {  "id":6, "value": "10.4000/edc.9014"},
   {  "id":7, "value": "unknown"}
 ]
+```
 
 HTTP 200
 [Asserts]
@@ -190,8 +212,12 @@ jsonpath "$[5].value.oa_locations" count == 1
 jsonpath "$[6].value.oa_locations" not exists
 
 
+# WARNING: The tests server requires an api key
 POST {{host}}/v1/crossref/prefixes/expand?indent=true
 content-type: application/json
+[Options]
+skip: true
+```
 [
   {  "id":1, "value": "10.3998"},
   {  "id":2, "value": "10.1016" },
@@ -200,6 +226,7 @@ content-type: application/json
   {  "id":5, "value": "10.1037"},
   {  "id":6, "value": "unknown"}
 ]
+```
 
 HTTP 200
 [{
@@ -227,8 +254,12 @@ HTTP 200
     "value": "n/a"
 }]
 
+# WARNING: The tests server requires an api key
 POST {{host}}/v1/crossref/works/expand?indent=true
 content-type: application/json
+[Options]
+skip: true
+```
 [
   { "id":1,  "value": "10.1016/j.fuel.2018.07.071" },
   { "id":2,  "value": "10.1007/s10980-018-0699-8" },
@@ -238,6 +269,7 @@ content-type: application/json
   { "id":6,  "value": "10.4000/edc.9014"},
   { "id":7,  "value": "unknown"}
 ]
+```
 
 HTTP 200
 [Asserts]
@@ -255,11 +287,15 @@ jsonpath "$[6].value" == "n/a"
 
 POST {{host}}/v1/openalex/works/expand?indent=true
 content-type: application/json
+[Options]
+skip: false
+```
 [
   { "id":1,  "value": "10.1103/PhysRevLett.19.1264"},
   { "id":2,  "value": "10.1016/j.fuel.2018.07.071" },
   { "id":8,  "value": "unknown"}
 ]
+```
 
 HTTP 200
 [Asserts]
@@ -273,12 +309,16 @@ jsonpath "$[2].value" == "n/a"
 
 POST {{host}}/v1/istex/works/expand?indent=true
 content-type: application/json
+[Options]
+skip: false
+```
 [
   { "id":1,   "value": "10.1016/S0047-6374(98)00099-2"},
   { "id":2,   "value": "10.1016/S0167-4943(01)00186-8"},
   { "id":3,   "value": "10.1093/ageing/afm016"},
   { "id":4,   "value": ""}
 ]
+```
 
 HTTP 200
 [Asserts]
@@ -290,33 +330,37 @@ jsonpath "$[2].value.genre[0]" == "research-article"
 jsonpath "$[3].value" == "n/a"
 
 
-# WoS requires an API key
-# POST {{host}}/v1/wos/fetch?indent=true
-# content-type: application/json
-# [
-#   {
-#     "query": "0",
-#     "value": "XX"
-#   },
-#   {
-#     "query" :"I",
-#     "value": {
-#       "databaseId": "WOK",
-#       "usrQuery": "TS=(cadmium)",
-#       "count": "5",
-#       "firstRecord": "1"
-#     }
-#   },
-#   {
-#     "query" :"II",
-#     "value": {
-#       "databaseId": "WOK",
-#       "usrQuery": "TS=(cadmium)",
-#       "count": "5",
-#       "firstRecord": "6"
-#     }
-#   }
-# ]
+# WARNING: The tests server requires an api key
+POST {{host}}/v1/wos/fetch?indent=true
+content-type: application/json
+[Options]
+skip: true
+```
+[
+  {
+    "query": "0",
+    "value": "XX"
+  },
+  {
+    "query" :"I",
+    "value": {
+      "databaseId": "WOK",
+      "usrQuery": "TS=(cadmium)",
+      "count": "5",
+      "firstRecord": "1"
+    }
+  },
+  {
+    "query" :"II",
+    "value": {
+      "databaseId": "WOK",
+      "usrQuery": "TS=(cadmium)",
+      "count": "5",
+      "firstRecord": "6"
+    }
+  }
+]
+```
 
 
 
@@ -349,12 +393,16 @@ jsonpath "$[3].value" == "n/a"
 
 POST {{host}}/v1/hal/works/expand?indent=true
 content-type: application/json
+[Options]
+skip: false
+```
 [
-  { "id":1,   "value": "10.1016/S0047-6374(98)00099-2"},
-  { "id":2,   "value": "10.35562/arabesques.1222"},
-  { "id":3,   "value": "10.3324/haematol.2016.148908"},
-  { "id":4,   "value": ""}
+  { "id":1,   "value": "10.1016/S0047-6374(98)00099-2" },
+  { "id":2,   "value": "10.35562/arabesques.1222" },
+  { "id":3,   "value": "10.3324/haematol.2016.148908" },
+  { "id":4,   "value": "" }
 ]
+```
 
 HTTP 200
 [Asserts]
@@ -366,15 +414,46 @@ jsonpath "$[2].value.teiHeader" exists
 jsonpath "$[2].value.text" exists
 jsonpath "$[3].value" == "n/a"
 
+POST {{host}}/v2/hal/works/expand?indent=true
+content-type: application/json
+[Options]
+skip: false
+```
+[
+  { "id":1,   "value": "10.1016/S0047-6374(98)00099-2" },
+  { "id":2,   "value": "10.35562/arabesques.1222" },
+  { "id":3,   "value": "10.3324/haematol.2016.148908" },
+  { "id":4,   "value": "" },
+  { "id":5,   "value": "10.23919/EUSIPCO58844.2023.10290033" }
+]
+```
+
+HTTP 200
+[Asserts]
+jsonpath "$" count == 5
+jsonpath "$[0].value" == "n/a"
+jsonpath "$[1].value.teiHeader" exists
+jsonpath "$[1].value.text" exists
+jsonpath "$[2].value.teiHeader" exists
+jsonpath "$[2].value.text" exists
+jsonpath "$[3].value" == "n/a"
+jsonpath "$[4].value.teiHeader" exists
+jsonpath "$[4].value.text" exists
+
+
 
 POST {{host}}/v1/conditor/works/expand?indent=true
 content-type: application/json
+[Options]
+skip: false
+```
 [
   { "id":1,   "value": "10.1016/S0047-6374(98)00099-2"},
   { "id":2,   "value": "10.35562/arabesques.1222"},
   { "id":3,   "value": "10.3324/haematol.2016.148908"},
   { "id":4,   "value": ""}
 ]
+```
 
 HTTP 200
 [Asserts]
@@ -399,3 +478,26 @@ jsonpath "$[3].value" == "n/a"
 # jsonpath "$" count == 2
 # jsonpath "$[0].value.revision_id" >= 96
 # jsonpath "$[1].value" == "n/a"
+
+POST {{host}}/v2/bso/works/expand?indent=true
+content-type: application/json
+[Options]
+skip: false
+```
+[
+  { "id":1,   "value": "10.1103/physrevc.106.024603"},
+  { "id":2,   "value": "10.1016/j.msea.2021.142288"},
+  { "id":3,   "value": "10.1029/2021gc010308"},
+  { "id":4,   "value": ""}
+]
+```
+
+HTTP 200
+[Asserts]
+jsonpath "$" count == 4
+jsonpath "$[0].value.lang" == "en"
+jsonpath "$[1].value.year" == "2022"
+jsonpath "$[2].value.genre" == "journal-article"
+jsonpath "$[3].value" == "n/a"
+
+

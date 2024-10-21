@@ -1,6 +1,6 @@
 # syntax=docker/dockerfile:1.2
 
-FROM python:3.9-slim-bullseye as dvcfiles
+FROM python:3.9-slim-bullseye AS dvcfiles
 WORKDIR /dvc
 RUN apt update && apt -y install git curl
 RUN pip install dvc[webdav]==3.42.0
@@ -30,7 +30,7 @@ RUN pip install \
 
 # Install all node dependencies
 RUN npm install \
-@ezs/storage@3.2.3
+    @ezs/storage@3.2.3
 #     @ezs/teeft@2.3.1 \
 #     @ezs/strings@1.0.3
 

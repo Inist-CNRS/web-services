@@ -479,8 +479,6 @@ body contains "2015;CENBG, CNRS/IN2P3, Chemin du Solarium B. P. 120, Gradignan, 
 #2015;CENBG, CNRS/IN2P3, Chemin du Solarium B. P. 120, Gradignan, F-33175, France;
 #```
 
-
-
 POST {{host}}/v1/rnsr/conditor
 content-type: application/json
 [{
@@ -552,4 +550,88 @@ HTTP 200
             "barboncino 781 franklin avenue crown heights brooklyn new york 11238"
         ]
     }
+}]
+
+POST {{host}}/v1/ror/get-id?indent=true
+content-type: application/json
+[
+  {
+    "id": 1,
+    "status": "wrong",
+    "value": "Norwich Medical School, University of East Anglia"
+  },
+  {
+    "id": 2,
+    "status": "correct",
+    "value": "Institut Lumière Matière [Villeurbanne]"
+  },
+  {
+    "id": 3,
+    "status": "correct-2",
+    "value": "NSF's National Optical-Infrared Astronomy Research Laboratory, 950 North Cherry Avenue, Tucson, AZ 85719, USA"
+  },
+  {
+    "id": 4,
+    "status": "non-existing",
+    "value": "Sphere Energy SAS, 250 Bis Boulevard Saint Germain, 75007, Paris, France"
+  },
+  {
+    "id": 5,
+    "status": "non-existing",
+    "value" : "Department of Computational Engineering, CSC — Scientific Computing Ltd, P.O. Box 405, 02101, Espoo, Finland"
+  }
+]
+
+HTTP 200
+[{
+    "id": 1,
+    "status": "wrong",
+    "value": {
+        "id_ror": "https://ror.org/01e0ns064",
+        "score": 1,
+        "name": "University of East",
+        "type": [
+            "Education"
+        ],
+        "name_geonames": null,
+        "id_geonames": null
+    }
+},
+{
+    "id": 2,
+    "status": "correct",
+    "value": {
+        "id_ror": "https://ror.org/0323bey33",
+        "score": 0.79,
+        "name": "Institut Lumière Matière",
+        "type": [
+            "Facility"
+        ],
+        "name_geonames": null,
+        "id_geonames": null
+    }
+},
+{
+    "id": 3,
+    "status": "correct-2",
+    "value": {
+        "id_ror": "https://ror.org/03zmsge54",
+        "score": 1,
+        "name": "NSF’s NOIRLab",
+        "type": [
+            "Facility"
+        ],
+        "name_geonames": "Pima",
+        "id_geonames": 5308878
+    }
+},
+{
+    "id": 4,
+    "status": "non-existing",
+    "value": "No match found"
+},
+{
+    "id": 5,
+    "status": "non-existing",
+    "value": "No match found"
 }]

@@ -1,4 +1,4 @@
-# ws-data-computer@2.13.0
+# ws-data-computer@2.15.0
 
 Le service `data-computer` offre plusieurs services **asynchrones** pour des calculs et de transformations de données simples.
 
@@ -397,7 +397,7 @@ Avec le paramètre output=3, on obtiendra :
 | nom                 | description                                 |
 | ------------------- | ------------------------------------------- |
 | indent (true/false) | Indenter le résultat renvoyer immédiatement |
-|   output  (0,1,n)   |            Choix de la sortie               |
+| output  (0,1,n)     | Choix de la sortie                          |
 
 #### Entête(s) HTTP
 

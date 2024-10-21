@@ -7,12 +7,9 @@ Created on Thu Mar 31 16:36:28 2022
 """
 
 from geopy.geocoders import Nominatim
-#import time
 import functools
 import unidecode
 import re
-#import pycountry
-from iso3166 import countries
 import json
 import sys
 
@@ -22,7 +19,7 @@ locator = functools.lru_cache(maxsize=128)(functools.partial(osm.geocode, timeou
 locator_rev = functools.lru_cache(maxsize=128)(functools.partial(osm.reverse, timeout=60,language='en'))
 
 #fin=json.loads(json.dumps([{
-#        "id":1,
+#        "id":"1",
 #        "value":"université sciences et technologies bordeaux 1 institut national de physique nucléaire et de physique des particules du cnrs in2p3 UMR5797"},
 #    {"id":2,
 #    "value":"uar76 / ups76 centre national de la recherche scientifique cnrs institut de l'information scientifique et technique inist"},
@@ -39,7 +36,20 @@ locator_rev = functools.lru_cache(maxsize=128)(functools.partial(osm.reverse, ti
 #     {"id":7,
 #      "value":"campus romanus de maron"}  ,
 #      {"id":8,
-#       "value":"Inist-CNRS, vandoeuvre les Nancy, France"}
+#       "value":"Inist-CNRS, vandoeuvre les Nancy, France"},
+#       {"id":9,
+#       "value":"labo amerloc, burlington, United States"},
+#    {"id":10,
+#       "value":"labo 2 states, albany, NY"},
+#    {"id":11,
+#       "value":"bbc1, english city, United Kingdom"},
+#     {"id":12,
+#      "value":"University of California, Los Alamos Scientific Laboratory, Los Alamos, New Mexico 87544 U.S.A."},
+#     {"id":13,
+#      "value":"Researcher with grant Bocconi University ."},
+#     {"id":14,
+#      "value":" University of Toulouse, INPT, INP‑PURPAN, 75 voie du T.O.E.C., FR‑31076 TOULOUSE. Email: regis.vezian@purpan.fr"}
+#      
 #        ]))
 
 
@@ -52,19 +62,29 @@ def placeaddress(address):
     except KeyError:
         country=res.raw['address']['country_code']
     try:
+        code=res.raw['address']['country_code']
+    except KeyError:
+            code=""
+        
+    try:
         village=res.raw['address']['village']
     except KeyError:
         village=''
-    return country,lat,lng,village
+    return country,lat,lng,village,code
 
-#for line in fin:
+
 for line in sys.stdin:
     country=""
+    code=""
+    a2=""
+    a3=""
     data=json.loads(line)
+
     aff=data['value']
     lines=aff.replace('"','')
-
-    adr=lines.strip()
+    adr=lines.strip('.')
+    adr=adr.strip()
+    
     adr=adr.replace('&amp;',';')
     ad=adr.split(';')
     ads=[i.strip() for i in ad]
@@ -75,30 +95,21 @@ for line in sys.stdin:
         a=a.replace('cedex','')
         a=re.sub(' U[0-9]+','',a,flags=re.IGNORECASE)
         a=re.sub("both in ",'',a,flags=re.IGNORECASE)
+        a=re.sub("researcher with grant",'',a,flags=re.IGNORECASE)
         a=re.sub(' UMR[0-9]+','',a,flags=re.IGNORECASE)
         a=a.replace('...',' ')
         a=a.replace('_',' ')
-
         a=re.sub('\([a-zA-Z0-9 ,:\–]+\)','',a)
-
-        ##-1 on traite avec libpostal et on regarde s'il y a un pays
-        #nl=parse_address(a.strip().strip('.'))
-        #d=dict(map(reversed,nl))
-        
+      
         ars=re.split(',|:',a)
         if re.match(r'u[amsrp]+ ?[0-9]+',a):
             country='France'
+            code='fr'
         else:
             try:
-                #country=d['country']
-                country=countries.get(ars[-1].strip()).name
-    #            if len(country)==3:
-    #                cd=country.upper()
-    #                #x=pycountry.countries.get(alpha_3=cd)
-    #                country=countries.get(cd).name
-    #                
-    #                #country=x.name
+
                 country=placeaddress(country)[0]
+                code=placeaddress(country)[4]
     
     
             except (KeyError,TypeError) as error:
@@ -107,6 +118,7 @@ for line in sys.stdin:
                 try:
     
                     country=placeaddress(a)[0]
+                    code=placeaddress(a)[4]
     
                     if placeaddress(a)[3].lower()!=a.lower():
     
@@ -131,9 +143,9 @@ for line in sys.stdin:
                     
                             a=a.replace(' hospital ',' ')
     
-                            a2=re.findall("university [a-zA-Z&]+",unidecode.unidecode(a), flags=re.IGNORECASE)
-                            if len(a2)>1:
-                            
+                            a2=re.findall("university [ 2a-zA-Z&]+",unidecode.unidecode(a), flags=re.IGNORECASE)
+                            if len(a2)>=1:
+                          
                                 a3=a2[0].replace("university of ","university ")
                             if len(a2)<1:
                                 a2=unidecode.unidecode(a).lower().replace('university','$ university').split('$ ')
@@ -214,6 +226,7 @@ for line in sys.stdin:
                             try:
     
                                 country=placeaddress(aa)[0]
+                                code=placeaddress(aa)[4]
                                 lat=placeaddress(aa)[1]
                                 lng=placeaddress(aa)[2]
     
@@ -222,18 +235,21 @@ for line in sys.stdin:
                                 to=1
     
                                 if lon==len(a2):
-                                    country="unknown"
+                                    country=""#"unknown"
     
                             lon+=1
-#                                    
-#                    elif re.match(r'u[amsrp]+ ?[0-9]+',a):
-#                            country='France'
+
                     else: 
-                        country="Unknown"
+                        country=""#"Unknown"
+
+    aa=''
+
     try:
-        data["value"]=[country, countries.get(country).alpha3]
+
+        data["value"]={'country':country, 'code':code}
     except KeyError:
-        data["value"]=[country, 'N/A']
+
+        data["value"]={'country':country, 'code':""}
     sys.stdout.write(json.dumps(data))
     sys.stdout.write('\n')
 

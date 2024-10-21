@@ -80,36 +80,41 @@ def penalizeProba(rnsr,proba):
 # WS
 for line in sys.stdin:
     data = json.loads(line)
-    affiliations = data["value"].split(";")
-    data["value"]=[]
-    for affiliation in affiliations:
-        affiliation= normalizeText(affiliation)
-        # Find code U.
-        rnsr, rnsrFinded = findCodeU(affiliation)
-        if rnsrFinded :
-            data["value"].append(rnsr)
+    
+    if len(data["value"]) < 3:
+        data["value"]={"rnsr":[]}
+        sys.stdout.write(json.dumps(data))
+        sys.stdout.write("\n")
         
-        # Else, use neuronal network
-        else:
-            #predict domain
-            predictionDomain = modelDomain.predict(affiliation)
-            domain = predictionDomain[0][0]
-            domain = re.sub("__label__","",domain)
-            predictionRnsr = "n/a"
-
-            #predict rnsr knowing domain
-            for i in range(11):
-                testModelDx = "D" + str(i+1).rjust(2,"0")
-                if domain == testModelDx :
-                    predictionRnsr = modelsDX[i].predict(affiliation)
-            rnsr, proba = predictionRnsr[0][0].replace("__label__",""),predictionRnsr[1][0]
-            proba = penalizeProba(rnsr,proba)
-
-            #threshold = 0.71
-            if proba < 0.71 :
-                data["value"].append("n/a")
+    else:
+        affiliations = data["value"].split(";")
+        data["value"]={"rnsr":[]}
+        for affiliation in affiliations:
+            affiliation= normalizeText(affiliation)
+            # Find code U.
+            rnsr, rnsrFinded = findCodeU(affiliation)
+            if rnsrFinded :
+                data["value"]["rnsr"].append(rnsr)
+            
+            # Else, use neuronal network
             else:
-                data["value"].append(rnsr)
+                #predict domain
+                predictionDomain = modelDomain.predict(affiliation)
+                domain = predictionDomain[0][0]
+                domain = re.sub("__label__","",domain)
+                predictionRnsr = "n/a"
 
-    sys.stdout.write(json.dumps(data))
-    sys.stdout.write("\n")
+                #predict rnsr knowing domain
+                for i in range(11):
+                    testModelDx = "D" + str(i+1).rjust(2,"0")
+                    if domain == testModelDx :
+                        predictionRnsr = modelsDX[i].predict(affiliation)
+                rnsr, proba = predictionRnsr[0][0].replace("__label__",""),predictionRnsr[1][0]
+                proba = penalizeProba(rnsr,proba)
+
+                #threshold = 0.71
+                if proba > 0.71 :
+                    data["value"]["rnsr"].append(rnsr)
+
+        sys.stdout.write(json.dumps(data))
+        sys.stdout.write("\n")

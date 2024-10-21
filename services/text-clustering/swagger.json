@@ -1,0 +1,33 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "text-clustering - Crée différents clusters à partir d'un ensemble de textes courts ou d'un ensemble de listes de mots-clés.",
+        "description": "Crée plusieurs groupe afin d'y classifier les différents textes en fonction de leur similarité. Le nombre de clusters est déterminé de manière automatique et des documents peuvent être considérés comme du bruit (dans ce cas précis, le label de leur cluster sera 0 ; les documents appartenant au cluster 0 ne sont pas regroupés ensembles). L'entrée peut être un texte court (type titre ou petit abstract), mais aussi une liste de mots-clés.",
+        "version": "1.2.2",
+        "termsOfService": "https://services.istex.fr/",
+        "contact": {
+            "name": "Inist-CNRS",
+            "url": "https://www.inist.fr/nous-contacter/"
+        }
+    },
+    "servers": [
+        {
+            "x-comment": "Will be automatically completed by the ezs server."
+        },
+        {
+            "url": "http://vptdmjobs.intra.inist.fr:49185/",
+            "description": "Latest version for production",
+            "x-profil": "Standard"
+        }
+    ],
+    "tags": [
+        {
+            "name": "text-clustering",
+            "description": "Crée différents clusters à partir d'un ensemble de textes courts ou d'un ensemble de listes de mots-clés.",
+            "externalDocs": {
+                "description": "Plus de documentation",
+                "url": "https://github.com/inist-cnrs/web-services/tree/main/services/text-clustering"
+            }
+        }
+    ]
+}
