@@ -34,9 +34,11 @@ def openAlex_to_doi(url) :
     if response.status_code == 200:
         data = response.json()
         doi = data.get('doi')
-        return doi
-    else:
-        return id
+        if doi is not None :
+            return doi
+        else:
+            return f"https://openalex.org/{id}"
+    
 
 def main():
     dois = []
@@ -79,9 +81,9 @@ def main():
     # on itère sur la liste qui contient les tuples citation, count et doi pour les ajouter aux différents champs
     for citation, info in top_citations:
         result["value"].append({
-            "citation": openAlex_to_doi(citation),
+            "cited_ref": openAlex_to_doi(citation),
             "count": info["count"],
-            "doi": info["doi"]
+            "citing_doi": info["doi"]
         })
 
     sys.stdout.write(json.dumps(result))
