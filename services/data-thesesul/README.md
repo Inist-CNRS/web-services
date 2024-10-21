@@ -1,4 +1,4 @@
-# ws-thesesul-sudoctohal@0.0.0
+# ws-thesesul-sudoctohal@1.0.0
 
 Transforme des thèses UL en TEI pour import dans HAL
 
