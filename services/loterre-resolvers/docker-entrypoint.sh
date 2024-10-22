@@ -5,7 +5,7 @@ find /app/public ! -user daemon -exec chown daemon:daemon {} \;
 find /tmp ! -user daemon -exec chown daemon:daemon {} \;
 
 cd /tmp || exit 1
-for tgz in databases/*.tgz; do su -s /bin/bash daemon -c "tar -xf $tgz"; done
+for tgz in /app/data/*.tgz; do su -s /bin/bash daemon -c "tar -xf $tgz"; done
 
 cd /app || exit 2
 node generate-dotenv.js

@@ -30,7 +30,7 @@ RUN npm install \
 
 # Declare files to copy in .dockerignore
 COPY --chown=daemon:daemon --from=dvcfiles /dvc/*.skos /app/data/
-COPY --chown=daemon:daemon --from=dvcfiles /dvc/databases /tmp/databases/
+COPY --chown=daemon:daemon --from=dvcfiles /dvc/databases /app/data/
 RUN chmod a+rwx /app/data
 
 COPY --chown=daemon:daemon ./docker-entrypoint.sh /app/
