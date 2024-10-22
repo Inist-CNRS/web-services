@@ -1,7 +1,7 @@
 {
     "private": true,
     "name": "ws-loterre-resolvers",
-    "version": "7.0.1",
+    "version": "7.0.2",
     "description": "Résolveurs pour des terminologies Loterre",
     "repository": {
         "type": "git",
