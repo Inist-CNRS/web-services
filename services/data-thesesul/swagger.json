@@ -1,0 +1,33 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "data-thesesul - Transforme des thèses UL en TEI pour import dans HAL",
+        "description": "A partir d'identifiants Sudoc, ce service web télécharge les XML et PDF en provenance du Sudoc. Les XML sont transformés dans un format TEI pour import dans Hal.",
+        "version": "1.0.1",
+        "termsOfService": "https://services.istex.fr/",
+        "contact": {
+            "name": "Inist-CNRS",
+            "url": "https://www.inist.fr/nous-contacter/"
+        }
+    },
+    "servers": [
+        {
+            "x-comment": "Will be automatically completed by the ezs server."
+        },
+        {
+            "url": "http://vptdmjobs.intra.inist.fr:49198/",
+            "description": "Latest version for production",
+            "x-profil": "Standard"
+        }
+    ],
+    "tags": [
+        {
+            "name": "data-thesesul",
+            "description": "Transforme des thèses UL en TEI pour import dans HAL",
+            "externalDocs": {
+                "description": "Plus de documentation",
+                "url": "https://github.com/inist-cnrs/web-services/tree/main/services/thesesul-sudoctohal"
+            }
+        }
+    ]
+}
