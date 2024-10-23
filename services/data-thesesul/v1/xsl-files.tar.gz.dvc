@@ -1,0 +1,5 @@
+outs:
+- md5: a38443235cfc85606e589748ece232f5
+  size: 12170
+  hash: md5
+  path: xsl-files.tar.gz

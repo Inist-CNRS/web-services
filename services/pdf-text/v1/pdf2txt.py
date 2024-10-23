@@ -24,17 +24,7 @@ nlp_fr=spacy.load("fr_core_news_sm")
 
 def convert_pdf_to_xml(input_path):
     result = subprocess.run(['pdftohtml','-xml', '-stdout','-hidden','-i','-q','-f',p, input_path], capture_output=True, text=True)
-
-    # Check if conversion was successful
-    if result.returncode == 0:
-        # Get the XML content in a variable
-        xml_content = result.stdout
-        return xml_content
-    else:
-        # print error message if needed
-        sys.stderr.write(f"Conversion of PDF {input_path} to XML has failed.")
-        sys.stderr.write("\n")
-        return None
+    return result.stdout
 
 
 def remove_xml_tags(xml_string):
@@ -226,6 +216,12 @@ for line in sys.stdin:
     except OSError :
         #print("Erreur lors de la suppression du fichier PDF:", e)
         line0['value']="Erreur lors de la suppression du fichier PDF"
+        
+    except Exception :
+        line0['value']="Erreur lors de la conversion du PDF en texte"
     
+    if line0['value']=="":
+        line0['value']="Erreur lors de la conversion du PDF en texte"
+        
     sys.stdout.write(json.dumps(line0))
     sys.stdout.write('\n')

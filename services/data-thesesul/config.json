@@ -1,0 +1,14 @@
+{
+    "environnement": {
+        "EZS_TITLE": "Transforme des thèses UL en TEI pour import dans HAL",
+        "EZS_DESCRIPTION": "A partir d'identifiants Sudoc, ce service web télécharge les XML et PDF en provenance du Sudoc. Les XML sont transformés dans un format TEI pour import dans Hal.",
+        "EZS_METRICS": true,
+        "EZS_CONCURRENCY": 1,
+        "EZS_CONTINUE_DELAY": 60,
+        "EZS_NSHARDS": 32,
+        "EZS_CACHE": true,
+        "EZS_VERBOSE": false,
+        "NODE_OPTIONS": "--max_old_space_size=1024",
+        "NODE_ENV": "production"
+    }
+}
