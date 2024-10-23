@@ -59,6 +59,7 @@
     "services/funder-ner",
     "services/hal-classifier",
     "services/irc3-species",
+    "services/loterre-resolvers",
     "services/ner-tagger",
     "services/nlp-tools2",
     "services/pdf-text",
