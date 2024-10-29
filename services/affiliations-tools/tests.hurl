@@ -583,55 +583,57 @@ content-type: application/json
 ]
 
 HTTP 200
-[{
+[
+  {
     "id": 1,
     "status": "wrong",
     "value": {
-        "id_ror": "https://ror.org/01e0ns064",
-        "score": 1,
-        "name": "University of East",
-        "type": [
-            "Education"
-        ],
-        "name_geonames": null,
-        "id_geonames": null
+      "id_ror": "https://ror.org/01e0ns064",
+      "score": 1,
+      "name": "University of East",
+      "type": [
+        "Education"
+      ],
+      "name_geonames": "Hyderabad",
+      "id_geonames": 1176734
     }
-},
-{
+  },
+  {
     "id": 2,
     "status": "correct",
     "value": {
-        "id_ror": "https://ror.org/0323bey33",
-        "score": 0.79,
-        "name": "Institut Lumière Matière",
-        "type": [
-            "Facility"
-        ],
-        "name_geonames": null,
-        "id_geonames": null
+      "id_ror": "https://ror.org/0323bey33",
+      "score": 0.79,
+      "name": "Institut Lumière Matière",
+      "type": [
+        "Facility"
+      ],
+      "name_geonames": "Villeurbanne",
+      "id_geonames": 2968254
     }
-},
-{
+  },
+  {
     "id": 3,
     "status": "correct-2",
     "value": {
-        "id_ror": "https://ror.org/03zmsge54",
-        "score": 1,
-        "name": "NSF’s NOIRLab",
-        "type": [
-            "Facility"
-        ],
-        "name_geonames": "Pima",
-        "id_geonames": 5308878
+      "id_ror": "https://ror.org/03zmsge54",
+      "score": 1,
+      "name": "NSF’s NOIRLab",
+      "type": [
+        "Facility"
+      ],
+      "name_geonames": "Tucson",
+      "id_geonames": 5318313
     }
-},
-{
+  },
+  {
     "id": 4,
     "status": "non-existing",
     "value": "No match found"
-},
-{
+  },
+  {
     "id": 5,
     "status": "non-existing",
     "value": "No match found"
-}]
+  }
+]
