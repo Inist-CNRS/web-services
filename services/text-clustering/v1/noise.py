@@ -76,9 +76,9 @@ cosine_dist_matrix = cosine_distances(embeddings, embeddings)
 clusterer = HDBSCAN(
     algorithm='auto',
     metric='precomputed',
-    min_cluster_size=int(max(10,len_data/100)),
-    cluster_selection_epsilon = 0.01,
-    min_samples=1,
+    min_cluster_size=int(max(5,len_data/20)),
+    cluster_selection_epsilon = 0.05,
+    min_samples=2,
     cluster_selection_method="eom",
     n_jobs=-1) 
 
@@ -89,20 +89,16 @@ clusterer.fit(cosine_dist_matrix)
 # extract infos
 res = []
 indice_in_cluster=0
-output = []
 for i in range(len_data):
+    line = all_data[i]
     if i in indice_out_cluster:
-        output.append({"id":all_data[i]["id"], "value": all_data[i]["id"]})
+        line["value"] = "no_abstract"
     else:
         if clusterer.labels_[indice_in_cluster] ==-1:
-            output.append({"id":all_data[indice_in_cluster]["id"], "value": all_data[indice_in_cluster]["id"]})
+            line["value"] ="noise"
+        else:
+            line["value"] = "relevant"
         indice_in_cluster +=1 # Here we increment only if the row isn't noise, because they aren't count in "clusterer model"
 
-# Write all corpus in once
-if len(output)==0:
-    sys.stdout.write(json.dumps({"id":"n/a","value":""}))
+    sys.stdout.write(json.dumps(line))
     sys.stdout.write("\n")
-else :
-    for line in output:
-        sys.stdout.write(json.dumps(line))
-        sys.stdout.write("\n")
