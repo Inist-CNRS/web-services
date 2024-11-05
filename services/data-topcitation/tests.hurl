@@ -45,8 +45,7 @@ delay: 10000
 
 HTTP 200
 Content-Type: application/json
-[
-  {
+[{
     "id": "https://doi.org/10.1007/bf01303701",
     "value": {
       "count": 6,
@@ -151,5 +150,4 @@ Content-Type: application/json
         "https://doi.org/10.1103/physrevlett.58.908"
       ]
     }
-  }
-]
+  }]
