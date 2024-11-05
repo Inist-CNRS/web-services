@@ -2,10 +2,10 @@
 # -*- coding: utf-8 -*-
 import json
 import sys
-import umap.umap_ as umap
 from sentence_transformers import SentenceTransformer
 from sklearn.preprocessing import StandardScaler
 from sklearn.metrics.pairwise import cosine_distances
+from sklearn.decomposition import PCA
 from sklearn.cluster import HDBSCAN
 
 # from prometheus_client import CollectorRegistry, Counter, push_to_gateway
@@ -66,14 +66,9 @@ for i in range(len_data):
     except:
         indice_out_cluster.append(i)
 
-# Reduce DIM from 700+ to 8
-embeddings = umap.UMAP(n_neighbors=30,
-                       n_components=8,
-                       min_dist=0.0,
-                       metric='cosine',
-                       init='spectral').fit_transform(center_reduce(texts))
-
-embeddings = center_reduce(embeddings)
+# Dimension reduction
+pca = PCA(n_components=0.95)
+embeddings = pca.fit_transform(center_reduce(texts))
 cosine_dist_matrix = cosine_distances(embeddings, embeddings)
 
 
