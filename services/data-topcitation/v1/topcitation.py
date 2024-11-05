@@ -41,6 +41,9 @@ def openAlex_to_doi(url) :
     
 
 def main():
+     # Définition de la limite par défaut à 10 citations
+    nbCitations = int(sys.argv[sys.argv.index('-p') + 1]) if '-p' in sys.argv else 10
+
     dois = []
     for line in sys.stdin:
         data = json.loads(line)
@@ -72,9 +75,9 @@ def main():
 
     # utilisation de la méthode sorted() pour trier le dictionnaire en fonciton de count
     sorted_citations = sorted(citation_count.items(), key=lambda item: item[1]['count'], reverse=True)
-    # on ne récupère que les 10 valeurs les plus grandes 
+    # on récupère les n valeurs les plus grandes, par défaut 10
     # voir pour modifier ce paramètre
-    top_citations = sorted_citations[:10]
+    top_citations = sorted_citations[:nbCitations]
 
     result = {"id":"n/a","value":[]}
     
