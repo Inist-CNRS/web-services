@@ -79,18 +79,12 @@ def main():
     # voir pour modifier ce paramètre
     top_citations = sorted_citations[:nbCitations]
 
-    result = {"id":"n/a","value":[]}
+    result = []
     
     # on itère sur la liste qui contient les tuples citation, count et doi pour les ajouter aux différents champs
     for citation, info in top_citations:
-        result["value"].append({
-            "cited_ref": openAlex_to_doi(citation),
-            "count": info["count"],
-            "citing_doi": info["doi"]
-        })
-
-    sys.stdout.write(json.dumps(result))
-    sys.stdout.write("\n")
+        sys.stdout.write(json.dumps({"id":openAlex_to_doi(citation), "value":{"count": info["count"],"citing_doi": info["doi"]}}))
+        sys.stdout.write("\n")
 
 if __name__ == "__main__":
     main()
