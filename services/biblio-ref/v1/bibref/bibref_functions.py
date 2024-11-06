@@ -3,8 +3,12 @@ from requests_ratelimiter import LimiterSession
 import unicodedata
 from thefuzz import fuzz
 import pickle
+import os
 
-mail_address = "istex@inist.fr"
+api_token = os.getenv('CROSSREF_API_KEY')
+headers = {
+    "Crossref-Plus-API-Token": api_token
+}
 session = LimiterSession(per_second=10)
 session_pdf = LimiterSession(per_second=10)
 
@@ -74,7 +78,7 @@ def find_doi(text):
         return ""
 
 
-def verify_doi(doi, mail=mail_address):
+def verify_doi(doi, headers=headers):
     
     """
     Verify a Digital Object Identifier (DOI) by making a GET request to the Crossref API. 
@@ -87,10 +91,10 @@ def verify_doi(doi, mail=mail_address):
         (int,dict): HTTP status code of the API response and dict informations found
     """
     
-    url = f"https://api.crossref.org/works/{doi}?mailto={mail}"
+    url = f"https://api.crossref.org/works/{doi}"
 
     try:
-        response = session.get(url)
+        response = session.get(url, headers=headers)
         status_code = response.status_code
         if status_code != 200 :
             return (status_code,{'title': "", 'first_author_given': "", 'first_author_name': "", 'doi': ""})
@@ -192,7 +196,7 @@ def compare_pubinfo_refbiblio(item,ref_biblio):
     return True, item['doi']
 
 
-def verify_biblio(ref_biblio, mail=mail_address):
+def verify_biblio(ref_biblio, headers=headers):
 
     """
     check with crossref api if a biblio ref is correct.
@@ -206,9 +210,9 @@ def verify_biblio(ref_biblio, mail=mail_address):
         a confidence score about the existence + doi of the biblio ref
     """
     
-    url = f'https://api.crossref.org/works?query.bibliographic="{ref_biblio}"&mailto={mail}&rows=5' #take only the 5 first results
+    url = f'https://api.crossref.org/works?query.bibliographic="{ref_biblio}"&rows=5' #take only the 5 first results
     try:
-        response = session.get(url)
+        response = session.get(url, headers=headers)
         data = response.json()
         items = data["message"]["items"] #to check
         for item in items:

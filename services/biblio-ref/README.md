@@ -6,21 +6,6 @@ Si un DOI est trouvé dans la référence bibliographique, valide la référence
 
 ## Construction de l'image docker
 
-Nécessite les variables d'environnement:
+Nécessite une variable d'environnement `API_TOKEN`, un token pour utiliser l'API Crossref. Elle doit se trouver dans un un fichier `.env` à la racine.
+Si vous ne disposez pas de token, vous pouvez supprimer les  headers des requêtes Crossref dans l'ensemble des fonctions python définies dans le fichier `./v1/bibref/bibref_functions.py`. Il faudra également supprimer les paramètres `--env-file .env` des scripts `npm start:dev` et `npm start` du `package.json`. Vous pouvez également utiliser la version 2.0.1.
 
-- `WEBDAV_URL`
-- `WEBDAV_LOGIN`
-- `WEBDAV_PASSWORD`
-
-> **Note:** pour utiliser un *remote* webdav, le protocole de l'URL est `webdavs`.
-> **Note:** n'oubliez pas d'exporter ces variables.
-
-`npm run build:dev` et `npm start:dev` importent le fichier `.env` quand il existe.
-
-> 📗 Suggestion: déclarez les variables dans le fichier `.env` de cette manière:
->
-> ```bash
-> export WEBDAV_URL=webdavs://your.webdav.com/dvc
-> export WEBDAV_LOGIN=yourlogin
-> export WEBDAV_PASSWORD=yourpass
-> ```
