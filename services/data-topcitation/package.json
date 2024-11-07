@@ -1,7 +1,7 @@
 {
   "private": true,
   "name": "ws-data-topcitation",
-  "version": "1.0.2",
+  "version": "2.0.0",
   "description": "Référence phare d'un corpus",
   "repository": {
     "type": "git",
