@@ -108,9 +108,8 @@ def filter_api(json, city=None, short=False):
         score_similarity = item["score"]
         name = item["organization"]["name"]
         type = item["organization"]["types"]
-        name_geonames = item["organization"]["addresses"][0]["geonames_city"]["geonames_admin2"]["name"]
-        id_geonames = item["organization"]["addresses"][0]["geonames_city"]["geonames_admin2"]["id"]
-        # json_dict = {"id_ror": id_ror, "score": score_similarity, "name": name}
+        name_geonames = item["organization"]["addresses"][0]["geonames_city"]["city"]
+        id_geonames = item["organization"]["addresses"][0]["geonames_city"]["id"]
         json_dict = {
             "id_ror": id_ror,
             "score": score_similarity,
