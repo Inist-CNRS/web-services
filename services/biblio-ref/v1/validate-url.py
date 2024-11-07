@@ -1,7 +1,5 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-import json
-import sys
 import random
 from bibref.bibref_functions import *
 import os

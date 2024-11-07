@@ -3,7 +3,7 @@
         "EZS_TITLE": "Valide une référence bibliographique",
         "EZS_DESCRIPTION": "Trouve les références bibliographiques d'un PDF puis utilise crossref pour: - valider les références bibliographiques - donner les DOIs s'ils existent - indiquer les éventuelles références rétractées.",
         "EZS_METRICS": true,
-        "EZS_CONCURRENCY": 1,
+        "EZS_CONCURRENCY": 4,
         "EZS_CONTINUE_DELAY": 18000,
         "EZS_PIPELINE_DELAY": 10800,
         "EZS_NSHARDS": 32,
@@ -11,6 +11,6 @@
         "EZS_VERBOSE": true,
         "NODE_OPTIONS": "--max_old_space_size=1024",
         "NODE_ENV": "production",
-        "CROSSREF_API_KEY":"REAL_CROSSREF_API_KEY"
+        "CROSSREF_API_KEY": "REAL_CROSSREF_API_KEY"
     }
 }

@@ -4,6 +4,8 @@ import unicodedata
 from thefuzz import fuzz
 import pickle
 import os
+import sys
+import json
 
 api_token = os.getenv('CROSSREF_API_KEY')
 headers = {
@@ -228,7 +230,8 @@ def verify_biblio(ref_biblio, headers=headers):
                 return "found",doi
             
         return "not_found",""
-    except:
+    except Exception as e:
+        sys.stderr.write("Error in verify_biblio function : "+str(e)+"\n")
         return "error_service",""
 
 
@@ -275,6 +278,7 @@ def biblio_ref(ref_biblio,retracted_doi=retracted_doi):
                     
         ### for others errors
         else:
+            sys.stderr.write("DOI requests failed. Crossref status code :" + str(crossref_status_code)+"\n")
             return {"doi":"","status": "error_service"}
 
     # second case : no doi is found
