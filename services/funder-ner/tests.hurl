@@ -12,7 +12,7 @@ HTTP 200
 [{
     "id": 1,
     "value": [
-      "CNRS",
-      "INIST"
+        "CNRS",
+        "INIST"
     ]
 }]
