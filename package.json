@@ -78,6 +78,6 @@
     "rest-cli": "1.8.13"
   },
   "devDependencies": {
-    "@types/node": "20.11.30"
+    "@types/node": "22.9.0"
   }
 }
