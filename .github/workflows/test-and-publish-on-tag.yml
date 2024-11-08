@@ -28,7 +28,7 @@ jobs:
       - name: Build .env from Github Actions secrets
         shell: bash
         run: |
-          bin/create-env.sh ${{ github.ref_name }} ${{ secrets.WEBDAV_LOGIN }} ${{ secrets.WEBDAV_PASSWORD }} ${{ secrets.WEBDAV_URL }} ${{secrets.OPENALEX_API_KEY}} ${{secrets.UNPAYWALL_API_KEY}}
+          bin/create-env.sh ${{ github.ref_name }} ${{ secrets.WEBDAV_LOGIN }} ${{ secrets.WEBDAV_PASSWORD }} ${{ secrets.WEBDAV_URL }} ${{secrets.OPENALEX_API_KEY}} ${{secrets.UNPAYWALL_API_KEY}} ${{secrets.CROSSREF_API_KEY}}
           ls -l services/*/.env
 
       - name: Build Docker Image & Test
@@ -58,7 +58,7 @@ jobs:
       - name: Build .env from Github Actions secrets
         shell: bash
         run: |
-          bin/create-env.sh ${{ github.ref_name }} ${{ secrets.WEBDAV_LOGIN }} ${{ secrets.WEBDAV_PASSWORD }} ${{ secrets.WEBDAV_URL }} ${{secrets.OPENALEX_API_KEY}} ${{secrets.UNPAYWALL_API_KEY}}
+          bin/create-env.sh ${{ github.ref_name }} ${{ secrets.WEBDAV_LOGIN }} ${{ secrets.WEBDAV_PASSWORD }} ${{ secrets.WEBDAV_URL }} ${{secrets.OPENALEX_API_KEY}} ${{secrets.UNPAYWALL_API_KEY}} ${{secrets.CROSSREF_API_KEY}}
           ls -l services/*/.env
 
       - name: Build & Push Docker Image
