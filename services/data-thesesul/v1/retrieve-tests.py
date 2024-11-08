@@ -22,7 +22,7 @@ list_cmd = 'rm -r /tmp/retrieve/datas && rm /tmp/retrieve/log.csv'
 bash = subprocess.run(list_cmd, shell=True, capture_output=True)
 
 # On exécute le test
-if set(result) == set(["271653795.pdf","271653795.xml","273522590.pdf","273522590.xml"]):
+if set(result) == set(["271653795.zip","273522590.zip"]):
     sys.stdout.write(json.dumps({"value":"True"}))
 else:
     sys.stdout.write(json.dumps({"value":"False"}))

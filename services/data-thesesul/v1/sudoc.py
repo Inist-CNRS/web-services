@@ -7,6 +7,7 @@ import requests
 import sys
 import json
 import re
+import zipfile
 
 # Chemin du répertoire temporaire
 TMP_DIR = '/tmp'
@@ -96,6 +97,33 @@ def validate_tei_hal(tei_hal_file):
     return True
 
 
+def modify_target_in_xml(file_path, sudoc_id):
+    with open(file_path, 'r', encoding='utf-8') as file:
+        content = file.read()
+
+    # use a regular expression to change a field
+    modified_content = re.sub(r'target=".*?\.pdf"', f'target="{sudoc_id}.pdf"', content)
+
+    with open(file_path, 'w', encoding='utf-8') as file:
+        file.write(modified_content)
+
+
+def create_zip(sudoc_id):
+    files_to_zip = [os.path.join(OUTPUT_DIR,f"{sudoc_id}.xml"), os.path.join(OUTPUT_DIR,f"{sudoc_id}.pdf")]
+    output_zip = os.path.join(OUTPUT_DIR,f'{sudoc_id}.zip')
+
+    try:
+        with zipfile.ZipFile(output_zip, 'w') as archive:
+            for fichier in files_to_zip:
+                archive.write(fichier, arcname=fichier.split('/')[-1])
+    except Exception as e:
+        sys.stderr.write(f"Failed to zip xml + pdf: {e}\n")
+        
+    if os.path.exists(os.path.join(OUTPUT_DIR,f"{sudoc_id}.pdf")):
+        os.remove(os.path.join(OUTPUT_DIR,f"{sudoc_id}.pdf"))
+        os.remove(os.path.join(OUTPUT_DIR,f"{sudoc_id}.xml"))
+        
+
 # Main
 if __name__ == "__main__":
     log_file = str(os.path.join(TMP_DIR, "retrieve", retrieve_id, "log.csv"))
@@ -131,6 +159,9 @@ if __name__ == "__main__":
                             pdf_file = download_pdf(res_file)
                             if not pdf_file:
                                 write_error_in_logs(log_file, sudoc_id, "Erreur : Récuperation du fichier PDF impossible")
+                            else:
+                                modify_target_in_xml(res_file, sudoc_id)
+                                create_zip(sudoc_id)
                         else:
                             write_error_in_logs(log_file, sudoc_id, "Erreur : Fichier TEI généré invalide")
                     else:
