@@ -2,18 +2,21 @@
 # -*- coding: utf-8 -*-
 import json
 import sys
-import umap.umap_ as umap
+import requests
 from sentence_transformers import SentenceTransformer
 from sklearn.preprocessing import StandardScaler
 from sklearn.metrics.pairwise import cosine_distances
-# Two hdbscan aglos : normal and from sklearn
-# import hdbscan
+from sklearn.decomposition import PCA
 from sklearn.cluster import HDBSCAN
 
 # from prometheus_client import CollectorRegistry, Counter, push_to_gateway
 # registry = CollectorRegistry()
 # c = Counter('documents', 'Number of documents processed', registry=registry)
 # job_name='clustering'
+
+
+# Get the index of "p" param (given by the user) and assign it to "nb". 20 if not found
+nbTopic = sys.argv[sys.argv.index('-p') + 1] if '-p' in sys.argv else 20
 
 
 def center_reduce(matrix):
@@ -33,10 +36,27 @@ def center_reduce(matrix):
 
     return matrix_center_reduce
 
+
+def teeft(data, n_keywords, language="en"):
+    try:
+        url = f"https://terms-extraction.services.istex.fr/v1/teeft/{language}?nb={n_keywords}"
+        headers = {
+            'accept': 'application/json',
+            'Content-Type': 'application/json',
+            }
+        response = requests.post(url, headers=headers, data=json.dumps([data]))
+        data = response.json()
+        return data[0]["value"]
+    except:
+        return []
+
+
 model = SentenceTransformer('./v1/all-MiniLM-L6-v2')
+n_keywords = 20
+
 
 ## WS
-# Datas
+# Embedding
 all_data = []
 for line in sys.stdin:
     data=json.loads(line)
@@ -68,36 +88,20 @@ for i in range(len_data):
     except:
         indice_out_cluster.append(i)
 
-# Reduce DIM from 700+ to 8
-embeddings = umap.UMAP(n_neighbors=30,
-                       n_components=8,
-                       min_dist=0.0,
-                       metric='cosine',
-                       init='spectral').fit_transform(center_reduce(texts))
 
-embeddings = center_reduce(embeddings)
+# Dimension reduction
+pca = PCA(n_components=0.95)
+embeddings = pca.fit_transform(center_reduce(texts))
 cosine_dist_matrix = cosine_distances(embeddings, embeddings)
 
-
-## HDBSCAN with hdbscan library
-# clusterer = hdbscan.HDBSCAN(algorithm='best',
-#                             prediction_data=True,
-#                             approx_min_span_tree=True,
-#                             gen_min_span_tree=True,
-#                             min_cluster_size=int(max(10,len_data/50)),
-#                             cluster_selection_epsilon = 0.02,
-#                             min_samples=1,
-#                             p=None,
-#                             metric='precomputed',
-#                             cluster_selection_method='eom')
 
 # HDBSCAN with scikit-learn
 clusterer = HDBSCAN(
     algorithm='auto',
     metric='precomputed',
-    min_cluster_size=int(max(10,len_data/100)),
-    cluster_selection_epsilon = 0.01,
-    min_samples=1,
+    min_cluster_size=int(max(5,len_data/20)),
+    cluster_selection_epsilon = 0.05,
+    min_samples=2,
     cluster_selection_method="eom",
     n_jobs=-1) 
 
@@ -105,14 +109,40 @@ clusterer = HDBSCAN(
 clusterer.fit(cosine_dist_matrix)
 
 
-# extract infos
-res = []
+# Create datas for teeft
+indice_in_cluster=0
+keywords = {} #keywords is a dictionary, the key is the cluster and value the input / output of teeft
+for i in range(len_data):
+    if i not in indice_out_cluster :
+        label = int(clusterer.labels_[indice_in_cluster]+1)
+        if label != 0:
+            if label in keywords:
+                keywords[label] += "\n" + str(all_data[i]["value"])
+            else:
+                keywords[label] = str(all_data[i]["value"])
+        indice_in_cluster+=1
+
+# Execute teeft
+n_clusters = len(keywords)
+for i in range(n_clusters):
+    data = {"id": i+1, "value": keywords[i+1]}
+    keywords[i+1] = teeft(data, n_keywords)
+# Add res for noise cluster
+keywords[0] = []
+
+
+# extract infos and return teeft res
 indice_in_cluster=0
 for i in range(len_data):
     if i in indice_out_cluster :
-        all_data[i]["value"] = {"cluster":0, "weight":"1.0"}
+        all_data[i]["value"] = {"cluster":0, "weight":"1.0", "keywords": []}
     else:
-        all_data[i]["value"]={"cluster":int(clusterer.labels_[indice_in_cluster]+1), "weight":str(clusterer.probabilities_[indice_in_cluster])}
+        label = int(clusterer.labels_[indice_in_cluster]+1)
+        all_data[i]["value"]={
+            "cluster":label,
+            "weight":str(clusterer.probabilities_[indice_in_cluster]),
+            "keywords":keywords[label]
+            }
         indice_in_cluster +=1 # Here we increment only if the row isn't noise, because they aren't count in "clusterer model"
 
 

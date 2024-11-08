@@ -14,3 +14,13 @@ X-Webhook-Success: https://webhook.site/7b9ddc51-b3eb-447a-8eba-1ab13f016bb7
 X-Webhook-Failure: https://webhook.site/7b9ddc51-b3eb-447a-8eba-1ab13f016bb7
 
 < ./examples/list-doi.tar.gz
+
+###
+# @name v1TopCitationNb
+# Renvoie le top 3 des citations phares d'un corpus
+POST {{host}}/v1/topcitation?nbCitations=3?indent=true HTTP/1.1
+Content-Type: application/x-gzip
+X-Webhook-Success: https://webhook.site/7b9ddc51-b3eb-447a-8eba-1ab13f016bb7
+X-Webhook-Failure: https://webhook.site/7b9ddc51-b3eb-447a-8eba-1ab13f016bb7
+
+< ./examples/list-doi.tar.gz

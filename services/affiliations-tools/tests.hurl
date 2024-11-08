@@ -557,49 +557,21 @@ content-type: application/json
 [
   {
     "id": 1,
-    "status": "wrong",
-    "value": "Norwich Medical School, University of East Anglia"
-  },
-  {
-    "id": 2,
-    "status": "correct",
     "value": "Institut Lumière Matière [Villeurbanne]"
   },
   {
-    "id": 3,
-    "status": "correct-2",
+    "id": 2,
     "value": "NSF's National Optical-Infrared Astronomy Research Laboratory, 950 North Cherry Avenue, Tucson, AZ 85719, USA"
   },
   {
-    "id": 4,
-    "status": "non-existing",
+    "id": 3,
     "value": "Sphere Energy SAS, 250 Bis Boulevard Saint Germain, 75007, Paris, France"
-  },
-  {
-    "id": 5,
-    "status": "non-existing",
-    "value" : "Department of Computational Engineering, CSC — Scientific Computing Ltd, P.O. Box 405, 02101, Espoo, Finland"
   }
 ]
 
 HTTP 200
 [{
     "id": 1,
-    "status": "wrong",
-    "value": {
-        "id_ror": "https://ror.org/01e0ns064",
-        "score": 1,
-        "name": "University of East",
-        "type": [
-            "Education"
-        ],
-        "name_geonames": null,
-        "id_geonames": null
-    }
-},
-{
-    "id": 2,
-    "status": "correct",
     "value": {
         "id_ror": "https://ror.org/0323bey33",
         "score": 0.79,
@@ -607,13 +579,12 @@ HTTP 200
         "type": [
             "Facility"
         ],
-        "name_geonames": null,
-        "id_geonames": null
+        "name_geonames": "Villeurbanne",
+        "id_geonames": 2968254
     }
 },
 {
-    "id": 3,
-    "status": "correct-2",
+    "id": 2,
     "value": {
         "id_ror": "https://ror.org/03zmsge54",
         "score": 1,
@@ -621,17 +592,11 @@ HTTP 200
         "type": [
             "Facility"
         ],
-        "name_geonames": "Pima",
-        "id_geonames": 5308878
+        "name_geonames": "Tucson",
+        "id_geonames": 5318313
     }
 },
 {
-    "id": 4,
-    "status": "non-existing",
-    "value": "No match found"
-},
-{
-    "id": 5,
-    "status": "non-existing",
+    "id": 3,
     "value": "No match found"
 }]
