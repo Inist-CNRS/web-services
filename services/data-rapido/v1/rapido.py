@@ -99,14 +99,11 @@ def rapido(dfAnnotations,dfText,ignoreWords,nlp,lAnnot,app=False):
     return exporter.listPersee
 
 # Args
+app = False
 if '-p' in sys.argv:
     arg = int(sys.argv[sys.argv.index('-p') + 1])
-    if arg == 0:
-        app = False
-    else:
+    if arg != 0:
         app = True
-else:
-    app = False
 
 # Pre-loading
 dfAnnotations = pd.read_csv(annotations_path)
