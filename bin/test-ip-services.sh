@@ -18,7 +18,7 @@ for SERVICE in "${SERVICES[@]}"; do
 
     SERVICE_LOCAL_URL=$(jq -r '.servers[1].url' "services/$SERVICE/swagger.json")
     SERVICE_LOCAL_IP=$(echo "$SERVICE_LOCAL_URL" | sed -e 's|vptdmservices.intra.inist.fr|192.168.128.151|' -e 's|vptdmjobs.intra.inist.fr|192.168.128.74|')
-    npx hurl --test --continue-on-error --variable host="$SERVICE_LOCAL_IP" "services/$SERVICE/tests.hurl"
+    npx hurl --jobs 1 --test --continue-on-error --variable host="$SERVICE_LOCAL_IP" "services/$SERVICE/tests.hurl"
 done
 
 exit 0
