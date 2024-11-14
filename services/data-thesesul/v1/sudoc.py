@@ -36,4 +36,3 @@ if __name__ == "__main__":
 
     sys.stdout.write(json.dumps({"value":"empty, just to proc webhook"}))
     sys.stdout.write("\n")
-
