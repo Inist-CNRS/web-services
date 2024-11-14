@@ -25,8 +25,8 @@ jobs:
 
       - name: Install Hurl
         run: |
-          curl --location --remote-name https://github.com/Orange-OpenSource/hurl/releases/download/4.3.0/hurl_4.3.0_amd64.deb
-          sudo dpkg -i hurl_4.3.0_amd64.deb
+          curl --location --remote-name https://github.com/Orange-OpenSource/hurl/releases/download/5.0.1/hurl_5.0.1_amd64.deb
+          sudo dpkg -i hurl_5.0.1_amd64.deb
           hurl --version
 
       - name: Build .env from Github Actions secrets
