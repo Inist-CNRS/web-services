@@ -44,8 +44,8 @@ def get_xml_from_sudoc(sudoc_id):
         return output_path
                 
 
-def download_pdf(res_file):
-    with open(res_file, "r") as f:
+def download_pdf(xml_file):
+    with open(xml_file, "r") as f:
         file = f.read()
         
     pdf_pattern = re.compile(r'target=\".*?\.pdf\"')
@@ -54,8 +54,9 @@ def download_pdf(res_file):
     if not any(matches):
         return None
     
-    output_pdf = res_file.replace("xml", "pdf")
-    url = "http://docnum.univ-lorraine.fr/public/" + matches[0].split('"')[1]
+    pdf_name = matches[0].split('"')[1]
+    output_pdf = os.path.join(OUTPUT_DIR, pdf_name)
+    url = "http://docnum.univ-lorraine.fr/public/" + pdf_name
     try:
         response = requests.get(url)
         if response.status_code!=200:
@@ -97,31 +98,21 @@ def validate_tei_hal(tei_hal_file):
     return True
 
 
-def modify_target_in_xml(file_path, sudoc_id):
-    with open(file_path, 'r', encoding='utf-8') as file:
-        content = file.read()
-
-    # use a regular expression to change a field
-    modified_content = re.sub(r'target=".*?\.pdf"', f'target="{sudoc_id}.pdf"', content)
-
-    with open(file_path, 'w', encoding='utf-8') as file:
-        file.write(modified_content)
-
-
-def create_zip(sudoc_id):
-    files_to_zip = [os.path.join(OUTPUT_DIR,f"{sudoc_id}.xml"), os.path.join(OUTPUT_DIR,f"{sudoc_id}.pdf")]
+def create_zip(sudoc_id, xml_file, pdf_file, log_file):
+    files_to_zip = [xml_file, pdf_file]
     output_zip = os.path.join(OUTPUT_DIR,f'{sudoc_id}.zip')
 
     try:
         with zipfile.ZipFile(output_zip, 'w') as archive:
             for fichier in files_to_zip:
                 archive.write(fichier, arcname=fichier.split('/')[-1])
+        os.remove(pdf_file)        
+        os.remove(xml_file)
+        
     except Exception as e:
         sys.stderr.write(f"Failed to zip xml + pdf: {e}\n")
-        
-    if os.path.exists(os.path.join(OUTPUT_DIR,f"{sudoc_id}.pdf")):
-        os.remove(os.path.join(OUTPUT_DIR,f"{sudoc_id}.pdf"))
-        os.remove(os.path.join(OUTPUT_DIR,f"{sudoc_id}.xml"))
+        os.remove(pdf_file)
+        write_error_in_logs(log_file, sudoc_id, "Erreur : Récuperation du fichier PDF impossible")
 
 
 def get_hal_zip_from_sudoc_id(sudoc_id, log_file):
@@ -133,17 +124,16 @@ def get_hal_zip_from_sudoc_id(sudoc_id, log_file):
             if tei_hal_file:
                 if validate_tei_hal(tei_hal_file):
                     input_file = os.path.join(TMP_DIR, f"tei_hal-{retrieve_id}.xml")
-                    res_file = os.path.join(OUTPUT_DIR, f'{sudoc_id}.xml')
+                    xml_file = os.path.join(OUTPUT_DIR, f'{sudoc_id}.xml')
                     with open(input_file, 'r') as f_in:
-                        with open(res_file, 'w') as f_out:
+                        with open(xml_file, 'w') as f_out:
                             f_out.write(f_in.read())
                             
-                    pdf_file = download_pdf(res_file)
+                    pdf_file = download_pdf(xml_file)
                     if not pdf_file:
                         write_error_in_logs(log_file, sudoc_id, "Erreur : Récuperation du fichier PDF impossible")
                     else:
-                        modify_target_in_xml(res_file, sudoc_id)
-                        create_zip(sudoc_id)
+                        create_zip(sudoc_id, xml_file, pdf_file, log_file)
                 else:
                     write_error_in_logs(log_file, sudoc_id, "Erreur : Fichier TEI généré invalide")
             else:
