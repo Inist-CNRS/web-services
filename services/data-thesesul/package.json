@@ -1,7 +1,7 @@
 {
   "private": true,
   "name": "ws-data-thesesul",
-  "version": "1.0.1",
+  "version": "1.1.0",
   "description": "Transforme des thèses UL en TEI pour import dans HAL",
   "repository": {
     "type": "git",
