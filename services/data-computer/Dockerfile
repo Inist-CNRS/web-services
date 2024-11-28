@@ -7,7 +7,6 @@ USER root
 RUN pip install \
     gensim==4.3.2 \
     spacy==3.6.1 \
-    spacy_lefff==0.5.1 \
     en-core-web-sm@https://github.com/explosion/spacy-models/releases/download/en_core_web_sm-3.6.0/en_core_web_sm-3.6.0.tar.gz \
     pandas==1.4.0 \
     lxml==4.7.1 \
@@ -15,11 +14,6 @@ RUN pip install \
     scipy==1.10.1 \
     prometheus-client==0.19.0
 
-# Install CURL to get spacy_lefff model and put it at the right place
-RUN apt update && apt -y install curl tar
-RUN curl -L -O https://github.com/sammous/spacy-lefff-model/releases/latest/download/model.tar.gz
-RUN mkdir /usr/local/lib/python3.9/site-packages/spacy_lefff/data/tagger
-RUN tar -xf model.tar.gz -C /usr/local/lib/python3.9/site-packages/spacy_lefff/data/tagger
 WORKDIR /app/public
 
 ENV NUMBA_CACHE_DIR=/tmp/numba_cache

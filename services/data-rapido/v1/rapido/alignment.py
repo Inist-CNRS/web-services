@@ -1,41 +1,90 @@
-import ast
 import re 
+from multiprocessing import Pool
+from flair.data import Sentence
 
 class alignWithText:
-    def __init__(self,dfAnnotations):
+    def __init__(self,dfAnnotations,tagger=False):
         self.dfAnnotations = dfAnnotations
+        if tagger:
+            self.tagger = tagger
         pass
 
-    def isAnnotationInText(self,text,page,dictionnary,idText):
+    def parr(self,obj):
+        newDic = {}
+        text = self.text
+        annot = obj[0][0]
+        trueAnnotation = obj[0][1]
+        if len(annot) < 5:
+            return newDic
+        if "(" in annot or ")" in annot or "+" in annot or "*" in annot or "?" in annot or "|" in annot:
+            return newDic
+        starts = [m.span()[0] for m in re.finditer(annot,text)]
+        if starts == []:
+            return newDic
+        newDic[(annot[1:-1],self.idText,self.page)] = [{"ID":id,"value":trueAnnotation,"start":starts} for id in obj[1]]
+        return newDic
+    
+    def isAnnotationInText(self,text,page,dictionnary,idText,lAnnot):
         text = " " + " ".join(text) + " "
-        text = text.lower()
+        self.text = text.lower()
+        self.idText = idText
+        self.page = page
         dic = dictionnary
-        for index, row in self.dfAnnotations.iterrows():
-            annotations = ast.literal_eval(row["Annotation"])
-            trueAnnotations = ast.literal_eval(row["trueAnnotation"])
-            for i,annot in enumerate(annotations):
-                annot = annot.lower()
-                annot = " " + annot + " "
-                if len(annot) < 5:
-                    continue
-                if "(" in annot:
-                    continue
-                starts = [m.span()[0] for m in re.finditer(annot,text)]
-                if starts == []:
-                    continue
-                for start in starts:
-                    inside = 0
-                    if (annot[1:-1],idText,page) in dic:
-                            for dico in dic[(annot[1:-1],idText,page)]:
-                                if dico["ID"] == row["ID"] and dico["value"] == trueAnnotations[i]:
-                                    inside = 1
-                            if inside == 0:
-                                dic[(annot[1:-1],idText,page)] += [{"ID":row["ID"], "value":trueAnnotations[i], "start":start}]
-                    else:
-                        dic[(annot[1:-1],idText,page)] = [{"ID":row["ID"], "value":trueAnnotations[i], "start":start}]
-                        start += 1
-
+        with Pool(5) as p:
+            r = p.map(self.parr,lAnnot)
+        for sDic in r:
+            if len(sDic) > 0:
+                key = [*sDic][0]
+                if key in dic:
+                    dic[key] += sDic[key]
+                else:
+                    dic[key] = sDic[key]
         return dic
+    
+    def isAnnotationInTextApp(self,text,page,dictionnary,idText,lAnnot, loc_remain_app):
+        txt = " "+" ".join(text)
+        sent= [x+" ." for x in txt.split(".")]
+        sentences = [Sentence(sent[i]) for i in range(len(sent))]
+        self.tagger.predict(sentences)
+        newDic = dictionnary
+        loc_remain = loc_remain_app
+        for sentence in sentences:
+            for entity in sentence.get_spans('ner'):
+                added = False
+                if entity.tag == "LOC":
+                    entity_txt = entity.text
+                    
+                    #######Fix temporaire erreur model "d' => "d ' "
+                    for err in ["d ' ","j ' ","l ' ", "D ' ","J ' ","L ' "]:
+                        if err in entity_txt:
+                            entity_txt = entity_txt.replace(err, err[0]+"' ")
+                    #######
+                            
+                    for obj in lAnnot:
+                        annot = obj[0][0]
+                        trueAnnotation = obj[0][1]
+                        if len(annot) < 5:
+                            continue
+                        if "(" in annot or ")" in annot or "+" in annot or "*" in annot or "?" in annot or "|" in annot:
+                            continue
+                        if annot.lower() == (" "+entity_txt+" ").lower():
+                            if (annot[1:-1],idText,page) in newDic:
+                                subDic0 = newDic[(annot[1:-1],idText,page)][0]
+                                if subDic0["value"]==trueAnnotation and sentence.to_original_text() not in subDic0["text"]:
+                                    for subDic in newDic[(annot[1:-1],idText,page)]:
+                                        subDic["text"].append(sentence.to_original_text())
+
+                            else:
+                                newDic[(annot[1:-1],idText,page)] = [{"ID":id,"value":trueAnnotation,"start":entity.start_pos,"text":[sentence.to_original_text()]} for id in obj[1]]
+                            added = True
+                            break
+                if not added:
+                    if (entity_txt,idText) in loc_remain:
+                        loc_remain[(entity_txt, idText)].append((page,sentence.to_original_text()))
+                    else:
+                        loc_remain[(entity_txt, idText)] = [(page,sentence.to_original_text())]
+
+        return newDic, loc_remain
 
 class postProcessing:
     def __init__(self,dfAnnotations,dic):
@@ -70,8 +119,8 @@ class postProcessing:
             lSubDic = []
             for subDic in dicList:
                 inside = False
-                ignoreList = ast.literal_eval(self.dfAnnotations[self.dfAnnotations["ID"] == subDic["ID"]].reset_index(drop=True)["Ignore"][0])
-                listIdRef = ast.literal_eval(self.dfAnnotations[self.dfAnnotations["ID"] == subDic["ID"]].reset_index(drop=True)["Annotation"][0])
+                ignoreList = self.dfAnnotations[self.dfAnnotations["ID"] == subDic["ID"]].reset_index(drop=True)["Ignore"][0]
+                listIdRef = self.dfAnnotations[self.dfAnnotations["ID"] == subDic["ID"]].reset_index(drop=True)["Annotation"][0]
                 if subDic["value"] in ignoreList:
                     for annot in listIdRef:
                         if annot != subDic["value"]:
@@ -132,7 +181,7 @@ class postProcessing:
         for key in self.dic:
             for subDic in self.dic[key]:
                 if subDic["ID"] not in listID:
-                    listIdRef = ast.literal_eval(self.dfAnnotations[self.dfAnnotations["ID"] == subDic["ID"]].reset_index(drop=True)["Annotation"][0])
+                    listIdRef = self.dfAnnotations[self.dfAnnotations["ID"] == subDic["ID"]].reset_index(drop=True)["Annotation"][0]
                     allLen += len(listIdRef)
                     for annot in listIdRef:
                         if annot in apparatitionDic:
@@ -144,7 +193,7 @@ class postProcessing:
             for subDic in self.dic[key]:
                 lenSubDic = len(subDic)
                 apparition = 0
-                listIdRef = ast.literal_eval(self.dfAnnotations[self.dfAnnotations["ID"] == subDic["ID"]].reset_index(drop=True)["Annotation"][0])
+                listIdRef = self.dfAnnotations[self.dfAnnotations["ID"] == subDic["ID"]].reset_index(drop=True)["Annotation"][0]
                 for annot in listIdRef:
                     if annot in apparatitionDic:
                         apparition += apparatitionDic[annot] 

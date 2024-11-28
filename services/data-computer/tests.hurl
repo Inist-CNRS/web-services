@@ -155,7 +155,6 @@ HTTP 200
 
 
 # TODO: ajouter les deux autres routes (v1GraphSegment, v1Lda)
-# TODO: ajouter la route rapido
 
 ##################################### group-by ######################
 POST {{host}}/v1/group-by

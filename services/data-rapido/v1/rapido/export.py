@@ -17,7 +17,7 @@ class exportJson:
                     break     
         return newSents
 
-    def toJson(self,dic,rmv,listText,listPage,idText,listTitle):
+    def toJson(self,dic,rmv,listText,listPage,idText,listTitle,loc_remain_app = False):
         siteDic = {"amathonte":"https://www.idref.fr/027523217","délos":"https://www.idref.fr/183212118","thasos":"https://www.idref.fr/182710335","delphes":"https://www.idref.fr/027322505","rome":"https://www.idref.fr/02724301X"}
         delimiter = "@"
         delimiterPersee = "@"
@@ -33,7 +33,6 @@ class exportJson:
         text = []
 
         title = " ".join(listTitle[0])
-
         for key in copyDIc:
             lid = []
             lconf = []
@@ -44,13 +43,18 @@ class exportJson:
                 lconf.append(subDic["confident"])
             for i,pg in enumerate(listPage):
                 if pg == key[2]:
-                    sents = [sentence + '.' for sentence in listText[i].split('.') if " "+key[0]+" " in sentence]
+                    if loc_remain_app:
+                        sents = copyDIc[key][0]["text"]
+                        for i,s in enumerate(sents):
+                            sents[i] = s.lower().replace(" "+key[0]+" "," **"+key[0]+"** ")
+                    else:
+                        sents = [sentence + '.' for sentence in listText[i].split('.') if " "+key[0]+" " in sentence]
 
-                    if key[0] in ["ferme","porte","base","fort"]:
-                        sents = self.posVerif(key[0],sents)
+                        if key[0] in ["ferme","porte","base","fort"]:
+                            sents = self.posVerif(key[0],sents)
 
-                    for i,s in enumerate(sents):
-                        sents[i] = s.replace(" "+key[0]+" "," **"+key[0]+"** ")
+                        for i,s in enumerate(sents):
+                            sents[i] = s.replace(" "+key[0]+" "," **"+key[0]+"** ")
                     ltext += sents
                     lpage += len(sents)*[str(key[2])]
             if key[2] == "Title":
@@ -118,6 +122,12 @@ class exportJson:
                 dejaUse.append(word[i])
                 listDic.append(subDic)
                 listDicPersee.append(subDicPersee)
+
+        if loc_remain_app:
+            listRemainPersee = []
+            for key in loc_remain_app:
+                listRemainPersee.append({"name":key[0],"occurences":[{"page":p,"text":t.replace(" "+key[0]+" "," **"+key[0]+"** ")} for p,t in loc_remain_app[key]],"notice":"None(apprentissage)","score":""})
+            listDicPersee += listRemainPersee
 
         jsonDic["sites"] = list(set(sites))
         jsonDic["entite"] = listDic

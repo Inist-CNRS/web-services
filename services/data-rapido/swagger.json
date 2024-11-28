@@ -1,0 +1,33 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "data-rapido - Applique un algorithme d'alignement avec idRef prévu dans le cadre du projet Rapido.",
+        "description": "Web service à destination du projet rapido. Ce web service prend en entrée un tar.gz comportant un dossier data incluant tout les documents xml à traiter. Il renvoit un json comportant les alignements que l'algorithme de la phase 1 ou le modél de la phase 2 a pu faire entre le texte et le référentiel idRef.",
+        "version": "1.0.1",
+        "termsOfService": "https://services.istex.fr/",
+        "contact": {
+            "name": "Inist-CNRS",
+            "url": "https://www.inist.fr/nous-contacter/"
+        }
+    },
+    "servers": [
+        {
+            "x-comment": "Will be automatically completed by the ezs server."
+        },
+        {
+            "url": "http://vptdmjobs.intra.inist.fr:49203/",
+            "description": "Latest version for production",
+            "x-profil": "Standard"
+        }
+    ],
+    "tags": [
+        {
+            "name": "data-rapido",
+            "description": "Applique un algorithme d'alignement avec idRef prévu dans le cadre du projet Rapido.",
+            "externalDocs": {
+                "description": "Plus de documentation",
+                "url": "https://github.com/inist-cnrs/web-services/tree/main/services/data-rapido"
+            }
+        }
+    ]
+}

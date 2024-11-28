@@ -1,0 +1,15 @@
+{
+    "environnement": {
+        "EZS_TITLE": "Applique un algorithme d'alignement avec idRef prévu dans le cadre du projet Rapido.",
+        "EZS_DESCRIPTION": "Web service à destination du projet rapido. Ce web service prend en entrée un tar.gz comportant un dossier data incluant tout les documents xml à traiter. Il renvoit un json comportant les alignements que l'algorithme a pu faire entre le texte et le référentiel idRef.",
+        "EZS_METRICS": true,
+        "EZS_CONCURRENCY": 2,
+        "EZS_CONTINUE_DELAY": 18000,
+        "EZS_PIPELINE_DELAY": 10800,
+        "EZS_NSHARDS": 32,
+        "EZS_CACHE": true,
+        "EZS_VERBOSE": true,
+        "NODE_OPTIONS": "--max_old_space_size=1024",
+        "NODE_ENV": "production"
+    }
+}
