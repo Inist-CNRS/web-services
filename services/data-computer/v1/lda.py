@@ -81,14 +81,12 @@ for line in sys.stdin:
     push_to_gateway('jobs-metrics.daf.intra.inist.fr', job=job_name, registry=registry)
 
 
-
-
 # following parameters depends of the size of the corpus : num_topics and num_iterations
 len_data = len(all_data)
-num_iterations= 1000
-if len_data < 400:
-    num_iterations = 500
-
+num_iterations= 500
+if len_data < 500:
+    num_iterations = 200
+minimum_probabilty = 1/nbTopic
 # training LDA
 texts = []
 index_without_value = []
@@ -102,25 +100,24 @@ for i in range(len_data):
             index_without_value.append(i)
     else:
         index_without_value.append(i)
-dictionary = corpora.Dictionary(texts) # Create a tf dictionary, but replace text by an id : [ [(id_token,numb_token),...] , [....] ]. The list represent docs of corpus
-dictionary.filter_extremes(no_below=3,no_above=0.5)
-corpus = [dictionary.doc2bow(text) for text in texts]
+
+bigram_model = models.Phrases(texts, min_count=3, threshold=1)
+bigram_texts = [bigram_model[doc] for doc in texts]
+dictionary = corpora.Dictionary(bigram_texts)  
+dictionary.filter_extremes(no_below=3, no_above=0.6)
+
+corpus = [dictionary.doc2bow(text) for text in bigram_texts] 
 
 try:
     lda_model = models.LdaModel(corpus,
                                 num_topics=nbTopic,
                                 id2word=dictionary,
-                                alpha="symmetric",
+                                alpha="asymetric",
                                 eta = "auto",
-                                minimum_probability=0.2,
-                                passes=1,
-                                iterations=1)
+                                minimum_probability=minimum_probabilty,
+                                passes=10,
+                                iterations=num_iterations)
     
-    for i in range(num_iterations):
-        lda_model.update(corpus)
-        c.inc()
-        push_to_gateway('jobs-metrics.daf.intra.inist.fr', job=job_name, registry=registry)
-
 except Exception as e :
     index_without_value = [i for i in range(len_data)]
 
@@ -146,7 +143,7 @@ for i in range(len_data):
             words = []
             words_weights = []
             for word, word_weight in lda_model.show_topic(topic_id):
-                words.append(word) 
+                words.append(word.replace("_"," ")) 
                 words_weights.append(str(word_weight))
             topic_info[f"topic_{topic_id + 1}"]["words"] = words
             topic_info[f"topic_{topic_id + 1}"]["words_weights"] = words_weights
