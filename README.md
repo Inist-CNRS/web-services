@@ -31,6 +31,7 @@ All contributing instructions are in [CONTRIBUTING](CONTRIBUTING.md).
 - [biblio-tools](./services/biblio-tools) [![Docker Pulls](https://img.shields.io/docker/pulls/cnrsinist/ws-biblio-tools.svg)](https://hub.docker.com/r/cnrsinist/ws-biblio-tools/)
 - [chem-ner](./services/chem-ner) [![Docker Pulls](https://img.shields.io/docker/pulls/cnrsinist/ws-chem-ner.svg)](https://hub.docker.com/r/cnrsinist/ws-chem-ner/)
 - [data-computer](./services/data-computer) [![Docker Pulls](https://img.shields.io/docker/pulls/cnrsinist/ws-data-computer.svg)](https://hub.docker.com/r/cnrsinist/ws-data-computer/)
+- [data-rapido](./services/data-rapido) [![Docker Pulls](https://img.shields.io/docker/pulls/cnrsinist/ws-data-rapido.svg)](https://hub.docker.com/r/cnrsinist/ws-data-rapido/)
 - [data-termsuite](./services/data-termsuite) [![Docker Pulls](https://img.shields.io/docker/pulls/cnrsinist/ws-data-termsuite.svg)](https://hub.docker.com/r/cnrsinist/ws-data-termsuite/)
 - [data-thesesul](./services/data-thesesul) [![Docker Pulls](https://img.shields.io/docker/pulls/cnrsinist/ws-data-thesesul.svg)](https://hub.docker.com/r/cnrsinist/ws-data-thesesul/)
 - [data-topcitation](./services/data-topcitation) [![Docker Pulls](https://img.shields.io/docker/pulls/cnrsinist/ws-data-topcitation.svg)](https://hub.docker.com/r/cnrsinist/ws-data-topcitation/)

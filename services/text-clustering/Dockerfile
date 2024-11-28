@@ -27,7 +27,7 @@ RUN pip install --no-build-isolation \
     --index-url https://download.pytorch.org/whl/cpu \
     --extra-index-url https://pypi.org/simple \
     sentence-transformers==2.2.2 \
-    umap-learn==0.5.5 \
+    huggingface_hub==0.23.2 \
     scikit-learn==1.4.1.post1 \
     prometheus-client==0.19.0
 

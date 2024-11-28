@@ -17,7 +17,7 @@ computing_token: jsonpath "$[0].value"
 [Asserts]
 variable "computing_token" exists
 
-POST {{host}}/v1/retrieve-tests
+POST {{host}}/v1/retrieve
 content-type: application/json
 [Options]
 delay: 10000
@@ -30,5 +30,7 @@ delay: 10000
 ```
 
 HTTP 200
-Content-Type: application/json
-`[{"value":"True"}]`
+Content-type: application/x-gzip
+[Asserts]
+bytes count > 3890000
+bytes count < 3892000
