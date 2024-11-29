@@ -16,8 +16,8 @@ c = Counter('documents', 'Number of documents processed', registry=registry)
 job_name='lda'
 
 
-# Get the index of "p" param (given by the user) and assign it to "nbTopic". 15 if not found
-nbTopic = sys.argv[sys.argv.index('-p') + 1] if '-p' in sys.argv else 15
+# Get the index of "p" param (given by the user) and assign it to "nbTopic". 6 if not found
+nbTopic = sys.argv[sys.argv.index('-p') + 1] if '-p' in sys.argv else 6
 
 nlp = spacy.load('en_core_web_sm', disable = ['parser','ner'])
 
@@ -84,9 +84,7 @@ for line in sys.stdin:
 # following parameters depends of the size of the corpus : num_topics and num_iterations
 len_data = len(all_data)
 num_iterations= 500
-if len_data < 500:
-    num_iterations = 200
-minimum_probabilty = 1/nbTopic
+minimum_probabilty = 1/float(nbTopic)
 # training LDA
 texts = []
 index_without_value = []
@@ -112,13 +110,15 @@ try:
     lda_model = models.LdaModel(corpus,
                                 num_topics=nbTopic,
                                 id2word=dictionary,
-                                alpha="asymetric",
-                                eta = "auto",
+                                alpha="auto",
+                                eta="auto",
                                 minimum_probability=minimum_probabilty,
                                 passes=10,
-                                iterations=num_iterations)
+                                iterations=num_iterations,
+                                random_state=42)
     
 except Exception as e :
+    sys.stderr.write(str(e))
     index_without_value = [i for i in range(len_data)]
 
 
@@ -157,12 +157,3 @@ for i in range(len_data):
             line["value"]["best_topic"]="n/a"
         sys.stdout.write(json.dumps(line))
         sys.stdout.write("\n")
-
-
-# #To see topics (to test it with a jsonl file)
-# sys.stdout.write(json.dumps(lda_model.print_topics()))
-
-# #Get coherence
-# cm = models.coherencemodel.CoherenceModel(model=lda_model, texts=texts, coherence='c_v')
-# cm.get_coherence()
-# exit()
