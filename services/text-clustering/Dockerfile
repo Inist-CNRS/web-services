@@ -29,6 +29,7 @@ RUN pip install --no-build-isolation \
     sentence-transformers==2.2.2 \
     huggingface_hub==0.23.2 \
     scikit-learn==1.4.1.post1 \
+    umap-learn==0.5.7 \
     prometheus-client==0.19.0
 
 # Declare files to copy in .dockerignore
