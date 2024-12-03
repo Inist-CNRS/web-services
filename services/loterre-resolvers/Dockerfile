@@ -25,8 +25,11 @@ WORKDIR /app/public
 
 # Install all node dependencies
 RUN npm install \
-    @ezs/storage@3.2.3 \
-    @ezs/xslt@1.3.31
+    @ezs/core@3.10.9 \
+    @ezs/analytics@2.3.4 \
+    @ezs/basics@2.8.1 \
+    @ezs/storage@3.2.5 \
+    @ezs/xslt@1.3.32
 
 # Declare files to copy in .dockerignore
 COPY --chown=daemon:daemon --from=dvcfiles /dvc/*.skos /app/data/
