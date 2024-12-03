@@ -2,16 +2,15 @@
 # -*- coding: utf-8 -*-
 import json
 import sys
+import requests
 from sentence_transformers import SentenceTransformer
 from sklearn.preprocessing import StandardScaler
-from sklearn.metrics.pairwise import cosine_distances
-from sklearn.decomposition import PCA
 from sklearn.cluster import HDBSCAN
+import umap
+import os
 
-# from prometheus_client import CollectorRegistry, Counter, push_to_gateway
-# registry = CollectorRegistry()
-# c = Counter('documents', 'Number of documents processed', registry=registry)
-# job_name='clustering'
+os.environ["TOKENIZERS_PARALLELISM"] = "false"
+model = SentenceTransformer('./v1/all-MiniLM-L6-v2')
 
 
 def center_reduce(matrix):
@@ -31,10 +30,9 @@ def center_reduce(matrix):
 
     return matrix_center_reduce
 
-model = SentenceTransformer('./v1/all-MiniLM-L6-v2')
 
 ## WS
-# Datas
+# Embedding
 all_data = []
 for line in sys.stdin:
     data=json.loads(line)
@@ -67,23 +65,21 @@ for i in range(len_data):
         indice_out_cluster.append(i)
 
 # Dimension reduction
-pca = PCA(n_components=0.95)
-embeddings = pca.fit_transform(center_reduce(texts))
-cosine_dist_matrix = cosine_distances(embeddings, embeddings)
+umap_model = umap.UMAP(n_neighbors=max(10, min(30,int(len_data/20))), n_components=2, metric='cosine',min_dist=0.0, random_state=42, n_jobs=1)
+reduced_embeddings = umap_model.fit_transform(texts)  # embeddings sont tes vecteurs de texte
 
 
 # HDBSCAN with scikit-learn
 clusterer = HDBSCAN(
     algorithm='auto',
-    metric='precomputed',
-    min_cluster_size=int(max(5,len_data/20)),
-    cluster_selection_epsilon = 0.05,
+    metric='euclidean',
+    min_cluster_size=2,
+    cluster_selection_epsilon = 0,
     min_samples=2,
     cluster_selection_method="eom",
     n_jobs=-1) 
 
-
-clusterer.fit(cosine_dist_matrix)
+clusterer.fit(reduced_embeddings)
 
 
 # extract infos
