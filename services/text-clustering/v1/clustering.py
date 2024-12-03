@@ -8,7 +8,9 @@ from sklearn.preprocessing import StandardScaler
 from sklearn.cluster import KMeans
 from sklearn.metrics import silhouette_score
 import umap
+import os
 
+os.environ["TOKENIZERS_PARALLELISM"] = "false"
 model = SentenceTransformer('./v1/all-MiniLM-L6-v2')
 n_keywords = 20
 nb_cluster = int(sys.argv[sys.argv.index('-p') + 1] if '-p' in sys.argv else 0)

@@ -5,11 +5,11 @@ import sys
 import requests
 from sentence_transformers import SentenceTransformer
 from sklearn.preprocessing import StandardScaler
-from sklearn.metrics.pairwise import cosine_distances
 from sklearn.cluster import HDBSCAN
 import umap
+import os
 
-
+os.environ["TOKENIZERS_PARALLELISM"] = "false"
 model = SentenceTransformer('./v1/all-MiniLM-L6-v2')
 
 
@@ -65,7 +65,7 @@ for i in range(len_data):
         indice_out_cluster.append(i)
 
 # Dimension reduction
-umap_model = umap.UMAP(n_neighbors=max(10, min(30,int(len_data/20))), n_components=2, metric='cosine', random_state=42, min_dist=0.0)
+umap_model = umap.UMAP(n_neighbors=max(10, min(30,int(len_data/20))), n_components=2, metric='cosine',min_dist=0.0, random_state=42, n_jobs=1)
 reduced_embeddings = umap_model.fit_transform(texts)  # embeddings sont tes vecteurs de texte
 
 
