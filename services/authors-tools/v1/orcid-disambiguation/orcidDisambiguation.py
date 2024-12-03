@@ -12,14 +12,15 @@ import plac
 def main(nameDepth = 20, worksDepth = 20):
     for line in sys.stdin:
         data = json.loads(line)
-        infos = data['value']
-        info = infos[0].copy()   
-        db = disambiguate(info,nameDepth=nameDepth, worksDepth=worksDepth )
-        result = db.disambiguation()
-        if len(result)>0:
-            data['value'] = result[0][0]
-        else:
-            data['value'] = "None"
+        res = []
+        for info in data['value'].copy():
+            db = disambiguate(info,nameDepth=nameDepth, worksDepth=worksDepth )
+            result = db.disambiguation()
+            if len(result)>0:
+                res.append(result[0][0])
+            else:
+                res.append("None")
+        data["value"] = res
         sys.stdout.write(json.dumps(data))
         sys.stdout.write('\n')
 

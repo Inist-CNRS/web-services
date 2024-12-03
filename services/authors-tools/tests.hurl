@@ -1,16 +1,24 @@
 POST {{host}}/v1/orcid-disambiguation/orcidDisambiguation?indent=true
 content-type: application/json
 [
-    {
-        "id":"1",
-        "value":[{"firstName" : "Rubén", "lastName" : "Vázquez-Cárdenas", "coAuthors" : ["Juan pablo Martínez-Pastor"]}]
-    }
+  {"id": 1,"value": [{"firstName": "Rubén","lastName": "Vázquez-Cárdenas","coAuthors": ["Juan pablo Martínez-Pastor"]},
+                     {"firstName": "Rubén","lastName": "Vázquez-Cárdenas","coAuthors": ["Juan pablo Martínez-Pastor"]}]},
+  {"id": 2,"value": [{"firstName": "Rubén","lastName": "Vázquez-Cárdenas","coAuthors": ["Juan pablo Martínez-Pastor"]}]}
 ]
 
 HTTP 200
 [{
-    "id": "1",
-    "value": "0000-0002-8416-869X"
+    "id": 1,
+    "value": [
+        "0000-0002-8416-869X",
+        "0000-0002-8416-869X"
+    ]
+},
+{
+    "id": 2,
+    "value": [
+        "0000-0002-8416-869X"
+    ]
 }]
 
 POST {{host}}/v1/first-name/gender?indent=true
