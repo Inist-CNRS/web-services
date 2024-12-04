@@ -4,15 +4,15 @@ import json
 import sys
 from sentence_transformers import SentenceTransformer
 
-similarity_thereshold = int(sys.argv[sys.argv.index('-p') + 1] if '-p' in sys.argv else 70)/100
-if similarity_thereshold < 0 :
-    similarity_thereshold=0.7
-if similarity_thereshold >1:
-    similarity_thereshold = 0.7
+similarity_threshold = int(sys.argv[sys.argv.index('-p') + 1] if '-p' in sys.argv else 70)/100
+if similarity_threshold < 0 :
+    similarity_threshold=0.7
+if similarity_threshold >1:
+    similarity_threshold = 0.7
 model = SentenceTransformer('./v1/all-MiniLM-L6-v2')
 
 
-def homogenise(phrases, similarity_matrix, similarity_thereshold=similarity_thereshold):
+def homogenise(phrases, similarity_matrix, similarity_threshold=similarity_threshold):
     output = []
     already_homogenise = {}
     for i in range(similarity_matrix.shape[0]):
@@ -22,7 +22,7 @@ def homogenise(phrases, similarity_matrix, similarity_thereshold=similarity_ther
                 break
             similarity_value = similarity_matrix[i, j].item()
                 
-            if similarity_value < similarity_thereshold:
+            if similarity_value < similarity_threshold:
                 continue
             else:
                 # Sans ce passage : imaginons nous avons 3 documents a b c
