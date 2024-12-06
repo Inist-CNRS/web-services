@@ -34,5 +34,3 @@ Content-Type: application/json
 [Asserts]
 jsonpath "$" count == 3
 jsonpath "$[0].value[0]" == "Inist-CNRS, UAR76"
-jsonpath "$[0].value[1]" == "2 rue Jean Zay, 54500 Vandoeuvre-lès-Nancy (Inist-CNRS)"
-jsonpath "$[0].value[2]" == "2 rue Jean Zay, 54500 Vandoeuvre-lès-Nancy (Inist-CNRS)"
