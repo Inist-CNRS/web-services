@@ -1,0 +1,33 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "data-homogenise - Homogénéise les valeurs d'un champs.",
+        "description": "Parcourt l'ensemble des valeurs d'un champs et regroupe les valeurs sémantiquement ou syntaxiquement très proches. La première valeur rencontrée considérée comme proche est prise comme référence et les prochaines occurences seront remplacées par cette première valeur.",
+        "version": "0.0.0",
+        "termsOfService": "https://services.istex.fr/",
+        "contact": {
+            "name": "Inist-CNRS",
+            "url": "https://www.inist.fr/nous-contacter/"
+        }
+    },
+    "servers": [
+        {
+            "x-comment": "Will be automatically completed by the ezs server."
+        },
+        {
+            "url": "http://vptdmjobs.intra.inist.fr:49206/",
+            "description": "Latest version for production",
+            "#DISABLED#x-profil": "Standard"
+        }
+    ],
+    "tags": [
+        {
+            "name": "data-homogenise",
+            "description": "Homogénéise les valeurs d'un champs.",
+            "externalDocs": {
+                "description": "Plus de documentation",
+                "url": "https://github.com/inist-cnrs/web-services/tree/main/services/data-homogenise"
+            }
+        }
+    ]
+}
