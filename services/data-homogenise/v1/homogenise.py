@@ -5,9 +5,9 @@ import sys
 from sentence_transformers import SentenceTransformer
 
 similarity_threshold = int(sys.argv[sys.argv.index('-p') + 1] if '-p' in sys.argv else 70)/100
-if similarity_threshold < 0 :
+if similarity_threshold < 0:
     similarity_threshold=0.7
-if similarity_threshold >1:
+if similarity_threshold > 1:
     similarity_threshold = 0.7
 model = SentenceTransformer('./v1/all-MiniLM-L6-v2')
 

@@ -2,7 +2,7 @@
   "private": true,
   "name": "ws-data-homogenise",
   "version": "0.0.0",
-  "description": "Homogénéise les valeurs d'un champs.",
+  "description": "Homogénéise les valeurs d'un champ",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Inist-CNRS/web-services.git"
