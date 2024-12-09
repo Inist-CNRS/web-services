@@ -49,6 +49,7 @@
     "services/biblio-tools",
     "services/chem-ner",
     "services/data-computer",
+    "services/data-homogenise",
     "services/data-rapido",
     "services/data-termsuite",
     "services/data-thesesul",
