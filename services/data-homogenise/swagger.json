@@ -17,7 +17,7 @@
         {
             "url": "http://vptdmjobs.intra.inist.fr:49206/",
             "description": "Latest version for production",
-            "#DISABLED#x-profil": "Standard"
+            "x-profil": "Standard"
         }
     ],
     "tags": [
