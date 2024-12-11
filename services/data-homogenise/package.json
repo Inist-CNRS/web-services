@@ -1,7 +1,7 @@
 {
   "private": true,
   "name": "ws-data-homogenise",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "description": "Homogénéise les valeurs d'un champ",
   "repository": {
     "type": "git",
@@ -31,6 +31,6 @@
     "build": ". ./.env 2> /dev/null; DOCKER_BUILDKIT=1 docker build -t cnrsinist/${npm_package_name}:${npm_package_version} --secret id=webdav_login,env=WEBDAV_LOGIN --secret id=webdav_password,env=WEBDAV_PASSWORD --secret id=webdav_url,env=WEBDAV_URL .",
     "start": "docker run --rm -p 31976:31976 cnrsinist/${npm_package_name}:${npm_package_version}",
     "publish": "docker push cnrsinist/${npm_package_name}:${npm_package_version}"
-},
+  },
   "avoid-testing": false
 }
