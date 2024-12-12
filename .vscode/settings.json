@@ -12,8 +12,11 @@
     "cSpell.language": "en,fr-FR",
     "cSpell.words": [
         "Bigramme",
+        "BUILDKIT",
         "cnrs",
+        "cnrsinist",
         "concat",
+        "Décommenter",
         "foaf",
         "inist",
         "Lodex",
@@ -22,10 +25,14 @@
         "openalex",
         "openapi",
         "prometheus",
+        "rnsr",
         "skos",
         "stopwords",
         "stylesheet",
+        "teeft",
         "ungroup",
-        "uuid"
+        "uuid",
+        "webdav",
+        "webdavs"
     ]
 }
