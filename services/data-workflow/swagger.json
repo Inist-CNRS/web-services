@@ -3,7 +3,7 @@
     "info": {
         "title": "data-workflow - Enchaînement asynchrone de traitements",
         "description": "Les workflows permettent de traiter des fichiers corpus compressés en appelant des webservices d'enrichissement par document de manière asynchrone.",
-        "version": "1.5.1",
+        "version": "1.6.0",
         "termsOfService": "https://services.istex.fr/",
         "contact": {
             "name": "Inist-CNRS",
