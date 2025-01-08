@@ -7,7 +7,7 @@ import os
 import sys
 import json
 
-api_token = os.getenv('CROSSREF_API_KEY')
+api_token = os.getenv("CROSSREF_API_KEY")
 headers = {
     "Crossref-Plus-API-Token": api_token
 }
@@ -15,8 +15,9 @@ session = LimiterSession(per_second=10)
 session_pdf = LimiterSession(per_second=10)
 
 # get a list of retracted DOIs
-with open('v1/annulled.pickle', 'rb') as file:
+with open("v1/annulled.pickle", "rb") as file:
     retracted_doi = pickle.load(file)
+
 
 def remove_accents(text):
     
@@ -36,6 +37,7 @@ def remove_accents(text):
     text_with_no_accent = re.sub("[\u0300-\u036f]", "", normalized_text)
     return text_with_no_accent
 
+
 def uniformize(text):
     
     """
@@ -51,7 +53,7 @@ def uniformize(text):
     text = remove_accents(text) #if text is not a string, it's return ""
 
     # remove punctuation
-    text = "".join(char if char.isalpha() else ' ' for char in text)
+    text = "".join(char if char.isalpha() else " " for char in text)
 
     return " ".join(text.lower().split())
 
@@ -80,6 +82,64 @@ def find_doi(text):
         return ""
 
 
+# specially designed functions for crossref API
+def get_title_authors_doi_source_date(message):
+    
+    """
+    Get the title, first author's given name, first author's family name, and DOI from the input message.
+    Objective : For a response to crossref API, this function is used to get informations from this response.
+    
+    Args:
+        message (dict): The input message containing information about the publication.
+    
+    Returns:
+        dict: A dictionary containing the title, first author's given name, first author's family name, and DOI.
+    """
+    
+    title = message["title"][0] if "title" in message else ""
+    doi = message["DOI"] if "DOI" in message else ""
+    try:
+        first_author_name = message["author"][0]["family"]
+    except:
+        first_author_name = ""
+    try:
+        first_author_given = message["author"][0]["given"]
+    except:
+        first_author_given = ""
+    try:
+        date = str(message["published"]["date-parts"][0][0])
+    except:
+        try:
+            date = str(message["published-print"]["date-parts"][0][0])
+        except:
+            date = ""
+    
+    source = {}
+    try :
+        source["source-long"] = message["container-title"][0]
+    except:
+        try:
+            source["source-long"] = message["event"]["name"]
+        except:
+            source["source-long"] = ""
+    try :
+        source["source-short"] = message["short-container-title"][0]
+    except:
+        try:
+            source["source-short"] = message["event"]["acronym"]
+        except:
+            source["source-short"] = ""
+
+    return {
+        "title": title,
+        "first_author_given": first_author_given,
+        "first_author_name": first_author_name,
+        "doi": doi,
+        "date": str(date),
+        "source": source
+        }
+    
+
 def verify_doi(doi, headers=headers):
     
     """
@@ -99,53 +159,17 @@ def verify_doi(doi, headers=headers):
         response = session.get(url, headers=headers)
         status_code = response.status_code
         if status_code != 200 :
-            return (status_code,{'title': "", 'first_author_given': "", 'first_author_name': "", 'doi': ""})
+            return (status_code, None)
         message = response.json()["message"]
-        others_biblio_info = {}
-        others_biblio_info["title"] = message["title"][0] if 'title' in message else ""
-        others_biblio_info["doi"] = message['DOI'] if "DOI" in message else ""
-        try:
-            others_biblio_info["first_author_name"] = message['author'][0]['family']
-        except:
-            others_biblio_info["first_author_name"] = ""
-        try:
-            others_biblio_info["first_author_given"] = message['author'][0]['given']
-        except:
-            others_biblio_info["first_author_given"] = ""
+        others_biblio_info = get_title_authors_doi_source_date(message)
             
         return (response.status_code , others_biblio_info)
 
     except:
-        return (503,{'title': "", 'first_author_given': "", 'first_author_name': "", 'doi': ""}) # if there is an unexpected error from crossref
+        return (503, None) # if there is an unexpected error from crossref
 
 
-# specially designed functions for crossref API
-def get_title_authors_doi(message):
-    
-    """
-    Get the title, first author's given name, first author's family name, and DOI from the input message.
-    Objective : For a response to crossref API, this function is used to get informations from this response.
-    
-    Args:
-        message (dict): The input message containing information about the publication.
-    
-    Returns:
-        dict: A dictionary containing the title, first author's given name, first author's family name, and DOI.
-    """
-    
-    title = message['title'][0] if 'title' in message else ""
-    doi = message['DOI'] if 'DOI' in message else ""
-    try:
-        first_author_name = message['author'][0]['family']
-    except:
-        first_author_name = ""
-    try:
-        first_author_given = message['author'][0]['given']
-    except:
-        first_author_given = ""
-    return {'title': title, 'first_author_given': first_author_given, 'first_author_name': first_author_name, 'doi': doi}
-
-def remove_retracted_prefix(text):
+def clean_crossref_title(text):
     
     """
     Function to delete "retracted" informations from crossref title
@@ -158,12 +182,16 @@ def remove_retracted_prefix(text):
     Returns:
         text: the title without retracted informations
     """
-    
     pattern = r'^(RETRACT(?:ED)?(?:ION)?\s?(?:ARTICLE)?\s?:\s?)'
     match = re.match(pattern, text, flags=re.IGNORECASE)
     if match:
         text = re.sub(pattern, '', text, count=1, flags=re.IGNORECASE)
+        
+    if "</" in text:
+        text = re.sub(r'<[^>]*>', '', text)
+        
     return text.strip()
+
 
 # Functions that compare informations between the Crossref metadata and 
 # the bibliographic reference given.
@@ -189,16 +217,32 @@ def compare_pubinfo_refbiblio(item,ref_biblio):
             True if it's match with the doi, else false + empty
         string
     """
-    
+    items_score = 0
+    # Title
+    title_score = fuzz.partial_ratio(uniformize(clean_crossref_title(item["title"])), ref_biblio)/100
+
+    if title_score > 0.9:
+        items_score += 1
+
     # Check first author
-    if uniformize(item['first_author_name']) not in ref_biblio:
-        return False, ""
-    if fuzz.partial_ratio(uniformize(remove_retracted_prefix(item['title'])), ref_biblio)<90:
-        return False, ""
-    return True, item['doi']
+    first_author = uniformize(item["first_author_name"])
+    if first_author and first_author in ref_biblio:
+        items_score +=1
+    
+    # Date
+    if item["date"] and item["date"] in ref_biblio:
+        items_score +=1
+        
+    # Source
+    if fuzz.partial_ratio(uniformize(item["source"]["source-short"]), ref_biblio)/100 > 0.8 or fuzz.partial_ratio(uniformize(item["source"]["source-short"]), ref_biblio)/100 > 0.8 :
+        items_score +=1
+
+    return items_score, title_score, item["doi"]
 
 
-def verify_biblio(ref_biblio, headers=headers):
+# This is the function to update if you want stronger or weaker criteria
+# For now, criteria is 2 or more matches on informations on title, authors, date and source except if it is date and source.
+def verify_biblio_without_doi(ref_biblio, headers=headers):
 
     """
     check with crossref api if a biblio ref is correct.
@@ -213,26 +257,49 @@ def verify_biblio(ref_biblio, headers=headers):
     """
     
     url = f'https://api.crossref.org/works?query.bibliographic="{ref_biblio}"&rows=5' #take only the 5 first results
+    hallucinated = False
+    
     try:
         response = session.get(url, headers=headers)
         data = response.json()
         items = data["message"]["items"] #to check
+        
         for item in items:
-            item_info = get_title_authors_doi(item)
-            # If no authors name or title in Crossref, return "not_found"
-            if item_info['first_author_name'] == "" or item_info['title']=="":
-                continue
-            # compare pub_info with ref_biblio
-            match_item, doi = compare_pubinfo_refbiblio(item_info,ref_biblio)
-            if match_item:
-                if doi in retracted_doi:
-                    return "retracted",doi
-                return "found",doi
+            item_info = get_title_authors_doi_source_date(item)
             
-        return "not_found",""
+            # compare pub_info with ref_biblio
+            match_items_score, title_score, doi = compare_pubinfo_refbiblio(item_info, ref_biblio)
+
+            # Matches criteria when there is no doi in the reference
+            if match_items_score >= 3:
+                return "found", doi
+            
+            elif match_items_score < 2:
+
+                if title_score > 0.9:
+                    hallucinated = True
+                continue
+            
+            # here match_item_score == 2, we need title OR soft critera on title :
+            else:
+                ## if title match found is returned
+                ## If title doesn't match, we need at least a weak criteria on title
+
+                if title_score < 0.75:
+                    continue
+                
+                else:
+                    return "found", doi
+        
+        if hallucinated:
+            return "hallucinated", ""
+        
+        else:
+            return "not_found", ""
+        
     except Exception as e:
         sys.stderr.write("Error in verify_biblio function : "+str(e)+"\n")
-        return "error_service",""
+        return "error_service", ""
 
 
 def biblio_ref(ref_biblio,retracted_doi=retracted_doi):
@@ -255,25 +322,30 @@ def biblio_ref(ref_biblio,retracted_doi=retracted_doi):
         ## If DOI exists
         if crossref_status_code==200:
             status = "found"
-                            
-            ### can be hallucinated
-            if len(doi)*1.5 < len(ref_biblio): 
-                is_not_hallucinated,doi = compare_pubinfo_refbiblio(others_biblio_info,ref_biblio)
-                if not is_not_hallucinated: # oh really dude
-                
-                    return {"doi":"","status": "hallucinated"}
-        
+            
             ### Can be retracted
             if doi in retracted_doi:
-                status = "retracted"
+                return {"doi":doi, "status": "retracted"}
+                  
+            ### can be hallucinated
+            if len(doi)*1.5 < len(ref_biblio): 
+                match_items_score, title_score, doi = compare_pubinfo_refbiblio(others_biblio_info,ref_biblio)
+                
+                if match_items_score < 2:
+                    return {"doi":"","status": "hallucinated"}
                 
             return {"doi":doi, "status": status}
 
 
         
-        ### If DOI doesn't exist
+        ## If DOI doesn't exist
         elif crossref_status_code==404:
-            status,doi = verify_biblio(ref_biblio)
+            status, doi = verify_biblio_without_doi(ref_biblio)
+            
+            ### Can be retracted
+            if doi in retracted_doi:
+                return {"doi":doi, "status": "retracted"}
+            
             return {"doi":doi, "status": status}
                     
         ### for others errors
@@ -283,5 +355,10 @@ def biblio_ref(ref_biblio,retracted_doi=retracted_doi):
 
     # second case : no doi is found
     else:
-        status,doi = verify_biblio(ref_biblio)
+        status,doi = verify_biblio_without_doi(ref_biblio)
+        
+        ### Can be retracted
+        if doi in retracted_doi:
+            return {"doi":doi, "status": "retracted"}
+            
         return {"doi":doi, "status": status}
