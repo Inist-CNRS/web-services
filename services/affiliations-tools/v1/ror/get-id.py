@@ -102,36 +102,38 @@ def api_ror(affiliation):
 def filter_api(json, city=None, short=False):
     if json == "Error affiliation" or json == "Error":
         return "Error affiliation"    
+    if json and "items" in json:
+        for item in json["items"]:
+            id_ror = item["organization"]["id"]
+            score_similarity = item["score"]
+            name = item["organization"]["name"]
+            type = item["organization"]["types"]
+            name_geonames = item["organization"]["addresses"][0]["geonames_city"]["city"]
+            id_geonames = item["organization"]["addresses"][0]["geonames_city"]["id"]
+            json_dict = {
+                "id_ror": id_ror,
+                "score": score_similarity,
+                "name": name,
+                "type": type,
+                "name_geonames": name_geonames,
+                "id_geonames": id_geonames,
+            }
+            if city:
+                if item["organization"]["addresses"][0]["city"].lower() == city.lower():
+                    return json_dict
+                elif short:
+                    return json_dict
+            elif short == True:
+                return json_dict
+            else:
+                return "no-city"
 
-    for item in json["items"]:
-        id_ror = item["organization"]["id"]
-        score_similarity = item["score"]
-        name = item["organization"]["name"]
-        type = item["organization"]["types"]
-        name_geonames = item["organization"]["addresses"][0]["geonames_city"]["city"]
-        id_geonames = item["organization"]["addresses"][0]["geonames_city"]["id"]
-        json_dict = {
-            "id_ror": id_ror,
-            "score": score_similarity,
-            "name": name,
-            "type": type,
-            "name_geonames": name_geonames,
-            "id_geonames": id_geonames,
-        }
         if city:
-            if item["organization"]["addresses"][0]["city"].lower() == city.lower():
-                return json_dict
-            elif short:
-                return json_dict
-        elif short == True:
-            return json_dict
-        else:
-            return "no-city"
+            return "No match found"
 
-    if city:
-        return "No match found"
-
-    return None
+        return None
+    else:
+        return "Unexpected data"
 
 
 def main():
