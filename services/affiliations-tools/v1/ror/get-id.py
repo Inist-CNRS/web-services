@@ -73,7 +73,7 @@ def request(name):
 
     url = f"https://api.ror.org/organizations?affiliation={name.replace(' ', '%20')}"
     if url == "https://api.ror.org/organizations?affiliation=n/a":
-        return "Error affiliation"
+        return "Error"
 
     try:
         response = requests.get(url, headers={"Accept": "application/json"})
@@ -100,8 +100,9 @@ def api_ror(affiliation):
 
 # Filtre la sortie de l'API ROR pour ne récupérer que ce qui intéresse
 def filter_api(json, city=None, short=False):
-    if json == "Error affiliation" or json == "Error":
-        return "Error affiliation"    
+    if json == "Error":
+        return {"status": "Unexpected data"}
+    
     if json and "items" in json:
         for item in json["items"]:
             id_ror = item["organization"]["id"]
@@ -111,6 +112,7 @@ def filter_api(json, city=None, short=False):
             name_geonames = item["organization"]["addresses"][0]["geonames_city"]["city"]
             id_geonames = item["organization"]["addresses"][0]["geonames_city"]["id"]
             json_dict = {
+                "status" : "Found",
                 "id_ror": id_ror,
                 "score": score_similarity,
                 "name": name,
@@ -126,14 +128,18 @@ def filter_api(json, city=None, short=False):
             elif short == True:
                 return json_dict
             else:
-                return "no-city"
+                json_dict = {"status": "No city found"}
+                return json_dict
 
         if city:
-            return "No match found"
+            json_dict = {"status": "No match found"}
+            return json_dict
 
         return None
+
     else:
-        return "Unexpected data"
+        json_dict = {"status": "Unexpected data"}
+        return json_dict
 
 
 def main():
@@ -153,10 +159,13 @@ def main():
                     data["value"] = filter_affiliation
 
                 else:
-                    data["value"] = "No match found"
+                    # Par exemple : "NSF’s National Optical-Infrared Astronomy Research Laboratory, 950 North Cherry Avenue, Paris, AZ 85719, USA"
+                    # Boucle "sécurité" > "filter_api"
+                    data["value"] = {"status": "No match found"}
 
             else:
-                data["value"] = "No house found"
+                 # Boucle "sécurité" > "extract_house" 
+                data["value"] = {"status": "No house found"}
 
         # Boucle pour l'affiliation courte (simple, on envoie tout)
         else:
