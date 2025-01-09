@@ -573,6 +573,7 @@ HTTP 200
 [{
     "id": 1,
     "value": {
+        "status": "Found",
         "id_ror": "https://ror.org/0323bey33",
         "score": 0.79,
         "name": "Institut Lumière Matière",
@@ -586,6 +587,7 @@ HTTP 200
 {
     "id": 2,
     "value": {
+        "status": "Found",
         "id_ror": "https://ror.org/03zmsge54",
         "score": 1,
         "name": "NSF’s NOIRLab",
@@ -598,5 +600,7 @@ HTTP 200
 },
 {
     "id": 3,
-    "value": "No match found"
+    "value": {
+        "status": "No match found"
+    }
 }]
