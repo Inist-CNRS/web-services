@@ -1,15 +1,38 @@
 import re 
 from multiprocessing import Pool
 from flair.data import Sentence
+import sys
 
 class alignWithText:
+    '''
+    Class to align text with idRef notices for phase 1 and phase 2 of RAPIDO project.
+    '''
     def __init__(self,dfAnnotations,tagger=False):
+        '''
+        Constructs all the necessary attributes.
+
+        Parameters
+        ----------
+            dfAnnotations : dataframe
+                dataframe containing all informations about the notices to align with
+            tagger : false or flair tagger
+                flair tagger (Default is False)
+        '''
         self.dfAnnotations = dfAnnotations
         if tagger:
             self.tagger = tagger
         pass
 
     def parr(self,obj):
+        '''
+        Function to align notices with a text for phase 1
+        Return a dictionnary where results are stored.
+
+        Parameters
+        ----------
+            obj: list of list
+                list of list from lAnnot in isAnnotationInText function
+        '''
         newDic = {}
         text = self.text
         annot = obj[0][0]
@@ -25,6 +48,25 @@ class alignWithText:
         return newDic
     
     def isAnnotationInText(self,text,page,dictionnary,idText,lAnnot):
+        '''
+        Function to parallelize phase 1 algorithme. Parallelization is applied to the notices.
+        Return a dictionnary where results are stored.
+
+        Parameters
+        ----------
+            obj: list of list
+                list of list from lAnnot in isAnnotationInText function
+            text : list of str
+                list of tokenized sentences
+            page : str
+                page of the sentences
+            dictionnary : dic
+                dictionnary to store and return the result
+            idText : str
+                id of the text where sentence is from
+            lAnnot : list
+                list of the notices made up to speed up computation 
+        '''
         text = " " + " ".join(text) + " "
         self.text = text.lower()
         self.idText = idText
@@ -42,6 +84,25 @@ class alignWithText:
         return dic
     
     def isAnnotationInTextApp(self,text,page,dictionnary,idText,lAnnot, loc_remain_app):
+        '''
+        Function to align notices with a text for phase 2 using a ML model trained on custom datas.
+        Return a dictionnary where results are stored.
+
+        Parameters
+        ----------
+            text : list of str
+                list of tokenized sentences
+            page : str
+                page of the sentences
+            dictionnary : dic
+                dictionnary to store and return the result
+            idText : str
+                id of the text where sentence is from
+            lAnnot : list
+                list of the notices made up to speed up computation 
+            loc_remain_app : dic
+                dictionnary to store remaining entity detected that where not aligned
+        '''
         txt = " "+" ".join(text)
         sent= [x+" ." for x in txt.split(".")]
         sentences = [Sentence(sent[i]) for i in range(len(sent))]
@@ -53,6 +114,7 @@ class alignWithText:
                 added = False
                 if entity.tag == "LOC":
                     entity_txt = entity.text
+                    entity_score = entity.score
                     
                     #######Fix temporaire erreur model "d' => "d ' "
                     for err in ["d ' ","j ' ","l ' ", "D ' ","J ' ","L ' "]:
@@ -73,25 +135,44 @@ class alignWithText:
                                 if subDic0["value"]==trueAnnotation and sentence.to_original_text() not in subDic0["text"]:
                                     for subDic in newDic[(annot[1:-1],idText,page)]:
                                         subDic["text"].append(sentence.to_original_text())
+                                        subDic["entity_score"].append(entity_score)
 
                             else:
-                                newDic[(annot[1:-1],idText,page)] = [{"ID":id,"value":trueAnnotation,"start":entity.start_pos,"text":[sentence.to_original_text()]} for id in obj[1]]
+                                newDic[(annot[1:-1],idText,page)] = [{"ID":id,"value":trueAnnotation,"start":entity.start_pos,
+                                                                      "text":[sentence.to_original_text()], "entity_score":[entity_score]} for id in obj[1]]
                             added = True
                             break
                 if not added:
                     if (entity_txt,idText) in loc_remain:
-                        loc_remain[(entity_txt, idText)].append((page,sentence.to_original_text()))
+                        loc_remain[(entity_txt, idText)].append((page,sentence.to_original_text(), entity_score))
                     else:
-                        loc_remain[(entity_txt, idText)] = [(page,sentence.to_original_text())]
+                        loc_remain[(entity_txt, idText)] = [(page, sentence.to_original_text(), entity_score)]
 
         return newDic, loc_remain
 
 class postProcessing:
+    '''
+    Class to clean up and add more informations on the datas after the alignment step.
+    '''
     def __init__(self,dfAnnotations,dic):
+        '''
+        Constructs all the necessary attributes.
+
+        Parameters
+        ----------
+            dfAnnotations : dataframe 
+                dataframe containing all informations about the notices to align with
+            dic : dic
+                dic containing aligned datas
+        '''
         self.dfAnnotations = dfAnnotations
         self.dic = dic
 
     def removeDuplicate(self):
+        '''
+        Remove entity detected and aligned if they are also part of a bigger entity.
+        For example "Temple of Athena" would be removed if "Temple of Athena in Sparte" was also detected and aligned. 
+        '''
         popList = []
         for key1 in self.dic:
             for key2 in self.dic:
@@ -106,6 +187,9 @@ class postProcessing:
             self.dic.pop(pop)
 
     def removeIgnore(self):
+        '''
+        Remove entity detected and aligned if they are in the ignored words list.
+        '''
         allWord = []
         for key in self.dic:
             dicList = self.dic[key]
@@ -140,6 +224,10 @@ class postProcessing:
         self.rmv = rmvKey
 
     def desambiguisation(self):
+        '''
+        Desambiguate and make a choice if an entity got multiples notices align with her.
+        Based mainly on whether or not other words from the notices appear in the text.
+        '''
         finalDic = {}
         
         pageDic = {}
@@ -174,32 +262,30 @@ class postProcessing:
 
         self.dic = finalDic.copy()
 
-    def confident(self):
-        listID = []
-        allLen = 0
-        apparatitionDic = {}
+    def score(self,dicAnnot):
+        '''
+        Give a score to an alignment.
+        Based mainly on whether or not other words in the notice appear, and the apparition frequency of the aligned word.
+
+        Parameters
+        ----------
+            dicAnnot : dic
+                dic of the notices made up to speed up score computation
+        '''
+        countIdRef = {}
+        already_in = {}
         for key in self.dic:
-            for subDic in self.dic[key]:
-                if subDic["ID"] not in listID:
-                    listIdRef = self.dfAnnotations[self.dfAnnotations["ID"] == subDic["ID"]].reset_index(drop=True)["Annotation"][0]
-                    allLen += len(listIdRef)
-                    for annot in listIdRef:
-                        if annot in apparatitionDic:
-                            apparatitionDic[annot] += 1
-                        else:
-                            apparatitionDic[annot] = 1    
-                    listID.append(subDic["ID"])
-        for key in self.dic:
-            for subDic in self.dic[key]:
-                lenSubDic = len(subDic)
-                apparition = 0
-                listIdRef = self.dfAnnotations[self.dfAnnotations["ID"] == subDic["ID"]].reset_index(drop=True)["Annotation"][0]
-                for annot in listIdRef:
-                    if annot in apparatitionDic:
-                        apparition += apparatitionDic[annot] 
-                if (apparition - lenSubDic + 1 ) <= len(listIdRef):
-                    subDic["confident"] = "PP("+str(0)+")"
-                elif (apparition - lenSubDic + 1 ) < 2*len(listIdRef):
-                    subDic["confident"] = "P("+str(apparition - lenSubDic + 1 - len(listIdRef))+")"
+            for value in self.dic[key]:
+                if value["ID"] in countIdRef:
+                    if key[0] not in already_in[value["ID"]]:
+                        countIdRef[value["ID"]] += 1
+                        already_in[value["ID"]].append(key[0])
                 else:
-                    subDic["confident"] = "TP("+str(apparition - lenSubDic + 1 - len(listIdRef))+")"
+                    countIdRef[value["ID"]] = 1
+                    already_in[value["ID"]] = [key[0]]
+
+        for key in self.dic:
+            for subDic in self.dic[key]:
+                listIdRef = self.dfAnnotations[self.dfAnnotations["ID"] == subDic["ID"]].reset_index(drop=True)["Annotation"][0]
+                score = 0.7*((countIdRef[subDic["ID"]]/len(listIdRef))**(0.25))+0.3*((1/len(dicAnnot[key[0]]))**(0.5))
+                subDic["score"] = score
