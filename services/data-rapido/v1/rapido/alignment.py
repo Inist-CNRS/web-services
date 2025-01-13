@@ -114,7 +114,7 @@ class alignWithText:
                 added = False
                 if entity.tag == "LOC":
                     entity_txt = entity.text
-                    entity_score = entity.score
+                    entity_score = '%.3f' % entity.score
                     
                     #######Fix temporaire erreur model "d' => "d ' "
                     for err in ["d ' ","j ' ","l ' ", "D ' ","J ' ","L ' "]:
@@ -288,4 +288,4 @@ class postProcessing:
             for subDic in self.dic[key]:
                 listIdRef = self.dfAnnotations[self.dfAnnotations["ID"] == subDic["ID"]].reset_index(drop=True)["Annotation"][0]
                 score = 0.7*((countIdRef[subDic["ID"]]/len(listIdRef))**(0.25))+0.3*((1/len(dicAnnot[key[0]]))**(0.5))
-                subDic["score"] = score
+                subDic["score"] = '%.3f' % score

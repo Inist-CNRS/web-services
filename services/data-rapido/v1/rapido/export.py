@@ -153,7 +153,7 @@ class exportJson:
                         subDicPersee["occurences"].append({"page" : page[i][k], "text" : text[i][k]})
 
                 if word[i] in siteDic:
-                    subDicPersee["notices"] = [{"notice":siteDic[word[i]],"score":1}]
+                    subDicPersee["notices"] = [{"notice":siteDic[word[i]],"score": '%.2f' % 1}]
                 else:
                     subDicPersee["notices"] = [{"notice":idRef[i][k], "score":score[i][k]} for k in range(len(idRef[i]))]                      
 

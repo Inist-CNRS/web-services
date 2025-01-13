@@ -47,7 +47,7 @@ HTTP 200
                 "notices": [
                     {
                         "notice": "https://www.idref.fr/192337963",
-                        "score": 0.7303517070658849
+                        "score": "0.730"
                     }
                 ]
             },
@@ -66,11 +66,11 @@ HTTP 200
                 "notices": [
                     {
                         "notice": "https://www.idref.fr/050189484",
-                        "score": 0.744017014312079
+                        "score": "0.744"
                     },
                     {
                         "notice": "https://www.idref.fr/153708638",
-                        "score": 0.9121320343559642
+                        "score": "0.912"
                     }
                 ]
             }
@@ -116,7 +116,7 @@ HTTP 200
                 "occurences": [
                     {
                         "page": "bch_0007-4217_2003_num_127_2_T1_0778_0000",
-                        "entity_score": 0.4152577519416809,
+                        "entity_score": "0.415",
                         "text": " **ASÉA** Travaux de l' Institut suédois  ."
                     }
                 ],
@@ -132,12 +132,12 @@ HTTP 200
                 "occurences": [
                     {
                         "page": "bch_0007-4217_2003_num_127_2_T1_0778_0000",
-                        "entity_score": 0.7659134864807129,
+                        "entity_score": "0.766",
                         "text": " Papamarinopoulos ( université de Patras ) ont entrepris un projet commun de prospection géophysique dans la ville basse d' **Aséa** dans le but de retrouver les sections de l' enceinte recouverte par une couche d' alluvions stériles déposées par l' Alphée  ."
                     },
                     {
                         "page": "Title",
-                        "entity_score": 0.4869116246700287,
+                        "entity_score": "0.487",
                         "text": " **Aséa** ."
                     }
                 ],
@@ -153,17 +153,17 @@ HTTP 200
                 "occurences": [
                     {
                         "page": "bch_0007-4217_2003_num_127_2_T1_0778_0000",
-                        "entity_score": 0.8267117142677307,
+                        "entity_score": "0.827",
                         "text": " Parmi les découvertes les plus importantes , on signale l' identification probable d' une tour carrée au Sud-Est de la route de **Mégalopolis**  ."
                     },
                     {
                         "page": "bch_0007-4217_2003_num_127_2_T1_0778_0000",
-                        "entity_score": 0.6094253063201904,
+                        "entity_score": "0.609",
                         "text": " Des vestiges appartenant sans doute à la porte principale de **Mégalopolis** ont été localisés juste au Nord de la route moderne , qui passe donc sans doute au-dessus de la route antique reliant **Mégalopolis** à Τ égée  ."
                     },
                     {
                         "page": "bch_0007-4217_2003_num_127_2_T1_0778_0000",
-                        "entity_score": 0.934586763381958,
+                        "entity_score": "0.935",
                         "text": " Des vestiges appartenant sans doute à la porte principale de **Mégalopolis** ont été localisés juste au Nord de la route moderne , qui passe donc sans doute au-dessus de la route antique reliant **Mégalopolis** à Τ égée  ."
                     }
                 ],
@@ -179,7 +179,7 @@ HTTP 200
                 "occurences": [
                     {
                         "page": "bch_0007-4217_2003_num_127_2_T1_0778_0000",
-                        "entity_score": 0.6515481472015381,
+                        "entity_score": "0.652",
                         "text": " Des vestiges appartenant sans doute à la porte principale de Mégalopolis ont été localisés juste au Nord de la route moderne , qui passe donc sans doute au-dessus de la route antique reliant Mégalopolis à Τ **égée**  ."
                     }
                 ],
