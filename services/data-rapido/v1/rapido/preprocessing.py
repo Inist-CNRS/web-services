@@ -4,11 +4,34 @@ from itertools import chain
 from lxml import etree
 
 class extractTei:
-    def __init__(self,file,tei_path):
-        self.file = file
+    '''
+    Class to extract informations from one or more TEI file, applying an xsl stylesheet.
+    '''
+
+    def __init__(self,files,tei_path):
+        '''
+        Constructs all the necessary attributes.
+
+        Parameters
+        ----------
+            files : list of str
+                list of tei file
+            tei_path : str
+                path of the xsl stylesheet
+        '''
+        self.files = files
         self.tei_path = tei_path
 
     def read_file(self,file):
+        '''
+        Apply an XSL stylesheet to one TEI file, and extract informations such as pages, article ID, texts and title.
+
+        Parameters
+        ----------
+            file : str
+                tei file
+        '''
+        title = "Titre non récupéré"
         pageNumberList = []
         pageNumberIdList = []
         pageSentenceList = []
@@ -84,23 +107,47 @@ class extractTei:
                         pageNumberIdList.append(xPage.group(1))
                                                 
                 pageSentenceList.append(pageSentence)    
-        return title,idArticle,pageSentenceList[1:],pageNumberList, pageNumberIdList        
+        return title,idArticle,pageSentenceList[1:],pageNumberList, pageNumberIdList
 
-    def extract_file(self):
+    def extract_files(self):
+        '''
+        Send TEIs one by one to the read_file method, and store the results on a Dataframe atribute.
+        '''
         columns = ["Title","ID","listText","listPage","listPageId"]
         data = []
-        title,idArticle,texts,pages, pagesId = self.read_file(self.file)
-        data.append([[title],idArticle,texts,pages,pagesId])
+        for file in self.files:
+            title,idArticle,texts,pages, pagesId = self.read_file(file)
+            data.append([[title],idArticle,texts,pages,pagesId])
         self.df = pd.DataFrame(data,columns=columns)
 
+
 class removeGreek:
+    '''
+    Class to remove sentences with a certain amount of greek from a list of sentences.
+    '''
     def __init__(self,ratio):
+        '''
+        Constructs all the necessary attributes.
+
+        Parameters
+        ----------
+            ratio : float
+                the maximum ratio of greek we want to keep a sentence
+        '''
         self.maxRatio = ratio
         greek_codes   = chain(range(0x370, 0x3e2), range(0x3f0, 0x400))
         greek_symbols = (chr(c) for c in greek_codes)
         self.greekLetters = [c for c in greek_symbols if c.isalpha()]
 
     def getGreekRatio(self,text):
+        '''
+        Return the ratio of greek letter in a text.
+
+        Parameters
+        ----------
+            text : str
+                text to extract the ratio of greek
+        '''
         nbGreekLetter = 0
         nbSpace = 0
         for letter in text:
@@ -111,6 +158,15 @@ class removeGreek:
         return (nbGreekLetter)/(len(text)-nbSpace)
 
     def rmvGreek(self,listText):
+        '''
+        Takes a list of text as input. Divide them into sentence and keep the ones with a ratio lower than ratio attribute.
+        Return them as a list.
+
+        Parameters
+        ----------
+            listText : list of str
+                list of text
+        '''
         listSent = []
         for text in listText:
             sentences = text.split(".")
@@ -124,6 +180,15 @@ class removeGreek:
         return listSent
 
 def dataToTxt(listTexts):
+    '''
+    Takes a list of text as input. Tokenize each text.
+    Return a list of list containing tokenized text.
+    
+    Parameters
+        ----------
+            listText : list of str
+                list of text 
+    '''
     L = []
     for text in listTexts:
         finalFile = []
