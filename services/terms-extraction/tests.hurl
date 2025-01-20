@@ -81,17 +81,17 @@ HTTP 200
         {
             "term": "mission spatiale",
             "frequency": 1,
-            "specificity": 0.16666666666666666
+            "specificity": 0.1667
         },
         {
             "term": "planète mars",
             "frequency": 1,
-            "specificity": 0.16666666666666666
+            "specificity": 0.1667
         },
         {
             "term": "jpl établissement",
             "frequency": 1,
-            "specificity": 0.16666666666666666
+            "specificity": 0.1667
         }
     ]
 },
@@ -216,22 +216,22 @@ HTTP 200
         {
             "term": "martian surface",
             "frequency": 2,
-            "specificity": 0.7063333333333334
+            "specificity": 0.7063
         },
         {
             "term": "martian atmosphere",
             "frequency": 2,
-            "specificity": 0.7063333333333334
+            "specificity": 0.7063
         },
         {
             "term": "crater jezero",
             "frequency": 1,
-            "specificity": 0.3531666666666667
+            "specificity": 0.3532
         },
         {
             "term": "jet propulsion laboratory",
             "frequency": 1,
-            "specificity": 0.3531666666666667
+            "specificity": 0.3532
         }
     ]
 },
@@ -389,318 +389,3 @@ content-type: application/json
 
 
 HTTP 200
-[{
-    "id": 1,
-    "value": [
-        {
-            "quantity": "100",
-            "unit": "[%]",
-            "detailed_unit": {
-                "percentage": {
-                    "surfaces": [
-                        "pc",
-                        "percent",
-                        "percentage"
-                    ],
-                    "symbols": [
-                        "%",
-                        "pct",
-                        "pct."
-                    ]
-                }
-            },
-            "related_concept": [
-                "liter-1",
-                "B2"
-            ]
-        },
-        {
-            "quantity": "100",
-            "unit": "[%]",
-            "detailed_unit": {
-                "percentage": {
-                    "surfaces": [
-                        "pc",
-                        "percent",
-                        "percentage"
-                    ],
-                    "symbols": [
-                        "%",
-                        "pct",
-                        "pct."
-                    ]
-                }
-            },
-            "related_concept": [
-                "liter-1"
-            ]
-        },
-        {
-            "quantity": "17",
-            "unit": "[PFU]",
-            "detailed_unit": {
-                "plaque forming units": {
-                    "surfaces": [
-                        "plaque forming units"
-                    ],
-                    "symbols": [
-                        "PFU"
-                    ]
-                }
-            },
-            "related_concept": []
-        },
-        {
-            "quantity": "44",
-            "unit": "[%]",
-            "detailed_unit": {
-                "percentage": {
-                    "surfaces": [
-                        "pc",
-                        "percent",
-                        "percentage"
-                    ],
-                    "symbols": [
-                        "%",
-                        "pct",
-                        "pct."
-                    ]
-                }
-            },
-            "related_concept": [
-                "B1",
-                "positive",
-                "samples"
-            ]
-        },
-        {
-            "quantity": "0.8",
-            "unit": "[PFU]",
-            "detailed_unit": {
-                "plaque forming units": {
-                    "surfaces": [
-                        "plaque forming units"
-                    ],
-                    "symbols": [
-                        "PFU"
-                    ]
-                }
-            },
-            "related_concept": [
-                "liter-1"
-            ]
-        },
-        {
-            "quantity": "6",
-            "unit": "[%]",
-            "detailed_unit": {
-                "percentage": {
-                    "surfaces": [
-                        "pc",
-                        "percent",
-                        "percentage"
-                    ],
-                    "symbols": [
-                        "%",
-                        "pct",
-                        "pct."
-                    ]
-                }
-            },
-            "related_concept": [
-                "B2",
-                "positive",
-                "samples"
-            ]
-        },
-        {
-            "quantity": "31",
-            "unit": "[%]",
-            "detailed_unit": {
-                "percentage": {
-                    "surfaces": [
-                        "pc",
-                        "percent",
-                        "percentage"
-                    ],
-                    "symbols": [
-                        "%",
-                        "pct",
-                        "pct."
-                    ]
-                }
-            },
-            "related_concept": [
-                "liter-1"
-            ]
-        },
-        {
-            "quantity": "0",
-            "unit": "[%]",
-            "detailed_unit": {
-                "percentage": {
-                    "surfaces": [
-                        "pc",
-                        "percent",
-                        "percentage"
-                    ],
-                    "symbols": [
-                        "%",
-                        "pct",
-                        "pct."
-                    ]
-                }
-            },
-            "related_concept": [
-                "B2",
-                "positive",
-                "samples"
-            ]
-        },
-        {
-            "quantity": "100",
-            "unit": "[%]",
-            "detailed_unit": {
-                "percentage": {
-                    "surfaces": [
-                        "pc",
-                        "percent",
-                        "percentage"
-                    ],
-                    "symbols": [
-                        "%",
-                        "pct",
-                        "pct."
-                    ]
-                }
-            },
-            "related_concept": [
-                "enterovirus",
-                "genome"
-            ]
-        },
-        {
-            "quantity": "56",
-            "unit": "[%]",
-            "detailed_unit": {
-                "percentage": {
-                    "surfaces": [
-                        "pc",
-                        "percent",
-                        "percentage"
-                    ],
-                    "symbols": [
-                        "%",
-                        "pct",
-                        "pct."
-                    ]
-                }
-            },
-            "related_concept": [
-                "B1",
-                "enterovirus",
-                "genome"
-            ]
-        },
-        {
-            "quantity": "19",
-            "unit": "[%]",
-            "detailed_unit": {
-                "percentage": {
-                    "surfaces": [
-                        "pc",
-                        "percent",
-                        "percentage"
-                    ],
-                    "symbols": [
-                        "%",
-                        "pct",
-                        "pct."
-                    ]
-                }
-            },
-            "related_concept": [
-                "B2",
-                "percentages",
-                "samples"
-            ]
-        }
-    ]
-},
-{
-    "id": 2,
-    "value": [
-        {
-            "quantity": "28",
-            "unit": "[degrees Fahrenheit]",
-            "detailed_unit": {
-                "fahrenheit": {
-                    "surfaces": [
-                        "Fahrenheit",
-                        "Farenheit",
-                        "deg F",
-                        "deg f",
-                        "deg fahrenheit",
-                        "deg farenheit",
-                        "degf",
-                        "degree F",
-                        "degree Fahrenheit",
-                        "degree Farenheit",
-                        "degree f",
-                        "degree fahrenheit",
-                        "degree farenheit",
-                        "degree-F",
-                        "degree-f",
-                        "degrees F",
-                        "degrees Fahrenheit",
-                        "degrees Farenheit",
-                        "degrees f",
-                        "degrees fahrenheit",
-                        "degrees farenheit",
-                        "degrees-F",
-                        "degrees-f",
-                        "degs fahrenheit",
-                        "degs farenheit",
-                        "fahrenheit",
-                        "farenheit"
-                    ],
-                    "symbols": [
-                        "F",
-                        "degF",
-                        "f",
-                        "°F"
-                    ]
-                }
-            },
-            "related_concept": [
-                "proposed",
-                "cold",
-                "treatment",
-                "tabaci",
-                "-2.2",
-                "degrees Celsius"
-            ]
-        },
-        {
-            "quantity": "2",
-            "unit": "[weeks]",
-            "detailed_unit": {
-                "week": {
-                    "surfaces": [
-                        "week",
-                        "weeks",
-                        "wks"
-                    ],
-                    "symbols": [
-                        "wk"
-                    ]
-                }
-            },
-            "related_concept": [
-                "tabaci",
-                "-2.2",
-                "degrees Celsius"
-            ]
-        }
-    ]
-}]
