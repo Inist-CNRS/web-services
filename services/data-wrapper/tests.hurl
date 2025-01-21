@@ -65,6 +65,7 @@ HTTP 200
 Content-type: application/gzip
 
 ##########################################
+
 POST {{host}}/v1/no-convert
 content-type: application/gzip
 file,example-tei.tar.gz;
@@ -73,3 +74,14 @@ HTTP 200
 Content-type: application/gzip
 [Asserts]
 sha256 == hex,8725be350c86b8e7ded291b42b01fdb94255dfa4cfc152c6743df8e334e59782;
+
+##########################################
+
+POST {{host}}/v1/tar-txt2json
+content-type: application/gzip
+file,texts.tar.gz;
+
+HTTP 200
+Content-type: application/gzip
+[Asserts]
+sha256 == hex,bb66227bba85fdb1be876cdcc50954177bf70c4a6008364df8e8365b2c000ce8;
