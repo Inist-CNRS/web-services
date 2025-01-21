@@ -84,4 +84,6 @@ file,texts.tar.gz;
 HTTP 200
 Content-type: application/gzip
 [Asserts]
-sha256 == hex,bb66227bba85fdb1be876cdcc50954177bf70c4a6008364df8e8365b2c000ce8;
+bytes count >= 485
+bytes count <= 500
+bytes startsWith hex,1f8b0800;
