@@ -16,7 +16,7 @@ def change_part(affiliation):
 
 # Fonction de WS de découpage d'adresse
 def ws_affiliation(affiliation):
-    url = "https://affiliations-tools.services.istex.fr/v1/addresses/parse"
+    url = "http://localhost:31976/v1/addresses/parse"
     headers = {"accept": "application/json", "Content-Type": "application/json"}
     data = [{"id": affiliation, "value": affiliation}]
     response = requests.post(url, headers=headers, json=data)
@@ -79,11 +79,17 @@ def request(name):
         response = requests.get(url, headers={"Accept": "application/json"})
         response.raise_for_status()
     except HTTPError as http_err:
-        print(f"HTTP error occurred: {http_err}",file=sys.stderr)  # Erreur HTTP (par exemple, 404, 500, etc.)
+        print(
+            f"HTTP error occurred: {http_err}", file=sys.stderr
+        )  # Erreur HTTP (par exemple, 404, 500, etc.)
     except Timeout as timeout_err:
-        print(f"Timeout error occurred: {timeout_err}",file=sys.stderr)  # La requête a expiré
+        print(
+            f"Timeout error occurred: {timeout_err}", file=sys.stderr
+        )  # La requête a expiré
     except RequestException as req_err:
-        print(f"Error occurred: {req_err}",file=sys.stderr)  # Autres erreurs (par exemple, problèmes de connexion, etc.)
+        print(
+            f"Error occurred: {req_err}", file=sys.stderr
+        )  # Autres erreurs (par exemple, problèmes de connexion, etc.)
     else:
         return response.json()
 
@@ -102,17 +108,19 @@ def api_ror(affiliation):
 def filter_api(json, city=None, short=False):
     if json == "Error":
         return {"status": "Unexpected data"}
-    
+
     if json and "items" in json:
         for item in json["items"]:
             id_ror = item["organization"]["id"]
             score_similarity = item["score"]
             name = item["organization"]["name"]
             type = item["organization"]["types"]
-            name_geonames = item["organization"]["addresses"][0]["geonames_city"]["city"]
+            name_geonames = item["organization"]["addresses"][0]["geonames_city"][
+                "city"
+            ]
             id_geonames = item["organization"]["addresses"][0]["geonames_city"]["id"]
             json_dict = {
-                "status" : "Found",
+                "status": "Found",
                 "id_ror": id_ror,
                 "score": score_similarity,
                 "name": name,
@@ -164,7 +172,7 @@ def main():
                     data["value"] = {"status": "No match found"}
 
             else:
-                 # Boucle "sécurité" > "extract_house" 
+                # Boucle "sécurité" > "extract_house"
                 data["value"] = {"status": "No house found"}
 
         # Boucle pour l'affiliation courte (simple, on envoie tout)
