@@ -1,5 +1,7 @@
 POST {{host}}/v1/expand?indent=true
 content-type: application/json
+[Options]
+skip: true
 [
   { "value": "Baran, N (reprint author), Univ Zagreb, Dept Phys, Bijenieka Cesta 32, Zagreb 10000, Croatia."},
   { "value": "Harikane, Y (reprint author), Univ Tokyo, Inst Cosm Ray Res, 5-1-5 Kashiwanoha, Kashiwa, Chiba 2778582, Japan.; Harikane, Y (reprint author), Univ Tokyo, Grad Sch Sci, Dept Phys, Bunkyo Ku, 7-3-1 Hongo, Tokyo 1130033, Japan."},
@@ -573,6 +575,7 @@ HTTP 200
 [{
     "id": 1,
     "value": {
+        "status": "Found",
         "id_ror": "https://ror.org/0323bey33",
         "score": 0.79,
         "name": "Institut Lumière Matière",
@@ -586,6 +589,7 @@ HTTP 200
 {
     "id": 2,
     "value": {
+        "status": "Found",
         "id_ror": "https://ror.org/03zmsge54",
         "score": 1,
         "name": "NSF’s NOIRLab",
@@ -598,5 +602,7 @@ HTTP 200
 },
 {
     "id": 3,
-    "value": "No match found"
+    "value": {
+        "status": "No match found"
+    }
 }]
