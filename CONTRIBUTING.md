@@ -277,8 +277,19 @@ npm run generate:service service-name
 
 ### OpenAPI: ajout d'une description multi-lignes dans les métadonnées du .ini
 
-Pour avoir une documentation OpenAPI complète, on peut écrire la description
-d'un service en Markdown.  
+Lors de la rédaction du .ini, trois champs méritent particulièrement l'attention :
+
+- `post.tags.0` qui permettra de configurer plus simplement `IA Factory`.
+Pour une identification rapide, ce peut être le nom court que l'on donne au service.
+- `post.summary` qui est affiché dans le menu déroulant de sélection de service
+de `IA Factory`. Doit être explicite pour l'utilisateur et idéalement commencer
+par le nom court du service
+- `post.description` qui est affiché après sélection du service dans le menu
+déroulant. Doit contenir une description plus détaillée ainsi que les précautions
+que les utilisateurs et utilisatrices doivent prendre.
+
+On peut écrire la description d'un service en Markdown, et donc l'écrire sur
+plusieurs lignes.
 On peut se contenter d'écrire cette description dans la métadonnée
 `post.description` directement, en mettant les lignes bout-à-bout, séparées par
 `^M`.  
