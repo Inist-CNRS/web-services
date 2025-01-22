@@ -254,6 +254,17 @@ On peut aussi [tester le serveur local](#tests).
 
 > 📘 On peut aussi écrire ce fichier à la main, voir [hurl](https://hurl.dev/).
 
+> [!TIP]  
+> Lorsque le test ne passe pas sur GitHub, parce que la route en question
+> utilise une API vérifiant l'IP de l'appelant, on peut se contenter de
+> désactiver ce test en fonction d'une variable `blocked` (qui sera
+> automatiquement positionnée à `true` sur GitHub).  
+>
+> ```ini
+> [Options]
+> skip: {{blocked}}
+> ```
+
 ### Script d'initialisation d'un nouveau service
 
 Pour faciliter la création d'un nouveau service, un script npm est disponible:
@@ -433,27 +444,27 @@ docker stop dev
 Pour tester un service lancé localement, utiliser:
 
 ```bash
-npm run test:local service-name
+HURL_blocked=false npm run test:local service-name
 ```
 
 Pour tester un service en production, taper:
 
 ```bash
-npm run test:remote service-name
+HURL_blocked=false npm run test:remote service-name
 ```
 
 Pour tester tous les services en production qui ont un fichier
 `tests.hurl`:
 
 ```bash
-npm run test:remotes services/*
+HURL_blocked=false npm run test:remotes services/*
 ```
 
 Pour tester uniquement certains services en production (à condition qu'ils aient
 un fichier `tests.hurl`):
 
 ```bash
-npm run test:remotes service-name service2-name
+HURL_blocked=false npm run test:remotes service-name service2-name
 ```
 
 > 📘 Pour éviter qu'un service soit testé lorsqu'il est en production, on peut
@@ -471,6 +482,19 @@ publié (sans URL externe), en se basant sur l'URL présente dans `swagger.json`
 ```bash
 ./bin/test-ip-services.sh services/service-name/
 ```
+
+> [!IMPORTANT]  
+> La partie `HURL_blocked=false` permet de préciser qu'on veut lancer *tous* les
+> tests du fichier `tests.hurl` concerné.  
+> Cette variable d'environnement est là pour permettre de lancer les tests d'un
+> fichier `tests.hurl` tout en ignorant ceux qui nécessitent un accès aux
+> services ISTEX.  
+> C'est le cas quand un GitHub Action essaye de lancer les tests: son IP n'est
+> pas présente dans les IP autorisées à accéder aux services ISTEX en
+> production.  
+> Dans ce cas, ou quand l'ordinateur depuis lequel on veut lancer les tests n'a
+> pas d'IP autorisée (par exemple chez soi, sans le VPN), on doit positionner la
+> variable `HURL_blocked` à `true`.  
 
 ## Ajout dans la liste du README
 

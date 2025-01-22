@@ -1,7 +1,7 @@
 POST {{host}}/v1/expand?indent=true
 content-type: application/json
 [Options]
-skip: true
+skip: {{blocked}}
 [
   { "value": "Baran, N (reprint author), Univ Zagreb, Dept Phys, Bijenieka Cesta 32, Zagreb 10000, Croatia."},
   { "value": "Harikane, Y (reprint author), Univ Tokyo, Inst Cosm Ray Res, 5-1-5 Kashiwanoha, Kashiwa, Chiba 2778582, Japan.; Harikane, Y (reprint author), Univ Tokyo, Grad Sch Sci, Dept Phys, Bunkyo Ku, 7-3-1 Hongo, Tokyo 1130033, Japan."},
