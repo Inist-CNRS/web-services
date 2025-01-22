@@ -1,6 +1,7 @@
 POST {{host}}/v1/expand?indent=true
 content-type: application/json
 [Options]
+# Uses two IP-protected web services in production
 skip: {{blocked}}
 [
   { "value": "Baran, N (reprint author), Univ Zagreb, Dept Phys, Bijenieka Cesta 32, Zagreb 10000, Croatia."},
