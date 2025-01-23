@@ -177,7 +177,7 @@ Le début du fichier `examples.http` (attention, ce nom est utilisé dans
 plusieurs scripts, veillez à bien l'orthographier) contient une commentaire
 explicatif, et une variable permettant de changer le serveur cible des requêtes:
 
-```http
+```ini
 # These examples can be used directly in VSCode, using REST Client extension (humao.rest-client)
 
 # Décommenter/commenter les lignes voulues pour tester localement
@@ -193,7 +193,7 @@ partir de la route de la requête.
 Par exemple, la route `/v1/true/json` donnera lieu à un `name` valant
 `v1TrueJson`:
 
-```http
+```ini
 ###
 # @name v1TrueJson
 # On met ici un commentaire décrivant ce que fait la route appelée
@@ -495,6 +495,18 @@ publié (sans URL externe), en se basant sur l'URL présente dans `swagger.json`
 > Dans ce cas, ou quand l'ordinateur depuis lequel on veut lancer les tests n'a
 > pas d'IP autorisée (par exemple chez soi, sans le VPN), on doit positionner la
 > variable `HURL_blocked` à `true`.  
+
+> [!TIP]  
+> Pour ne pas avoir à taper systématiquement `HURL_blocked=false` avant toute
+> commande de lancement de tests, on peut exporter cette variable depuis son
+> `~/.bashrc` (si vous utilisez bash):  
+>
+> ```sh
+> # hurl variable to skip tests accessing protected (blocked) API
+> # true: You are not able to access *.services.istex.fr
+> # false: You are able to access *.services.istex.fr
+> export HURL_blocked=false
+> ```
 
 ## Ajout dans la liste du README
 
