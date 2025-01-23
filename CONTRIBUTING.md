@@ -496,6 +496,18 @@ publié (sans URL externe), en se basant sur l'URL présente dans `swagger.json`
 > pas d'IP autorisée (par exemple chez soi, sans le VPN), on doit positionner la
 > variable `HURL_blocked` à `true`.  
 
+> [!TIP]  
+> Pour ne pas avoir à taper systématiquement `HURL_blocked=false` avant toute
+> commande de lancement de tests, on peut exporter cette variable depuis son
+> `~/.bashrc` (si vous utilisez bash):  
+>
+> ```sh
+> # hurl variable to skip tests accessing protected (blocked) API
+> # true: You are not able to access *.services.istex.fr
+> # false: You are able to access *.services.istex.fr
+> export HURL_blocked=false
+> ```
+
 ## Ajout dans la liste du README
 
 Une fois que le nouveau service est créé, il faut l'ajouter à la liste du README
