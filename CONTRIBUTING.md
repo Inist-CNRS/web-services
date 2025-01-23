@@ -177,7 +177,7 @@ Le début du fichier `examples.http` (attention, ce nom est utilisé dans
 plusieurs scripts, veillez à bien l'orthographier) contient une commentaire
 explicatif, et une variable permettant de changer le serveur cible des requêtes:
 
-```http
+```ini
 # These examples can be used directly in VSCode, using REST Client extension (humao.rest-client)
 
 # Décommenter/commenter les lignes voulues pour tester localement
@@ -193,7 +193,7 @@ partir de la route de la requête.
 Par exemple, la route `/v1/true/json` donnera lieu à un `name` valant
 `v1TrueJson`:
 
-```http
+```ini
 ###
 # @name v1TrueJson
 # On met ici un commentaire décrivant ce que fait la route appelée
