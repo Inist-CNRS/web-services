@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 
 from bibref.bibref_functions import *
+import json
 
 
 # WS
