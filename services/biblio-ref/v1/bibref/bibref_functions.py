@@ -5,7 +5,6 @@ from thefuzz import fuzz
 import pickle
 import os
 import sys
-import json
 
 api_token = os.getenv("CROSSREF_API_KEY")
 headers = {

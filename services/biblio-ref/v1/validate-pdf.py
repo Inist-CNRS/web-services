@@ -3,6 +3,7 @@
 import os
 from refextract import extract_references_from_file
 from bibref.bibref_functions import *
+import json
 
 
 for line in sys.stdin:
