@@ -1,4 +1,4 @@
-# ws-loterre-resolvers@7.0.5
+# ws-loterre-resolvers@7.0.6
 
 Résolveurs pour des terminologies Loterre
 
