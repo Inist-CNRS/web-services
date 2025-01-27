@@ -25,9 +25,9 @@ WORKDIR /app/public
 
 # Install all node dependencies
 RUN npm install \
-    @ezs/core@3.10.9 \
-    @ezs/analytics@2.3.4 \
-    @ezs/basics@2.8.1 \
+    @ezs/core@3.11.0 \
+    @ezs/analytics@2.3.5 \
+    @ezs/basics@2.9.1 \
     @ezs/storage@3.2.5 \
     @ezs/xslt@1.3.32
 
