@@ -3,7 +3,7 @@
     "info": {
         "title": "data-rapido - Applique un algorithme d'alignement avec idRef prévu dans le cadre du projet Rapido.",
         "description": "Web service à destination du projet rapido. Ce web service prend en entrée un tar.gz comportant un dossier data incluant tout les documents xml à traiter. Il renvoit un json comportant les alignements que l'algorithme de la phase 1 ou le modél de la phase 2 a pu faire entre le texte et le référentiel idRef.",
-        "version": "1.0.1",
+        "version": "1.1.0",
         "termsOfService": "https://services.istex.fr/",
         "contact": {
             "name": "Inist-CNRS",
