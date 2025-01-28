@@ -1,7 +1,7 @@
 {
   "private": true,
   "name": "ws-data-rapido",
-  "version": "1.0.1",
+  "version": "1.1.0",
   "description": "Applique un algorithme d'alignement avec idRef prévu dans le cadre du projet Rapido.",
   "repository": {
     "type": "git",
