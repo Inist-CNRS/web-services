@@ -32,9 +32,9 @@ RUN npm install \
     @ezs/xslt@1.3.32
 
 # Declare files to copy in .dockerignore
-COPY --chown=daemon:daemon --from=dvcfiles /dvc/*.skos /app/data/
-COPY --chown=daemon:daemon --from=dvcfiles /dvc/databases /app/data/
-RUN chmod a+rwx /app/data
+COPY --chown=daemon:daemon --from=dvcfiles /dvc/*.skos /app/data0/
+COPY --chown=daemon:daemon --from=dvcfiles /dvc/databases /app/data0/
+RUN chmod a+rwx /app/data0
 
 COPY --chown=daemon:daemon ./docker-entrypoint.sh /app/
 COPY --chown=daemon:daemon ./config.json /app/
