@@ -8,10 +8,16 @@ cd /app || exit 1
 node generate-dotenv.js
 
 
+mkdir -p /app/data
+chown -R daemon:daemon /app/data
+
+# Restore SKOS files
+cp /app/data0/*.skos /app/data
+
 # Restore databases
 cd /app/data || exit 2
 
-for tgz in /app/data/*.tgz
+for tgz in /app/data0/*.tgz
 do
     su -s /bin/bash daemon -c "tar -xf $tgz"
     echo "Extracted $tgz"
