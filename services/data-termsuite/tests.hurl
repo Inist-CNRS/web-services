@@ -47,42 +47,52 @@ HTTP 200
 Content-Type: application/json
 [{
     "key": "n: sediment",
+    "spec": 4.61,
     "freq": 10
 },
 {
     "key": "nn: proto-paratethys sea",
+    "spec": 4.56,
     "freq": 9
 },
 {
     "key": "a: glacial",
+    "spec": 4.46,
     "freq": 7
 },
 {
     "key": "n: mmes",
+    "spec": 4.46,
     "freq": 7
 },
 {
     "key": "a: tropical",
+    "spec": 4.46,
     "freq": 7
 },
 {
     "key": "n: precipitation",
+    "spec": 4.46,
     "freq": 7
 },
 {
     "key": "n: genus",
+    "spec": 4.46,
     "freq": 7
 },
 {
     "key": "n: obliquiloculata",
+    "spec": 4.46,
     "freq": 7
 },
 {
     "key": "n: telescopus",
+    "spec": 4.39,
     "freq": 6
 },
 {
     "key": "nn: clay mineral",
+    "spec": 4.39,
     "freq": 6
 }]
 
