@@ -311,6 +311,7 @@ def biblio_ref(ref_biblio, retracted_doi=retracted_doi):
     ref_biblio = uniformize(ref_biblio)  # Warining : in the rest of code, the biblio ref is uniformize (remove some informations)
     # First case : doi is found
     if doi:
+        doi = doi.strip(".")
         crossref_status_code, others_biblio_info = verify_doi(doi)  # Verify doi using crossref api
         
         # # If DOI exists
