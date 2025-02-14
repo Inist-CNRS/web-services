@@ -1,7 +1,7 @@
 {
   "private": true,
   "name": "ws-text-summarize",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Génère un résumé d'un article scientifique.",
   "repository": {
     "type": "git",
