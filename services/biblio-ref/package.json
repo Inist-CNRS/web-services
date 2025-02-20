@@ -1,7 +1,7 @@
 {
     "private": true,
     "name": "ws-biblio-ref",
-    "version": "2.2.0",
+    "version": "2.2.1",
     "description": "Valide une référence bibliographique",
     "repository": {
         "type": "git",

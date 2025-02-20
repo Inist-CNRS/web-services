@@ -13,5 +13,7 @@ with open(input_file, 'r') as file:
     for row in reader:
         data.append(row[0])
 
+data_lower = [elt.lower() for elt in data]
+
 with open(output_file, 'wb') as file:
-    pickle.dump(data, file)
+    pickle.dump(data_lower, file)
