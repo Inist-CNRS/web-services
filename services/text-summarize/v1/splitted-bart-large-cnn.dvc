@@ -1,0 +1,6 @@
+outs:
+- md5: 0bed5fddcb301ea3471172e2b792dddc.dir
+  size: 1628805120
+  nfiles: 4
+  hash: md5
+  path: splitted-bart-large-cnn
