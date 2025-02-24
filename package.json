@@ -40,6 +40,7 @@
     "services/address-kit",
     "services/affiliation-rnsr",
     "services/affiliations-tools",
+    "services/aiabstract-check",
     "services/ark-tools",
     "services/astro-ner",
     "services/authors-tools",

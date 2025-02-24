@@ -343,7 +343,7 @@ En plus du reste, il faut suivre ces étapes lorsqu'on utilise DVC :
   - Initier un dépôt DVC en faisant `dvc init` (nécessite d'être dans un dépôt git).
   - se connecter au webdav du service (à ne faire que la première fois), pour cela :
     - spécifier l'url du webdav (en utilisant le protocole webdavs): `dvc remote add -d webdav-remote webdavs://YOUR_WEBDAV_URL.fr`
-    - entrer le login : `dvc remote modify --local webdav-remote login YOUR_LOGIN`
+    - entrer le login : `dvc remote modify --local webdav-remote user YOUR_LOGIN`
     - entrer le mot de passe : `dvc remote modify --local webdav-remote password YOUR_PASSWORD`
   - push le fichier sur le webdav : `dvc add DOSSIER_OU_FICHIER_A_PUSH` puis `dvc push`, sans se soucier du nom
   - Le fichier `DOSSIER_OU_FICHIER_A_PUSH.dvc` est créé et devra être copié à l'endroit où le modèle doit être dans le code

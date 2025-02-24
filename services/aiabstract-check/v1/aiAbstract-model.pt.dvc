@@ -1,0 +1,5 @@
+outs:
+- md5: 95ee3b734fa972a0527806df174593b0
+  size: 438733166
+  hash: md5
+  path: aiAbstract-model.pt
