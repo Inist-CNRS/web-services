@@ -6,7 +6,7 @@ Utilise un modèle de langue pour générer le résumé d'un article scientifiqu
 
 ## Langues supportées
 
-Ce service se base sur le modèle Bart-large et mBart-large-50. Ces deux modèles sont mis à dispotion dans deux routes distinctes : `v1/en` et `v1/multilingual`.
+Ce service se base sur le modèle Bart-large et mBart-large-50. Ces deux modèles sont mis à disposition dans deux routes distinctes : `v1/en` et `v1/multilingual`.
 
 ###  Route : `en`
 
