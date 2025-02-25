@@ -22,6 +22,7 @@ All contributing instructions are in [CONTRIBUTING](CONTRIBUTING.md).
 - [address-kit](./services/address-kit) [![Docker Pulls](https://img.shields.io/docker/pulls/cnrsinist/ws-address-kit.svg)](https://hub.docker.com/r/cnrsinist/ws-address-kit/)
 - [affiliation-rnsr](./services/affiliation-rnsr) [![Docker Pulls](https://img.shields.io/docker/pulls/cnrsinist/ws-affiliation-rnsr.svg)](https://hub.docker.com/r/cnrsinist/ws-affiliation-rnsr/)
 - [affiliations-tools](./services/affiliations-tools) [![Docker Pulls](https://img.shields.io/docker/pulls/cnrsinist/ws-affiliations-tools.svg)](https://hub.docker.com/r/cnrsinist/ws-affiliations-tools/)
+- [aiabstract-check](./services/aiabstract-check) [![Docker Pulls](https://img.shields.io/docker/pulls/cnrsinist/ws-aiabstract-check.svg)](https://hub.docker.com/r/cnrsinist/ws-aiabstract-check/)
 - [ark-tools](./services/ark-tools) [![Docker Pulls](https://img.shields.io/docker/pulls/cnrsinist/ws-ark-tools.svg)](https://hub.docker.com/r/cnrsinist/ws-ark-tools/)
 - [astro-ner](./services/astro-ner) [![Docker Pulls](https://img.shields.io/docker/pulls/cnrsinist/ws-astro-ner.svg)](https://hub.docker.com/r/cnrsinist/ws-astro-ner/)
 - [authors-tools](./services/authors-tools) [![Docker Pulls](https://img.shields.io/docker/pulls/cnrsinist/ws-authors-tools.svg)](https://hub.docker.com/r/cnrsinist/ws-authors-tools/)
