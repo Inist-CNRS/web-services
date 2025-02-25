@@ -1,0 +1,6 @@
+outs:
+- md5: 7b02ec162f9f33d444380c514f668cb7.dir
+  size: 2466764800
+  nfiles: 5
+  hash: md5
+  path: mbart-large-50-finetuned-summarization-V2
