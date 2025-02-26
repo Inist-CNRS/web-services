@@ -66,7 +66,7 @@ def find_doi(text):
         return ""
     try:
         doiStr = doi.group()
-        return doiStr
+        return doiStr.lower()
     except Exception:
         return ""
 
@@ -225,7 +225,13 @@ def compare_pubinfo_refbiblio(item,ref_biblio):
     if fuzz.partial_ratio(uniformize(item["source"]["source-short"]), ref_biblio)/100 > 0.8 or fuzz.partial_ratio(uniformize(item["source"]["source-short"]), ref_biblio)/100 > 0.8 :
         items_score += 1
 
-    return items_score, title_score, item["doi"]
+    try:
+        doi = item["doi"].lower()
+    except Exception:
+        print("Error : can't lower DOI", sys.stderr)
+        doi = ""
+
+    return items_score, title_score, doi
 
 
 # This is the function to update if you want stronger or weaker criteria
@@ -305,6 +311,7 @@ def biblio_ref(ref_biblio, retracted_doi=retracted_doi):
     ref_biblio = uniformize(ref_biblio)  # Warining : in the rest of code, the biblio ref is uniformize (remove some informations)
     # First case : doi is found
     if doi:
+        doi = doi.strip(".")
         crossref_status_code, others_biblio_info = verify_doi(doi)  # Verify doi using crossref api
         
         # # If DOI exists

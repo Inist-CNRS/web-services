@@ -1,4 +1,4 @@
-# ws-biblio-ref@2.2.0
+# ws-biblio-ref@2.2.2
 
 Valide une référence bibliographique
 
