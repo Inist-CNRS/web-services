@@ -13,7 +13,7 @@ if similarity_threshold > 1:
 model = SentenceTransformer('./v1/all-MiniLM-L6-v2')
 
 
-def homogenise(phrases, similarity_matrix, similarity_threshold=similarity_threshold):
+def group_by_similarity(phrases, similarity_matrix, similarity_threshold=similarity_threshold):
     output = {}
     already_homogenise = {}
     for i in range(similarity_matrix.shape[0]):
@@ -82,7 +82,7 @@ for i, sous_liste in enumerate(texts):
 embeddings = model.encode(phrases)
 similarity_matrix = model.similarity(embeddings, embeddings)
 
-output = homogenise(phrases, similarity_matrix)
+output = group_by_similarity(phrases, similarity_matrix)
 
 res = []
 for idx in output:
