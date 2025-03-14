@@ -27,8 +27,8 @@ def group_by_similarity(phrases, similarity_matrix, similarity_threshold=similar
                 continue
             else:
                 # Sans ce passage : imaginons nous avons 3 documents a b c
-                # si b est homogénéisé par a et c par b
-                # la sortie serait a a b mais nous on veut a a a
+                # si b est groupé avec a et c avec b
+                # les éléments ne seraient pas correctement groupés
                 indice_is_homogen_to = i
                 already_homogenise[indice_is_homogen_to] = j
                 
