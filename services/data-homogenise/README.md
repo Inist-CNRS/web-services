@@ -1,4 +1,4 @@
-# ws-data-homogenise@1.0.0
+# ws-data-homogenise@2.0.0
 
 Homogénéise les valeurs d'un champ.
 
