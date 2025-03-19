@@ -133,7 +133,6 @@ for i in range(len_data):
     except:
         indice_out_cluster.append(i)
 
-
 # Dimension reduction
 umap_model = umap.UMAP(
     n_neighbors=max(10, min(30, int(len_data / 20))),
@@ -145,7 +144,7 @@ umap_model = umap.UMAP(
 reduced_embeddings = umap_model.fit_transform(texts)
 
 if nb_cluster == 0:
-    nb_cluster = find_optimal_k(reduced_embeddings, max_k=30)
+    nb_cluster = find_optimal_k(reduced_embeddings, max_k=min(30, len(texts)-2))
 
 # Clustering
 clusterer = KMeans(n_clusters=nb_cluster, random_state=42)
