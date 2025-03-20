@@ -570,7 +570,7 @@ Il y a plusieurs images de base:
 ## Création d'une version
 
 Pour créer une version, on peut se servir de npm et du *workspace* associé au service en question.  
-Exemple: `npm -w services/service-nme version patch`.  
+Exemple: `npm -w services/service-name version patch`.  
 L'argument de `npm version` est `major`, `minor` ou `patch` suivant qu'il y a un
 changement majeur, un ajout de fonctionnalité ou une correction.  
 
