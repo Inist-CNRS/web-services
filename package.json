@@ -1,7 +1,7 @@
 {
   "private": true,
   "name": "web-services",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Web services at Inist-CNRS",
   "main": "index.js",
   "scripts": {
