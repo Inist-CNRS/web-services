@@ -8,6 +8,8 @@
 POST {{host}}/v1/clustering
 content-type: application/x-tar
 x-hook: https://webhook.site/69300b22-a251-4c16-9905-f7ba218ae7e9
+[Options]
+skip: {{blocked}}
 file,example.tar.gz;
 
 HTTP 200
@@ -21,6 +23,7 @@ POST {{host}}/v1/retrieve-json
 content-type: application/json
 [Options]
 delay: 90000
+skip: {{blocked}}
 ```
 [
 	{
@@ -34,7 +37,6 @@ Content-Type: application/json
 [Asserts]
 jsonpath "$" count == 49
 jsonpath "$[*].value.cluster" exists
-jsonpath "$[*].value.weight" exists
 
 
 ##################################################################

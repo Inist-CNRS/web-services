@@ -1,10 +1,9 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 import os
-import sys
-import json
 from refextract import extract_references_from_file
 from bibref.bibref_functions import *
+import json
 
 
 for line in sys.stdin:

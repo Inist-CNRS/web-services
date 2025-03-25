@@ -1,5 +1,5 @@
 # syntax=docker/dockerfile:1.2
-FROM python:3.9-slim-bullseye as build1
+FROM python:3.9-slim-bullseye AS build1
 WORKDIR /dvc
 RUN apt update && apt -y install git curl
 RUN pip install dvc[webdav]==3.39.0

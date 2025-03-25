@@ -1,0 +1,14 @@
+{
+    "environnement": {
+        "EZS_TITLE": "Génère un résumé d'un article scientifique.",
+        "EZS_DESCRIPTION": "Utilise un modèle de langue pour générer le résumé d'un article scientifique à partir du texte intégral. La nature du modèle ne permet pas de garantir la reproductibilité des résultats. Si le texte est trop long, la fin du document n'est pas prise en compte (ce qui affecte peu les performances globales du modèle). La route doit être choisie en fonction de la langue du document.",
+        "EZS_METRICS": true,
+        "EZS_CONCURRENCY": 1,
+        "EZS_CONTINUE_DELAY": 60,
+        "EZS_NSHARDS": 32,
+        "EZS_CACHE": true,
+        "EZS_VERBOSE": false,
+        "NODE_OPTIONS": "--max_old_space_size=1024",
+        "NODE_ENV": "production"
+    }
+}

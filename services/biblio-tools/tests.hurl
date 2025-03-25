@@ -442,6 +442,26 @@ jsonpath "$[4].value.text" exists
 
 
 
+POST {{host}}/v2/hal/works/expandByHalId?indent=true
+content-type: application/json
+[Options]
+skip: false
+```
+[
+  { "id":1,   "value": "hal-01831500" },
+  { "id":4,   "value": "" }
+]
+```
+
+HTTP 200
+[Asserts]
+jsonpath "$" count == 2
+jsonpath "$[0].value.teiHeader" exists
+jsonpath "$[0].value.text" exists
+jsonpath "$[1].value" == "n/a"
+
+
+
 POST {{host}}/v1/conditor/works/expand?indent=true
 content-type: application/json
 [Options]

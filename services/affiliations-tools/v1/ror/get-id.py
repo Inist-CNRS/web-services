@@ -16,7 +16,7 @@ def change_part(affiliation):
 
 # Fonction de WS de découpage d'adresse
 def ws_affiliation(affiliation):
-    url = "https://affiliations-tools.services.istex.fr/v1/addresses/parse"
+    url = "http://localhost:31976/v1/addresses/parse"
     headers = {"accept": "application/json", "Content-Type": "application/json"}
     data = [{"id": affiliation, "value": affiliation}]
     response = requests.post(url, headers=headers, json=data)
@@ -73,17 +73,23 @@ def request(name):
 
     url = f"https://api.ror.org/organizations?affiliation={name.replace(' ', '%20')}"
     if url == "https://api.ror.org/organizations?affiliation=n/a":
-        return "Error affiliation"
+        return "Error"
 
     try:
         response = requests.get(url, headers={"Accept": "application/json"})
         response.raise_for_status()
     except HTTPError as http_err:
-        print(f"HTTP error occurred: {http_err}",file=sys.stderr)  # Erreur HTTP (par exemple, 404, 500, etc.)
+        print(
+            f"HTTP error occurred: {http_err}", file=sys.stderr
+        )  # Erreur HTTP (par exemple, 404, 500, etc.)
     except Timeout as timeout_err:
-        print(f"Timeout error occurred: {timeout_err}",file=sys.stderr)  # La requête a expiré
+        print(
+            f"Timeout error occurred: {timeout_err}", file=sys.stderr
+        )  # La requête a expiré
     except RequestException as req_err:
-        print(f"Error occurred: {req_err}",file=sys.stderr)  # Autres erreurs (par exemple, problèmes de connexion, etc.)
+        print(
+            f"Error occurred: {req_err}", file=sys.stderr
+        )  # Autres erreurs (par exemple, problèmes de connexion, etc.)
     else:
         return response.json()
 
@@ -100,39 +106,48 @@ def api_ror(affiliation):
 
 # Filtre la sortie de l'API ROR pour ne récupérer que ce qui intéresse
 def filter_api(json, city=None, short=False):
-    if json == "Error affiliation" or json == "Error":
-        return "Error affiliation"    
+    if json == "Error":
+        return {"status": "Unexpected data"}
 
-    for item in json["items"]:
-        id_ror = item["organization"]["id"]
-        score_similarity = item["score"]
-        name = item["organization"]["name"]
-        type = item["organization"]["types"]
-        name_geonames = item["organization"]["addresses"][0]["geonames_city"]["geonames_admin2"]["name"]
-        id_geonames = item["organization"]["addresses"][0]["geonames_city"]["geonames_admin2"]["id"]
-        # json_dict = {"id_ror": id_ror, "score": score_similarity, "name": name}
-        json_dict = {
-            "id_ror": id_ror,
-            "score": score_similarity,
-            "name": name,
-            "type": type,
-            "name_geonames": name_geonames,
-            "id_geonames": id_geonames,
-        }
+    if json and "items" in json:
+        for item in json["items"]:
+            id_ror = item["organization"]["id"]
+            score_similarity = item["score"]
+            name = item["organization"]["name"]
+            type = item["organization"]["types"]
+            name_geonames = item["organization"]["addresses"][0]["geonames_city"][
+                "city"
+            ]
+            id_geonames = item["organization"]["addresses"][0]["geonames_city"]["id"]
+            json_dict = {
+                "status": "Found",
+                "id_ror": id_ror,
+                "score": score_similarity,
+                "name": name,
+                "type": type,
+                "name_geonames": name_geonames,
+                "id_geonames": id_geonames,
+            }
+            if city:
+                if item["organization"]["addresses"][0]["city"].lower() == city.lower():
+                    return json_dict
+                elif short:
+                    return json_dict
+            elif short == True:
+                return json_dict
+            else:
+                json_dict = {"status": "No city found"}
+                return json_dict
+
         if city:
-            if item["organization"]["addresses"][0]["city"].lower() == city.lower():
-                return json_dict
-            elif short:
-                return json_dict
-        elif short == True:
+            json_dict = {"status": "No match found"}
             return json_dict
-        else:
-            return "no-city"
 
-    if city:
-        return "No match found"
+        return None
 
-    return None
+    else:
+        json_dict = {"status": "Unexpected data"}
+        return json_dict
 
 
 def main():
@@ -152,10 +167,13 @@ def main():
                     data["value"] = filter_affiliation
 
                 else:
-                    data["value"] = "No match found"
+                    # Par exemple : "NSF’s National Optical-Infrared Astronomy Research Laboratory, 950 North Cherry Avenue, Paris, AZ 85719, USA"
+                    # Boucle "sécurité" > "filter_api"
+                    data["value"] = {"status": "No match found"}
 
             else:
-                data["value"] = "No house found"
+                # Boucle "sécurité" > "extract_house"
+                data["value"] = {"status": "No house found"}
 
         # Boucle pour l'affiliation courte (simple, on envoie tout)
         else:

@@ -1,5 +1,5 @@
 # syntax=docker/dockerfile:1.2
-FROM python:3.9-slim-bullseye as dvc-files
+FROM python:3.9-slim-bullseye AS dvc-files
 WORKDIR /dvc
 RUN apt update && apt -y install git
 RUN pip install dvc[webdav]==3.39.0
@@ -27,8 +27,9 @@ RUN pip install --no-build-isolation \
     --index-url https://download.pytorch.org/whl/cpu \
     --extra-index-url https://pypi.org/simple \
     sentence-transformers==2.2.2 \
-    umap-learn==0.5.5 \
+    huggingface_hub==0.23.2 \
     scikit-learn==1.4.1.post1 \
+    umap-learn==0.5.7 \
     prometheus-client==0.19.0
 
 # Declare files to copy in .dockerignore

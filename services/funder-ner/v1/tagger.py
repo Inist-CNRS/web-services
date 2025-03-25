@@ -18,6 +18,6 @@ for line in sys.stdin:
     for token in lSent:
         sentence.add_token(token)
     tagger.predict(sentence)
-    data["value"] = str([entity.text for entity in sentence.get_spans('ner')])
+    data["value"] = [entity.text for entity in sentence.get_spans('ner')]
     sys.stdout.write(json.dumps(data))
     sys.stdout.write('\n')

@@ -4,10 +4,10 @@
 // and for remote tests (services/<instance>/tests.hurl)
 //
 // To test locally, use:
-// hurl --test --variable host=http://localhost:31976 services/<instance>/tests.hurl
+// hurl --test --variable host=http://localhost:31976 --jobs 1 services/<instance>/tests.hurl
 //
 // To test remotely, use:
-// hurl --test --variable host=https://<instance>.services.istex.fr services/<instance>/tests.hurl
+// hurl --test --variable host=https://<instance>.services.istex.fr --jobs 1 services/<instance>/tests.hurl
 //
 // The service should be launched as a local server. URL: http://localhost:31976
 // Just launch:

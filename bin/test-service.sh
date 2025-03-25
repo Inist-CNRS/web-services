@@ -31,4 +31,4 @@ else
     HOST="https://$SERVICE.services.istex.fr"
 fi
 
-npx hurl --test --variable host="$HOST" "services/$SERVICE/tests.hurl"
+npx hurl --test --jobs 1 --variable host="$HOST" "services/$SERVICE/tests.hurl"
