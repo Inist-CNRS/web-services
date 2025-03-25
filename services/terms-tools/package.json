@@ -1,7 +1,7 @@
 {
   "private": true,
   "name": "ws-terms-tools",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "POStagging de termes et annotation",
   "repository": {
     "type": "git",
@@ -25,10 +25,10 @@
     "version:push": "git push && git push --tags",
     "version": "npm run version:insert && npm run version:commit && npm run version:tag",
     "postversion": "npm run version:push",
-    "build:dev": "docker build -t cnrsinist/${npm_package_name}:latest .",
+    "build:dev": ". ./.env 2> /dev/null; DOCKER_BUILDKIT=1 docker build -t cnrsinist/${npm_package_name}:latest --secret id=webdav_login,env=WEBDAV_LOGIN --secret id=webdav_password,env=WEBDAV_PASSWORD --secret id=webdav_url,env=WEBDAV_URL .",
     "start:dev": "npm run build:dev && docker run --name dev --rm --detach -p 31976:31976 cnrsinist/${npm_package_name}:latest",
     "stop:dev": "docker stop dev",
-    "build": "docker build -t cnrsinist/${npm_package_name}:${npm_package_version} .",
+    "build": ". ./.env 2> /dev/null; DOCKER_BUILDKIT=1 docker build -t cnrsinist/${npm_package_name}:${npm_package_version} --secret id=webdav_login,env=WEBDAV_LOGIN --secret id=webdav_password,env=WEBDAV_PASSWORD --secret id=webdav_url,env=WEBDAV_URL .",
     "start": "docker run --rm -p 31976:31976 cnrsinist/${npm_package_name}:${npm_package_version}",
     "publish": "docker push cnrsinist/${npm_package_name}:${npm_package_version}"
   }
