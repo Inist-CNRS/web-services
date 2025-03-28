@@ -141,7 +141,7 @@ umap_model = umap.UMAP(
     metric="cosine",
     random_state=42,
     min_dist=0.0,
-    n_job=1
+    n_jobs=1
 )
 reduced_embeddings = umap_model.fit_transform(texts)
 
