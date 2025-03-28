@@ -51,9 +51,9 @@ for i in range(len_data):
         
         if "value" in line :
             value = line["value"]
-            if type(value)==list:
+            if isinstance(value, list):
                 texts.append(model.encode(" ".join(value)))
-            elif type(value)==str:
+            elif isinstance(value, str):
                     texts.append(model.encode(value))
             else:
                 indice_out_cluster.append(i)
@@ -65,8 +65,15 @@ for i in range(len_data):
         indice_out_cluster.append(i)
 
 # Dimension reduction
-umap_model = umap.UMAP(n_neighbors=max(10, min(30,int(len_data/20))), n_components=2, metric='cosine',min_dist=0.0, random_state=42, n_jobs=1)
-reduced_embeddings = umap_model.fit_transform(texts)  # embeddings sont tes vecteurs de texte
+umap_model = umap.UMAP(
+    n_neighbors=max(10, min(30,int(len_data/20))),
+    n_components=2,
+    metric='cosine',
+    min_dist=0.0,
+    random_state=42,
+    n_jobs=1)
+
+reduced_embeddings = umap_model.fit_transform(texts)
 
 
 # HDBSCAN with scikit-learn
@@ -85,6 +92,7 @@ clusterer.fit(reduced_embeddings)
 # extract infos
 res = []
 indice_in_cluster=0
+text_output = ""
 for i in range(len_data):
     line = all_data[i]
     if i in indice_out_cluster:
@@ -94,7 +102,9 @@ for i in range(len_data):
             line["value"] ="noise"
         else:
             line["value"] = "relevant"
-        indice_in_cluster +=1 # Here we increment only if the row isn't noise, because they aren't count in "clusterer model"
-
-    sys.stdout.write(json.dumps(line))
-    sys.stdout.write("\n")
+        # Increment only if the row isn't noise (they aren't count in "clusterer model")
+        indice_in_cluster +=1
+    text_output += json.dumps(line)
+    text_output += "\n"
+    
+sys.stdout.write(text_output)
