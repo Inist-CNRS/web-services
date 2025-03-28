@@ -12,6 +12,7 @@ import os
 
 os.environ["TOKENIZERS_PARALLELISM"] = "false"
 model = SentenceTransformer("./v1/all-MiniLM-L6-v2")
+
 n_keywords = 20
 nb_cluster = int(sys.argv[sys.argv.index("-p") + 1] if "-p" in sys.argv else 0)
 if nb_cluster > 30:
@@ -120,9 +121,9 @@ for i in range(len_data):
 
         if "value" in line:
             value = line["value"]
-            if type(value) is list:
+            if isinstance(value, list):
                 texts.append(model.encode(" ".join(value)))
-            elif type(value) == str:
+            elif isinstance(value, str):
                 texts.append(model.encode(value))
             else:
                 indice_out_cluster.append(i)
@@ -135,11 +136,12 @@ for i in range(len_data):
 
 # Dimension reduction
 umap_model = umap.UMAP(
-    n_neighbors=max(10, min(30, int(len_data / 20))),
+    n_neighbors=max(10, min(30, int(len_data/20))),
     n_components=10,
     metric="cosine",
     random_state=42,
     min_dist=0.0,
+    n_job=1
 )
 reduced_embeddings = umap_model.fit_transform(texts)
 
