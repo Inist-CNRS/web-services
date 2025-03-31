@@ -729,6 +729,5 @@ HTTP 200
         "Donec et metus rhoncus sem ultricies semper.",
         "Donec luctus magna vitae mi malesuada, eget tristique turpis mattis."
     ]
-}
-]
+}]
 
