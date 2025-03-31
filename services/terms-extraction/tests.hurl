@@ -709,7 +709,7 @@ POST {{host}}/v1/tools/sentences?indent=true
 content-type: application/json
 [
 	{
-		"value": "Bonjour. Comment ça va ?",
+		"value": "Bonjour. Comment ça va ?"
 	},
 	{
 		"value": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec et metus rhoncus sem ultricies semper. Donec luctus magna vitae mi malesuada, eget tristique turpis mattis."
