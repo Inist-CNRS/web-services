@@ -3,7 +3,7 @@
     "info": {
         "title": "terms-extraction - Extraction de termes",
         "summary": "Extraction de termes à partir de textes en anglais ou en français.",
-        "version": "1.8.2",
+        "version": "1.9.0",
         "termsOfService": "https://services.istex.fr/",
         "contact": {
             "name": "Inist-CNRS",
@@ -15,7 +15,7 @@
             "x-comment": "Will be automatically completed by the ezs server."
         },
         {
-            "url": "http://vptdmservices.intra.inist.fr:49328/",
+            "url": "http://vptdmservices.intra.inist.fr:49334/",
             "description": "Latest version for production",
             "x-profil": "Standard"
         }
