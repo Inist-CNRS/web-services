@@ -5,14 +5,14 @@ import sys
 from difflib import SequenceMatcher
 import numpy as np
 
-def get_ratio(data):
+def get_ratio(data, all_data):
     currentTitle = data['value']
     currentId = data['id']
     idList = []
     ratioList = []
 
     for _,line_cmp in enumerate(all_data):
-        data_cmp = line_cmp[0]
+        data_cmp = line_cmp
         id,title = data_cmp["id"],data_cmp["value"]
         if currentId == id:
             continue
@@ -35,7 +35,7 @@ for line in sys.stdin:
 output = int(sys.argv[sys.argv.index('-p') + 1] if '-p' in sys.argv else 0)
 
 for line in all_data:
-    id, ratioList, idList = get_ratio(line[0])
+    id, ratioList, idList = get_ratio(line, all_data)
     if output == 0:
         if ratioList[0] < 0.6:
             sim = []
