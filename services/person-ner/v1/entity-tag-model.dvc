@@ -1,0 +1,6 @@
+outs:
+- md5: 780ca7f97b97198bd4cfc743e12f61b0.dir
+  size: 141937333
+  nfiles: 6
+  hash: md5
+  path: entity-tag-model
