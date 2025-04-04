@@ -3,11 +3,11 @@ content-type: application/json
 [
   {
     "id": "1",
-    "value": "Python is widely used in data science. Bob R. uses it ; he works for the CNRS"
+    "value": "En avril 2024, un sommet technologique révolutionnaire s'est tenu dans la Silicon Valley. L'orateur principal, David Johnson, a présenté un camion électrique appelé CyberHauler. Le sommet, qui a duré trois jours, a mis l'accent sur les avancées en matière d'IA et d'énergie verte. Des représentants de l'Union européenne étaient présents pour discuter des nouvelles lois environnementales visant à réduire les émissions de carbone de 20 % au cours de la prochaine décennie. L'événement s'est achevé par un dîner de gala au Golden Gate Bridge, avec une vue spectaculaire sur l'océan Pacifique."
   },
   {
     "id": "2",
-    "value": "Jean Dupont assiste àu festival de Cannes sur la côte d'Azur."
+    "value": "In April 2024, a groundbreaking technology summit was held at the Silicon Valley. The keynote speaker, David Johnson, introduced an electric truck named CyberHauler. The summit, which lasted three days, highlighted advances in AI and green energy. Representatives from the European Union were present to discuss new environmental laws aimed at reducing carbon emissions by 20% over the next decade. The event concluded with a gala dinner at the Golden Gate Bridge, with a spectacular view of the Pacific Ocean."
   }
 ]
 
@@ -16,14 +16,15 @@ HTTP 200
     "id": "1",
     "value": {
         "PER": [
-            "Bob R."
+            "David Johnson"
         ],
-        "LOC": [],
+        "LOC": [
+            "Silicon Valley",
+            "Golden Gate Bridge",
+            "océan Pacifique"
+        ],
         "ORG": [
-            "CNRS"
-        ],
-        "MISC": [
-            "Python"
+            "Union européenne"
         ]
     }
 },
@@ -31,14 +32,15 @@ HTTP 200
     "id": "2",
     "value": {
         "PER": [
-            "Jean Dupont"
+            "David Johnson"
         ],
         "LOC": [
-            "côte d'Azur"
+            "Silicon Valley",
+            "Golden Gate Bridge",
+            "Pacific Ocean"
         ],
-        "ORG": [],
-        "MISC": [
-            "festival de Cannes"
+        "ORG": [
+            "European Union"
         ]
     }
 }]
@@ -48,11 +50,11 @@ content-type: application/json
 [
   {
     "id": 1,
-    "value": "On September 15th, 2023, the renowned artist Sarah Blake unveiled Whispers of the Wind, at the Metropolitan Museum of Art in New York City. The event attracted people from all over the world, including the famous author Emily Green and several political figures from the United Nations. The museum, located on Fifth Avenue, is known for its extensive collection of European paintings. During the unveiling, a new highway connecting the city to Washington, D.C., was also announced, funded by a grant of $5 million from the federal government. This new project, expected to be completed by 2025, promises to reduce travel time by 30%. Sarah's masterpiece, inspired by the serene landscapes of the Rocky Mountains, is expected to be a major attraction, drawing art enthusiasts and tourists alike."
+    "value": "On September 15th, 2023, the renowned artist Sarah Blake unveiled Whispers of the Wind, at a museum in New York City. The event attracted people from all over the world, including the famous author Emily Green and several political figures from the United Nations. The museum, located on Fifth Avenue, is known for its extensive collection of European paintings. During the unveiling, a new highway connecting the city to Washington, D.C., was also announced, funded by a grant of $5 million from the federal government. This new project, expected to be completed by 2025, promises to reduce travel time by 30%. Sarah's masterpiece, inspired by the serene landscapes of the Rocky Mountains, is expected to be a major attraction, drawing art enthusiasts and tourists alike."
   },
   {
     "id": 2,
-    "value":"In April 2024, a groundbreaking technology summit was held at the Silicon Valley headquarters of FutureTech, attracting tech innovators and CEOs from major companies like OmniCorp and QuantumSoft. The keynote speaker, David Johnson, introduced Electra's latest product, an electric truck named CyberHauler. The summit, which lasted three days, highlighted advances in AI and green energy. Representatives from the European Union were present to discuss new environmental laws aimed at reducing carbon emissions by 20% over the next decade. The summit's discussions, conducted primarily in English, also touched on the upcoming Mars mission scheduled for 2030, which aims to establish the first human colony on the Red Planet. The event concluded with a gala dinner at the Golden Gate Bridge, with a spectacular view of the Pacific Ocean."
+    "value":"In April 2024, a groundbreaking technology summit was held at the Silicon Valley. The keynote speaker, David Johnson, introduced an electric truck named CyberHauler. The summit, which lasted three days, highlighted advances in AI and green energy. Representatives from the European Union were present to discuss new environmental laws aimed at reducing carbon emissions by 20% over the next decade. The event concluded with a gala dinner at the Golden Gate Bridge, with a spectacular view of the Pacific Ocean."
   }
 ]
 
@@ -68,79 +70,29 @@ HTTP 200
         ],
         "LOC": [
             "New York City",
+            "Fifth Avenue",
             "Washington",
             "D.C.",
-            "the Rocky Mountains"
+            "Rocky Mountains"
         ],
         "ORG": [
-            "the Metropolitan Museum of Art",
-            "the United Nations"
-        ],
-        "DATE": [
-            "September 15th,",
-            "2023",
-            "2025"
-        ],
-        "EVENT": [],
-        "FAC": [
-            "Fifth Avenue"
-        ],
-        "LANGUAGE": [],
-        "LAW": [],
-        "MONEY": [
-            "$5 million"
-        ],
-        "NORP": [
-            "European"
-        ],
-        "PRODUCT": [],
-        "QUANTITY": [
-            "30%"
-        ],
-        "WORK_OF_ART": []
+            "United Nations"
+        ]
     }
 },
 {
     "id": 2,
     "value": {
         "PER": [
-            "David Johnson",
-            "CyberHauler"
+            "David Johnson"
         ],
         "LOC": [
-            "the Silicon Valley",
-            "Mars",
-            "the Red Planet",
-            "the Pacific Ocean"
+            "Silicon Valley",
+            "Golden Gate Bridge",
+            "Pacific Ocean"
         ],
         "ORG": [
-            "FutureTech",
-            "OmniCorp",
-            "QuantumSoft",
-            "Electra",
-            "AI",
-            "the European Union"
-        ],
-        "DATE": [
-            "April 2024",
-            "three days",
-            "the next decade",
-            "2030"
-        ],
-        "EVENT": [],
-        "FAC": [
-            "the Golden Gate Bridge"
-        ],
-        "LANGUAGE": [
-            "English"
-        ],
-        "LAW": [],
-        "MONEY": [],
-        "NORP": [],
-        "PRODUCT": [],
-        "QUANTITY": [
-            "20%"
-        ],
-        "WORK_OF_ART": []
+            "European Union"
+        ]
     }
 }]
