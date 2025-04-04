@@ -1,0 +1,57 @@
+# These examples can be used directly in VSCode, using HTTPYac extension (anweber.vscode-httpyac)
+# They are important, because used to generate the tests.hurl file.
+
+# Décommenter/commenter les lignes voulues pour tester localement
+@host=http://localhost:31976
+# @host=https://data-table.services.istex.fr
+
+###
+# @name v1Retrieve
+# @save
+POST {{host}}/v1/retrieve HTTP/1.1
+Content-Type: application/json
+
+[
+	{
+		"value":"8RjaJDej5"
+	}
+]
+
+###
+# @name v1RetrieveJSON
+POST {{host}}/v1/retrieve-json?indent=true HTTP/1.1
+Content-Type: application/json
+
+[
+	{
+		"value":"fRDWhEhay"
+	}
+]
+###
+# @name v1RetrieveCSV
+POST {{host}}/v1/retrieve-csv?indent=true HTTP/1.1
+Content-Type: text/csv
+
+[
+	{
+		"value":"QjiWLMeKC"
+	}
+]
+
+###
+# @name v1baseLine
+POST {{host}}/v1/base-line HTTP/1.1
+Content-Type: application/x-tar
+X-Webhook-Success: https://webhook.site/69300b22-a251-4c16-9905-f7ba218ae7e9
+X-Webhook-Failure: https://webhook.site/69300b22-a251-4c16-9905-f7ba218ae7e9
+
+< ./example-json.tar.gz
+
+###
+# @name v1table-extraction
+POST {{host}}/v1/table-extraction HTTP/1.1
+Content-Type: application/x-tar
+X-Webhook-Success: https://webhook.site/69300b22-a251-4c16-9905-f7ba218ae7e9
+X-Webhook-Failure: https://webhook.site/69300b22-a251-4c16-9905-f7ba218ae7e9
+
+< ./example-xml-rapido.tar.gz
