@@ -68,7 +68,6 @@
     "services/pdf-text",
     "services/person-ner",
     "services/sciencemetrix-classification",
-    "services/data-table",
     "services/terms-extraction",
     "services/terms-tools",
     "services/text-clustering",
