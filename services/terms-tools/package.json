@@ -1,7 +1,7 @@
 {
   "private": true,
   "name": "ws-terms-tools",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "description": "POStagging de termes et annotation",
   "repository": {
     "type": "git",
