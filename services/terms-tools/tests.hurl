@@ -1,6 +1,6 @@
 # WARNING: This file should have CRLF line endings. It is an exception.
 #          See .gitattributes
-POST {{host}}/v1/en/dico_pos/postag?input=terms
+POST {{host}}/v1/en/dico-pos/postag?input=terms
 Content-Type: text/tab-separated-values
 ```
 id	value
@@ -21,7 +21,7 @@ HTTP 200
 #"http://data.loterre.fr/ark:/67375/P66#xl_en_ded9af98"	"processes"	"NNS"	"process"
 #```
 
-POST {{host}}/v1/fr/dico_pos/postag?input=terms
+POST {{host}}/v1/fr/dico-pos/postag?input=terms
 Content-Type: text/tab-separated-values
 ```
 id	value
@@ -43,7 +43,7 @@ HTTP 200
 ```
 
 
-POST {{host}}/v1/en/terms_matcher/P66
+POST {{host}}/v1/en/terms-matcher/P66
 Content-Type: application/json
 
 [
@@ -58,7 +58,7 @@ HTTP 200
 #<?xml version="1.0" encoding="UTF-8"?><result><text><tag #id="http://data.loterre.fr/ark:/67375/P66-D6XL3PDR-M" TermeReconnu="blind implantation methods" #lang="en">blind implantation methods</tag></text><text><tag id="http://data.loterre.fr/ark:/67375/P66-WG17XBG4-V" TermeReconnu="Mem-Pro-Clinic test" #lang="en">Mem-Pro-Clinic test</tag><tag id="http://data.loterre.fr/ark:/67375/P66-VLJ0CQH4-G" #TermeReconnu="prospective thoughts" lang="en">prospective thoughts</tag><tag id="http://data.loterre.fr/ark:/67375/P66-J8FC45M1-6" TermeReconnu="long-term memory" #lang="en">long-term memory</tag></text></result>
 
 
-POST {{host}}/v1/fr/terms_matcher/P66
+POST {{host}}/v1/fr/terms-matcher/P66
 Content-Type: application/json
 
 [
