@@ -85,8 +85,11 @@ def get_title_authors_doi_source_date(message):
         dict: A dictionary containing the title, first author's given name,
         first author's family name, and DOI.
     """
-    title = message["title"][0] if "title" in message else ""
     doi = message["DOI"] if "DOI" in message else ""
+    try:
+        title = message["title"][0] if "title" in message else ""
+    except Exception:
+        title = ""
     try:
         first_author_name = message["author"][0]["family"]
     except Exception:
@@ -148,14 +151,20 @@ def verify_doi(doi, headers=headers):
     try:
         response = session.get(url, headers=headers)
         status_code = response.status_code
-        if status_code != 200:
-            return (status_code, None)
+    except Exception as e:
+        sys.stderr.write("Error while checking DOI : "+str(e)+ "\n")
+        return (503, None)  # if there is an unexpected error from crossref
+    
+    if status_code != 200:
+        return (status_code, None)
+    
+    try:
         message = response.json()["message"]
         others_biblio_info = get_title_authors_doi_source_date(message)
-
         return (response.status_code, others_biblio_info)
 
-    except:
+    except Exception as e:
+        sys.stderr.write("Error while processing crossref response : "+str(e)+ "\n")
         return (503, None)  # if there is an unexpected error from crossref
 
 
@@ -209,7 +218,7 @@ def compare_pubinfo_refbiblio(item,ref_biblio):
     # Title
     title_score = fuzz.partial_ratio(uniformize(clean_crossref_title(item["title"])), ref_biblio)/100
 
-    if title_score > 0.9:
+    if title_score > 0.8:
         items_score += 1
 
     # Check first author
@@ -228,7 +237,7 @@ def compare_pubinfo_refbiblio(item,ref_biblio):
     try:
         doi = item["doi"].lower()
     except Exception:
-        print("Error : can't lower DOI", sys.stderr)
+        sys.stderr.write("cant lower doi")
         doi = ""
 
     return items_score, title_score, doi
@@ -236,7 +245,7 @@ def compare_pubinfo_refbiblio(item,ref_biblio):
 
 # This is the function to update if you want stronger or weaker criteria
 # For now, criteria is 2 or more matches on informations on title, authors, date and source except if it is date and source.
-def verify_biblio_without_doi(ref_biblio, headers=headers):
+def verify_biblio_without_doi(ref_biblio, headers=headers, wrong_doi=False):
     """
     check with crossref api if a biblio ref is correct.
     Objective : In this function, we check if the biblio ref exist if no doi
@@ -266,10 +275,14 @@ def verify_biblio_without_doi(ref_biblio, headers=headers):
             # Matches criteria when there is no doi in the reference
             if match_items_score >= 3:
                 return "found", doi
+            
+            # if doi is wrong
+            elif wrong_doi:
+                continue
 
             elif match_items_score < 2:
 
-                if title_score > 0.9:
+                if 0.7 < title_score < 0.85:
                     hallucinated = True
                 continue
 
@@ -279,12 +292,18 @@ def verify_biblio_without_doi(ref_biblio, headers=headers):
                 # if title match found is returned
                 # If title doesn't match, required a weak criteria on title
 
-                if title_score < 0.75:
+                if title_score < 0.7:
                     continue
+                
+                if title_score < 0.85:
+                    hallucinated = True
+                    continue
+                
+                return "found", doi
 
-                else:
-                    return "found", doi
-
+        if wrong_doi:
+            return "hallucinated", ""
+        
         if hallucinated:
             return "hallucinated", ""
 
@@ -326,19 +345,23 @@ def biblio_ref(ref_biblio, retracted_doi=retracted_doi):
             if len(doi)*1.5 < len(ref_biblio): 
                 match_items_score, title_score, doi = compare_pubinfo_refbiblio(others_biblio_info,ref_biblio)
                 
-                if match_items_score < 2:
-                    return {"doi": "", "status": "hallucinated"}
+                if match_items_score < 3:
+                    if title_score < 0.7:
+                        return {"doi": "", "status": "hallucinated"}
                
             return {"doi": doi, "status": status}
         
         # # If DOI doesn't exist
         elif crossref_status_code == 404:
-            status, doi = verify_biblio_without_doi(ref_biblio)
+            status, doi = verify_biblio_without_doi(ref_biblio, wrong_doi=True)
             
             # # # Can be retracted
             if doi in retracted_doi:
                 return {"doi": doi, "status": "retracted"}
             
+            # # # can't be not found : there is a doi. Should be on Crossref.
+            if status == "not_found":
+                return {"doi": "", "status": "hallucinated"}
             return {"doi": doi, "status": status}
                     
         # # # for others errors
