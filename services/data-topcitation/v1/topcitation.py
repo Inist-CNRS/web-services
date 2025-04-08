@@ -20,9 +20,9 @@ def extract_doi_referenced_works(data):
         referenced_works = data.get('referenced_works', [])
         
         if not referenced_works:
-            return {doi_url: {"referenced_works": "champ referenced_works vide"}}
-        
-        return {doi_url: {"referenced_works": referenced_works}}
+            return {doi_url: "champ referenced_works vide"}
+        else :
+            return {doi_url: referenced_works}
     else:
         return {}
 
@@ -30,7 +30,6 @@ def openAlex_to_doi(url) :
 
     url_parse = url.split("/")
     id = url_parse[-1]
-
     url = f"https://api.openalex.org/works/{id}"
     response = requests.get(url)
 
@@ -67,7 +66,7 @@ def main():
 
     # parcours le dictionnaire où les dois sont des clés et les références des listes de valeurs
     for doi, references in all_references.items():
-        if references["referenced_works"] == "champ referenced_works vide":
+        if references == "champ referenced_works vide":
             # Ajouter une entrée dans le JSON indiquant que le champ referenced_works est vide
             sys.stdout.write(json.dumps({"id": doi, "value": {"message": "champ referenced_works vide"}}))
             sys.stdout.write("\n")
