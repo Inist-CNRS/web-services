@@ -243,7 +243,13 @@ delay: 15000
 
 HTTP 200
 Content-Type: application/xml
-# ```
+[Asserts]
+xpath "/*[name()='gexf']" exists
+xpath "substring(//*[name()='meta']/@lastmodifieddate,1,2)" == "20"
+xpath "string(//*[name()='creator'])" == "NetworkX 3.2.1"
+xpath "//*[name()='node']" count >= 8 # 15 in reality, hurl bug ?
+xpath "//*[name()='edge']" count >= 12 # 26 in reality
+# ```xml
 # <gexf xmlns:viz="http://www.gexf.net/1.2draft/viz" xmlns="http://www.gexf.net/1.2draft" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.gexf.net/1.2draft http://www.gexf.net/1.2draft/gexf.xsd" version="1.2">
 #   <meta lastmodifieddate="2025-04-01">
 #     <creator>NetworkX 3.2.1</creator>
