@@ -20,7 +20,7 @@ def extract_doi_referenced_works(data):
         referenced_works = data.get('referenced_works', [])
         
         if not referenced_works:
-            return {doi_url: {"referenced_works": "champs referenced_works vide"}}
+            return {doi_url: {"referenced_works": "champ referenced_works vide"}}
         
         return {doi_url: {"referenced_works": referenced_works}}
     else:
@@ -67,9 +67,9 @@ def main():
 
     # parcours le dictionnaire où les dois sont des clés et les références des listes de valeurs
     for doi, references in all_references.items():
-        if references["referenced_works"] == "champs referenced_works vide":
+        if references["referenced_works"] == "champ referenced_works vide":
             # Ajouter une entrée dans le JSON indiquant que le champ referenced_works est vide
-            sys.stdout.write(json.dumps({"id": doi, "value": {"message": "champs referenced_works vide"}}))
+            sys.stdout.write(json.dumps({"id": doi, "value": {"message": "champ referenced_works vide"}}))
             sys.stdout.write("\n")
         else : 
         # itération de la liste des références
