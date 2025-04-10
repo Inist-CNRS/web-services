@@ -52,6 +52,7 @@
     "services/data-computer",
     "services/data-homogenise",
     "services/data-rapido",
+    "services/data-table",
     "services/data-termsuite",
     "services/data-thesesul",
     "services/data-topcitation",
