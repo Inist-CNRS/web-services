@@ -1,19 +1,36 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-import spacy
 import json
 import sys
+import torch
+import pickle
+from entitytag.entitytag_functions import *
 
-nlp = spacy.load("xx_ent_wiki_sm")
 
+# Load vocabulary and model
+with open("./v1/entity-tag-model/multilingual/word2idx.pkl", "rb") as f:
+    word2idx = pickle.load(f)
+
+with open("./v1/entity-tag-model/multilingual/tag2idx.pkl", "rb") as f:
+    tag2idx = pickle.load(f)
+
+idx2word = {i: w for w, i in word2idx.items()}
+idx2tag = {i: t for t, i in tag2idx.items()}
+
+model = LSTM_NER(vocab_size=len(word2idx), tagset_size=len(tag2idx), embed_dim=300)
+model.load_state_dict(torch.load("./v1/entity-tag-model/multilingual/entityTag-multilingual.pth", map_location=torch.device('cpu')))
+
+
+# WS
 for line in sys.stdin:
     line = json.loads(line)
-    res = {"PER":[],"LOC":[],"ORG":[],"MISC":[]}
+
     try:
         value = line["value"]
     except KeyError:
         value = ""
-
+        doc = []
+        
     try:
         if value[:8].lower() == "abstract":
             value = value[9:].strip()
@@ -21,15 +38,29 @@ for line in sys.stdin:
         pass
     
     try:
-        doc = nlp(value)
-        doc = doc.ents
-    except Exception:
-        doc = []
-    
-    for ent in doc:
-        res[ent.label_].append(ent.text)
+        sentences = split_sentences_nltk(value)
+        data = []
+        max_len = 0
+        for sentence in sentences:
+            sentence = multilingual_tokenizer(sentence)
+            len_sentence = len(sentence)
+            if len_sentence > max_len:
+                max_len = len_sentence
+            data.append(sentence)
+        entities = extract_entities(data, model, word2idx, idx2tag, max_len, threshold=0.7)
         
-    line["value"] = res
-    
+        for ent in entities:
+            remove_occurences(entities[ent], "")
+
+    except Exception as e:
+        sys.stderr.write(str(e))
+        sys.stderr.write("\n")
+        entities = {
+            "PER": [],
+            "LOC": [],
+            "ORG": []
+            }
+        
+    line["value"] = entities
     sys.stdout.write(json.dumps(line))
     sys.stdout.write("\n")
