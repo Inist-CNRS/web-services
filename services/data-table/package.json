@@ -1,7 +1,7 @@
 {
   "private": true,
   "name": "ws-data-table",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "description": "Extract tables from pdf files",
   "repository": {
     "type": "git",
