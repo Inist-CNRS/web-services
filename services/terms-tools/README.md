@@ -1,6 +1,9 @@
 # terms_tools
 
-Bibliothèque d'outils pour l'étiquetage POS de liste et la reconnaissance de termes
+Bibliothèque d'outils pour :
+- l'étiquetage POS de listes de termes  
+- la reconnaissance de termes Loterre  
+- en français et en anglais
 
 ## POStag et lemmatisation une liste de termes en français et en anglais  
 
@@ -10,7 +13,7 @@ exemple : `test_labelEN.tsv`
 
 ```tsv
 id	text  
-http://data.loterre.fr/ark:/67375/P66#xl_en_9278939f	qualities
+http://data.loterre.fr/ark:/67375/P66#xl_en_9278939f	qualities 
 http://data.loterre.fr/ark:/67375/P66#xl_en_696ab94f	material entities
 http://data.loterre.fr/ark:/67375/P66#xl_en_d9fccd58	process
 http://data.loterre.fr/ark:/67375/P66#xl_en_0fa9a1f2	empirical effect
@@ -19,7 +22,7 @@ http://data.loterre.fr/ark:/67375/P66#xl_en_06b45a8a	general empirical observati
 http://data.loterre.fr/ark:/67375/P66#xl_en_d9a365b6	empirical generalisations
 ```
 
-### Trois types d'OUTPUT sont disponibles
+### Trois types de sorties sont disponibles    
 
 #### sous la forme d'un dictionnaire jsonld avec l'ensemble des informations (option -o json)
 
@@ -32,8 +35,8 @@ http://data.loterre.fr/ark:/67375/P66#xl_en_53acd26b	[{"id": 0, "start": 0, "end
 ##### WebService
 
 ```bash
-ROUTE = /v1/en/dico-pos/postag?input=terms**  
-URL =  https://loterre-annotator-1.terminology.inist.fr   
+ROUTE = /v1/en/dico-pos/postag?input=terms    
+URL = https://terms-tools.services.istex.fr    
 
 curl -X 'POST' '$URL/v1/en/dico-pos/postag?input=terms' --data-binary '@../terms_tools/test/data/test_labelEN.tsv'  
 
@@ -53,15 +56,15 @@ http://data.loterre.fr/ark:/67375/P66#xl_en_ef4050c0	objects	NNS	object
 ##### WebService
 
 ```bash
-ROUTE = v1/en/dico-annot/postag?input=terms
-URL =    
+ROUTE = v1/en/dico-annot/postag?input=terms  
+URL =  https://terms-tools.services.istex.fr   
 
 curl -X 'POST' '$URL/v1/en/dico-annot/postag?input=terms' --data-binary '@../terms_tools/test/data/test_labelEN.tsv'
 
 curl -X 'POST' '$URL/v1/fr/dico-annot/postag?input=terms' --data-binary '@../terms_tools/test/data/test_labelFR.tsv'
 ```
 
-#### sous la forme d'un dictionnaire pour termMatcher
+#### Sous la forme d'un dictionnaire pour termMatcher
 
 Exemple de sortie :
 
@@ -74,8 +77,8 @@ http://data.loterre.fr/ark:/67375/P66#xl_en_d2b95b32	{"label": "empirical genera
 
 
 ```bash
-ROUTE = v1/en/full-morph/postag?input=terms
-URL =  
+ROUTE = v1/en/full-morph/postag?input=terms  
+URL = https://terms-tools.services.istex.fr  
 
 curl -X 'POST' '$URL/v1/en/full-morph/postag?input=terms' --data-binary '@../terms_tools/test/data/test_labelEN.tsv'  
 
@@ -88,30 +91,35 @@ curl -X 'POST' '$URL/v1/fr/full-morph/postag?input=terms' --data-binary '@../ter
 ##### WebService
 
 ```
-ROUTE = /v1/en/terms_matcher/<CODE_VOC>/format=<FORMAT>
-URL = !
+ROUTE = /v1/<CODE_LANGUE>/terms_matcher/<CODE_VOC>/format=<FORMAT>  
+URL = https://terms-tools.services.istex.fr  
 ```
 
 **FORMAT**
+
+<CODE_LANGUE> = fr, en
+
 |  format | description |
 | :--------------- | :--------------- |
 | json-standoff | liste de termes reconnus sous le forme json |
 | json-indoc| document avec termes annotés, format json id, value |
 | xml-standoff | liste de termes reconnus sous le forme xml (loterre widget) |
 
-CODE_VOC = voir la liste des codes vocabulaires de loterre
+<CODE_VOC> = voir la liste des codes vocabulaires de loterre, [https://loterre.istex.fr/fr/](https://loterre.istex.fr/fr/)
 
 
 #### Exemples :
 
-- Reconnaissance des termes en appartenant au vocabulaire  https://loterre.istex.fr/P66/ 
-CODE_VOC=P66   ; format=json-standoff
-- Sortie au format json standoff
+- Dans un texte anglais, reconnaissance des termes appartenant au vocabulaire  https://loterre.istex.fr/P66/  :  
+<CODE_LANGUE> = en  
+<CODE_VOC> = P66   
+- Sortie au format json standoff :  
+=> format = json-standoff
 
 #### Requête :
 
 ```
-cat <<EOF | curl -v --proxy "" -X POST --data-binary @- https://loterre-annotator-1.terminology.inist.fr/v1/en/terms-matcher/P66?format=json-standoff
+cat <<EOF | curl -v --proxy "" -X POST --data-binary @- https://terms-tools.services.istex.fr/v1/en/terms-matcher/P66?format=json-standoff
 [
     {
         "id": "1",
