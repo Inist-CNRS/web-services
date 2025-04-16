@@ -3,14 +3,10 @@ FROM cnrsinist/ezs-python-server:py3.9-no16-1.0.11
 
 USER root
 # Install all python dependencies
-RUN apt update && apt install -y poppler-utils libmagic1
-
 RUN pip3 install \
     requests_ratelimiter==0.4.2 \
     thefuzz==0.22.1 \
-    refextract==1.1.4 \
-    python-magic==0.4.27
-
+    lxml==5.3.2
 
 WORKDIR /app/public
 
