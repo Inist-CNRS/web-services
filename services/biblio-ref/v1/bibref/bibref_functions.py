@@ -5,6 +5,7 @@ from thefuzz import fuzz
 import pickle
 import os
 import sys
+import urllib.parse
 
 api_token = os.getenv("CROSSREF_API_KEY")
 headers = {
@@ -98,13 +99,20 @@ def get_title_authors_doi_source_date(message):
         first_author_given = message["author"][0]["given"]
     except Exception:
         first_author_given = ""
+    date = ""
+
     try:
-        date = str(message["published"]["date-parts"][0][0])
+        date_fields = ["issued", "published", "published-print", "published-online"]
+        
+        for field in date_fields:
+            if field in message and "date-parts" in message[field]:
+                date_parts = message[field]["date-parts"]
+                if date_parts and isinstance(date_parts[0], list) and date_parts[0]:
+                    date = str(date_parts[0][0])  # Année uniquement
+                    break
     except Exception:
-        try:
-            date = str(message["published-print"]["date-parts"][0][0])
-        except Exception:
-            date = ""
+        date = ""
+
 
     source = {}
 
@@ -146,7 +154,8 @@ def verify_doi(doi, headers=headers):
     Returns:
         (int,dict): status code of the API response and dict informations found
     """
-    url = f"https://api.crossref.org/works/{doi}"
+    query = urllib.parse.quote(doi)
+    url = f"https://api.crossref.org/works/{query}"
 
     try:
         response = session.get(url, headers=headers)
@@ -193,7 +202,7 @@ def clean_crossref_title(text):
 
 # Functions that compare informations between the Crossref metadata and 
 # the bibliographic reference given.
-def compare_pubinfo_refbiblio(item,ref_biblio):
+def compare_pubinfo_refbiblio(item, ref_biblio):
     """
     Compare informations of one of the crossref publis with the biblio.
 
@@ -258,7 +267,8 @@ def verify_biblio_without_doi(ref_biblio, headers=headers, wrong_doi=False):
     Returns :
         a confidence score about the existence + doi of the biblio ref
     """
-    url = f'https://api.crossref.org/works?query.bibliographic="{ref_biblio}"&rows=5'  # take only the 5 first results
+    query = urllib.parse.quote(ref_biblio)
+    url = f'https://api.crossref.org/works?query.bibliographic={query}&rows=5'  # take only the 5 first results
     hallucinated = False
 
     try:
@@ -277,28 +287,20 @@ def verify_biblio_without_doi(ref_biblio, headers=headers, wrong_doi=False):
                 return "found", doi
             
             # if doi is wrong
-            elif wrong_doi:
+            if wrong_doi:
                 continue
 
-            elif match_items_score < 2:
-
-                if 0.7 < title_score < 0.85:
-                    hallucinated = True
+            if title_score < 0.6:
                 continue
+            
+            if title_score > 0.9 and match_items_score < 2:
+                hallucinated = True
+                continue
+            
+            if match_items_score == 2 and title_score > 0.98:
+                return "found", doi
 
-            # here match_item_score == 2, we need title OR soft
-            # critera on title :
-            else:
-                # if title match found is returned
-                # If title doesn't match, required a weak criteria on title
-
-                if title_score < 0.7:
-                    continue
-                
-                if title_score < 0.85:
-                    hallucinated = True
-                    continue
-                
+            if match_items_score == 2 and 0.6 < title_score < 0.9:
                 return "found", doi
 
         if wrong_doi:
