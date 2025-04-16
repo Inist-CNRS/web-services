@@ -1,10 +1,12 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 import random
-from bibref.bibref_functions import *
+import bibref.bibref_functions as bf
 import os
 from refextract import extract_references_from_file
 import json
+import sys
+
 
     
 for line in sys.stdin:
@@ -17,7 +19,7 @@ for line in sys.stdin:
     pdf_filename = '/tmp/'+name
 
     try:
-        response = session_pdf.get(url)
+        response = bf.session_pdf.get(url)
         response.raise_for_status()  # check if request succeeded
 
         with open(pdf_filename, 'wb') as pdf_file:
@@ -39,7 +41,7 @@ for line in sys.stdin:
     
     all_res = []
     for reference in references:
-        res = biblio_ref(reference)
+        res = bf.biblio_ref(reference)
         res['reference'] = reference
         res['url_pdf']=url
         all_res.append(res)

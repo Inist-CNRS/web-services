@@ -2,8 +2,9 @@
 # -*- coding: utf-8 -*-
 import os
 from refextract import extract_references_from_file
-from bibref.bibref_functions import *
+import bibref.bibref_functions as bf
 import json
+import sys
 
 
 for line in sys.stdin:
@@ -35,7 +36,7 @@ for line in sys.stdin:
     else:
         for reference in references:
             idx += 1
-            res = biblio_ref(reference)
+            res = bf.biblio_ref(reference)
             res['reference'] = reference
             sys.stdout.write(json.dumps({"id":idx, "value":res}))
             sys.stdout.write('\n')
