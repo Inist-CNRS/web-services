@@ -3,10 +3,12 @@
 from transformers import AutoTokenizer, AutoModelForSeq2SeqLM
 import json
 import sys
+import torch
+
+torch.set_num_threads(6)
 
 tokenizer = AutoTokenizer.from_pretrained("./v1/bart-large-cnn")
 model = AutoModelForSeq2SeqLM.from_pretrained("./v1/bart-large-cnn")
-
 
 # Fonction pour générer un résumé à partir d'un texte
 def generate_summary(text):
