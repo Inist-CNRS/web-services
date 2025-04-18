@@ -2,7 +2,6 @@ import requests
 import os
 import sys
 from lxml import etree
-import urllib.parse
 
 
 GROBID_URL = os.getenv("GROBID_API_URL")

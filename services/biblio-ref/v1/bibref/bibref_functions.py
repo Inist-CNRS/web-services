@@ -7,9 +7,9 @@ import os
 import sys
 import urllib.parse
 
-api_token = os.getenv("CROSSREF_API_KEY")
+CROSSREF_TOKEN = os.getenv("CROSSREF_API_KEY")
 headers = {
-    "Crossref-Plus-API-Token": api_token
+    "Crossref-Plus-API-Token": CROSSREF_TOKEN
 }
 session = LimiterSession(per_second=10)
 session_pdf = LimiterSession(per_second=10)
