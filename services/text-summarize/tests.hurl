@@ -7,7 +7,7 @@ content-type: application/json
 HTTP 200
 [{
     "id": "1",
-    "value": "LODEX est un logiciel open source dédié à la valorisation de données structurées. Il facilite la curation et la sémantisation de données brutes pour les connecter au web de données via les normes et les standards du web sémantique. Il propose, en plus de la création automatique d’identifiants, la génération d’identifiants pérennes normalisés via le système des ark."
+    "value": "LODEX est un logiciel open source dédié à la valorisation de données structurées. Il facilite la curation et la sémantisation de données brutes pour les connecter au web de données via les normes et les standards du web sémantique. Il propose, en plus de la création automatique d’identifiants, la génération d’identifiants pérennes normalisés via le système des ark. <AI-generated>"
 }]
 
 POST {{host}}/v1/en?indent=true
@@ -20,5 +20,5 @@ content-type: application/json
 HTTP 200
 [{
     "id": "1",
-    "value": "In bibliographic databases, affiliations of authors are of paramount importance. They permit to the laboratories or institutes to get national and even international visibility. Depending on the country, it is not always clear how to name a laboratory with respect to its supervisory authorities. New methods for disambiguation could help the information analysts to be more efficient when labelling. This paper proposes an approach based on Naive Bayes (NB) learning method and overlapping clustering."
+    "value": "In bibliographic databases, affiliations of authors are of paramount importance. They permit to the laboratories or institutes to get national and even international visibility. Depending on the country, it is not always clear how to name a laboratory with respect to its supervisory authorities. New methods for disambiguation could help the information analysts to be more efficient when labelling. <AI-generated>"
 }]
