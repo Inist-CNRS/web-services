@@ -22,7 +22,7 @@ http://data.loterre.fr/ark:/67375/P66#xl_en_06b45a8a	general empirical observati
 http://data.loterre.fr/ark:/67375/P66#xl_en_d9a365b6	empirical generalisations
 ```
 
-### Trois types de sorties sont disponibles    
+### Trois types de sorties sont disponibles  
 
 #### sous la forme d'un dictionnaire jsonld avec l'ensemble des informations (option -o json)
 
