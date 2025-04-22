@@ -4,6 +4,7 @@ from transformers import AutoTokenizer, AutoModelForSeq2SeqLM
 import json
 import sys
 import torch
+
 torch.set_num_threads(6)
 
 tokenizer = AutoTokenizer.from_pretrained("./v1/mbart-large-50-finetuned-summarization-V2")
@@ -34,4 +35,3 @@ for line in sys.stdin:
 
     sys.stdout.write(json.dumps(data))
     sys.stdout.write("\n")
-
