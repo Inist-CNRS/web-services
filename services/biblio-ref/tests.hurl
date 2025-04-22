@@ -1,5 +1,7 @@
 POST {{host}}/v1/validate?indent=true
 content-type: application/json
+[Options]
+skip: {{blocked}}
 [
   {
     "value":"Y. B. LINHART. L. CHAOUNI-BENABDALLAH, J.-M. PARRY & J. D. THOMPSON - Selective herbivory of thyme chemotypes by a mollusk and a grasshopper"
@@ -70,6 +72,8 @@ HTTP 200
 
 POST {{host}}/v1/validate-url?indent=true
 content-type: application/json
+[Options]
+skip: {{blocked}}
 [
   {
     "value":"https://cnrs.hal.science/hal-04461354/file/anki-gaillard-revol.pdf"
@@ -132,6 +136,8 @@ HTTP 200
 
 POST {{host}}/v1/validate-pdf?indent=true
 Content-Type: application/pdf
+[Options]
+skip: {{blocked}}
 file,./example.pdf;
 
 
