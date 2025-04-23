@@ -37,4 +37,4 @@ RUN mv /app/public/config.json /app && chmod a+w /app/config.json
 RUN mkdir /tmp/retrieve
 
 COPY --chown=daemon:daemon --from=dvc-files /dvc/bart-large-cnn /app/public/v1/bart-large-cnn
-COPY --chown=daemon:daemon --from=dvc-files dvc/mbart-large-50-finetuned-summarization-V2 /app/public/v1/mbart-large-50-finetuned-summarization-V2
+COPY --chown=daemon:daemon --from=dvc-files /dvc/mbart-large-50-finetuned-summarization-V2 /app/public/v1/mbart-large-50-finetuned-summarization-V2
