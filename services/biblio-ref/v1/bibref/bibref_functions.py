@@ -5,10 +5,11 @@ from thefuzz import fuzz
 import pickle
 import os
 import sys
+import urllib.parse
 
-api_token = os.getenv("CROSSREF_API_KEY")
+CROSSREF_TOKEN = os.getenv("CROSSREF_API_KEY")
 headers = {
-    "Crossref-Plus-API-Token": api_token
+    "Crossref-Plus-API-Token": CROSSREF_TOKEN
 }
 session = LimiterSession(per_second=10)
 session_pdf = LimiterSession(per_second=10)
@@ -85,8 +86,11 @@ def get_title_authors_doi_source_date(message):
         dict: A dictionary containing the title, first author's given name,
         first author's family name, and DOI.
     """
-    title = message["title"][0] if "title" in message else ""
     doi = message["DOI"] if "DOI" in message else ""
+    try:
+        title = message["title"][0] if "title" in message else ""
+    except Exception:
+        title = ""
     try:
         first_author_name = message["author"][0]["family"]
     except Exception:
@@ -95,13 +99,20 @@ def get_title_authors_doi_source_date(message):
         first_author_given = message["author"][0]["given"]
     except Exception:
         first_author_given = ""
+    date = ""
+
     try:
-        date = str(message["published"]["date-parts"][0][0])
+        date_fields = ["issued", "published", "published-print", "published-online"]
+        
+        for field in date_fields:
+            if field in message and "date-parts" in message[field]:
+                date_parts = message[field]["date-parts"]
+                if date_parts and isinstance(date_parts[0], list) and date_parts[0]:
+                    date = str(date_parts[0][0])  # Année uniquement
+                    break
     except Exception:
-        try:
-            date = str(message["published-print"]["date-parts"][0][0])
-        except Exception:
-            date = ""
+        date = ""
+
 
     source = {}
 
@@ -143,19 +154,26 @@ def verify_doi(doi, headers=headers):
     Returns:
         (int,dict): status code of the API response and dict informations found
     """
-    url = f"https://api.crossref.org/works/{doi}"
+    query = urllib.parse.quote(doi)
+    url = f"https://api.crossref.org/works/{query}"
 
     try:
         response = session.get(url, headers=headers)
         status_code = response.status_code
-        if status_code != 200:
-            return (status_code, None)
+    except Exception as e:
+        sys.stderr.write("Error while checking DOI : "+str(e)+ "\n")
+        return (503, None)  # if there is an unexpected error from crossref
+    
+    if status_code != 200:
+        return (status_code, None)
+    
+    try:
         message = response.json()["message"]
         others_biblio_info = get_title_authors_doi_source_date(message)
-
         return (response.status_code, others_biblio_info)
 
-    except:
+    except Exception as e:
+        sys.stderr.write("Error while processing crossref response : "+str(e)+ "\n")
         return (503, None)  # if there is an unexpected error from crossref
 
 
@@ -184,7 +202,7 @@ def clean_crossref_title(text):
 
 # Functions that compare informations between the Crossref metadata and 
 # the bibliographic reference given.
-def compare_pubinfo_refbiblio(item,ref_biblio):
+def compare_pubinfo_refbiblio(item, ref_biblio):
     """
     Compare informations of one of the crossref publis with the biblio.
 
@@ -209,7 +227,7 @@ def compare_pubinfo_refbiblio(item,ref_biblio):
     # Title
     title_score = fuzz.partial_ratio(uniformize(clean_crossref_title(item["title"])), ref_biblio)/100
 
-    if title_score > 0.9:
+    if title_score > 0.8:
         items_score += 1
 
     # Check first author
@@ -228,7 +246,7 @@ def compare_pubinfo_refbiblio(item,ref_biblio):
     try:
         doi = item["doi"].lower()
     except Exception:
-        print("Error : can't lower DOI", sys.stderr)
+        sys.stderr.write("cant lower doi")
         doi = ""
 
     return items_score, title_score, doi
@@ -236,7 +254,7 @@ def compare_pubinfo_refbiblio(item,ref_biblio):
 
 # This is the function to update if you want stronger or weaker criteria
 # For now, criteria is 2 or more matches on informations on title, authors, date and source except if it is date and source.
-def verify_biblio_without_doi(ref_biblio, headers=headers):
+def verify_biblio_without_doi(ref_biblio, headers=headers, wrong_doi=False):
     """
     check with crossref api if a biblio ref is correct.
     Objective : In this function, we check if the biblio ref exist if no doi
@@ -249,7 +267,8 @@ def verify_biblio_without_doi(ref_biblio, headers=headers):
     Returns :
         a confidence score about the existence + doi of the biblio ref
     """
-    url = f'https://api.crossref.org/works?query.bibliographic="{ref_biblio}"&rows=5'  # take only the 5 first results
+    query = urllib.parse.quote(ref_biblio)
+    url = f'https://api.crossref.org/works?query.bibliographic={query}&rows=5'  # take only the 5 first results
     hallucinated = False
 
     try:
@@ -266,25 +285,27 @@ def verify_biblio_without_doi(ref_biblio, headers=headers):
             # Matches criteria when there is no doi in the reference
             if match_items_score >= 3:
                 return "found", doi
-
-            elif match_items_score < 2:
-
-                if title_score > 0.9:
-                    hallucinated = True
+            
+            # if doi is wrong
+            if wrong_doi:
                 continue
 
-            # here match_item_score == 2, we need title OR soft
-            # critera on title :
-            else:
-                # if title match found is returned
-                # If title doesn't match, required a weak criteria on title
+            if title_score < 0.6:
+                continue
+            
+            if title_score > 0.9 and match_items_score < 2:
+                hallucinated = True
+                continue
+            
+            if match_items_score == 2 and title_score > 0.98:
+                return "found", doi
 
-                if title_score < 0.75:
-                    continue
+            if match_items_score == 2 and 0.6 < title_score < 0.9:
+                return "found", doi
 
-                else:
-                    return "found", doi
-
+        if wrong_doi:
+            return "hallucinated", ""
+        
         if hallucinated:
             return "hallucinated", ""
 
@@ -326,19 +347,23 @@ def biblio_ref(ref_biblio, retracted_doi=retracted_doi):
             if len(doi)*1.5 < len(ref_biblio): 
                 match_items_score, title_score, doi = compare_pubinfo_refbiblio(others_biblio_info,ref_biblio)
                 
-                if match_items_score < 2:
-                    return {"doi": "", "status": "hallucinated"}
+                if match_items_score < 3:
+                    if title_score < 0.7:
+                        return {"doi": "", "status": "hallucinated"}
                
             return {"doi": doi, "status": status}
         
         # # If DOI doesn't exist
         elif crossref_status_code == 404:
-            status, doi = verify_biblio_without_doi(ref_biblio)
+            status, doi = verify_biblio_without_doi(ref_biblio, wrong_doi=True)
             
             # # # Can be retracted
             if doi in retracted_doi:
                 return {"doi": doi, "status": "retracted"}
             
+            # # # can't be not found : there is a doi. Should be on Crossref.
+            if status == "not_found":
+                return {"doi": "", "status": "hallucinated"}
             return {"doi": doi, "status": status}
                     
         # # # for others errors
