@@ -15,8 +15,18 @@ RUN dvc doctor
 COPY ./v1/splitted-bart-large-cnn.dvc /dvc
 COPY ./v1/mbart-large-50-finetuned-summarization-V2.dvc /dvc
 RUN dvc pull -v
-RUN cat /dvc/splitted-bart-large-cnn/* > /dvc/bart-large-cnn.tar && tar -xf /dvc/bart-large-cnn.tar
-RUN cat /dvc/mbart-large-50-finetuned-summarization-V2/* > /dvc/mbart-large-50-finetuned-summarization-V2.tar && tar -xf /dvc/mbart-large-50-finetuned-summarization-V2.tar
+RUN cd /dvc/splitted-bart-large-cnn && \
+    cat x* > ../bart-large-cnn.tar && \
+    cd .. && \
+    tar -xf bart-large-cnn.tar && \
+    rm bart-large-cnn.tar && \
+    rm /dvc/splitted-bart-large-cnn/x*
+RUN cd /dvc/mbart-large-50-finetuned-summarization-V2 && \
+    cat x* > ../mbart-large-50-finetuned-summarization-V2.tar && \
+    cd .. && \
+    tar -xf mbart-large-50-finetuned-summarization-V2.tar && \
+    rm mbart-large-50-finetuned-summarization-V2.tar && \
+    rm /dvc/mbart-large-50-finetuned-summarization-V2/x*
 
 
 FROM cnrsinist/ezs-python-pytorch-server:py3.9-no16-1.1.4
@@ -29,9 +39,7 @@ USER root
 RUN pip install --no-build-isolation \
     --index-url https://download.pytorch.org/whl/cpu \
     --extra-index-url https://pypi.org/simple \
-    transformers==4.41.2 \
-    protobuf==5.29.3 \
-    sentencepiece==0.2.0
+    transformers==4.41.2
 
 # Declare files to copy in .dockerignore
 COPY --chown=daemon:daemon . /app/public/
@@ -39,4 +47,4 @@ RUN mv /app/public/config.json /app && chmod a+w /app/config.json
 RUN mkdir /tmp/retrieve
 
 COPY --chown=daemon:daemon --from=dvc-files /dvc/bart-large-cnn /app/public/v1/bart-large-cnn
-COPY --chown=daemon:daemon --from=dvc-files dvc/mbart-large-50-finetuned-summarization-V2 /app/public/v1/mbart-large-50-finetuned-summarization-V2
+COPY --chown=daemon:daemon --from=dvc-files /dvc/mbart-large-50-finetuned-summarization-V2 /app/public/v1/mbart-large-50-finetuned-summarization-V2
