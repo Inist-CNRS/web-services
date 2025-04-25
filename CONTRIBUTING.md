@@ -81,6 +81,9 @@ D'autres exemples de noms de branche:
 > de garder tout ce qui est technique (ça peut exclure la documentation
 > elle-même) en anglais.
 
+> **Remarque** : assurez-vous de partir de la branche `main` *à jour* (en faisant un
+> `git pull origin main` *avant* de créer la branche).
+
 ## Création d'un service
 
 Avant toute chose, il faut s'assurer qu'un service qui pourrait accueillir votre
