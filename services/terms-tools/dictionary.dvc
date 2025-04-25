@@ -1,6 +1,6 @@
 outs:
-- md5: 1f429eaaf7f878cebe24348f36a40ff8.dir
-  size: 10237960
-  nfiles: 18
+- md5: 6addd324230c5da9980aa0b4f540c3f8.dir
+  size: 72609757
+  nfiles: 108
   hash: md5
   path: dictionary
