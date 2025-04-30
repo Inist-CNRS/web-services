@@ -34,7 +34,7 @@ for citation in json_data:
 # Ajouter les nœuds avec leurs attributs
 for doi, info in doi_info.items():
     count = info["count"]
-    size = math.log(count + 1) * 100
+    size = math.log(count + 1, 10) * 50 + 50
 
     # Déterminer la couleur
     if info["cité"] and info["citant"]:
