@@ -3,10 +3,13 @@ import requests
 from collections import defaultdict
 import json
 import sys
+import os
+
+OPENALEX_TOKEN = os.getenv("OPENALEX_API_KEY")
+
 
 def get_openalex_info(doi):
-    url = f"https://api.openalex.org/works/doi:{doi}"
-
+    url = f"https://api.openalex.org/works/doi:{doi}?api_key={OPENALEX_TOKEN}"
     response = requests.get(url)
 
     if response.status_code == 200:
@@ -30,7 +33,8 @@ def openAlex_to_doi(url) :
 
     url_parse = url.split("/")
     id = url_parse[-1]
-    url = f"https://api.openalex.org/works/{id}"
+    url = f"https://api.openalex.org/works/{id}?api_key={OPENALEX_TOKEN}"
+
     response = requests.get(url)
 
     if response.status_code == 200:
