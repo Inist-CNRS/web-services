@@ -9,7 +9,8 @@ RUN pip install \
     charset-normalizer==3.3.2 \
     idna==3.7 \
     requests==2.32.3 \
-    urllib3==2.2.2
+    urllib3==2.2.2 \
+    networkx==3.2.1
 
 WORKDIR /app/public
 # Declare files to copy in .dockerignore
