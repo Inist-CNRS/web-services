@@ -12,14 +12,15 @@ def get_ratio(data, all_data):
     ratioList = []
 
     for _,line_cmp in enumerate(all_data):
-        if "value" in line_cmp:
-            data_cmp = line_cmp
-            id,title = data_cmp["id"],data_cmp["value"]
-            if currentId == id:
-                continue
-            ratio = SequenceMatcher(None, currentTitle, title).ratio()
-            idList.append(id)
-            ratioList.append(ratio)
+        if "value" not in line_cmp:
+            continue
+        data_cmp = line_cmp
+        id,title = data_cmp["id"],data_cmp["value"]
+        if currentId == id:
+            continue
+        ratio = SequenceMatcher(None, currentTitle, title).ratio()
+        idList.append(id)
+        ratioList.append(ratio)
 
     #Sort both lists according to ratioList
     ratioList,idList = (list(t) for t in zip(*sorted(zip(ratioList, idList),reverse=True)))
