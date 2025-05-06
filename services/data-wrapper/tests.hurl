@@ -88,3 +88,22 @@ bytes count >= 480
 bytes count <= 495
 bytes startsWith hex,1f8b0800;
 bytes endsWith hex,00140000;
+
+##########################################
+
+POST {{host}}/v1/txt
+content-type: text/plain
+```
+Ici je mets un texte quelconque.
+Sur plusieurs lignes.
+
+Avec des paragraphes séparés.
+```
+
+HTTP 200
+Content-type: application/gzip
+[Asserts]
+bytes count >= 370
+bytes count <= 395
+bytes startsWith hex,1f8b0800;
+bytes endsWith hex,000c0000;
