@@ -49,6 +49,7 @@
     "services/biblio-ref",
     "services/biblio-tools",
     "services/chem-ner",
+    "services/coara-tools",
     "services/data-computer",
     "services/data-homogenise",
     "services/data-rapido",
