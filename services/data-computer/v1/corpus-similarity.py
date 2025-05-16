@@ -55,6 +55,7 @@ for line in all_data:
         else:
             sim = idList[:min(len(idList),output)]
             score = ratioList[:min(len(idList),output)]
+        score = [round(s, 2) for s in score]
         sys.stdout.write(json.dumps({"id":id,"value":{"similarity":sim, "score":score}}))
         sys.stdout.write('\n')
     else:
