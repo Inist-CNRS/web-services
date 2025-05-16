@@ -121,10 +121,19 @@ for i in range(len_data):
 
         if "value" in line:
             value = line["value"]
+            
             if isinstance(value, list):
+                if value == []:
+                    indice_out_cluster.append(i)
+                    continue
                 texts.append(model.encode(" ".join(value)))
+                
             elif isinstance(value, str):
+                if len(value) < 4:
+                    indice_out_cluster.append(i)
+                    continue
                 texts.append(model.encode(value))
+                
             else:
                 indice_out_cluster.append(i)
 
