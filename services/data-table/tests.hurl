@@ -254,4 +254,4 @@ Content-Type: text/csv
 [Asserts]
 body contains "Page: 0"
 body contains "Importance estimée"
-body contains "\"Importance estimée\",\"Importance\",\"0.0943\",\"0.0943\",\"0.0943\",\"0.0951\",\"0.0951\",\"0.0951\",\"0.0951\",\"0.0951\",\"0.0951\",\"0.0951\""
+body contains "\"Variable\",\"Importance estimée\",\"Importance estimée\",\"Variable\",\"Importance estimée\",\"Importance estimée\""
