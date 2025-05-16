@@ -15,6 +15,8 @@ import unidecode
 import random
 import json
 import sys
+from io import BytesIO
+from docx import Document
 
 nlp_en = spacy.load("en_core_web_sm")
 nlp_fr=spacy.load("fr_core_news_sm")
@@ -104,11 +106,31 @@ def get_alphabetic_numeric_ratio(chaine):
     return rapport
 
 
+def docx_to_text(file_content):
+    # Convert bytes in lines to clean
+    document = Document(BytesIO(file_content))
+    raw_lines = [para.text.strip() for para in document.paragraphs]
+
+    clean_lines = []
+    for line in raw_lines:
+        line = line.strip()
+
+        # Filter bad lines
+        if not line:  # Empty
+            continue
+        if len(line) < 3:  # Too short
+            continue
+
+        clean_lines.append(line)
+
+    return ' '.join(clean_lines).replace("  ", " ")  # avoiding regex
+
 
 for line in sys.stdin:
     line0=json.loads(line)
     # URL of PDF
     url=line0['value']
+            
     name=str(round(random.random()*1000))+url.split('/')[-1]
     if 'hal.science' in url:
         p='2'
@@ -122,12 +144,20 @@ for line in sys.stdin:
         # dl the PDF
         response = requests.get(url)
         response.raise_for_status()  # check if request succeeded
-    
+
+        # Is there an impostor among pdf ?
+        if ".docx" in url and ".pdf" not in url:
+            text = docx_to_text(response.content)
+            line0['value'] = text
+            sys.stdout.write(json.dumps(line0))
+            sys.stdout.write('\n')
+            continue
+
         # save pdf
         with open(pdf_filename, 'wb') as pdf_file:
             pdf_file.write(response.content)
             
-    
+
         # exec pdftohtml for the xml conversion
         xml_data = convert_pdf_to_xml(pdf_filename)
     
@@ -217,7 +247,8 @@ for line in sys.stdin:
         #print("Erreur lors de la suppression du fichier PDF:", e)
         line0['value']="Erreur lors de la suppression du fichier PDF"
         
-    except Exception :
+    except Exception as e:
+        sys.stderr.write("\n"+str(e)+"\n")
         line0['value']="Erreur lors de la conversion du PDF en texte"
     
     if line0['value']=="":
