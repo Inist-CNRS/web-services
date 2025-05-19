@@ -10,7 +10,8 @@ RUN pip install \
     Unidecode==1.3.2 \
     pypdf==4.3.1 \
     en_core_web_sm@https://github.com/explosion/spacy-models/releases/download/en_core_web_sm-2.3.1/en_core_web_sm-2.3.1.tar.gz \
-    fr_core_news_sm@https://github.com/explosion/spacy-models/releases/download/fr_core_news_sm-2.3.0/fr_core_news_sm-2.3.0.tar.gz
+    fr_core_news_sm@https://github.com/explosion/spacy-models/releases/download/fr_core_news_sm-2.3.0/fr_core_news_sm-2.3.0.tar.gz \
+    python-docx==1.1.2
 
 RUN apt update && apt install -y pdftohtml
 
