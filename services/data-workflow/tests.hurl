@@ -304,3 +304,307 @@ HTTP 200
 Content-Type: application/json
 [Asserts]
 jsonpath "$[0].value.isAiGenerated" == false
+
+
+
+############################################################################
+# Test v1/astro-tag-pdf
+
+POST {{host}}/v1/astro-tag-pdf
+content-type: application/x-gzip
+# X-Webhook-Success: https://webhook.site/684dd427-5484-404a-b5a0-80e5b6726a1c
+# X-Webhook-Failure: https://webhook.site/684dd427-5484-404a-b5a0-80e5b6726a1c
+[Options]
+skip: {{blocked}}
+file,./entity-test.pdf.tar.gz;
+
+HTTP 200
+Content-Type: application/json
+# Capture the computing token
+[Captures]
+computing_token: jsonpath "$[0].value"
+[Asserts]
+variable "computing_token" exists
+
+# There should be a waiting time, representing the time taken to process data.
+# Fortunately, as the data is sparse, and the computing time is small,
+# the need is small.
+# In normal use cases, a webhook is called when the processing is finished.
+# That query gives the process identifier.
+# Next, you can call the retrieve URL by putting the identifier in the value field.
+
+# Version 4.1.0 of hurl added a delay option, which value is milliseconds.
+# https://hurl.dev/blog/2023/09/24/announcing-hurl-4.1.0.html#add-delay-between-requests
+
+POST {{host}}/v1/retrieve-json?indent=false
+content-type: application/json
+[Options]
+delay: 30000
+skip: {{blocked}}
+```
+[
+	{
+		"value":"{{computing_token}}"
+	}
+]
+```
+
+HTTP 200
+Content-Type: application/json
+[Asserts]
+jsonpath "$[0].value.Planete" includes "Jupiter"
+jsonpath "$[0].value.Planete" includes "Saturn"
+jsonpath "$[0].value.Planete" count == 2
+
+
+############################################################################
+# Test v1/astro-tag
+
+POST {{host}}/v1/astro-tag
+content-type: application/x-gzip
+# X-Webhook-Success: https://webhook.site/684dd427-5484-404a-b5a0-80e5b6726a1c
+# X-Webhook-Failure: https://webhook.site/684dd427-5484-404a-b5a0-80e5b6726a1c
+[Options]
+skip: {{blocked}}
+file,./22-txt-en.tar.gz;
+
+HTTP 200
+Content-Type: application/json
+# Capture the computing token
+[Captures]
+computing_token: jsonpath "$[0].value"
+[Asserts]
+variable "computing_token" exists
+
+# There should be a waiting time, representing the time taken to process data.
+# Fortunately, as the data is sparse, and the computing time is small,
+# the need is small.
+# In normal use cases, a webhook is called when the processing is finished.
+# That query gives the process identifier.
+# Next, you can call the retrieve URL by putting the identifier in the value field.
+
+# Version 4.1.0 of hurl added a delay option, which value is milliseconds.
+# https://hurl.dev/blog/2023/09/24/announcing-hurl-4.1.0.html#add-delay-between-requests
+
+POST {{host}}/v1/retrieve-json?indent=false
+content-type: application/json
+[Options]
+delay: 30000
+skip: {{blocked}}
+```
+[
+	{
+		"value":"{{computing_token}}"
+	}
+]
+```
+
+HTTP 200
+Content-Type: application/json
+[Asserts]
+jsonpath "$[0].value.Satellite_naturel" includes "Tethys"
+jsonpath "$[0].value.Satellite_naturel" count == 1
+jsonpath "$[6].value.Planete" includes "Earth"
+jsonpath "$[6].value.Planete" count == 1
+
+############################################################################
+# Test v1/chem-tag-pdf
+
+POST {{host}}/v1/chem-tag-pdf
+content-type: application/x-gzip
+# X-Webhook-Success: https://webhook.site/684dd427-5484-404a-b5a0-80e5b6726a1c
+# X-Webhook-Failure: https://webhook.site/684dd427-5484-404a-b5a0-80e5b6726a1c
+[Options]
+skip: {{blocked}}
+file,./entity-test.pdf.tar.gz;
+
+HTTP 200
+Content-Type: application/json
+# Capture the computing token
+[Captures]
+computing_token: jsonpath "$[0].value"
+[Asserts]
+variable "computing_token" exists
+
+# There should be a waiting time, representing the time taken to process data.
+# Fortunately, as the data is sparse, and the computing time is small,
+# the need is small.
+# In normal use cases, a webhook is called when the processing is finished.
+# That query gives the process identifier.
+# Next, you can call the retrieve URL by putting the identifier in the value field.
+
+# Version 4.1.0 of hurl added a delay option, which value is milliseconds.
+# https://hurl.dev/blog/2023/09/24/announcing-hurl-4.1.0.html#add-delay-between-requests
+
+POST {{host}}/v1/retrieve-json
+content-type: application/json
+[Options]
+delay: 30000
+skip: {{blocked}}
+```
+[
+	{
+		"value":"{{computing_token}}"
+	}
+]
+```
+
+HTTP 200
+Content-Type: application/json
+[Asserts]
+jsonpath "$[0].value.chemical" includes "ibuprofen"
+jsonpath "$[0].value.chemical" includes "amoxicillin"
+jsonpath "$[0].value.chemical" count == 2
+
+
+############################################################################
+# Test v1/chem-tag
+
+POST {{host}}/v1/chem-tag
+content-type: application/x-gzip
+# X-Webhook-Success: https://webhook.site/684dd427-5484-404a-b5a0-80e5b6726a1c
+# X-Webhook-Failure: https://webhook.site/684dd427-5484-404a-b5a0-80e5b6726a1c
+[Options]
+skip: {{blocked}}
+file,./22-txt-en.tar.gz;
+
+HTTP 200
+Content-Type: application/json
+# Capture the computing token
+[Captures]
+computing_token: jsonpath "$[0].value"
+[Asserts]
+variable "computing_token" exists
+
+# There should be a waiting time, representing the time taken to process data.
+# Fortunately, as the data is sparse, and the computing time is small,
+# the need is small.
+# In normal use cases, a webhook is called when the processing is finished.
+# That query gives the process identifier.
+# Next, you can call the retrieve URL by putting the identifier in the value field.
+
+# Version 4.1.0 of hurl added a delay option, which value is milliseconds.
+# https://hurl.dev/blog/2023/09/24/announcing-hurl-4.1.0.html#add-delay-between-requests
+
+POST {{host}}/v1/retrieve-json?indent=false
+content-type: application/json
+[Options]
+delay: 30000
+skip: {{blocked}}
+```
+[
+	{
+		"value":"{{computing_token}}"
+	}
+]
+```
+
+HTTP 200
+Content-Type: application/json
+[Asserts]
+jsonpath "$[1].value.chemical" includes "zircon"
+jsonpath "$[1].value.chemical" includes "granodiorite"
+jsonpath "$[1].value.chemical" includes "Si"
+jsonpath "$[1].value.chemical" includes "SiO2"
+jsonpath "$[1].value.chemical" count == 15
+
+
+############################################################################
+# Test v1/diseases-tag-pdf
+
+POST {{host}}/v1/diseases-tag-pdf
+content-type: application/x-gzip
+# X-Webhook-Success: https://webhook.site/684dd427-5484-404a-b5a0-80e5b6726a1c
+# X-Webhook-Failure: https://webhook.site/684dd427-5484-404a-b5a0-80e5b6726a1c
+[Options]
+skip: {{blocked}}
+file,./entity-test.pdf.tar.gz;
+
+HTTP 200
+Content-Type: application/json
+# Capture the computing token
+[Captures]
+computing_token: jsonpath "$[0].value"
+[Asserts]
+variable "computing_token" exists
+
+# There should be a waiting time, representing the time taken to process data.
+# Fortunately, as the data is sparse, and the computing time is small,
+# the need is small.
+# In normal use cases, a webhook is called when the processing is finished.
+# That query gives the process identifier.
+# Next, you can call the retrieve URL by putting the identifier in the value field.
+
+# Version 4.1.0 of hurl added a delay option, which value is milliseconds.
+# https://hurl.dev/blog/2023/09/24/announcing-hurl-4.1.0.html#add-delay-between-requests
+
+POST {{host}}/v1/retrieve-json?indent=false
+content-type: application/json
+[Options]
+delay: 30000
+skip: {{blocked}}
+```
+[
+	{
+		"value":"{{computing_token}}"
+	}
+]
+```
+
+HTTP 200
+Content-Type: application/json
+[Asserts]
+jsonpath "$[0].value.diseases" includes "pain"
+jsonpath "$[0].value.diseases" includes "migraine"
+jsonpath "$[0].value.diseases" includes "respiratory infection"
+jsonpath "$[0].value.diseases" count == 3
+
+
+############################################################################
+# Test v1/diseases-tag
+
+POST {{host}}/v1/diseases-tag
+content-type: application/x-gzip
+# X-Webhook-Success: https://webhook.site/684dd427-5484-404a-b5a0-80e5b6726a1c
+# X-Webhook-Failure: https://webhook.site/684dd427-5484-404a-b5a0-80e5b6726a1c
+[Options]
+skip: {{blocked}}
+file,./22-txt-en.tar.gz;
+
+HTTP 200
+Content-Type: application/json
+# Capture the computing token
+[Captures]
+computing_token: jsonpath "$[0].value"
+[Asserts]
+variable "computing_token" exists
+
+# There should be a waiting time, representing the time taken to process data.
+# Fortunately, as the data is sparse, and the computing time is small,
+# the need is small.
+# In normal use cases, a webhook is called when the processing is finished.
+# That query gives the process identifier.
+# Next, you can call the retrieve URL by putting the identifier in the value field.
+
+# Version 4.1.0 of hurl added a delay option, which value is milliseconds.
+# https://hurl.dev/blog/2023/09/24/announcing-hurl-4.1.0.html#add-delay-between-requests
+
+POST {{host}}/v1/retrieve-json?indent=false
+content-type: application/json
+[Options]
+delay: 30000
+skip: {{blocked}}
+```
+[
+	{
+		"value":"{{computing_token}}"
+	}
+]
+```
+
+HTTP 200
+Content-Type: application/json
+[Asserts]
+jsonpath "$[1].value.diseases" includes "magmatism"
+jsonpath "$[1].value.diseases" count == 4
+
