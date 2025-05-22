@@ -14,7 +14,7 @@ for line in sys.stdin:
         continue
 
 # Did not success to do it in EZS
-# If no document are tag as noise, the stream is "break"
+# If no documents are tagged as noise, the stream is broken.
 # Can dodge it in python with the next line
 if len(output) == 0:
     sys.stdout.write(json.dumps({"noise": ""}))
