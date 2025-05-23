@@ -5,7 +5,7 @@ import json
 import sys
 import torch
 
-torch.set_num_threads(6)
+torch.set_num_threads(4)
 
 tokenizer = AutoTokenizer.from_pretrained("./v1/bart-large-cnn")
 model = AutoModelForSeq2SeqLM.from_pretrained("./v1/bart-large-cnn")
@@ -16,8 +16,12 @@ def generate_summary(text):
     if input_ids.shape[1] < 250:
         return text
 
-    outputs = model.generate(input_ids)
-    summary = tokenizer.decode(outputs[0], skip_special_tokens=True)
+    try:
+        outputs = model.generate(input_ids)
+        summary = tokenizer.decode(outputs[0], skip_special_tokens=True) + " <AI-generated>"
+    except Exception as e:
+        sys.stderr.write(f"\nError with EN-model: {str(e)}\n")
+
     return summary
 
 
@@ -26,7 +30,7 @@ for line in sys.stdin:
     if "value" in data:
         text = data["value"]
         if isinstance(data["value"], str):
-            data["value"] = generate_summary(text) + " <AI-generated>"
+            data["value"] = generate_summary(text)
         else:
             data["value"] = ""
     else:
