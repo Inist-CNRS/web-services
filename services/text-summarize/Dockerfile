@@ -39,7 +39,8 @@ USER root
 RUN pip install --no-build-isolation \
     --index-url https://download.pytorch.org/whl/cpu \
     --extra-index-url https://pypi.org/simple \
-    transformers==4.41.2
+    transformers==4.41.2 \
+    lxml==5.4.0
 
 # Declare files to copy in .dockerignore
 COPY --chown=daemon:daemon . /app/public/
