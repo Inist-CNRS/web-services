@@ -4,13 +4,33 @@ from transformers import AutoTokenizer, AutoModelForSeq2SeqLM
 import json
 import sys
 import torch
+import re
 
 torch.set_num_threads(4)
 
 tokenizer = AutoTokenizer.from_pretrained("./v1/bart-large-cnn")
 model = AutoModelForSeq2SeqLM.from_pretrained("./v1/bart-large-cnn")
 
-# Fonction pour générer un résumé à partir d'un texte
+
+def clean_authors(text):
+    try:
+        if len(text) < 510:
+            return text
+        begin, end = text[:500], text[500:]
+        pattern = r'''
+            (?:
+                (?:[A-ZÉÈÊËÀÂÄÎÏÔÖÛÜ]\.\s*|[A-ZÉÈÊËÀÂÄÎÏÔÖÛÜ][a-zéèêëàâäîïôöûüç]+)\s+
+                [A-ZÉÈÊËÀÂÄÎÏÔÖÛÜ][a-zéèêëàâäîïôöûüç]+
+                \s*
+                (?:,|and|&)?\s*
+            ){2,}
+        '''
+        regex = re.compile(pattern, re.VERBOSE)
+        return regex.sub('', begin) + end
+    except Exception:
+        return text
+
+
 def generate_summary(text):
     input_ids = tokenizer(text, return_tensors="pt", padding=True, truncation=True, max_length=1024).input_ids
     if input_ids.shape[1] < 30:
@@ -30,7 +50,7 @@ for line in sys.stdin:
     if "value" in data:
         text = data["value"]
         if isinstance(data["value"], str):
-            data["value"] = generate_summary(text)
+            data["value"] = generate_summary(clean_authors(text))
         else:
             data["value"] = ""
     else:
