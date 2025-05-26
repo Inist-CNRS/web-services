@@ -4,6 +4,10 @@ Génère un résumé d'un article scientifique.
 
 Utilise un modèle de langue pour générer le résumé d'un article scientifique à partir du texte intégral. La nature du modèle ne permet pas de garantir la reproductibilité des résultats. Si le texte est trop long, la fin du document n'est pas prise en compte (ce qui affecte peu les performances globales du modèle). La route doit être choisie en fonction de la langue du document.
 
+## Précaution
+
+Ce service utilise `Grobid`. Il faut impérativement renseigner la variable d'environnement `GROBID_API_URL` pour son bon déroulement. L'URL renseignée doit contenir la route (i.e. /api/processFulltextDocument)
+
 ## Langues supportées
 
 Ce service se base sur le modèle Bart-large et mBart-large-50. Ces deux modèles sont mis à disposition dans deux routes distinctes : `v1/en` et `v1/multilingual`.
