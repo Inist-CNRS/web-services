@@ -290,7 +290,7 @@ variable "computing_token" exists
 POST {{host}}/v1/retrieve-json
 content-type: application/json
 [Options]
-delay: 20000
+delay: 10000
 skip: {{blocked}}
 ```
 [
@@ -392,7 +392,7 @@ variable "computing_token" exists
 POST {{host}}/v1/retrieve-json?indent=false
 content-type: application/json
 [Options]
-delay: 30000
+delay: 10000
 skip: {{blocked}}
 ```
 [
@@ -442,7 +442,7 @@ variable "computing_token" exists
 POST {{host}}/v1/retrieve-json?indent=false
 content-type: application/json
 [Options]
-delay: 30000
+delay: 20000
 skip: {{blocked}}
 ```
 [
@@ -492,7 +492,7 @@ variable "computing_token" exists
 POST {{host}}/v1/retrieve-json
 content-type: application/json
 [Options]
-delay: 30000
+delay: 10000
 skip: {{blocked}}
 ```
 [
@@ -542,7 +542,7 @@ variable "computing_token" exists
 POST {{host}}/v1/retrieve-json?indent=false
 content-type: application/json
 [Options]
-delay: 30000
+delay: 20000
 skip: {{blocked}}
 ```
 [
@@ -594,7 +594,7 @@ variable "computing_token" exists
 POST {{host}}/v1/retrieve-json?indent=false
 content-type: application/json
 [Options]
-delay: 30000
+delay: 10000
 skip: {{blocked}}
 ```
 [
@@ -645,7 +645,7 @@ variable "computing_token" exists
 POST {{host}}/v1/retrieve-json?indent=false
 content-type: application/json
 [Options]
-delay: 30000
+delay: 20000
 skip: {{blocked}}
 ```
 [
