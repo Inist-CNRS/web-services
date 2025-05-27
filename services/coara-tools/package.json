@@ -1,7 +1,7 @@
 {
   "private": true,
   "name": "ws-coara-tools",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "Services pour l'instance Lodex Coara",
   "repository": {
     "type": "git",

@@ -7,18 +7,44 @@ content-type: application/json
 
 HTTP 200
 [{
-    "value": {
-        "tools": [
-            "research integrity",
-            "san francisco declaration on research assessment",
-            "dora",
-            "leiden manifesto"
-        ],
-        "tools_homogenised": [
-            "research integrity",
-            "dora",
-            "dora",
-            "leiden manifesto"
-        ]
-    }
+    "value": [
+        {
+            "tool": "research integrity",
+            "tool_homogenised": "research integrity",
+            "other_tool_form": [
+                "research integrity",
+                "research integrity code",
+                "research integrity practices"
+            ],
+            "definition": "definition of research integrity"
+        },
+        {
+            "tool": "san francisco declaration on research assessment",
+            "tool_homogenised": "dora",
+            "other_tool_form": [
+                "dora",
+                "declaration on research assessment",
+                "san francisco declaration on research assessment"
+            ],
+            "definition": "Definition of dora"
+        },
+        {
+            "tool": "dora",
+            "tool_homogenised": "dora",
+            "other_tool_form": [
+                "dora",
+                "declaration on research assessment",
+                "san francisco declaration on research assessment"
+            ],
+            "definition": "Definition of dora"
+        },
+        {
+            "tool": "leiden manifesto",
+            "tool_homogenised": "leiden manifesto",
+            "other_tool_form": [
+                "leiden manifesto"
+            ],
+            "definition": "Definition of leiden manifesto"
+        }
+    ]
 }]
