@@ -1,8 +1,13 @@
-# ws-text-summarize@1.0.1
+# ws-text-summarize@1.1.0
 
 Génère un résumé d'un article scientifique.
 
 Utilise un modèle de langue pour générer le résumé d'un article scientifique à partir du texte intégral. La nature du modèle ne permet pas de garantir la reproductibilité des résultats. Si le texte est trop long, la fin du document n'est pas prise en compte (ce qui affecte peu les performances globales du modèle). La route doit être choisie en fonction de la langue du document.
+
+## Précaution
+
+Ce service utilise `Grobid`. Il faut impérativement renseigner la variable d'environnement `GROBID_API_URL` pour son bon déroulement. L'URL renseignée doit contenir la route (i.e. /api/processFulltextDocument). Elle pourra être mis dans un fichier `.env` dans le répertoire du service (`services/text-summarize`).
+De la même manière, nous utilisons DVC pour récupérer les modèles sur un webdav. Pour se faire, nous devons renseigner 3 variables d'environnements dans ce même fichier `.env` : `WEBDAV_URL`, `WEBDAV_LOGIN`, `WEBDAV_PASSWORD`.
 
 ## Langues supportées
 

@@ -22,3 +22,16 @@ HTTP 200
     "id": "1",
     "value": "In bibliographic databases, affiliations of authors are of paramount importance. They permit to the laboratories or institutes to get national and even international visibility. Depending on the country, it is not always clear how to name a laboratory with respect to its supervisory authorities. New methods for disambiguation could help the information analysts to be more efficient when labelling. <AI-generated>"
 }]
+
+
+POST {{host}}/v1/en-pdf?indent=true
+Content-Type: application/pdf
+[Options]
+skip: {{blocked}}
+file,./text-summarize-test.pdf;
+
+
+HTTP 200
+[Asserts]
+jsonpath "$[0].id" exists
+jsonpath "$[0].value" startsWith "TextMine working group aims to bring together researchers"
