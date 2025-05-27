@@ -1,4 +1,4 @@
-# ws-coara-tools@0.0.1
+# ws-coara-tools@1.0.0
 
 Services pour l'instance Lodex Coara
 
