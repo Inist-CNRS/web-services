@@ -6,7 +6,8 @@ Utilise un modèle de langue pour générer le résumé d'un article scientifiqu
 
 ## Précaution
 
-Ce service utilise `Grobid`. Il faut impérativement renseigner la variable d'environnement `GROBID_API_URL` pour son bon déroulement. L'URL renseignée doit contenir la route (i.e. /api/processFulltextDocument)
+Ce service utilise `Grobid`. Il faut impérativement renseigner la variable d'environnement `GROBID_API_URL` pour son bon déroulement. L'URL renseignée doit contenir la route (i.e. /api/processFulltextDocument). Elle pourra être mis dans un fichier `.env` à la racine du dépôt.
+De la même manière, nous utilisons DVC pour récupérer les modèles sur un webdav. Pour se faire, nous devons renseigner 3 variables d'environnements dans ce même fichier `.env` : `WEBDAV_URL`, `WEBDAV_LOGIN`, `WEBDAV_PASSWORD`.
 
 ## Langues supportées
 
