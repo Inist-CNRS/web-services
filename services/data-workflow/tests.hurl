@@ -358,7 +358,24 @@ jsonpath "$[0].value[0].term" exists
 jsonpath "$[0].value[0].frequency" exists
 jsonpath "$[0].value[0].specificity" exists
 
+POST {{host}}/v1/retrieve-lines-csv
+content-type: application/json
+[Options]
+skip: {{blocked}}
+```
+[
+	{
+		"value":"{{computing_token}}"
+	}
+]
+```
 
+HTTP 200
+Content-Type: text/csv
+[Asserts]
+body contains "\"id\",\"term\",\"frequency\",\"specificity\""
+body contains "\"WPpTXDTJB.txt\",\"proto-paratethys\",\"9\",\"1\""
+body contains "\"WtJ4NNWhq.txt\",\"time scale\",\"1\",\"0.2\""
 
 ############################################################################
 # Test v1/astro-tag-pdf
@@ -660,4 +677,3 @@ Content-Type: application/json
 [Asserts]
 jsonpath "$[1].value.diseases" includes "magmatism"
 jsonpath "$[1].value.diseases" count == 4
-
