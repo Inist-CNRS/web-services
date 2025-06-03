@@ -13,7 +13,7 @@ torch.set_num_threads(4)
 tokenizer = AutoTokenizer.from_pretrained("./v1/bart-large-cnn")
 model = AutoModelForSeq2SeqLM.from_pretrained("./v1/bart-large-cnn")
 
-GROBID_URL = os.getenv("GROBID_API_URL")
+GROBID_API_URL = os.getenv("GROBID_API_URL")
 
 
 def extract_text_grobid(pdf_path):
@@ -25,7 +25,7 @@ def extract_text_grobid(pdf_path):
             'consolidateHeader': '1'
         }
         try:
-            response = requests.post(GROBID_URL, files=files, data=data)
+            response = requests.post(GROBID_API_URL, files=files, data=data)
 
             if response.status_code == 200:
                 xml = response.text
