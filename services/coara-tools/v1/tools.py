@@ -27,18 +27,25 @@ for line in sys.stdin:
     except Exception:
         matches = []
 
-    results = {}
-    results_tools_homogenised = []
-    results_tools = []
+    results = []
     for match in matches:
+        tool_to_add = {"tool": "", "tool_homogenised": "", "other_tool_form": "", "definition": ""}
         key = match.lower()
-        results_tools.append(key)
-        canonical = tools_dict.get(key)
-        if canonical:
-            results_tools_homogenised.append(canonical)
-            
-    results["tools"] = results_tools
-    results["tools_homogenised"] = results_tools_homogenised
+        
+        tool_to_add["tool"] = key
+        try:
+            tool_to_add["tool_homogenised"] = tools_dict[key]["tool_homogenised"]
+        except Exception:
+            tool_to_add["tool_homogenised"] = ""
+        try:
+            tool_to_add["other_tool_form"] = tools_dict[key]["other_tool_form"]
+        except Exception:
+            tool_to_add["other_tool_form"] = ""
+        try:
+            tool_to_add["definition"] = tools_dict[key]["definition"]
+        except Exception:
+            tool_to_add["definition"] = ""
+        results.append(tool_to_add)
 
     data["value"] = results
     sys.stdout.write(json.dumps(data))
