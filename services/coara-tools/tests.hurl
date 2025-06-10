@@ -16,7 +16,8 @@ HTTP 200
                 "research integrity code",
                 "research integrity practices"
             ],
-            "definition": "definition of research integrity"
+            "definition": "Update this terminology with a definition of the given tool.",
+            "other_tool_form_flatten": "research integrity ; research integrity code ; research integrity practices"
         },
         {
             "tool": "san francisco declaration on research assessment",
@@ -26,7 +27,8 @@ HTTP 200
                 "declaration on research assessment",
                 "san francisco declaration on research assessment"
             ],
-            "definition": "Definition of dora"
+            "definition": "Update this terminology with a definition of the given tool.",
+            "other_tool_form_flatten": "dora ; declaration on research assessment ; san francisco declaration on research assessment"
         },
         {
             "tool": "dora",
@@ -36,7 +38,8 @@ HTTP 200
                 "declaration on research assessment",
                 "san francisco declaration on research assessment"
             ],
-            "definition": "Definition of dora"
+            "definition": "Update this terminology with a definition of the given tool.",
+            "other_tool_form_flatten": "dora ; declaration on research assessment ; san francisco declaration on research assessment"
         },
         {
             "tool": "leiden manifesto",
@@ -44,7 +47,8 @@ HTTP 200
             "other_tool_form": [
                 "leiden manifesto"
             ],
-            "definition": "Definition of leiden manifesto"
+            "definition": "Update this terminology with a definition of the given tool.",
+            "other_tool_form_flatten": "leiden manifesto"
         }
     ]
 }]

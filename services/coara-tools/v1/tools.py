@@ -42,6 +42,10 @@ for line in sys.stdin:
         except Exception:
             tool_to_add["other_tool_form"] = ""
         try:
+            tool_to_add["other_tool_form_flatten"] = tools_dict[key]["other_tool_form_flatten"]
+        except Exception:
+            tool_to_add["other_tool_form_flatten"] = ""
+        try:
             tool_to_add["definition"] = tools_dict[key]["definition"]
         except Exception:
             tool_to_add["definition"] = ""
