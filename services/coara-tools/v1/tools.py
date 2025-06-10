@@ -16,6 +16,7 @@ pattern = re.compile(r'\b(' + '|'.join(escaped_terms) + r')\b', flags=re.IGNOREC
 
 
 for line in sys.stdin:
+    uniq = []
     data = json.loads(line)
     try:
         text = data["value"]
@@ -32,6 +33,10 @@ for line in sys.stdin:
         tool_to_add = {"tool": "", "tool_homogenised": "", "other_tool_form": "", "definition": ""}
         key = match.lower()
         
+        if key in uniq:
+            continue
+        uniq.append(key)
+        
         tool_to_add["tool"] = key
         try:
             tool_to_add["tool_homogenised"] = tools_dict[key]["tool_homogenised"]
@@ -41,6 +46,10 @@ for line in sys.stdin:
             tool_to_add["other_tool_form"] = tools_dict[key]["other_tool_form"]
         except Exception:
             tool_to_add["other_tool_form"] = ""
+        try:
+            tool_to_add["other_tool_form_flatten"] = tools_dict[key]["other_tool_form_flatten"]
+        except Exception:
+            tool_to_add["other_tool_form_flatten"] = ""
         try:
             tool_to_add["definition"] = tools_dict[key]["definition"]
         except Exception:
