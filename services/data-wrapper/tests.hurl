@@ -48,6 +48,19 @@ HTTP 200
 
 ##########################################
 
+POST {{host}}/v1/csv?id=id&value=content
+content-type: text/csv
+```
+id,content
+1,
+2,Not empty
+```
+
+HTTP 200
+Content-type: application/gzip
+
+##########################################
+
 POST {{host}}/v1/tar-tei2json
 content-type: application/x-tar
 file,example-tei.tar.gz;
