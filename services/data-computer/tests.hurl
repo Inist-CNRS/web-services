@@ -113,6 +113,10 @@ HTTP 200
             "Titre 4",
             "Titre 2"
         ],
+        "text": [
+            "Intrenational Conference on Industrial Engineering and Systems Management",
+            "IESM 2017 : 7th International Conference on Industrial Engineering and Systems Management"
+        ],
         "score": [
             0.94,
             0.93
@@ -125,6 +129,9 @@ HTTP 200
         "similarity": [
             "Titre 1"
         ],
+        "text": [
+            "IESM - International Conference on Industrial Engineering and Systems Management"
+        ],
         "score": [
             0.93
         ]
@@ -136,6 +143,9 @@ HTTP 200
         "similarity": [
             "Titre 4"
         ],
+        "text": [
+            "Intrenational Conference on Industrial Engineering and Systems Management"
+        ],
         "score": [
             0.89
         ]
@@ -146,6 +156,9 @@ HTTP 200
     "value": {
         "similarity": [
             "Titre 1"
+        ],
+        "text": [
+            "IESM - International Conference on Industrial Engineering and Systems Management"
         ],
         "score": [
             0.94
