@@ -48,6 +48,40 @@ HTTP 200
 
 ##########################################
 
+POST {{host}}/v1/fields/json?indent=true
+content-type: application/json
+[
+    {"title": "Rocky", "actors": ["Sylvester Stallone", "Talia Shire", "Carl Weathers", "Burt Young"]},
+    {"title": "Rocky 2", "actors": ["Sylvester Stallone", "Talia Shire", "Carl Weathers", "Burt Young", "Burgess Meredith", "Tony Burton", "Frank Stallone", "Stu Nahan"]}
+]
+
+HTTP 200
+[{
+    "value": "title"
+},
+{
+    "value": "actors"
+}]
+
+##########################################
+
+POST {{host}}/v1/fields/jsonl?indent=true
+content-type: application/jsonl
+```
+{"title": "Rocky", "actors": ["Sylvester Stallone", "Talia Shire", "Carl Weathers", "Burt Young"]}
+```
+
+HTTP 200
+[{
+    "value": "title"
+},
+{
+    "value": "actors"
+}]
+
+
+##########################################
+
 POST {{host}}/v1/csv?id=id&value=content
 content-type: text/csv
 ```
