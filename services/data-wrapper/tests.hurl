@@ -120,3 +120,16 @@ bytes count >= 370
 bytes count <= 400
 bytes startsWith hex,1f8b0800;
 bytes endsWith hex,000c0000;
+
+##########################################
+
+POST {{host}}/v1/jsonl?id=title&value=year
+Content-Type: application/jsonl
+```
+{"title":"Rocky","year":1976}
+{"title":"Rocky 2","year":1979}
+{"title":"Rocky 3","year":1982}
+```
+
+HTTP 200
+Content-type: application/gzip
