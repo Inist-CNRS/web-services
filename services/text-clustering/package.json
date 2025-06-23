@@ -1,7 +1,7 @@
 {
     "private": true,
     "name": "ws-text-clustering",
-    "version": "2.0.0",
+    "version": "2.0.1",
     "description": "Créer différents `clusters` à partir d'un ensemble de textes courts ou d'un ensemble de listes de mots-clés.",
     "repository": {
         "type": "git",
