@@ -33,6 +33,7 @@ All contributing instructions are in [CONTRIBUTING](CONTRIBUTING.md).
 - [chem-ner](./services/chem-ner) [![Docker Pulls](https://img.shields.io/docker/pulls/cnrsinist/ws-chem-ner.svg)](https://hub.docker.com/r/cnrsinist/ws-chem-ner/)
 - [coara-tools](./services/coara-tools) [![Docker Pulls](https://img.shields.io/docker/pulls/cnrsinist/ws-coara-tools.svg)](https://hub.docker.com/r/cnrsinist/ws-coara-tools/)
 - [data-computer](./services/data-computer) [![Docker Pulls](https://img.shields.io/docker/pulls/cnrsinist/ws-data-computer.svg)](https://hub.docker.com/r/cnrsinist/ws-data-computer/)
+- [data-dataset](./services/data-dataset) [![Docker Pulls](https://img.shields.io/docker/pulls/cnrsinist/ws-data-dataset.svg)](https://hub.docker.com/r/cnrsinist/ws-data-dataset/)
 - [data-homogenise](./services/data-homogenise) [![Docker Pulls](https://img.shields.io/docker/pulls/cnrsinist/ws-data-homogenise.svg)](https://hub.docker.com/r/cnrsinist/ws-data-homogenise/)
 - [data-rapido](./services/data-rapido) [![Docker Pulls](https://img.shields.io/docker/pulls/cnrsinist/ws-data-rapido.svg)](https://hub.docker.com/r/cnrsinist/ws-data-rapido/)
 - [data-table](./services/data-table) [![Docker Pulls](https://img.shields.io/docker/pulls/cnrsinist/ws-data-table.svg)](https://hub.docker.com/r/cnrsinist/ws-data-table/)
