@@ -2,6 +2,7 @@
 
 ROOT="$(dirname "$0")/.."
 SCHEME="https:"
+ISTEX_GATEWAY="${ROOT}/../istex-gateway/"
 
 allItems=""
 
@@ -54,7 +55,7 @@ process () {
 			;;
 	esac
 	CURL_OUTFILE=$(mktemp)
-    cat <<EOF | curl --silent --user "${LOGIN}:${PASSW}" -T - "http://vpdaf.intra.inist.fr:35270/internal-proxy-1/data/${NAME}.yml" --digest  --write-out "%{http_code}" --output /dev/null > "${CURL_OUTFILE}"
+    cat <<EOF | tee "${ISTEX_GATEWAY}/config/${NAME}.yml" | curl --silent --user "${LOGIN}:${PASSW}" -T - "http://vpdaf.intra.inist.fr:35270/internal-proxy-1/data/${NAME}.yml" --digest  --write-out "%{http_code}" --output /dev/null > "${CURL_OUTFILE}"
 http:
     routers:
         Router-${NAME}:
