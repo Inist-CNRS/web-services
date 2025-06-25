@@ -2,6 +2,7 @@
 
 ROOT="$(dirname "$0")/.."
 SCHEME="https:"
+CALLING_DIRECTORY=$(pwd)
 ISTEX_GATEWAY="${ROOT}/../istex-gateway/"
 
 allItems=""
@@ -89,6 +90,13 @@ EOF
     return 0
 }
 
+################# main #################
+
+echo "Récupération du dépôt istex-gateway"
+cd "${ISTEX_GATEWAY}" || exit 1
+git pull
+cd "${CALLING_DIRECTORY}" || exit 2
+
 FILES=$(ls "${ROOT}"/services/*/swagger.json)
 
 echo -n "Login: "
@@ -102,6 +110,12 @@ do
     process "$swagger" "$login" "$passw"
 done
 
+echo "Mise à jour du dépôt istex-gateway"
+cd "${ISTEX_GATEWAY}" || exit 1
+git add config
+git commit -m "Update config files"
+git push
+cd "${CALLING_DIRECTORY}" || exit 2
 
 echo -n "open-api - Swagger - "
 CURL_OUTFILE=$(mktemp)
