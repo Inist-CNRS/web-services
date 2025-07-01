@@ -51,7 +51,6 @@
     "services/chem-ner",
     "services/coara-tools",
     "services/data-computer",
-    "services/data-dataset",
     "services/data-homogenise",
     "services/data-rapido",
     "services/data-table",
