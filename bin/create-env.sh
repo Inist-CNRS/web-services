@@ -29,6 +29,8 @@ WEBDAV_URL=$4
 OPENALEX_API_KEY=$5
 UNPAYWALL_API_KEY=$6
 CROSSREF_API_KEY=$7
+KAGGLE_USERNAME= $8
+KAGGLE_KEY=$9
 
 echo "Building .env for $SERVICE_NAME"
 
@@ -39,4 +41,6 @@ echo "Building .env for $SERVICE_NAME"
     echo "export OPENALEX_API_KEY=$OPENALEX_API_KEY"
     echo "export UNPAYWALL_API_KEY=$UNPAYWALL_API_KEY"
     echo "export CROSSREF_API_KEY=$CROSSREF_API_KEY"
+    echo "export KAGGLE_USERNAME=$KAGGLE_USERNAME"
+    echo "export KAGGLE_KEY=$KAGGLE_KEY"
 } > "services/$SERVICE_NAME/.env"
