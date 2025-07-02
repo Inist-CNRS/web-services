@@ -12,6 +12,8 @@ RUN pip install \
     opencv-contrib-python==4.11.0.86 \
     pillow==10.1.0
 
+RUN apt-get install tesseract-ocr-fra
+
 # Install all node dependencies
 # RUN npm install \
 #     @ezs/teeft@2.3.1 \
