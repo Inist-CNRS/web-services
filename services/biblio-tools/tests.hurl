@@ -516,7 +516,7 @@ HTTP 200
 [Asserts]
 jsonpath "$" count == 4
 jsonpath "$[0].value.lang" == "en"
-jsonpath "$[1].value.year" == "2022"
+jsonpath "$[1].value.year" == "2021"
 jsonpath "$[2].value.genre" == "journal-article"
 jsonpath "$[3].value" == "n/a"
 
