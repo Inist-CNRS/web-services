@@ -4,15 +4,13 @@ FROM cnrsinist/ezs-python-server:py3.9-no16-1.0.11
 USER root
 # Install all python dependencies
 
-RUN apt update && apt install -y tesseract-ocr ffmpeg libsm6 libxext6
+RUN apt update && apt install -y tesseract-ocr tesseract-ocr-fra ffmpeg libsm6 libxext6
 
 RUN pip install \
     numba==0.58.1 \
     img2table==1.4.1 \
     opencv-contrib-python==4.11.0.86 \
     pillow==10.1.0
-
-RUN apt-get install tesseract-ocr-fra
 
 # Install all node dependencies
 # RUN npm install \
