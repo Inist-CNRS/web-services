@@ -167,3 +167,18 @@ Content-Type: application/jsonl
 
 HTTP 200
 Content-type: application/gzip
+
+##########################################
+
+POST {{host}}/v1/json?id=title&value=year
+Content-Type: application/json
+```
+[
+{"title":"Rocky","year":1976},
+{"title":"Rocky 2","year":1979},
+{"title":"Rocky 3","year":1982}
+]
+```
+
+HTTP 200
+Content-type: application/gzip
