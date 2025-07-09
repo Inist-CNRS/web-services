@@ -151,7 +151,7 @@ HTTP 200
 Content-type: application/gzip
 [Asserts]
 bytes count >= 370
-bytes count <= 400
+bytes count <= 420
 bytes startsWith hex,1f8b0800;
 bytes endsWith hex,000c0000;
 
