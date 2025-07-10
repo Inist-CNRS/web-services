@@ -1010,7 +1010,7 @@ HTTP 200
         ],
         "skos$exactMatch": [
             {
-                "rdf$resource": "https://rdf.insee.fr/sparql/describe?uri=http://id.insee.fr/geo/commune/5691555d-e924-48b3-a6ce-f91db0bb5a20&default-graph-uri=data"
+                "rdf$resource": "http://id.insee.fr/geo/commune/5691555d-e924-48b3-a6ce-f91db0bb5a20"
             },
             {
                 "rdf$resource": "http://sws.geonames.org/2990999/"
@@ -1034,9 +1034,6 @@ HTTP 200
                 "rdf$resource": "https://ark.frantiq.fr/ark:/26678/pcrtngUfUyvuMo"
             }
         ],
-        "owl$sameAs": {
-            "rdf$resource": "http://id.insee.fr/geo/commune/5691555d-e924-48b3-a6ce-f91db0bb5a20"
-        },
         "geo$lat": {
             "rdf$datatype": "http://www.w3.org/2001/XMLSchema#double",
             "xml$t": "48.68439"
@@ -1138,7 +1135,7 @@ HTTP 200
         ],
         "skos$exactMatch": [
             {
-                "rdf$resource": "https://rdf.insee.fr/sparql/describe?uri=http://id.insee.fr/geo/commune/bb79c0c4-aa6a-4a4b-9c29-092df11d498d&default-graph-uri=data"
+                "rdf$resource": "http://id.insee.fr/geo/commune/bb79c0c4-aa6a-4a4b-9c29-092df11d498d"
             },
             {
                 "rdf$resource": "http://sws.geonames.org/3020411/"
@@ -1162,9 +1159,6 @@ HTTP 200
                 "rdf$resource": "https://ark.frantiq.fr/ark:/26678/pcrtPj3bWMJKt5"
             }
         ],
-        "owl$sameAs": {
-            "rdf$resource": "http://id.insee.fr/geo/commune/bb79c0c4-aa6a-4a4b-9c29-092df11d498d"
-        },
         "geo$lat": {
             "rdf$datatype": "http://www.w3.org/2001/XMLSchema#double",
             "xml$t": "48.67937"
@@ -1255,7 +1249,7 @@ HTTP 200
         },
         "skos$exactMatch": [
             {
-                "rdf$resource": "https://rdf.insee.fr/sparql/describe?uri=http://id.insee.fr/geo/commune/577cea3f-8b18-456d-8c0e-2d18742cdfc6&default-graph-uri=data"
+                "rdf$resource": "http://id.insee.fr/geo/commune/577cea3f-8b18-456d-8c0e-2d18742cdfc6"
             },
             {
                 "rdf$resource": "http://sws.geonames.org/2988823/"
@@ -1279,9 +1273,6 @@ HTTP 200
                 "rdf$resource": "https://ark.frantiq.fr/ark:/26678/pcrtg0M9kUBsJq"
             }
         ],
-        "owl$sameAs": {
-            "rdf$resource": "http://id.insee.fr/geo/commune/577cea3f-8b18-456d-8c0e-2d18742cdfc6"
-        },
         "geo$lat": {
             "rdf$datatype": "http://www.w3.org/2001/XMLSchema#double",
             "xml$t": "48.98349"
