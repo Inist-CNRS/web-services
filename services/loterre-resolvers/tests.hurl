@@ -798,8 +798,6 @@ HTTP 200
 
 POST {{host}}/v1/D63/expand?indent=true
 content-type: application/json
-[Options]
-skip: false
 [
   { "value": "toto"},
   { "value": "Nancy" },
@@ -1322,8 +1320,6 @@ HTTP 200
 
 POST {{host}}/v1/D63/identify?indent=true
 content-type: application/json
-[Options]
-skip: false
 [
   { "value": "Pompey"}
 ]
@@ -1410,6 +1406,10 @@ HTTP 200
         "dcterms$created": {
             "rdf$datatype": "http://www.w3.org/2001/XMLSchema#date",
             "xml$t": "2017-12-04"
+        },
+        "dct$creator": {
+            "rdf$datatype": "http://www.w3.org/2001/XMLSchema#string",
+            "xml$t": "Frank Arnould"
         },
         "dct$isReferencedBy": [
             {
@@ -1576,6 +1576,14 @@ HTTP 200
                 "rdf$resource": "http://data.loterre.fr/ark:/67375/P66-X4ZVD1JP-3"
             }
         ],
+        "uneskos$memberOf": [
+            {
+                "rdf$resource": "http://data.loterre.fr/ark:/67375/P66/Animal"
+            },
+            {
+                "rdf$resource": "http://data.loterre.fr/ark:/67375/P66/Homme"
+            }
+        ],
         "indexKeys": [
             "amygdala",
             "amygdale",
@@ -1601,12 +1609,13 @@ HTTP 200
 {
     "value": {
         "rdf$about": "http://data.loterre.fr/ark:/67375/P66-KHRWNS4W-Q",
-        "dct$creator": {
-            "xml$t": "Frank Arnould"
-        },
         "dcterms$created": {
             "rdf$datatype": "http://www.w3.org/2001/XMLSchema#date",
             "xml$t": "2018-08-03"
+        },
+        "dct$creator": {
+            "rdf$datatype": "http://www.w3.org/2001/XMLSchema#string",
+            "xml$t": "Frank Arnould"
         },
         "dcterms$modified": {
             "rdf$datatype": "http://www.w3.org/2001/XMLSchema#date",
@@ -1738,6 +1747,17 @@ HTTP 200
                 "rdf$resource": "http://data.loterre.fr/ark:/67375/P66-XJ333KQF-6"
             }
         ],
+        "uneskos$memberOf": [
+            {
+                "rdf$resource": "http://data.loterre.fr/ark:/67375/P66/Animal"
+            },
+            {
+                "rdf$resource": "http://data.loterre.fr/ark:/67375/P66/Homme"
+            },
+            {
+                "rdf$resource": "http://data.loterre.fr/ark:/67375/P66/Neurologie"
+            }
+        ],
         "indexKeys": [
             "frontallobe",
             "lobefrontal",
@@ -1756,7 +1776,12 @@ HTTP 200
 {
     "value": {
         "rdf$about": "http://data.loterre.fr/ark:/67375/P66-RGFWPLNW-K",
+        "dcterms$created": {
+            "rdf$datatype": "http://www.w3.org/2001/XMLSchema#date",
+            "xml$t": "2017-12-04"
+        },
         "dct$creator": {
+            "rdf$datatype": "http://www.w3.org/2001/XMLSchema#string",
             "xml$t": "Frank Arnould"
         },
         "dct$isReferencedBy": [
@@ -1776,10 +1801,6 @@ HTTP 200
                 "rdf$resource": "http://data.loterre.fr/ark:/67375/P66/doc/MazancieuxA_2023_1"
             }
         ],
-        "dcterms$created": {
-            "rdf$datatype": "http://www.w3.org/2001/XMLSchema#date",
-            "xml$t": "2017-12-04"
-        },
         "dcterms$modified": {
             "rdf$datatype": "http://www.w3.org/2001/XMLSchema#date",
             "xml$t": "2025-02-20"
@@ -1877,7 +1898,7 @@ HTTP 200
                         "xml$t": "métacognition"
                     }
                 ],
-                "rdf$about": "http://data.loterre.fr/ark:/67375/P66-RGFWPLNW-K"
+                "rdf$about": "http://data.loterre.fr/ark:/67375/P66-W6MLR9QR-H"
             }
         ],
         "skos$narrower": [
@@ -1909,19 +1930,33 @@ HTTP 200
             }
         ],
         "skos$related": [
-                    {
-                         "rdf$resource": "http://data.loterre.fr/ark:/67375/P66-D304PDBZ-3"
-                    },
-                    {
-                         "rdf$resource": "http://data.loterre.fr/ark:/67375/P66-QZXRZM22-5"
-                    },
-                    {
-                         "rdf$resource": "http://data.loterre.fr/ark:/67375/P66-VWG96TP1-F"
-                    },
-                    {
-                         "rdf$resource": "http://data.loterre.fr/ark:/67375/P66-ZTRSJ6KF-F"
-                    }
-               ],
+            {
+                "rdf$resource": "http://data.loterre.fr/ark:/67375/P66-D304PDBZ-3"
+            },
+            {
+                "rdf$resource": "http://data.loterre.fr/ark:/67375/P66-QZXRZM22-5"
+            },
+            {
+                "rdf$resource": "http://data.loterre.fr/ark:/67375/P66-VWG96TP1-F"
+            },
+            {
+                "rdf$resource": "http://data.loterre.fr/ark:/67375/P66-ZTRSJ6KF-F"
+            }
+        ],
+        "uneskos$memberOf": [
+            {
+                "rdf$resource": "http://data.loterre.fr/ark:/67375/P66/Homme"
+            },
+            {
+                "rdf$resource": "http://data.loterre.fr/ark:/67375/P66/Psychologie"
+            },
+            {
+                "rdf$resource": "http://data.loterre.fr/ark:/67375/P66/MemoryAndEducationGroup"
+            },
+            {
+                "rdf$resource": "http://data.loterre.fr/ark:/67375/P66/MemoryAndLawGroup"
+            }
+        ],
         "indexKeys": [
             "metamemory",
             "metamemoire",
@@ -4331,13 +4366,13 @@ POST {{host}}/v1/QX8/annotate?indent=true
 content-type: application/json
 [
     {
-        "id": "ark:/67375/6H6-SXFZKH1W-6",
-        "value": "Abstract: The Pliocene stratigraphy of the Romagna Northern Apennines foredeep has been reconstructed through mapping and measuring the different lithostratigraphic units. The physically correlated sedimentary bodies have been chronologically calibrated through biostratigraphic analyses. Analysis of facies and fossil content allowed reconstructing the main depositional systems and their evolution. The co-occurrence of shallow- to deep-water environments and carbonate to siliciclastic systems allowed understanding fully the role of eustasy and climate vs. continuous tectonic deformation controlling the accommodation and basin morphology. Following a limited sea-level lowering at 4.2 Ma, associated with the first signal of cooling in the Early Pliocene, a fast growing subtropical type carbonate platform developed, in response to warm and oligotrophic surface waters. Furthermore, a significant drop in sea-level at 3.75 Ma points to an important Pliocene continental glaciation in the Northern Hemisphere. During the subsequent transgression, warm and possibly humid climate favoured the deposition of the first Pliocene sapropel around 3.3 Ma. The growth of a second generation of carbonate platform between 3.3 and 3.042 Ma suggests a renewed warm period and limited runoff. At the top of this highstand, thick sapropels developed, which can easily be correlated across the Mediterranean. The platform abruptly drowned, was overwhelmed by bio-erosion and was covered by iron\u2013phosphate crusts; whereas in the adjacent basins numerous sapropel layers occurred, rich of biosiliceous forms, documenting the shift from Ccarb to Corg deposition. Strong oscillations of climate, due to precessionally controlled seasonality, and increased precipitation and runoff are considered as the main causes of the increase of surface water fertility. After the 2.87 Ma sea-level drop, again very significant, the sapropel rapidly disappears, in conjunction to the development of the lowstand wedge. After this cold period, which ended around 2.6 Ma, carbonate platforms never recovered due to the enduring cooler surface waters and the onset of an active drainage on the Apenninic range. This study documents the role of the eustatic variations on the Pliocene deposition of the actively deforming Northern Apennines foredeep. The abrupt lithostratigraphic changes appear also controlled by palaeoproductivity variations associated with climate and runoff."
+    "id": "ark:/67375/6H6-SXFZKH1W-6",
+    "value": "Abstract: The Pliocene stratigraphy of the Romagna Northern Apennines foredeep has been reconstructed through mapping and measuring the different lithostratigraphic units. The physically correlated sedimentary bodies have been chronologically calibrated through biostratigraphic analyses. Analysis of facies and fossil content allowed reconstructing the main depositional systems and their evolution. The co-occurrence of shallow- to deep-water environments and carbonate to siliciclastic systems allowed understanding fully the role of eustasy and climate vs. continuous tectonic deformation controlling the accommodation and basin morphology. Following a limited sea-level lowering at 4.2 Ma, associated with the first signal of cooling in the Early Pliocene, a fast growing subtropical type carbonate platform developed, in response to warm and oligotrophic surface waters. Furthermore, a significant drop in sea-level at 3.75 Ma points to an important Pliocene continental glaciation in the Northern Hemisphere. During the subsequent transgression, warm and possibly humid climate favoured the deposition of the first Pliocene sapropel around 3.3 Ma. The growth of a second generation of carbonate platform between 3.3 and 3.042 Ma suggests a renewed warm period and limited runoff. At the top of this highstand, thick sapropels developed, which can easily be correlated across the Mediterranean. The platform abruptly drowned, was overwhelmed by bio-erosion and was covered by iron\u2013phosphate crusts; whereas in the adjacent basins numerous sapropel layers occurred, rich of biosiliceous forms, documenting the shift from Ccarb to Corg deposition. Strong oscillations of climate, due to precessionally controlled seasonality, and increased precipitation and runoff are considered as the main causes of the increase of surface water fertility. After the 2.87 Ma sea-level drop, again very significant, the sapropel rapidly disappears, in conjunction to the development of the lowstand wedge. After this cold period, which ended around 2.6 Ma, carbonate platforms never recovered due to the enduring cooler surface waters and the onset of an active drainage on the Apenninic range. This study documents the role of the eustatic variations on the Pliocene deposition of the actively deforming Northern Apennines foredeep. The abrupt lithostratigraphic changes appear also controlled by palaeoproductivity variations associated with climate and runoff."
      },
-    {
-        "id": "ark:/67375/6H6-MT1C65QX-P",
-        "value": "Abstract: Qinghai Lake is a large saline lake on the Qinghai\u2013Tibetan Plateau of central Asia that is effected by both the Indian and Asian monsoons. We used reflectance spectroscopy to characterize the sediments in a 795-cm long core taken from the southeastern part of the lake. Sediment redness, which is related to iron oxide content, seems to monitor paleoclimatic changes in the core. Iron oxides appear to be eroded from nearby red beds or loess deposits and are transported by fluvial means into the lake. Thus, redness increases at times of increased precipitation, that is, as monsoon strength increases. Our redness monsoon proxy shows climate changes on several times scales. On a millennial scale, it records humid conditions during the Early and Mid-Holocene. From about 4200 to 2300 yr BP, low redness values suggest a two-millennial long dry period, which in the Late Holocene is followed by a more humid period. On a centennial scale, the redness proxy records not only the Little Ice Age, but also the Medieval Warm Period, the Dark Ages Cool Period and the Roman Warm Period. Time series analysis of the redness record indicates a 200 yr frequency, which corresponds to the de Vries solar cycle suggesting that, in addition to insolation changes resulting from orbital variations, solar forcing also results from cyclic changes in the sun&apos;s luminosity."
-    }
+{
+    "id": "ark:/67375/6H6-MT1C65QX-P",
+    "value": "Abstract: Qinghai Lake is a large saline lake on the Qinghai\u2013Tibetan Plateau of central Asia that is effected by both the Indian and Asian monsoons. We used reflectance spectroscopy to characterize the sediments in a 795-cm long core taken from the southeastern part of the lake. Sediment redness, which is related to iron oxide content, seems to monitor paleoclimatic changes in the core. Iron oxides appear to be eroded from nearby red beds or loess deposits and are transported by fluvial means into the lake. Thus, redness increases at times of increased precipitation, that is, as monsoon strength increases. Our redness monsoon proxy shows climate changes on several times scales. On a millennial scale, it records humid conditions during the Early and Mid-Holocene. From about 4200 to 2300 yr BP, low redness values suggest a two-millennial long dry period, which in the Late Holocene is followed by a more humid period. On a centennial scale, the redness proxy records not only the Little Ice Age, but also the Medieval Warm Period, the Dark Ages Cool Period and the Roman Warm Period. Time series analysis of the redness record indicates a 200 yr frequency, which corresponds to the de Vries solar cycle suggesting that, in addition to insolation changes resulting from orbital variations, solar forcing also results from cyclic changes in the sun&apos;s luminosity."
+}
 ]
 
 HTTP 200
@@ -5044,7 +5079,6 @@ HTTP 200
 
 POST {{host}}/v1/JVR/expand?indent=true
 content-type: application/json
-
 [
   { "value": "toto"},
   { "value": "diabète" },
@@ -6072,7 +6106,6 @@ HTTP 200
 
 POST {{host}}/v1/JVR/identify?indent=true
 content-type: application/json
-
 [
   { "value": "toto"},
   { "value": "diabète" },
@@ -6080,6 +6113,7 @@ content-type: application/json
   { "value": "cancer" },
   { "value": "insulin"}
 ]
+
 
 HTTP 200
 [{
