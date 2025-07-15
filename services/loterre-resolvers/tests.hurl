@@ -6114,7 +6114,6 @@ content-type: application/json
   { "value": "insulin"}
 ]
 
-
 HTTP 200
 [{
     "value": "n/a"
@@ -6147,5 +6146,307 @@ HTTP 200
         "prefLabel@en": "Insulin",
         "localization@en": [],
         "localization@fr": []
+    }
+}]
+
+POST {{host}}/v1/EMTD/expand?indent=true
+content-type: application/json
+[
+  { "value": "toto"},
+  { "value": "bactériophage" },
+  { "value": "clonage" },
+  { "value": "ELISA" },
+  { "value": "entérotoxine"}
+]
+
+HTTP 200
+[{
+    "value": "n/a"
+},
+{
+    "value": {
+        "rdf$about": "https://opendata.inra.fr/EMTD/22",
+        "skos$inScheme": {
+            "rdf$resource": "https://opendata.inra.fr/EMTD"
+        },
+        "skos$prefLabel": [
+            {
+                "xml$lang": "fr",
+                "xml$t": "bactériophage"
+            },
+            {
+                "xml$lang": "en",
+                "xml$t": "bacteriophage"
+            }
+        ],
+        "skosxl$prefLabel": {
+            "rdf$resource": "https://opendata.inra.fr/EMTD/xl_fr_22-1"
+        },
+        "skos$altLabel": [
+            {
+                "xml$lang": "fr",
+                "xml$t": "phage"
+            },
+            {
+                "xml$lang": "en",
+                "xml$t": "phage"
+            }
+        ],
+        "skos$definition": [
+            {
+                "xml$lang": "fr",
+                "xml$t": "Virus des bactéries. (Source : INRA)"
+            },
+            {
+                "xml$lang": "en",
+                "xml$t": "Bacteriophage: any virus that infects bacteria. (Source : INRA)"
+            }
+        ],
+        "dc$subject": [
+            {
+                "xml$lang": "fr",
+                "xml$t": "Microbiologie"
+            },
+            {
+                "xml$lang": "en",
+                "xml$t": "Microbiology"
+            }
+        ],
+        "indexKeys": [
+            "bacteriophage",
+            "phage"
+        ],
+        "score": 2,
+        "skos$broader": [],
+        "skos$narrower": []
+    }
+},
+{
+    "value": {
+        "rdf$about": "https://opendata.inra.fr/EMTD/29",
+        "skos$inScheme": {
+            "rdf$resource": "https://opendata.inra.fr/EMTD"
+        },
+        "skos$prefLabel": [
+            {
+                "xml$lang": "fr",
+                "xml$t": "clonage"
+            },
+            {
+                "xml$lang": "en",
+                "xml$t": "cloning"
+            }
+        ],
+        "skosxl$prefLabel": {
+            "rdf$resource": "https://opendata.inra.fr/EMTD/xl_fr_29-1"
+        },
+        "skos$definition": [
+            {
+                "xml$lang": "fr",
+                "xml$t": "Méthode de reproduction asexuée aboutissant à la formation d'un ensemble de cellules dérivées d'une seule cellule initiale et possédant la même constitution génétique. (Source : INRA)"
+            },
+            {
+                "xml$lang": "en",
+                "xml$t": "Cloning: the process whereby clones are established. (Source : INRA)"
+            }
+        ],
+        "dc$subject": [
+            {
+                "xml$lang": "fr",
+                "xml$t": "Microbiologie"
+            },
+            {
+                "xml$lang": "en",
+                "xml$t": "Microbiology"
+            }
+        ],
+        "indexKeys": [
+            "clonage",
+            "cloning"
+        ],
+        "score": 2,
+        "skos$broader": [],
+        "skos$narrower": []
+    }
+},
+{
+    "value": {
+        "rdf$about": "https://opendata.inra.fr/EMTD/49",
+        "skos$inScheme": {
+            "rdf$resource": "https://opendata.inra.fr/EMTD"
+        },
+        "skos$prefLabel": [
+            {
+                "xml$lang": "fr",
+                "xml$t": "ELISA"
+            },
+            {
+                "xml$lang": "en",
+                "xml$t": "ELISA"
+            }
+        ],
+        "skosxl$prefLabel": [
+            {
+                "rdf$resource": "https://opendata.inra.fr/EMTD/xl_fr_49-1"
+            },
+            {
+                "rdf$resource": "https://opendata.inra.fr/EMTD/xl_en_49-3"
+            }
+        ],
+        "skos$altLabel": [
+            {
+                "xml$lang": "fr",
+                "xml$t": "technique ELISA"
+            },
+            {
+                "xml$lang": "en",
+                "xml$t": "Enzyme-Linked Immunosorbent Assay"
+            }
+        ],
+        "skosxl$altLabel": {
+            "rdf$resource": "https://opendata.inra.fr/EMTD/xl_en_49-4"
+        },
+        "skos$definition": [
+            {
+                "xml$lang": "fr",
+                "xml$t": "Dosage immunochimique qui utilise comme réactif l'anticorps pour doser l'antigène et inversement. (Source : INRA)"
+            },
+            {
+                "xml$lang": "en",
+                "xml$t": "ELISA: a sensitive analytical technique in which an enzyme is complexed to an antigen or antibody. (Source : INRA)"
+            }
+        ],
+        "skos$note": [
+            {
+                "xml$lang": "fr",
+                "xml$t": "La détection des anticorps au cours de l'analyse est réalisée à l'aide de marqueurs, en général des enzymes. (Source : INRA)"
+            },
+            {
+                "xml$lang": "fr",
+                "xml$t": "Les principales enzymes utilisées sont la peroxydase, la phosphatase alcaline et la glucose oxydase. (Source : INRA)"
+            }
+        ],
+        "dc$subject": [
+            {
+                "xml$lang": "fr",
+                "xml$t": "Immunologie"
+            },
+            {
+                "xml$lang": "en",
+                "xml$t": "Immunology"
+            }
+        ],
+        "indexKeys": [
+            "elisa",
+            "techniqueelisa",
+            "enzymelinkedimmunosorbentassay"
+        ],
+        "score": 2,
+        "skos$broader": [],
+        "skos$narrower": []
+    }
+},
+{
+    "value": {
+        "rdf$about": "https://opendata.inra.fr/EMTD/50",
+        "skos$inScheme": {
+            "rdf$resource": "https://opendata.inra.fr/EMTD"
+        },
+        "skos$prefLabel": [
+            {
+                "xml$lang": "fr",
+                "xml$t": "entérotoxine"
+            },
+            {
+                "xml$lang": "en",
+                "xml$t": "enterotoxin"
+            }
+        ],
+        "skosxl$prefLabel": {
+            "rdf$resource": "https://opendata.inra.fr/EMTD/xl_fr_50-1"
+        },
+        "skos$definition": [
+            {
+                "xml$lang": "fr",
+                "xml$t": "Protéine ingérée ou produite par des bactéries pathogènes, agissant dans l'intestin de l'homme ou de l'animal et responsable de diarrhées associées ou non à des dommages tissulaires. (Source : INRA)"
+            },
+            {
+                "xml$lang": "en",
+                "xml$t": "Enterotoxin: any bacterial exoprotein that causes increased exudation of fluid in the gastrointestinal tract. (Source : INRA)"
+            }
+        ],
+        "skos$note": {
+            "xml$lang": "fr",
+            "xml$t": "On distingue deux groupes d'entérotoxines : les entérotoxines cytotoniques responsables de diarrhées et capables de provoquer une réponse sécrétoire en anse intestinale ligaturée et les entérotoxines cytotoxiques qui provoquent des lésions histologiques importantes au niveau de l'épithélium. (Source : INRA)"
+        },
+        "dc$subject": [
+            {
+                "xml$lang": "fr",
+                "xml$t": "Médecine humaine et pathologie"
+            },
+            {
+                "xml$lang": "en",
+                "xml$t": "Human medicine and diseases"
+            },
+            {
+                "xml$lang": "fr",
+                "xml$t": "Gastroentérologie"
+            },
+            {
+                "xml$lang": "en",
+                "xml$t": "Gastroenterology"
+            }
+        ],
+        "indexKeys": [
+            "enterotoxine",
+            "enterotoxin"
+        ],
+        "score": 2,
+        "skos$broader": [],
+        "skos$narrower": []
+    }
+}]
+
+POST {{host}}/v1/EMTD/identify?indent=true
+content-type: application/json
+[
+  { "value": "toto"},
+  { "value": "bactériophage" },
+  { "value": "clonage" },
+  { "value": "ELISA" },
+  { "value": "entérotoxine"}
+]
+
+
+HTTP 200
+[{
+    "value": "n/a"
+},
+{
+    "value": {
+        "about": "https://opendata.inra.fr/EMTD/22",
+        "prefLabel@fr": "bactériophage",
+        "prefLabel@en": "bacteriophage"
+    }
+},
+{
+    "value": {
+        "about": "https://opendata.inra.fr/EMTD/29",
+        "prefLabel@fr": "clonage",
+        "prefLabel@en": "cloning"
+    }
+},
+{
+    "value": {
+        "about": "https://opendata.inra.fr/EMTD/49",
+        "prefLabel@fr": "ELISA",
+        "prefLabel@en": "ELISA"
+    }
+},
+{
+    "value": {
+        "about": "https://opendata.inra.fr/EMTD/50",
+        "prefLabel@fr": "entérotoxine",
+        "prefLabel@en": "enterotoxin"
     }
 }]

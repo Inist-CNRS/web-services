@@ -146,3 +146,30 @@ Content-Type: application/json
   { "value": "cancer" },
   { "value": "insulin"}
 ]
+
+###
+# @name EMTD_expand
+POST {{host}}/v1/EMTD/expand?indent=true HTTP/1.1
+Content-Type: application/json
+
+[
+  { "value": "toto"},
+  { "value": "bactériophage" },
+  { "value": "clonage" },
+  { "value": "ELISA" },
+  { "value": "entérotoxine"}
+]
+
+###
+#  @name EMTD_identify
+POST {{host}}/v1/EMTD/identify?indent=true HTTP/1.1
+Content-Type: application/json
+
+[
+  { "value": "toto"},
+  { "value": "bactériophage" },
+  { "value": "clonage" },
+  { "value": "ELISA" },
+  { "value": "entérotoxine"}
+]
+
