@@ -1407,27 +1407,7 @@ HTTP 200
 {
     "value": {
         "rdf$about": "http://data.loterre.fr/ark:/67375/P66-W52CFWZ4-9",
-        "dct$creator": {
-            "xml$t": "Frank Arnould"
-        },
-        "isReferencedBy": [
-                    {
-                         "rdf$resource": "http://data.loterre.fr/ark:/67375/P66/doc/AbuHasan_2022_1"
-                    },
-                    {
-                         "rdf$resource": "http://data.loterre.fr/ark:/67375/P66/doc/McGaugh_1996_1"
-                    },
-                    {
-                         "rdf$resource": "http://data.loterre.fr/ark:/67375/P66/doc/Phelps_2004_1"
-                    },
-                    {
-                         "rdf$resource": "http://data.loterre.fr/ark:/67375/P66/doc/Ressler_2019_1"
-                    },
-                    {
-                         "rdf$resource": "http://data.loterre.fr/ark:/67375/P66/doc/Roozendaal_2009_1"
-                    }
-               ],
-        "dct$created": {
+        "dcterms$created": {
             "rdf$datatype": "http://www.w3.org/2001/XMLSchema#date",
             "xml$t": "2017-12-04"
         },
