@@ -1410,23 +1410,23 @@ HTTP 200
         "dct$creator": {
             "xml$t": "Frank Arnould"
         },
-        "dct$bibliographicCitation": [
-            {
-                "xml$t": "AbuHasan, Q., Reddy, V., & Siddiqui, W. (2022). Neuroanatomy, Amygdala. In StatPearls. StatPearls Publishing.  http://www.ncbi.nlm.nih.gov/books/NBK537102/"
-            },
-            {
-                "xml$t": "McGaugh, J. L., Cahill, L., & Roozendaal, B. (1996). Involvement of the amygdala in memory storage: Interaction with other brain systems. Proceedings of the National Academy of Sciences, 93(24), 13508–13514.  https://doi.org/10.1073/pnas.93.24.13508"
-            },
-            {
-                "xml$t": "Phelps, E. A. (2004). Human emotion and memory: Interactions of the amygdala and hippocampal complex. Current Opinion in Neurobiology, 14(2), 198–202.  https://doi.org/10.1016/j.conb.2004.03.015"
-            },
-            {
-                "xml$t": "Ressler, R. L., & Maren, S. (2019). Synaptic encoding of fear memories in the amygdala. Current Opinion in Neurobiology, 54, 54–59.  https://doi.org/10.1016/j.conb.2018.08.012"
-            },
-            {
-                "xml$t": "Roozendaal, B., McEwen, B. S., & Chattarji, S. (2009). Stress, memory and the amygdala. Nature Reviews Neuroscience, 10(6), 423–433.  https://doi.org/10.1038/nrn2651"
-            }
-        ],
+        "isReferencedBy": [
+                    {
+                         "rdf$resource": "http://data.loterre.fr/ark:/67375/P66/doc/AbuHasan_2022_1"
+                    },
+                    {
+                         "rdf$resource": "http://data.loterre.fr/ark:/67375/P66/doc/McGaugh_1996_1"
+                    },
+                    {
+                         "rdf$resource": "http://data.loterre.fr/ark:/67375/P66/doc/Phelps_2004_1"
+                    },
+                    {
+                         "rdf$resource": "http://data.loterre.fr/ark:/67375/P66/doc/Ressler_2019_1"
+                    },
+                    {
+                         "rdf$resource": "http://data.loterre.fr/ark:/67375/P66/doc/Roozendaal_2009_1"
+                    }
+               ],
         "dct$created": {
             "rdf$datatype": "http://www.w3.org/2001/XMLSchema#date",
             "xml$t": "2017-12-04"
@@ -1488,7 +1488,7 @@ HTTP 200
                 "rdf$resource": "http://data.loterre.fr/ark:/67375/2CX-5D7NJT7F-T"
             },
             {
-                "rdf$resource": "http://data.loterre.fr/ark:/67375/JVR/M0001044"
+                "rdf$resource": "http://data.loterre.fr/ark:/67375/JVR-K82QZ4R6-T"
             },
             {
                 "rdf$resource": "http://purl.obolibrary.org/obo/UBERON_0001876"
@@ -1645,7 +1645,7 @@ HTTP 200
                 "rdf$resource": "http://data.loterre.fr/ark:/67375/2CX-G82P3PDQ-K"
             },
             {
-                "rdf$resource": "http://data.loterre.fr/ark:/67375/JVR/M0008848"
+                "rdf$resource": "http://data.loterre.fr/ark:/67375/JVR-SLFCVTRT-4"
             },
             {
                 "rdf$resource": "http://purl.obolibrary.org/obo/UBERON_0005838"
@@ -1759,27 +1759,30 @@ HTTP 200
         "dct$creator": {
             "xml$t": "Frank Arnould"
         },
-        "dct$bibliographicCitation": [
-            {
-                "xml$t": "Dunlosky, J., & Bjork, R. A. (Eds.). (2013). Handbook of Metamemory and Memory. Psychology Press."
-            },
-            {
-                "xml$t": "Dunlosky, J., & Tauber, S. (Eds.). (2016). The Oxford handbook of metamemory. Oxford University Press."
-            },
-            {
-                "xml$t": "Flavell, J. H. (1971). First discussant’s comments: What is memory development the development of? Human Development, 14(4), 272–278.  https://doi.org/10.1159/000271221"
-            },
-            {
-                "xml$t": "Le Berre, A.-P., Eustache, F., & Beaunieux, H. (2009). La métamémoire : théorie et clinique. Revue de neuropsychologie, 1(4), 312–320.  https://doi.org/10.3917/rne.014.0312"
-            }
-        ],
+        "isReferencedBy": [
+                    {
+                         "rdf$resource": "http://data.loterre.fr/ark:/67375/P66/doc/Dunlosky_2013"
+                    },
+                    {
+                         "rdf$resource": "http://data.loterre.fr/ark:/67375/P66/doc/Dunlosky_2016"
+                    },
+                    {
+                         "rdf$resource": "http://data.loterre.fr/ark:/67375/P66/doc/Flavell_1971"
+                    },
+                    {
+                         "rdf$resource": "http://data.loterre.fr/ark:/67375/P66/doc/Le_Berre_2009"
+                    },
+                    {
+                         "rdf$resource": "http://data.loterre.fr/ark:/67375/P66/doc/MazancieuxA_2023_1"
+                    }
+               ],
         "dct$created": {
             "rdf$datatype": "http://www.w3.org/2001/XMLSchema#date",
             "xml$t": "2017-12-04"
         },
         "dct$modified": {
             "rdf$datatype": "http://www.w3.org/2001/XMLSchema#date",
-            "xml$t": "2022-04-29"
+            "xml$t": "2025-02-20"
         },
         "skos$definition": [
             {
@@ -1793,7 +1796,7 @@ HTTP 200
         ],
         "skos$exactMatch": [
             {
-                "rdf$resource": "http://data.loterre.fr/ark:/67375/JVR/M000599742"
+                "rdf$resource": "http://data.loterre.fr/ark:/67375/JVR-ZFS4MKLQ-D"
             },
             {
                 "rdf$resource": "https://en.wikipedia.org/wiki/Metamemory"
@@ -1843,6 +1846,9 @@ HTTP 200
             },
             {
                 "rdf$resource": "http://data.loterre.fr/ark:/67375/P66-WDJFQLQJ-P"
+            },
+            {
+                "rdf$resource": "http://data.loterre.fr/ark:/67375/P66-ZV2MRLJ6-6"
             }
         ],
         "inist$isMeasuredBy": [
@@ -1902,9 +1908,20 @@ HTTP 200
                 "rdf$about": "http://data.loterre.fr/ark:/67375/P66-XNPMCKS4-S"
             }
         ],
-        "skos$related": {
-            "rdf$resource": "http://data.loterre.fr/ark:/67375/P66-QZXRZM22-5"
-        },
+        "skos$related": [
+                    {
+                         "rdf$resource": "http://data.loterre.fr/ark:/67375/P66-D304PDBZ-3"
+                    },
+                    {
+                         "rdf$resource": "http://data.loterre.fr/ark:/67375/P66-QZXRZM22-5"
+                    },
+                    {
+                         "rdf$resource": "http://data.loterre.fr/ark:/67375/P66-VWG96TP1-F"
+                    },
+                    {
+                         "rdf$resource": "http://data.loterre.fr/ark:/67375/P66-ZTRSJ6KF-F"
+                    }
+               ],
         "indexKeys": [
             "metamemory",
             "metamemoire",
