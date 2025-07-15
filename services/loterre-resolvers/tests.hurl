@@ -1042,7 +1042,7 @@ HTTP 200
             "rdf$datatype": "http://www.w3.org/2001/XMLSchema#double",
             "xml$t": "6.18496"
         },
-        "dcterms$created": {
+        "dct$created": {
             "rdf$datatype": "http://www.w3.org/2001/XMLSchema#date",
             "xml$t": "2018-09-19"
         },
@@ -1167,7 +1167,7 @@ HTTP 200
             "rdf$datatype": "http://www.w3.org/2001/XMLSchema#double",
             "xml$t": "5.84433"
         },
-        "dcterms$created": {
+        "dct$created": {
             "rdf$datatype": "http://www.w3.org/2001/XMLSchema#date",
             "xml$t": "2018-09-19"
         },
@@ -1281,7 +1281,7 @@ HTTP 200
             "rdf$datatype": "http://www.w3.org/2001/XMLSchema#double",
             "xml$t": "6.02084"
         },
-        "dcterms$created": {
+        "dct$created": {
             "rdf$datatype": "http://www.w3.org/2001/XMLSchema#date",
             "xml$t": "2018-09-19"
         },
