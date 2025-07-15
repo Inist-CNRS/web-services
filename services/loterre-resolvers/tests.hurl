@@ -1570,6 +1570,9 @@ HTTP 200
                 "rdf$resource": "http://data.loterre.fr/ark:/67375/P66-J6P7BVWC-2"
             },
             {
+                "rdf$resource": "http://data.loterre.fr/ark:/67375/P66-NZG0Q0JG-4"
+            },
+            {
                 "rdf$resource": "http://data.loterre.fr/ark:/67375/P66-VSZT26MD-V"
             },
             {
@@ -1870,14 +1873,14 @@ HTTP 200
                 "skos$prefLabel": [
                     {
                         "xml$lang": "en",
-                        "xml$t": "memory"
+                        "xml$t": "metacognition"
                     },
                     {
                         "xml$lang": "fr",
-                        "xml$t": "mémoire"
+                        "xml$t": "métacognition"
                     }
                 ],
-                "rdf$about": "http://data.loterre.fr/ark:/67375/P66-P3PC7CZ3-D"
+                "rdf$about": "http://data.loterre.fr/ark:/67375/P66-RGFWPLNW-K"
             }
         ],
         "skos$narrower": [
