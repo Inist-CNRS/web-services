@@ -20,7 +20,7 @@ cd "services/$SERVICE_NAME"
 npm run start:dev
 
 echo "Waiting server to be ready"
-wait_for_url "http://localhost:31976" 10 30000
+wait_for_url "http://localhost:31976" 30 30000
 
 echo "Running hurl tests"
 hurl --jobs 1 --variable host=http://localhost:31976 --test tests.hurl
