@@ -1411,23 +1411,23 @@ HTTP 200
             "rdf$datatype": "http://www.w3.org/2001/XMLSchema#date",
             "xml$t": "2017-12-04"
         },
-        "isReferencedBy": [
-                    {
-                         "rdf$resource": "http://data.loterre.fr/ark:/67375/P66/doc/AbuHasan_2022_1"
-                    },
-                    {
-                         "rdf$resource": "http://data.loterre.fr/ark:/67375/P66/doc/McGaugh_1996_1"
-                    },
-                    {
-                         "rdf$resource": "http://data.loterre.fr/ark:/67375/P66/doc/Phelps_2004_1"
-                    },
-                    {
-                         "rdf$resource": "http://data.loterre.fr/ark:/67375/P66/doc/Ressler_2019_1"
-                    },
-                    {
-                         "rdf$resource": "http://data.loterre.fr/ark:/67375/P66/doc/Roozendaal_2009_1"
-                    }
-               ],
+        "dct$isReferencedBy": [
+            {
+                "rdf$resource": "http://data.loterre.fr/ark:/67375/P66/doc/AbuHasan_2022_1"
+            },
+            {
+                "rdf$resource": "http://data.loterre.fr/ark:/67375/P66/doc/McGaugh_1996_1"
+            },
+            {
+                "rdf$resource": "http://data.loterre.fr/ark:/67375/P66/doc/Phelps_2004_1"
+            },
+            {
+                "rdf$resource": "http://data.loterre.fr/ark:/67375/P66/doc/Ressler_2019_1"
+            },
+            {
+                "rdf$resource": "http://data.loterre.fr/ark:/67375/P66/doc/Roozendaal_2009_1"
+            }
+        ],
         "dcterms$modified": {
             "rdf$datatype": "http://www.w3.org/2001/XMLSchema#date",
             "xml$t": "2022-03-28"
@@ -1604,11 +1604,11 @@ HTTP 200
         "dct$creator": {
             "xml$t": "Frank Arnould"
         },
-        "dct$created": {
+        "dcterms$created": {
             "rdf$datatype": "http://www.w3.org/2001/XMLSchema#date",
             "xml$t": "2018-08-03"
         },
-        "dct$modified": {
+        "dcterms$modified": {
             "rdf$datatype": "http://www.w3.org/2001/XMLSchema#date",
             "xml$t": "2022-03-30"
         },
@@ -1759,28 +1759,28 @@ HTTP 200
         "dct$creator": {
             "xml$t": "Frank Arnould"
         },
-        "isReferencedBy": [
-                    {
-                         "rdf$resource": "http://data.loterre.fr/ark:/67375/P66/doc/Dunlosky_2013"
-                    },
-                    {
-                         "rdf$resource": "http://data.loterre.fr/ark:/67375/P66/doc/Dunlosky_2016"
-                    },
-                    {
-                         "rdf$resource": "http://data.loterre.fr/ark:/67375/P66/doc/Flavell_1971"
-                    },
-                    {
-                         "rdf$resource": "http://data.loterre.fr/ark:/67375/P66/doc/Le_Berre_2009"
-                    },
-                    {
-                         "rdf$resource": "http://data.loterre.fr/ark:/67375/P66/doc/MazancieuxA_2023_1"
-                    }
-               ],
-        "dct$created": {
+        "dct$isReferencedBy": [
+            {
+                "rdf$resource": "http://data.loterre.fr/ark:/67375/P66/doc/Dunlosky_2013"
+            },
+            {
+                "rdf$resource": "http://data.loterre.fr/ark:/67375/P66/doc/Dunlosky_2016"
+            },
+            {
+                "rdf$resource": "http://data.loterre.fr/ark:/67375/P66/doc/Flavell_1971"
+            },
+            {
+                "rdf$resource": "http://data.loterre.fr/ark:/67375/P66/doc/Le_Berre_2009"
+            },
+            {
+                "rdf$resource": "http://data.loterre.fr/ark:/67375/P66/doc/MazancieuxA_2023_1"
+            }
+        ],
+        "dcterms$created": {
             "rdf$datatype": "http://www.w3.org/2001/XMLSchema#date",
             "xml$t": "2017-12-04"
         },
-        "dct$modified": {
+        "dcterms$modified": {
             "rdf$datatype": "http://www.w3.org/2001/XMLSchema#date",
             "xml$t": "2025-02-20"
         },
