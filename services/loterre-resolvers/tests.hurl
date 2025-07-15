@@ -1411,7 +1411,24 @@ HTTP 200
             "rdf$datatype": "http://www.w3.org/2001/XMLSchema#date",
             "xml$t": "2017-12-04"
         },
-        "dct$modified": {
+        "isReferencedBy": [
+                    {
+                         "rdf$resource": "http://data.loterre.fr/ark:/67375/P66/doc/AbuHasan_2022_1"
+                    },
+                    {
+                         "rdf$resource": "http://data.loterre.fr/ark:/67375/P66/doc/McGaugh_1996_1"
+                    },
+                    {
+                         "rdf$resource": "http://data.loterre.fr/ark:/67375/P66/doc/Phelps_2004_1"
+                    },
+                    {
+                         "rdf$resource": "http://data.loterre.fr/ark:/67375/P66/doc/Ressler_2019_1"
+                    },
+                    {
+                         "rdf$resource": "http://data.loterre.fr/ark:/67375/P66/doc/Roozendaal_2009_1"
+                    }
+               ],
+        "dcterms$modified": {
             "rdf$datatype": "http://www.w3.org/2001/XMLSchema#date",
             "xml$t": "2022-03-28"
         },
