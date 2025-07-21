@@ -173,3 +173,27 @@ Content-Type: application/json
   { "value": "entérotoxine"}
 ]
 
+
+###
+#  @name BLH_identify
+POST {{host}}/v1/BLH/identify?indent=true HTTP/1.1
+Content-Type: application/json
+
+[
+  { "value": "ecological abundance" },
+  { "value": "coral reef" },
+  { "value": "holobiont" },
+  { "value": "toto2" }
+]
+
+###
+# @name BLH_expand
+POST {{host}}/v1/BLH/expand?indent=true HTTP/1.1
+Content-Type: application/json
+
+[
+  { "value": "ecological abundance" },
+  { "value": "coral reef" },
+  { "value": "holobiont" },
+  { "value": "toto" }
+]
