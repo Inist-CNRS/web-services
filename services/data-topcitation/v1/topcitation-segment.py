@@ -10,9 +10,12 @@ G = nx.DiGraph()
 
 doi_info = {}
 for citation in json_data:
+    if "message" in citation["value"].keys() :
+        continue
     citation_id = citation["id"]
     count = citation["value"]["count"]
     citing_dois = citation["value"]["citing_doi"]
+
 
     # Mettre à jour le statut du DOI cité
     if citation_id not in doi_info:
