@@ -46,68 +46,21 @@ delay: 25000
 HTTP 200
 Content-Type: application/json
 [{
+    "id": "https://doi.org/10.1016/s1262-3636(15)30325-6",
+    "value": {
+        "message": "champ referenced_works vide"
+    }
+},
+{
     "id": "https://doi.org/10.1007/bf01303701",
     "value": {
-        "count": 6,
+        "count": 5,
         "citing_doi": [
-            "https://doi.org/10.1021/ja800073m",
-            "https://doi.org/10.1126/science.235.4793.1196",
             "https://doi.org/10.1103/physrevlett.58.908",
-            "https://doi.org/10.1103/revmodphys.70.1039",
             "https://doi.org/10.1103/revmodphys.66.1125",
-            "https://doi.org/10.1103/physrevb.37.3759"
-        ]
-    }
-},
-{
-    "id": "https://doi.org/10.1103/physrev.115.2",
-    "value": {
-        "count": 3,
-        "citing_doi": [
             "https://doi.org/10.1126/science.235.4793.1196",
             "https://doi.org/10.1103/revmodphys.70.1039",
-            "https://doi.org/10.1103/physrevb.37.3759"
-        ]
-    }
-},
-{
-    "id": "https://doi.org/10.1126/science.235.4793.1196",
-    "value": {
-        "count": 3,
-        "citing_doi": [
-            "https://doi.org/10.1103/revmodphys.70.1039",
-            "https://doi.org/10.1103/revmodphys.66.1125",
-            "https://doi.org/10.1103/physrevb.37.3759"
-        ]
-    }
-},
-{
-    "id": "https://doi.org/10.1103/physrevb.40.2254",
-    "value": {
-        "count": 2,
-        "citing_doi": [
-            "https://doi.org/10.1021/ja800073m",
-            "https://doi.org/10.1103/revmodphys.70.1039"
-        ]
-    }
-},
-{
-    "id": "https://doi.org/10.1103/physrevb.50.6534",
-    "value": {
-        "count": 2,
-        "citing_doi": [
-            "https://doi.org/10.1021/ja800073m",
-            "https://doi.org/10.1103/revmodphys.70.1039"
-        ]
-    }
-},
-{
-    "id": "https://doi.org/10.1038/372532a0",
-    "value": {
-        "count": 2,
-        "citing_doi": [
-            "https://doi.org/10.1021/ja800073m",
-            "https://doi.org/10.1103/revmodphys.70.1039"
+            "https://doi.org/10.1021/ja800073m"
         ]
     }
 },
@@ -116,18 +69,8 @@ Content-Type: application/json
     "value": {
         "count": 2,
         "citing_doi": [
-            "https://doi.org/10.1126/science.235.4793.1196",
-            "https://doi.org/10.1103/physrevlett.58.908"
-        ]
-    }
-},
-{
-    "id": "https://doi.org/10.1088/0370-1298/62/7/303",
-    "value": {
-        "count": 2,
-        "citing_doi": [
-            "https://doi.org/10.1126/science.235.4793.1196",
-            "https://doi.org/10.1103/revmodphys.70.1039"
+            "https://doi.org/10.1103/physrevlett.58.908",
+            "https://doi.org/10.1126/science.235.4793.1196"
         ]
     }
 },
@@ -136,8 +79,8 @@ Content-Type: application/json
     "value": {
         "count": 2,
         "citing_doi": [
-            "https://doi.org/10.1126/science.235.4793.1196",
-            "https://doi.org/10.1103/physrevlett.58.908"
+            "https://doi.org/10.1103/physrevlett.58.908",
+            "https://doi.org/10.1126/science.235.4793.1196"
         ]
     }
 },
@@ -146,8 +89,68 @@ Content-Type: application/json
     "value": {
         "count": 2,
         "citing_doi": [
-            "https://doi.org/10.1126/science.235.4793.1196",
-            "https://doi.org/10.1103/physrevlett.58.908"
+            "https://doi.org/10.1103/physrevlett.58.908",
+            "https://doi.org/10.1126/science.235.4793.1196"
+        ]
+    }
+},
+{
+    "id": "https://doi.org/10.1143/jjap.26.l1",
+    "value": {
+        "count": 2,
+        "citing_doi": [
+            "https://doi.org/10.1103/physrevlett.58.908",
+            "https://doi.org/10.1126/science.235.4793.1196"
+        ]
+    }
+},
+{
+    "id": "https://doi.org/10.1103/physrevb.39.8988",
+    "value": {
+        "count": 2,
+        "citing_doi": [
+            "https://doi.org/10.1103/revmodphys.66.1125",
+            "https://doi.org/10.1103/revmodphys.70.1039"
+        ]
+    }
+},
+{
+    "id": "https://doi.org/10.1103/physrevb.40.546",
+    "value": {
+        "count": 2,
+        "citing_doi": [
+            "https://doi.org/10.1103/revmodphys.66.1125",
+            "https://doi.org/10.1103/revmodphys.70.1039"
+        ]
+    }
+},
+{
+    "id": "https://doi.org/10.1126/science.235.4793.1196",
+    "value": {
+        "count": 2,
+        "citing_doi": [
+            "https://doi.org/10.1103/revmodphys.66.1125",
+            "https://doi.org/10.1103/revmodphys.70.1039"
+        ]
+    }
+},
+{
+    "id": "https://doi.org/10.1103/physrevlett.62.2317",
+    "value": {
+        "count": 2,
+        "citing_doi": [
+            "https://doi.org/10.1103/revmodphys.66.1125",
+            "https://doi.org/10.1103/revmodphys.70.1039"
+        ]
+    }
+},
+{
+    "id": "https://doi.org/10.1103/physrevb.49.12115",
+    "value": {
+        "count": 2,
+        "citing_doi": [
+            "https://doi.org/10.1103/revmodphys.66.1125",
+            "https://doi.org/10.1103/revmodphys.70.1039"
         ]
     }
 }]
@@ -193,38 +196,41 @@ delay: 15000
 HTTP 200
 Content-Type: application/json
 [{
+    "id": "https://doi.org/10.1016/s1262-3636(15)30325-6",
+    "value": {
+        "message": "champ referenced_works vide"
+    }
+},
+{
     "id": "https://doi.org/10.1007/bf01303701",
     "value": {
-        "count": 6,
+        "count": 5,
         "citing_doi": [
-            "https://doi.org/10.1021/ja800073m",
-            "https://doi.org/10.1126/science.235.4793.1196",
             "https://doi.org/10.1103/physrevlett.58.908",
-            "https://doi.org/10.1103/revmodphys.70.1039",
             "https://doi.org/10.1103/revmodphys.66.1125",
-            "https://doi.org/10.1103/physrevb.37.3759"
-        ]
-    }
-},
-{
-    "id": "https://doi.org/10.1103/physrev.115.2",
-    "value": {
-        "count": 3,
-        "citing_doi": [
             "https://doi.org/10.1126/science.235.4793.1196",
             "https://doi.org/10.1103/revmodphys.70.1039",
-            "https://doi.org/10.1103/physrevb.37.3759"
+            "https://doi.org/10.1021/ja800073m"
         ]
     }
 },
 {
-    "id": "https://doi.org/10.1126/science.235.4793.1196",
+    "id": "https://doi.org/10.1126/science.235.4788.567",
     "value": {
-        "count": 3,
+        "count": 2,
         "citing_doi": [
-            "https://doi.org/10.1103/revmodphys.70.1039",
-            "https://doi.org/10.1103/revmodphys.66.1125",
-            "https://doi.org/10.1103/physrevb.37.3759"
+            "https://doi.org/10.1103/physrevlett.58.908",
+            "https://doi.org/10.1126/science.235.4793.1196"
+        ]
+    }
+},
+{
+    "id": "https://doi.org/10.1103/physrevlett.58.408",
+    "value": {
+        "count": 2,
+        "citing_doi": [
+            "https://doi.org/10.1103/physrevlett.58.908",
+            "https://doi.org/10.1126/science.235.4793.1196"
         ]
     }
 }]
@@ -248,7 +254,7 @@ xpath "/*[name()='gexf']" exists
 xpath "substring(//*[name()='meta']/@lastmodifieddate,1,2)" == "20"
 xpath "string(//*[name()='creator'])" == "NetworkX 3.2.1"
 xpath "//*[name()='node']" count >= 8 # 15 in reality, hurl bug ?
-xpath "//*[name()='edge']" count >= 12 # 26 in reality
+xpath "//*[name()='edge']" count >= 9 # 26 in reality
 # ```xml
 # <gexf xmlns:viz="http://www.gexf.net/1.2draft/viz" xmlns="http://www.gexf.net/1.2draft" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.gexf.net/1.2draft http://www.gexf.net/1.2draft/gexf.xsd" version="1.2">
 #   <meta lastmodifieddate="2025-04-01">
