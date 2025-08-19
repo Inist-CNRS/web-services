@@ -76,10 +76,10 @@
     "services/text-summarize"
   ],
   "dependencies": {
-    "@ezs/analytics": "2.3.2",
-    "@ezs/basics": "2.7.0",
-    "@ezs/core": "3.10.2",
-    "@ezs/spawn": "1.4.6",
+    "@ezs/analytics": "2.3.5",
+    "@ezs/basics": "2.9.1",
+    "@ezs/core": "3.11.2",
+    "@ezs/spawn": "1.4.8",
     "@orangeopensource/hurl": "5.0.1",
     "rest-cli": "1.8.13"
   },
