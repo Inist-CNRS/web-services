@@ -1,7 +1,7 @@
 {
     "private": true,
     "name": "ws-irc3-species",
-    "version": "1.1.5",
+    "version": "1.1.6",
     "description": "IRC3 dédiée à la recherche des noms scientifiques",
     "repository": {
         "type": "git",
