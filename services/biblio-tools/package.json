@@ -1,7 +1,7 @@
 {
   "private": true,
   "name": "ws-biblio-tools",
-  "version": "5.0.1",
+  "version": "5.0.2",
   "description": "Outils pour références bibliographiques",
   "repository": {
     "type": "git",
