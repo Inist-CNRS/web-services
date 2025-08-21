@@ -17,3 +17,7 @@ RUN gunzip v1/CoL.txt.gz
 
 # Setup env variable
 ENV LANG=C.UTF-8
+
+# Install all node dependencies
+RUN npm install \
+    @ezs/strings@1.0.5
