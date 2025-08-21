@@ -1,7 +1,7 @@
 {
   "private": true,
   "name": "ws-aiabstract-check",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Detection d'abstract scientifique généré par IA",
   "repository": {
     "type": "git",
