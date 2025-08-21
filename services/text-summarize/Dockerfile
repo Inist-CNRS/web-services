@@ -29,7 +29,7 @@ RUN cd /dvc/mbart-large-50-finetuned-summarization-V2 && \
     rm /dvc/mbart-large-50-finetuned-summarization-V2/x*
 
 
-FROM cnrsinist/ezs-python-pytorch-server:py3.9-no16-1.1.4
+FROM cnrsinist/ezs-python-pytorch-server:py3.9-no16-1.1.6
 
 ENV HF_HOME=/app/.cache/huggingface
 ENV NUMBA_CACHE_DIR=/tmp/numba_cache
