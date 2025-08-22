@@ -39,7 +39,7 @@ fi
 # constructs the beginning of the image tag.
 #
 # @param {string} base image name in the format `ezs-python-server` or
-#                 `basees/ezs-python-saxon-server`
+#                 `bases/ezs-python-saxon-server`
 function updateBase() {
     # $1 should be in `ezs-python-server`, or `ezs-python-saxon-server` format
     # But `bases/ezs-python-server` is accepted too.

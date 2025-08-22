@@ -3,7 +3,7 @@
     "info": {
         "title": "astro-ner - Cette instance propose un outil de reconnaissance d'entités nommées en astronomie",
         "description": "Ce web-service renvoie la liste des entités nommées en astronomie",
-        "version": "1.0.10",
+        "version": "1.0.11",
         "termsOfService": "https://services.istex.fr/",
         "contact": {
             "name": "Inist-CNRS",

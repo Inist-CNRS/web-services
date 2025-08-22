@@ -1,4 +1,4 @@
-FROM cnrsinist/ezs-python-server:py3.9-no16-1.0.11
+FROM cnrsinist/ezs-python-server:py3.9-no16-1.0.12
 
 USER root
 
@@ -26,8 +26,8 @@ RUN pip install \
 
 # Install all node dependencies
 RUN npm install \
-    @ezs/teeft@2.3.1 \
-    @ezs/strings@1.0.3
+    @ezs/teeft@2.3.2 \
+    @ezs/strings@1.0.5
 
 # Fix permissions for CQE
 RUN chmod -R 777 /usr/local/lib/python3.9/site-packages/CQE/

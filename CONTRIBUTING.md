@@ -567,8 +567,12 @@ Il y a plusieurs images de base:
 
 > **Note:** il existe maintenant un script qui se charge de la mise à jour des
 > images qui dépendent directement d'une image de base: [`npm run update:images
-> <image-name>`](./SCRIPTS.md#updateimages).  Assurez-vous que l'image a été créée (version, build, push)
-> avant de lancer le script.
+> <image-name>`](./SCRIPTS.md#updateimages).  Assurez-vous que l'image a été
+> créée (version, build, push) avant de lancer le script. De même, faites en
+> sorte que les dernières modifications de la branche `main` soient intégrées
+> dans la branche de travail de la *pull request* (un `git merge main` devrait
+> faire l'affaire), sous peine d'avoir des tags de version existant déjà, et
+> interrompant la mise à jour du/des service/s en question.
 
 ## Création d'une version
 

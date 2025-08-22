@@ -1,5 +1,5 @@
 # syntax=docker/dockerfile:1.2
-FROM cnrsinist/ezs-python-saxon-server:py3.9-no16-1.0.5
+FROM cnrsinist/ezs-python-saxon-server:py3.9-no16-1.0.6
 
 USER root
 

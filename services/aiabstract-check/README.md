@@ -1,4 +1,4 @@
-# ws-aiabstract-check@1.0.0
+# ws-aiabstract-check@1.0.1
 
 Detection of AI generated scientific abstract
 

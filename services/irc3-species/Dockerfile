@@ -1,5 +1,5 @@
 # syntax=docker/dockerfile:1.2
-FROM cnrsinist/ezs-python-server:py3.9-no16-1.0.11
+FROM cnrsinist/ezs-python-server:py3.9-no16-1.0.12
 
 USER root
 
@@ -17,3 +17,7 @@ RUN gunzip v1/CoL.txt.gz
 
 # Setup env variable
 ENV LANG=C.UTF-8
+
+# Install all node dependencies
+RUN npm install \
+    @ezs/strings@1.0.5

@@ -17,7 +17,7 @@ COPY ./v1/xsl-files.tar.gz.dvc /dvc
 RUN dvc pull -v
 
 
-FROM cnrsinist/ezs-python-server:py3.9-no16-1.0.11
+FROM cnrsinist/ezs-python-server:py3.9-no16-1.0.12
 USER root
 RUN apt update && apt install xsltproc libxml2-utils -y
 # Install all python dependencies

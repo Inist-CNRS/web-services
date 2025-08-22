@@ -8,11 +8,11 @@ RUN apt update && apt install -y tini && \
     }' > /etc/ezmaster.json
 
 WORKDIR /app
-RUN npm install dotenv-cli@7.4.1 && \
-    npm install @ezs/core@3.10.2 && \
-    npm install @ezs/analytics@2.3.2 && \
-    npm install @ezs/basics@2.7.0 && \
-    npm install @ezs/spawn@1.4.6 && \
+RUN npm install dotenv-cli@8.0.0 && \
+    npm install @ezs/core@3.11.2 && \
+    npm install @ezs/analytics@2.3.5 && \
+    npm install @ezs/basics@2.9.1 && \
+    npm install @ezs/spawn@1.4.8 && \
     chmod a+w /app
 
 # Make sure that .npm folder is readable by the daemon user

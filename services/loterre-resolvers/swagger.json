@@ -3,7 +3,7 @@
     "info": {
         "title": "loterre-resolvers - Résolveurs pour des terminologies Loterre",
         "summary": "Fait appel aux vocabulaires Loterre pour obtenir des informations dans différents domaines.",
-        "version": "7.0.7",
+        "version": "7.0.8",
         "termsOfService": "https://services.istex.fr/",
         "contact": {
             "name": "Inist-CNRS",

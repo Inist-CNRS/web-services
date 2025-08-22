@@ -21,7 +21,7 @@ RUN dvc pull -v
 ####
 # Build and install web services dependencies files
 ####
-FROM cnrsinist/ezs-python-server:py3.9-no16-1.0.11
+FROM cnrsinist/ezs-python-server:py3.9-no16-1.0.12
 
 USER root
 # Install all python dependencies
