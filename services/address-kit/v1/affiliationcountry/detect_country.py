@@ -110,20 +110,19 @@ for line in sys.stdin:
             code = "fr"
         else:
             try:
-
-                country = place_address(country)[0]
-                code = place_address(country)[4]
+                res_country = place_address(country)
+                country = res_country[0]
+                code = res_country[4]
 
             except (KeyError, TypeError):
                 # - 2 s'il n'y a pas de pays avec libpostal on essaye avec nominatim de trouver un pays
 
                 try:
+                    res_a = place_address(a)
+                    country = res_a[0]
+                    code = res_a[4]
 
-                    country = place_address(a)[0]
-                    code = place_address(a)[4]
-
-                    if place_address(a)[3].lower() != a.lower():
-
+                    if res_a[3].lower() != a.lower():
                         country = country
 
                 # -3 si ça ne fonctionne pas on essaye de spliter l'adresse et de traiter les éléments séparément
@@ -291,11 +290,11 @@ for line in sys.stdin:
                             aa = aa.strip()
                             # time.sleep(1)
                             try:
-
-                                country = place_address(aa)[0]
-                                code = place_address(aa)[4]
-                                lat = place_address(aa)[1]
-                                lng = place_address(aa)[2]
+                                res_aa = place_address(aa)
+                                country = res_aa[0]
+                                code = res_aa[4]
+                                lat = res_aa[1]
+                                lng = res_aa[2]
 
                                 break
                             except TypeError:
