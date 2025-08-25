@@ -1,7 +1,7 @@
 {
     "private": true,
     "name": "ws-chem-ner",
-    "version": "4.0.1",
+    "version": "4.0.2",
     "description": "Trouve des entités nommées de Chimie dans un texte",
     "repository": {
         "type": "git",

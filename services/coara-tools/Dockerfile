@@ -15,7 +15,7 @@ COPY ./v1/fasttext_model.bin.dvc /dvc
 RUN dvc pull -v
 
 
-FROM cnrsinist/ezs-python-pytorch-server:py3.9-no16-1.1.4
+FROM cnrsinist/ezs-python-pytorch-server:py3.9-no16-1.1.6
 
 USER root
 # Install all python dependencies

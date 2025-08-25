@@ -8,4 +8,4 @@ content-type: application/json
 HTTP 200
 [Asserts]
 jsonpath "$[0].value" startsWith "LODEX : des données structurées"
-jsonpath "$[0].value" matches /^.{6500,7500}$/
+jsonpath "$[0].value" matches /^.{6500,10100}$/

@@ -1,4 +1,4 @@
-FROM cnrsinist/ezs-python-server:py3.9-no16-1.0.11
+FROM cnrsinist/ezs-python-server:py3.9-no16-1.0.12
 
 ARG saxon_ver=10.9
 ENV SAXON_HOME=/usr/share/java/saxon

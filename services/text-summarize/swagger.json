@@ -3,7 +3,7 @@
     "info": {
         "title": "text-summarize - Génère un résumé d'un article scientifique.",
         "description": "Utilise un LLM pour générer le résumé d'un article scientifique à partir du texte intégral. Si le texte est trop long, la fin du document n'est pas prise en compte (ce qui affecte peu les performances globales du modèle). L'utilisateur-rice veillera à utiliser route adaptée en fonction de la langue du document.",
-        "version": "1.1.1",
+        "version": "1.1.2",
         "termsOfService": "https://services.istex.fr/",
         "contact": {
             "name": "Inist-CNRS",

@@ -1,4 +1,4 @@
-# ws-pdf-text@1.2.1
+# ws-pdf-text@1.2.2
 
 Transforme un PDF en texte à partir de l'URL
 

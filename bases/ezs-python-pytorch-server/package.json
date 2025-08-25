@@ -1,7 +1,7 @@
 {
   "private": true,
   "name": "ezs-python-pytorch-server",
-  "version": "1.1.4",
+  "version": "1.1.6",
   "description": "ezs server + python + pytorch",
   "repository": {
     "type": "git",

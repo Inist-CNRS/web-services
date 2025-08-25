@@ -3,7 +3,7 @@
     "info": {
         "title": "person-ner - Extraction d'entité nommées de noms de personnes",
         "description": "Permet d'extraire les entités nommées correspondant à des noms de personnes dans du texte",
-        "version": "1.2.0",
+        "version": "1.2.1",
         "termsOfService": "https://services.istex.fr/",
         "contact": {
             "name": "Inist-CNRS",
