@@ -16,15 +16,13 @@ COPY ./v1/model-software.pt.dvc /dvc
 RUN dvc pull -v
 
 
-FROM cnrsinist/ezs-python-server:py3.9-no16-1.0.12
+FROM cnrsinist/ezs-python-pytorch-server:py3.9-no16-1.1.6
 
 USER root
 # Install all python dependencies
 RUN pip install \
     flair==0.15.1 \
     requests_ratelimiter==0.4.2
-
-
 
 WORKDIR /app/public
 # Declare files to copy in .dockerignore
