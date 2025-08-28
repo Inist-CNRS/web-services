@@ -24,7 +24,7 @@ def use_libraried_io(software):
         dict: information to return for the software
     """
 
-    url = f"https://libraries.io/api/search?q={software}&api_key={API_KEY}&sort=rank"
+    url = f"https://libraries.io/api/search?q={software}&api_key={API_KEY}"
 
     res = {
         "name": software,
