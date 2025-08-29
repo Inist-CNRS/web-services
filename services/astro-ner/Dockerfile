@@ -24,6 +24,5 @@ RUN npm install @ezs/storage@3.2.5
 WORKDIR /app/public
 # Declare files to copy in .dockerignore
 COPY --chown=daemon:daemon . /app/public/
-RUN mv ./config.json /app && chmod a+w /app/config.json
-
+COPY --chown=daemon:daemon ./config.json /app/config.json
 COPY --chown=daemon:daemon --from=dvcfiles /dvc/model.pt /app/public/v1/model.pt
