@@ -16,7 +16,7 @@ RUN cat model/* > model.pt
 
 FROM cnrsinist/ezs-python-pytorch-server:py3.9-no16-1.1.6
 
-USER root
+WORKDIR /app
 
 RUN pip install Unidecode==1.3.7
 
