@@ -3,26 +3,28 @@
 import json
 import sys
 from sentence_transformers import SentenceTransformer
+from collections import Counter
 
 similarity_threshold = int(sys.argv[sys.argv.index('-p') + 1] if '-p' in sys.argv else 70)/100
 if similarity_threshold < 0:
-    similarity_threshold=0.7
+    similarity_threshold = 0.7
 if similarity_threshold > 1:
     similarity_threshold = 0.7
 model = SentenceTransformer('./v1/all-MiniLM-L6-v2')
 
 
-def homogenise(phrases, similarity_matrix, similarity_threshold=similarity_threshold):
-    output = []
+def homogenise(phrases, similarity_matrix, simil=similarity_threshold):
+    output = phrases
     already_homogenise = {}
+    group_list = {}
     for i in range(similarity_matrix.shape[0]):
         for j in range(i+1):
             if i == j:
-                output.append(phrases[i])
+                group_list[i] = [i]
                 break
             similarity_value = similarity_matrix[i, j].item()
                 
-            if similarity_value < similarity_threshold:
+            if similarity_value < simil:
                 continue
             else:
                 # Sans ce passage : imaginons nous avons 3 documents a b c
@@ -36,13 +38,23 @@ def homogenise(phrases, similarity_matrix, similarity_threshold=similarity_thres
                 
                 output.append(phrases[indice_is_homogen_to])
                 break
+    for sentence, homogen_sentence in already_homogenise.items():
+        if homogen_sentence not in group_list:
+            group_list[homogen_sentence] = []
+        group_list[homogen_sentence].append(sentence)
+    
+    for _, sentence_id in group_list.items():
+        sentences = [phrases[idx] for idx in sentence_id]
+        most_common_phrase = Counter(sentences).most_common()[0][0]
+        for idx in sentence_id:
+            output[idx] = most_common_phrase
     return output
 
 
-#WS
+# WS
 all_data = []
 for line in sys.stdin:
-    data=json.loads(line)
+    data = json.loads(line)
     all_data.append(data)
 
 len_data = len(all_data)
@@ -53,11 +65,13 @@ for i in range(len_data):
     try:
         line = all_data[i]
         
-        if "value" in line :
+        if "value" in line:
             value = line["value"]
-            if type(value)==list:
-                texts.append([elt for elt in value if isinstance(elt,str)])
-            elif type(value)==str:
+            if isinstance(value, list):
+                texts.append(
+                    [elt if isinstance(elt, str) else "" for elt in value]
+                    )
+            elif isinstance(value, str):
                 texts.append([value])
             else:
                 indice_noise.append(i)
@@ -65,7 +79,7 @@ for i in range(len_data):
         else:
             indice_noise.append(i)
 
-    except:
+    except Exception:
         indice_noise.append(i)
 
 
@@ -83,16 +97,16 @@ similarity_matrix = model.similarity(embeddings, embeddings)
 output = homogenise(phrases, similarity_matrix)
 
 len_ligne = len(indices_lignes)
-indice_not_noise=0
+indice_not_noise = 0
 for i in range(len_data):
-    if i in indice_noise :
+    if i in indice_noise:
         all_data[i]["value"] = []
     else:
         all_data[i]["value"] = []
         for j in range(len_ligne):
             if indices_lignes[j] == indice_not_noise:
                 all_data[i]["value"].append(output[j])
-        indice_not_noise +=1 # Here we increment only if the row isn't noise
+        indice_not_noise += 1  # Here we increment only if the row isn't noise
 
 # Write all corpus in once
 for line in all_data:
