@@ -11,15 +11,15 @@ RUN --mount=type=secret,id=webdav_login \
     dvc remote modify --local webdav-remote user "$(cat /run/secrets/webdav_login)" && \
     dvc remote modify --local webdav-remote password "$(cat /run/secrets/webdav_password)"
 COPY ./v1/model.dvc /dvc
-RUN dvc pull -v
-RUN cat model/* > model.pt
+RUN dvc pull -v && \
+    cat model/* > model.pt
 
 FROM cnrsinist/ezs-python-pytorch-server:py3.9-no16-1.1.6
 
 WORKDIR /app
 
-RUN pip install --no-cache-dir Unidecode==1.4.0
-RUN npm install --omit dev @ezs/storage@3.2.5 && \
+RUN pip install --no-cache-dir Unidecode==1.4.0 && \
+    npm install --omit dev @ezs/storage@3.2.5 && \
     npm cache clean --force
 
 WORKDIR /app/public
