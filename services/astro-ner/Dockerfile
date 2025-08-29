@@ -1,6 +1,6 @@
 FROM python:3.9-slim-bullseye AS dvcfiles
 WORKDIR /dvc
-RUN apt update && apt install -y --no-install-recommends git curl && rm -rf /var/lib/apt/lists/*
+RUN apt update && apt install -y --no-install-recommends git curl && apt clean && rm -rf /var/lib/apt/lists/*
 RUN pip install --no-cache-dir dvc[webdav]==3.42.0
 RUN --mount=type=secret,id=webdav_login \
     --mount=type=secret,id=webdav_password \
