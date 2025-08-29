@@ -18,11 +18,8 @@ FROM cnrsinist/ezs-python-pytorch-server:py3.9-no16-1.1.6
 
 WORKDIR /app
 
-RUN pip install Unidecode==1.3.7
-
-# Install all node dependencies
-RUN npm install \
-    @ezs/storage@3.2.3
+RUN pip install Unidecode==1.4.0
+RUN npm install @ezs/storage@3.2.5
 
 WORKDIR /app/public
 # Declare files to copy in .dockerignore
