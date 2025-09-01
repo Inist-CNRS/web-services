@@ -1,4 +1,4 @@
-FROM python:3.9-slim-bullseye AS dvcfiles
+FROM python:3.9-slim-bullseye AS dvc-files
 WORKDIR /dvc
 RUN apt-get update && apt-get install -y --no-install-recommends git=1:2.30.2-1+deb11u4 curl=7.74.0-1.3+deb11u15 && apt-get clean && rm -rf /var/lib/apt/lists/*
 RUN pip install --no-cache-dir dvc[webdav]==3.42.0
@@ -26,4 +26,4 @@ WORKDIR /app/public
 # Declare files to copy in .dockerignore
 COPY --chown=daemon:daemon . /app/public/
 COPY --chown=daemon:daemon ./config.json /app/config.json
-COPY --chown=daemon:daemon --from=dvcfiles /dvc/model.pt /app/public/v1/model.pt
+COPY --chown=daemon:daemon --from=dvc-files /dvc/model.pt /app/public/v1/model.pt
