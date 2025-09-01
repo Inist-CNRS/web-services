@@ -418,6 +418,13 @@ source .venv/bin/activate
 
 ### Avec docker
 
+Pour vérifier que l'image respecte les bonnes pratiques, on peut utiliser la
+commande `build:check`:
+
+```bash
+npm -w services/service-name run build:check
+```
+
 Pour construire l'image avec le tag `latest`:
 
 ```bash
