@@ -45,4 +45,4 @@ WORKDIR /app/public
 
 # Declare files to copy in .dockerignore
 COPY --chown=daemon:daemon . /app/public/
-COPY --chown=daemon:daemon ./config.json /app/public/
+COPY --chown=daemon:daemon ./config.json /app/config.json
