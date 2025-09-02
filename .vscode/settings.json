@@ -28,6 +28,7 @@
         "Loterre",
         "openalex",
         "openapi",
+        "pipefail",
         "prometheus",
         "rnsr",
         "skos",
