@@ -2,7 +2,7 @@ FROM cnrsinist/ezs-python-server:py3.9-no16-1.0.12
 
 WORKDIR /app
 
-RUN npm install --omit dev @ezs/ark@1.3.8 && \
+RUN npm install --omit=dev @ezs/ark@1.3.8 && \
     npm cache clean --force
 
 WORKDIR /app/public

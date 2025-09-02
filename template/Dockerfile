@@ -7,7 +7,7 @@ USER root
 #     unidecode==1.3.7
 
 # Install all node dependencies
-# RUN npm install --omit dev \
+# RUN npm install --omit=dev \
 #         @ezs/teeft@2.3.2 \
 #         @ezs/strings@1.0.5 && \
 #     npm cache clean --force

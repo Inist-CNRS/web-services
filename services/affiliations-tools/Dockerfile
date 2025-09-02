@@ -24,10 +24,10 @@ RUN apt-get update && \
     cd .. && \
     rm -rf libpostal-master && \
     # Install node global dependencies
-    npm install --omit dev -g node-gyp@11.4.2 && \
+    npm install --omit=dev -g node-gyp@11.4.2 && \
     # Install all node dependencies
     cd /app && \
-    npm install --omit dev \
+    npm install --omit=dev \
     @ezs/libpostal@0.3.1 \
     @ezs/conditor@2.13.4 && \
     npm cache clean --force && \
