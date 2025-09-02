@@ -106,35 +106,45 @@ def api_ror(affiliation):
 
 # Filtre la sortie de l'API ROR pour ne récupérer que ce qui intéresse
 def filter_api(json, city=None, short=False):
+
     if json == "Error":
         return {"status": "Unexpected data"}
 
     if json and "items" in json:
         for item in json["items"]:
-            id_ror = item["organization"]["id"]
-            score_similarity = item["score"]
-            name = item["organization"]["name"]
-            type = item["organization"]["types"]
-            name_geonames = item["organization"]["addresses"][0]["geonames_city"][
-                "city"
-            ]
-            id_geonames = item["organization"]["addresses"][0]["geonames_city"]["id"]
-            json_dict = {
-                "status": "Found",
-                "id_ror": id_ror,
-                "score": score_similarity,
-                "name": name,
-                "type": type,
-                "name_geonames": name_geonames,
-                "id_geonames": id_geonames,
-            }
+            try :
+                id_ror = item["organization"]["id"]
+                score_similarity = item["score"]
+                name = item["organization"]["names"][0]["value"]
+                type = item["organization"]["types"]
+                name_geonames = item["organization"]["locations"][0]["geonames_details"]["name"]
+                id_geonames = item["organization"]["locations"][0]["geonames_id"]
+                json_dict = {
+                    "status": "Found",
+                    "id_ror": id_ror,
+                    "score": score_similarity,
+                    "name": name,
+                    "type": type,
+                    "name_geonames": name_geonames,
+                    "id_geonames": id_geonames,
+                }
+            except :
+                json_dict = {"status": "Incomplete data"}
+                return json_dict
+
             if city:
-                if item["organization"]["addresses"][0]["city"].lower() == city.lower():
+                try :
+                    if item["organization"]["locations"][0]["geonames_details"]["name"].lower() == city.lower():
+                        return json_dict
+                    elif short:
+                        return json_dict
+                except :
+                    json_dict = {"status": "Incomplete data"}
                     return json_dict
-                elif short:
-                    return json_dict
+
             elif short == True:
                 return json_dict
+
             else:
                 json_dict = {"status": "No city found"}
                 return json_dict

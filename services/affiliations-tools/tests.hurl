@@ -579,9 +579,9 @@ HTTP 200
         "status": "Found",
         "id_ror": "https://ror.org/0323bey33",
         "score": 0.79,
-        "name": "Institut Lumière Matière",
+        "name": "ILM",
         "type": [
-            "Facility"
+            "facility"
         ],
         "name_geonames": "Villeurbanne",
         "id_geonames": 2968254
@@ -593,9 +593,9 @@ HTTP 200
         "status": "Found",
         "id_ror": "https://ror.org/03zmsge54",
         "score": 1,
-        "name": "NSF’s NOIRLab",
+        "name": "NOIRLab",
         "type": [
-            "Facility"
+            "facility"
         ],
         "name_geonames": "Tucson",
         "id_geonames": 5318313
