@@ -1,0 +1,14 @@
+{
+    "environnement": {
+        "EZS_TITLE": "ws to create graph in gexf format",
+        "EZS_DESCRIPTION": "Web service that takes keywords from documents to create a partitionned graph in gexf format",
+        "EZS_METRICS": true,
+        "EZS_CONCURRENCY": 2,
+        "EZS_CONTINUE_DELAY": 60,
+        "EZS_NSHARDS": 32,
+        "EZS_CACHE": true,
+        "EZS_VERBOSE": false,
+        "NODE_OPTIONS": "--max_old_space_size=1024",
+        "NODE_ENV": "production"
+    }
+}
