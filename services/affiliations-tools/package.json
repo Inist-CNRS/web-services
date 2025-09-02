@@ -1,7 +1,7 @@
 {
     "private": true,
     "name": "ws-affiliations-tools",
-    "version": "1.2.6",
+    "version": "1.2.7",
     "description": "Structuration et enrichissements d'affiliations",
     "repository": {
         "type": "git",
