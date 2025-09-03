@@ -74,6 +74,7 @@
         "uuid",
         "webdav",
         "webdavs",
+        "xsltproc",
         "zulu"
     ]
 }
