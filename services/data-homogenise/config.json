@@ -1,7 +1,7 @@
 {
     "environnement": {
         "EZS_TITLE": "Homogénéise les valeurs d'un champ.",
-        "EZS_DESCRIPTION": "Parcourt l'ensemble des valeurs d'un champ et regroupe les valeurs sémantiquement ou syntaxiquement très proches. La première valeur rencontrée considérée comme proche est prise comme référence et les prochaines occurrences seront remplacées par cette première valeur.",
+        "EZS_DESCRIPTION": "Parcourt l'ensemble des valeurs d'un champ et regroupe les valeurs sémantiquement ou syntaxiquement très proches. La valeur la plus fréquente est prise comme référence et les occurrences sémantiquement proches seront remplacées par cette valeur.",
         "EZS_METRICS": true,
         "EZS_CONCURRENCY": 2,
         "EZS_CONTINUE_DELAY": 18000,
