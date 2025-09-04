@@ -1,7 +1,7 @@
 # syntax=docker/dockerfile:1.2
 FROM cnrsinist/ezs-python-server:py3.9-no16-1.0.12
 
-USER root
+WORKDIR /app
 # Install all python dependencies
 # RUN pip install --no-cache-dir \
 #     unidecode==1.3.7
