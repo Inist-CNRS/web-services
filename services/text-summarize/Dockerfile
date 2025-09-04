@@ -16,15 +16,13 @@ RUN dvc doctor
 COPY ./v1/splitted-bart-large-cnn.dvc /dvc
 COPY ./v1/mbart-large-50-finetuned-summarization-V2.dvc /dvc
 RUN dvc pull -v
-WORKDIR /dvc/splitted-bart-large-cnn
-RUN cat x* > ../bart-large-cnn.tar
-WORKDIR /dvc/mbart-large-50-finetuned-summarization-V2
-RUN cat x* > ../mbart-large-50-finetuned-summarization-V2.tar
 
 WORKDIR /dvc
-RUN tar -xf bart-large-cnn.tar && \
+RUN cat /dvc/splitted-bart-large-cnn/x* > bart-large-cnn.tar && \
+    tar -xf bart-large-cnn.tar && \
     rm bart-large-cnn.tar && \
     rm /dvc/splitted-bart-large-cnn/x* && \
+    cat /dvc/mbart-large-50-finetuned-summarization-V2/x* > mbart-large-50-finetuned-summarization-V2.tar && \
     tar -xf mbart-large-50-finetuned-summarization-V2.tar && \
     rm mbart-large-50-finetuned-summarization-V2.tar && \
     rm /dvc/mbart-large-50-finetuned-summarization-V2/x*
