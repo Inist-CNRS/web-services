@@ -12,6 +12,7 @@
     "cSpell.language": "en,fr-FR",
     "cSpell.words": [
         "autoremove",
+        "bart",
         "Bigramme",
         "BUILDKIT",
         "certifi",
@@ -26,6 +27,7 @@
         "dotenv",
         "ezmaster",
         "fasttext",
+        "finetuned",
         "foaf",
         "gensim",
         "GROBID",
@@ -42,6 +44,7 @@
         "loterre",
         "Loterre",
         "lxml",
+        "mbart",
         "nltk",
         "numba",
         "numpy",
