@@ -21,7 +21,7 @@ RUN cat /dvc/v1/en/HALen_matrixKDT.npy.* > /dvc/v1/en/HALen_matrixKDT.npy && \
     rm /dvc/v1/en/HALen_matrixKDT.npy.*
 
 ####
-# Build and install web services dependcies en files
+# Build and install web services dependencies en files
 ####
 FROM cnrsinist/ezs-python-server:py3.9-no16-1.0.12
 
