@@ -10,13 +10,16 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 RUN curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.3/install.sh | bash
 
 ENV NVM_DIR=/root/.nvm
-WORKDIR /root
 RUN . "$NVM_DIR/nvm.sh" && \
     nvm install ${NODE_VERSION} && \
     nvm use v${NODE_VERSION} && \
     nvm alias default v${NODE_VERSION} && \
     nvm cache clear
+
+# Make sure that .npm folder is readable by the daemon user
+WORKDIR /root/.npm
 RUN chmod -R a+rwx /root && \
     chown -R 1:1 "/root/.npm"
+WORKDIR /root
 
 ENV PATH="/root/.nvm/versions/node/v${NODE_VERSION}/bin/:${PATH}"
