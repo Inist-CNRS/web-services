@@ -22,7 +22,7 @@ def extract_text_grobid(pdf_path):
             'input': (pdf_path, pdf_file, 'application/pdf')
         }
         data = {
-            'consolidateHeader': '1'
+            'consolidateHeader': '0'
         }
         try:
             response = requests.post(GROBID_API_URL, files=files, data=data)
