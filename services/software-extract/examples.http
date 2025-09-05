@@ -1,0 +1,31 @@
+# These examples can be used directly in VSCode, using HTTPYac extension (anweber.vscode-httpyac)
+# They are important, because used to generate the tests.hurl file.
+
+# Décommenter/commenter les lignes voulues pour tester localement
+@host=http://localhost:31976
+# @host=https://software-extract.services.istex.fr
+
+###
+# @name v1Tagger
+# Extraction des noms de logiciels
+POST {{host}}/v1/tagger?indent=true HTTP/1.1
+Content-Type: application/json
+
+[
+	{ "value": "This is a test text for the ner model. Model has to extract software such as BioImag Softr." },
+	{ "value": "An RNN-based model was designed using Python3 language with the PyTorch packages." },
+	{ "value": "There is no software in this sentence." }
+]
+
+
+###
+# @name v1TaggerOa
+# Extraction des noms de logiciels
+POST {{host}}/v1/tagger-oa?indent=true HTTP/1.1
+Content-Type: application/json
+
+[
+	{ "value": "This is a test text for the ner model. Model has to extract software such as BioImag Softr." },
+	{ "value": "An RNN-based model was designed using Python3 language with the PyTorch packages." },
+	{ "value": "There is no software in this sentence." }
+]

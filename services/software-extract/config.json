@@ -1,0 +1,15 @@
+{
+    "environnement": {
+        "EZS_TITLE": "Extrait des noms de logiciels dans un texte écrit en anglais.",
+        "EZS_DESCRIPTION": "Extrait des noms de logiciels de textes écrits en anglais. Le modèle a été entraîné sur des articles scientifiques.",
+        "EZS_METRICS": true,
+        "EZS_CONCURRENCY": 2,
+        "EZS_CONTINUE_DELAY": 60,
+        "EZS_NSHARDS": 32,
+        "EZS_CACHE": true,
+        "EZS_VERBOSE": false,
+        "NODE_OPTIONS": "--max_old_space_size=1024",
+        "NODE_ENV": "production",
+        "LIBRARIES_IO_API_KEY": "real_api_key"
+    }
+}

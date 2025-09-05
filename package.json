@@ -70,6 +70,7 @@
     "services/pdf-text",
     "services/person-ner",
     "services/sciencemetrix-classification",
+    "services/software-extract",
     "services/terms-extraction",
     "services/terms-tools",
     "services/text-clustering",

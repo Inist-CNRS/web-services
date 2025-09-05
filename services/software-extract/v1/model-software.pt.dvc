@@ -1,0 +1,5 @@
+outs:
+- md5: 028ea31866da7441ef14e4c1708cee31
+  size: 414135861
+  hash: md5
+  path: model-software.pt
