@@ -1,6 +1,7 @@
 FROM cnrsinist/python-node:py3.9-no16-1.0.1
 
-RUN apt update && apt install -y tini && \
+RUN apt-get update && apt-get install -y --no-install-recommends tini && \
+    apt-get clean && rm -rf /var/lib/apt/lists/* && \
     echo '{ \
     "httpPort": 31976, \
     "configPath": "/app/config.json", \
@@ -8,11 +9,12 @@ RUN apt update && apt install -y tini && \
     }' > /etc/ezmaster.json
 
 WORKDIR /app
-RUN npm install dotenv-cli@8.0.0 && \
-    npm install @ezs/core@3.11.2 && \
-    npm install @ezs/analytics@2.3.5 && \
-    npm install @ezs/basics@2.9.1 && \
-    npm install @ezs/spawn@1.4.8 && \
+RUN npm install --omit=dev dotenv-cli@10.0.0 && \
+    npm install --omit=dev @ezs/core@4.0.1 && \
+    npm install --omit=dev @ezs/analytics@2.3.5 && \
+    npm install --omit=dev @ezs/basics@2.9.2 && \
+    npm install --omit=dev @ezs/spawn@1.4.9 && \
+    npm cache clean --force && \
     chmod a+w /app
 
 # Make sure that .npm folder is readable by the daemon user
