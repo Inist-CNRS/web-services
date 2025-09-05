@@ -231,7 +231,7 @@ def get_weights(autors_list,seuil_edge):
 
 
 def export_to_gexf_full(
-    G, node_xyz, node_weights, node_color, edge_list, edge_color,
+    G, node_xyz, r_all, node_color, edge_list, edge_color,
     edge_width, node_name, pid):
     def rgb_to_gexf(color_hex, alpha=1.0):
         """Convert hex color like '#ff8800' into GEXF dict {r,g,b,a}"""
@@ -253,14 +253,12 @@ def export_to_gexf_full(
 
     # --- Nodes ---
     for i, n in enumerate(node_name):
-        max_weight = max(node_weights)
-
         for i, n in enumerate(node_name):
-            normalized_size = 50.0 * (node_weights[i] / max_weight)  # between 0–50
+            normalized_size = r_all[i]
             G.nodes[n]["viz"] = {
                 "position": {
-                    "x": safe_float(node_xyz[i][0]*150),
-                    "y": safe_float(node_xyz[i][1]*150),
+                    "x": safe_float(node_xyz[i][0]),
+                    "y": safe_float(node_xyz[i][1]),
                     "z": 0.0,
                 },
                 "size": safe_float(normalized_size),
@@ -392,5 +390,5 @@ def plot_2D(G,partition,ignore_edge, pid):
     plt.savefig("/tmp/"+pid+'.png', dpi=dpi)
     #plt.show()
 
-    return export_to_gexf_full(G, node_xyz, node_weights, node_color,
+    return export_to_gexf_full(G, node_xyz, r_all, node_color,
                                edge_list, edge_color, edge_width, node_name, pid)
