@@ -1,8 +1,9 @@
 # syntax=docker/dockerfile:1.2
+
 FROM python:3.9-slim-bullseye AS dvc-files
 WORKDIR /dvc
-RUN apt update && apt -y install git
-RUN pip install dvc[webdav]==3.39.0
+RUN apt-get update && apt-get -y --no-install-recommends install git=1:2.30.2-1+deb11u4 && apt-get clean && rm -rf /var/lib/apt/lists/*
+RUN pip install --no-cache-dir dvc[webdav]==3.39.0
 RUN --mount=type=secret,id=webdav_login \
     --mount=type=secret,id=webdav_password \
     --mount=type=secret,id=webdav_url \
@@ -18,18 +19,15 @@ RUN dvc pull -v
 
 FROM cnrsinist/ezs-python-pytorch-server:py3.9-no16-1.1.6
 
-USER root
 # Install all python dependencies
-RUN pip install --no-build-isolation \
+RUN pip install --no-cache-dir --no-build-isolation \
     --index-url https://download.pytorch.org/whl/cpu \
     --extra-index-url https://pypi.org/simple \
-    nltk==3.9.1
-
-RUN [ "python3", "-c", "import nltk; nltk.download('punkt_tab', download_dir='/usr/local/nltk_data')" ]
+    nltk==3.9.1 && \
+    python3 -c "import nltk; nltk.download('punkt_tab', download_dir='/usr/local/nltk_data')"
 
 # Declare files to copy in .dockerignore
 COPY --chown=daemon:daemon . /app/public/
-RUN mv /app/public/config.json /app && chmod a+w /app/config.json
-RUN mkdir /tmp/retrieve
+COPY --chown=daemon:daemon ./config.json /app/config.json
 
 COPY --chown=daemon:daemon --from=dvc-files /dvc/entity-tag-model /app/public/v1/entity-tag-model

@@ -382,6 +382,72 @@ En plus du reste, il faut suivre ces étapes lorsqu'on utilise DVC :
 
 - relancer le conteneur
 
+### Dockerfile: bonnes pratiques
+
+Pour un rappel de beaucoup de bonnes pratiques, utilisez le script `build:check`
+de votre service:
+
+```bash
+npm -w services/service-name run build:check
+```
+
+Il procède à une vérification statique du `Dockerfile` avec
+[hadolint](https://github.com/hadolint/hadolint).
+
+#### apt
+
+Pour les paquets `apt`, il est conseillé de les installer en une seule commande,
+afin d'éviter de lancer plusieurs fois la commande `apt-get update`.
+
+Exemple:
+
+```dockerfile
+RUN apt-get update && apt-get -y --no-install-recommends install \
+    libxml2-dev=2.9.10+dfsg-6.7+deb11u8 \
+    libxslt1-dev=1.1.34-4+deb11u2 \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/*
+```
+
+- `apt-get update` est lancée en premier, pour mettre à jour la liste des paquets
+- `apt-get -y --no-install-recommends install` installe les paquets
+- `apt-get clean` supprime les caches des paquets téléchargés
+- `rm -rf /var/lib/apt/lists/*` supprime la liste des paquets
+
+> [!NOTE] On installe les paquets avec la version explicite, pour éviter les
+> mises à jour involontaires.
+
+#### pip
+
+Pour les paquets `pip` aussi, il est conseillé de les installer en une seule
+commande, afin d'éviter de lancer plusieurs fois la commande `pip install`.
+
+Pour supprimer les caches `pip` de l'image Docker, utilisez l'option
+`--no-cache-dir`.
+
+#### npm
+
+Pour les paquets `npm`, il est conseillé de les installer en une seule commande,
+afin d'éviter de créer plusieurs couches inutiles.
+
+Ajoutez l'option `--omit=dev` à la commande `npm install`.  
+Puis lancez `npm cache clean --force` à la fin de la commande.
+
+#### Dockerfile
+
+À savoir:
+
+- l'image de base utilise le USER `root`, vous n'avez donc pas besoin de le
+  préciser (et d'ailleurs, ce n'est à strictement parler pas une bonne pratique
+  de sécurité). Sachez simplement que le serveur sera lancé par l'utilisateur
+  `daemon`.
+- ne mettez pas de `CMD` ou de `ENTRYPOINT` dans votre `Dockerfile`, l'image de
+  base en contient déjà un. Évidemment, si vous avez besoin de lancer un
+  serveur autre que celui de base, vous pouvez bien sûr en redéfinir un.
+- le fichier `config.json` doit être mis dans `/app`, et appartenir à `daemon`.
+  Utilisez de préférence `COPY --chown=daemon:daemon ./config.json
+  /app/config.json`.
+
 ## Développement
 
 ### Sans docker
@@ -417,6 +483,13 @@ source .venv/bin/activate
 ```
 
 ### Avec docker
+
+Pour vérifier que l'image respecte les bonnes pratiques, on peut utiliser la
+commande `build:check`:
+
+```bash
+npm -w services/service-name run build:check
+```
 
 Pour construire l'image avec le tag `latest`:
 

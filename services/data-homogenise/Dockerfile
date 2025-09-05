@@ -1,8 +1,8 @@
 # syntax=docker/dockerfile:1.2
 FROM python:3.9-slim-bullseye AS dvc-files
 WORKDIR /dvc
-RUN apt update && apt -y install git
-RUN pip install dvc[webdav]==3.39.0
+RUN apt-get update && apt-get -y --no-install-recommends install git=1:2.30.2-1+deb11u4 && apt-get clean && rm -rf /var/lib/apt/lists/*
+RUN pip install --no-cache-dir dvc[webdav]==3.39.0
 RUN --mount=type=secret,id=webdav_login \
     --mount=type=secret,id=webdav_password \
     --mount=type=secret,id=webdav_url \
@@ -21,17 +21,16 @@ FROM cnrsinist/ezs-python-pytorch-server:py3.9-no16-1.1.6
 ENV HF_HOME=/app/.cache/huggingface
 ENV NUMBA_CACHE_DIR=/tmp/numba_cache
 
-USER root
+WORKDIR /app
 # Install all python dependencies
-RUN pip install --no-build-isolation \
+RUN pip install --no-cache-dir --no-build-isolation \
     --index-url https://download.pytorch.org/whl/cpu \
     --extra-index-url https://pypi.org/simple \
     sentence-transformers==3.3.1 \
     huggingface_hub==0.23.2
 
 # Declare files to copy in .dockerignore
-COPY --chown=daemon:daemon . /app/public/
-RUN mv /app/public/config.json /app && chmod a+w /app/config.json
-RUN mkdir /tmp/retrieve
+COPY --chown=daemon:daemon . /app/public
+COPY --chown=daemon:daemon ./config.json /app/config.json
 
 COPY --chown=daemon:daemon --from=dvc-files /dvc/all-MiniLM-L6-v2 /app/public/v1/all-MiniLM-L6-v2

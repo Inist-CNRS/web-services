@@ -2,8 +2,8 @@
 
 FROM python:3.9-slim-bullseye AS dvcfiles
 WORKDIR /dvc
-RUN apt update && apt -y install git curl
-RUN pip install dvc[webdav]==3.42.0
+RUN apt-get update && apt-get -y install --no-install-recommends git=1:2.30.2-1+deb11u4 && apt-get clean && rm -rf /var/lib/apt/lists/*
+RUN pip install --no-cache-dir dvc[webdav]==3.42.0
 RUN --mount=type=secret,id=webdav_login \
     --mount=type=secret,id=webdav_password \
     --mount=type=secret,id=webdav_url \
@@ -19,17 +19,17 @@ RUN dvc pull -v
 ##################################################################
 FROM cnrsinist/ezs-python-saxon-server:py3.9-no16-1.0.6
 
-USER root
 WORKDIR /app/public/v1
 WORKDIR /app/public
 
 # Install all node dependencies
-RUN npm install \
-    @ezs/core@3.11.0 \
+RUN npm install --omit=dev \
+    @ezs/core@3.11.2 \
     @ezs/analytics@2.3.5 \
     @ezs/basics@2.9.1 \
     @ezs/storage@3.2.5 \
-    @ezs/xslt@1.3.32
+    @ezs/xslt@1.3.32 && \
+    npm cache clean --force
 
 # Declare files to copy in .dockerignore
 COPY --chown=daemon:daemon --from=dvcfiles /dvc/*.skos /app/data0/
@@ -40,7 +40,6 @@ COPY --chown=daemon:daemon ./docker-entrypoint.sh /app/
 COPY --chown=daemon:daemon ./config.json /app/
 COPY --chown=daemon:daemon ./v1 /app/public/v1/
 COPY --chown=daemon:daemon ./swagger.json /app/public/
-RUN chmod a+x /app/docker-entrypoint.sh
-
-# Clean base image example/test files
-RUN rm /app/public/parse.*
+RUN chmod a+x /app/docker-entrypoint.sh && \
+    # Clean base image example/test files
+    rm /app/public/parse.*

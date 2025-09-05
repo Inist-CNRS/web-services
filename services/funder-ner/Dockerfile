@@ -5,8 +5,8 @@
 ####
 FROM python:3.9-slim-bullseye AS dvc-files
 WORKDIR /dvc
-RUN apt update && apt -y install git curl
-RUN pip install dvc[webdav]==3.39.0
+RUN apt-get update && apt-get -y --no-install-recommends install git=1:2.30.2-1+deb11u4 && apt-get clean && rm -rf /var/lib/apt/lists/*
+RUN pip install --no-cache-dir dvc[webdav]==3.39.0
 RUN --mount=type=secret,id=webdav_login \
     --mount=type=secret,id=webdav_password \
     --mount=type=secret,id=webdav_url \
@@ -23,11 +23,9 @@ RUN dvc pull -v
 ####
 FROM cnrsinist/ezs-python-pytorch-server:py3.9-no16-1.1.6
 
-USER root
-
 WORKDIR /app/public
 # Declare files to copy in .dockerignore
 COPY --chown=daemon:daemon . /app/public/
-RUN mv ./config.json /app && chmod a+w /app/config.json
+COPY --chown=daemon:daemon ./config.json /app/config.json
 # Copy dvc files
 COPY --chown=daemon:daemon --from=dvc-files /dvc/v1 /app/public/v1
