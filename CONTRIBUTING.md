@@ -515,6 +515,13 @@ ou bien:
 docker stop dev
 ```
 
+## Debug
+
+Pour déboguer un service, il est possible d'ajouter la propriété `DEBUG` dans le
+fichier `config.json` du service, et de la positionner à `*`.  
+Il faut aussi mettre `EZS_VERBOSE` à `false` pour éviter une surcharge de cette
+variable.
+
 ## Tests
 
 Pour tester un service lancé localement, utiliser:
