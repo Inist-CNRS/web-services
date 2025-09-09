@@ -52,6 +52,7 @@
         "openapi",
         "opencv",
         "pipefail",
+        "poppler",
         "prometheus",
         "punkt",
         "pytorch",
