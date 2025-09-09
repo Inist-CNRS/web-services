@@ -17,7 +17,7 @@ COPY ./dictionary.dvc /dvc
 COPY ./data.dvc /dvc
 RUN dvc pull -v
 
-FROM cnrsinist/ezs-python-server:py3.9-no16-1.0.12
+FROM cnrsinist/ezs-python-server:py3.9-no24-1.0.13
 
 ENV TERMS_TOOLS_VERSION=1.2.1
 ENV GIT=https://github.com/stephane54/terms-tools.git
