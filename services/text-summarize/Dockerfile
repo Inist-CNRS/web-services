@@ -28,7 +28,7 @@ RUN cat /dvc/splitted-bart-large-cnn/x* > bart-large-cnn.tar && \
     rm /dvc/mbart-large-50-finetuned-summarization-V2/x*
 
 
-FROM cnrsinist/ezs-python-pytorch-server:py3.9-no16-1.1.6
+FROM cnrsinist/ezs-python-pytorch-server:py3.9-no24-1.1.8
 
 ENV HF_HOME=/app/.cache/huggingface
 ENV NUMBA_CACHE_DIR=/tmp/numba_cache
