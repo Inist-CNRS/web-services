@@ -9,7 +9,6 @@ ARG transformers_ver=4.41.2
 ARG flair_ver=0.10
 
 WORKDIR /app
-USER root
 
 #####
 ### Multi layer installation, this part is here to help understanding the
@@ -38,7 +37,7 @@ USER root
 #    apt autoremove -y
 
 # Install dependencies, for documentation see commented code above
-RUN apt-get update && apt-get install -y --no-install-recommends build-essential make gcc && \
+RUN apt-get update && apt-get install -y --no-install-recommends build-essential=12.9 make=4.3-4.1 gcc=4:10.2.1-1 && \
     apt-get clean && rm -rf /var/lib/apt/lists/* && \
     pip install --no-cache-dir --no-build-isolation \
     --index-url https://download.pytorch.org/whl/cpu \
@@ -49,8 +48,8 @@ RUN apt-get update && apt-get install -y --no-install-recommends build-essential
     scipy==${scipy_ver} \
     transformers==${transformers_ver} \
     flair==${flair_ver} && \
-    apt remove -y --purge build-essential make gcc && \
-    apt autoremove -y
+    apt-get remove -y --purge build-essential make gcc && \
+    apt-get autoremove -y
 
 # Make sure that .flair folder is readable by the daemon user
 WORKDIR /usr/sbin/.flair
@@ -58,10 +57,9 @@ RUN chmod -R a+rwx /usr/sbin/.flair
 
 WORKDIR /app
 # Create a cache directory
-RUN mkdir /app/.cache
-
-# Convert every file owner
-RUN chown daemon:daemon -R /app
+RUN mkdir /app/.cache && \
+    # Convert every file owner
+    chown daemon:daemon -R /app
 
 # Set the transformers cache directory
 # ENV TRANSFORMERS_CACHE=/app/.cache/transformers # Old transformers cache directory environment variables
