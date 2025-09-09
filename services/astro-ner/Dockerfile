@@ -14,7 +14,7 @@ COPY ./v1/model.dvc /dvc
 RUN dvc pull -v && \
     cat model/* > model.pt
 
-FROM cnrsinist/ezs-python-pytorch-server:py3.9-no16-1.1.6
+FROM cnrsinist/ezs-python-pytorch-server:py3.9-no24-1.1.8
 
 WORKDIR /app
 
