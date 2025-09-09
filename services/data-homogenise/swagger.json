@@ -3,7 +3,7 @@
     "info": {
         "title": "data-homogenise - Homogénéise les valeurs d'un champ",
         "description": "Parcourt l'ensemble des valeurs d'un champ et regroupe les valeurs sémantiquement ou syntaxiquement très proches. La valeur la plus fréquente est prise comme référence et les occurrences sémantiquement proches seront remplacées par cette valeur.",
-        "version": "2.1.0",
+        "version": "2.1.1",
         "termsOfService": "https://services.istex.fr/",
         "contact": {
             "name": "Inist-CNRS",
