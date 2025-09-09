@@ -15,14 +15,14 @@ USER root
 ### Multi layer installation, this part is here to help understanding the
 ### monolayer installation below.
 #####
-## Install build depenencies
+## Install build dependencies
 #RUN apt update && apt install -y build-essential make gcc
 #
 ## Install pytorch, scipy, transformers and flair
 ## For the pip installation we use the default repository
 ## as fallback to other package,
 ## it not required but if we want to add other module not
-## avaible in pytorch repository this make it possible.
+## available in pytorch repository this make it possible.
 #RUN pip install --no-build-isolation \
 #    --index-url https://download.pytorch.org/whl/cpu \
 #    --extra-index-url https://pypi.org/simple \
@@ -37,9 +37,10 @@ USER root
 #RUN apt remove -y --purge build-essential make gcc && \
 #    apt autoremove -y
 
-# Install depencies, for documention see commented code above
-RUN apt update && apt install -y build-essential make gcc && \
-    pip install --no-build-isolation \
+# Install dependencies, for documentation see commented code above
+RUN apt-get update && apt-get install -y --no-install-recommends build-essential make gcc && \
+    apt-get clean && rm -rf /var/lib/apt/lists/* && \
+    pip install --no-cache-dir --no-build-isolation \
     --index-url https://download.pytorch.org/whl/cpu \
     --extra-index-url https://pypi.org/simple \
     torch==${torch_ver} \
@@ -63,7 +64,7 @@ RUN mkdir /app/.cache
 RUN chown daemon:daemon -R /app
 
 # Set the transformers cache directory
-# ENV TRANSFORMERS_CACHE=/app/.cache/transformers # Old transformers cache directory environement variables
+# ENV TRANSFORMERS_CACHE=/app/.cache/transformers # Old transformers cache directory environment variables
 ENV HF_HOME=/app/.cache/transformers
 
 EXPOSE 31976

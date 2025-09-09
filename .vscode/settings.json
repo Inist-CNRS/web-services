@@ -74,6 +74,8 @@
         "tess",
         "thefuzz",
         "tini",
+        "torchaudio",
+        "torchvision",
         "treetagger",
         "ungroup",
         "unidecode",
