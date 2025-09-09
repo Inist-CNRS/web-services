@@ -3,7 +3,7 @@
     "info": {
         "title": "funder-ner - Détection de financeurs",
         "description": "Détecte des financeurs dans un article en anglais et renvoie la liste des financeurs repérés.",
-        "version": "2.0.2",
+        "version": "2.0.3",
         "termsOfService": "https://services.istex.fr/",
         "contact": {
             "name": "Inist-CNRS",
