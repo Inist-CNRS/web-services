@@ -1,5 +1,5 @@
 # syntax=docker/dockerfile:1.2
-FROM cnrsinist/ezs-python-server:py3.9-no16-1.0.12
+FROM cnrsinist/ezs-python-server:py3.9-no24-1.0.13
 
 RUN apt-get update && apt-get install -y --no-install-recommends perl=5.32.1-4+deb11u4 libjson-perl=4.03000-1 && apt-get clean && rm -rf /var/lib/apt/lists/*
 
