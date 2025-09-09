@@ -1,6 +1,6 @@
 # syntax=docker/dockerfile:1.2
 
-FROM cnrsinist/ezs-python-server:py3.9-no16-1.0.12
+FROM cnrsinist/ezs-python-server:py3.9-no24-1.0.13
 
 # Install all python dependencies
 RUN pip install --no-cache-dir \

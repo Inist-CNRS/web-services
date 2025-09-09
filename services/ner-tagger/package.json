@@ -1,7 +1,7 @@
 {
   "private": true,
   "name": "ws-ner-tagger",
-  "version": "1.0.10",
+  "version": "1.0.11",
   "description": "Détection d'entités nommées dans des textes",
   "repository": {
     "type": "git",

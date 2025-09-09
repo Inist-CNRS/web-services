@@ -1,7 +1,7 @@
 {
   "private": true,
   "name": "ws-base-line",
-  "version": "1.0.24",
+  "version": "1.0.25",
   "description": "Base line web services",
   "repository": {
     "type": "git",

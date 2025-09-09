@@ -1,5 +1,5 @@
 # syntax=docker/dockerfile:1.2
-FROM cnrsinist/ezs-python-server:py3.9-no16-1.0.12
+FROM cnrsinist/ezs-python-server:py3.9-no24-1.0.13
 
 ENV \
     TT_VERSION=3.2.5 \

@@ -3,7 +3,7 @@
     "info": {
         "title": "aiabstract-check - Detection d'abstract scientifique généré par IA",
         "description": "Web service qui détecte si un abstract d'un article scientifique a été généré par IA ou non",
-        "version": "1.0.1",
+        "version": "1.0.2",
         "termsOfService": "https://services.istex.fr/",
         "contact": {
             "name": "Inist-CNRS",

@@ -3,7 +3,7 @@
 	"info": {
 		"title": "base-line-python - Services en python dédiés aux tests",
 		"summary": "Vérifie la faisabilité de services en python",
-		"version": "1.0.12",
+		"version": "1.0.13",
 		"termsOfService": "https://services.istex.fr/",
 		"contact": {
 			"name": "Inist-CNRS",

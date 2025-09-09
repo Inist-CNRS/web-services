@@ -1,7 +1,7 @@
 {
   "private": true,
   "name": "ws-pdf-text",
-  "version": "1.2.2",
+  "version": "1.2.3",
   "description": "Transforme un PDF en texte à partir de l'URL",
   "repository": {
     "type": "git",

@@ -3,7 +3,7 @@
     "info": {
         "title": "affiliations-tools - Structuration et enrichissements d'affiliations",
         "summary": "Propose plusieurs services autour des affiliations présentes dans les notices bibliographiques",
-        "version": "1.2.7",
+        "version": "1.2.8",
         "termsOfService": "https://services.istex.fr/",
         "contact": {
             "name": "Inist-CNRS",

@@ -17,7 +17,7 @@ COPY ./dvc.* /dvc/
 RUN dvc pull -v
 
 ##################################################################
-FROM cnrsinist/ezs-python-saxon-server:py3.9-no16-1.0.6
+FROM cnrsinist/ezs-python-saxon-server:py3.9-no24-1.0.8
 
 WORKDIR /app/public/v1
 WORKDIR /app/public

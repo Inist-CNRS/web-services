@@ -1,4 +1,4 @@
-FROM cnrsinist/ezs-python-server:py3.9-no16-1.0.12
+FROM cnrsinist/ezs-python-server:py3.9-no24-1.0.13
 
 # Set all required version
 ARG torch_ver=2.3.0
@@ -9,20 +9,19 @@ ARG transformers_ver=4.41.2
 ARG flair_ver=0.10
 
 WORKDIR /app
-USER root
 
 #####
 ### Multi layer installation, this part is here to help understanding the
 ### monolayer installation below.
 #####
-## Install build depenencies
+## Install build dependencies
 #RUN apt update && apt install -y build-essential make gcc
 #
 ## Install pytorch, scipy, transformers and flair
 ## For the pip installation we use the default repository
 ## as fallback to other package,
 ## it not required but if we want to add other module not
-## avaible in pytorch repository this make it possible.
+## available in pytorch repository this make it possible.
 #RUN pip install --no-build-isolation \
 #    --index-url https://download.pytorch.org/whl/cpu \
 #    --extra-index-url https://pypi.org/simple \
@@ -37,9 +36,10 @@ USER root
 #RUN apt remove -y --purge build-essential make gcc && \
 #    apt autoremove -y
 
-# Install depencies, for documention see commented code above
-RUN apt update && apt install -y build-essential make gcc && \
-    pip install --no-build-isolation \
+# Install dependencies, for documentation see commented code above
+RUN apt-get update && apt-get install -y --no-install-recommends build-essential=12.9 make=4.3-4.1 gcc=4:10.2.1-1 && \
+    apt-get clean && rm -rf /var/lib/apt/lists/* && \
+    pip install --no-cache-dir --no-build-isolation \
     --index-url https://download.pytorch.org/whl/cpu \
     --extra-index-url https://pypi.org/simple \
     torch==${torch_ver} \
@@ -48,8 +48,8 @@ RUN apt update && apt install -y build-essential make gcc && \
     scipy==${scipy_ver} \
     transformers==${transformers_ver} \
     flair==${flair_ver} && \
-    apt remove -y --purge build-essential make gcc && \
-    apt autoremove -y
+    apt-get remove -y --purge build-essential make gcc && \
+    apt-get autoremove -y
 
 # Make sure that .flair folder is readable by the daemon user
 WORKDIR /usr/sbin/.flair
@@ -57,13 +57,12 @@ RUN chmod -R a+rwx /usr/sbin/.flair
 
 WORKDIR /app
 # Create a cache directory
-RUN mkdir /app/.cache
-
-# Convert every file owner
-RUN chown daemon:daemon -R /app
+RUN mkdir /app/.cache && \
+    # Convert every file owner
+    chown daemon:daemon -R /app
 
 # Set the transformers cache directory
-# ENV TRANSFORMERS_CACHE=/app/.cache/transformers # Old transformers cache directory environement variables
+# ENV TRANSFORMERS_CACHE=/app/.cache/transformers # Old transformers cache directory environment variables
 ENV HF_HOME=/app/.cache/transformers
 
 EXPOSE 31976

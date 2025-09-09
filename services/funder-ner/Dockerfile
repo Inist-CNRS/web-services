@@ -21,7 +21,7 @@ RUN dvc pull -v
 ####
 # Build and install web services dependencies  files
 ####
-FROM cnrsinist/ezs-python-pytorch-server:py3.9-no16-1.1.6
+FROM cnrsinist/ezs-python-pytorch-server:py3.9-no24-1.1.8
 
 WORKDIR /app/public
 # Declare files to copy in .dockerignore
