@@ -520,7 +520,8 @@ docker stop dev
 Pour déboguer un service, il est possible d'ajouter la propriété `DEBUG` dans le
 fichier `config.json` du service, et de la positionner à `ezs:*`.  
 Il faut aussi mettre `EZS_VERBOSE` à `false` pour éviter une surcharge de cette
-variable.
+variable.  
+Cela donne accès aux informations de débogage interne de `ezs`.  
 
 ## Tests
 
