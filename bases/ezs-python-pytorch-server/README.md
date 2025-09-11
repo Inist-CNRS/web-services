@@ -5,7 +5,7 @@ Ce répertoire contient de quoi construire une image Docker lançant un serveur
 scripts python et d'utiliser pytorch.
 
 C'est une image de base des web services.  
-Son nom est: `ezs-python-pytorch-server:py3.9no24-1.1.8`
+Son nom est: `cnrsinist/ezs-python-pytorch-server:py3.9-no24-1.1.8`
 
 ## Versions utilisées
 
