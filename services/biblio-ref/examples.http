@@ -19,6 +19,9 @@ Content-Type: application/json
     "value": "https://doi.org/10.1016\/b978-0-323-90638-8.00002-3"
   },
   {
+    "value": "OCR problem > https://doi.org/10.1016\/b978-0-323-90638- 8.00002-3"
+  },
+  {
     "value": "RETRACTED > Estruch R., Primary Prevention of Cardiovascular Disease with a Mediterranean Diet, 10.1056/nejmoa1200303"
   },
   {

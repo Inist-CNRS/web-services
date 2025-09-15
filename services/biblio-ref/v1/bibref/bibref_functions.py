@@ -353,7 +353,7 @@ def process_crossref_doi(doi, raw_ref):
             doi = doi.strip(".")
             crossref_status_code, others_biblio_info = verify_doi(doi)
 
-    return crossref_status_code, others_biblio_info
+    return crossref_status_code, doi, others_biblio_info
 
 
 def biblio_ref(ref_biblio, retracted_doi=retracted_doi):
@@ -372,7 +372,7 @@ def biblio_ref(ref_biblio, retracted_doi=retracted_doi):
     ref_biblio = uniformize(ref_biblio)  # Warining : in the rest of code, the biblio ref is uniformize (remove some informations)
     # First case : doi is found
     if doi:
-        crossref_status_code, others_biblio_info = process_crossref_doi(doi, save_ref_biblio)
+        crossref_status_code, doi, others_biblio_info = process_crossref_doi(doi, save_ref_biblio)
                         
         # # If DOI exists
         if crossref_status_code==200:

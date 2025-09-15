@@ -10,6 +10,9 @@ skip: {{blocked}}
     "value": "https://doi.org/10.1016\/b978-0-323-90638-8.00002-3"
   },
   {
+    "value": "OCR problem > https://doi.org/10.1016\/b978-0-323-90638- 8.00002-3"
+  },
+  {
     "value": "RETRACTED > Estruch R., Primary Prevention of Cardiovascular Disease with a Mediterranean Diet, 10.1056/nejmoa1200303"
   },
   {
@@ -30,6 +33,12 @@ HTTP 200
 [{
     "value": {
         "doi": "10.3406/ecmed.1999.1879",
+        "status": "found"
+    }
+},
+{
+    "value": {
+        "doi": "10.1016/b978-0-323-90638-8.00002-3",
         "status": "found"
     }
 },
