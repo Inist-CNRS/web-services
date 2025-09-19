@@ -2,16 +2,15 @@
 # -*- coding: utf-8 -*-
 import json
 import sys
-import umap.umap_ as umap
+import requests
 from sentence_transformers import SentenceTransformer
 from sklearn.preprocessing import StandardScaler
-from sklearn.metrics.pairwise import cosine_distances
 from sklearn.cluster import HDBSCAN
+import umap
+import os
 
-# from prometheus_client import CollectorRegistry, Counter, push_to_gateway
-# registry = CollectorRegistry()
-# c = Counter('documents', 'Number of documents processed', registry=registry)
-# job_name='clustering'
+os.environ["TOKENIZERS_PARALLELISM"] = "false"
+model = SentenceTransformer('./v1/all-MiniLM-L6-v2')
 
 
 def center_reduce(matrix):
@@ -31,10 +30,9 @@ def center_reduce(matrix):
 
     return matrix_center_reduce
 
-model = SentenceTransformer('./v1/all-MiniLM-L6-v2')
 
 ## WS
-# Datas
+# Embedding
 all_data = []
 for line in sys.stdin:
     data=json.loads(line)
@@ -53,9 +51,9 @@ for i in range(len_data):
         
         if "value" in line :
             value = line["value"]
-            if type(value)==list:
+            if isinstance(value, list):
                 texts.append(model.encode(" ".join(value)))
-            elif type(value)==str:
+            elif isinstance(value, str):
                     texts.append(model.encode(value))
             else:
                 indice_out_cluster.append(i)
@@ -66,48 +64,47 @@ for i in range(len_data):
     except:
         indice_out_cluster.append(i)
 
-# Reduce DIM from 700+ to 8
-embeddings = umap.UMAP(n_neighbors=30,
-                       n_components=8,
-                       min_dist=0.0,
-                       metric='cosine',
-                       init='spectral').fit_transform(center_reduce(texts))
+# Dimension reduction
+umap_model = umap.UMAP(
+    n_neighbors=max(10, min(30,int(len_data/20))),
+    n_components=2,
+    metric='cosine',
+    min_dist=0.0,
+    random_state=42,
+    n_jobs=1)
 
-embeddings = center_reduce(embeddings)
-cosine_dist_matrix = cosine_distances(embeddings, embeddings)
+reduced_embeddings = umap_model.fit_transform(texts)
 
 
 # HDBSCAN with scikit-learn
 clusterer = HDBSCAN(
     algorithm='auto',
-    metric='precomputed',
-    min_cluster_size=int(max(10,len_data/100)),
-    cluster_selection_epsilon = 0.01,
-    min_samples=1,
+    metric='euclidean',
+    min_cluster_size=2,
+    cluster_selection_epsilon = 0,
+    min_samples=2,
     cluster_selection_method="eom",
     n_jobs=-1) 
 
-
-clusterer.fit(cosine_dist_matrix)
+clusterer.fit(reduced_embeddings)
 
 
 # extract infos
 res = []
 indice_in_cluster=0
-output = []
+text_output = ""
 for i in range(len_data):
+    line = all_data[i]
     if i in indice_out_cluster:
-        output.append({"id":all_data[i]["id"], "value": all_data[i]["id"]})
+        line["value"] = "no_abstract"
     else:
         if clusterer.labels_[indice_in_cluster] ==-1:
-            output.append({"id":all_data[indice_in_cluster]["id"], "value": all_data[indice_in_cluster]["id"]})
-        indice_in_cluster +=1 # Here we increment only if the row isn't noise, because they aren't count in "clusterer model"
-
-# Write all corpus in once
-if len(output)==0:
-    sys.stdout.write(json.dumps({"id":"n/a","value":""}))
-    sys.stdout.write("\n")
-else :
-    for line in output:
-        sys.stdout.write(json.dumps(line))
-        sys.stdout.write("\n")
+            line["value"] ="noise"
+        else:
+            line["value"] = "relevant"
+        # Increment only if the row isn't noise (they aren't count in "clusterer model")
+        indice_in_cluster +=1
+    text_output += json.dumps(line)
+    text_output += "\n"
+    
+sys.stdout.write(text_output)

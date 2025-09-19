@@ -16,7 +16,7 @@ for SERVICE in "${SERVICES[@]}"; do
         continue
     fi
 
-    npx hurl --test --continue-on-error --variable host="https://$SERVICE.services.istex.fr" "services/$SERVICE/tests.hurl"
+    npx hurl --test --jobs 1 --continue-on-error --variable host="https://$SERVICE.services.istex.fr" "services/$SERVICE/tests.hurl"
 done
 
 exit 0

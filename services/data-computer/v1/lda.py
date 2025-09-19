@@ -16,8 +16,8 @@ c = Counter('documents', 'Number of documents processed', registry=registry)
 job_name='lda'
 
 
-# Get the index of "p" param (given by the user) and assign it to "nbTopic". 15 if not found
-nbTopic = sys.argv[sys.argv.index('-p') + 1] if '-p' in sys.argv else 15
+# Get the index of "p" param (given by the user) and assign it to "nbTopic". 6 if not found
+nbTopic = sys.argv[sys.argv.index('-p') + 1] if '-p' in sys.argv else 6
 
 nlp = spacy.load('en_core_web_sm', disable = ['parser','ner'])
 
@@ -81,14 +81,10 @@ for line in sys.stdin:
     push_to_gateway('jobs-metrics.daf.intra.inist.fr', job=job_name, registry=registry)
 
 
-
-
 # following parameters depends of the size of the corpus : num_topics and num_iterations
 len_data = len(all_data)
-num_iterations= max(200,len_data/100)
-if len_data < 200:
-    num_iterations = 100
-
+num_iterations= 500
+minimum_probabilty = 1/float(nbTopic)
 # training LDA
 texts = []
 index_without_value = []
@@ -102,26 +98,27 @@ for i in range(len_data):
             index_without_value.append(i)
     else:
         index_without_value.append(i)
-dictionary = corpora.Dictionary(texts) # Create a tf dictionary, but replace text by an id : [ [(id_token,numb_token),...] , [....] ]. The list represent docs of corpus
-dictionary.filter_extremes(no_below=3,no_above=0.5)
-corpus = [dictionary.doc2bow(text) for text in texts]
+
+bigram_model = models.Phrases(texts, min_count=3, threshold=1)
+bigram_texts = [bigram_model[doc] for doc in texts]
+dictionary = corpora.Dictionary(bigram_texts)  
+dictionary.filter_extremes(no_below=3, no_above=0.6)
+
+corpus = [dictionary.doc2bow(text) for text in bigram_texts] 
 
 try:
     lda_model = models.LdaModel(corpus,
                                 num_topics=nbTopic,
                                 id2word=dictionary,
-                                alpha="symmetric",
-                                eta = "auto",
-                                minimum_probability=0.2,
-                                passes=1,
-                                iterations=1)
+                                alpha="auto",
+                                eta="auto",
+                                minimum_probability=minimum_probabilty,
+                                passes=10,
+                                iterations=num_iterations,
+                                random_state=42)
     
-    for i in range(num_iterations):
-        lda_model.update(corpus)
-        c.inc()
-        push_to_gateway('jobs-metrics.daf.intra.inist.fr', job=job_name, registry=registry)
-
 except Exception as e :
+    sys.stderr.write(str(e))
     index_without_value = [i for i in range(len_data)]
 
 
@@ -146,7 +143,7 @@ for i in range(len_data):
             words = []
             words_weights = []
             for word, word_weight in lda_model.show_topic(topic_id):
-                words.append(word) 
+                words.append(word.replace("_"," ")) 
                 words_weights.append(str(word_weight))
             topic_info[f"topic_{topic_id + 1}"]["words"] = words
             topic_info[f"topic_{topic_id + 1}"]["words_weights"] = words_weights
@@ -160,12 +157,3 @@ for i in range(len_data):
             line["value"]["best_topic"]="n/a"
         sys.stdout.write(json.dumps(line))
         sys.stdout.write("\n")
-
-
-# #To see topics (to test it with a jsonl file)
-# sys.stdout.write(json.dumps(lda_model.print_topics()))
-
-# #Get coherence
-# cm = models.coherencemodel.CoherenceModel(model=lda_model, texts=texts, coherence='c_v')
-# cm.get_coherence()
-# exit()

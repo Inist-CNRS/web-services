@@ -21,7 +21,7 @@ for SERVICE in "${SERVICES[@]}"; do
         continue
     fi
 
-    npx hurl --test --continue-on-error --variable host="https://$SERVICE.services.istex.fr" "services/$SERVICE/tests.hurl" 2> /dev/null
+    npx hurl --test --jobs 1 --continue-on-error --variable host="https://$SERVICE.services.istex.fr" "services/$SERVICE/tests.hurl" 2> /dev/null
     if [ $? -ne 0 ]; then
         printf "%s\t%s\t❌\n" "$SERVICE" "$VERSION"
     else

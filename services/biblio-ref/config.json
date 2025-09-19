@@ -10,6 +10,8 @@
         "EZS_CACHE": true,
         "EZS_VERBOSE": true,
         "NODE_OPTIONS": "--max_old_space_size=1024",
-        "NODE_ENV": "production"
+        "NODE_ENV": "production",
+        "CROSSREF_API_KEY": "REAL_CROSSREF_API_KEY",
+        "GROBID_API_URL": "REAL_GROBID_API_URL"
     }
 }

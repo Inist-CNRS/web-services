@@ -111,15 +111,15 @@ curl -X 'POST' \
 qui donnera ce résultat
 
 ```csv
-"key","freq"
-"n: sediment","10"
-"nn: proto-paratethys sea","9"
-"a: glacial","7"
-"n: mmes","7"
-"a: tropical","7"
-"n: precipitation","7"
-"n: genus","7"
-"n: obliquiloculata","7"
-"n: telescopus","6"
-"nn: clay mineral","6"
+"key","spec","freq"
+"n: sediment","4.61","10"
+"nn: proto-paratethys sea","4.56","9"
+"a: glacial","4.46","7"
+"n: mmes","4.46","7"
+"a: tropical","4.46","7"
+"n: precipitation","4.46","7"
+"n: genus","4.46","7"
+"n: obliquiloculata","4.46","7"
+"n: telescopus","4.39","6"
+"nn: clay mineral","4.39","6"
 ```

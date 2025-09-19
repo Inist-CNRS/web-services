@@ -52,6 +52,7 @@ result_path="/tmp/retrieve/$corpus-result.tsv"
 java -Xms1g -Xmx6g -cp "$JAR" fr.univnantes.termsuite.tools.TerminologyExtractorCLI  \
     -c  "$corpus_path" \
     --tsv "$result_path" \
+    --tsv-properties "key,spec,freq" \
     -l "$language" -t /opt/treetagger \
     --post-filter-top-n="$TOPN" --post-filter-property=spec
 
