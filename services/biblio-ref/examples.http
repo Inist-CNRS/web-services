@@ -49,3 +49,21 @@ POST {{host}}/v1/validate-pdf?indent=true
 Content-Type: application/pdf
 
 < ./example.pdf
+
+###
+# @name v1IsRetracted
+# Valide la référence bibliographique d'un PDF
+POST {{host}}/v1/is-retracted?indent=true
+Content-Type: application/json
+
+[
+  {
+    "value": "10.1016\/b978-0-323-90638-8.00002-3"
+  },
+  {
+    "value": "10.1016/s0167-577x(02)01208-9"
+  },
+  {
+    "value": "if value is not a doi, returns false"
+  }
+]
