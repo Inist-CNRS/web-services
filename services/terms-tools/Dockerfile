@@ -16,10 +16,11 @@ COPY ./dictionary.dvc /dvc
 COPY ./data.dvc /dvc
 RUN dvc pull -v
 
-FROM cnrsinist/ezs-python-server:py3.9-no16-1.0.11
+FROM cnrsinist/ezs-python-server:py3.9-no16-1.0.12
 
-ENV TERMS_TOOLS_VERSION=1.2.1
+ENV TERMS_TOOLS_VERSION=2.0
 ENV GIT=https://github.com/stephane54/terms-tools.git
+ENV DICO_PATH="/app/public/dictionary"
 
 USER root
 
@@ -29,6 +30,12 @@ RUN apt update && \
     # Download libpostal 
 RUN pip install --upgrade pip
 RUN pip install --no-cache-dir git+$GIT@$TERMS_TOOLS_VERSION#egg=terms_tools
+
+# download spacy models
+RUN pip install \
+    en_core_web_trf@https://github.com/explosion/spacy-models/releases/download/en_core_web_trf-3.8.0/en_core_web_trf-3.8.0-py3-none-any.whl \
+    fr_dep_news_trf@https://github.com/explosion/spacy-models/releases/download/fr_dep_news_trf-3.8.0/fr_dep_news_trf-3.8.0-py3-none-any.whl
+
 
 # rendre possible installation des ressources stanza lors 1er execution (mkdir en user daemon)
 RUN chmod 777 /usr/sbin/
