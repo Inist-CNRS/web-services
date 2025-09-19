@@ -57,7 +57,9 @@ def find_doi(text, delete_line_break=False, process_deleted_underscore=False):
     """
     Function to find a DOI (Digital Object Identifier) in the given text.
     Args:
-        text: the input text in which to search for the DOI
+        text (str): the input text in which to search for the DOI
+        delete_line_break (bool): Set to True when doi characters separated by a line break must be processed.
+        process_deleted_underscore (bool): Set to True when doi characters separated by an underscore must be processed.
     Returns
         str: the found DOI, or an empty string if not found
     """
@@ -331,6 +333,7 @@ def process_crossref_doi(doi, raw_ref):
 
     Args:
         doi (str): the doi to check
+        raw_ref (str): the raw reference
     """
     doi = doi.strip(".")
     crossref_status_code, others_biblio_info = verify_doi(doi)  # Verify doi using crossref api
