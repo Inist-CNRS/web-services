@@ -14,15 +14,29 @@ with open("v1/annulled.pickle", "rb") as file:
 for line in sys.stdin:
     data = json.loads(line)
     doi = data["value"]
-    if "id" in data:
-        output = {"id": data["id"], "value":{"is_retracted": False}}
-    else:
-        output = {"value":{"is_retracted": False}}
+    if isinstance(doi, str):
+        if "id" in data:
+            output = {"id": data["id"], "value":{"is_retracted": False}}
+        else:
+            output = {"value":{"is_retracted": False}}
 
-    try:
         if doi in retracted_doi:
             output["value"]["is_retracted"] = True
-    except Exception:
-        pass
-    json.dump(output, sys.stdout)
-    sys.stdout.write("\n")
+
+        json.dump(output, sys.stdout)
+        sys.stdout.write("\n")
+        
+    if isinstance(doi, list):
+        if "id" in data:
+            output = {"id": data["id"], "value":{"is_retracted": []}}
+        else:
+            output = {"value":{"is_retracted": []}}
+
+        for elt in doi:
+            if elt in retracted_doi:
+                output["value"]["is_retracted"].append(True)
+            else:
+                output["value"]["is_retracted"].append(False)
+
+        json.dump(output, sys.stdout)
+        sys.stdout.write("\n")
