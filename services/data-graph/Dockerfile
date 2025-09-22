@@ -11,4 +11,4 @@ RUN pip --no-cache-dir install \
 WORKDIR /app/public
 # Declare files to copy in .dockerignore
 COPY --chown=daemon:daemon . /app/public/
-RUN mv ./config.json /app && chmod a+w /app/config.json
+COPY --chown=daemon:daemon ./config.json /app/config.json
