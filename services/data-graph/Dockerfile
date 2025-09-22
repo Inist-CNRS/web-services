@@ -2,7 +2,7 @@
 FROM cnrsinist/ezs-python-server:py3.9-no24-1.0.13
 
 
-RUN pip install \
+RUN pip --no-cache-dir install \
     matplotlib==3.9.4 \
     networkx==3.2.1 \
     numpy==2.0.2 \
