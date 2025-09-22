@@ -1,7 +1,6 @@
 # syntax=docker/dockerfile:1.2
 FROM cnrsinist/ezs-python-server:py3.9-no24-1.0.13
 
-USER root
 
 RUN pip install \
     matplotlib==3.9.4 \
