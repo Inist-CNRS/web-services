@@ -1,7 +1,7 @@
 {
   "private": true,
   "name": "ws-software-extract",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "description": "Extrait des noms de logiciels dans un texte écrit en anglais.",
   "repository": {
     "type": "git",
