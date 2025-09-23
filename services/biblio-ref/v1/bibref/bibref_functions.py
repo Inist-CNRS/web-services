@@ -18,6 +18,7 @@ session_pdf = LimiterSession(per_second=10)
 with open("v1/annulled.pickle", "rb") as file:
     retracted_doi = pickle.load(file)
 
+retracted_doi = set(retracted_doi)
 
 def remove_accents(text):
     """
@@ -315,10 +316,10 @@ def verify_biblio_without_doi(ref_biblio, headers=headers, wrong_doi=False):
                 return "found", doi
 
         if wrong_doi:
-            return "hallucinated", ""
+            return "to_be_verified", ""
         
         if hallucinated:
-            return "hallucinated", ""
+            return "to_be_verified", ""
 
         else:
             return "not_found", ""
@@ -391,7 +392,7 @@ def biblio_ref(ref_biblio, retracted_doi=retracted_doi):
                 
                 if match_items_score < 3:
                     if title_score < 0.7:
-                        return {"doi": "", "status": "hallucinated"}
+                        return {"doi": "", "status": "to_be_verified"}
                
             return {"doi": doi, "status": status}
         
@@ -406,7 +407,7 @@ def biblio_ref(ref_biblio, retracted_doi=retracted_doi):
             
             # # # can't be not found : there is a doi. Should be on Crossref.
             if status == "not_found":
-                return {"doi": "", "status": "hallucinated"}
+                return {"doi": "", "status": "to_be_verified"}
             return {"doi": doi, "status": status}
                     
         # # # for others errors

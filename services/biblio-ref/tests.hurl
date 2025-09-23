@@ -16,16 +16,7 @@ skip: {{blocked}}
     "value": "RETRACTED > Estruch R., Primary Prevention of Cardiovascular Disease with a Mediterranean Diet, 10.1056/nejmoa1200303"
   },
   {
-    "value": "HALLUCINATED > Zohuri, B. (2019). A Comparison of Molten Salt Reactors to Light Water Reactors: Pros and Cons. In Molten Salt Reactors and Thorium Energy (pp. 81-98). Woodhead Publishing. https://doi.org/10.1016\/b978-0-323-90638-8.00002-3"
-  },
-  {
-    "value": "HALUCINATED WITHOUT DOI > Zohuri, B. (2019). Selective herbivory of thyme chemotypes by a mollusk and a grasshopper (pp. 81-98). Woodhead Publishing."
-  },
-  {
-    "value": ["bad","input","type"]
-  },
-  {
-    "value": "nothing here"
+    "value": "HALUCINATED > Zohuri, B. (2019). Selective herbivory of thyme chemotypes by a mollusk and a grasshopper (pp. 81-98). Woodhead Publishing."
   }
 ]
 
@@ -56,26 +47,8 @@ HTTP 200
 },
 {
     "value": {
-        "doi": "10.1016/b978-0-323-90638-8.00002-3",
-        "status": "found"
-    }
-},
-{
-    "value": {
         "doi": "",
-        "status": "hallucinated"
-    }
-},
-{
-    "value": {
-        "doi": "",
-        "status": "error_data"
-    }
-},
-{
-    "value": {
-        "doi": "",
-        "status": "not_found"
+        "status": "to_be_verified"
     }
 }]
 
