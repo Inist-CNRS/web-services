@@ -17,7 +17,7 @@
         {
             "url": "http://vptdmservices.intra.inist.fr:49351/",
             "description": "Latest version for production",
-            "#DISABLED#x-profil": "Standard"
+            "x-profil": "Standard"
         }
     ],
     "tags": [
