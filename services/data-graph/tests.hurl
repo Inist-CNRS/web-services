@@ -37,8 +37,6 @@ bytes count <= 25800000
 
 POST {{host}}/v1/retrieve-gexf
 content-type: application/json
-[Options]
-delay: 40000
 ```
 [
 	{
