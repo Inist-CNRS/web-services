@@ -29,6 +29,7 @@ WEBDAV_URL=$4
 OPENALEX_API_KEY=$5
 UNPAYWALL_API_KEY=$6
 CROSSREF_API_KEY=$7
+LIBRARIES_IO_API_KEY=$8
 
 echo "Building .env for $SERVICE_NAME"
 
@@ -39,4 +40,5 @@ echo "Building .env for $SERVICE_NAME"
     echo "export OPENALEX_API_KEY=$OPENALEX_API_KEY"
     echo "export UNPAYWALL_API_KEY=$UNPAYWALL_API_KEY"
     echo "export CROSSREF_API_KEY=$CROSSREF_API_KEY"
+    echo "export LIBRARIES_IO_API_KEY=$LIBRARIES_IO_API_KEY"
 } > "services/$SERVICE_NAME/.env"
