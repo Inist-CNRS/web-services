@@ -1,0 +1,33 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "data-graph - ws to create graph in gexf format",
+        "description": "Web service that takes keywords from documents to create a partitionned graph in gexf format",
+        "version": "1.0.0",
+        "termsOfService": "https://services.istex.fr/",
+        "contact": {
+            "name": "Inist-CNRS",
+            "url": "https://www.inist.fr/nous-contacter/"
+        }
+    },
+    "servers": [
+        {
+            "x-comment": "Will be automatically completed by the ezs server."
+        },
+        {
+            "url": "http://vptdmjobs.intra.inist.fr:49243/",
+            "description": "Latest version for production",
+            "#DISABLED#x-profil": "Standard"
+        }
+    ],
+    "tags": [
+        {
+            "name": "data-graph",
+            "description": "ws to create graph in gexf format",
+            "externalDocs": {
+                "description": "Plus de documentation",
+                "url": "https://github.com/inist-cnrs/web-services/tree/main/services/data-graph"
+            }
+        }
+    ]
+}
