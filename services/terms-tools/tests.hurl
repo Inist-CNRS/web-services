@@ -61,7 +61,7 @@ Content-Type: application/json
 ]
 
 HTTP 200
-[{"id":"18","value":"the mem-pro-clinic_test_http://data.loterre.fr/ark:/67375/p66-wg17xbg4-v is a clinical test to assess difficulties in event- and time-based prospective_thought_http://data.loterre.fr/ark:/67375/p66-vlj0cqh4-g. this   implies that activated long-term_memory_http://data.loterre.fr/ark:/67375/p66-j8fc45m1-6 provides a representational basis for semantic verbal short-term signal."},{"id":"27","value":"a new method to implant false autobiographical books: blind implantation call blind_implantation_method_http://data.loterre.fr/ark:/67375/p66-d6xl3pdr-m."},{"id":"35","value":"a guy with hypermnesia_(pathology)_http://data.loterre.fr/ark:/67375/p66-fqxk8kbn-c is capable of storing idea in an extraordinarily efficient manner."}]
+[{"id":"18","value":"the TERM||mem-pro-clinic test||http://data.loterre.fr/ark:/67375/p66-wg17xbg4-v is a clinical test to assess difficulties in event- and time-based TERM||prospective thought||http://data.loterre.fr/ark:/67375/p66-vlj0cqh4-g. this   implies that activated TERM||long-term memory||http://data.loterre.fr/ark:/67375/p66-j8fc45m1-6 provides a representational basis for semantic verbal short-term signal."},{"id":"27","value":"a new method to implant false autobiographical books: blind implantation call TERM||blind implantation method||http://data.loterre.fr/ark:/67375/p66-d6xl3pdr-m."},{"id":"35","value":"a guy with TERM||hypermnesia (pathology)||http://data.loterre.fr/ark:/67375/p66-fqxk8kbn-c is capable of storing idea in an extraordinarily efficient manner."}]
 
 
 POST {{host}}/v1/en/terms-matcher/P66?format=xml-standoff
