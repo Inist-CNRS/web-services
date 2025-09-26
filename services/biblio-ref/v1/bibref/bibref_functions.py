@@ -18,6 +18,7 @@ session_pdf = LimiterSession(per_second=10)
 with open("v1/annulled.pickle", "rb") as file:
     retracted_doi = pickle.load(file)
 
+retracted_doi = set(retracted_doi)
 
 def remove_accents(text):
     """
@@ -53,21 +54,32 @@ def uniformize(text):
 
 
 # DOI funtions
-def find_doi(text):
+def find_doi(text, delete_line_break=False, process_deleted_underscore=False):
     """
     Function to find a DOI (Digital Object Identifier) in the given text.
     Args:
-        text: the input text in which to search for the DOI
+        text (str): the input text in which to search for the DOI
+        delete_line_break (bool): Set to True when doi characters separated by a line break must be processed.
+        process_deleted_underscore (bool): Set to True when doi characters separated by an underscore must be processed.
     Returns
         str: the found DOI, or an empty string if not found
     """
-    doi_regex = r"\b10.\d{4,}\/[^\s]+\b"
+    if delete_line_break:
+        doi_regex = r"10\.\d{4,}\/[^\s,]+\s[^\s,]+"
+    elif process_deleted_underscore:
+        doi_regex = r"10\.\d{4,}\/[^\,]+"
+    else:
+        doi_regex = r"10\.\d{4,}\/[^\s\,]+"
+    
     doi = re.search(doi_regex, text)
     if doi is None:
         return ""
+    
     try:
         doiStr = doi.group()
-        return doiStr.lower()
+        if process_deleted_underscore:
+            return doiStr.lower().replace(" ", "_")
+        return doiStr.lower().replace(" ", "")
     except Exception:
         return ""
 
@@ -240,7 +252,7 @@ def compare_pubinfo_refbiblio(item, ref_biblio):
         items_score += 1
 
     # Source
-    if fuzz.partial_ratio(uniformize(item["source"]["source-short"]), ref_biblio)/100 > 0.8 or fuzz.partial_ratio(uniformize(item["source"]["source-short"]), ref_biblio)/100 > 0.8 :
+    if fuzz.partial_ratio(uniformize(item["source"]["source-short"]), ref_biblio)/100 > 0.8 or fuzz.partial_ratio(uniformize(item["source"]["source-long"]), ref_biblio)/100 > 0.8 :
         items_score += 1
 
     try:
@@ -304,10 +316,10 @@ def verify_biblio_without_doi(ref_biblio, headers=headers, wrong_doi=False):
                 return "found", doi
 
         if wrong_doi:
-            return "hallucinated", ""
+            return "to_be_verified", ""
         
         if hallucinated:
-            return "hallucinated", ""
+            return "to_be_verified", ""
 
         else:
             return "not_found", ""
@@ -315,6 +327,37 @@ def verify_biblio_without_doi(ref_biblio, headers=headers, wrong_doi=False):
     except Exception as e:
         sys.stderr.write("Error in verify_biblio function : "+str(e)+"\n")
         return "error_service", ""
+
+
+def process_crossref_doi(doi, raw_ref):
+    """Check DOI. Process if this one is cut or if _ has been replace by spaces.
+
+    Args:
+        doi (str): the doi to check
+        raw_ref (str): the raw reference
+    """
+    doi = doi.strip(".")
+    crossref_status_code, others_biblio_info = verify_doi(doi)  # Verify doi using crossref api
+    
+    # # If doi isn't found, try to delete \n
+    if crossref_status_code==404:
+        doi = find_doi(raw_ref, delete_line_break=True)
+        if not doi:
+            crossref_status_code=404
+        else:
+            doi = doi.strip(".")
+            crossref_status_code, others_biblio_info = verify_doi(doi)
+            
+    # # If doi isn't found, try to process supressed "_"
+    if crossref_status_code==404:
+        doi = find_doi(raw_ref, process_deleted_underscore=True)
+        if not doi:
+            crossref_status_code=404
+        else:
+            doi = doi.strip(".")
+            crossref_status_code, others_biblio_info = verify_doi(doi)
+
+    return crossref_status_code, doi, others_biblio_info
 
 
 def biblio_ref(ref_biblio, retracted_doi=retracted_doi):
@@ -329,12 +372,12 @@ def biblio_ref(ref_biblio, retracted_doi=retracted_doi):
         return {"doi": "", "status": "error_data"}
 
     doi = find_doi(ref_biblio)
+    save_ref_biblio=ref_biblio
     ref_biblio = uniformize(ref_biblio)  # Warining : in the rest of code, the biblio ref is uniformize (remove some informations)
     # First case : doi is found
     if doi:
-        doi = doi.strip(".")
-        crossref_status_code, others_biblio_info = verify_doi(doi)  # Verify doi using crossref api
-        
+        crossref_status_code, doi, others_biblio_info = process_crossref_doi(doi, save_ref_biblio)
+                        
         # # If DOI exists
         if crossref_status_code==200:
             status = "found"
@@ -349,12 +392,13 @@ def biblio_ref(ref_biblio, retracted_doi=retracted_doi):
                 
                 if match_items_score < 3:
                     if title_score < 0.7:
-                        return {"doi": "", "status": "hallucinated"}
+                        return {"doi": "", "status": "to_be_verified"}
                
             return {"doi": doi, "status": status}
         
         # # If DOI doesn't exist
         elif crossref_status_code == 404:
+
             status, doi = verify_biblio_without_doi(ref_biblio, wrong_doi=True)
             
             # # # Can be retracted
@@ -363,7 +407,7 @@ def biblio_ref(ref_biblio, retracted_doi=retracted_doi):
             
             # # # can't be not found : there is a doi. Should be on Crossref.
             if status == "not_found":
-                return {"doi": "", "status": "hallucinated"}
+                return {"doi": "", "status": "to_be_verified"}
             return {"doi": doi, "status": status}
                     
         # # # for others errors
