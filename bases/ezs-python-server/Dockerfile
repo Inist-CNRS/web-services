@@ -1,6 +1,7 @@
-FROM cnrsinist/python-node:py3.9-no16-1.0.1
+FROM cnrsinist/python-node:py3.9-no24-1.1.0
 
-RUN apt update && apt install -y tini && \
+RUN apt-get update && apt-get install -y --no-install-recommends tini=0.19.0-1 && \
+    apt-get clean && rm -rf /var/lib/apt/lists/* && \
     echo '{ \
     "httpPort": 31976, \
     "configPath": "/app/config.json", \
@@ -8,11 +9,12 @@ RUN apt update && apt install -y tini && \
     }' > /etc/ezmaster.json
 
 WORKDIR /app
-RUN npm install dotenv-cli@7.4.1 && \
-    npm install @ezs/core@3.10.2 && \
-    npm install @ezs/analytics@2.3.2 && \
-    npm install @ezs/basics@2.7.0 && \
-    npm install @ezs/spawn@1.4.6 && \
+RUN npm install --omit=dev dotenv-cli@10.0.0 && \
+    npm install --omit=dev @ezs/core@4.0.2 && \
+    npm install --omit=dev @ezs/analytics@2.3.5 && \
+    npm install --omit=dev @ezs/basics@2.9.2 && \
+    npm install --omit=dev @ezs/spawn@1.4.9 && \
+    npm cache clean --force && \
     chmod a+w /app
 
 # Make sure that .npm folder is readable by the daemon user
@@ -25,3 +27,5 @@ COPY . /app/
 
 ENTRYPOINT [ "/usr/bin/tini", "-g", "--" ]
 CMD [ "/app/docker-entrypoint.sh" ]
+
+EXPOSE 31976

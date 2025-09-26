@@ -39,25 +39,34 @@ def predict_formula_ml(input_text):
 
     predictions = torch.argmax(output.logits, dim=-1)
 
-    # Get token that contains "disease"
-    tokens = tokenizer.convert_ids_to_tokens(tokens['input_ids'][0])
-    disease_tokens_list = []
-    i=0
+    #convert the predictions to labels
+    predicted_labels = [model.config.id2label[pred.item()] for pred in predictions[0]]
 
-    while i < len(predictions[0]):
-        # prediction [0][i] depends of i : {0 : "B-disease" , 1 : "I-disease" , 2: "NOT a disease NE"}
-        k=0
-        if predictions[0][i] < 2:
-            disease_tokens_toappend = []
-            while predictions[0][i+k] < 2:
-                disease_tokens_toappend.append(tokens[i+k])
-                k+=1
-            disease_tokens_list.append(disease_tokens_toappend)
-        i+=k+1
-    value = []
-    for disease_tokens in disease_tokens_list:
-        value.append(tokenizer.decode(tokenizer.convert_tokens_to_ids(disease_tokens)))
-    return value
+    diseases_entities = []
+    current_entity = []
+
+    # Iterate over both tokens and entity directly
+    for token, label in zip(tokenizer.convert_ids_to_tokens(tokens['input_ids'][0]), predicted_labels):
+        if label.startswith("B-"):  # Beginning of an entity
+            if current_entity:
+                diseases_entities.append(current_entity)
+                current_entity = []
+            current_entity.append(token)
+        elif label.startswith("I-") and current_entity:  # Continuation of an entity
+            current_entity.append(token)
+        else:
+            if current_entity:
+                diseases_entities.append(current_entity)
+                current_entity = []
+
+    # If there's an entity left at the end (here was a bug with last version)
+    if current_entity:
+        diseases_entities.append(current_entity)
+
+    # Convert tokens back to string format
+    diseases_entities = [tokenizer.convert_tokens_to_string(entity_tokens) for entity_tokens in diseases_entities]
+
+    return diseases_entities
 
 # if text too long
 def split_text(text):

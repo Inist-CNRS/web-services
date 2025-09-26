@@ -1,8 +1,9 @@
-FROM cnrsinist/ezs-python-server:py3.9-no16-1.0.11
+FROM cnrsinist/ezs-python-server:py3.9-no24-1.0.13
 
-USER root
+WORKDIR /app
 
-RUN npm install @ezs/ark@1.3.7
+RUN npm install --omit=dev @ezs/ark@1.3.8 && \
+    npm cache clean --force
 
 WORKDIR /app/public
 # Declare files to copy in .dockerignore

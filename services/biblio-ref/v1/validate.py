@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 
-import sys
 import json
-from bibref.bibref_functions import *
+import sys
+import bibref.bibref_functions as bf
 
 
 # WS
@@ -10,7 +10,7 @@ for line in sys.stdin:
     data = json.loads(line)
     ref_biblio = data["value"]
     
-    res = biblio_ref(ref_biblio)
+    res = bf.biblio_ref(ref_biblio)
     
     data["value"] = res
     json.dump(data, sys.stdout)

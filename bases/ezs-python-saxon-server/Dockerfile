@@ -1,12 +1,12 @@
-FROM cnrsinist/ezs-python-server:py3.9-no16-1.0.11
+FROM cnrsinist/ezs-python-server:py3.9-no24-1.0.13
 
 ARG saxon_ver=10.9
 ENV SAXON_HOME=/usr/share/java/saxon
 
-USER root
-RUN apt update && apt install -y default-jre \
-    poppler-utils \
-    unzip
+RUN apt-get update && apt-get install -y --no-install-recommends default-jre=2:1.11-72 \
+    poppler-utils=20.09.0-3.1+deb11u2 \
+    unzip=6.0-26+deb11u1 && \
+    apt-get clean && rm -rf /var/lib/apt/lists/*
 
 ADD \
     https://repo1.maven.org/maven2/net/sf/saxon/Saxon-HE/${saxon_ver}/Saxon-HE-${saxon_ver}.jar \
@@ -28,7 +28,8 @@ RUN unzip fop.zip && \
 ENV PATH="/fop:$PATH"
 
 WORKDIR /app
-RUN npm install @ezs/xslt@1.3.31
+RUN npm --omit=dev install @ezs/xslt@1.3.32 && \
+    npm cache clean --force
 RUN chown daemon:daemon -R /app
 
 WORKDIR /app
