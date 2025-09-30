@@ -1,23 +1,19 @@
 # syntax=docker/dockerfile:1.2
-FROM cnrsinist/ezs-python-server:py3.9-no16-1.0.11
+FROM cnrsinist/ezs-python-server:py3.9-no24-1.0.13
 
-USER root
+WORKDIR /app
 # Install all python dependencies
-RUN apt update && apt install -y poppler-utils libmagic1
-
-RUN pip3 install \
+RUN pip3 install --no-cache-dir \
     requests_ratelimiter==0.4.2 \
     thefuzz==0.22.1 \
-    refextract==1.1.4 \
-    python-magic==0.4.27
-
+    lxml==5.3.2
 
 WORKDIR /app/public
 
 # Declare files to copy in .dockerignore
 # A modifier : (utiliser le .dockerignore)
 COPY --chown=daemon:daemon . /app/public
-RUN mv ./config.json /app && chmod a+w /app/config.json
+COPY --chown=daemon:daemon ./config.json /app/config.json
 
 # Download the list of annulled papers from PPS + process it
 RUN curl -go /tmp/pps.csv 'https://dbrech.irit.fr/pls/apex/f?p=9999:300::IR[allproblematicpapers]_CSV'

@@ -1,0 +1,33 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "loterre-resolvers - Résolveurs pour des terminologies Loterre",
+        "summary": "Fait appel aux vocabulaires Loterre pour obtenir des informations dans différents domaines.",
+        "version": "7.0.9",
+        "termsOfService": "https://services.istex.fr/",
+        "contact": {
+            "name": "Inist-CNRS",
+            "url": "https://www.inist.fr/nous-contacter/"
+        }
+    },
+    "servers": [
+        {
+            "x-comment": "Will be automatically completed by the ezs server."
+        },
+        {
+            "url": "http://vptermsuite.intra.inist.fr:49173/",
+            "description": "Latest version for production",
+            "x-profil": "Standard"
+        }
+    ],
+    "tags": [
+        {
+            "name": "loterre-resolvers",
+            "description": "Résolveurs pour des terminologies Loterre",
+            "externalDocs": {
+                "description": "Plus de documentation",
+                "url": "https://github.com/inist-cnrs/web-services/tree/main/services/loterre-resolvers"
+            }
+        }
+    ]
+}

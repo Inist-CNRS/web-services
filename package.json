@@ -1,7 +1,7 @@
 {
   "private": true,
   "name": "web-services",
-  "version": "1.1.0",
+  "version": "1.0.0",
   "description": "Web services at Inist-CNRS",
   "main": "index.js",
   "scripts": {
@@ -40,6 +40,7 @@
     "services/address-kit",
     "services/affiliation-rnsr",
     "services/affiliations-tools",
+    "services/aiabstract-check",
     "services/ark-tools",
     "services/astro-ner",
     "services/authors-tools",
@@ -48,8 +49,15 @@
     "services/biblio-ref",
     "services/biblio-tools",
     "services/chem-ner",
+    "services/coara-tools",
     "services/data-computer",
+    "services/data-graph",
+    "services/data-homogenise",
+    "services/data-rapido",
+    "services/data-table",
     "services/data-termsuite",
+    "services/data-thesesul",
+    "services/data-topcitation",
     "services/data-workflow",
     "services/data-wrapper",
     "services/diseases-ner",
@@ -57,24 +65,27 @@
     "services/funder-ner",
     "services/hal-classifier",
     "services/irc3-species",
+    "services/loterre-resolvers",
     "services/ner-tagger",
     "services/nlp-tools2",
     "services/pdf-text",
     "services/person-ner",
     "services/sciencemetrix-classification",
+    "services/software-extract",
     "services/terms-extraction",
     "services/terms-tools",
-    "services/text-clustering"
+    "services/text-clustering",
+    "services/text-summarize"
   ],
   "dependencies": {
-    "@ezs/analytics": "2.3.2",
-    "@ezs/basics": "2.9.1",
-    "@ezs/core": "1.18.0",
-    "@ezs/spawn": "1.4.6",
-    "@orangeopensource/hurl": "4.3.3",
+    "@ezs/analytics": "2.3.5",
+    "@ezs/basics": "2.9.2",
+    "@ezs/core": "4.0.2",
+    "@ezs/spawn": "1.4.9",
+    "@orangeopensource/hurl": "5.0.1",
     "rest-cli": "1.8.13"
   },
   "devDependencies": {
-    "@types/node": "20.11.30"
+    "@types/node": "24.3.1"
   }
 }

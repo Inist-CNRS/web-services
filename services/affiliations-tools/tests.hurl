@@ -1,5 +1,8 @@
 POST {{host}}/v1/expand?indent=true
 content-type: application/json
+[Options]
+# Uses two IP-protected web services in production
+skip: {{blocked}}
 [
   { "value": "Baran, N (reprint author), Univ Zagreb, Dept Phys, Bijenieka Cesta 32, Zagreb 10000, Croatia."},
   { "value": "Harikane, Y (reprint author), Univ Tokyo, Inst Cosm Ray Res, 5-1-5 Kashiwanoha, Kashiwa, Chiba 2778582, Japan.; Harikane, Y (reprint author), Univ Tokyo, Grad Sch Sci, Dept Phys, Bunkyo Ku, 7-3-1 Hongo, Tokyo 1130033, Japan."},
@@ -557,81 +560,50 @@ content-type: application/json
 [
   {
     "id": 1,
-    "status": "wrong",
-    "value": "Norwich Medical School, University of East Anglia"
-  },
-  {
-    "id": 2,
-    "status": "correct",
     "value": "Institut Lumière Matière [Villeurbanne]"
   },
   {
-    "id": 3,
-    "status": "correct-2",
+    "id": 2,
     "value": "NSF's National Optical-Infrared Astronomy Research Laboratory, 950 North Cherry Avenue, Tucson, AZ 85719, USA"
   },
   {
-    "id": 4,
-    "status": "non-existing",
+    "id": 3,
     "value": "Sphere Energy SAS, 250 Bis Boulevard Saint Germain, 75007, Paris, France"
-  },
-  {
-    "id": 5,
-    "status": "non-existing",
-    "value" : "Department of Computational Engineering, CSC — Scientific Computing Ltd, P.O. Box 405, 02101, Espoo, Finland"
   }
 ]
 
 HTTP 200
 [{
     "id": 1,
-    "status": "wrong",
     "value": {
-        "id_ror": "https://ror.org/01e0ns064",
-        "score": 1,
-        "name": "University of East",
+        "status": "Found",
+        "id_ror": "https://ror.org/0323bey33",
+        "score": 0.79,
+        "name": "ILM",
         "type": [
-            "Education"
+            "facility"
         ],
-        "name_geonames": null,
-        "id_geonames": null
+        "name_geonames": "Villeurbanne",
+        "id_geonames": 2968254
     }
 },
 {
     "id": 2,
-    "status": "correct",
     "value": {
-        "id_ror": "https://ror.org/0323bey33",
-        "score": 0.79,
-        "name": "Institut Lumière Matière",
+        "status": "Found",
+        "id_ror": "https://ror.org/03zmsge54",
+        "score": 1,
+        "name": "NOIRLab",
         "type": [
-            "Facility"
+            "facility"
         ],
-        "name_geonames": null,
-        "id_geonames": null
+        "name_geonames": "Tucson",
+        "id_geonames": 5318313
     }
 },
 {
     "id": 3,
-    "status": "correct-2",
     "value": {
-        "id_ror": "https://ror.org/03zmsge54",
-        "score": 1,
-        "name": "NSF’s NOIRLab",
-        "type": [
-            "Facility"
-        ],
-        "name_geonames": "Pima",
-        "id_geonames": 5308878
+        "status": "No match found"
     }
-},
-{
-    "id": 4,
-    "status": "non-existing",
-    "value": "No match found"
-},
-{
-    "id": 5,
-    "status": "non-existing",
-    "value": "No match found"
 }]
