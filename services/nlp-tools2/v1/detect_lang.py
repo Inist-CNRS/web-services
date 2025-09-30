@@ -5,7 +5,8 @@ Created on Thu Jun 17 15:18:10 2021
 
 @author: cuxac
 
-A partir d'un texte (pas d'un mot) affiche le code langue du texte (2 caractères) si ça probabilité est supérieure au seuil de 0.85
+À partir d'un texte (pas d'un mot) affiche le code langue du texte (2
+caractères) si sa probabilité est supérieure au seuil de 0.85
 
 """
 
@@ -35,13 +36,15 @@ import sys
 for line in sys.stdin:
     data = json.loads(line)
 
-    text = data['value']
+    text = data["value"]
     if cld3.get_language(text).probability > 0.85:
 
-        data['value'] = cld3.get_language(text).language  # ,round(cld3.get_language(text).probability,2)
+        data["value"] = cld3.get_language(
+            text
+        ).language  # ,round(cld3.get_language(text).probability,2)
 
     else:
-        data['value'] = ''
+        data["value"] = ""
 
     sys.stdout.write(json.dumps(data))
-    sys.stdout.write('\n')
+    sys.stdout.write("\n")

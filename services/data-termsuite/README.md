@@ -1,4 +1,4 @@
-# ws-data-termsuite@3.0.4
+# ws-data-termsuite@3.2.2
 
 Web service TermSuite
 

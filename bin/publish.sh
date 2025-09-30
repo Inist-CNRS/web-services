@@ -2,6 +2,8 @@
 
 ROOT="$(dirname "$0")/.."
 SCHEME="https:"
+CALLING_DIRECTORY=$(pwd)
+ISTEX_GATEWAY="${ROOT}/../istex-gateway/"
 
 allItems=""
 
@@ -54,7 +56,7 @@ process () {
 			;;
 	esac
 	CURL_OUTFILE=$(mktemp)
-    cat <<EOF | curl --silent --user "${LOGIN}:${PASSW}" -T - "http://vpdaf.intra.inist.fr:35270/internal-proxy-1/data/${NAME}.yml" --digest  --write-out "%{http_code}" --output /dev/null > "${CURL_OUTFILE}"
+    cat <<EOF | tee "${ISTEX_GATEWAY}/config/${NAME}.yml" | curl --silent --user "${LOGIN}:${PASSW}" -T - "http://vpdaf.intra.inist.fr:35270/internal-proxy-1/data/${NAME}.yml" --digest  --write-out "%{http_code}" --output /dev/null > "${CURL_OUTFILE}"
 http:
     routers:
         Router-${NAME}:
@@ -88,6 +90,13 @@ EOF
     return 0
 }
 
+################# main #################
+
+echo "Récupération du dépôt istex-gateway"
+cd "${ISTEX_GATEWAY}" || exit 1
+git pull
+cd "${CALLING_DIRECTORY}" || exit 2
+
 FILES=$(ls "${ROOT}"/services/*/swagger.json)
 
 echo -n "Login: "
@@ -101,6 +110,12 @@ do
     process "$swagger" "$login" "$passw"
 done
 
+echo "Mise à jour du dépôt istex-gateway"
+cd "${ISTEX_GATEWAY}" || exit 1
+git add config
+git commit -m "Update config files"
+git push
+cd "${CALLING_DIRECTORY}" || exit 2
 
 echo -n "open-api - Swagger - "
 CURL_OUTFILE=$(mktemp)

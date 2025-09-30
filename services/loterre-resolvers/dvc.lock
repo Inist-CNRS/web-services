@@ -1,0 +1,236 @@
+schema: '2.0'
+stages:
+  tgz@216:
+    cmd:
+    - EZS_PIPELINE_DELAY=1200 loterreID=216 bunx ezs create-databases.ini <<< '[{}]'
+    - tar -czf databases/216.tgz databases/216
+    deps:
+    - path: create-databases.ini
+      hash: md5
+      md5: d24e36d0f1e6c881b412528ecbd78b4d
+      size: 604
+    - path: data/216.skos
+      hash: md5
+      md5: 3adb88d03412ed4e4569b71b14354d0c
+      size: 1936035
+    outs:
+    - path: databases/216.tgz
+      hash: md5
+      md5: 28ef3059d93b91020f524680d54d6b2f
+      size: 3343752
+  tgz@QX8:
+    cmd:
+    - EZS_PIPELINE_DELAY=1200 loterreID=QX8 bunx ezs create-databases.ini <<< '[{}]'
+    - tar -czf databases/QX8.tgz databases/QX8
+    deps:
+    - path: create-databases.ini
+      hash: md5
+      md5: d24e36d0f1e6c881b412528ecbd78b4d
+      size: 604
+    - path: data/QX8.skos
+      hash: md5
+      md5: 0e0210f8098cfa0d19918469480f60a0
+      size: 2027326
+    outs:
+    - path: databases/QX8.tgz
+      hash: md5
+      md5: d9a42f34fb27d39ad02c1811aedcd3e1
+      size: 3095298
+  tgz@3JP:
+    cmd:
+    - EZS_PIPELINE_DELAY=1200 loterreID=3JP bunx ezs create-databases.ini <<< '[{}]'
+    - tar -czf databases/3JP.tgz databases/3JP
+    deps:
+    - path: create-databases.ini
+      hash: md5
+      md5: d24e36d0f1e6c881b412528ecbd78b4d
+      size: 604
+    - path: data/3JP.skos
+      hash: md5
+      md5: 8a20304e8bf72fd72c82879d922dc173
+      size: 2308578
+    outs:
+    - path: databases/3JP.tgz
+      hash: md5
+      md5: 8dede3f3882c5238fe9fd19743f6de23
+      size: 5786310
+  tgz@73G:
+    cmd:
+    - EZS_PIPELINE_DELAY=1200 loterreID=73G bunx ezs create-databases.ini <<< '[{}]'
+    - tar -czf databases/73G.tgz databases/73G
+    deps:
+    - path: create-databases.ini
+      hash: md5
+      md5: d24e36d0f1e6c881b412528ecbd78b4d
+      size: 604
+    - path: data/73G.skos
+      hash: md5
+      md5: f77a6ade78f20824c4ac32b5a5a290be
+      size: 2496320
+    outs:
+    - path: databases/73G.tgz
+      hash: md5
+      md5: aa9291d2e8edabea9c4d87e1cad22bde
+      size: 4861450
+  tgz@9SD:
+    cmd:
+    - EZS_PIPELINE_DELAY=1200 loterreID=9SD bunx ezs create-databases.ini <<< '[{}]'
+    - tar -czf databases/9SD.tgz databases/9SD
+    deps:
+    - path: create-databases.ini
+      hash: md5
+      md5: d24e36d0f1e6c881b412528ecbd78b4d
+      size: 604
+    - path: data/9SD.skos
+      hash: md5
+      md5: 7a7ecf5ef02e07bfb0ca26af228a0ea9
+      size: 3078291
+    outs:
+    - path: databases/9SD.tgz
+      hash: md5
+      md5: 2e8c5de44935cbb1ed3905d5334554f9
+      size: 2447909
+  tgz@P66:
+    cmd:
+    - EZS_PIPELINE_DELAY=1200 loterreID=P66 bunx ezs create-databases.ini <<< '[{}]'
+    - tar -czf databases/P66.tgz databases/P66
+    deps:
+    - path: create-databases.ini
+      hash: md5
+      md5: d24e36d0f1e6c881b412528ecbd78b4d
+      size: 604
+    - path: data/P66.skos
+      hash: md5
+      md5: 0c9cfd915beba169a839ebfa90c20c76
+      size: 3917649
+    outs:
+    - path: databases/P66.tgz
+      hash: md5
+      md5: ec4329197f7cde2ce323cad10a06d9fb
+      size: 3599562
+  tgz@MDL:
+    cmd:
+    - EZS_PIPELINE_DELAY=1200 loterreID=MDL bunx ezs create-databases.ini <<< '[{}]'
+    - tar -czf databases/MDL.tgz databases/MDL
+    deps:
+    - path: create-databases.ini
+      hash: md5
+      md5: d24e36d0f1e6c881b412528ecbd78b4d
+      size: 604
+    - path: data/MDL.skos
+      hash: md5
+      md5: 03fa07edb29af5a50801302722c8fb16
+      size: 5657134
+    outs:
+    - path: databases/MDL.tgz
+      hash: md5
+      md5: 3db94dbb55139947b21a466f5f1dbf8b
+      size: 7664643
+  tgz@P21:
+    cmd:
+    - EZS_PIPELINE_DELAY=1200 loterreID=P21 bunx ezs create-databases.ini <<< '[{}]'
+    - tar -czf databases/P21.tgz databases/P21
+    deps:
+    - path: create-databases.ini
+      hash: md5
+      md5: d24e36d0f1e6c881b412528ecbd78b4d
+      size: 604
+    - path: data/P21.skos
+      hash: md5
+      md5: 3d44f296cb995aedae522a50a33b2762
+      size: 8495524
+    outs:
+    - path: databases/P21.tgz
+      hash: md5
+      md5: ed22963ea4f4470fb4d293bc5f312a49
+      size: 12846318
+  tgz@BVM:
+    cmd:
+    - EZS_PIPELINE_DELAY=1200 loterreID=BVM bunx ezs create-databases.ini <<< '[{}]'
+    - tar -czf databases/BVM.tgz databases/BVM
+    deps:
+    - path: create-databases.ini
+      hash: md5
+      md5: d24e36d0f1e6c881b412528ecbd78b4d
+      size: 604
+    - path: data/BVM.skos
+      hash: md5
+      md5: 08e1013cdf5b8d13f9da6c318a9e90c4
+      size: 9635826
+    outs:
+    - path: databases/BVM.tgz
+      hash: md5
+      md5: 3f8a4c3ceba8f3c45dc91be3d9ba948f
+      size: 5085076
+  tgz@2XK:
+    cmd:
+    - EZS_PIPELINE_DELAY=1200 loterreID=2XK bunx ezs create-databases.ini <<< '[{}]'
+    - tar -czf databases/2XK.tgz databases/2XK
+    deps:
+    - path: create-databases.ini
+      hash: md5
+      md5: d24e36d0f1e6c881b412528ecbd78b4d
+      size: 604
+    - path: data/2XK.skos
+      hash: md5
+      md5: b9c11f0d64f73cbd1109b8f80a0850e7
+      size: 28170863
+    outs:
+    - path: databases/2XK.tgz
+      hash: md5
+      md5: ebf4d581d27c9db024e1debf9ec849a1
+      size: 21391769
+  tgz@N9J:
+    cmd:
+    - EZS_PIPELINE_DELAY=1200 loterreID=N9J bunx ezs create-databases.ini <<< '[{}]'
+    - tar -czf databases/N9J.tgz databases/N9J
+    deps:
+    - path: create-databases.ini
+      hash: md5
+      md5: d24e36d0f1e6c881b412528ecbd78b4d
+      size: 604
+    - path: data/N9J.skos
+      hash: md5
+      md5: 4cbae496c05d3d2a534f52c059153d90
+      size: 58246718
+    outs:
+    - path: databases/N9J.tgz
+      hash: md5
+      md5: 2b78b493c8a108597296503e857e3c93
+      size: 56017597
+  tgz@D63:
+    cmd:
+    - EZS_PIPELINE_DELAY=1200 loterreID=D63 bunx ezs create-databases.ini <<< '[{}]'
+    - tar -czf databases/D63.tgz databases/D63
+    deps:
+    - path: create-databases.ini
+      hash: md5
+      md5: d24e36d0f1e6c881b412528ecbd78b4d
+      size: 604
+    - path: data/D63.skos
+      hash: md5
+      md5: 990c26cb46fc302441f84ca46b6d0a28
+      size: 92156390
+    outs:
+    - path: databases/D63.tgz
+      hash: md5
+      md5: bac27a547b6bcacb5b7c0eeb60a25825
+      size: 40158038
+  tgz@JVR:
+    cmd:
+    - EZS_PIPELINE_DELAY=1200 loterreID=JVR bunx ezs create-databases.ini <<< '[{}]'
+    - tar -czf databases/JVR.tgz databases/JVR
+    deps:
+    - path: create-databases.ini
+      hash: md5
+      md5: d24e36d0f1e6c881b412528ecbd78b4d
+      size: 604
+    - path: data/JVR.skos
+      hash: md5
+      md5: 4ef3370991e26d92054eeb66c5f75b42
+      size: 117642710
+    outs:
+    - path: databases/JVR.tgz
+      hash: md5
+      md5: 3df5c6acfb417d2549721c61af666edf
+      size: 113042022

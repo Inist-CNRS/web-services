@@ -3,7 +3,7 @@
         "EZS_TITLE": "Conversions en fichier corpus compressé",
         "EZS_DESCRIPTION": "Les fichiers corpus compressés sont compatibles avec tous les traitements TDM dédiés aux corpus (services web asynchrone)",
         "EZS_METRICS": true,
-        "EZS_CONCURRENCY": 4,
+        "EZS_CONCURRENCY": 2,
         "EZS_CONTINUE_DELAY": 60,
         "EZS_NSHARDS": 32,
         "EZS_CACHE": true,
