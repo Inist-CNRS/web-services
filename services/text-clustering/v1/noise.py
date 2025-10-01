@@ -26,21 +26,21 @@ def center_reduce(matrix):
     # center and reduce
     scaler = StandardScaler()
     scaler.fit(matrix)
-    matrix_center_reduce =scaler.transform(matrix) 
+    matrix_center_reduce = scaler.transform(matrix) 
 
     return matrix_center_reduce
 
 
-## WS
+# # WS
 # Embedding
 all_data = []
 for line in sys.stdin:
-    data=json.loads(line)
+    data = json.loads(line)
     all_data.append(data)
 
 len_data = len(all_data)
 
-texts=[]
+texts = []
 indice_out_cluster = []
 for i in range(len_data):
     # c.inc()
@@ -49,24 +49,34 @@ for i in range(len_data):
     try:
         line = all_data[i]
         
-        if "value" in line :
+        if "value" in line:
             value = line["value"]
+            
             if isinstance(value, list):
-                texts.append(model.encode(" ".join(value)))
+                to_embedded = " ".join(value)
+                if len(to_embedded.replace(" ", "")) < 4:
+                    indice_out_cluster.append(i)
+                    continue
+                texts.append(model.encode(to_embedded))
+                
             elif isinstance(value, str):
-                    texts.append(model.encode(value))
+                if len(value) < 4:
+                    indice_out_cluster.append(i)
+                    continue
+                texts.append(model.encode(value))
+                
             else:
                 indice_out_cluster.append(i)
                 
         else:
             indice_out_cluster.append(i)
 
-    except:
+    except Exception:
         indice_out_cluster.append(i)
 
 # Dimension reduction
 umap_model = umap.UMAP(
-    n_neighbors=max(10, min(30,int(len_data/20))),
+    n_neighbors=max(10, min(30, int(len_data/20))),
     n_components=2,
     metric='cosine',
     min_dist=0.0,
@@ -81,7 +91,7 @@ clusterer = HDBSCAN(
     algorithm='auto',
     metric='euclidean',
     min_cluster_size=2,
-    cluster_selection_epsilon = 0,
+    cluster_selection_epsilon=0,
     min_samples=2,
     cluster_selection_method="eom",
     n_jobs=-1) 
@@ -91,19 +101,19 @@ clusterer.fit(reduced_embeddings)
 
 # extract infos
 res = []
-indice_in_cluster=0
+indice_in_cluster = 0
 text_output = ""
 for i in range(len_data):
     line = all_data[i]
     if i in indice_out_cluster:
         line["value"] = "no_abstract"
     else:
-        if clusterer.labels_[indice_in_cluster] ==-1:
-            line["value"] ="noise"
+        if clusterer.labels_[indice_in_cluster] == -1:
+            line["value"] = "noise"
         else:
             line["value"] = "relevant"
         # Increment only if the row isn't noise (they aren't count in "clusterer model")
-        indice_in_cluster +=1
+        indice_in_cluster += 1
     text_output += json.dumps(line)
     text_output += "\n"
     
