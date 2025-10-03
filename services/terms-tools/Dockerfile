@@ -19,18 +19,28 @@ RUN dvc pull -v
 
 FROM cnrsinist/ezs-python-server:py3.9-no24-1.0.13
 
-ENV TERMS_TOOLS_VERSION=1.2.1
+
+ENV TERMS_TOOLS_VERSION=2.0
 ENV GIT=https://github.com/stephane54/terms-tools.git
+ENV DICO_PATH="/app/public/dictionary"
 
 # Install required dependencies to build terms_tools
-RUN apt-get update && \
-    apt-get install -y --no-install-recommends  autoconf=2.69-14 automake=1:1.16.3-2 build-essential=12.9 curl=7.74.0-1.3+deb11u15 git=1:2.30.2-1+deb11u4 libtool=2.4.6-15 pkg-config=0.29.2-1 unzip=6.0-26+deb11u1 && \
-    apt-get clean && \
-    rm -rf /var/lib/apt/lists/*
-# Download libpostal
-RUN pip install --no-cache-dir git+$GIT@$TERMS_TOOLS_VERSION#egg=terms_tools && \
-    # rendre possible installation des ressources stanza lors 1ere exécution (mkdir en user daemon)
-    chmod 777 /usr/sbin/
+
+RUN apt update && \
+    apt install -y unzip curl autoconf automake libtool pkg-config build-essential git
+    # Download libpostal 
+RUN pip install --upgrade pip
+RUN pip install --no-cache-dir git+$GIT@$TERMS_TOOLS_VERSION#egg=terms_tools
+
+# download spacy models
+RUN pip install  --no-cache-dir \
+    en_core_web_trf@https://github.com/explosion/spacy-models/releases/download/en_core_web_trf-3.8.0/en_core_web_trf-3.8.0-py3-none-any.whl \
+    fr_dep_news_trf@https://github.com/explosion/spacy-models/releases/download/fr_dep_news_trf-3.8.0/fr_dep_news_trf-3.8.0-py3-none-any.whl
+
+
+# rendre possible installation des ressources stanza lors 1er execution (mkdir en user daemon)
+RUN chmod 777 /usr/sbin/
+
 
 WORKDIR /app/public
 
