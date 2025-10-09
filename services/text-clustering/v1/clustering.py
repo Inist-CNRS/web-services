@@ -7,6 +7,7 @@ from sentence_transformers import SentenceTransformer
 from sklearn.preprocessing import StandardScaler
 from sklearn.cluster import KMeans
 from sklearn.metrics import silhouette_score
+from sklearn.decomposition import PCA
 import umap
 import os
 
@@ -169,16 +170,25 @@ for i in range(len_data):
     except Exception:
         indice_out_cluster.append(i)
 
-# Dimension reduction
-umap_model = umap.UMAP(
-    n_neighbors=max(10, min(30, int(len_data/20))),
-    n_components=10,
-    metric="cosine",
-    random_state=42,
-    min_dist=0.0,
-    n_jobs=1
-)
-reduced_embeddings = umap_model.fit_transform(texts)
+try:
+    # Dimension reduction
+    umap_model = umap.UMAP(
+        n_neighbors=max(10, min(30, int(len_data/20))),
+        n_components=10,
+        metric="cosine",
+        random_state=42,
+        min_dist=0.0,
+        n_jobs=1
+    )
+    reduced_embeddings = umap_model.fit_transform(texts)
+except Exception:
+    try:
+        pca_model = PCA(n_components=min(10, texts.shape[1]))
+        reduced_embeddings = pca_model.fit_transform(texts)
+    except Exception:
+        indice_out_cluster = [i for i in range(len_data)]
+        reduced_embeddings = []
+
 
 if nb_cluster == 0:
     nb_cluster = find_optimal_k(reduced_embeddings, max_k=min(21, len(texts)-2))
