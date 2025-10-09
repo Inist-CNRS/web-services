@@ -8,6 +8,7 @@ from sklearn.preprocessing import StandardScaler
 from sklearn.cluster import KMeans
 from sklearn.metrics import silhouette_score
 from sklearn.decomposition import PCA
+import random
 import umap
 import os
 
@@ -134,6 +135,26 @@ def filter_keywords(data, threshold):
     return filtered_data
 
 
+def truncate_text_for_teeft(text):
+    """
+    Truncate text for teeft if it is too large.
+    I observed that teeft can easily process text of 1 125 000 characters,
+    but more can be complicated.
+    """
+    # Shuffle paragraphs
+    paragraphs = text.split("\n\n")
+    random.shuffle(paragraphs)
+    shuffled_text = "\n\n".join(paragraphs)
+
+    # Truncate if necessary
+    if len(shuffled_text) > 1125000:
+        # Cut at 1 125 000 and remove potentially incomplete last line
+        truncated = shuffled_text[:1125000]
+        truncated = truncated.rsplit("\n", 1)[0]
+        return truncated
+    return shuffled_text
+
+
 # # WS
 # Embedding
 all_data = []
@@ -216,7 +237,7 @@ for i in range(len_data):
         label = int(clusterer.labels_[indice_in_cluster] + 1)
         if label != 0:
             if label in keywords:
-                keywords[label] += "\n" + str(all_data[i]["value"])
+                keywords[label] += "\n\n" + str(all_data[i]["value"])
             else:
                 keywords[label] = str(all_data[i]["value"])
         indice_in_cluster += 1
@@ -224,8 +245,12 @@ for i in range(len_data):
 # Execute teeft
 n_clusters = len(keywords)
 for i in range(n_clusters):
-    data = {"id": i + 1, "value": keywords[i + 1]}
-    keywords[i + 1] = teeft(data, n_keywords)
+    if i+1 in keywords:
+        keywords[i+1] = truncate_text_for_teeft(keywords[i+1])
+        data = {"id": i + 1, "value": keywords[i + 1]}
+        keywords[i + 1] = teeft(data, n_keywords)
+    else:
+        continue
 
 # Filter dict : delete every keywords who has a to big frequency
 try:
