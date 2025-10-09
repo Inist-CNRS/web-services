@@ -41,6 +41,14 @@ def center_reduce(matrix):
 
 
 def find_optimal_k(X, min_k=2, max_k=21):
+    """Use a ternary search algorithm to find the number of clusters (k)
+    that maximize the silouhette score of the algorithm.
+
+    Args:
+        X (list): embeddings of documents to cluster
+        min_k (int, optional): Can't have less than 2 clusters. Defaults to 2.
+        max_k (int, optional): Cant' have more than 21 clusters. Defaults to 21.
+    """
 
     def evaluate(k):
         if k not in scores:
