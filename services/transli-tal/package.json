@@ -1,7 +1,7 @@
 {
   "private": true,
   "name": "ws-transli-tal",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "description": "TransliTAL is a suite of tools for producing and correcting romanizations for library records.",
   "repository": {
     "type": "git",
