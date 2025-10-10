@@ -1,0 +1,25 @@
+# These examples can be used directly in VSCode, using HTTPYac extension (anweber.vscode-httpyac)
+# They are important, because used to generate the tests.hurl file.
+
+# Décommenter/commenter les lignes voulues pour tester localement
+@host=http://localhost:31976
+# @host=https://transli-tal.services.istex.fr
+
+###
+# @name v1translitCyr
+# Translittération de caractères cyrilliques en latin
+POST {{host}}/v1/translit/cyr?indent=true HTTP/1.1
+Content-Type: application/json
+
+[
+    {"id": 1, "value": "долгого ХVIII века"},
+    {"id": 2, "value": "Эпоха Просвещения"},
+    {"id": 3, "value": "Хороводные и игровые песни Сибири"},
+    {"id": 4, "value": "Ежегодник книги СССР"},
+    {"id": 5, "value": "Изданiя факультета восточныхъ языковъ императорскаго С.-Петербургскаго университета"},
+    {"id": 6, "value": "Публицистика русского зарубежья,1920-1945"},
+    {"id": 7, "value": "Современный русский литературный язык"},
+    {"id": 8, "value": "Введение в современную российскую историю"},
+    {"id": 9, "value": "Вестник истории мировой культуры"},
+    {"id": 10, "value": "Журналъ Министерства внутреннихъ дѣлъ"}
+]
