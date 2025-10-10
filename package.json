@@ -75,7 +75,8 @@
     "services/terms-extraction",
     "services/terms-tools",
     "services/text-clustering",
-    "services/text-summarize"
+    "services/text-summarize",
+    "services/transli-tal"
   ],
   "dependencies": {
     "@ezs/analytics": "2.3.5",
