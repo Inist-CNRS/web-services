@@ -1,15 +1,52 @@
 stages:
   tgz:
     foreach:
+      - EMTD # Écologie microbienne du tube digestif
+      - VPAC # Politique Agricole Commune
+      - ERC # Classification de l'ERC
+      - PAN # Panification au levain naturel
+      - TSM # Techniques de séparation par membranes
+      - CUEX # Cuisson-extrusion
+      - 8HQ # Tableau périodique des éléments
+      - BRMH # Biotechnologies de la reproduction
+      - IDIA # Ionisation dans l'industrie agro-alimentaire
+      - GGMGG # Génétique moléculaire
+      - TSO # Science ouverte
+      - 1WB # Transferts de chaleur
+      - GT  # Géographie
+      - C0X # Covid-19
+      - th63 # Nomenclature zoologique
+      - W7B # Transfusion sanguine
+      - 8LP # Traitement automatique des langues
+      - DOM # Domaines scientifiques
+      - 27X # Art et Archéologie
       - 216 # Éducation
+      - 4V5 # Histoire et sciences des religions
       - QX8 # Paléoclimatologie
+      - FMC # Optique
+      - BLH # Biodiversité
+      - RVQ # Composés inorganiques
       - 3JP # Sociologie
-      - 73G # Philosophie
+      - SN8 # Traitement du signal
+      - XD4 # Histoire des sciences et techniques
+      - G9G # Taxonomie des poissons
+      - 905 # Préhistoire
+      - LTK # ThesoTM
       - 9SD # Pays et subdivisions
-      - P66 # Mémoire
+      - 3WV # Écotoxicologie
+      - 73G # Philosophie
+      - KG7 # Géographie de l'Amérique du Nord
+      - RDR # Électronique
       - MDL # Astronomie
+      - VH8 # Pathologies humaines
+      - KW5 # Ethnologie
+      - TSP # Santé publique
+      - P66 # Mémoire
       - P21 # Littérature
+      - NHT # Physique de l'état condensé
       - BVM # NETSCITY
+      - 26L # Sciences de la terre
+      - PSR # Mathématiques
       - 2XK # Laboratoires
       - N9J # SAGE
       - D63 # Communes (France)
