@@ -7,6 +7,8 @@ from sentence_transformers import SentenceTransformer
 from sklearn.preprocessing import StandardScaler
 from sklearn.cluster import KMeans
 from sklearn.metrics import silhouette_score
+from sklearn.decomposition import PCA
+import random
 import umap
 import os
 
@@ -39,20 +41,52 @@ def center_reduce(matrix):
     return matrix_center_reduce
 
 
-def find_optimal_k(distance_matrix, max_k):
-    silhouette_scores = []
+def find_optimal_k(X, min_k=2, max_k=21):
+    """Use a ternary search algorithm to find the number of clusters (k)
+    that maximize the silouhette score of the algorithm.
 
-    for k in range(2, max_k + 1):
-        kmeans = KMeans(n_clusters=k, random_state=42)
-        kmeans.fit(distance_matrix)
+    Args:
+        X (list): embeddings of documents to cluster
+        min_k (int, optional): Can't have less than 2 clusters. Defaults to 2.
+        max_k (int, optional): Cant' have more than 21 clusters. Defaults to 21.
+    """
 
-        score = silhouette_score(distance_matrix, kmeans.labels_, metric="euclidean")
-        silhouette_scores.append(score)
+    def evaluate(k):
+        if k not in scores:
+            kmeans = KMeans(n_clusters=k, random_state=42)
+            labels = kmeans.fit_predict(X)
+            scores[k] = silhouette_score(X, labels, metric="euclidean")
+        return scores[k]
 
-    # keep the k who gives the best silouhette score
-    optimal_k = silhouette_scores.index(max(silhouette_scores)) + 2
+    if max_k < 5:
+        return 2
 
-    return optimal_k
+    scores = {}
+    best_k = min_k
+    best_score = -1
+    left, right = min_k, max_k
+
+    while right - left > 2:
+        mid1 = left + (right - left) // 3
+        mid2 = right - (right - left) // 3
+
+        score1, score2 = evaluate(mid1), evaluate(mid2)
+
+        if score1 > score2:
+            right = mid2
+            if score1 > best_score:
+                best_k, best_score = mid1, score1
+        else:
+            left = mid1
+            if score2 > best_score:
+                best_k, best_score = mid2, score2
+
+    if left == 2:
+        score1 = evaluate(2)
+
+    best_k = max(scores, key=scores.get)
+
+    return best_k
 
 
 def teeft(data, n_keywords, language="en"):
@@ -65,7 +99,7 @@ def teeft(data, n_keywords, language="en"):
         response = requests.post(url, headers=headers, data=json.dumps([data]))
         data = response.json()
         return data[0]["value"]
-    except:
+    except Exception:
         return []
 
 
@@ -101,7 +135,27 @@ def filter_keywords(data, threshold):
     return filtered_data
 
 
-## WS
+def truncate_text_for_teeft(text):
+    """
+    Truncate text for teeft if it is too large.
+    I observed that teeft can easily process text of 1 125 000 characters,
+    but more can be complicated.
+    """
+    # Shuffle paragraphs
+    paragraphs = text.split("\n\n")
+    random.shuffle(paragraphs)
+    shuffled_text = "\n\n".join(paragraphs)
+
+    # Truncate if necessary
+    if len(shuffled_text) > 1125000:
+        # Cut at 1 125 000 and remove potentially incomplete last line
+        truncated = shuffled_text[:1125000]
+        truncated = truncated.rsplit("\n", 1)[0]
+        return truncated
+    return shuffled_text
+
+
+# # WS
 # Embedding
 all_data = []
 for line in sys.stdin:
@@ -114,7 +168,8 @@ texts = []
 indice_out_cluster = []
 for i in range(len_data):
     # c.inc()
-    # push_to_gateway('jobs-metrics.daf.intra.inist.fr', job=job_name, registry=registry)
+    # push_to_gateway('jobs-metrics.daf.intra.inist.fr', job=job_name,
+    # registry=registry)
 
     try:
         line = all_data[i]
@@ -123,10 +178,11 @@ for i in range(len_data):
             value = line["value"]
             
             if isinstance(value, list):
-                if value == []:
+                to_embedded = " ".join(value)
+                if len(to_embedded.replace(" ", "")) < 4:
                     indice_out_cluster.append(i)
                     continue
-                texts.append(model.encode(" ".join(value)))
+                texts.append(model.encode(to_embedded))
                 
             elif isinstance(value, str):
                 if len(value) < 4:
@@ -140,22 +196,31 @@ for i in range(len_data):
         else:
             indice_out_cluster.append(i)
 
-    except:
+    except Exception:
         indice_out_cluster.append(i)
 
-# Dimension reduction
-umap_model = umap.UMAP(
-    n_neighbors=max(10, min(30, int(len_data/20))),
-    n_components=10,
-    metric="cosine",
-    random_state=42,
-    min_dist=0.0,
-    n_jobs=1
-)
-reduced_embeddings = umap_model.fit_transform(texts)
+try:
+    # Dimension reduction
+    umap_model = umap.UMAP(
+        n_neighbors=max(10, min(30, int(len_data/20))),
+        n_components=10,
+        metric="cosine",
+        random_state=42,
+        min_dist=0.0,
+        n_jobs=1
+    )
+    reduced_embeddings = umap_model.fit_transform(texts)
+except Exception:
+    try:
+        pca_model = PCA(n_components=min(10, texts.shape[1]))
+        reduced_embeddings = pca_model.fit_transform(texts)
+    except Exception:
+        indice_out_cluster = [i for i in range(len_data)]
+        reduced_embeddings = []
+
 
 if nb_cluster == 0:
-    nb_cluster = find_optimal_k(reduced_embeddings, max_k=min(30, len(texts)-2))
+    nb_cluster = find_optimal_k(reduced_embeddings, max_k=min(21, len(texts)-2))
 
 # Clustering
 clusterer = KMeans(n_clusters=nb_cluster, random_state=42)
@@ -166,13 +231,13 @@ clusterer.fit(reduced_embeddings)
 indice_in_cluster = 0
 keywords = (
     {}
-)  # keywords is a dictionary, the key is the cluster and value the input / output of teeft
+)  # keywords is a dictionary, the key is the cluster and value texts from clus
 for i in range(len_data):
     if i not in indice_out_cluster:
         label = int(clusterer.labels_[indice_in_cluster] + 1)
         if label != 0:
             if label in keywords:
-                keywords[label] += "\n" + str(all_data[i]["value"])
+                keywords[label] += "\n\n" + str(all_data[i]["value"])
             else:
                 keywords[label] = str(all_data[i]["value"])
         indice_in_cluster += 1
@@ -180,13 +245,17 @@ for i in range(len_data):
 # Execute teeft
 n_clusters = len(keywords)
 for i in range(n_clusters):
-    data = {"id": i + 1, "value": keywords[i + 1]}
-    keywords[i + 1] = teeft(data, n_keywords)
+    if i+1 in keywords:
+        keywords[i+1] = truncate_text_for_teeft(keywords[i+1])
+        data = {"id": i + 1, "value": keywords[i + 1]}
+        keywords[i + 1] = teeft(data, n_keywords)
+    else:
+        continue
 
 # Filter dict : delete every keywords who has a to big frequency
 try:
     keywords = filter_keywords(keywords, threshold=0.5)
-except:
+except Exception:
     pass
 # Add res for noise cluster
 keywords[0] = []
@@ -199,7 +268,8 @@ for i in range(len_data):
     else:
         label = int(clusterer.labels_[indice_in_cluster] + 1)
         all_data[i]["value"] = {"cluster": label, "keywords": keywords[label]}
-        indice_in_cluster += 1  # Here we increment only if the row isn't noise, because they aren't count in "clusterer model"
+        # increment on cluster indices only bc noise isn't in "clusterer model"
+        indice_in_cluster += 1
 
 
 # Write all corpus in once
