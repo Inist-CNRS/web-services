@@ -1,7 +1,7 @@
-FROM cnrsinist/ezs-python-server:py3.9-no16-1.0.11
+FROM cnrsinist/ezs-python-server:py3.9-no24-1.0.13
 
-USER root
-RUN pip install unidecode==1.3.7
+WORKDIR /app
+RUN pip install --no-cache-dir unidecode==1.3.7
 
 WORKDIR /app/public
 # Declare files to copy in .dockerignore

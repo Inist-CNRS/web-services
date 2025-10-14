@@ -1,0 +1,14 @@
+{
+    "environnement": {
+        "EZS_TITLE": "Services pour l'instance Lodex Coara",
+        "EZS_DESCRIPTION": "Cette instance contient un ensemble de services utiles pour la création de l'instance Lodex Coara.",
+        "EZS_METRICS": true,
+        "EZS_CONCURRENCY": 2,
+        "EZS_CONTINUE_DELAY": 60,
+        "EZS_NSHARDS": 32,
+        "EZS_CACHE": true,
+        "EZS_VERBOSE": false,
+        "NODE_OPTIONS": "--max_old_space_size=1024",
+        "NODE_ENV": "production"
+    }
+}

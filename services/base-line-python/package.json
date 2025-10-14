@@ -1,7 +1,7 @@
 {
   "private": true,
   "name": "ws-base-line-python",
-  "version": "1.0.11",
+  "version": "1.0.13",
   "description": "Base line web services in Python",
   "repository": {
     "type": "git",
@@ -25,6 +25,7 @@
     "version:push": "git push && git push --tags",
     "version": "npm run version:insert && npm run version:commit && npm run version:tag",
     "postversion": "npm run version:push",
+    "build:check": "docker build --check -t cnrsinist/${npm_package_name}:latest  . && docker run --rm -i hadolint/hadolint hadolint - < Dockerfile ",
     "build:dev": "docker build -t cnrsinist/${npm_package_name}:latest .",
     "start:dev": "npm run build:dev && docker run --name dev --rm --detach -p 31976:31976 cnrsinist/${npm_package_name}:latest",
     "stop:dev": "docker stop dev",

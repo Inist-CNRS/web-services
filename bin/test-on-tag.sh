@@ -27,7 +27,7 @@ echo "Waiting server to be ready"
 wait_for_url "http://localhost:31976" 10 30000
 
 echo "Running hurl tests"
-hurl --variable host=http://localhost:31976 --test --jobs 1 tests.hurl
+hurl --variable host=http://localhost:31976 --variable blocked=true --test --jobs 1 tests.hurl
 
 echo "Stopping container of $SERVICE_NAME"
 npm run stop:dev

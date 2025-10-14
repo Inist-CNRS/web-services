@@ -1,0 +1,8 @@
+# User is dealt with in entrypoints
+DS002
+
+# HealthCheck is done with Helm/K3S
+DS026
+
+# 'RUN cd ...' to change directory
+AVD-DS-0013

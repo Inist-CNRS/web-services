@@ -96,7 +96,7 @@ variable "computing_token" exists
 POST {{host}}/v1/retrieve-json?indent=true
 content-type: application/json
 [Options]
-delay: 1000
+delay: 2000
 ```
 [
 	{
@@ -113,9 +113,13 @@ HTTP 200
             "Titre 4",
             "Titre 2"
         ],
+        "text": [
+            "Intrenational Conference on Industrial Engineering and Systems Management",
+            "IESM 2017 : 7th International Conference on Industrial Engineering and Systems Management"
+        ],
         "score": [
-            0.9411764705882353,
-            0.9349112426035503
+            0.94,
+            0.93
         ]
     }
 },
@@ -125,8 +129,11 @@ HTTP 200
         "similarity": [
             "Titre 1"
         ],
+        "text": [
+            "IESM - International Conference on Industrial Engineering and Systems Management"
+        ],
         "score": [
-            0.9349112426035503
+            0.93
         ]
     }
 },
@@ -136,8 +143,11 @@ HTTP 200
         "similarity": [
             "Titre 4"
         ],
+        "text": [
+            "Intrenational Conference on Industrial Engineering and Systems Management"
+        ],
         "score": [
-            0.8888888888888888
+            0.89
         ]
     }
 },
@@ -147,10 +157,16 @@ HTTP 200
         "similarity": [
             "Titre 1"
         ],
+        "text": [
+            "IESM - International Conference on Industrial Engineering and Systems Management"
+        ],
         "score": [
-            0.9411764705882353
+            0.94
         ]
     }
+},
+{
+    "id": "Titre 5"
 }]
 
 

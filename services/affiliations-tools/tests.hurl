@@ -1,5 +1,8 @@
 POST {{host}}/v1/expand?indent=true
 content-type: application/json
+[Options]
+# Uses two IP-protected web services in production
+skip: {{blocked}}
 [
   { "value": "Baran, N (reprint author), Univ Zagreb, Dept Phys, Bijenieka Cesta 32, Zagreb 10000, Croatia."},
   { "value": "Harikane, Y (reprint author), Univ Tokyo, Inst Cosm Ray Res, 5-1-5 Kashiwanoha, Kashiwa, Chiba 2778582, Japan.; Harikane, Y (reprint author), Univ Tokyo, Grad Sch Sci, Dept Phys, Bunkyo Ku, 7-3-1 Hongo, Tokyo 1130033, Japan."},
@@ -573,11 +576,12 @@ HTTP 200
 [{
     "id": 1,
     "value": {
+        "status": "Found",
         "id_ror": "https://ror.org/0323bey33",
         "score": 0.79,
-        "name": "Institut Lumière Matière",
+        "name": "ILM",
         "type": [
-            "Facility"
+            "facility"
         ],
         "name_geonames": "Villeurbanne",
         "id_geonames": 2968254
@@ -586,11 +590,12 @@ HTTP 200
 {
     "id": 2,
     "value": {
+        "status": "Found",
         "id_ror": "https://ror.org/03zmsge54",
         "score": 1,
-        "name": "NSF’s NOIRLab",
+        "name": "NOIRLab",
         "type": [
-            "Facility"
+            "facility"
         ],
         "name_geonames": "Tucson",
         "id_geonames": 5318313
@@ -598,5 +603,7 @@ HTTP 200
 },
 {
     "id": 3,
-    "value": "No match found"
+    "value": {
+        "status": "No match found"
+    }
 }]

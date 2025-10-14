@@ -3,10 +3,13 @@ import requests
 from collections import defaultdict
 import json
 import sys
+import os
+
+OPENALEX_TOKEN = os.getenv("OPENALEX_API_KEY")
+
 
 def get_openalex_info(doi):
-    url = f"https://api.openalex.org/works/doi:{doi}"
-
+    url = f"https://api.openalex.org/works/doi:{doi}?api_key={OPENALEX_TOKEN}"
     response = requests.get(url)
 
     if response.status_code == 200:
@@ -19,16 +22,19 @@ def extract_doi_referenced_works(data):
         doi_url = data.get('doi')
         referenced_works = data.get('referenced_works', [])
         
-        return {doi_url: referenced_works}
+        if not referenced_works:
+            return {doi_url: "champ referenced_works vide"}
+        else :
+            return {doi_url: referenced_works}
     else:
         return {}
-    
+
 def openAlex_to_doi(url) :
 
     url_parse = url.split("/")
     id = url_parse[-1]
+    url = f"https://api.openalex.org/works/{id}?api_key={OPENALEX_TOKEN}"
 
-    url = f"https://api.openalex.org/works/{id}"
     response = requests.get(url)
 
     if response.status_code == 200:
@@ -64,14 +70,19 @@ def main():
 
     # parcours le dictionnaire où les dois sont des clés et les références des listes de valeurs
     for doi, references in all_references.items():
+        if references == "champ referenced_works vide":
+            # Ajouter une entrée dans le JSON indiquant que le champ referenced_works est vide
+            sys.stdout.write(json.dumps({"id": doi, "value": {"message": "champ referenced_works vide"}}))
+            sys.stdout.write("\n")
+        else : 
         # itération de la liste des références
-        for citation in references:
-            # chaque citation est un clé qui a comme valeur les clés count et doi
-            # count est une clé qui a pour valeur le nombre de fois qu'apparait une citation
-            citation_count[citation]["count"] += 1
-            # doi est une clé qui a pour valeur le ou les doi(s) qui cite la citation
-            citation_count[citation]["doi"].append(doi)
-# exemple : {'https://openalex.org/W107566402': {'count': 1, 'doi': ['https://doi.org/10.1007/s10844-014-0317-4']}
+            for citation in references:
+                # chaque citation est un clé qui a comme valeur les clés count et doi
+                # count est une clé qui a pour valeur le nombre de fois qu'apparait une citation
+                citation_count[citation]["count"] += 1
+                # doi est une clé qui a pour valeur le ou les doi(s) qui cite la citation
+                citation_count[citation]["doi"].append(doi)
+    # exemple : {'https://openalex.org/W107566402': {'count': 1, 'doi': ['https://doi.org/10.1007/s10844-014-0317-4']}
 
     # utilisation de la méthode sorted() pour trier le dictionnaire en fonciton de count
     sorted_citations = sorted(citation_count.items(), key=lambda item: item[1]['count'], reverse=True)

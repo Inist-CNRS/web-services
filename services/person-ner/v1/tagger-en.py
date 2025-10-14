@@ -1,30 +1,29 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-import spacy
 import json
 import sys
+import torch
+import pickle
+from entitytag.entitytag_functions import *
 
-nlp = spacy.load("en_core_web_sm")
 
+# Load vocabulary and model
+with open("./v1/entity-tag-model/en/word2idx.pkl", "rb") as f:
+    word2idx = pickle.load(f)
+
+with open("./v1/entity-tag-model/en/tag2idx.pkl", "rb") as f:
+    tag2idx = pickle.load(f)
+
+idx2word = {i: w for w, i in word2idx.items()}
+idx2tag = {i: t for t, i in tag2idx.items()}
+
+model = LSTM_NER(vocab_size=len(word2idx), tagset_size=len(tag2idx), embed_dim=200)
+model.load_state_dict(torch.load("./v1/entity-tag-model/en/entityTag-sm.pth", map_location=torch.device('cpu')))
+
+
+# WS
 for line in sys.stdin:
     line = json.loads(line)
-    
-    res = {
-    "PER": [],
-    "LOC": [],
-    "ORG": [],
-    "DATE": [],
-    "EVENT": [],
-    "FAC": [],
-    "LANGUAGE": [],
-    "LAW": [],
-    "MONEY": [],
-    "NORP": [],
-    "PRODUCT": [],
-    "QUANTITY": [],
-    "WORK_OF_ART": []
-    }
-
 
     try:
         value = line["value"]
@@ -39,37 +38,29 @@ for line in sys.stdin:
         pass
     
     try:
-        doc = nlp(value)
-        doc = doc.ents
-    except Exception:
-        doc = []
-    
-    for ent in doc:
-        label = ent.label_.replace("PERSON","PER").replace("GPE","LOC").replace("PERCENT","QUANTITY")
-        if label in res :
-            res[label].append(ent.text)
+        sentences = split_sentences_nltk(value)
+        data = []
+        max_len = 0
+        for sentence in sentences:
+            sentence = multilingual_tokenizer(sentence)
+            len_sentence = len(sentence)
+            if len_sentence > max_len:
+                max_len = len_sentence
+            data.append(sentence)
+        entities = extract_entities(data, model, word2idx, idx2tag, max_len, threshold=0.85)
         
-    line["value"] = res
-    
+        for ent in entities:
+            remove_occurences(entities[ent], "")
+
+    except Exception as e:
+        sys.stderr.write(str(e))
+        sys.stderr.write("\n")
+        entities = {
+            "PER": [],
+            "LOC": [],
+            "ORG": []
+            }
+        
+    line["value"] = entities
     sys.stdout.write(json.dumps(line))
     sys.stdout.write("\n")
-
-## Liste de toutes les entités nommées et de leur signification avant modification :
-# PERSON:      People, including fictional.
-# NORP:        Nationalities or religious or political groups.
-# FAC:         Buildings, airports, highways, bridges, etc.
-# ORG:         Companies, agencies, institutions, etc.
-# GPE:         Countries, cities, states.                       ===> merged with LOC
-# LOC:         Non-GPE locations, mountain ranges, bodies of water.
-# PRODUCT:     Objects, vehicles, foods, etc. (Not services.)
-# EVENT:       Named hurricanes, battles, wars, sports events, etc.
-# WORK_OF_ART: Titles of books, songs, etc.
-# LAW:         Named documents made into laws.
-# LANGUAGE:    Any named language.
-# DATE:        Absolute or relative dates or periods.
-# TIME:        Times smaller than a day.                        ===> deleted
-# PERCENT:     Percentage, including ”%“.                       ===> merged with QUANTITY
-# MONEY:       Monetary values, including unit.
-# QUANTITY:    Measurements, as of weight or distance.
-# ORDINAL:     “first”, “second”, etc.                          ===> deleted
-# CARDINAL:    Numerals that do not fall under another type.    ===> deleted

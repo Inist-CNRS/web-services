@@ -20,7 +20,7 @@ sur le GitBucket de l'Inist.
 
 Les scripts utilisés par ce dépôt sont pour la plupart écrits en node.  
 Pour profiter du système des *workspaces*, il faut npm 7+.  
-Il faut donc s'assurer d'avoir node 16+ (voir [.nvmrc](.nvmrc)).  
+Il faut donc s'assurer d'avoir node 22+ (voir [.nvmrc](.nvmrc)).  
 
 Il est conseillé d'installer node via [nvm](https://github.com/nvm-sh/nvm), et
 de se conformer à la version inscrite dans le fichier [.nvmrc](./.nvmrc).  
@@ -80,6 +80,9 @@ D'autres exemples de noms de branche:
 > **Remarque** : comme nous construisons des programmes *open source*, tâchons
 > de garder tout ce qui est technique (ça peut exclure la documentation
 > elle-même) en anglais.
+
+> **Remarque** : assurez-vous de partir de la branche `main` *à jour* (en faisant un
+> `git pull origin main` *avant* de créer la branche).
 
 ## Création d'un service
 
@@ -177,7 +180,7 @@ Le début du fichier `examples.http` (attention, ce nom est utilisé dans
 plusieurs scripts, veillez à bien l'orthographier) contient une commentaire
 explicatif, et une variable permettant de changer le serveur cible des requêtes:
 
-```http
+```ini
 # These examples can be used directly in VSCode, using REST Client extension (humao.rest-client)
 
 # Décommenter/commenter les lignes voulues pour tester localement
@@ -193,7 +196,7 @@ partir de la route de la requête.
 Par exemple, la route `/v1/true/json` donnera lieu à un `name` valant
 `v1TrueJson`:
 
-```http
+```ini
 ###
 # @name v1TrueJson
 # On met ici un commentaire décrivant ce que fait la route appelée
@@ -254,6 +257,17 @@ On peut aussi [tester le serveur local](#tests).
 
 > 📘 On peut aussi écrire ce fichier à la main, voir [hurl](https://hurl.dev/).
 
+> [!TIP]  
+> Lorsque le test ne passe pas sur GitHub, parce que la route en question
+> utilise une API vérifiant l'IP de l'appelant, on peut se contenter de
+> désactiver ce test en fonction d'une variable `blocked` (qui sera
+> automatiquement positionnée à `true` sur GitHub).  
+>
+> ```ini
+> [Options]
+> skip: {{blocked}}
+> ```
+
 ### Script d'initialisation d'un nouveau service
 
 Pour faciliter la création d'un nouveau service, un script npm est disponible:
@@ -275,10 +289,21 @@ npm run generate:service service-name
 > ⚠ Ne pas mettre de caractère `&` dans les réponses, ça provoque un
 > remplacement bizarre.
 
-### OpenAPI: ajout d'une description multilignes dans les métadonnées du .ini
+### OpenAPI: ajout d'une description multi-lignes dans les métadonnées du .ini
 
-Pour avoir une documentation OpenAPI complète, on peut écrire la description
-d'un service en Markdown.  
+Lors de la rédaction du .ini, trois champs méritent particulièrement l'attention :
+
+- `post.tags.0` qui permettra de configurer plus simplement `IA Factory`.
+Pour une identification rapide, ce peut être le nom court que l'on donne au service.
+- `post.summary` qui est affiché dans le menu déroulant de sélection de service
+de `IA Factory`. Doit être explicite pour l'utilisateur et idéalement commencer
+par le nom court du service
+- `post.description` qui est affiché après sélection du service dans le menu
+déroulant. Doit contenir une description plus détaillée ainsi que les précautions
+que les utilisateurs et utilisatrices doivent prendre.
+
+On peut écrire la description d'un service en Markdown, et donc l'écrire sur
+plusieurs lignes.
 On peut se contenter d'écrire cette description dans la métadonnée
 `post.description` directement, en mettant les lignes bout-à-bout, séparées par
 `^M`.  
@@ -318,10 +343,10 @@ En plus du reste, il faut suivre ces étapes lorsqu'on utilise DVC :
 
 - S'assurer d'avoir déposé les données sur le webdav du service TDM en ayant préalablement utilisé DVC (pour cela : )
   - mettre son fichier nommé `DOSSIER_OU_FICHIER_A_PUSH` dans un autre dossier.
-  - Initier un dépot DVC en faisant `dvc init` (nécessite d'être dans un dépot git).
+  - Initier un dépôt DVC en faisant `dvc init` (nécessite d'être dans un dépôt git).
   - se connecter au webdav du service (à ne faire que la première fois), pour cela :
     - spécifier l'url du webdav (en utilisant le protocole webdavs): `dvc remote add -d webdav-remote webdavs://YOUR_WEBDAV_URL.fr`
-    - entrer le login : `dvc remote modify --local webdav-remote login YOUR_LOGIN`
+    - entrer le login : `dvc remote modify --local webdav-remote user YOUR_LOGIN`
     - entrer le mot de passe : `dvc remote modify --local webdav-remote password YOUR_PASSWORD`
   - push le fichier sur le webdav : `dvc add DOSSIER_OU_FICHIER_A_PUSH` puis `dvc push`, sans se soucier du nom
   - Le fichier `DOSSIER_OU_FICHIER_A_PUSH.dvc` est créé et devra être copié à l'endroit où le modèle doit être dans le code
@@ -356,6 +381,72 @@ En plus du reste, il faut suivre ces étapes lorsqu'on utilise DVC :
     ```
 
 - relancer le conteneur
+
+### Dockerfile: bonnes pratiques
+
+Pour un rappel de beaucoup de bonnes pratiques, utilisez le script `build:check`
+de votre service:
+
+```bash
+npm -w services/service-name run build:check
+```
+
+Il procède à une vérification statique du `Dockerfile` avec
+[hadolint](https://github.com/hadolint/hadolint).
+
+#### apt
+
+Pour les paquets `apt`, il est conseillé de les installer en une seule commande,
+afin d'éviter de lancer plusieurs fois la commande `apt-get update`.
+
+Exemple:
+
+```dockerfile
+RUN apt-get update && apt-get -y --no-install-recommends install \
+    libxml2-dev=2.9.10+dfsg-6.7+deb11u8 \
+    libxslt1-dev=1.1.34-4+deb11u2 \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/*
+```
+
+- `apt-get update` est lancée en premier, pour mettre à jour la liste des paquets
+- `apt-get -y --no-install-recommends install` installe les paquets
+- `apt-get clean` supprime les caches des paquets téléchargés
+- `rm -rf /var/lib/apt/lists/*` supprime la liste des paquets
+
+> [!NOTE] On installe les paquets avec la version explicite, pour éviter les
+> mises à jour involontaires.
+
+#### pip
+
+Pour les paquets `pip` aussi, il est conseillé de les installer en une seule
+commande, afin d'éviter de lancer plusieurs fois la commande `pip install`.
+
+Pour supprimer les caches `pip` de l'image Docker, utilisez l'option
+`--no-cache-dir`.
+
+#### npm
+
+Pour les paquets `npm`, il est conseillé de les installer en une seule commande,
+afin d'éviter de créer plusieurs couches inutiles.
+
+Ajoutez l'option `--omit=dev` à la commande `npm install`.  
+Puis lancez `npm cache clean --force` à la fin de la commande.
+
+#### Dockerfile
+
+À savoir:
+
+- l'image de base utilise le USER `root`, vous n'avez donc pas besoin de le
+  préciser (et d'ailleurs, ce n'est à strictement parler pas une bonne pratique
+  de sécurité). Sachez simplement que le serveur sera lancé par l'utilisateur
+  `daemon`.
+- ne mettez pas de `CMD` ou de `ENTRYPOINT` dans votre `Dockerfile`, l'image de
+  base en contient déjà un. Évidemment, si vous avez besoin de lancer un
+  serveur autre que celui de base, vous pouvez bien sûr en redéfinir un.
+- le fichier `config.json` doit être mis dans `/app`, et appartenir à `daemon`.
+  Utilisez de préférence `COPY --chown=daemon:daemon ./config.json
+  /app/config.json`.
 
 ## Développement
 
@@ -393,6 +484,13 @@ source .venv/bin/activate
 
 ### Avec docker
 
+Pour vérifier que l'image respecte les bonnes pratiques, on peut utiliser la
+commande `build:check`:
+
+```bash
+npm -w services/service-name run build:check
+```
+
 Pour construire l'image avec le tag `latest`:
 
 ```bash
@@ -417,32 +515,40 @@ ou bien:
 docker stop dev
 ```
 
+## Debug
+
+Pour déboguer un service, il est possible d'ajouter la propriété `DEBUG` dans le
+fichier `config.json` du service, et de la positionner à `ezs:*`.  
+Il faut aussi mettre `EZS_VERBOSE` à `false` pour éviter une surcharge de cette
+variable.  
+Cela donne accès aux informations de débogage interne de `ezs`.  
+
 ## Tests
 
 Pour tester un service lancé localement, utiliser:
 
 ```bash
-npm run test:local service-name
+HURL_blocked=false npm run test:local service-name
 ```
 
 Pour tester un service en production, taper:
 
 ```bash
-npm run test:remote service-name
+HURL_blocked=false npm run test:remote service-name
 ```
 
 Pour tester tous les services en production qui ont un fichier
 `tests.hurl`:
 
 ```bash
-npm run test:remotes services/*
+HURL_blocked=false npm run test:remotes services/*
 ```
 
 Pour tester uniquement certains services en production (à condition qu'ils aient
 un fichier `tests.hurl`):
 
 ```bash
-npm run test:remotes service-name service2-name
+HURL_blocked=false npm run test:remotes service-name service2-name
 ```
 
 > 📘 Pour éviter qu'un service soit testé lorsqu'il est en production, on peut
@@ -450,8 +556,41 @@ npm run test:remotes service-name service2-name
 > `true`.
 >
 > Exemple de cas où c'est utile: `ark-tools`, où on crée des identifiants censés
-> être uniques. Afin de ne pas épuiser les possiblités, on évite de le tester
+> être uniques. Afin de ne pas épuiser les possibilités, on évite de le tester
 > trop souvent.
+
+Pour tester un service qui est sur une machine de production, mais pas encore
+publié (sans URL externe), en se basant sur l'URL présente dans `swagger.json`
+(et en remplaçant le nom de la machine par son IP interne, si on la connaît):
+
+```bash
+./bin/test-ip-services.sh services/service-name/
+```
+
+> [!IMPORTANT]  
+> La partie `HURL_blocked=false` permet de préciser qu'on veut lancer *tous* les
+> tests du fichier `tests.hurl` concerné.  
+> Cette variable d'environnement est là pour permettre de lancer les tests d'un
+> fichier `tests.hurl` tout en ignorant ceux qui nécessitent un accès aux
+> services ISTEX.  
+> C'est le cas quand un GitHub Action essaye de lancer les tests: son IP n'est
+> pas présente dans les IP autorisées à accéder aux services ISTEX en
+> production.  
+> Dans ce cas, ou quand l'ordinateur depuis lequel on veut lancer les tests n'a
+> pas d'IP autorisée (par exemple chez soi, sans le VPN), on doit positionner la
+> variable `HURL_blocked` à `true`.  
+
+> [!TIP]  
+> Pour ne pas avoir à taper systématiquement `HURL_blocked=false` avant toute
+> commande de lancement de tests, on peut exporter cette variable depuis son
+> `~/.bashrc` (si vous utilisez bash):  
+>
+> ```sh
+> # hurl variable to skip tests accessing protected (blocked) API
+> # true: You are not able to access *.services.istex.fr
+> # false: You are able to access *.services.istex.fr
+> export HURL_blocked=false
+> ```
 
 ## Ajout dans la liste du README
 
@@ -509,23 +648,28 @@ Il y a plusieurs images de base:
 
 > **Note:** il existe maintenant un script qui se charge de la mise à jour des
 > images qui dépendent directement d'une image de base: [`npm run update:images
-> <image-name>`](./SCRIPTS.md#updateimages).  Assurez-vous que l'image a été créée (version, build, push)
-> avant de lancer le script.
+> <image-name>`](./SCRIPTS.md#updateimages).  Assurez-vous que l'image a été
+> créée (version, build, push) avant de lancer le script. De même, faites en
+> sorte que les dernières modifications de la branche `main` soient intégrées
+> dans la branche de travail de la *pull request* (un `git merge main` devrait
+> faire l'affaire), sous peine d'avoir des tags de version existant déjà, et
+> interrompant la mise à jour du/des service/s en question.
 
 ## Création d'une version
 
-Une version se crée manuellement. Pour ça il faut se déplacer dans le
-répertoire du `Dockerfile` et lancer `npm version` en utilisant l'argument
-`major`, `minor` ou `patch` suivant qu'il y a un changement majeur, un ajout de
-fonctionnalité ou une correction.
+Pour créer une version, on peut se servir de npm et du *workspace* associé au service en question.  
+Exemple: `npm -w services/service-name version patch`.  
+L'argument de `npm version` est `major`, `minor` ou `patch` suivant qu'il y a un
+changement majeur, un ajout de fonctionnalité ou une correction.  
 
 Cela va créer un tag, modifier le numéro de version dans le README, et pousser
 le tout sur GitHub, déclenchant une action de Github qui poussera
 automatiquement l'image sur Docker Hub.
 
-> **Remarque**: on peut aussi utiliser l'option *workspace* `-w` de npm pour
-> créer la version depuis la racine du dépôt: `npm -w services/service-name
-> version patch`.
+> **Remarque**: on peut aussi créer la version manuellement. Pour ça il faut se déplacer dans le
+répertoire du `Dockerfile` et lancer `npm version` en utilisant l'argument
+`major`, `minor` ou `patch` suivant qu'il y a un changement majeur, un ajout de
+fonctionnalité ou une correction.
 
 ## Mise en production
 
@@ -569,14 +713,14 @@ Où:
 2. on ajuste le champ `url` du même objet pour pointer sur l'URL interne du
    container sur la machine de production.
 
-> ⚠ Pendant la phase de transition du code source des services web, on publiera
-> les services en production à partir du dépôt
-> [GitBucket](https://gitbucket.inist.fr/tdm/web-services) où la procédure est
-> la même, mais où on supprimera tous les fichiers du services, excepté
-> `swagger.json`, qui contiendra les mêmes valeurs que sur GitHub.
-
-Puis, on lance `./bin/publish`, qui demande les *login* et mot de passe de la
+Puis, on lance `./bin/publish.sh`, qui demande les *login* et mot de passe de la
 machine du *reverse proxy*.
 
-> Le script `./bin/publish` à utiliser pendant la phase de transition est celui
-> du GitBucket.
+> [!WARNING]  
+> La procédure durant la phase de transition de
+> [GitBucket](https://gitbucket.inist.fr/tdm/web-services) à GitHub était plus
+> complexe, et permettait la publication (via `make publish`) avant d'avoir
+> fusionné la *Pull Request*.  
+> La nouvelle manière de faire implique que la PR soit fusionnée dans la branche
+> principale, afin de ne pas configurer le *reverse proxy* avec des
+> `swagger.json` obsolètes.  

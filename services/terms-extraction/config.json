@@ -3,7 +3,7 @@
         "EZS_TITLE": "Extraction de termes",
         "EZS_DESCRIPTION": "Extraction de termes à partir de textes en anglais ou en français.",
         "EZS_METRICS": true,
-        "EZS_CONCURRENCY": 4,
+        "EZS_CONCURRENCY": 2,
         "EZS_CONTINUE_DELAY": 60,
         "EZS_NSHARDS": 32,
         "EZS_CACHE": true,
