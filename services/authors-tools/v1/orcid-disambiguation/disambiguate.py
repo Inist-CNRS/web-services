@@ -5,6 +5,8 @@ from difflib import SequenceMatcher
 import urllib.parse
 import time
 import sys
+from requests.auth import HTTPBasicAuth
+import os
 
 def getPoints(liste):
     return liste[2]
@@ -18,22 +20,40 @@ class disambiguate:
         self.worksDepth = worksDepth
         self.infoDic = {}
         self.extractInfoDic(infoDic)
+        self.client_id = os.getenv('ORCID_CLIENT_ID')
+        self.client_secret = os.getenv('ORCID_SECRET')
+        self.access_token = self.getToken()
+    
+    def getToken(self):
+        TOKEN_URL = "https://orcid.org/oauth/token"
+        data = {"grant_type": "client_credentials", "scope": "/read-public"}
+        response = requests.post( TOKEN_URL, auth=HTTPBasicAuth(self.client_id, self.client_secret), data=data)
+        if response.status_code == 200:
+            token_data = response.json()
+            access_token = token_data["access_token"]
+            print("Successfully access token!", file=sys.stderr)
+            return access_token
+        else:
+            print("Failed to get token:", response.status_code, response.text, file=sys.stderr)
+            return None
+        
+
 
     def getDfFromName(self,name):
         url = "https://pub.orcid.org/v3.0/csv-search/?q="+urllib.parse.quote("(given-and-family-names:"+name+")")
-        response = requests.get(url,headers={'Accept':'text/csv'})
+        response = requests.get(url,headers={'Authorization': f'Bearer {self.access_token}', 'Accept':'text/csv'})
         df = pd.read_csv(StringIO(str(response.content,'utf-8')))
         return df
 
     def getWorksFromOrcid(self,orcid):
         url = "https://pub.orcid.org/"+self.version+"/"+orcid+"/works"
-        response = requests.get(url,headers={'Accept':'application/orcid+json'})
+        response = requests.get(url,headers={'Authorization': f'Bearer {self.access_token}', 'Accept':'application/orcid+json'})
         works = response.json().get("group")
         return works
 
     def getCoAuthorsFromPutcode(self,putcode,orcid):
         url = "https://pub.orcid.org/"+self.version+"/"+orcid+"/work/"+str(putcode)
-        response = requests.get(url,headers={'Accept':'application/orcid+json'})
+        response = requests.get(url,headers={'Authorization': f'Bearer {self.access_token}', 'Accept':'application/orcid+json'})
         contributors = response.json().get("contributors")
         try:
             coAuthors = [contributor["credit-name"]['value'] for contributor in contributors.get("contributor")]

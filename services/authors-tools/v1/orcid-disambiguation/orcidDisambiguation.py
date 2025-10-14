@@ -3,6 +3,7 @@ from disambiguate import disambiguate
 import sys
 import json
 import plac
+import time
 
 @plac.annotations(
     nameDepth = ("Maximum number of people to check" ,"option", "p", int ),
