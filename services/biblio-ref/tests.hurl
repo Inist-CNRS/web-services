@@ -72,9 +72,15 @@ HTTP 200
             "url_pdf": "https://cnrs.hal.science/hal-04461354/file/anki-gaillard-revol.pdf"
         },
         {
-            "doi": "10.3115/1220355",
-            "status": "found",
-            "reference": "Akbik, A., D. Blythe, et R. Vollgraf (2018). Contextual string embeddings for sequence labe- ling. In COLING 2018, 27th International Conference on Computational Linguistics, pp. 1638-1649.",
+            "doi": "",
+            "status": "not_found",
+            "reference": "Akbik, A., D. Blythe, et R. Vollgraf (2018). Contextual string embeddings for sequence labe- ling.",
+            "url_pdf": "https://cnrs.hal.science/hal-04461354/file/anki-gaillard-revol.pdf"
+        },
+        {
+            "doi": "",
+            "status": "not_found",
+            "reference": "In COLING 2018, 27th International Conference on Computational Linguistics, pp. 1638-1649.",
             "url_pdf": "https://cnrs.hal.science/hal-04461354/file/anki-gaillard-revol.pdf"
         },
         {
