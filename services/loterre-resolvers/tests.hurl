@@ -798,8 +798,6 @@ HTTP 200
 
 POST {{host}}/v1/D63/expand?indent=true
 content-type: application/json
-[Options]
-skip: false
 [
   { "value": "toto"},
   { "value": "Nancy" },
@@ -1010,7 +1008,7 @@ HTTP 200
         ],
         "skos$exactMatch": [
             {
-                "rdf$resource": "https://rdf.insee.fr/sparql/describe?uri=http://id.insee.fr/geo/commune/5691555d-e924-48b3-a6ce-f91db0bb5a20&default-graph-uri=data"
+                "rdf$resource": "http://id.insee.fr/geo/commune/5691555d-e924-48b3-a6ce-f91db0bb5a20"
             },
             {
                 "rdf$resource": "http://sws.geonames.org/2990999/"
@@ -1034,9 +1032,6 @@ HTTP 200
                 "rdf$resource": "https://ark.frantiq.fr/ark:/26678/pcrtngUfUyvuMo"
             }
         ],
-        "owl$sameAs": {
-            "rdf$resource": "http://id.insee.fr/geo/commune/5691555d-e924-48b3-a6ce-f91db0bb5a20"
-        },
         "geo$lat": {
             "rdf$datatype": "http://www.w3.org/2001/XMLSchema#double",
             "xml$t": "48.68439"
@@ -1045,7 +1040,7 @@ HTTP 200
             "rdf$datatype": "http://www.w3.org/2001/XMLSchema#double",
             "xml$t": "6.18496"
         },
-        "dcterms$created": {
+        "dct$created": {
             "rdf$datatype": "http://www.w3.org/2001/XMLSchema#date",
             "xml$t": "2018-09-19"
         },
@@ -1138,7 +1133,7 @@ HTTP 200
         ],
         "skos$exactMatch": [
             {
-                "rdf$resource": "https://rdf.insee.fr/sparql/describe?uri=http://id.insee.fr/geo/commune/bb79c0c4-aa6a-4a4b-9c29-092df11d498d&default-graph-uri=data"
+                "rdf$resource": "http://id.insee.fr/geo/commune/bb79c0c4-aa6a-4a4b-9c29-092df11d498d"
             },
             {
                 "rdf$resource": "http://sws.geonames.org/3020411/"
@@ -1162,9 +1157,6 @@ HTTP 200
                 "rdf$resource": "https://ark.frantiq.fr/ark:/26678/pcrtPj3bWMJKt5"
             }
         ],
-        "owl$sameAs": {
-            "rdf$resource": "http://id.insee.fr/geo/commune/bb79c0c4-aa6a-4a4b-9c29-092df11d498d"
-        },
         "geo$lat": {
             "rdf$datatype": "http://www.w3.org/2001/XMLSchema#double",
             "xml$t": "48.67937"
@@ -1173,7 +1165,7 @@ HTTP 200
             "rdf$datatype": "http://www.w3.org/2001/XMLSchema#double",
             "xml$t": "5.84433"
         },
-        "dcterms$created": {
+        "dct$created": {
             "rdf$datatype": "http://www.w3.org/2001/XMLSchema#date",
             "xml$t": "2018-09-19"
         },
@@ -1255,7 +1247,7 @@ HTTP 200
         },
         "skos$exactMatch": [
             {
-                "rdf$resource": "https://rdf.insee.fr/sparql/describe?uri=http://id.insee.fr/geo/commune/577cea3f-8b18-456d-8c0e-2d18742cdfc6&default-graph-uri=data"
+                "rdf$resource": "http://id.insee.fr/geo/commune/577cea3f-8b18-456d-8c0e-2d18742cdfc6"
             },
             {
                 "rdf$resource": "http://sws.geonames.org/2988823/"
@@ -1279,9 +1271,6 @@ HTTP 200
                 "rdf$resource": "https://ark.frantiq.fr/ark:/26678/pcrtg0M9kUBsJq"
             }
         ],
-        "owl$sameAs": {
-            "rdf$resource": "http://id.insee.fr/geo/commune/577cea3f-8b18-456d-8c0e-2d18742cdfc6"
-        },
         "geo$lat": {
             "rdf$datatype": "http://www.w3.org/2001/XMLSchema#double",
             "xml$t": "48.98349"
@@ -1290,7 +1279,7 @@ HTTP 200
             "rdf$datatype": "http://www.w3.org/2001/XMLSchema#double",
             "xml$t": "6.02084"
         },
-        "dcterms$created": {
+        "dct$created": {
             "rdf$datatype": "http://www.w3.org/2001/XMLSchema#date",
             "xml$t": "2018-09-19"
         },
@@ -1416,31 +1405,32 @@ HTTP 200
 {
     "value": {
         "rdf$about": "http://data.loterre.fr/ark:/67375/P66-W52CFWZ4-9",
-        "dct$creator": {
-            "xml$t": "Frank Arnould"
-        },
-        "dct$bibliographicCitation": [
-            {
-                "xml$t": "AbuHasan, Q., Reddy, V., & Siddiqui, W. (2022). Neuroanatomy, Amygdala. In StatPearls. StatPearls Publishing.  http://www.ncbi.nlm.nih.gov/books/NBK537102/"
-            },
-            {
-                "xml$t": "McGaugh, J. L., Cahill, L., & Roozendaal, B. (1996). Involvement of the amygdala in memory storage: Interaction with other brain systems. Proceedings of the National Academy of Sciences, 93(24), 13508–13514.  https://doi.org/10.1073/pnas.93.24.13508"
-            },
-            {
-                "xml$t": "Phelps, E. A. (2004). Human emotion and memory: Interactions of the amygdala and hippocampal complex. Current Opinion in Neurobiology, 14(2), 198–202.  https://doi.org/10.1016/j.conb.2004.03.015"
-            },
-            {
-                "xml$t": "Ressler, R. L., & Maren, S. (2019). Synaptic encoding of fear memories in the amygdala. Current Opinion in Neurobiology, 54, 54–59.  https://doi.org/10.1016/j.conb.2018.08.012"
-            },
-            {
-                "xml$t": "Roozendaal, B., McEwen, B. S., & Chattarji, S. (2009). Stress, memory and the amygdala. Nature Reviews Neuroscience, 10(6), 423–433.  https://doi.org/10.1038/nrn2651"
-            }
-        ],
-        "dct$created": {
+        "dcterms$created": {
             "rdf$datatype": "http://www.w3.org/2001/XMLSchema#date",
             "xml$t": "2017-12-04"
         },
-        "dct$modified": {
+        "dct$creator": {
+            "rdf$datatype": "http://www.w3.org/2001/XMLSchema#string",
+            "xml$t": "Frank Arnould"
+        },
+        "dct$isReferencedBy": [
+            {
+                "rdf$resource": "http://data.loterre.fr/ark:/67375/P66/doc/AbuHasan_2022_1"
+            },
+            {
+                "rdf$resource": "http://data.loterre.fr/ark:/67375/P66/doc/McGaugh_1996_1"
+            },
+            {
+                "rdf$resource": "http://data.loterre.fr/ark:/67375/P66/doc/Phelps_2004_1"
+            },
+            {
+                "rdf$resource": "http://data.loterre.fr/ark:/67375/P66/doc/Ressler_2019_1"
+            },
+            {
+                "rdf$resource": "http://data.loterre.fr/ark:/67375/P66/doc/Roozendaal_2009_1"
+            }
+        ],
+        "dcterms$modified": {
             "rdf$datatype": "http://www.w3.org/2001/XMLSchema#date",
             "xml$t": "2022-03-28"
         },
@@ -1497,7 +1487,7 @@ HTTP 200
                 "rdf$resource": "http://data.loterre.fr/ark:/67375/2CX-5D7NJT7F-T"
             },
             {
-                "rdf$resource": "http://data.loterre.fr/ark:/67375/JVR/M0001044"
+                "rdf$resource": "http://data.loterre.fr/ark:/67375/JVR-K82QZ4R6-T"
             },
             {
                 "rdf$resource": "http://purl.obolibrary.org/obo/UBERON_0001876"
@@ -1579,10 +1569,21 @@ HTTP 200
                 "rdf$resource": "http://data.loterre.fr/ark:/67375/P66-J6P7BVWC-2"
             },
             {
+                "rdf$resource": "http://data.loterre.fr/ark:/67375/P66-NZG0Q0JG-4"
+            },
+            {
                 "rdf$resource": "http://data.loterre.fr/ark:/67375/P66-VSZT26MD-V"
             },
             {
                 "rdf$resource": "http://data.loterre.fr/ark:/67375/P66-X4ZVD1JP-3"
+            }
+        ],
+        "uneskos$memberOf": [
+            {
+                "rdf$resource": "http://data.loterre.fr/ark:/67375/P66/Animal"
+            },
+            {
+                "rdf$resource": "http://data.loterre.fr/ark:/67375/P66/Homme"
             }
         ],
         "indexKeys": [
@@ -1610,14 +1611,15 @@ HTTP 200
 {
     "value": {
         "rdf$about": "http://data.loterre.fr/ark:/67375/P66-KHRWNS4W-Q",
-        "dct$creator": {
-            "xml$t": "Frank Arnould"
-        },
-        "dct$created": {
+        "dcterms$created": {
             "rdf$datatype": "http://www.w3.org/2001/XMLSchema#date",
             "xml$t": "2018-08-03"
         },
-        "dct$modified": {
+        "dct$creator": {
+            "rdf$datatype": "http://www.w3.org/2001/XMLSchema#string",
+            "xml$t": "Frank Arnould"
+        },
+        "dcterms$modified": {
             "rdf$datatype": "http://www.w3.org/2001/XMLSchema#date",
             "xml$t": "2022-03-30"
         },
@@ -1654,7 +1656,7 @@ HTTP 200
                 "rdf$resource": "http://data.loterre.fr/ark:/67375/2CX-G82P3PDQ-K"
             },
             {
-                "rdf$resource": "http://data.loterre.fr/ark:/67375/JVR/M0008848"
+                "rdf$resource": "http://data.loterre.fr/ark:/67375/JVR-SLFCVTRT-4"
             },
             {
                 "rdf$resource": "http://purl.obolibrary.org/obo/UBERON_0005838"
@@ -1747,6 +1749,17 @@ HTTP 200
                 "rdf$resource": "http://data.loterre.fr/ark:/67375/P66-XJ333KQF-6"
             }
         ],
+        "uneskos$memberOf": [
+            {
+                "rdf$resource": "http://data.loterre.fr/ark:/67375/P66/Animal"
+            },
+            {
+                "rdf$resource": "http://data.loterre.fr/ark:/67375/P66/Homme"
+            },
+            {
+                "rdf$resource": "http://data.loterre.fr/ark:/67375/P66/Neurologie"
+            }
+        ],
         "indexKeys": [
             "frontallobe",
             "lobefrontal",
@@ -1765,30 +1778,34 @@ HTTP 200
 {
     "value": {
         "rdf$about": "http://data.loterre.fr/ark:/67375/P66-RGFWPLNW-K",
-        "dct$creator": {
-            "xml$t": "Frank Arnould"
-        },
-        "dct$bibliographicCitation": [
-            {
-                "xml$t": "Dunlosky, J., & Bjork, R. A. (Eds.). (2013). Handbook of Metamemory and Memory. Psychology Press."
-            },
-            {
-                "xml$t": "Dunlosky, J., & Tauber, S. (Eds.). (2016). The Oxford handbook of metamemory. Oxford University Press."
-            },
-            {
-                "xml$t": "Flavell, J. H. (1971). First discussant’s comments: What is memory development the development of? Human Development, 14(4), 272–278.  https://doi.org/10.1159/000271221"
-            },
-            {
-                "xml$t": "Le Berre, A.-P., Eustache, F., & Beaunieux, H. (2009). La métamémoire : théorie et clinique. Revue de neuropsychologie, 1(4), 312–320.  https://doi.org/10.3917/rne.014.0312"
-            }
-        ],
-        "dct$created": {
+        "dcterms$created": {
             "rdf$datatype": "http://www.w3.org/2001/XMLSchema#date",
             "xml$t": "2017-12-04"
         },
-        "dct$modified": {
+        "dct$creator": {
+            "rdf$datatype": "http://www.w3.org/2001/XMLSchema#string",
+            "xml$t": "Frank Arnould"
+        },
+        "dct$isReferencedBy": [
+            {
+                "rdf$resource": "http://data.loterre.fr/ark:/67375/P66/doc/Dunlosky_2013"
+            },
+            {
+                "rdf$resource": "http://data.loterre.fr/ark:/67375/P66/doc/Dunlosky_2016"
+            },
+            {
+                "rdf$resource": "http://data.loterre.fr/ark:/67375/P66/doc/Flavell_1971"
+            },
+            {
+                "rdf$resource": "http://data.loterre.fr/ark:/67375/P66/doc/Le_Berre_2009"
+            },
+            {
+                "rdf$resource": "http://data.loterre.fr/ark:/67375/P66/doc/MazancieuxA_2023_1"
+            }
+        ],
+        "dcterms$modified": {
             "rdf$datatype": "http://www.w3.org/2001/XMLSchema#date",
-            "xml$t": "2022-04-29"
+            "xml$t": "2025-02-20"
         },
         "skos$definition": [
             {
@@ -1802,7 +1819,7 @@ HTTP 200
         ],
         "skos$exactMatch": [
             {
-                "rdf$resource": "http://data.loterre.fr/ark:/67375/JVR/M000599742"
+                "rdf$resource": "http://data.loterre.fr/ark:/67375/JVR-ZFS4MKLQ-D"
             },
             {
                 "rdf$resource": "https://en.wikipedia.org/wiki/Metamemory"
@@ -1852,6 +1869,9 @@ HTTP 200
             },
             {
                 "rdf$resource": "http://data.loterre.fr/ark:/67375/P66-WDJFQLQJ-P"
+            },
+            {
+                "rdf$resource": "http://data.loterre.fr/ark:/67375/P66-ZV2MRLJ6-6"
             }
         ],
         "inist$isMeasuredBy": [
@@ -1873,14 +1893,14 @@ HTTP 200
                 "skos$prefLabel": [
                     {
                         "xml$lang": "en",
-                        "xml$t": "memory"
+                        "xml$t": "metacognition"
                     },
                     {
                         "xml$lang": "fr",
-                        "xml$t": "mémoire"
+                        "xml$t": "métacognition"
                     }
                 ],
-                "rdf$about": "http://data.loterre.fr/ark:/67375/P66-P3PC7CZ3-D"
+                "rdf$about": "http://data.loterre.fr/ark:/67375/P66-W6MLR9QR-H"
             }
         ],
         "skos$narrower": [
@@ -1911,9 +1931,34 @@ HTTP 200
                 "rdf$about": "http://data.loterre.fr/ark:/67375/P66-XNPMCKS4-S"
             }
         ],
-        "skos$related": {
-            "rdf$resource": "http://data.loterre.fr/ark:/67375/P66-QZXRZM22-5"
-        },
+        "skos$related": [
+            {
+                "rdf$resource": "http://data.loterre.fr/ark:/67375/P66-D304PDBZ-3"
+            },
+            {
+                "rdf$resource": "http://data.loterre.fr/ark:/67375/P66-QZXRZM22-5"
+            },
+            {
+                "rdf$resource": "http://data.loterre.fr/ark:/67375/P66-VWG96TP1-F"
+            },
+            {
+                "rdf$resource": "http://data.loterre.fr/ark:/67375/P66-ZTRSJ6KF-F"
+            }
+        ],
+        "uneskos$memberOf": [
+            {
+                "rdf$resource": "http://data.loterre.fr/ark:/67375/P66/Homme"
+            },
+            {
+                "rdf$resource": "http://data.loterre.fr/ark:/67375/P66/Psychologie"
+            },
+            {
+                "rdf$resource": "http://data.loterre.fr/ark:/67375/P66/MemoryAndEducationGroup"
+            },
+            {
+                "rdf$resource": "http://data.loterre.fr/ark:/67375/P66/MemoryAndLawGroup"
+            }
+        ],
         "indexKeys": [
             "metamemory",
             "metamemoire",
