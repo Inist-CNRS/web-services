@@ -1320,8 +1320,6 @@ HTTP 200
 
 POST {{host}}/v1/D63/identify?indent=true
 content-type: application/json
-[Options]
-skip: false
 [
   { "value": "Pompey"}
 ]
@@ -4368,13 +4366,13 @@ POST {{host}}/v1/QX8/annotate?indent=true
 content-type: application/json
 [
     {
-        "id": "ark:/67375/6H6-SXFZKH1W-6",
-        "value": "Abstract: The Pliocene stratigraphy of the Romagna Northern Apennines foredeep has been reconstructed through mapping and measuring the different lithostratigraphic units. The physically correlated sedimentary bodies have been chronologically calibrated through biostratigraphic analyses. Analysis of facies and fossil content allowed reconstructing the main depositional systems and their evolution. The co-occurrence of shallow- to deep-water environments and carbonate to siliciclastic systems allowed understanding fully the role of eustasy and climate vs. continuous tectonic deformation controlling the accommodation and basin morphology. Following a limited sea-level lowering at 4.2 Ma, associated with the first signal of cooling in the Early Pliocene, a fast growing subtropical type carbonate platform developed, in response to warm and oligotrophic surface waters. Furthermore, a significant drop in sea-level at 3.75 Ma points to an important Pliocene continental glaciation in the Northern Hemisphere. During the subsequent transgression, warm and possibly humid climate favoured the deposition of the first Pliocene sapropel around 3.3 Ma. The growth of a second generation of carbonate platform between 3.3 and 3.042 Ma suggests a renewed warm period and limited runoff. At the top of this highstand, thick sapropels developed, which can easily be correlated across the Mediterranean. The platform abruptly drowned, was overwhelmed by bio-erosion and was covered by iron\u2013phosphate crusts; whereas in the adjacent basins numerous sapropel layers occurred, rich of biosiliceous forms, documenting the shift from Ccarb to Corg deposition. Strong oscillations of climate, due to precessionally controlled seasonality, and increased precipitation and runoff are considered as the main causes of the increase of surface water fertility. After the 2.87 Ma sea-level drop, again very significant, the sapropel rapidly disappears, in conjunction to the development of the lowstand wedge. After this cold period, which ended around 2.6 Ma, carbonate platforms never recovered due to the enduring cooler surface waters and the onset of an active drainage on the Apenninic range. This study documents the role of the eustatic variations on the Pliocene deposition of the actively deforming Northern Apennines foredeep. The abrupt lithostratigraphic changes appear also controlled by palaeoproductivity variations associated with climate and runoff."
+    "id": "ark:/67375/6H6-SXFZKH1W-6",
+    "value": "Abstract: The Pliocene stratigraphy of the Romagna Northern Apennines foredeep has been reconstructed through mapping and measuring the different lithostratigraphic units. The physically correlated sedimentary bodies have been chronologically calibrated through biostratigraphic analyses. Analysis of facies and fossil content allowed reconstructing the main depositional systems and their evolution. The co-occurrence of shallow- to deep-water environments and carbonate to siliciclastic systems allowed understanding fully the role of eustasy and climate vs. continuous tectonic deformation controlling the accommodation and basin morphology. Following a limited sea-level lowering at 4.2 Ma, associated with the first signal of cooling in the Early Pliocene, a fast growing subtropical type carbonate platform developed, in response to warm and oligotrophic surface waters. Furthermore, a significant drop in sea-level at 3.75 Ma points to an important Pliocene continental glaciation in the Northern Hemisphere. During the subsequent transgression, warm and possibly humid climate favoured the deposition of the first Pliocene sapropel around 3.3 Ma. The growth of a second generation of carbonate platform between 3.3 and 3.042 Ma suggests a renewed warm period and limited runoff. At the top of this highstand, thick sapropels developed, which can easily be correlated across the Mediterranean. The platform abruptly drowned, was overwhelmed by bio-erosion and was covered by iron\u2013phosphate crusts; whereas in the adjacent basins numerous sapropel layers occurred, rich of biosiliceous forms, documenting the shift from Ccarb to Corg deposition. Strong oscillations of climate, due to precessionally controlled seasonality, and increased precipitation and runoff are considered as the main causes of the increase of surface water fertility. After the 2.87 Ma sea-level drop, again very significant, the sapropel rapidly disappears, in conjunction to the development of the lowstand wedge. After this cold period, which ended around 2.6 Ma, carbonate platforms never recovered due to the enduring cooler surface waters and the onset of an active drainage on the Apenninic range. This study documents the role of the eustatic variations on the Pliocene deposition of the actively deforming Northern Apennines foredeep. The abrupt lithostratigraphic changes appear also controlled by palaeoproductivity variations associated with climate and runoff."
      },
-    {
-        "id": "ark:/67375/6H6-MT1C65QX-P",
-        "value": "Abstract: Qinghai Lake is a large saline lake on the Qinghai\u2013Tibetan Plateau of central Asia that is effected by both the Indian and Asian monsoons. We used reflectance spectroscopy to characterize the sediments in a 795-cm long core taken from the southeastern part of the lake. Sediment redness, which is related to iron oxide content, seems to monitor paleoclimatic changes in the core. Iron oxides appear to be eroded from nearby red beds or loess deposits and are transported by fluvial means into the lake. Thus, redness increases at times of increased precipitation, that is, as monsoon strength increases. Our redness monsoon proxy shows climate changes on several times scales. On a millennial scale, it records humid conditions during the Early and Mid-Holocene. From about 4200 to 2300 yr BP, low redness values suggest a two-millennial long dry period, which in the Late Holocene is followed by a more humid period. On a centennial scale, the redness proxy records not only the Little Ice Age, but also the Medieval Warm Period, the Dark Ages Cool Period and the Roman Warm Period. Time series analysis of the redness record indicates a 200 yr frequency, which corresponds to the de Vries solar cycle suggesting that, in addition to insolation changes resulting from orbital variations, solar forcing also results from cyclic changes in the sun&apos;s luminosity."
-    }
+{
+    "id": "ark:/67375/6H6-MT1C65QX-P",
+    "value": "Abstract: Qinghai Lake is a large saline lake on the Qinghai\u2013Tibetan Plateau of central Asia that is effected by both the Indian and Asian monsoons. We used reflectance spectroscopy to characterize the sediments in a 795-cm long core taken from the southeastern part of the lake. Sediment redness, which is related to iron oxide content, seems to monitor paleoclimatic changes in the core. Iron oxides appear to be eroded from nearby red beds or loess deposits and are transported by fluvial means into the lake. Thus, redness increases at times of increased precipitation, that is, as monsoon strength increases. Our redness monsoon proxy shows climate changes on several times scales. On a millennial scale, it records humid conditions during the Early and Mid-Holocene. From about 4200 to 2300 yr BP, low redness values suggest a two-millennial long dry period, which in the Late Holocene is followed by a more humid period. On a centennial scale, the redness proxy records not only the Little Ice Age, but also the Medieval Warm Period, the Dark Ages Cool Period and the Roman Warm Period. Time series analysis of the redness record indicates a 200 yr frequency, which corresponds to the de Vries solar cycle suggesting that, in addition to insolation changes resulting from orbital variations, solar forcing also results from cyclic changes in the sun&apos;s luminosity."
+}
 ]
 
 HTTP 200
@@ -5081,7 +5079,6 @@ HTTP 200
 
 POST {{host}}/v1/JVR/expand?indent=true
 content-type: application/json
-
 [
   { "value": "toto"},
   { "value": "diabète" },
@@ -6109,7 +6106,6 @@ HTTP 200
 
 POST {{host}}/v1/JVR/identify?indent=true
 content-type: application/json
-
 [
   { "value": "toto"},
   { "value": "diabète" },
@@ -6151,4 +6147,185 @@ HTTP 200
         "localization@en": [],
         "localization@fr": []
     }
+}]
+
+POST {{host}}/v1/identify?indent=true&loterreID=9SD
+content-type: application/json
+[
+  { "value": "CAN" },
+  { "value": "N'importe quoi" }
+]
+
+
+HTTP 200
+[{
+    "value": {
+        "rdf$about": "http://data.loterre.fr/ark:/67375/9SD-QDWJ08N6-7",
+        "skos$inScheme": {
+            "rdf$resource": "http://data.loterre.fr/ark:/67375/9SD"
+        },
+        "skos$prefLabel": [
+            {
+                "xml$lang": "fr",
+                "xml$t": "Canada"
+            },
+            {
+                "xml$lang": "en",
+                "xml$t": "Canada"
+            }
+        ],
+        "gvp$tgn3202_capital_is": {
+            "rdf$resource": "http://data.loterre.fr/ark:/67375/9SD-HG1FKQGP-C"
+        },
+        "inist$lodexPlacenameCode": {
+            "xml$t": "CAN"
+        },
+        "gn$geonamesID": {
+            "xml$t": "6251999"
+        },
+        "obo$GEO_000035330": {
+            "xml$t": "6251999"
+        },
+        "gn$featureClass": {
+            "rdf$resource": "https://www.geonames.org/ontology#A"
+        },
+        "gn$featureCode": {
+            "rdf$resource": "https://www.geonames.org/ontology#A.PCLI"
+        },
+        "geo$lat": {
+            "rdf$datatype": "http://www.w3.org/2001/XMLSchema#double",
+            "xml$t": "57.7487688035733"
+        },
+        "geo$long": {
+            "rdf$datatype": "http://www.w3.org/2001/XMLSchema#double",
+            "xml$t": "-101.569822125212"
+        },
+        "skosxl$altLabel": [
+            {
+                "rdf$resource": "http://data.loterre.fr/ark:/67375/9SD/d1e4500/xl-fr-16"
+            },
+            {
+                "rdf$resource": "http://data.loterre.fr/ark:/67375/9SD/d1e4500/xl-en-16"
+            },
+            {
+                "rdf$resource": "http://data.loterre.fr/ark:/67375/9SD/d1e4500/xl-fr-18"
+            },
+            {
+                "rdf$resource": "http://data.loterre.fr/ark:/67375/9SD/d1e4500/xl-en-18"
+            },
+            {
+                "rdf$resource": "http://data.loterre.fr/ark:/67375/9SD/d1e4500/xl-fr-19"
+            },
+            {
+                "rdf$resource": "http://data.loterre.fr/ark:/67375/9SD/d1e4500/xl-en-19"
+            },
+            {
+                "rdf$resource": "http://data.loterre.fr/ark:/67375/9SD/d1e4500/xl-fr-23"
+            },
+            {
+                "rdf$resource": "http://data.loterre.fr/ark:/67375/9SD/d1e4500/xl-en-23"
+            }
+        ],
+        "obo$GEO_000000022": {
+            "xml$t": "CAN"
+        },
+        "gn$countryCode": {
+            "xml$t": "CA"
+        },
+        "obo$GEO_000000023": {
+            "xml$t": "CA"
+        },
+        "obo$GEO_000000021": {
+            "xml$t": "124"
+        },
+        "skos$exactMatch": [
+            {
+                "rdf$resource": "https://www.wikidata.org/wiki/Q16"
+            },
+            {
+                "rdf$resource": "https://en.wikipedia.org/wiki/Canada"
+            },
+            {
+                "rdf$resource": "https://fr.wikipedia.org/wiki/Canada"
+            },
+            {
+                "rdf$resource": "http://dbpedia.org/page/Canada"
+            },
+            {
+                "rdf$resource": "https://www.geonames.org/6251999/"
+            }
+        ],
+        "wdt$P36": {
+            "rdf$resource": "https://www.wikidata.org/wiki/Q1930"
+        },
+        "wdt$P3422": {
+            "xml$t": "99401"
+        },
+        "skos$altLabel": [
+            {
+                "xml$lang": "fr",
+                "xml$t": "CAN"
+            },
+            {
+                "xml$lang": "en",
+                "xml$t": "CAN"
+            },
+            {
+                "xml$lang": "fr",
+                "xml$t": "CA"
+            },
+            {
+                "xml$lang": "en",
+                "xml$t": "CA"
+            },
+            {
+                "xml$lang": "fr",
+                "xml$t": "124"
+            },
+            {
+                "xml$lang": "en",
+                "xml$t": "124"
+            }
+        ],
+        "skos$broader": [
+            {
+                "skos$prefLabel": [
+                    {
+                        "xml$lang": "fr",
+                        "xml$t": "Amérique septentrionale"
+                    },
+                    {
+                        "xml$lang": "en",
+                        "xml$t": "Northern America"
+                    }
+                ],
+                "rdf$about": "http://data.loterre.fr/ark:/67375/9SD-WFRKZV0L-5"
+            }
+        ],
+        "skos$narrower": [
+            {
+                "skos$prefLabel": [
+                    {
+                        "xml$lang": "fr",
+                        "xml$t": "Ottawa"
+                    },
+                    {
+                        "xml$lang": "en",
+                        "xml$t": "Ottawa"
+                    }
+                ],
+                "rdf$about": "http://data.loterre.fr/ark:/67375/9SD-HG1FKQGP-C"
+            }
+        ],
+        "indexKeys": [
+            "canada",
+            "can",
+            "ca",
+            "124"
+        ],
+        "score": 2
+    }
+},
+{
+    "value": "n/a"
 }]
