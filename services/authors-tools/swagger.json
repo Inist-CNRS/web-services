@@ -3,7 +3,7 @@
     "info": {
         "title": "authors-tools - Les web services qui se lancent sur le champs 'authors'",
         "description": "Regroupe tous les web services qui traitent des auteurs (noms, affiliations...)",
-        "version": "2.6.0",
+        "version": "2.6.2",
         "termsOfService": "https://services.istex.fr/",
         "contact": {
             "name": "Inist-CNRS",

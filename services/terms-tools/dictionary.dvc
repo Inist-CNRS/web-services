@@ -1,0 +1,5 @@
+outs:
+- md5: 453b5bfcf03d58e12825f61ab080d9a3.dir
+  nfiles: 220
+  hash: md5
+  path: dictionary

@@ -40,6 +40,7 @@
     "services/address-kit",
     "services/affiliation-rnsr",
     "services/affiliations-tools",
+    "services/aiabstract-check",
     "services/ark-tools",
     "services/astro-ner",
     "services/authors-tools",
@@ -48,8 +49,12 @@
     "services/biblio-ref",
     "services/biblio-tools",
     "services/chem-ner",
+    "services/coara-tools",
     "services/data-computer",
+    "services/data-graph",
+    "services/data-homogenise",
     "services/data-rapido",
+    "services/data-table",
     "services/data-termsuite",
     "services/data-thesesul",
     "services/data-topcitation",
@@ -66,19 +71,22 @@
     "services/pdf-text",
     "services/person-ner",
     "services/sciencemetrix-classification",
+    "services/software-extract",
     "services/terms-extraction",
     "services/terms-tools",
-    "services/text-clustering"
+    "services/text-clustering",
+    "services/text-summarize",
+    "services/transli-tal"
   ],
   "dependencies": {
-    "@ezs/analytics": "2.3.2",
-    "@ezs/basics": "2.7.0",
-    "@ezs/core": "3.10.2",
-    "@ezs/spawn": "1.4.6",
+    "@ezs/analytics": "2.3.5",
+    "@ezs/basics": "2.9.2",
+    "@ezs/core": "4.0.2",
+    "@ezs/spawn": "1.4.9",
     "@orangeopensource/hurl": "5.0.1",
     "rest-cli": "1.8.13"
   },
   "devDependencies": {
-    "@types/node": "22.9.0"
+    "@types/node": "24.3.1"
   }
 }
