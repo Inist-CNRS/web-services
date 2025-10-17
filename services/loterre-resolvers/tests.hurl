@@ -6336,7 +6336,6 @@ content-type: application/json
   { "value": "N'importe quoi" }
 ]
 
-
 HTTP 200
 [{
     "value": {
@@ -6508,4 +6507,34 @@ HTTP 200
 },
 {
     "value": "n/a"
+}]
+
+POST {{host}}/v1/annotate?indent=true&loterreID=9SD
+content-type: application/json
+[
+  { "value": "Je suppose que l'on cherche dans le texte une occurrence d'un toponyme, comme le Canada." },
+  { "value": "Aucun toponyme dans ce texte." }
+]
+
+
+HTTP 200
+[{
+    "value": [
+        {
+            "lang": "eng",
+            "prefLabel": "Canada",
+            "termeReconnu": [
+                "Canada."
+            ],
+            "arbreHierarchique": [
+                "1 - World, 2 - Americas, 3 - North America, 4 - Northern America"
+            ],
+            "conceptUri": "http://data.loterre.fr/ark:/67375/9SD-QDWJ08N6-7",
+            "outil": "Loterre_Annot",
+            "frequence": "1"
+        }
+    ]
+},
+{
+    "value": []
 }]

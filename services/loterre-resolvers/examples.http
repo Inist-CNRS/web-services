@@ -166,3 +166,13 @@ Content-Type: application/json
   { "value": "CAN" },
   { "value": "N'importe quoi" }
 ]
+
+###
+# @name v1annotate9SD
+POST {{host}}/v1/annotate?indent=true&loterreID=9SD HTTP/1.1
+Content-Type: application/json
+
+[
+  { "value": "Je suppose que l'on cherche dans le texte une occurrence d'un toponyme, comme le Canada." },
+  { "value": "Aucun toponyme dans ce texte." }
+]
