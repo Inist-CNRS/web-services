@@ -6156,6 +6156,186 @@ content-type: application/json
   { "value": "N'importe quoi" }
 ]
 
+HTTP 200
+[{
+    "value": {
+        "rdf$about": "http://data.loterre.fr/ark:/67375/9SD-QDWJ08N6-7",
+        "skos$inScheme": {
+            "rdf$resource": "http://data.loterre.fr/ark:/67375/9SD"
+        },
+        "skos$prefLabel": [
+            {
+                "xml$lang": "fr",
+                "xml$t": "Canada"
+            },
+            {
+                "xml$lang": "en",
+                "xml$t": "Canada"
+            }
+        ],
+        "gvp$tgn3202_capital_is": {
+            "rdf$resource": "http://data.loterre.fr/ark:/67375/9SD-HG1FKQGP-C"
+        },
+        "inist$lodexPlacenameCode": {
+            "xml$t": "CAN"
+        },
+        "gn$geonamesID": {
+            "xml$t": "6251999"
+        },
+        "obo$GEO_000035330": {
+            "xml$t": "6251999"
+        },
+        "gn$featureClass": {
+            "rdf$resource": "https://www.geonames.org/ontology#A"
+        },
+        "gn$featureCode": {
+            "rdf$resource": "https://www.geonames.org/ontology#A.PCLI"
+        },
+        "geo$lat": {
+            "rdf$datatype": "http://www.w3.org/2001/XMLSchema#double",
+            "xml$t": "57.7487688035733"
+        },
+        "geo$long": {
+            "rdf$datatype": "http://www.w3.org/2001/XMLSchema#double",
+            "xml$t": "-101.569822125212"
+        },
+        "skosxl$altLabel": [
+            {
+                "rdf$resource": "http://data.loterre.fr/ark:/67375/9SD/d1e4500/xl-fr-16"
+            },
+            {
+                "rdf$resource": "http://data.loterre.fr/ark:/67375/9SD/d1e4500/xl-en-16"
+            },
+            {
+                "rdf$resource": "http://data.loterre.fr/ark:/67375/9SD/d1e4500/xl-fr-18"
+            },
+            {
+                "rdf$resource": "http://data.loterre.fr/ark:/67375/9SD/d1e4500/xl-en-18"
+            },
+            {
+                "rdf$resource": "http://data.loterre.fr/ark:/67375/9SD/d1e4500/xl-fr-19"
+            },
+            {
+                "rdf$resource": "http://data.loterre.fr/ark:/67375/9SD/d1e4500/xl-en-19"
+            },
+            {
+                "rdf$resource": "http://data.loterre.fr/ark:/67375/9SD/d1e4500/xl-fr-23"
+            },
+            {
+                "rdf$resource": "http://data.loterre.fr/ark:/67375/9SD/d1e4500/xl-en-23"
+            }
+        ],
+        "obo$GEO_000000022": {
+            "xml$t": "CAN"
+        },
+        "gn$countryCode": {
+            "xml$t": "CA"
+        },
+        "obo$GEO_000000023": {
+            "xml$t": "CA"
+        },
+        "obo$GEO_000000021": {
+            "xml$t": "124"
+        },
+        "skos$exactMatch": [
+            {
+                "rdf$resource": "https://www.wikidata.org/wiki/Q16"
+            },
+            {
+                "rdf$resource": "https://en.wikipedia.org/wiki/Canada"
+            },
+            {
+                "rdf$resource": "https://fr.wikipedia.org/wiki/Canada"
+            },
+            {
+                "rdf$resource": "http://dbpedia.org/page/Canada"
+            },
+            {
+                "rdf$resource": "https://www.geonames.org/6251999/"
+            }
+        ],
+        "wdt$P36": {
+            "rdf$resource": "https://www.wikidata.org/wiki/Q1930"
+        },
+        "wdt$P3422": {
+            "xml$t": "99401"
+        },
+        "skos$altLabel": [
+            {
+                "xml$lang": "fr",
+                "xml$t": "CAN"
+            },
+            {
+                "xml$lang": "en",
+                "xml$t": "CAN"
+            },
+            {
+                "xml$lang": "fr",
+                "xml$t": "CA"
+            },
+            {
+                "xml$lang": "en",
+                "xml$t": "CA"
+            },
+            {
+                "xml$lang": "fr",
+                "xml$t": "124"
+            },
+            {
+                "xml$lang": "en",
+                "xml$t": "124"
+            }
+        ],
+        "skos$broader": [
+            {
+                "skos$prefLabel": [
+                    {
+                        "xml$lang": "fr",
+                        "xml$t": "Amérique septentrionale"
+                    },
+                    {
+                        "xml$lang": "en",
+                        "xml$t": "Northern America"
+                    }
+                ],
+                "rdf$about": "http://data.loterre.fr/ark:/67375/9SD-WFRKZV0L-5"
+            }
+        ],
+        "skos$narrower": [
+            {
+                "skos$prefLabel": [
+                    {
+                        "xml$lang": "fr",
+                        "xml$t": "Ottawa"
+                    },
+                    {
+                        "xml$lang": "en",
+                        "xml$t": "Ottawa"
+                    }
+                ],
+                "rdf$about": "http://data.loterre.fr/ark:/67375/9SD-HG1FKQGP-C"
+            }
+        ],
+        "indexKeys": [
+            "canada",
+            "can",
+            "ca",
+            "124"
+        ],
+        "score": 2
+    }
+},
+{
+    "value": "n/a"
+}]
+
+POST {{host}}/v1/expand?indent=true&loterreID=9SD
+content-type: application/json
+[
+  { "value": "CAN" },
+  { "value": "N'importe quoi" }
+]
+
 
 HTTP 200
 [{

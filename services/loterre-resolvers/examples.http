@@ -156,3 +156,13 @@ Content-Type: application/json
   { "value": "CAN" },
   { "value": "N'importe quoi" }
 ]
+
+###
+# @name v1expand9SD
+POST {{host}}/v1/expand?indent=true&loterreID=9SD HTTP/1.1
+Content-Type: application/json
+
+[
+  { "value": "CAN" },
+  { "value": "N'importe quoi" }
+]
