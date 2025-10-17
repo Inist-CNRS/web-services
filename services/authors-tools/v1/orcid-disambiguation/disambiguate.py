@@ -21,7 +21,15 @@ class disambiguate:
         self.infoDic = {}
         self.extractInfoDic(infoDic)
         self.client_id = os.getenv('ORCID_CLIENT_ID')
+        if self.client_id == None or self.client_id == "ORCID_CLIENT_ID":
+            print("CLIENT ID not found", file= sys.stderr)
+        else:
+            print("CLIENT ID found", file= sys.stderr)
         self.client_secret = os.getenv('ORCID_SECRET')
+        if self.client_secret == None or self.client_secret == "ORCID_SECRET":
+            print("CLIENT SECRET not found", file= sys.stderr)
+        else:
+            print("CLIENT SECRET found", file= sys.stderr)
         self.access_token = self.getToken()
     
     def getToken(self):

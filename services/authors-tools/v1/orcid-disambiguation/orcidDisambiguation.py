@@ -11,6 +11,7 @@ import time
 )
 
 def main(nameDepth = 20, worksDepth = 20):
+    print("Date and time :", time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()), file=sys.stderr)
     for line in sys.stdin:
         data = json.loads(line)
         res = []
