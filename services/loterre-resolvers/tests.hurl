@@ -798,8 +798,6 @@ HTTP 200
 
 POST {{host}}/v1/D63/expand?indent=true
 content-type: application/json
-[Options]
-skip: false
 [
   { "value": "toto"},
   { "value": "Nancy" },
@@ -1010,7 +1008,7 @@ HTTP 200
         ],
         "skos$exactMatch": [
             {
-                "rdf$resource": "https://rdf.insee.fr/sparql/describe?uri=http://id.insee.fr/geo/commune/5691555d-e924-48b3-a6ce-f91db0bb5a20&default-graph-uri=data"
+                "rdf$resource": "http://id.insee.fr/geo/commune/5691555d-e924-48b3-a6ce-f91db0bb5a20"
             },
             {
                 "rdf$resource": "http://sws.geonames.org/2990999/"
@@ -1034,9 +1032,6 @@ HTTP 200
                 "rdf$resource": "https://ark.frantiq.fr/ark:/26678/pcrtngUfUyvuMo"
             }
         ],
-        "owl$sameAs": {
-            "rdf$resource": "http://id.insee.fr/geo/commune/5691555d-e924-48b3-a6ce-f91db0bb5a20"
-        },
         "geo$lat": {
             "rdf$datatype": "http://www.w3.org/2001/XMLSchema#double",
             "xml$t": "48.68439"
@@ -1045,7 +1040,7 @@ HTTP 200
             "rdf$datatype": "http://www.w3.org/2001/XMLSchema#double",
             "xml$t": "6.18496"
         },
-        "dcterms$created": {
+        "dct$created": {
             "rdf$datatype": "http://www.w3.org/2001/XMLSchema#date",
             "xml$t": "2018-09-19"
         },
@@ -1138,7 +1133,7 @@ HTTP 200
         ],
         "skos$exactMatch": [
             {
-                "rdf$resource": "https://rdf.insee.fr/sparql/describe?uri=http://id.insee.fr/geo/commune/bb79c0c4-aa6a-4a4b-9c29-092df11d498d&default-graph-uri=data"
+                "rdf$resource": "http://id.insee.fr/geo/commune/bb79c0c4-aa6a-4a4b-9c29-092df11d498d"
             },
             {
                 "rdf$resource": "http://sws.geonames.org/3020411/"
@@ -1162,9 +1157,6 @@ HTTP 200
                 "rdf$resource": "https://ark.frantiq.fr/ark:/26678/pcrtPj3bWMJKt5"
             }
         ],
-        "owl$sameAs": {
-            "rdf$resource": "http://id.insee.fr/geo/commune/bb79c0c4-aa6a-4a4b-9c29-092df11d498d"
-        },
         "geo$lat": {
             "rdf$datatype": "http://www.w3.org/2001/XMLSchema#double",
             "xml$t": "48.67937"
@@ -1173,7 +1165,7 @@ HTTP 200
             "rdf$datatype": "http://www.w3.org/2001/XMLSchema#double",
             "xml$t": "5.84433"
         },
-        "dcterms$created": {
+        "dct$created": {
             "rdf$datatype": "http://www.w3.org/2001/XMLSchema#date",
             "xml$t": "2018-09-19"
         },
@@ -1255,7 +1247,7 @@ HTTP 200
         },
         "skos$exactMatch": [
             {
-                "rdf$resource": "https://rdf.insee.fr/sparql/describe?uri=http://id.insee.fr/geo/commune/577cea3f-8b18-456d-8c0e-2d18742cdfc6&default-graph-uri=data"
+                "rdf$resource": "http://id.insee.fr/geo/commune/577cea3f-8b18-456d-8c0e-2d18742cdfc6"
             },
             {
                 "rdf$resource": "http://sws.geonames.org/2988823/"
@@ -1279,9 +1271,6 @@ HTTP 200
                 "rdf$resource": "https://ark.frantiq.fr/ark:/26678/pcrtg0M9kUBsJq"
             }
         ],
-        "owl$sameAs": {
-            "rdf$resource": "http://id.insee.fr/geo/commune/577cea3f-8b18-456d-8c0e-2d18742cdfc6"
-        },
         "geo$lat": {
             "rdf$datatype": "http://www.w3.org/2001/XMLSchema#double",
             "xml$t": "48.98349"
@@ -1290,7 +1279,7 @@ HTTP 200
             "rdf$datatype": "http://www.w3.org/2001/XMLSchema#double",
             "xml$t": "6.02084"
         },
-        "dcterms$created": {
+        "dct$created": {
             "rdf$datatype": "http://www.w3.org/2001/XMLSchema#date",
             "xml$t": "2018-09-19"
         },
@@ -1331,8 +1320,6 @@ HTTP 200
 
 POST {{host}}/v1/D63/identify?indent=true
 content-type: application/json
-[Options]
-skip: false
 [
   { "value": "Pompey"}
 ]
@@ -1416,31 +1403,32 @@ HTTP 200
 {
     "value": {
         "rdf$about": "http://data.loterre.fr/ark:/67375/P66-W52CFWZ4-9",
-        "dct$creator": {
-            "xml$t": "Frank Arnould"
-        },
-        "dct$bibliographicCitation": [
-            {
-                "xml$t": "AbuHasan, Q., Reddy, V., & Siddiqui, W. (2022). Neuroanatomy, Amygdala. In StatPearls. StatPearls Publishing.  http://www.ncbi.nlm.nih.gov/books/NBK537102/"
-            },
-            {
-                "xml$t": "McGaugh, J. L., Cahill, L., & Roozendaal, B. (1996). Involvement of the amygdala in memory storage: Interaction with other brain systems. Proceedings of the National Academy of Sciences, 93(24), 13508–13514.  https://doi.org/10.1073/pnas.93.24.13508"
-            },
-            {
-                "xml$t": "Phelps, E. A. (2004). Human emotion and memory: Interactions of the amygdala and hippocampal complex. Current Opinion in Neurobiology, 14(2), 198–202.  https://doi.org/10.1016/j.conb.2004.03.015"
-            },
-            {
-                "xml$t": "Ressler, R. L., & Maren, S. (2019). Synaptic encoding of fear memories in the amygdala. Current Opinion in Neurobiology, 54, 54–59.  https://doi.org/10.1016/j.conb.2018.08.012"
-            },
-            {
-                "xml$t": "Roozendaal, B., McEwen, B. S., & Chattarji, S. (2009). Stress, memory and the amygdala. Nature Reviews Neuroscience, 10(6), 423–433.  https://doi.org/10.1038/nrn2651"
-            }
-        ],
-        "dct$created": {
+        "dcterms$created": {
             "rdf$datatype": "http://www.w3.org/2001/XMLSchema#date",
             "xml$t": "2017-12-04"
         },
-        "dct$modified": {
+        "dct$creator": {
+            "rdf$datatype": "http://www.w3.org/2001/XMLSchema#string",
+            "xml$t": "Frank Arnould"
+        },
+        "dct$isReferencedBy": [
+            {
+                "rdf$resource": "http://data.loterre.fr/ark:/67375/P66/doc/AbuHasan_2022_1"
+            },
+            {
+                "rdf$resource": "http://data.loterre.fr/ark:/67375/P66/doc/McGaugh_1996_1"
+            },
+            {
+                "rdf$resource": "http://data.loterre.fr/ark:/67375/P66/doc/Phelps_2004_1"
+            },
+            {
+                "rdf$resource": "http://data.loterre.fr/ark:/67375/P66/doc/Ressler_2019_1"
+            },
+            {
+                "rdf$resource": "http://data.loterre.fr/ark:/67375/P66/doc/Roozendaal_2009_1"
+            }
+        ],
+        "dcterms$modified": {
             "rdf$datatype": "http://www.w3.org/2001/XMLSchema#date",
             "xml$t": "2022-03-28"
         },
@@ -1497,7 +1485,7 @@ HTTP 200
                 "rdf$resource": "http://data.loterre.fr/ark:/67375/2CX-5D7NJT7F-T"
             },
             {
-                "rdf$resource": "http://data.loterre.fr/ark:/67375/JVR/M0001044"
+                "rdf$resource": "http://data.loterre.fr/ark:/67375/JVR-K82QZ4R6-T"
             },
             {
                 "rdf$resource": "http://purl.obolibrary.org/obo/UBERON_0001876"
@@ -1579,10 +1567,21 @@ HTTP 200
                 "rdf$resource": "http://data.loterre.fr/ark:/67375/P66-J6P7BVWC-2"
             },
             {
+                "rdf$resource": "http://data.loterre.fr/ark:/67375/P66-NZG0Q0JG-4"
+            },
+            {
                 "rdf$resource": "http://data.loterre.fr/ark:/67375/P66-VSZT26MD-V"
             },
             {
                 "rdf$resource": "http://data.loterre.fr/ark:/67375/P66-X4ZVD1JP-3"
+            }
+        ],
+        "uneskos$memberOf": [
+            {
+                "rdf$resource": "http://data.loterre.fr/ark:/67375/P66/Animal"
+            },
+            {
+                "rdf$resource": "http://data.loterre.fr/ark:/67375/P66/Homme"
             }
         ],
         "indexKeys": [
@@ -1610,14 +1609,15 @@ HTTP 200
 {
     "value": {
         "rdf$about": "http://data.loterre.fr/ark:/67375/P66-KHRWNS4W-Q",
-        "dct$creator": {
-            "xml$t": "Frank Arnould"
-        },
-        "dct$created": {
+        "dcterms$created": {
             "rdf$datatype": "http://www.w3.org/2001/XMLSchema#date",
             "xml$t": "2018-08-03"
         },
-        "dct$modified": {
+        "dct$creator": {
+            "rdf$datatype": "http://www.w3.org/2001/XMLSchema#string",
+            "xml$t": "Frank Arnould"
+        },
+        "dcterms$modified": {
             "rdf$datatype": "http://www.w3.org/2001/XMLSchema#date",
             "xml$t": "2022-03-30"
         },
@@ -1654,7 +1654,7 @@ HTTP 200
                 "rdf$resource": "http://data.loterre.fr/ark:/67375/2CX-G82P3PDQ-K"
             },
             {
-                "rdf$resource": "http://data.loterre.fr/ark:/67375/JVR/M0008848"
+                "rdf$resource": "http://data.loterre.fr/ark:/67375/JVR-SLFCVTRT-4"
             },
             {
                 "rdf$resource": "http://purl.obolibrary.org/obo/UBERON_0005838"
@@ -1747,6 +1747,17 @@ HTTP 200
                 "rdf$resource": "http://data.loterre.fr/ark:/67375/P66-XJ333KQF-6"
             }
         ],
+        "uneskos$memberOf": [
+            {
+                "rdf$resource": "http://data.loterre.fr/ark:/67375/P66/Animal"
+            },
+            {
+                "rdf$resource": "http://data.loterre.fr/ark:/67375/P66/Homme"
+            },
+            {
+                "rdf$resource": "http://data.loterre.fr/ark:/67375/P66/Neurologie"
+            }
+        ],
         "indexKeys": [
             "frontallobe",
             "lobefrontal",
@@ -1765,30 +1776,34 @@ HTTP 200
 {
     "value": {
         "rdf$about": "http://data.loterre.fr/ark:/67375/P66-RGFWPLNW-K",
-        "dct$creator": {
-            "xml$t": "Frank Arnould"
-        },
-        "dct$bibliographicCitation": [
-            {
-                "xml$t": "Dunlosky, J., & Bjork, R. A. (Eds.). (2013). Handbook of Metamemory and Memory. Psychology Press."
-            },
-            {
-                "xml$t": "Dunlosky, J., & Tauber, S. (Eds.). (2016). The Oxford handbook of metamemory. Oxford University Press."
-            },
-            {
-                "xml$t": "Flavell, J. H. (1971). First discussant’s comments: What is memory development the development of? Human Development, 14(4), 272–278.  https://doi.org/10.1159/000271221"
-            },
-            {
-                "xml$t": "Le Berre, A.-P., Eustache, F., & Beaunieux, H. (2009). La métamémoire : théorie et clinique. Revue de neuropsychologie, 1(4), 312–320.  https://doi.org/10.3917/rne.014.0312"
-            }
-        ],
-        "dct$created": {
+        "dcterms$created": {
             "rdf$datatype": "http://www.w3.org/2001/XMLSchema#date",
             "xml$t": "2017-12-04"
         },
-        "dct$modified": {
+        "dct$creator": {
+            "rdf$datatype": "http://www.w3.org/2001/XMLSchema#string",
+            "xml$t": "Frank Arnould"
+        },
+        "dct$isReferencedBy": [
+            {
+                "rdf$resource": "http://data.loterre.fr/ark:/67375/P66/doc/Dunlosky_2013"
+            },
+            {
+                "rdf$resource": "http://data.loterre.fr/ark:/67375/P66/doc/Dunlosky_2016"
+            },
+            {
+                "rdf$resource": "http://data.loterre.fr/ark:/67375/P66/doc/Flavell_1971"
+            },
+            {
+                "rdf$resource": "http://data.loterre.fr/ark:/67375/P66/doc/Le_Berre_2009"
+            },
+            {
+                "rdf$resource": "http://data.loterre.fr/ark:/67375/P66/doc/MazancieuxA_2023_1"
+            }
+        ],
+        "dcterms$modified": {
             "rdf$datatype": "http://www.w3.org/2001/XMLSchema#date",
-            "xml$t": "2022-04-29"
+            "xml$t": "2025-02-20"
         },
         "skos$definition": [
             {
@@ -1802,7 +1817,7 @@ HTTP 200
         ],
         "skos$exactMatch": [
             {
-                "rdf$resource": "http://data.loterre.fr/ark:/67375/JVR/M000599742"
+                "rdf$resource": "http://data.loterre.fr/ark:/67375/JVR-ZFS4MKLQ-D"
             },
             {
                 "rdf$resource": "https://en.wikipedia.org/wiki/Metamemory"
@@ -1852,6 +1867,9 @@ HTTP 200
             },
             {
                 "rdf$resource": "http://data.loterre.fr/ark:/67375/P66-WDJFQLQJ-P"
+            },
+            {
+                "rdf$resource": "http://data.loterre.fr/ark:/67375/P66-ZV2MRLJ6-6"
             }
         ],
         "inist$isMeasuredBy": [
@@ -1873,14 +1891,14 @@ HTTP 200
                 "skos$prefLabel": [
                     {
                         "xml$lang": "en",
-                        "xml$t": "memory"
+                        "xml$t": "metacognition"
                     },
                     {
                         "xml$lang": "fr",
-                        "xml$t": "mémoire"
+                        "xml$t": "métacognition"
                     }
                 ],
-                "rdf$about": "http://data.loterre.fr/ark:/67375/P66-P3PC7CZ3-D"
+                "rdf$about": "http://data.loterre.fr/ark:/67375/P66-W6MLR9QR-H"
             }
         ],
         "skos$narrower": [
@@ -1911,9 +1929,34 @@ HTTP 200
                 "rdf$about": "http://data.loterre.fr/ark:/67375/P66-XNPMCKS4-S"
             }
         ],
-        "skos$related": {
-            "rdf$resource": "http://data.loterre.fr/ark:/67375/P66-QZXRZM22-5"
-        },
+        "skos$related": [
+            {
+                "rdf$resource": "http://data.loterre.fr/ark:/67375/P66-D304PDBZ-3"
+            },
+            {
+                "rdf$resource": "http://data.loterre.fr/ark:/67375/P66-QZXRZM22-5"
+            },
+            {
+                "rdf$resource": "http://data.loterre.fr/ark:/67375/P66-VWG96TP1-F"
+            },
+            {
+                "rdf$resource": "http://data.loterre.fr/ark:/67375/P66-ZTRSJ6KF-F"
+            }
+        ],
+        "uneskos$memberOf": [
+            {
+                "rdf$resource": "http://data.loterre.fr/ark:/67375/P66/Homme"
+            },
+            {
+                "rdf$resource": "http://data.loterre.fr/ark:/67375/P66/Psychologie"
+            },
+            {
+                "rdf$resource": "http://data.loterre.fr/ark:/67375/P66/MemoryAndEducationGroup"
+            },
+            {
+                "rdf$resource": "http://data.loterre.fr/ark:/67375/P66/MemoryAndLawGroup"
+            }
+        ],
         "indexKeys": [
             "metamemory",
             "metamemoire",
@@ -4323,13 +4366,13 @@ POST {{host}}/v1/QX8/annotate?indent=true
 content-type: application/json
 [
     {
-        "id": "ark:/67375/6H6-SXFZKH1W-6",
-        "value": "Abstract: The Pliocene stratigraphy of the Romagna Northern Apennines foredeep has been reconstructed through mapping and measuring the different lithostratigraphic units. The physically correlated sedimentary bodies have been chronologically calibrated through biostratigraphic analyses. Analysis of facies and fossil content allowed reconstructing the main depositional systems and their evolution. The co-occurrence of shallow- to deep-water environments and carbonate to siliciclastic systems allowed understanding fully the role of eustasy and climate vs. continuous tectonic deformation controlling the accommodation and basin morphology. Following a limited sea-level lowering at 4.2 Ma, associated with the first signal of cooling in the Early Pliocene, a fast growing subtropical type carbonate platform developed, in response to warm and oligotrophic surface waters. Furthermore, a significant drop in sea-level at 3.75 Ma points to an important Pliocene continental glaciation in the Northern Hemisphere. During the subsequent transgression, warm and possibly humid climate favoured the deposition of the first Pliocene sapropel around 3.3 Ma. The growth of a second generation of carbonate platform between 3.3 and 3.042 Ma suggests a renewed warm period and limited runoff. At the top of this highstand, thick sapropels developed, which can easily be correlated across the Mediterranean. The platform abruptly drowned, was overwhelmed by bio-erosion and was covered by iron\u2013phosphate crusts; whereas in the adjacent basins numerous sapropel layers occurred, rich of biosiliceous forms, documenting the shift from Ccarb to Corg deposition. Strong oscillations of climate, due to precessionally controlled seasonality, and increased precipitation and runoff are considered as the main causes of the increase of surface water fertility. After the 2.87 Ma sea-level drop, again very significant, the sapropel rapidly disappears, in conjunction to the development of the lowstand wedge. After this cold period, which ended around 2.6 Ma, carbonate platforms never recovered due to the enduring cooler surface waters and the onset of an active drainage on the Apenninic range. This study documents the role of the eustatic variations on the Pliocene deposition of the actively deforming Northern Apennines foredeep. The abrupt lithostratigraphic changes appear also controlled by palaeoproductivity variations associated with climate and runoff."
+    "id": "ark:/67375/6H6-SXFZKH1W-6",
+    "value": "Abstract: The Pliocene stratigraphy of the Romagna Northern Apennines foredeep has been reconstructed through mapping and measuring the different lithostratigraphic units. The physically correlated sedimentary bodies have been chronologically calibrated through biostratigraphic analyses. Analysis of facies and fossil content allowed reconstructing the main depositional systems and their evolution. The co-occurrence of shallow- to deep-water environments and carbonate to siliciclastic systems allowed understanding fully the role of eustasy and climate vs. continuous tectonic deformation controlling the accommodation and basin morphology. Following a limited sea-level lowering at 4.2 Ma, associated with the first signal of cooling in the Early Pliocene, a fast growing subtropical type carbonate platform developed, in response to warm and oligotrophic surface waters. Furthermore, a significant drop in sea-level at 3.75 Ma points to an important Pliocene continental glaciation in the Northern Hemisphere. During the subsequent transgression, warm and possibly humid climate favoured the deposition of the first Pliocene sapropel around 3.3 Ma. The growth of a second generation of carbonate platform between 3.3 and 3.042 Ma suggests a renewed warm period and limited runoff. At the top of this highstand, thick sapropels developed, which can easily be correlated across the Mediterranean. The platform abruptly drowned, was overwhelmed by bio-erosion and was covered by iron\u2013phosphate crusts; whereas in the adjacent basins numerous sapropel layers occurred, rich of biosiliceous forms, documenting the shift from Ccarb to Corg deposition. Strong oscillations of climate, due to precessionally controlled seasonality, and increased precipitation and runoff are considered as the main causes of the increase of surface water fertility. After the 2.87 Ma sea-level drop, again very significant, the sapropel rapidly disappears, in conjunction to the development of the lowstand wedge. After this cold period, which ended around 2.6 Ma, carbonate platforms never recovered due to the enduring cooler surface waters and the onset of an active drainage on the Apenninic range. This study documents the role of the eustatic variations on the Pliocene deposition of the actively deforming Northern Apennines foredeep. The abrupt lithostratigraphic changes appear also controlled by palaeoproductivity variations associated with climate and runoff."
      },
-    {
-        "id": "ark:/67375/6H6-MT1C65QX-P",
-        "value": "Abstract: Qinghai Lake is a large saline lake on the Qinghai\u2013Tibetan Plateau of central Asia that is effected by both the Indian and Asian monsoons. We used reflectance spectroscopy to characterize the sediments in a 795-cm long core taken from the southeastern part of the lake. Sediment redness, which is related to iron oxide content, seems to monitor paleoclimatic changes in the core. Iron oxides appear to be eroded from nearby red beds or loess deposits and are transported by fluvial means into the lake. Thus, redness increases at times of increased precipitation, that is, as monsoon strength increases. Our redness monsoon proxy shows climate changes on several times scales. On a millennial scale, it records humid conditions during the Early and Mid-Holocene. From about 4200 to 2300 yr BP, low redness values suggest a two-millennial long dry period, which in the Late Holocene is followed by a more humid period. On a centennial scale, the redness proxy records not only the Little Ice Age, but also the Medieval Warm Period, the Dark Ages Cool Period and the Roman Warm Period. Time series analysis of the redness record indicates a 200 yr frequency, which corresponds to the de Vries solar cycle suggesting that, in addition to insolation changes resulting from orbital variations, solar forcing also results from cyclic changes in the sun&apos;s luminosity."
-    }
+{
+    "id": "ark:/67375/6H6-MT1C65QX-P",
+    "value": "Abstract: Qinghai Lake is a large saline lake on the Qinghai\u2013Tibetan Plateau of central Asia that is effected by both the Indian and Asian monsoons. We used reflectance spectroscopy to characterize the sediments in a 795-cm long core taken from the southeastern part of the lake. Sediment redness, which is related to iron oxide content, seems to monitor paleoclimatic changes in the core. Iron oxides appear to be eroded from nearby red beds or loess deposits and are transported by fluvial means into the lake. Thus, redness increases at times of increased precipitation, that is, as monsoon strength increases. Our redness monsoon proxy shows climate changes on several times scales. On a millennial scale, it records humid conditions during the Early and Mid-Holocene. From about 4200 to 2300 yr BP, low redness values suggest a two-millennial long dry period, which in the Late Holocene is followed by a more humid period. On a centennial scale, the redness proxy records not only the Little Ice Age, but also the Medieval Warm Period, the Dark Ages Cool Period and the Roman Warm Period. Time series analysis of the redness record indicates a 200 yr frequency, which corresponds to the de Vries solar cycle suggesting that, in addition to insolation changes resulting from orbital variations, solar forcing also results from cyclic changes in the sun&apos;s luminosity."
+}
 ]
 
 HTTP 200
@@ -5036,7 +5079,6 @@ HTTP 200
 
 POST {{host}}/v1/JVR/expand?indent=true
 content-type: application/json
-
 [
   { "value": "toto"},
   { "value": "diabète" },
@@ -6064,7 +6106,6 @@ HTTP 200
 
 POST {{host}}/v1/JVR/identify?indent=true
 content-type: application/json
-
 [
   { "value": "toto"},
   { "value": "diabète" },
@@ -6106,4 +6147,394 @@ HTTP 200
         "localization@en": [],
         "localization@fr": []
     }
+}]
+
+POST {{host}}/v1/identify?indent=true&loterreID=9SD
+content-type: application/json
+[
+  { "value": "CAN" },
+  { "value": "N'importe quoi" }
+]
+
+HTTP 200
+[{
+    "value": {
+        "rdf$about": "http://data.loterre.fr/ark:/67375/9SD-QDWJ08N6-7",
+        "skos$inScheme": {
+            "rdf$resource": "http://data.loterre.fr/ark:/67375/9SD"
+        },
+        "skos$prefLabel": [
+            {
+                "xml$lang": "fr",
+                "xml$t": "Canada"
+            },
+            {
+                "xml$lang": "en",
+                "xml$t": "Canada"
+            }
+        ],
+        "gvp$tgn3202_capital_is": {
+            "rdf$resource": "http://data.loterre.fr/ark:/67375/9SD-HG1FKQGP-C"
+        },
+        "inist$lodexPlacenameCode": {
+            "xml$t": "CAN"
+        },
+        "gn$geonamesID": {
+            "xml$t": "6251999"
+        },
+        "obo$GEO_000035330": {
+            "xml$t": "6251999"
+        },
+        "gn$featureClass": {
+            "rdf$resource": "https://www.geonames.org/ontology#A"
+        },
+        "gn$featureCode": {
+            "rdf$resource": "https://www.geonames.org/ontology#A.PCLI"
+        },
+        "geo$lat": {
+            "rdf$datatype": "http://www.w3.org/2001/XMLSchema#double",
+            "xml$t": "57.7487688035733"
+        },
+        "geo$long": {
+            "rdf$datatype": "http://www.w3.org/2001/XMLSchema#double",
+            "xml$t": "-101.569822125212"
+        },
+        "skosxl$altLabel": [
+            {
+                "rdf$resource": "http://data.loterre.fr/ark:/67375/9SD/d1e4500/xl-fr-16"
+            },
+            {
+                "rdf$resource": "http://data.loterre.fr/ark:/67375/9SD/d1e4500/xl-en-16"
+            },
+            {
+                "rdf$resource": "http://data.loterre.fr/ark:/67375/9SD/d1e4500/xl-fr-18"
+            },
+            {
+                "rdf$resource": "http://data.loterre.fr/ark:/67375/9SD/d1e4500/xl-en-18"
+            },
+            {
+                "rdf$resource": "http://data.loterre.fr/ark:/67375/9SD/d1e4500/xl-fr-19"
+            },
+            {
+                "rdf$resource": "http://data.loterre.fr/ark:/67375/9SD/d1e4500/xl-en-19"
+            },
+            {
+                "rdf$resource": "http://data.loterre.fr/ark:/67375/9SD/d1e4500/xl-fr-23"
+            },
+            {
+                "rdf$resource": "http://data.loterre.fr/ark:/67375/9SD/d1e4500/xl-en-23"
+            }
+        ],
+        "obo$GEO_000000022": {
+            "xml$t": "CAN"
+        },
+        "gn$countryCode": {
+            "xml$t": "CA"
+        },
+        "obo$GEO_000000023": {
+            "xml$t": "CA"
+        },
+        "obo$GEO_000000021": {
+            "xml$t": "124"
+        },
+        "skos$exactMatch": [
+            {
+                "rdf$resource": "https://www.wikidata.org/wiki/Q16"
+            },
+            {
+                "rdf$resource": "https://en.wikipedia.org/wiki/Canada"
+            },
+            {
+                "rdf$resource": "https://fr.wikipedia.org/wiki/Canada"
+            },
+            {
+                "rdf$resource": "http://dbpedia.org/page/Canada"
+            },
+            {
+                "rdf$resource": "https://www.geonames.org/6251999/"
+            }
+        ],
+        "wdt$P36": {
+            "rdf$resource": "https://www.wikidata.org/wiki/Q1930"
+        },
+        "wdt$P3422": {
+            "xml$t": "99401"
+        },
+        "skos$altLabel": [
+            {
+                "xml$lang": "fr",
+                "xml$t": "CAN"
+            },
+            {
+                "xml$lang": "en",
+                "xml$t": "CAN"
+            },
+            {
+                "xml$lang": "fr",
+                "xml$t": "CA"
+            },
+            {
+                "xml$lang": "en",
+                "xml$t": "CA"
+            },
+            {
+                "xml$lang": "fr",
+                "xml$t": "124"
+            },
+            {
+                "xml$lang": "en",
+                "xml$t": "124"
+            }
+        ],
+        "skos$broader": [
+            {
+                "skos$prefLabel": [
+                    {
+                        "xml$lang": "fr",
+                        "xml$t": "Amérique septentrionale"
+                    },
+                    {
+                        "xml$lang": "en",
+                        "xml$t": "Northern America"
+                    }
+                ],
+                "rdf$about": "http://data.loterre.fr/ark:/67375/9SD-WFRKZV0L-5"
+            }
+        ],
+        "skos$narrower": [
+            {
+                "skos$prefLabel": [
+                    {
+                        "xml$lang": "fr",
+                        "xml$t": "Ottawa"
+                    },
+                    {
+                        "xml$lang": "en",
+                        "xml$t": "Ottawa"
+                    }
+                ],
+                "rdf$about": "http://data.loterre.fr/ark:/67375/9SD-HG1FKQGP-C"
+            }
+        ],
+        "indexKeys": [
+            "canada",
+            "can",
+            "ca",
+            "124"
+        ],
+        "score": 2
+    }
+},
+{
+    "value": "n/a"
+}]
+
+POST {{host}}/v1/expand?indent=true&loterreID=9SD
+content-type: application/json
+[
+  { "value": "CAN" },
+  { "value": "N'importe quoi" }
+]
+
+HTTP 200
+[{
+    "value": {
+        "rdf$about": "http://data.loterre.fr/ark:/67375/9SD-QDWJ08N6-7",
+        "skos$inScheme": {
+            "rdf$resource": "http://data.loterre.fr/ark:/67375/9SD"
+        },
+        "skos$prefLabel": [
+            {
+                "xml$lang": "fr",
+                "xml$t": "Canada"
+            },
+            {
+                "xml$lang": "en",
+                "xml$t": "Canada"
+            }
+        ],
+        "gvp$tgn3202_capital_is": {
+            "rdf$resource": "http://data.loterre.fr/ark:/67375/9SD-HG1FKQGP-C"
+        },
+        "inist$lodexPlacenameCode": {
+            "xml$t": "CAN"
+        },
+        "gn$geonamesID": {
+            "xml$t": "6251999"
+        },
+        "obo$GEO_000035330": {
+            "xml$t": "6251999"
+        },
+        "gn$featureClass": {
+            "rdf$resource": "https://www.geonames.org/ontology#A"
+        },
+        "gn$featureCode": {
+            "rdf$resource": "https://www.geonames.org/ontology#A.PCLI"
+        },
+        "geo$lat": {
+            "rdf$datatype": "http://www.w3.org/2001/XMLSchema#double",
+            "xml$t": "57.7487688035733"
+        },
+        "geo$long": {
+            "rdf$datatype": "http://www.w3.org/2001/XMLSchema#double",
+            "xml$t": "-101.569822125212"
+        },
+        "skosxl$altLabel": [
+            {
+                "rdf$resource": "http://data.loterre.fr/ark:/67375/9SD/d1e4500/xl-fr-16"
+            },
+            {
+                "rdf$resource": "http://data.loterre.fr/ark:/67375/9SD/d1e4500/xl-en-16"
+            },
+            {
+                "rdf$resource": "http://data.loterre.fr/ark:/67375/9SD/d1e4500/xl-fr-18"
+            },
+            {
+                "rdf$resource": "http://data.loterre.fr/ark:/67375/9SD/d1e4500/xl-en-18"
+            },
+            {
+                "rdf$resource": "http://data.loterre.fr/ark:/67375/9SD/d1e4500/xl-fr-19"
+            },
+            {
+                "rdf$resource": "http://data.loterre.fr/ark:/67375/9SD/d1e4500/xl-en-19"
+            },
+            {
+                "rdf$resource": "http://data.loterre.fr/ark:/67375/9SD/d1e4500/xl-fr-23"
+            },
+            {
+                "rdf$resource": "http://data.loterre.fr/ark:/67375/9SD/d1e4500/xl-en-23"
+            }
+        ],
+        "obo$GEO_000000022": {
+            "xml$t": "CAN"
+        },
+        "gn$countryCode": {
+            "xml$t": "CA"
+        },
+        "obo$GEO_000000023": {
+            "xml$t": "CA"
+        },
+        "obo$GEO_000000021": {
+            "xml$t": "124"
+        },
+        "skos$exactMatch": [
+            {
+                "rdf$resource": "https://www.wikidata.org/wiki/Q16"
+            },
+            {
+                "rdf$resource": "https://en.wikipedia.org/wiki/Canada"
+            },
+            {
+                "rdf$resource": "https://fr.wikipedia.org/wiki/Canada"
+            },
+            {
+                "rdf$resource": "http://dbpedia.org/page/Canada"
+            },
+            {
+                "rdf$resource": "https://www.geonames.org/6251999/"
+            }
+        ],
+        "wdt$P36": {
+            "rdf$resource": "https://www.wikidata.org/wiki/Q1930"
+        },
+        "wdt$P3422": {
+            "xml$t": "99401"
+        },
+        "skos$altLabel": [
+            {
+                "xml$lang": "fr",
+                "xml$t": "CAN"
+            },
+            {
+                "xml$lang": "en",
+                "xml$t": "CAN"
+            },
+            {
+                "xml$lang": "fr",
+                "xml$t": "CA"
+            },
+            {
+                "xml$lang": "en",
+                "xml$t": "CA"
+            },
+            {
+                "xml$lang": "fr",
+                "xml$t": "124"
+            },
+            {
+                "xml$lang": "en",
+                "xml$t": "124"
+            }
+        ],
+        "skos$broader": [
+            {
+                "skos$prefLabel": [
+                    {
+                        "xml$lang": "fr",
+                        "xml$t": "Amérique septentrionale"
+                    },
+                    {
+                        "xml$lang": "en",
+                        "xml$t": "Northern America"
+                    }
+                ],
+                "rdf$about": "http://data.loterre.fr/ark:/67375/9SD-WFRKZV0L-5"
+            }
+        ],
+        "skos$narrower": [
+            {
+                "skos$prefLabel": [
+                    {
+                        "xml$lang": "fr",
+                        "xml$t": "Ottawa"
+                    },
+                    {
+                        "xml$lang": "en",
+                        "xml$t": "Ottawa"
+                    }
+                ],
+                "rdf$about": "http://data.loterre.fr/ark:/67375/9SD-HG1FKQGP-C"
+            }
+        ],
+        "indexKeys": [
+            "canada",
+            "can",
+            "ca",
+            "124"
+        ],
+        "score": 2
+    }
+},
+{
+    "value": "n/a"
+}]
+
+POST {{host}}/v1/annotate?indent=true&loterreID=9SD
+content-type: application/json
+[
+  { "value": "Je suppose que l'on cherche dans le texte une occurrence d'un toponyme, comme le Canada." },
+  { "value": "Aucun toponyme dans ce texte." }
+]
+
+
+HTTP 200
+[{
+    "value": [
+        {
+            "lang": "eng",
+            "prefLabel": "Canada",
+            "termeReconnu": [
+                "Canada."
+            ],
+            "arbreHierarchique": [
+                "1 - World, 2 - Americas, 3 - North America, 4 - Northern America"
+            ],
+            "conceptUri": "http://data.loterre.fr/ark:/67375/9SD-QDWJ08N6-7",
+            "outil": "Loterre_Annot",
+            "frequence": "1"
+        }
+    ]
+},
+{
+    "value": []
 }]

@@ -24,10 +24,10 @@ WORKDIR /app/public
 
 # Install all node dependencies
 RUN npm install --omit=dev \
-    @ezs/core@3.11.2 \
-    @ezs/analytics@2.3.5 \
-    @ezs/basics@2.9.1 \
-    @ezs/storage@3.2.5 \
+    @ezs/core@4.1.1 \
+    @ezs/analytics@2.3.6 \
+    @ezs/basics@2.9.2 \
+    @ezs/storage@3.2.6 \
     @ezs/xslt@1.3.32 && \
     npm cache clean --force
 
