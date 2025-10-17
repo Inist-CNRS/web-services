@@ -15,7 +15,7 @@
             "x-comment": "Will be automatically completed by the ezs server."
         },
         {
-            "url": "http://vptermsuite.intra.inist.fr:49173/",
+            "url": "http://vptermsuite.intra.inist.fr:49176/",
             "description": "Latest version for production",
             "x-profil": "Standard"
         }
