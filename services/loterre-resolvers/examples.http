@@ -176,3 +176,533 @@ Content-Type: application/json
   { "value": "Je suppose que l'on cherche dans le texte une occurrence d'un toponyme, comme le Canada." },
   { "value": "Aucun toponyme dans ce texte." }
 ]
+
+###
+# @name v1annotateEMTD
+# en: KO
+# fr: KO
+# FIXME ?
+# POST {{host}}/v1/annotate?indent=true&loterreID=EMTD HTTP/1.1
+# Content-Type: application/json
+
+# [
+#   { "value": "adhesin anaerobiosis autoclaving isolator" },
+#   { "value": "bactériophage clonage ELISA entérotoxine" }
+# ]
+
+###
+# @name v1annotateVPAC
+# en: KO
+# fr: KO
+# FIXME ?
+# POST {{host}}/v1/annotate?indent=true&loterreID=VPAC HTTP/1.1
+# Content-Type: application/json
+
+# [
+#   { "value": "La réforme de la PAC 2023-2027 introduit des éco-régimes visant à renforcer la conditionnalité des aides directes, en liant 25 % des subventions à l’adoption de pratiques agricoles respectueuses de la biodiversité." },
+#   { "value": "The reform of the Common Agricultural Policy (CAP) 2023-2027 introduces eco-regimes aimed at strengthening the conditionality of direct aids, linking 25% of subsidies to the adoption of environmentally friendly agricultural practices." },
+#   { "value": "The 2023-2027 CAP reform introduces eco-schemes aimed at strengthening the conditionality of direct payments, linking 25% of subsidies to the adoption of biodiversity-friendly agricultural practices. " },
+#   { "value": "IACS income aid indicative price investment aid" }
+# ]
+
+###
+# @name v1annotateERC
+# fr: KO
+# en: OK
+POST {{host}}/v1/annotate?indent=true&loterreID=ERC HTTP/1.1
+Content-Type: application/json
+
+[
+  { "value": "Le projet soumis au panel LS7 de l’ERC a été classé comme Frontier Research, avec une évaluation A pour son approche interdisciplinaire combinant génomique et épigénétique." },
+  { "value": "The project submitted to the ERC panel LS7 was classified as Frontier Research, with an evaluation A for its interdisciplinary approach combining genomics and epigenetics." }
+]
+
+###
+# @name v1annotatePAN
+# fr: KO
+# en: KO
+# FIXME ?
+# POST {{host}}/v1/annotate?indent=true&loterreID=PAN HTTP/1.1
+# Content-Type: application/json
+
+# [
+#   { "value": "L’activité protéolytique des lactobacilles du levain naturel a été mesurée par électrophorèse SDS-PAGE, révélant une dégradation optimale des protéines du gluten après 12 heures de fermentation à 28 °C." },
+#   { "value": "The proteolytic activity of lactobacilli in natural sourdough was measured by SDS-PAGE electrophoresis, revealing optimal degradation of gluten proteins after 12 hours of fermentation at 28 °C." },
+#   { "value": "acidité albumines amidon amorphe autolyse" }
+# ]
+
+###
+# @name v1annotateTSM
+# fr: KO
+# en: OK
+# FIXME ?
+# POST {{host}}/v1/annotate?indent=true&loterreID=TSM HTTP/1.1
+# Content-Type: application/json
+
+# [
+#   { "value": "La nouvelle technologie de séparation par microfiltration a permis d’augmenter la productivité de l’usine de traitement de l’eau potable, en réduisant la contamination des membranes par les particules sédimentaires." },
+#   { "value": "L’efficacité de rétention des membranes en polyamide pour l’élimination des micropolluants organiques a été évaluée à 98 % sous une pression trans-membranaire de 10 bars. " },
+#   { "value": "The retention efficiency of polyamide membranes for the removal of organic micropollutants was evaluated at 98% under a transmembrane pressure of 10 bars." },
+#   { "value": "Boucle de circulation empilement peau perméabilité" },
+#   { "value": "skin anisotropic membrane" }
+# ]
+
+###
+# @name v1annotateCUEX
+# fr: KO
+# en: KO
+# FIXME ?
+# POST {{host}}/v1/annotate?indent=true&loterreID=CUEX HTTP/1.1
+# Content-Type: application/json
+
+# [
+#   { "value": "La cuisson-extrusion est une technique de transformation des céréales qui permet de favoriser la digestibilité et la disponibilité nutritionnelle des aliments." },
+#   { "value": "L’extrusion réactive à double vis a permis d’obtenir une expansion volumétrique de 3,2 pour des snacks à base de farine de pois, avec un temps de séjour moyen de 45 secondes à 140 °C." },
+#   { "value": "The extrusion cooking process involves heating and extruding dough through a die to create various food products." },
+#   { "value": "Reactive twin-screw extrusion produced a volumetric expansion of 3.2 for pea flour-based snacks, with an average residence time of 45 seconds at 140°C." },
+#   { "value": "barrel caseinate coextrusion" }
+# ]
+
+###
+# @name v1annotate8HQ
+# fr: OK
+# en: OK+
+POST {{host}}/v1/annotate?indent=true&loterreID=8HQ HTTP/1.1
+Content-Type: application/json
+
+[
+  { "id": 1, "value": "L’étude de la structure électronique de l’uranium hexafluoride a permis de caractériser les liaisons covalentes et les interactions ioniques dans ce composé." },
+  { "id": 2, "value": "L’uranium hexafluoride est un composé gazeux utilisé dans l’industrie nucléaire pour enrichir l’uranium utilisé dans les réacteurs nucléaires." },
+  { "id": 3, "value": "La configuration électronique [Xe]4f¹⁴5d¹⁰6s² du mercure explique sa faible réactivité et sa tendance à former des amalgames avec d’autres métaux de transition. " },
+  { "id": 4, "value": "The electronic structure study of uranium hexafluoride has characterized its covalent bonds and ionic interactions." },
+  { "id": 5, "value": "Uranium hexafluoride is a gaseous compound used in the nuclear industry to enrich uranium for use in nuclear reactors." },
+  { "id": 6, "value": "The electronic configuration of mercury [Xe]4f¹⁴5d¹⁰6s² explains its low reactivity and tendency to form amalgams with other transition metals." }
+]
+
+###
+# @name v1annotateBRMH
+# en: KO
+# FIXME ?
+# POST {{host}}/v1/annotate?indent=true&loterreID=BRMH HTTP/1.1
+# Content-Type: application/json
+
+# [
+#   { "value": "The vitrification of oocytes showed a post-thaw survival rate of 92%, thanks to the use of a cryoprotectant based on dimethyl sulfoxide and sucrose." },
+#   { "value": "chimera clone" }
+# ]
+
+###
+# @name v1annotateIDIA
+# en: KO
+# FIXME ?
+# POST {{host}}/v1/annotate?indent=true&loterreID=IDIA HTTP/1.1
+# Content-Type: application/json
+
+# [
+#   { "value": "Gamma irradiation treatment (3 kGy dose) reduced the microbial load of Listeria monocytogenes by 5 log CFU/g in samples of raw ham." },
+#   { "value": "caesium-137 Compton effect curie"}
+# ]
+
+###
+# @name v1annotateGGMGG
+# en: KO
+# FIXME ?
+# POST {{host}}/v1/annotate?indent=true&loterreID=GGMGG HTTP/1.1
+# Content-Type: application/json
+
+# [
+#   { "value": "The use of a cryoprotectant based on dimethyl sulfoxide and sucrose improved the vitrification of oocytes, with a post-thaw survival rate of 92%." },
+#   { "value": "CRISPR-Cas9 editing targeting exon 7 of BRCA1 induced genomic instability detected by high-throughput sequencing in breast cancer cell lines." },
+#   { "value": "cap cell fusion cytosine"}
+# ]
+
+###
+# @name v1annotateTSO
+# en: OK
+POST {{host}}/v1/annotate?indent=true&loterreID=TSO HTTP/1.1
+Content-Type: application/json
+
+[
+  { "value": "The adoption of FAIR principles (Findable, Accessible, Interoperable, Reusable) for research datasets was strengthened by the integration of standardized metadata according to the DataCite schema." }
+]
+
+###
+# @name v1annotate1WB
+# en: OK
+POST {{host}}/v1/annotate?indent=true&loterreID=1WB HTTP/1.1
+Content-Type: application/json
+
+[
+  { "value": "The heat transfer coefficient (h) was calculated using the formula h = Q / (A * ΔT), where Q is the heat transfer rate, A is the surface area, and ΔT is the temperature difference." },
+  { "value": "The overall heat transfer coefficient of a plate heat exchanger was calculated at 1200 W/m²·K for a flow rate of 2 m³/h of water at 80°C." }
+]
+
+###
+# @name v1annotateGT
+# en: KO
+POST {{host}}/v1/annotate?indent=true&loterreID=GT HTTP/1.1
+Content-Type: application/json
+
+[
+  { "value": "GIS analysis of spatial dynamics revealed a correlation between increasing urbanization of the Mediterranean coast and the fragmentation of dune ecosystems." },
+  { "value": "Call center Dam Date Decision" }
+]
+
+###
+# @name v1annotateC0X
+# en: OK
+POST {{host}}/v1/annotate?indent=true&loterreID=C0X HTTP/1.1
+Content-Type: application/json
+
+[
+  { "value": "The Omicron BA.5 variant showed partial immune escape from neutralizing antibodies induced by vaccination, with an IC50 titer reduced by 80% compared to the original strain." }
+]
+
+###
+# @name v1annotateTh63
+# en: OK
+POST {{host}}/v1/annotate?indent=true&loterreID=th63 HTTP/1.1
+Content-Type: application/json
+
+[
+  { "value": "The new species of frog, Rhinella loterrei, was discovered in the Amazon rainforest and described based on morphological and molecular characteristics." },
+  { "value": "The taxonomic revision of the genus Pseudomonas led to the reclassification of P. fluorescens as Pseudomonas protegens, according to the rules of the International Code of Zoological Nomenclature." }
+]
+
+###
+# @name v1annotateW7B
+# en: OK
+POST {{host}}/v1/annotate?indent=true&loterreID=W7B HTTP/1.1
+Content-Type: application/json
+
+[
+  { "value": "ABO-Rh compatibility was confirmed by an indirect Coombs test, allowing an emergency transfusion of packed red blood cells to an O-negative patient." }
+]
+
+###
+# @name v1annotate8LP
+# en: OK
+POST {{host}}/v1/annotate?indent=true&loterreID=8LP HTTP/1.1
+Content-Type: application/json
+
+[
+  { "value": "The automatic translation system achieved a BLEU score of 45.6 on the Europarl dataset, surpassing the previous state-of-the-art by 2.8 points." },
+  { "value": "Training a BERT model on a corpus of legal texts achieved 94% precision for the named entity recognition task." }
+]
+
+###
+# @name v1annotateDOM
+# en: OK
+POST {{host}}/v1/annotate?indent=true&loterreID=DOM HTTP/1.1
+Content-Type: application/json
+
+[
+  { "value": "Mapping interdisciplinary collaborations revealed a 40% increase in co-publications between neuroscience and artificial intelligence since 2020." }
+]
+
+###
+# @name v1annotate27X
+# en: OK
+POST {{host}}/v1/annotate?indent=true&loterreID=27X HTTP/1.1
+Content-Type: application/json
+
+[
+  { "value": "Raman spectroscopy analysis of blue pigments in the Lascaux cave frescoes confirmed the use of laurionite, a rare lead chloride mineral." }
+]
+
+###
+# @name v1annotate216
+# en: OK
+POST {{host}}/v1/annotate?indent=true&loterreID=216 HTTP/1.1
+Content-Type: application/json
+
+[
+  { "value": "The study of the effects of acculturation on academic achievement revealed a positive correlation between cultural assimilation and academic success in immigrant students." },
+  { "value": "The assessment of socio-emotional skills in primary school students showed a 20% improvement after implementing a Montessori-based program." }
+]
+
+###
+# @name v1annotate4V5
+# en: OK
+POST {{host}}/v1/annotate?indent=true&loterreID=4V5 HTTP/1.1
+Content-Type: application/json
+
+[
+  { "value": "The study of the Coptic manuscripts from Nag Hammadi revealed Gnostic influences in the apocryphal texts of early Christianity." }
+]
+
+###
+# @name v1annotateQX8
+# en: OK
+POST {{host}}/v1/annotate?indent=true&loterreID=QX8 HTTP/1.1
+Content-Type: application/json
+
+[
+  { "value": "The analysis of oxygen isotope ratios in speleothems from southern France indicated a significant cooling event during the Younger Dryas period." },
+  { "value": "The analysis of Antarctic ice cores highlighted a correlation between atmospheric CO₂ concentrations and glacial-interglacial cycles over the past 800,000 years." }
+]
+
+###
+# @name v1annotateFMC
+# en: OK
+POST {{host}}/v1/annotate?indent=true&loterreID=FMC HTTP/1.1
+Content-Type: application/json
+
+[
+  { "value": "The development of adaptive optics techniques has significantly improved the resolution of ground-based telescopes, allowing for clearer observations of distant celestial objects." },
+  { "value": "X-ray diffraction by a Bragg grating allowed the measurement of an interplanar spacing of 0.28 nm in a doped silicon crystal." }
+]
+
+###
+# @name v1annotateBLH
+# en: OK
+POST {{host}}/v1/annotate?indent=true&loterreID=BLH HTTP/1.1
+Content-Type: application/json
+
+[
+  { "value": "Meta-analysis of GPS tracking data revealed a 30% reduction in the hunting territories of Eurasian lynxes due to forest fragmentation." }
+]
+
+###
+# @name v1annotateRVQ
+# en: KO
+POST {{host}}/v1/annotate?indent=true&loterreID=RVQ HTTP/1.1
+Content-Type: application/json
+
+[
+  { "value": "Hydrothermal synthesis of TiO₂ nanoparticles produced anatase crystals with a specific surface area of 150 m²/g, ideal for photocatalytic applications." }
+]
+
+###
+# @name v1annotate3JP
+# en: OK
+POST {{host}}/v1/annotate?indent=true&loterreID=3JP HTTP/1.1
+Content-Type: application/json
+
+[
+  { "value": "The study of social capital in deprived neighborhoods revealed a positive correlation between community engagement and subjective well-being." },
+  { "value": "The qualitative survey on social inequalities in access to healthcare revealed a cumulative disadvantage effect for precarious populations in urban areas." }
+]
+
+###
+# @name v1annotateSN8
+# en: OK
+POST {{host}}/v1/annotate?indent=true&loterreID=SN8 HTTP/1.1
+Content-Type: application/json
+
+[
+  { "value": "The application of wavelet transforms to biomedical signals improved the detection of epileptic seizures by enhancing the signal-to-noise ratio." },
+  { "value": "Adaptive filtering using the LMS algorithm reduced the signal-to-noise ratio by 15 dB in EEG signals contaminated by muscle artifacts." }
+]
+
+###
+# @name v1annotateXD4
+# en: OK
+POST {{host}}/v1/annotate?indent=true&loterreID=XD4 HTTP/1.1
+Content-Type: application/json
+
+[
+  { "value": "The discovery of the Antikythera mechanism in 1901 revealed the existence of an ancient Greek analog computer used for astronomical calculations." },
+  { "value": "The invention of the compound microscope by Zacharias Janssen in the 17th century marked a turning point in microbiology, enabling Leeuwenhoek to observe bacteria." }
+]
+
+###
+# @name v1annotateG9G
+# en: OK
+POST {{host}}/v1/annotate?indent=true&loterreID=G9G HTTP/1.1
+Content-Type: application/json
+
+[
+  { "value": "The study of the feeding habits of the bluefin tuna revealed a preference for anchovies and sardines, with a diet composition of 70% prey and 30% detritus." },
+  { "value": "The phylogenetic revision of Cichlidae from Lake Malawi led to the description of three new species of the genus Labeotropheus, based on morphometric and genetic criteria." }
+]
+
+###
+# @name v1annotate905
+# en: OK
+POST {{host}}/v1/annotate?indent=true&loterreID=905 HTTP/1.1
+Content-Type: application/json
+
+[
+  { "value": "The discovery of the earliest evidence of human occupation in the Near East dates back to 125,000 years ago, challenging the conventional view of modern human origins in Africa." },
+  { "value": "Analysis of flint tools from the Solutré site confirmed the use of bifacial retouching techniques by Upper Paleolithic hunter-gatherers." }
+]
+
+###
+# @name v1annotateLTK
+# en: OK
+POST {{host}}/v1/annotate?indent=true&loterreID=LTK HTTP/1.1
+Content-Type: application/json
+
+[
+  { "value": "Academic Free License version 3" }
+]
+
+###
+# @name v1annotate3WV
+# en: OK
+POST {{host}}/v1/annotate?indent=true&loterreID=3WV HTTP/1.1
+Content-Type: application/json
+
+[
+  { "value": "The bioaccumulation of cadmium in the liver tissues of Oncorhynchus mykiss was measured at 12 µg/g after chronic exposure to mining-contaminated waters." }
+]
+
+###
+# @name v1annotate73G
+# en: OK
+POST {{host}}/v1/annotate?indent=true&loterreID=73G HTTP/1.1
+Content-Type: application/json
+
+[
+  { "value": "The study of the ontological status of abstract objects revealed a plurality of views among philosophers, with some arguing for a realist position and others for an anti-realist stance." },
+  { "value": "The phenomenological analysis of time perception in Husserl highlighted the distinction between objective time and lived time, central to the critique of classical metaphysics." }
+]
+
+###
+# @name v1annotateKG7
+# en: OK
+POST {{host}}/v1/annotate?indent=true&loterreID=KG7 HTTP/1.1
+Content-Type: application/json
+
+[
+  { "value": "The study of migration dynamics in the United States showed an increasing concentration of Hispanic populations in southern states, with an annual growth rate of 3% in Texas." }
+]
+
+###
+# @name v1annotateRDR
+# en: OK
+POST {{host}}/v1/annotate?indent=true&loterreID=RDR HTTP/1.1
+Content-Type: application/json
+
+[
+  { "value": "The development of graphene-based transistors has the potential to revolutionize the field of electronics, with applications ranging from flexible displays to high-speed computing." },
+  { "value": "The design of a high-frequency printed circuit board required the use of low-loss dielectric materials (tan δ < 0.002) to minimize electromagnetic interference." }
+]
+
+###
+# @name v1annotateMDL
+# en: OK
+POST {{host}}/v1/annotate?indent=true&loterreID=MDL HTTP/1.1
+Content-Type: application/json
+
+[
+  { "value": "The discovery of a new exoplanet, Kepler-452b, orbiting a sun-like star in the habitable zone of the Milky Way galaxy, raises hopes for the existence of extraterrestrial life." },
+  { "value": "The detection of a super-Earth exoplanet by the transit method revealed an orbital period of 12.3 days around the red dwarf star Gliese 581." }
+]
+
+###
+# @name v1annotateVH8
+# en: OK
+POST {{host}}/v1/annotate?indent=true&loterreID=VH8 HTTP/1.1
+Content-Type: application/json
+
+[
+  { "value": "The epidemiological study confirmed an 8% prevalence of Crohn’s disease in Caucasian populations, with an incidence peak between the ages of 20 and 30." }
+]
+
+###
+# @name v1annotateKW5
+# en: OK
+POST {{host}}/v1/annotate?indent=true&loterreID=KW5 HTTP/1.1
+Content-Type: application/json
+
+[
+  { "value": "The study of the social organization of the Yanomami people revealed a complex system of kinship and alliance based on bilateral cross-cousin marriage." },
+  { "value": "Ethnographic research among Andean Amerindian communities documented symbolic reciprocity practices in pre-Columbian agrarian rituals." }
+]
+
+###
+# @name v1annotateTSP
+# en: KO
+POST {{host}}/v1/annotate?indent=true&loterreID=TSP HTTP/1.1
+Content-Type: application/json
+
+[
+  { "value": "The measles vaccination campaign in sub-Saharan Africa reduced incidence by 75% between 2015 and 2023, according to WHO data." }
+]
+
+###
+# @name v1annotateP21
+# en: OK
+POST {{host}}/v1/annotate?indent=true&loterreID=P21 HTTP/1.1
+Content-Type: application/json
+
+[
+  { "value": "Stylistic analysis of Proust’s novels revealed a systematic use of extended metaphor to represent the subjectivity of time and memory." }
+]
+
+###
+# @name v1annotateNHT
+# en: OK
+POST {{host}}/v1/annotate?indent=true&loterreID=NHT HTTP/1.1
+Content-Type: application/json
+
+[
+  { "value": "The study of superconductivity in cuprate materials revealed a complex interplay between charge ordering and antiferromagnetic correlations, challenging the conventional BCS theory." },
+  { "value": "The superconducting phase transition in cuprates was observed at a critical temperature of 92 K, confirming the effect of hydrostatic pressure on the crystalline structure." }
+]
+
+###
+# @name v1annotateBVM
+# en: OK
+POST {{host}}/v1/annotate?indent=true&loterreID=BVM HTTP/1.1
+Content-Type: application/json
+
+[
+  { "value": "The town of Vandœuvre-lès-Nancy is located in the Meurthe-et-Moselle department, in the Grand Est region of France." }
+]
+
+###
+# @name v1annotate26L
+# en: OK
+POST {{host}}/v1/annotate?indent=true&loterreID=26L HTTP/1.1
+Content-Type: application/json
+
+[
+  { "value": "Seismic analysis of active faults in the Alpine region revealed an increased risk of magnitude 6.5 earthquakes in the next 50 years." }
+]
+
+###
+# @name v1annotatePSR
+# en: OK
+POST {{host}}/v1/annotate?indent=true&loterreID=PSR HTTP/1.1
+Content-Type: application/json
+
+[
+  { "value": "The proof of Fermat’s Last Theorem used advanced number theory tools, including modular forms and Galois representations." }
+]
+
+###
+# @name v1annotateN9J
+# en: KO
+# Very long response time (116717ms)
+# Empty response
+# FIXME: old db format (not sqlite): 404k files
+# POST {{host}}/v1/annotate?indent=true&loterreID=N9J HTTP/1.1
+# Content-Type: application/json
+
+# [
+#   { "value": "The integration of epidemiological data into the SAGE system enabled predictive modeling of epidemic spread with a 5% margin of error." },
+#   { "value": "Abraham Lincoln " }
+# ]
+
+###
+# @name v1annotateD63
+# en: OK
+POST {{host}}/v1/annotate?indent=true&loterreID=D63 HTTP/1.1
+Content-Type: application/json
+
+[
+  { "value": "Ars-sur-Moselle Ars-Laquenexy" }
+]
+
+###
+# @name v1annotateJVR
+# en: OK
+POST {{host}}/v1/annotate?indent=true&loterreID=JVR HTTP/1.1
+Content-Type: application/json
+
+[
+  { "value": "Indexing biomedical articles with MeSH terms facilitated the identification of 12,000 publications on the molecular mechanisms of antibiotic resistance." }
+]
