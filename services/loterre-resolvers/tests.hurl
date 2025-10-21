@@ -6516,7 +6516,6 @@ content-type: application/json
   { "value": "Aucun toponyme dans ce texte." }
 ]
 
-
 HTTP 200
 [{
     "value": [
@@ -6537,4 +6536,2970 @@ HTTP 200
 },
 {
     "value": []
+}]
+
+POST {{host}}/v1/annotate?indent=true&loterreID=ERC
+content-type: application/json
+[
+  { "value": "Le projet soumis au panel LS7 de l’ERC a été classé comme Frontier Research, avec une évaluation A pour son approche interdisciplinaire combinant génomique et épigénétique." },
+  { "value": "The project submitted to the ERC panel LS7 was classified as Frontier Research, with an evaluation A for its interdisciplinary approach combining genomics and epigenetics." }
+]
+
+HTTP 200
+[{
+    "value": []
+},
+{
+    "value": [
+        {
+            "lang": "eng",
+            "prefLabel": "Epigenetics",
+            "termeReconnu": [
+                "epigenetics."
+            ],
+            "arbreHierarchique": [
+                "1 - Life Sciences, 2 - Integrative Biology: from Genes and Genomes to Systems"
+            ],
+            "conceptUri": "http://data.loterre.fr/ark:/67375/ERC-D2G5W17Z-N",
+            "outil": "Loterre_Annot",
+            "frequence": "1"
+        },
+        {
+            "lang": "eng",
+            "prefLabel": "Genomics",
+            "termeReconnu": [
+                "genomics"
+            ],
+            "arbreHierarchique": [
+                "1 - Life Sciences, 2 - Integrative Biology: from Genes and Genomes to Systems"
+            ],
+            "conceptUri": "http://data.loterre.fr/ark:/67375/ERC-QCZ7P4PF-Z",
+            "outil": "Loterre_Annot",
+            "frequence": "1"
+        }
+    ]
+}]
+
+POST {{host}}/v1/annotate?indent=true&loterreID=8HQ
+content-type: application/json
+[
+  { "id": 1, "value": "L’étude de la structure électronique de l’uranium hexafluoride a permis de caractériser les liaisons covalentes et les interactions ioniques dans ce composé." },
+  { "id": 2, "value": "L’uranium hexafluoride est un composé gazeux utilisé dans l’industrie nucléaire pour enrichir l’uranium utilisé dans les réacteurs nucléaires." },
+  { "id": 3, "value": "La configuration électronique [Xe]4f¹⁴5d¹⁰6s² du mercure explique sa faible réactivité et sa tendance à former des amalgames avec d’autres métaux de transition. " },
+  { "id": 4, "value": "The electronic structure study of uranium hexafluoride has characterized its covalent bonds and ionic interactions." },
+  { "id": 5, "value": "Uranium hexafluoride is a gaseous compound used in the nuclear industry to enrich uranium for use in nuclear reactors." },
+  { "id": 6, "value": "The electronic configuration of mercury [Xe]4f¹⁴5d¹⁰6s² explains its low reactivity and tendency to form amalgams with other transition metals." }
+]
+
+HTTP 200
+[{
+    "id": "1",
+    "value": [
+        {
+            "lang": "eng",
+            "prefLabel": "uranium",
+            "termeReconnu": [
+                "’uranium"
+            ],
+            "arbreHierarchique": [
+                "1 - collective name, 2 - metal, 3 - actinoid",
+                "1 - periodic table structure, 2 - block, 3 - f-block element",
+                "1 - periodic table structure, 2 - period, 3 - period 7 element"
+            ],
+            "conceptUri": "http://data.loterre.fr/ark:/67375/8HQ-CXXQX7D7-P",
+            "outil": "Loterre_Annot",
+            "frequence": "2"
+        },
+        {
+            "lang": "eng",
+            "prefLabel": "lanthanum",
+            "termeReconnu": [
+                "la"
+            ],
+            "arbreHierarchique": [
+                "1 - collective name, 2 - metal, 3 - rare-earth element, 4 - lanthanoid",
+                "1 - periodic table structure, 2 - period, 3 - period 6 element"
+            ],
+            "conceptUri": "http://data.loterre.fr/ark:/67375/8HQ-GLQBRH9P-Q",
+            "outil": "Loterre_Annot",
+            "frequence": "1"
+        },
+        {
+            "lang": "eng",
+            "prefLabel": "cerium",
+            "termeReconnu": [
+                "ce"
+            ],
+            "arbreHierarchique": [
+                "1 - collective name, 2 - metal, 3 - rare-earth element, 4 - lanthanoid",
+                "1 - periodic table structure, 2 - block, 3 - f-block element",
+                "1 - periodic table structure, 2 - period, 3 - period 6 element"
+            ],
+            "conceptUri": "http://data.loterre.fr/ark:/67375/8HQ-Z426CQXF-G",
+            "outil": "Loterre_Annot",
+            "frequence": "1"
+        }
+    ]
+},
+{
+    "id": "2",
+    "value": [
+        {
+            "lang": "eng",
+            "prefLabel": "uranium",
+            "termeReconnu": [
+                "’uranium"
+            ],
+            "arbreHierarchique": [
+                "1 - collective name, 2 - metal, 3 - actinoid",
+                "1 - periodic table structure, 2 - block, 3 - f-block element",
+                "1 - periodic table structure, 2 - period, 3 - period 7 element"
+            ],
+            "conceptUri": "http://data.loterre.fr/ark:/67375/8HQ-CXXQX7D7-P",
+            "outil": "Loterre_Annot",
+            "frequence": "4"
+        }
+    ]
+},
+{
+    "id": "3",
+    "value": [
+        {
+            "lang": "eng",
+            "prefLabel": "xenon",
+            "termeReconnu": [
+                "[Xe]"
+            ],
+            "arbreHierarchique": [
+                "1 - collective name, 2 - main group element",
+                "1 - collective name, 2 - nonmetal, 3 - noble gas",
+                "1 - periodic table structure, 2 - block, 3 - p-block element",
+                "1 - periodic table structure, 2 - period, 3 - period 5 element",
+                "1 - periodic table structure, 2 - group, 3 - group 18 element"
+            ],
+            "conceptUri": "http://data.loterre.fr/ark:/67375/8HQ-DT73NB0V-F",
+            "outil": "Loterre_Annot",
+            "frequence": "1"
+        }
+    ]
+},
+{
+    "id": "4",
+    "value": [
+        {
+            "lang": "eng",
+            "prefLabel": "uranium",
+            "termeReconnu": [
+                "uranium"
+            ],
+            "arbreHierarchique": [
+                "1 - collective name, 2 - metal, 3 - actinoid",
+                "1 - periodic table structure, 2 - block, 3 - f-block element",
+                "1 - periodic table structure, 2 - period, 3 - period 7 element"
+            ],
+            "conceptUri": "http://data.loterre.fr/ark:/67375/8HQ-CXXQX7D7-P",
+            "outil": "Loterre_Annot",
+            "frequence": "2"
+        }
+    ]
+},
+{
+    "id": "5",
+    "value": [
+        {
+            "lang": "eng",
+            "prefLabel": "uranium",
+            "termeReconnu": [
+                "uranium"
+            ],
+            "arbreHierarchique": [
+                "1 - collective name, 2 - metal, 3 - actinoid",
+                "1 - periodic table structure, 2 - block, 3 - f-block element",
+                "1 - periodic table structure, 2 - period, 3 - period 7 element"
+            ],
+            "conceptUri": "http://data.loterre.fr/ark:/67375/8HQ-CXXQX7D7-P",
+            "outil": "Loterre_Annot",
+            "frequence": "2"
+        },
+        {
+            "lang": "eng",
+            "prefLabel": "indium",
+            "termeReconnu": [
+                "in"
+            ],
+            "arbreHierarchique": [
+                "1 - collective name, 2 - main group element",
+                "1 - collective name, 2 - metal, 3 - poor metal",
+                "1 - periodic table structure, 2 - block, 3 - p-block element",
+                "1 - periodic table structure, 2 - period, 3 - period 5 element",
+                "1 - periodic table structure, 2 - group, 3 - group 13 element"
+            ],
+            "conceptUri": "http://data.loterre.fr/ark:/67375/8HQ-BRKZVG3H-8",
+            "outil": "Loterre_Annot",
+            "frequence": "2"
+        }
+    ]
+},
+{
+    "id": "6",
+    "value": [
+        {
+            "lang": "eng",
+            "prefLabel": "mercury",
+            "termeReconnu": [
+                "mercury"
+            ],
+            "arbreHierarchique": [
+                "1 - collective name, 2 - metal, 3 - transition metal",
+                "1 - periodic table structure, 2 - block, 3 - d-block element",
+                "1 - periodic table structure, 2 - period, 3 - period 6 element",
+                "1 - periodic table structure, 2 - group, 3 - group 12 element"
+            ],
+            "conceptUri": "http://data.loterre.fr/ark:/67375/8HQ-H9J0KWB5-L",
+            "outil": "Loterre_Annot",
+            "frequence": "2"
+        },
+        {
+            "lang": "eng",
+            "prefLabel": "xenon",
+            "termeReconnu": [
+                "[Xe]"
+            ],
+            "arbreHierarchique": [
+                "1 - collective name, 2 - main group element",
+                "1 - collective name, 2 - nonmetal, 3 - noble gas",
+                "1 - periodic table structure, 2 - block, 3 - p-block element",
+                "1 - periodic table structure, 2 - period, 3 - period 5 element",
+                "1 - periodic table structure, 2 - group, 3 - group 18 element"
+            ],
+            "conceptUri": "http://data.loterre.fr/ark:/67375/8HQ-DT73NB0V-F",
+            "outil": "Loterre_Annot",
+            "frequence": "1"
+        }
+    ]
+}]
+
+POST {{host}}/v1/annotate?indent=true&loterreID=TSO
+content-type: application/json
+[
+  { "value": "The adoption of FAIR principles (Findable, Accessible, Interoperable, Reusable) for research datasets was strengthened by the integration of standardized metadata according to the DataCite schema." }
+]
+
+HTTP 200
+[{
+    "value": [
+        {
+            "lang": "eng",
+            "prefLabel": "metadata",
+            "termeReconnu": [
+                "metadata"
+            ],
+            "arbreHierarchique": [
+                "1 - data type"
+            ],
+            "conceptUri": "http://data.loterre.fr/ark:/67375/TSO-VF5K6BGT-F",
+            "outil": "Loterre_Annot",
+            "frequence": "1"
+        },
+        {
+            "lang": "eng",
+            "prefLabel": "interoperable",
+            "termeReconnu": [
+                "Interoperable,"
+            ],
+            "arbreHierarchique": [
+                "1 - open science tool, 2 - open science guidelines, 3 - FAIR principles"
+            ],
+            "conceptUri": "http://data.loterre.fr/ark:/67375/TSO-C676TDJV-H",
+            "outil": "Loterre_Annot",
+            "frequence": "1"
+        },
+        {
+            "lang": "eng",
+            "prefLabel": "FAIR principles",
+            "termeReconnu": [
+                "FAIR principles"
+            ],
+            "arbreHierarchique": [
+                "1 - open science tool, 2 - open science guidelines"
+            ],
+            "conceptUri": "http://data.loterre.fr/ark:/67375/TSO-D9HJPTL6-X",
+            "outil": "Loterre_Annot",
+            "frequence": "1"
+        },
+        {
+            "lang": "eng",
+            "prefLabel": "accessible",
+            "termeReconnu": [
+                "Accessible,"
+            ],
+            "arbreHierarchique": [
+                "1 - open science tool, 2 - open science guidelines, 3 - FAIR principles"
+            ],
+            "conceptUri": "http://data.loterre.fr/ark:/67375/TSO-KHFX8870-5",
+            "outil": "Loterre_Annot",
+            "frequence": "1"
+        },
+        {
+            "lang": "eng",
+            "prefLabel": "DataCite",
+            "termeReconnu": [
+                "DataCite"
+            ],
+            "arbreHierarchique": [
+                "1 - open science organization"
+            ],
+            "conceptUri": "http://data.loterre.fr/ark:/67375/TSO-RPJVDHMM-Q",
+            "outil": "Loterre_Annot",
+            "frequence": "1"
+        },
+        {
+            "lang": "eng",
+            "prefLabel": "findable",
+            "termeReconnu": [
+                "(Findable,"
+            ],
+            "arbreHierarchique": [
+                "1 - open science tool, 2 - open science guidelines, 3 - FAIR principles"
+            ],
+            "conceptUri": "http://data.loterre.fr/ark:/67375/TSO-JDVCT02T-P",
+            "outil": "Loterre_Annot",
+            "frequence": "1"
+        },
+        {
+            "lang": "eng",
+            "prefLabel": "reusable",
+            "termeReconnu": [
+                "Reusable)"
+            ],
+            "arbreHierarchique": [
+                "1 - open science tool, 2 - open science guidelines, 3 - FAIR principles"
+            ],
+            "conceptUri": "http://data.loterre.fr/ark:/67375/TSO-X4ZW5XQD-G",
+            "outil": "Loterre_Annot",
+            "frequence": "1"
+        }
+    ]
+}]
+
+POST {{host}}/v1/annotate?indent=true&loterreID=1WB
+content-type: application/json
+[
+  { "value": "The heat transfer coefficient (h) was calculated using the formula h = Q / (A * ΔT), where Q is the heat transfer rate, A is the surface area, and ΔT is the temperature difference." },
+  { "value": "The overall heat transfer coefficient of a plate heat exchanger was calculated at 1200 W/m²·K for a flow rate of 2 m³/h of water at 80°C." }
+]
+
+HTTP 200
+[{
+    "value": [
+        {
+            "lang": "eng",
+            "prefLabel": "heat transfer coefficient",
+            "termeReconnu": [
+                "heat transfer coefficient"
+            ],
+            "conceptUri": "http://data.loterre.fr/ark:/67375/1WB-H28CTZKJ-3",
+            "outil": "Loterre_Annot",
+            "frequence": "2",
+            "arbreHierarchique": []
+        },
+        {
+            "lang": "eng",
+            "prefLabel": "heat transfer",
+            "termeReconnu": [
+                "heat transfer"
+            ],
+            "conceptUri": "http://data.loterre.fr/ark:/67375/1WB-FP4PXH0Z-F",
+            "outil": "Loterre_Annot",
+            "frequence": "4",
+            "arbreHierarchique": []
+        }
+    ]
+},
+{
+    "value": [
+        {
+            "lang": "eng",
+            "prefLabel": "heat transfer coefficient",
+            "termeReconnu": [
+                "heat transfer coefficient"
+            ],
+            "conceptUri": "http://data.loterre.fr/ark:/67375/1WB-H28CTZKJ-3",
+            "outil": "Loterre_Annot",
+            "frequence": "2",
+            "arbreHierarchique": []
+        },
+        {
+            "lang": "eng",
+            "prefLabel": "flow rate",
+            "termeReconnu": [
+                "flow rate"
+            ],
+            "conceptUri": "http://data.loterre.fr/ark:/67375/1WB-CCP1GGWR-W",
+            "outil": "Loterre_Annot",
+            "frequence": "2",
+            "arbreHierarchique": []
+        },
+        {
+            "lang": "eng",
+            "prefLabel": "water",
+            "termeReconnu": [
+                "water"
+            ],
+            "conceptUri": "http://data.loterre.fr/ark:/67375/1WB-X9ZQV4NC-3",
+            "outil": "Loterre_Annot",
+            "frequence": "2",
+            "arbreHierarchique": []
+        },
+        {
+            "lang": "eng",
+            "prefLabel": "heat exchanger",
+            "termeReconnu": [
+                "heat exchanger"
+            ],
+            "conceptUri": "http://data.loterre.fr/ark:/67375/1WB-DJ8S5VHV-X",
+            "outil": "Loterre_Annot",
+            "frequence": "2",
+            "arbreHierarchique": []
+        },
+        {
+            "lang": "eng",
+            "prefLabel": "plate",
+            "termeReconnu": [
+                "plate"
+            ],
+            "conceptUri": "http://data.loterre.fr/ark:/67375/1WB-NW7DW0NH-X",
+            "outil": "Loterre_Annot",
+            "frequence": "2",
+            "arbreHierarchique": []
+        },
+        {
+            "lang": "eng",
+            "prefLabel": "heat transfer",
+            "termeReconnu": [
+                "heat transfer"
+            ],
+            "conceptUri": "http://data.loterre.fr/ark:/67375/1WB-FP4PXH0Z-F",
+            "outil": "Loterre_Annot",
+            "frequence": "2",
+            "arbreHierarchique": []
+        }
+    ]
+}]
+
+POST {{host}}/v1/annotate?indent=true&loterreID=C0X
+content-type: application/json
+[
+  { "value": "The Omicron BA.5 variant showed partial immune escape from neutralizing antibodies induced by vaccination, with an IC50 titer reduced by 80% compared to the original strain." }
+]
+
+HTTP 200
+[{
+    "value": [
+        {
+            "lang": "eng",
+            "prefLabel": "vaccination",
+            "termeReconnu": [
+                "vaccination,"
+            ],
+            "arbreHierarchique": [
+                "1 - public health, 2 - public health measure"
+            ],
+            "conceptUri": "http://data.loterre.fr/ark:/67375/C0X-JQ1JT614-W",
+            "outil": "Loterre_Annot",
+            "frequence": "1"
+        },
+        {
+            "lang": "eng",
+            "prefLabel": "neutralizing antibody",
+            "termeReconnu": [
+                "neutralizing antibodies"
+            ],
+            "arbreHierarchique": [
+                "1 - immuno-inflammatory cascade, 2 - immune response, 3 - immune response protein, 4 - immunoglobulin, 5 - antibody",
+                "1 - immuno-inflammatory cascade, 2 - immune response, 3 - antibody"
+            ],
+            "conceptUri": "http://data.loterre.fr/ark:/67375/C0X-VBLBCCQF-9",
+            "outil": "Loterre_Annot",
+            "frequence": "1"
+        }
+    ]
+}]
+
+POST {{host}}/v1/annotate?indent=true&loterreID=th63
+content-type: application/json
+[
+  { "value": "The new species of frog, Rhinella loterrei, was discovered in the Amazon rainforest and described based on morphological and molecular characteristics." },
+  { "value": "The taxonomic revision of the genus Pseudomonas led to the reclassification of P. fluorescens as Pseudomonas protegens, according to the rules of the International Code of Zoological Nomenclature." }
+]
+
+HTTP 200
+[{
+    "value": [
+        {
+            "lang": "eng",
+            "prefLabel": "species",
+            "termeReconnu": [
+                "species"
+            ],
+            "conceptUri": "http://data.loterre.fr/ark:/67375/FM8-GGHX4HD9-H",
+            "outil": "Loterre_Annot",
+            "frequence": "2",
+            "arbreHierarchique": []
+        }
+    ]
+},
+{
+    "value": [
+        {
+            "lang": "eng",
+            "prefLabel": "the International Code of Zoological Nomenclature",
+            "termeReconnu": [
+                "the International Code of Zoological Nomenclature.",
+                "Code"
+            ],
+            "conceptUri": "http://data.loterre.fr/ark:/67375/FM8-X1WPCB46-V",
+            "outil": "Loterre_Annot",
+            "frequence": "3",
+            "arbreHierarchique": []
+        },
+        {
+            "lang": "eng",
+            "prefLabel": "nomenclature",
+            "termeReconnu": [
+                "Nomenclature."
+            ],
+            "conceptUri": "http://data.loterre.fr/ark:/67375/FM8-JZRVFKGM-4",
+            "outil": "Loterre_Annot",
+            "frequence": "2",
+            "arbreHierarchique": []
+        },
+        {
+            "lang": "eng",
+            "prefLabel": "genus",
+            "termeReconnu": [
+                "genus"
+            ],
+            "conceptUri": "http://data.loterre.fr/ark:/67375/FM8-H3WT4FCG-9",
+            "outil": "Loterre_Annot",
+            "frequence": "2",
+            "arbreHierarchique": []
+        }
+    ]
+}]
+
+POST {{host}}/v1/annotate?indent=true&loterreID=W7B
+content-type: application/json
+[
+  { "value": "ABO-Rh compatibility was confirmed by an indirect Coombs test, allowing an emergency transfusion of packed red blood cells to an O-negative patient." }
+]
+
+HTTP 200
+[{
+    "value": [
+        {
+            "lang": "eng",
+            "prefLabel": "compatibility",
+            "termeReconnu": [
+                "compatibility"
+            ],
+            "arbreHierarchique": [
+                "1 - haemovigilance, 2 - blood transfusion safety"
+            ],
+            "conceptUri": "http://data.loterre.fr/ark:/67375/W7B-XHRJ21R8-D",
+            "outil": "Loterre_Annot",
+            "frequence": "2"
+        },
+        {
+            "lang": "eng",
+            "prefLabel": "blood",
+            "termeReconnu": [
+                "blood"
+            ],
+            "arbreHierarchique": [
+                "1 - anatomy, 2 - body fluid"
+            ],
+            "conceptUri": "http://data.loterre.fr/ark:/67375/W7B-C3Z9ZC9N-4",
+            "outil": "Loterre_Annot",
+            "frequence": "2"
+        },
+        {
+            "lang": "eng",
+            "prefLabel": "indirect Coombs test",
+            "termeReconnu": [
+                "indirect Coombs test,"
+            ],
+            "arbreHierarchique": [
+                "1 - exploration, 2 - Coombs' test",
+                "1 - immunology of blood transfusion, 2 - Coombs' test"
+            ],
+            "conceptUri": "http://data.loterre.fr/ark:/67375/W7B-FX48MCJ6-G",
+            "outil": "Loterre_Annot",
+            "frequence": "2"
+        },
+        {
+            "lang": "eng",
+            "prefLabel": "emergency",
+            "termeReconnu": [
+                "emergency"
+            ],
+            "arbreHierarchique": [
+                "1 - indication for transfusion"
+            ],
+            "conceptUri": "http://data.loterre.fr/ark:/67375/W7B-G4482MDN-G",
+            "outil": "Loterre_Annot",
+            "frequence": "2"
+        },
+        {
+            "lang": "eng",
+            "prefLabel": "Coombs' test",
+            "termeReconnu": [
+                "Coombs test,"
+            ],
+            "arbreHierarchique": [
+                "1 - exploration",
+                "1 - immunology of blood transfusion"
+            ],
+            "conceptUri": "http://data.loterre.fr/ark:/67375/W7B-G5JKMRHN-8",
+            "outil": "Loterre_Annot",
+            "frequence": "1"
+        }
+    ]
+}]
+
+POST {{host}}/v1/annotate?indent=true&loterreID=8LP
+content-type: application/json
+[
+  { "value": "The automatic translation system achieved a BLEU score of 45.6 on the Europarl dataset, surpassing the previous state-of-the-art by 2.8 points." },
+  { "value": "Training a BERT model on a corpus of legal texts achieved 94% precision for the named entity recognition task." }
+]
+
+HTTP 200
+[{
+    "value": [
+        {
+            "lang": "eng",
+            "prefLabel": "score",
+            "termeReconnu": [
+                "score"
+            ],
+            "arbreHierarchique": [
+                "1 - NLP resources and evaluation, 2 - measure, 3 - metric"
+            ],
+            "conceptUri": "http://data.loterre.fr/ark:/67375/8LP-M5GJKWH3-1",
+            "outil": "Loterre_Annot",
+            "frequence": "2"
+        },
+        {
+            "lang": "eng",
+            "prefLabel": "BLEU score",
+            "termeReconnu": [
+                "BLEU score"
+            ],
+            "arbreHierarchique": [
+                "1 - NLP resources and evaluation, 2 - measure, 3 - metric, 4 - score"
+            ],
+            "conceptUri": "http://data.loterre.fr/ark:/67375/8LP-JZSZKRQP-W",
+            "outil": "Loterre_Annot",
+            "frequence": "3"
+        },
+        {
+            "lang": "eng",
+            "prefLabel": "machine translation",
+            "termeReconnu": [
+                "automatic translation"
+            ],
+            "arbreHierarchique": [
+                "1 - applied NLP"
+            ],
+            "conceptUri": "http://data.loterre.fr/ark:/67375/8LP-FDWPZPFW-0",
+            "outil": "Loterre_Annot",
+            "frequence": "1"
+        },
+        {
+            "lang": "eng",
+            "prefLabel": "data set",
+            "termeReconnu": [
+                "dataset,"
+            ],
+            "arbreHierarchique": [
+                "1 - NLP resources and evaluation"
+            ],
+            "conceptUri": "http://data.loterre.fr/ark:/67375/8LP-NNH3JM15-X",
+            "outil": "Loterre_Annot",
+            "frequence": "1"
+        }
+    ]
+},
+{
+    "value": [
+        {
+            "lang": "eng",
+            "prefLabel": "BERT",
+            "termeReconnu": [
+                "BERT"
+            ],
+            "arbreHierarchique": [
+                "1 - NLP methods and tools, 2 - model, 3 - statistical model, 4 - foundation model, 5 - language model",
+                "1 - NLP methods and tools, 2 - statistics, 3 - statistical model, 4 - foundation model, 5 - language model"
+            ],
+            "conceptUri": "http://data.loterre.fr/ark:/67375/8LP-NBH731S9-G",
+            "outil": "Loterre_Annot",
+            "frequence": "2"
+        },
+        {
+            "lang": "eng",
+            "prefLabel": "named entity recognition",
+            "termeReconnu": [
+                "named entity recognition",
+                "entity recognition"
+            ],
+            "arbreHierarchique": [
+                "1 - applied NLP, 2 - information retrieval, 3 - information extraction"
+            ],
+            "conceptUri": "http://data.loterre.fr/ark:/67375/8LP-C3FMJCQM-G",
+            "outil": "Loterre_Annot",
+            "frequence": "3"
+        },
+        {
+            "lang": "eng",
+            "prefLabel": "precision",
+            "termeReconnu": [
+                "precision"
+            ],
+            "arbreHierarchique": [
+                "1 - NLP resources and evaluation, 2 - measure"
+            ],
+            "conceptUri": "http://data.loterre.fr/ark:/67375/8LP-KP1BF5CK-N",
+            "outil": "Loterre_Annot",
+            "frequence": "2"
+        },
+        {
+            "lang": "eng",
+            "prefLabel": "corpus",
+            "termeReconnu": [
+                "corpus"
+            ],
+            "arbreHierarchique": [
+                "1 - NLP resources and evaluation, 2 - knowledge resource, 3 - knowledge base, 4 - textual database"
+            ],
+            "conceptUri": "http://data.loterre.fr/ark:/67375/8LP-GJJLPWT0-8",
+            "outil": "Loterre_Annot",
+            "frequence": "2"
+        },
+        {
+            "lang": "eng",
+            "prefLabel": "model",
+            "termeReconnu": [
+                "model"
+            ],
+            "arbreHierarchique": [
+                "1 - NLP methods and tools"
+            ],
+            "conceptUri": "http://data.loterre.fr/ark:/67375/8LP-CXPCLB75-R",
+            "outil": "Loterre_Annot",
+            "frequence": "2"
+        }
+    ]
+}]
+
+POST {{host}}/v1/annotate?indent=true&loterreID=DOM
+content-type: application/json
+[
+  { "value": "Mapping interdisciplinary collaborations revealed a 40% increase in co-publications between neuroscience and artificial intelligence since 2020." }
+]
+
+HTTP 200
+[{
+    "value": [
+        {
+            "lang": "eng",
+            "prefLabel": "artificial intelligence",
+            "termeReconnu": [
+                "artificial intelligence"
+            ],
+            "arbreHierarchique": [
+                "1 - sciences and technology, 2 - exact sciences and technology, 3 - engineering sciences"
+            ],
+            "conceptUri": "http://data.loterre.fr/ark:/67375/DOM-V871XPQD-F",
+            "outil": "Loterre_Annot",
+            "frequence": "1"
+        }
+    ]
+}]
+
+POST {{host}}/v1/annotate?indent=true&loterreID=27X
+content-type: application/json
+[
+  { "value": "Raman spectroscopy analysis of blue pigments in the Lascaux cave frescoes confirmed the use of laurionite, a rare lead chloride mineral." }
+]
+
+HTTP 200
+[{
+    "value": [
+        {
+            "lang": "eng",
+            "prefLabel": "analysis",
+            "termeReconnu": [
+                "analysis"
+            ],
+            "conceptUri": "http://data.loterre.fr/ark:/67375/27X-VGPTW8Z9-H",
+            "outil": "Loterre_Annot",
+            "frequence": "2",
+            "arbreHierarchique": []
+        },
+        {
+            "lang": "eng",
+            "prefLabel": "cave",
+            "termeReconnu": [
+                "cave"
+            ],
+            "conceptUri": "http://data.loterre.fr/ark:/67375/27X-SCDMDH3X-F",
+            "outil": "Loterre_Annot",
+            "frequence": "2",
+            "arbreHierarchique": []
+        },
+        {
+            "lang": "eng",
+            "prefLabel": "mineral",
+            "termeReconnu": [
+                "mineral."
+            ],
+            "conceptUri": "http://data.loterre.fr/ark:/67375/27X-VZJK0WDF-B",
+            "outil": "Loterre_Annot",
+            "frequence": "2",
+            "arbreHierarchique": []
+        },
+        {
+            "lang": "eng",
+            "prefLabel": "lead",
+            "termeReconnu": [
+                "lead"
+            ],
+            "conceptUri": "http://data.loterre.fr/ark:/67375/27X-VLX3N05B-F",
+            "outil": "Loterre_Annot",
+            "frequence": "2",
+            "arbreHierarchique": []
+        }
+    ]
+}]
+
+POST {{host}}/v1/annotate?indent=true&loterreID=216
+content-type: application/json
+[
+  { "value": "The study of the effects of acculturation on academic achievement revealed a positive correlation between cultural assimilation and academic success in immigrant students." },
+  { "value": "The assessment of socio-emotional skills in primary school students showed a 20% improvement after implementing a Montessori-based program." }
+]
+
+HTTP 200
+[{
+    "value": [
+        {
+            "lang": "eng",
+            "prefLabel": "study",
+            "termeReconnu": [
+                "study"
+            ],
+            "conceptUri": "http://data.loterre.fr/ark:/67375/216-LH5MXFNJ-T",
+            "outil": "Loterre_Annot",
+            "frequence": "2",
+            "arbreHierarchique": []
+        },
+        {
+            "lang": "eng",
+            "prefLabel": "immigrant",
+            "termeReconnu": [
+                "immigrant"
+            ],
+            "conceptUri": "http://data.loterre.fr/ark:/67375/216-C5VZLGC3-B",
+            "outil": "Loterre_Annot",
+            "frequence": "2",
+            "arbreHierarchique": []
+        },
+        {
+            "lang": "eng",
+            "prefLabel": "acculturation",
+            "termeReconnu": [
+                "acculturation"
+            ],
+            "conceptUri": "http://data.loterre.fr/ark:/67375/216-V4MVZSND-0",
+            "outil": "Loterre_Annot",
+            "frequence": "2",
+            "arbreHierarchique": []
+        },
+        {
+            "lang": "eng",
+            "prefLabel": "cultural",
+            "termeReconnu": [
+                "cultural"
+            ],
+            "conceptUri": "http://data.loterre.fr/ark:/67375/216-XHX5DL0B-N",
+            "outil": "Loterre_Annot",
+            "frequence": "2",
+            "arbreHierarchique": []
+        },
+        {
+            "lang": "eng",
+            "prefLabel": "academic achievement",
+            "termeReconnu": [
+                "academic achievement"
+            ],
+            "conceptUri": "http://data.loterre.fr/ark:/67375/216-X76QG5BC-J",
+            "outil": "Loterre_Annot",
+            "frequence": "2",
+            "arbreHierarchique": []
+        },
+        {
+            "lang": "eng",
+            "prefLabel": "success",
+            "termeReconnu": [
+                "success"
+            ],
+            "conceptUri": "http://data.loterre.fr/ark:/67375/216-K6NK1P87-B",
+            "outil": "Loterre_Annot",
+            "frequence": "2",
+            "arbreHierarchique": []
+        },
+        {
+            "lang": "eng",
+            "prefLabel": "achievement",
+            "termeReconnu": [
+                "achievement"
+            ],
+            "conceptUri": "http://data.loterre.fr/ark:/67375/216-Q9KVZ5SH-X",
+            "outil": "Loterre_Annot",
+            "frequence": "2",
+            "arbreHierarchique": []
+        },
+        {
+            "lang": "eng",
+            "prefLabel": "correlation",
+            "termeReconnu": [
+                "correlation"
+            ],
+            "conceptUri": "http://data.loterre.fr/ark:/67375/216-H5M3NZSX-B",
+            "outil": "Loterre_Annot",
+            "frequence": "2",
+            "arbreHierarchique": []
+        }
+    ]
+},
+{
+    "value": [
+        {
+            "lang": "eng",
+            "prefLabel": "school",
+            "termeReconnu": [
+                "school"
+            ],
+            "conceptUri": "http://data.loterre.fr/ark:/67375/216-T9XS3FGS-6",
+            "outil": "Loterre_Annot",
+            "frequence": "2",
+            "arbreHierarchique": []
+        },
+        {
+            "lang": "eng",
+            "prefLabel": "primary school",
+            "termeReconnu": [
+                "primary school"
+            ],
+            "conceptUri": "http://data.loterre.fr/ark:/67375/216-HLQNZH6R-X",
+            "outil": "Loterre_Annot",
+            "frequence": "2",
+            "arbreHierarchique": []
+        },
+        {
+            "lang": "eng",
+            "prefLabel": "assessment",
+            "termeReconnu": [
+                "assessment"
+            ],
+            "conceptUri": "http://data.loterre.fr/ark:/67375/216-VGVBBSF0-7",
+            "outil": "Loterre_Annot",
+            "frequence": "2",
+            "arbreHierarchique": []
+        }
+    ]
+}]
+
+POST {{host}}/v1/annotate?indent=true&loterreID=4V5
+content-type: application/json
+[
+  { "value": "The study of the Coptic manuscripts from Nag Hammadi revealed Gnostic influences in the apocryphal texts of early Christianity." }
+]
+
+HTTP 200
+[{
+    "value": [
+        {
+            "lang": "eng",
+            "prefLabel": "apocryphal",
+            "termeReconnu": [
+                "apocryphal"
+            ],
+            "conceptUri": "http://data.loterre.fr/ark:/67375/4V5-W8GQB1CF-N",
+            "outil": "Loterre_Annot",
+            "frequence": "2",
+            "arbreHierarchique": []
+        },
+        {
+            "lang": "eng",
+            "prefLabel": "Christianity",
+            "termeReconnu": [
+                "Christianity."
+            ],
+            "conceptUri": "http://data.loterre.fr/ark:/67375/4V5-TJ4FQ8FT-0",
+            "outil": "Loterre_Annot",
+            "frequence": "1",
+            "arbreHierarchique": []
+        },
+        {
+            "lang": "eng",
+            "prefLabel": "study",
+            "termeReconnu": [
+                "study"
+            ],
+            "conceptUri": "http://data.loterre.fr/ark:/67375/4V5-MTRNX1RZ-7",
+            "outil": "Loterre_Annot",
+            "frequence": "2",
+            "arbreHierarchique": []
+        },
+        {
+            "lang": "eng",
+            "prefLabel": "Nag Hammadi",
+            "termeReconnu": [
+                "Nag Hammadi"
+            ],
+            "conceptUri": "http://data.loterre.fr/ark:/67375/4V5-WTDTNBKJ-N",
+            "outil": "Loterre_Annot",
+            "frequence": "1",
+            "arbreHierarchique": []
+        }
+    ]
+}]
+
+POST {{host}}/v1/annotate?indent=true&loterreID=QX8
+content-type: application/json
+[
+  { "value": "The analysis of oxygen isotope ratios in speleothems from southern France indicated a significant cooling event during the Younger Dryas period." },
+  { "value": "The analysis of Antarctic ice cores highlighted a correlation between atmospheric CO₂ concentrations and glacial-interglacial cycles over the past 800,000 years." }
+]
+
+HTTP 200
+[{
+    "value": [
+        {
+            "lang": "eng",
+            "prefLabel": "isotope",
+            "termeReconnu": [
+                "isotope"
+            ],
+            "arbreHierarchique": [
+                "1 - study material, 2 - chemical object"
+            ],
+            "conceptUri": "http://data.loterre.fr/ark:/67375/QX8-74FCQRH9-5",
+            "outil": "Loterre_Annot",
+            "frequence": "1"
+        },
+        {
+            "lang": "eng",
+            "prefLabel": "Dryas",
+            "termeReconnu": [
+                "Dryas"
+            ],
+            "arbreHierarchique": [
+                "1 - natural phenomenon, 2 - climatic phenomenon, 3 - glaciation, 4 - Tardiglacial",
+                "1 - scientific discipline, 2 - stratigraphy, 3 - climatostratigraphy, 4 - climatostratigraphic period, 5 - glaciation, 6 - Tardiglacial",
+                "1 - geologic time scale, 2 - geological age, 3 - Phanerozoic, 4 - Cenozoic, 5 - Quaternary, 6 - Pleistocene, 7 - Upper Pleistocene, 8 - Tardiglacial"
+            ],
+            "conceptUri": "http://data.loterre.fr/ark:/67375/QX8-8PCVHC5J-H",
+            "outil": "Loterre_Annot",
+            "frequence": "1"
+        },
+        {
+            "lang": "eng",
+            "prefLabel": "Younger Dryas",
+            "termeReconnu": [
+                "Younger Dryas"
+            ],
+            "arbreHierarchique": [
+                "1 - natural phenomenon, 2 - climatic phenomenon, 3 - glaciation, 4 - Tardiglacial, 5 - Dryas",
+                "1 - scientific discipline, 2 - stratigraphy, 3 - climatostratigraphy, 4 - climatostratigraphic period, 5 - glaciation, 6 - Tardiglacial, 7 - Dryas",
+                "1 - geologic time scale, 2 - geological age, 3 - Phanerozoic, 4 - Cenozoic, 5 - Quaternary, 6 - Pleistocene, 7 - Upper Pleistocene, 8 - Tardiglacial, 9 - Dryas"
+            ],
+            "conceptUri": "http://data.loterre.fr/ark:/67375/QX8-B0DCHJM3-V",
+            "outil": "Loterre_Annot",
+            "frequence": "1"
+        },
+        {
+            "lang": "eng",
+            "prefLabel": "stable oxygen isotope",
+            "termeReconnu": [
+                "oxygen isotope"
+            ],
+            "arbreHierarchique": [
+                "1 - study material, 2 - chemical object, 3 - isotope, 4 - stable isotope"
+            ],
+            "conceptUri": "http://data.loterre.fr/ark:/67375/QX8-T1JSV3FP-N",
+            "outil": "Loterre_Annot",
+            "frequence": "1"
+        },
+        {
+            "lang": "eng",
+            "prefLabel": "climate cooling",
+            "termeReconnu": [
+                "cooling"
+            ],
+            "arbreHierarchique": [
+                "1 - natural phenomenon, 2 - climatic phenomenon"
+            ],
+            "conceptUri": "http://data.loterre.fr/ark:/67375/QX8-9QHZB08T-S",
+            "outil": "Loterre_Annot",
+            "frequence": "1"
+        }
+    ]
+},
+{
+    "value": [
+        {
+            "lang": "eng",
+            "prefLabel": "ice",
+            "termeReconnu": [
+                "ice"
+            ],
+            "arbreHierarchique": [
+                "1 - study material"
+            ],
+            "conceptUri": "http://data.loterre.fr/ark:/67375/QX8-09NX0HBD-X",
+            "outil": "Loterre_Annot",
+            "frequence": "1"
+        },
+        {
+            "lang": "eng",
+            "prefLabel": "interglacial",
+            "termeReconnu": [
+                "-interglacial"
+            ],
+            "arbreHierarchique": [
+                "1 - natural phenomenon, 2 - climatic phenomenon",
+                "1 - scientific discipline, 2 - stratigraphy, 3 - climatostratigraphy, 4 - climatostratigraphic period"
+            ],
+            "conceptUri": "http://data.loterre.fr/ark:/67375/QX8-PQ8FVKX8-3",
+            "outil": "Loterre_Annot",
+            "frequence": "1"
+        },
+        {
+            "lang": "eng",
+            "prefLabel": "glaciation",
+            "termeReconnu": [
+                "glacial-"
+            ],
+            "arbreHierarchique": [
+                "1 - natural phenomenon, 2 - climatic phenomenon",
+                "1 - scientific discipline, 2 - stratigraphy, 3 - climatostratigraphy, 4 - climatostratigraphic period"
+            ],
+            "conceptUri": "http://data.loterre.fr/ark:/67375/QX8-5K8FD2VC-9",
+            "outil": "Loterre_Annot",
+            "frequence": "1"
+        }
+    ]
+}]
+
+POST {{host}}/v1/annotate?indent=true&loterreID=FMC
+content-type: application/json
+[
+  { "value": "The development of adaptive optics techniques has significantly improved the resolution of ground-based telescopes, allowing for clearer observations of distant celestial objects." },
+  { "value": "X-ray diffraction by a Bragg grating allowed the measurement of an interplanar spacing of 0.28 nm in a doped silicon crystal." }
+]
+
+HTTP 200
+[{
+    "value": [
+        {
+            "lang": "eng",
+            "prefLabel": "optics",
+            "termeReconnu": [
+                "optics"
+            ],
+            "conceptUri": "http://data.loterre.fr/ark:/67375/FMC-XJV4MHHP-D",
+            "outil": "Loterre_Annot",
+            "frequence": "1",
+            "arbreHierarchique": []
+        },
+        {
+            "lang": "eng",
+            "prefLabel": "adaptive optics",
+            "termeReconnu": [
+                "adaptive optics"
+            ],
+            "arbreHierarchique": [
+                "1 - optics"
+            ],
+            "conceptUri": "http://data.loterre.fr/ark:/67375/FMC-LV091DX2-5",
+            "outil": "Loterre_Annot",
+            "frequence": "1"
+        }
+    ]
+},
+{
+    "value": [
+        {
+            "lang": "eng",
+            "prefLabel": "Bragg grating",
+            "termeReconnu": [
+                "Bragg grating"
+            ],
+            "conceptUri": "http://data.loterre.fr/ark:/67375/FMC-HHTZTFZT-2",
+            "outil": "Loterre_Annot",
+            "frequence": "1",
+            "arbreHierarchique": []
+        }
+    ]
+}]
+
+POST {{host}}/v1/annotate?indent=true&loterreID=BLH
+content-type: application/json
+[
+  { "value": "Meta-analysis of GPS tracking data revealed a 30% reduction in the hunting territories of Eurasian lynxes due to forest fragmentation." }
+]
+
+HTTP 200
+[{
+    "value": [
+        {
+            "lang": "eng",
+            "prefLabel": "forest",
+            "termeReconnu": [
+                "forest"
+            ],
+            "arbreHierarchique": [
+                "1 - ecological system, 2 - ecosphere, 3 - biosphere, 4 - ecosystem",
+                "1 - ecological system, 2 - landscape, 3 - vegetation, 4 - vegetation type",
+                "1 - environment, 2 - landscape, 3 - vegetation, 4 - vegetation type"
+            ],
+            "conceptUri": "http://data.loterre.fr/ark:/67375/BLH-Q0TCDKPC-X",
+            "outil": "Loterre_Annot",
+            "frequence": "1"
+        }
+    ]
+}]
+
+POST {{host}}/v1/annotate?indent=true&loterreID=RVQ
+content-type: application/json
+[
+  { "value": "Hydrothermal synthesis of TiO₂ nanoparticles produced anatase crystals with a specific surface area of 150 m²/g, ideal for photocatalytic applications." }
+]
+
+HTTP 200
+[{
+    "value": []
+}]
+
+POST {{host}}/v1/annotate?indent=true&loterreID=3JP
+content-type: application/json
+[
+  { "value": "The study of social capital in deprived neighborhoods revealed a positive correlation between community engagement and subjective well-being." },
+  { "value": "The qualitative survey on social inequalities in access to healthcare revealed a cumulative disadvantage effect for precarious populations in urban areas." }
+]
+
+HTTP 200
+[{
+    "value": [
+        {
+            "lang": "eng",
+            "prefLabel": "capital",
+            "termeReconnu": [
+                "capital"
+            ],
+            "conceptUri": "http://data.loterre.fr/ark:/67375/3JP-XTS3W9Q4-W",
+            "outil": "Loterre_Annot",
+            "frequence": "2",
+            "arbreHierarchique": []
+        },
+        {
+            "lang": "eng",
+            "prefLabel": "social capital",
+            "termeReconnu": [
+                "social capital"
+            ],
+            "conceptUri": "http://data.loterre.fr/ark:/67375/3JP-LP7H6JD9-3",
+            "outil": "Loterre_Annot",
+            "frequence": "2",
+            "arbreHierarchique": []
+        },
+        {
+            "lang": "eng",
+            "prefLabel": "community",
+            "termeReconnu": [
+                "community"
+            ],
+            "conceptUri": "http://data.loterre.fr/ark:/67375/3JP-WLPK2GF4-P",
+            "outil": "Loterre_Annot",
+            "frequence": "2",
+            "arbreHierarchique": []
+        },
+        {
+            "lang": "eng",
+            "prefLabel": "correlation",
+            "termeReconnu": [
+                "correlation"
+            ],
+            "conceptUri": "http://data.loterre.fr/ark:/67375/3JP-G22MGXW4-M",
+            "outil": "Loterre_Annot",
+            "frequence": "2",
+            "arbreHierarchique": []
+        },
+        {
+            "lang": "eng",
+            "prefLabel": "engagement",
+            "termeReconnu": [
+                "engagement"
+            ],
+            "conceptUri": "http://data.loterre.fr/ark:/67375/3JP-SV3JT6LM-L",
+            "outil": "Loterre_Annot",
+            "frequence": "2",
+            "arbreHierarchique": []
+        }
+    ]
+},
+{
+    "value": [
+        {
+            "lang": "eng",
+            "prefLabel": "access",
+            "termeReconnu": [
+                "access"
+            ],
+            "conceptUri": "http://data.loterre.fr/ark:/67375/3JP-Q5785BHN-H",
+            "outil": "Loterre_Annot",
+            "frequence": "2",
+            "arbreHierarchique": []
+        },
+        {
+            "lang": "eng",
+            "prefLabel": "effect",
+            "termeReconnu": [
+                "effect"
+            ],
+            "conceptUri": "http://data.loterre.fr/ark:/67375/3JP-C2RJTPNJ-7",
+            "outil": "Loterre_Annot",
+            "frequence": "2",
+            "arbreHierarchique": []
+        },
+        {
+            "lang": "eng",
+            "prefLabel": "survey",
+            "termeReconnu": [
+                "survey"
+            ],
+            "conceptUri": "http://data.loterre.fr/ark:/67375/3JP-C58R0627-3",
+            "outil": "Loterre_Annot",
+            "frequence": "2",
+            "arbreHierarchique": []
+        },
+        {
+            "lang": "eng",
+            "prefLabel": "urban area",
+            "termeReconnu": [
+                "urban areas."
+            ],
+            "conceptUri": "http://data.loterre.fr/ark:/67375/3JP-V0NP45PD-F",
+            "outil": "Loterre_Annot",
+            "frequence": "1",
+            "arbreHierarchique": []
+        }
+    ]
+}]
+
+POST {{host}}/v1/annotate?indent=true&loterreID=SN8
+content-type: application/json
+[
+  { "value": "The application of wavelet transforms to biomedical signals improved the detection of epileptic seizures by enhancing the signal-to-noise ratio." },
+  { "value": "Adaptive filtering using the LMS algorithm reduced the signal-to-noise ratio by 15 dB in EEG signals contaminated by muscle artifacts." }
+]
+
+HTTP 200
+[{
+    "value": [
+        {
+            "lang": "eng",
+            "prefLabel": "noise",
+            "termeReconnu": [
+                "-noise"
+            ],
+            "conceptUri": "http://data.loterre.fr/ark:/67375/SN8-T971B13D-1",
+            "outil": "Loterre_Annot",
+            "frequence": "1",
+            "arbreHierarchique": []
+        },
+        {
+            "lang": "eng",
+            "prefLabel": "wavelet",
+            "termeReconnu": [
+                "wavelet"
+            ],
+            "conceptUri": "http://data.loterre.fr/ark:/67375/SN8-RMX080ZW-4",
+            "outil": "Loterre_Annot",
+            "frequence": "1",
+            "arbreHierarchique": []
+        },
+        {
+            "lang": "eng",
+            "prefLabel": "signal",
+            "termeReconnu": [
+                "signal-"
+            ],
+            "conceptUri": "http://data.loterre.fr/ark:/67375/SN8-M56G53GK-N",
+            "outil": "Loterre_Annot",
+            "frequence": "1",
+            "arbreHierarchique": []
+        }
+    ]
+},
+{
+    "value": [
+        {
+            "lang": "eng",
+            "prefLabel": "noise",
+            "termeReconnu": [
+                "-noise"
+            ],
+            "conceptUri": "http://data.loterre.fr/ark:/67375/SN8-T971B13D-1",
+            "outil": "Loterre_Annot",
+            "frequence": "1",
+            "arbreHierarchique": []
+        },
+        {
+            "lang": "eng",
+            "prefLabel": "filtering",
+            "termeReconnu": [
+                "filtering"
+            ],
+            "conceptUri": "http://data.loterre.fr/ark:/67375/SN8-CZP1WZ6K-R",
+            "outil": "Loterre_Annot",
+            "frequence": "1",
+            "arbreHierarchique": []
+        },
+        {
+            "lang": "eng",
+            "prefLabel": "signal",
+            "termeReconnu": [
+                "signal-"
+            ],
+            "conceptUri": "http://data.loterre.fr/ark:/67375/SN8-M56G53GK-N",
+            "outil": "Loterre_Annot",
+            "frequence": "1",
+            "arbreHierarchique": []
+        }
+    ]
+}]
+
+POST {{host}}/v1/annotate?indent=true&loterreID=XD4
+content-type: application/json
+[
+  { "value": "The discovery of the Antikythera mechanism in 1901 revealed the existence of an ancient Greek analog computer used for astronomical calculations." },
+  { "value": "The invention of the compound microscope by Zacharias Janssen in the 17th century marked a turning point in microbiology, enabling Leeuwenhoek to observe bacteria." }
+]
+
+HTTP 200
+[{
+    "value": [
+        {
+            "lang": "eng",
+            "prefLabel": "discovery",
+            "termeReconnu": [
+                "discovery"
+            ],
+            "conceptUri": "http://data.loterre.fr/ark:/67375/XD4-CMC3R849-W",
+            "outil": "Loterre_Annot",
+            "frequence": "2",
+            "arbreHierarchique": []
+        },
+        {
+            "lang": "eng",
+            "prefLabel": "computer",
+            "termeReconnu": [
+                "computer"
+            ],
+            "conceptUri": "http://data.loterre.fr/ark:/67375/XD4-R2R0N9KK-T",
+            "outil": "Loterre_Annot",
+            "frequence": "2",
+            "arbreHierarchique": []
+        }
+    ]
+},
+{
+    "value": [
+        {
+            "lang": "eng",
+            "prefLabel": "bacteria",
+            "termeReconnu": [
+                "bacteria."
+            ],
+            "conceptUri": "http://data.loterre.fr/ark:/67375/XD4-PJWKV0P8-3",
+            "outil": "Loterre_Annot",
+            "frequence": "2",
+            "arbreHierarchique": []
+        },
+        {
+            "lang": "eng",
+            "prefLabel": "invention",
+            "termeReconnu": [
+                "invention"
+            ],
+            "conceptUri": "http://data.loterre.fr/ark:/67375/XD4-BWNHCZHM-B",
+            "outil": "Loterre_Annot",
+            "frequence": "2",
+            "arbreHierarchique": []
+        },
+        {
+            "lang": "eng",
+            "prefLabel": "microbiology",
+            "termeReconnu": [
+                "microbiology,"
+            ],
+            "conceptUri": "http://data.loterre.fr/ark:/67375/XD4-Z01KSK0M-S",
+            "outil": "Loterre_Annot",
+            "frequence": "2",
+            "arbreHierarchique": []
+        },
+        {
+            "lang": "eng",
+            "prefLabel": "microscope",
+            "termeReconnu": [
+                "microscope"
+            ],
+            "conceptUri": "http://data.loterre.fr/ark:/67375/XD4-Q6MZF7KF-W",
+            "outil": "Loterre_Annot",
+            "frequence": "2",
+            "arbreHierarchique": []
+        },
+        {
+            "lang": "eng",
+            "prefLabel": "17th century",
+            "termeReconnu": [
+                "17th century"
+            ],
+            "conceptUri": "http://data.loterre.fr/ark:/67375/XD4-Z0677C9F-F",
+            "outil": "Loterre_Annot",
+            "frequence": "1",
+            "arbreHierarchique": []
+        }
+    ]
+}]
+
+POST {{host}}/v1/annotate?indent=true&loterreID=G9G
+content-type: application/json
+[
+  { "value": "The study of the feeding habits of the bluefin tuna revealed a preference for anchovies and sardines, with a diet composition of 70% prey and 30% detritus." },
+  { "value": "The phylogenetic revision of Cichlidae from Lake Malawi led to the description of three new species of the genus Labeotropheus, based on morphometric and genetic criteria." }
+]
+
+HTTP 200
+[{
+    "value": [
+        {
+            "lang": "eng",
+            "prefLabel": "Thunnus",
+            "termeReconnu": [
+                "tuna"
+            ],
+            "arbreHierarchique": [
+                "1 - -Actinopterygii, 2 - -Neopterygii, 3 - Halecostomi, 4 - Teleostei, 5 - Euteleostei, 6 - Neoteleostei, 7 - Acanthomorpha, 8 - Acanthopterygii, 9 - Percomorpha, 10 - Perciformes, 11 - Scombridae",
+                "1 - -Actinopterygii, 2 - -Neopterygii, 3 - Halecostomi, 4 - Teleostei, 5 - Euteleostei, 6 - Neoteleostei, 7 - Acanthomorpha, 8 - Acanthopterygii, 9 - Percomorpha, 10 - Perciformes, 11 - -Neopterygii",
+                "1 - -Actinopterygii"
+            ],
+            "conceptUri": "http://data.loterre.fr/ark:/67375/G9G-STN4HXT1-6",
+            "outil": "Loterre_Annot",
+            "frequence": "1"
+        },
+        {
+            "lang": "eng",
+            "prefLabel": "Thunnus thynnus",
+            "termeReconnu": [
+                "bluefin tuna"
+            ],
+            "arbreHierarchique": [
+                "1 - -Actinopterygii, 2 - -Neopterygii, 3 - -Halecostomi, 4 - Teleostei, 5 - Euteleostei, 6 - Neoteleostei, 7 - Acanthomorpha, 8 - Acanthopterygii, 9 - Percomorpha, 10 - Perciformes, 11 - Scombridae, 12 - Thunnus",
+                "1 - -Actinopterygii, 2 - -Neopterygii, 3 - -Halecostomi, 4 - Teleostei, 5 - Euteleostei, 6 - Neoteleostei, 7 - Acanthomorpha, 8 - Acanthopterygii, 9 - Percomorpha, 10 - Perciformes, 11 - Scombridae, 12 - -Halecostomi",
+                "1 - -Actinopterygii, 2 - -Neopterygii, 3 - -Halecostomi, 4 - Teleostei, 5 - Euteleostei, 6 - Neoteleostei, 7 - Acanthomorpha, 8 - Acanthopterygii, 9 - Percomorpha, 10 - Perciformes, 11 - Scombridae, 12 - -Neopterygii",
+                "1 - -Actinopterygii"
+            ],
+            "conceptUri": "http://data.loterre.fr/ark:/67375/G9G-Z33K083S-F",
+            "outil": "Loterre_Annot",
+            "frequence": "1"
+        }
+    ]
+},
+{
+    "value": [
+        {
+            "lang": "eng",
+            "prefLabel": "Cichlidae",
+            "termeReconnu": [
+                "Cichlidae"
+            ],
+            "arbreHierarchique": [
+                "1 - -Actinopterygii, 2 - Neopterygii, 3 - Halecostomi, 4 - Teleostei, 5 - Euteleostei, 6 - Neoteleostei, 7 - Acanthomorpha, 8 - Acanthopterygii, 9 - Percomorpha, 10 - Perciformes",
+                "1 - -Actinopterygii"
+            ],
+            "conceptUri": "http://data.loterre.fr/ark:/67375/G9G-XMJ1C0JV-F",
+            "outil": "Loterre_Annot",
+            "frequence": "1"
+        },
+        {
+            "lang": "eng",
+            "prefLabel": "Labeotropheus",
+            "termeReconnu": [
+                "Labeotropheus,"
+            ],
+            "arbreHierarchique": [
+                "1 - -Actinopterygii, 2 - -Neopterygii, 3 - Halecostomi, 4 - Teleostei, 5 - Euteleostei, 6 - Neoteleostei, 7 - Acanthomorpha, 8 - Acanthopterygii, 9 - Percomorpha, 10 - Perciformes, 11 - Cichlidae",
+                "1 - -Actinopterygii, 2 - -Neopterygii, 3 - Halecostomi, 4 - Teleostei, 5 - Euteleostei, 6 - Neoteleostei, 7 - Acanthomorpha, 8 - Acanthopterygii, 9 - Percomorpha, 10 - Perciformes, 11 - -Neopterygii",
+                "1 - -Actinopterygii"
+            ],
+            "conceptUri": "http://data.loterre.fr/ark:/67375/G9G-GL54M01V-1",
+            "outil": "Loterre_Annot",
+            "frequence": "1"
+        }
+    ]
+}]
+
+POST {{host}}/v1/annotate?indent=true&loterreID=905
+content-type: application/json
+[
+  { "value": "The discovery of the earliest evidence of human occupation in the Near East dates back to 125,000 years ago, challenging the conventional view of modern human origins in Africa." },
+  { "value": "Analysis of flint tools from the Solutré site confirmed the use of bifacial retouching techniques by Upper Paleolithic hunter-gatherers." }
+]
+
+HTTP 200
+[{
+    "value": [
+        {
+            "lang": "eng",
+            "prefLabel": "Africa",
+            "termeReconnu": [
+                "Africa."
+            ],
+            "conceptUri": "http://data.loterre.fr/ark:/67375/905-HW5XRMMD-S",
+            "outil": "Loterre_Annot",
+            "frequence": "1",
+            "arbreHierarchique": []
+        },
+        {
+            "lang": "eng",
+            "prefLabel": "east",
+            "termeReconnu": [
+                "East"
+            ],
+            "conceptUri": "http://data.loterre.fr/ark:/67375/905-ZTK1SDWV-3",
+            "outil": "Loterre_Annot",
+            "frequence": "2",
+            "arbreHierarchique": []
+        },
+        {
+            "lang": "eng",
+            "prefLabel": "Near East",
+            "termeReconnu": [
+                "Near East"
+            ],
+            "conceptUri": "http://data.loterre.fr/ark:/67375/905-KH49NRW5-Q",
+            "outil": "Loterre_Annot",
+            "frequence": "1",
+            "arbreHierarchique": []
+        }
+    ]
+},
+{
+    "value": [
+        {
+            "lang": "eng",
+            "prefLabel": "tools",
+            "termeReconnu": [
+                "tools"
+            ],
+            "conceptUri": "http://data.loterre.fr/ark:/67375/905-LHSVR979-4",
+            "outil": "Loterre_Annot",
+            "frequence": "2",
+            "arbreHierarchique": []
+        },
+        {
+            "lang": "eng",
+            "prefLabel": "flint",
+            "termeReconnu": [
+                "flint"
+            ],
+            "conceptUri": "http://data.loterre.fr/ark:/67375/905-SJC0MHR4-K",
+            "outil": "Loterre_Annot",
+            "frequence": "2",
+            "arbreHierarchique": []
+        },
+        {
+            "lang": "eng",
+            "prefLabel": "site",
+            "termeReconnu": [
+                "site"
+            ],
+            "conceptUri": "http://data.loterre.fr/ark:/67375/905-S6747KTV-R",
+            "outil": "Loterre_Annot",
+            "frequence": "2",
+            "arbreHierarchique": []
+        }
+    ]
+}]
+
+POST {{host}}/v1/annotate?indent=true&loterreID=LTK
+content-type: application/json
+[
+  { "value": "Academic Free License version 3" }
+]
+
+HTTP 200
+[{
+    "value": [
+        {
+            "lang": "eng",
+            "prefLabel": "license",
+            "termeReconnu": [
+                "License"
+            ],
+            "arbreHierarchique": [
+                "1 - entity, 2 - continuant, 3 - generically dependent continuant, 4 - information content entity"
+            ],
+            "conceptUri": "http://data.loterre.fr/ark:/67375/LTK-CPCS5X8F-T",
+            "outil": "Loterre_Annot",
+            "frequence": "1"
+        },
+        {
+            "lang": "eng",
+            "prefLabel": "free",
+            "termeReconnu": [
+                "Free"
+            ],
+            "arbreHierarchique": [
+                "1 - entity, 2 - continuant, 3 - generically dependent continuant, 4 - information content entity, 5 - license clause, 6 - purchase cost"
+            ],
+            "conceptUri": "http://data.loterre.fr/ark:/67375/LTK-BW3T8N3J-2",
+            "outil": "Loterre_Annot",
+            "frequence": "1"
+        }
+    ]
+}]
+
+POST {{host}}/v1/annotate?indent=true&loterreID=3WV
+content-type: application/json
+[
+  { "value": "The bioaccumulation of cadmium in the liver tissues of Oncorhynchus mykiss was measured at 12 µg/g after chronic exposure to mining-contaminated waters." }
+]
+
+HTTP 200
+[{
+    "value": [
+        {
+            "lang": "eng",
+            "prefLabel": "cadmium",
+            "termeReconnu": [
+                "cadmium"
+            ],
+            "arbreHierarchique": [
+                "1 - chemical compound, 2 - substance, 3 - material, 4 - chemical element"
+            ],
+            "conceptUri": "http://data.loterre.fr/ark:/67375/3WV-QNV25LPJ-J",
+            "outil": "Loterre_Annot",
+            "frequence": "1"
+        },
+        {
+            "lang": "eng",
+            "prefLabel": "mining",
+            "termeReconnu": [
+                "mining-"
+            ],
+            "arbreHierarchique": [
+                "1 - activity, 2 - human activity"
+            ],
+            "conceptUri": "http://data.loterre.fr/ark:/67375/3WV-RSJTHRK5-P",
+            "outil": "Loterre_Annot",
+            "frequence": "1"
+        },
+        {
+            "lang": "eng",
+            "prefLabel": "exposure",
+            "termeReconnu": [
+                "exposure"
+            ],
+            "arbreHierarchique": [
+                "1 - process"
+            ],
+            "conceptUri": "http://data.loterre.fr/ark:/67375/3WV-S3H3ZLT8-9",
+            "outil": "Loterre_Annot",
+            "frequence": "1"
+        },
+        {
+            "lang": "eng",
+            "prefLabel": "liver",
+            "termeReconnu": [
+                "liver"
+            ],
+            "arbreHierarchique": [
+                "1 - living organism, 2 - body part, 3 - organ",
+                "1 - living organism, 2 - body part, 3 - biological system, 4 - digestive system"
+            ],
+            "conceptUri": "http://data.loterre.fr/ark:/67375/3WV-KMS3VN7C-J",
+            "outil": "Loterre_Annot",
+            "frequence": "1"
+        },
+        {
+            "lang": "eng",
+            "prefLabel": "Oncorhynchus mykiss",
+            "termeReconnu": [
+                "Oncorhynchus mykiss"
+            ],
+            "arbreHierarchique": [
+                "1 - Animalia, 2 - Vertebrata, 3 - Pisces"
+            ],
+            "conceptUri": "http://data.loterre.fr/ark:/67375/3WV-MJT91668-9",
+            "outil": "Loterre_Annot",
+            "frequence": "1"
+        }
+    ]
+}]
+
+POST {{host}}/v1/annotate?indent=true&loterreID=73G
+content-type: application/json
+[
+  { "value": "The study of the ontological status of abstract objects revealed a plurality of views among philosophers, with some arguing for a realist position and others for an anti-realist stance." },
+  { "value": "The phenomenological analysis of time perception in Husserl highlighted the distinction between objective time and lived time, central to the critique of classical metaphysics." }
+]
+
+HTTP 200
+[{
+    "value": [
+        {
+            "lang": "eng",
+            "prefLabel": "abstract",
+            "termeReconnu": [
+                "abstract"
+            ],
+            "conceptUri": "http://data.loterre.fr/ark:/67375/73G-NPLZXBMW-1",
+            "outil": "Loterre_Annot",
+            "frequence": "2",
+            "arbreHierarchique": []
+        },
+        {
+            "lang": "eng",
+            "prefLabel": "others",
+            "termeReconnu": [
+                "others"
+            ],
+            "conceptUri": "http://data.loterre.fr/ark:/67375/73G-D4L8J4Z3-K",
+            "outil": "Loterre_Annot",
+            "frequence": "2",
+            "arbreHierarchique": []
+        },
+        {
+            "lang": "eng",
+            "prefLabel": "study",
+            "termeReconnu": [
+                "study"
+            ],
+            "conceptUri": "http://data.loterre.fr/ark:/67375/73G-BTN9W88W-C",
+            "outil": "Loterre_Annot",
+            "frequence": "2",
+            "arbreHierarchique": []
+        },
+        {
+            "lang": "eng",
+            "prefLabel": "ontological",
+            "termeReconnu": [
+                "ontological"
+            ],
+            "conceptUri": "http://data.loterre.fr/ark:/67375/73G-QL5NS8KL-G",
+            "outil": "Loterre_Annot",
+            "frequence": "2",
+            "arbreHierarchique": []
+        },
+        {
+            "lang": "eng",
+            "prefLabel": "philosophers",
+            "termeReconnu": [
+                "philosophers,"
+            ],
+            "conceptUri": "http://data.loterre.fr/ark:/67375/73G-B7X9MFZC-8",
+            "outil": "Loterre_Annot",
+            "frequence": "2",
+            "arbreHierarchique": []
+        },
+        {
+            "lang": "eng",
+            "prefLabel": "plurality",
+            "termeReconnu": [
+                "plurality"
+            ],
+            "conceptUri": "http://data.loterre.fr/ark:/67375/73G-NDRSLXX5-F",
+            "outil": "Loterre_Annot",
+            "frequence": "2",
+            "arbreHierarchique": []
+        },
+        {
+            "lang": "eng",
+            "prefLabel": "status",
+            "termeReconnu": [
+                "status"
+            ],
+            "conceptUri": "http://data.loterre.fr/ark:/67375/73G-WZ77S3V9-J",
+            "outil": "Loterre_Annot",
+            "frequence": "2",
+            "arbreHierarchique": []
+        }
+    ]
+},
+{
+    "value": [
+        {
+            "lang": "eng",
+            "prefLabel": "analysis",
+            "termeReconnu": [
+                "analysis"
+            ],
+            "conceptUri": "http://data.loterre.fr/ark:/67375/73G-L0BB1PZJ-B",
+            "outil": "Loterre_Annot",
+            "frequence": "2",
+            "arbreHierarchique": []
+        },
+        {
+            "lang": "eng",
+            "prefLabel": "classical",
+            "termeReconnu": [
+                "classical"
+            ],
+            "conceptUri": "http://data.loterre.fr/ark:/67375/73G-DL6D2JGL-D",
+            "outil": "Loterre_Annot",
+            "frequence": "2",
+            "arbreHierarchique": []
+        },
+        {
+            "lang": "eng",
+            "prefLabel": "critique",
+            "termeReconnu": [
+                "critique"
+            ],
+            "conceptUri": "http://data.loterre.fr/ark:/67375/73G-L78M9NDL-H",
+            "outil": "Loterre_Annot",
+            "frequence": "1",
+            "arbreHierarchique": []
+        },
+        {
+            "lang": "eng",
+            "prefLabel": "distinction",
+            "termeReconnu": [
+                "distinction"
+            ],
+            "conceptUri": "http://data.loterre.fr/ark:/67375/73G-JRFH46NX-C",
+            "outil": "Loterre_Annot",
+            "frequence": "2",
+            "arbreHierarchique": []
+        },
+        {
+            "lang": "eng",
+            "prefLabel": "metaphysics",
+            "termeReconnu": [
+                "metaphysics."
+            ],
+            "conceptUri": "http://data.loterre.fr/ark:/67375/73G-PZDQRXGZ-6",
+            "outil": "Loterre_Annot",
+            "frequence": "2",
+            "arbreHierarchique": []
+        },
+        {
+            "lang": "eng",
+            "prefLabel": "objective",
+            "termeReconnu": [
+                "objective"
+            ],
+            "conceptUri": "http://data.loterre.fr/ark:/67375/73G-QPC777N3-6",
+            "outil": "Loterre_Annot",
+            "frequence": "2",
+            "arbreHierarchique": []
+        },
+        {
+            "lang": "eng",
+            "prefLabel": "perception",
+            "termeReconnu": [
+                "perception"
+            ],
+            "conceptUri": "http://data.loterre.fr/ark:/67375/73G-HNGSDZXW-Z",
+            "outil": "Loterre_Annot",
+            "frequence": "2",
+            "arbreHierarchique": []
+        },
+        {
+            "lang": "eng",
+            "prefLabel": "time",
+            "termeReconnu": [
+                "time",
+                "time,"
+            ],
+            "conceptUri": "http://data.loterre.fr/ark:/67375/73G-JFRTJT2J-F",
+            "outil": "Loterre_Annot",
+            "frequence": "6",
+            "arbreHierarchique": []
+        },
+        {
+            "lang": "eng",
+            "prefLabel": "lived",
+            "termeReconnu": [
+                "lived"
+            ],
+            "conceptUri": "http://data.loterre.fr/ark:/67375/73G-T5CXPF6W-P",
+            "outil": "Loterre_Annot",
+            "frequence": "2",
+            "arbreHierarchique": []
+        }
+    ]
+}]
+
+POST {{host}}/v1/annotate?indent=true&loterreID=KG7
+content-type: application/json
+[
+  { "value": "The study of migration dynamics in the United States showed an increasing concentration of Hispanic populations in southern states, with an annual growth rate of 3% in Texas." }
+]
+
+HTTP 200
+[{
+    "value": [
+        {
+            "lang": "eng",
+            "prefLabel": "United States",
+            "termeReconnu": [
+                "United States"
+            ],
+            "arbreHierarchique": [
+                "1 - North America"
+            ],
+            "conceptUri": "http://data.loterre.fr/ark:/67375/KG7-Q5LR1TMX-0",
+            "outil": "Loterre_Annot",
+            "frequence": "1"
+        },
+        {
+            "lang": "eng",
+            "prefLabel": "Texas",
+            "termeReconnu": [
+                "Texas."
+            ],
+            "arbreHierarchique": [
+                "1 - North America, 2 - United States"
+            ],
+            "conceptUri": "http://data.loterre.fr/ark:/67375/KG7-G89C24QG-C",
+            "outil": "Loterre_Annot",
+            "frequence": "1"
+        }
+    ]
+}]
+
+POST {{host}}/v1/annotate?indent=true&loterreID=RDR
+content-type: application/json
+[
+  { "value": "The development of graphene-based transistors has the potential to revolutionize the field of electronics, with applications ranging from flexible displays to high-speed computing." },
+  { "value": "The design of a high-frequency printed circuit board required the use of low-loss dielectric materials (tan δ < 0.002) to minimize electromagnetic interference." }
+]
+
+HTTP 200
+[{
+    "value": [
+        {
+            "lang": "eng",
+            "prefLabel": "electronics",
+            "termeReconnu": [
+                "electronics,"
+            ],
+            "conceptUri": "http://data.loterre.fr/ark:/67375/RDR-TSBCRM07-D",
+            "outil": "Loterre_Annot",
+            "frequence": "2",
+            "arbreHierarchique": []
+        },
+        {
+            "lang": "eng",
+            "prefLabel": "graphene",
+            "termeReconnu": [
+                "graphene-"
+            ],
+            "arbreHierarchique": [
+                "1 - zero band gap semiconductor"
+            ],
+            "conceptUri": "http://data.loterre.fr/ark:/67375/RDR-MW4NN7KN-J",
+            "outil": "Loterre_Annot",
+            "frequence": "2"
+        }
+    ]
+},
+{
+    "value": [
+        {
+            "lang": "eng",
+            "prefLabel": "electromagnetic interference",
+            "termeReconnu": [
+                "electromagnetic interference."
+            ],
+            "conceptUri": "http://data.loterre.fr/ark:/67375/RDR-QXWDRMCN-F",
+            "outil": "Loterre_Annot",
+            "frequence": "2",
+            "arbreHierarchique": []
+        },
+        {
+            "lang": "eng",
+            "prefLabel": "printed circuit board",
+            "termeReconnu": [
+                "printed circuit board"
+            ],
+            "conceptUri": "http://data.loterre.fr/ark:/67375/RDR-TV88JC1K-2",
+            "outil": "Loterre_Annot",
+            "frequence": "2",
+            "arbreHierarchique": []
+        },
+        {
+            "lang": "eng",
+            "prefLabel": "printed circuit",
+            "termeReconnu": [
+                "printed circuit"
+            ],
+            "conceptUri": "http://data.loterre.fr/ark:/67375/RDR-GNLB7Q4H-F",
+            "outil": "Loterre_Annot",
+            "frequence": "2",
+            "arbreHierarchique": []
+        },
+        {
+            "lang": "eng",
+            "prefLabel": "dielectric materials",
+            "termeReconnu": [
+                "dielectric materials"
+            ],
+            "conceptUri": "http://data.loterre.fr/ark:/67375/RDR-WVW5C33N-G",
+            "outil": "Loterre_Annot",
+            "frequence": "2",
+            "arbreHierarchique": []
+        }
+    ]
+}]
+
+POST {{host}}/v1/annotate?indent=true&loterreID=MDL
+content-type: application/json
+[
+  { "value": "The discovery of a new exoplanet, Kepler-452b, orbiting a sun-like star in the habitable zone of the Milky Way galaxy, raises hopes for the existence of extraterrestrial life." },
+  { "value": "The detection of a super-Earth exoplanet by the transit method revealed an orbital period of 12.3 days around the red dwarf star Gliese 581." }
+]
+
+HTTP 200
+[{
+    "value": [
+        {
+            "lang": "eng",
+            "prefLabel": "Milky Way",
+            "termeReconnu": [
+                "Milky Way",
+                "Milky Way galaxy,"
+            ],
+            "arbreHierarchique": [
+                "1 - galactic and extragalactic astronomy, 2 - galaxy, 3 - spiral galaxy, 4 - barred spiral galaxy"
+            ],
+            "conceptUri": "http://data.loterre.fr/ark:/67375/MDL-NXBSWJWQ-L",
+            "outil": "Loterre_Annot",
+            "frequence": "2"
+        },
+        {
+            "lang": "eng",
+            "prefLabel": "galaxy",
+            "termeReconnu": [
+                "galaxy,"
+            ],
+            "arbreHierarchique": [
+                "1 - galactic and extragalactic astronomy"
+            ],
+            "conceptUri": "http://data.loterre.fr/ark:/67375/MDL-XQ63631W-F",
+            "outil": "Loterre_Annot",
+            "frequence": "1"
+        },
+        {
+            "lang": "eng",
+            "prefLabel": "Sun",
+            "termeReconnu": [
+                "sun-"
+            ],
+            "arbreHierarchique": [
+                "1 - solar system"
+            ],
+            "conceptUri": "http://data.loterre.fr/ark:/67375/MDL-T1P11XML-4",
+            "outil": "Loterre_Annot",
+            "frequence": "1"
+        },
+        {
+            "lang": "eng",
+            "prefLabel": "extraterrestrial life",
+            "termeReconnu": [
+                "extraterrestrial life."
+            ],
+            "conceptUri": "http://data.loterre.fr/ark:/67375/MDL-FBHBGD4L-D",
+            "outil": "Loterre_Annot",
+            "frequence": "2",
+            "arbreHierarchique": []
+        },
+        {
+            "lang": "eng",
+            "prefLabel": "extrasolar planet",
+            "termeReconnu": [
+                "exoplanet,"
+            ],
+            "arbreHierarchique": [
+                "1 - interstellar space"
+            ],
+            "conceptUri": "http://data.loterre.fr/ark:/67375/MDL-GQX87B9C-0",
+            "outil": "Loterre_Annot",
+            "frequence": "1"
+        }
+    ]
+},
+{
+    "value": [
+        {
+            "lang": "eng",
+            "prefLabel": "dwarf star",
+            "termeReconnu": [
+                "dwarf star"
+            ],
+            "arbreHierarchique": [
+                "1 - stellar astronomy, 2 - stellar type, 3 - main-sequence star"
+            ],
+            "conceptUri": "http://data.loterre.fr/ark:/67375/MDL-B17N3PH1-7",
+            "outil": "Loterre_Annot",
+            "frequence": "2"
+        },
+        {
+            "lang": "eng",
+            "prefLabel": "red dwarf",
+            "termeReconnu": [
+                "red dwarf"
+            ],
+            "arbreHierarchique": [
+                "1 - stellar astronomy, 2 - stellar type, 3 - main-sequence star, 4 - dwarf star",
+                "1 - stellar astronomy, 2 - stellar type, 3 - late-type star, 4 - cool star"
+            ],
+            "conceptUri": "http://data.loterre.fr/ark:/67375/MDL-MVTDHC7N-4",
+            "outil": "Loterre_Annot",
+            "frequence": "2"
+        },
+        {
+            "lang": "eng",
+            "prefLabel": "Earth",
+            "termeReconnu": [
+                "-Earth"
+            ],
+            "arbreHierarchique": [
+                "1 - solar system, 2 - planet, 3 - terrestrial planet"
+            ],
+            "conceptUri": "http://data.loterre.fr/ark:/67375/MDL-CC00QLNZ-R",
+            "outil": "Loterre_Annot",
+            "frequence": "1"
+        },
+        {
+            "lang": "eng",
+            "prefLabel": "extrasolar planet",
+            "termeReconnu": [
+                "exoplanet"
+            ],
+            "arbreHierarchique": [
+                "1 - interstellar space"
+            ],
+            "conceptUri": "http://data.loterre.fr/ark:/67375/MDL-GQX87B9C-0",
+            "outil": "Loterre_Annot",
+            "frequence": "1"
+        }
+    ]
+}]
+
+POST {{host}}/v1/annotate?indent=true&loterreID=VH8
+content-type: application/json
+[
+  { "value": "The epidemiological study confirmed an 8% prevalence of Crohn’s disease in Caucasian populations, with an incidence peak between the ages of 20 and 30." }
+]
+
+HTTP 200
+[{
+    "value": [
+        {
+            "lang": "eng",
+            "prefLabel": "disease",
+            "termeReconnu": [
+                "disease"
+            ],
+            "conceptUri": "http://data.loterre.fr/ark:/67375/VH8-MSKR5H7R-L",
+            "outil": "Loterre_Annot",
+            "frequence": "1",
+            "arbreHierarchique": []
+        }
+    ]
+}]
+
+POST {{host}}/v1/annotate?indent=true&loterreID=KW5
+content-type: application/json
+[
+  { "value": "The study of the social organization of the Yanomami people revealed a complex system of kinship and alliance based on bilateral cross-cousin marriage." },
+  { "value": "Ethnographic research among Andean Amerindian communities documented symbolic reciprocity practices in pre-Columbian agrarian rituals." }
+]
+
+HTTP 200
+[{
+    "value": [
+        {
+            "lang": "eng",
+            "prefLabel": "cousin",
+            "termeReconnu": [
+                "-cousin"
+            ],
+            "conceptUri": "http://data.loterre.fr/ark:/67375/KW5-S427HG09-W",
+            "outil": "Loterre_Annot",
+            "frequence": "2",
+            "arbreHierarchique": []
+        },
+        {
+            "lang": "eng",
+            "prefLabel": "people",
+            "termeReconnu": [
+                "people"
+            ],
+            "conceptUri": "http://data.loterre.fr/ark:/67375/KW5-DS5JC6CG-Z",
+            "outil": "Loterre_Annot",
+            "frequence": "2",
+            "arbreHierarchique": []
+        },
+        {
+            "lang": "eng",
+            "prefLabel": "system",
+            "termeReconnu": [
+                "system"
+            ],
+            "conceptUri": "http://data.loterre.fr/ark:/67375/KW5-TWD9LF11-4",
+            "outil": "Loterre_Annot",
+            "frequence": "2",
+            "arbreHierarchique": []
+        },
+        {
+            "lang": "eng",
+            "prefLabel": "cross",
+            "termeReconnu": [
+                "cross-"
+            ],
+            "conceptUri": "http://data.loterre.fr/ark:/67375/KW5-SVKM46QC-P",
+            "outil": "Loterre_Annot",
+            "frequence": "2",
+            "arbreHierarchique": []
+        },
+        {
+            "lang": "eng",
+            "prefLabel": "Yanomami",
+            "termeReconnu": [
+                "Yanomami"
+            ],
+            "conceptUri": "http://data.loterre.fr/ark:/67375/KW5-ZK31017V-9",
+            "outil": "Loterre_Annot",
+            "frequence": "1",
+            "arbreHierarchique": []
+        },
+        {
+            "lang": "eng",
+            "prefLabel": "marriage",
+            "termeReconnu": [
+                "marriage."
+            ],
+            "conceptUri": "http://data.loterre.fr/ark:/67375/KW5-P3PLNSZ5-M",
+            "outil": "Loterre_Annot",
+            "frequence": "2",
+            "arbreHierarchique": []
+        },
+        {
+            "lang": "eng",
+            "prefLabel": "organization",
+            "termeReconnu": [
+                "organization"
+            ],
+            "conceptUri": "http://data.loterre.fr/ark:/67375/KW5-JNZ2360Q-L",
+            "outil": "Loterre_Annot",
+            "frequence": "2",
+            "arbreHierarchique": []
+        },
+        {
+            "lang": "eng",
+            "prefLabel": "social organization",
+            "termeReconnu": [
+                "social organization"
+            ],
+            "conceptUri": "http://data.loterre.fr/ark:/67375/KW5-R1GK99FS-7",
+            "outil": "Loterre_Annot",
+            "frequence": "2",
+            "arbreHierarchique": []
+        },
+        {
+            "lang": "eng",
+            "prefLabel": "kinship",
+            "termeReconnu": [
+                "kinship"
+            ],
+            "conceptUri": "http://data.loterre.fr/ark:/67375/KW5-CS683F0L-J",
+            "outil": "Loterre_Annot",
+            "frequence": "2",
+            "arbreHierarchique": []
+        }
+    ]
+},
+{
+    "value": [
+        {
+            "lang": "eng",
+            "prefLabel": "research",
+            "termeReconnu": [
+                "research"
+            ],
+            "conceptUri": "http://data.loterre.fr/ark:/67375/KW5-DNT5767L-P",
+            "outil": "Loterre_Annot",
+            "frequence": "2",
+            "arbreHierarchique": []
+        },
+        {
+            "lang": "eng",
+            "prefLabel": "reciprocity",
+            "termeReconnu": [
+                "reciprocity"
+            ],
+            "conceptUri": "http://data.loterre.fr/ark:/67375/KW5-CNRV0V6L-V",
+            "outil": "Loterre_Annot",
+            "frequence": "2",
+            "arbreHierarchique": []
+        },
+        {
+            "lang": "eng",
+            "prefLabel": "Amerindian",
+            "termeReconnu": [
+                "Amerindian"
+            ],
+            "conceptUri": "http://data.loterre.fr/ark:/67375/KW5-WGTR919P-S",
+            "outil": "Loterre_Annot",
+            "frequence": "1",
+            "arbreHierarchique": []
+        }
+    ]
+}]
+
+POST {{host}}/v1/annotate?indent=true&loterreID=TSP
+content-type: application/json
+[
+  { "value": "The measles vaccination campaign in sub-Saharan Africa reduced incidence by 75% between 2015 and 2023, according to WHO data." }
+]
+
+HTTP 200
+[{
+    "value": []
+}]
+
+POST {{host}}/v1/annotate?indent=true&loterreID=P21
+content-type: application/json
+[
+  { "value": "Stylistic analysis of Proust’s novels revealed a systematic use of extended metaphor to represent the subjectivity of time and memory." }
+]
+
+HTTP 200
+[{
+    "value": [
+        {
+            "lang": "eng",
+            "prefLabel": "time",
+            "termeReconnu": [
+                "time"
+            ],
+            "conceptUri": "http://data.loterre.fr/ark:/67375/P21-HB7FP32T-T",
+            "outil": "Loterre_Annot",
+            "frequence": "2",
+            "arbreHierarchique": []
+        },
+        {
+            "lang": "eng",
+            "prefLabel": "subjectivity",
+            "termeReconnu": [
+                "subjectivity"
+            ],
+            "conceptUri": "http://data.loterre.fr/ark:/67375/P21-C22KR17B-9",
+            "outil": "Loterre_Annot",
+            "frequence": "2",
+            "arbreHierarchique": []
+        },
+        {
+            "lang": "eng",
+            "prefLabel": "memory",
+            "termeReconnu": [
+                "memory."
+            ],
+            "conceptUri": "http://data.loterre.fr/ark:/67375/P21-ZTSLGCSS-Z",
+            "outil": "Loterre_Annot",
+            "frequence": "2",
+            "arbreHierarchique": []
+        },
+        {
+            "lang": "eng",
+            "prefLabel": "metaphor",
+            "termeReconnu": [
+                "metaphor"
+            ],
+            "conceptUri": "http://data.loterre.fr/ark:/67375/P21-NQKCD1XP-M",
+            "outil": "Loterre_Annot",
+            "frequence": "2",
+            "arbreHierarchique": []
+        }
+    ]
+}]
+
+POST {{host}}/v1/annotate?indent=true&loterreID=NHT
+content-type: application/json
+[
+  { "value": "The study of superconductivity in cuprate materials revealed a complex interplay between charge ordering and antiferromagnetic correlations, challenging the conventional BCS theory." },
+  { "value": "The superconducting phase transition in cuprates was observed at a critical temperature of 92 K, confirming the effect of hydrostatic pressure on the crystalline structure." }
+]
+
+HTTP 200
+[{
+    "value": [
+        {
+            "lang": "eng",
+            "prefLabel": "superconductivity",
+            "termeReconnu": [
+                "superconductivity"
+            ],
+            "conceptUri": "http://data.loterre.fr/ark:/67375/NHT-L5BTQRJ6-V",
+            "outil": "Loterre_Annot",
+            "frequence": "2",
+            "arbreHierarchique": []
+        },
+        {
+            "lang": "eng",
+            "prefLabel": "charge ordering",
+            "termeReconnu": [
+                "charge ordering"
+            ],
+            "conceptUri": "http://data.loterre.fr/ark:/67375/NHT-S9XV7KM4-Q",
+            "outil": "Loterre_Annot",
+            "frequence": "2",
+            "arbreHierarchique": []
+        },
+        {
+            "lang": "eng",
+            "prefLabel": "ordering",
+            "termeReconnu": [
+                "ordering"
+            ],
+            "conceptUri": "http://data.loterre.fr/ark:/67375/NHT-SKRNL16V-F",
+            "outil": "Loterre_Annot",
+            "frequence": "2",
+            "arbreHierarchique": []
+        },
+        {
+            "lang": "eng",
+            "prefLabel": "BCS theory",
+            "termeReconnu": [
+                "BCS theory."
+            ],
+            "conceptUri": "http://data.loterre.fr/ark:/67375/NHT-JTZ3JNTP-L",
+            "outil": "Loterre_Annot",
+            "frequence": "1",
+            "arbreHierarchique": []
+        },
+        {
+            "lang": "eng",
+            "prefLabel": "material",
+            "termeReconnu": [
+                "materials"
+            ],
+            "conceptUri": "http://data.loterre.fr/ark:/67375/NHT-LLPT4NTN-2",
+            "outil": "Loterre_Annot",
+            "frequence": "1",
+            "arbreHierarchique": []
+        }
+    ]
+},
+{
+    "value": [
+        {
+            "lang": "eng",
+            "prefLabel": "crystalline structure",
+            "termeReconnu": [
+                "crystalline structure."
+            ],
+            "conceptUri": "http://data.loterre.fr/ark:/67375/NHT-RFXGGP5K-J",
+            "outil": "Loterre_Annot",
+            "frequence": "2",
+            "arbreHierarchique": []
+        },
+        {
+            "lang": "eng",
+            "prefLabel": "hydrostatic pressure",
+            "termeReconnu": [
+                "hydrostatic pressure"
+            ],
+            "conceptUri": "http://data.loterre.fr/ark:/67375/NHT-C4LRM5HH-5",
+            "outil": "Loterre_Annot",
+            "frequence": "2",
+            "arbreHierarchique": []
+        },
+        {
+            "lang": "eng",
+            "prefLabel": "critical temperature",
+            "termeReconnu": [
+                "critical temperature"
+            ],
+            "conceptUri": "http://data.loterre.fr/ark:/67375/NHT-JPZ2831R-D",
+            "outil": "Loterre_Annot",
+            "frequence": "2",
+            "arbreHierarchique": []
+        }
+    ]
+}]
+
+POST {{host}}/v1/annotate?indent=true&loterreID=BVM
+content-type: application/json
+[
+  { "value": "The town of Vandœuvre-lès-Nancy is located in the Meurthe-et-Moselle department, in the Grand Est region of France." }
+]
+
+HTTP 200
+[{
+    "value": [
+        {
+            "lang": "eng",
+            "prefLabel": "France",
+            "termeReconnu": [
+                "France."
+            ],
+            "conceptUri": "http://data.loterre.fr/ark:/67375/BVM-CZ8WD4C2-L",
+            "outil": "Loterre_Annot",
+            "frequence": "1",
+            "arbreHierarchique": []
+        },
+        {
+            "lang": "eng",
+            "prefLabel": "Nancy",
+            "termeReconnu": [
+                "-Nancy"
+            ],
+            "arbreHierarchique": [
+                "1 - France, 2 - Metropolitan France, 3 - Grand Est, 4 - Meurthe-et-Moselle (department)"
+            ],
+            "conceptUri": "http://data.loterre.fr/ark:/67375/BVM-LKXX0BMT-C",
+            "outil": "Loterre_Annot",
+            "frequence": "2"
+        },
+        {
+            "lang": "eng",
+            "prefLabel": "Grand Est",
+            "termeReconnu": [
+                "Grand Est"
+            ],
+            "arbreHierarchique": [
+                "1 - France, 2 - Metropolitan France"
+            ],
+            "conceptUri": "http://data.loterre.fr/ark:/67375/BVM-V26GXZKG-M",
+            "outil": "Loterre_Annot",
+            "frequence": "1"
+        },
+        {
+            "lang": "eng",
+            "prefLabel": "Vandœuvre-lès-Nancy",
+            "termeReconnu": [
+                "-Nancy"
+            ],
+            "arbreHierarchique": [
+                "1 - France, 2 - Metropolitan France, 3 - Grand Est, 4 - Meurthe-et-Moselle (department)"
+            ],
+            "conceptUri": "http://data.loterre.fr/ark:/67375/BVM-WWQ45JT4-C",
+            "outil": "Loterre_Annot",
+            "frequence": "2"
+        },
+        {
+            "lang": "eng",
+            "prefLabel": "Moselle (department)",
+            "termeReconnu": [
+                "-Moselle"
+            ],
+            "arbreHierarchique": [
+                "1 - France, 2 - Metropolitan France, 3 - Grand Est"
+            ],
+            "conceptUri": "http://data.loterre.fr/ark:/67375/BVM-QHX8DJHD-H",
+            "outil": "Loterre_Annot",
+            "frequence": "1"
+        }
+    ]
+}]
+
+POST {{host}}/v1/annotate?indent=true&loterreID=26L
+content-type: application/json
+[
+  { "value": "Seismic analysis of active faults in the Alpine region revealed an increased risk of magnitude 6.5 earthquakes in the next 50 years." }
+]
+
+HTTP 200
+[{
+    "value": [
+        {
+            "lang": "eng",
+            "prefLabel": "analysis",
+            "termeReconnu": [
+                "analysis"
+            ],
+            "conceptUri": "http://data.loterre.fr/ark:/67375/26L-TCDK21X6-P",
+            "outil": "Loterre_Annot",
+            "frequence": "2",
+            "arbreHierarchique": []
+        },
+        {
+            "lang": "eng",
+            "prefLabel": "magnitude",
+            "termeReconnu": [
+                "magnitude"
+            ],
+            "conceptUri": "http://data.loterre.fr/ark:/67375/26L-LBMWGCX9-7",
+            "outil": "Loterre_Annot",
+            "frequence": "2",
+            "arbreHierarchique": []
+        },
+        {
+            "lang": "eng",
+            "prefLabel": "fault",
+            "termeReconnu": [
+                "faults"
+            ],
+            "conceptUri": "http://data.loterre.fr/ark:/67375/26L-WHVLKV0R-2",
+            "outil": "Loterre_Annot",
+            "frequence": "1",
+            "arbreHierarchique": []
+        },
+        {
+            "lang": "eng",
+            "prefLabel": "active fault",
+            "termeReconnu": [
+                "active faults"
+            ],
+            "arbreHierarchique": [
+                "1 - fault"
+            ],
+            "conceptUri": "http://data.loterre.fr/ark:/67375/26L-XJDGH935-D",
+            "outil": "Loterre_Annot",
+            "frequence": "1"
+        },
+        {
+            "lang": "eng",
+            "prefLabel": "earthquake",
+            "termeReconnu": [
+                "earthquakes"
+            ],
+            "conceptUri": "http://data.loterre.fr/ark:/67375/26L-RXPH74CR-D",
+            "outil": "Loterre_Annot",
+            "frequence": "1",
+            "arbreHierarchique": []
+        }
+    ]
+}]
+
+POST {{host}}/v1/annotate?indent=true&loterreID=PSR
+content-type: application/json
+[
+  { "value": "The proof of Fermat’s Last Theorem used advanced number theory tools, including modular forms and Galois representations." }
+]
+
+HTTP 200
+[{
+    "value": [
+        {
+            "lang": "eng",
+            "prefLabel": "number",
+            "termeReconnu": [
+                "number"
+            ],
+            "conceptUri": "http://data.loterre.fr/ark:/67375/PSR-Z5NBGSJC-F",
+            "outil": "Loterre_Annot",
+            "frequence": "1",
+            "arbreHierarchique": []
+        },
+        {
+            "lang": "eng",
+            "prefLabel": "number theory",
+            "termeReconnu": [
+                "number theory"
+            ],
+            "arbreHierarchique": [
+                "1 - number"
+            ],
+            "conceptUri": "http://data.loterre.fr/ark:/67375/PSR-P93ST75Z-8",
+            "outil": "Loterre_Annot",
+            "frequence": "1"
+        }
+    ]
+}]
+
+POST {{host}}/v1/annotate?indent=true&loterreID=N9J
+content-type: application/json
+[
+  { "value": "The integration of epidemiological data into the SAGE system enabled predictive modeling of epidemic spread with a 5% margin of error." },
+  { "value": "Abraham Lincoln " }
+]
+
+HTTP 200
+[{
+    "value": [
+        {
+            "lang": "eng",
+            "prefLabel": "epidemiological data",
+            "termeReconnu": [
+                "epidemiological data"
+            ],
+            "arbreHierarchique": [
+                "1 - contexts, 2 - population characteristics, 3 - demography, 4 - vital statistics",
+                "1 - contexts, 2 - population characteristics, 3 - health, 4 - public health, 5 - epidemiologic measurements, 6 - demography, 7 - vital statistics",
+                "1 - contexts, 2 - demography, 3 - vital statistics",
+                "1 - contexts, 2 - population characteristics, 3 - health, 4 - public health, 5 - epidemiologic methods, 6 - data collection, 7 - vital statistics",
+                "1 - social science subjects, 2 - health and social care, 3 - health policy, 4 - health statistics, 5 - medical statistical data",
+                "1 - social science subjects, 2 - library and information science, 3 - information science, 4 - types of information, 5 - types of data, 6 - statistical data, 7 - health statistics, 8 - medical statistical data"
+            ],
+            "conceptUri": "http://data.loterre.fr/ark:/67375/N9J-VL8ZJWRZ-W",
+            "outil": "Loterre_Annot",
+            "frequence": "1"
+        },
+        {
+            "lang": "eng",
+            "prefLabel": "spread",
+            "termeReconnu": [
+                "spread"
+            ],
+            "arbreHierarchique": [
+                "1 - social science subjects, 2 - business and management, 3 - international business, 4 - international finance",
+                "1 - social science subjects, 2 - business and management, 3 - finance, 4 - international finance"
+            ],
+            "conceptUri": "http://data.loterre.fr/ark:/67375/N9J-KWKBTJX4-C",
+            "outil": "Loterre_Annot",
+            "frequence": "1"
+        }
+    ]
+},
+{
+    "value": []
+}]
+
+POST {{host}}/v1/annotate?indent=true&loterreID=D63
+content-type: application/json
+[
+  { "value": "Ars-sur-Moselle Ars-Laquenexy" }
+]
+
+HTTP 200
+[{
+    "value": [
+        {
+            "lang": "eng",
+            "prefLabel": "Laquenexy",
+            "termeReconnu": [
+                "-Laquenexy\\"
+            ],
+            "arbreHierarchique": [
+                "1 - France, 2 - Metropolitan France, 3 - Grand Est, 4 - Moselle (department)"
+            ],
+            "conceptUri": "http://data.loterre.fr/ark:/67375/D63-M6C2ZBZS-D",
+            "outil": "Loterre_Annot",
+            "frequence": "1"
+        },
+        {
+            "lang": "eng",
+            "prefLabel": "Moselle (department)",
+            "termeReconnu": [
+                "-Moselle"
+            ],
+            "arbreHierarchique": [
+                "1 - France, 2 - Metropolitan France, 3 - Grand Est"
+            ],
+            "conceptUri": "http://data.loterre.fr/ark:/67375/D63-JXNF7504-C",
+            "outil": "Loterre_Annot",
+            "frequence": "1"
+        },
+        {
+            "lang": "eng",
+            "prefLabel": "Ars (Charente)",
+            "termeReconnu": [
+                "Ars-"
+            ],
+            "arbreHierarchique": [
+                "1 - France, 2 - Metropolitan France, 3 - Nouvelle-Aquitaine, 4 - Charente (department)"
+            ],
+            "conceptUri": "http://data.loterre.fr/ark:/67375/D63-M6JT57SJ-2",
+            "outil": "Loterre_Annot",
+            "frequence": "1"
+        },
+        {
+            "lang": "eng",
+            "prefLabel": "Ars (Creuse)",
+            "termeReconnu": [
+                "Ars-"
+            ],
+            "arbreHierarchique": [
+                "1 - France, 2 - Metropolitan France, 3 - Nouvelle-Aquitaine, 4 - Creuse (department)"
+            ],
+            "conceptUri": "http://data.loterre.fr/ark:/67375/D63-L4MTZ2Z9-H",
+            "outil": "Loterre_Annot",
+            "frequence": "1"
+        }
+    ]
+}]
+
+POST {{host}}/v1/annotate?indent=true&loterreID=JVR
+content-type: application/json
+[
+  { "value": "Indexing biomedical articles with MeSH terms facilitated the identification of 12,000 publications on the molecular mechanisms of antibiotic resistance." }
+]
+
+
+HTTP 200
+[{
+    "value": [
+        {
+            "lang": "eng",
+            "prefLabel": "Publications",
+            "termeReconnu": [
+                "publications"
+            ],
+            "arbreHierarchique": [
+                "1 - Information Science, 2 - Communications Media"
+            ],
+            "conceptUri": "http://data.loterre.fr/ark:/67375/JVR-P61PFVSG-P",
+            "outil": "Loterre_Annot",
+            "frequence": "1"
+        },
+        {
+            "lang": "eng",
+            "prefLabel": "Anti-Bacterial Agents",
+            "termeReconnu": [
+                "antibiotic"
+            ],
+            "arbreHierarchique": [
+                "1 - Chemical Actions and Uses, 2 - Pharmacologic Actions, 3 - Therapeutic Uses, 4 - Anti-Infective Agents"
+            ],
+            "conceptUri": "http://data.loterre.fr/ark:/67375/JVR-GBM73BCQ-W",
+            "outil": "Loterre_Annot",
+            "frequence": "1"
+        },
+        {
+            "lang": "eng",
+            "prefLabel": "Drug Resistance, Microbial",
+            "termeReconnu": [
+                "antibiotic resistance."
+            ],
+            "arbreHierarchique": [
+                "1 - Microbiological Phenomena",
+                "1 - Physiological Phenomena, 2 - Pharmacological and Toxicological Phenomena, 3 - Pharmacological Phenomena, 4 - Drug Resistance"
+            ],
+            "conceptUri": "http://data.loterre.fr/ark:/67375/JVR-P5T30DB5-0",
+            "outil": "Loterre_Annot",
+            "frequence": "1"
+        }
+    ]
 }]
