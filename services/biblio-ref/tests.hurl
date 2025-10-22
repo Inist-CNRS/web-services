@@ -19,7 +19,7 @@ skip: {{blocked}}
     "value": "HALUCINATED > Zohuri, B. (2019). Selective herbivory of thyme chemotypes by a mollusk and a grasshopper (pp. 81-98). Woodhead Publishing."
   },
   {
-    "value": "DataCite DOI > 10.48433/cr_he6 42"
+    "value": "10.48433/cr_he6 42"
   }
 ]
 
