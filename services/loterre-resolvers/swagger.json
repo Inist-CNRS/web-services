@@ -3,19 +3,20 @@
     "info": {
         "title": "loterre-resolvers - Résolveurs pour des terminologies Loterre",
         "summary": "Fait appel aux vocabulaires Loterre pour obtenir des informations dans différents domaines.",
-        "version": "8.0.0",
+        "version": "8.1.0",
         "termsOfService": "https://services.istex.fr/",
         "contact": {
             "name": "Inist-CNRS",
             "url": "https://www.inist.fr/nous-contacter/"
-        }
+        },
+        "description": "Fait appel aux vocabulaires [Loterre](https://loterre.istex.fr/) pour obtenir\ndes informations dans différents domaines.  \n\nTrois services sont proposés :\n\n1. [`/v1/identify`](#loterre-resolvers/post-v1-identify) : à partir d'un tableau\n   de termes, renvoie au moins un identifiant, les verbalisations anglaise et\n   française, et éventuellement d'autres informations.  \n2. [`/v1/expand`](#loterre-resolvers/post-v1-expand) : à partir d'un tableau de\n   termes, renvoie un objet SKOS (au format JSON) du vocabulaire correspondant.  \n3. [`/v1/annotate`](#loterre-resolvers/post-v1-annotate) : à partir d'un texte,\n   renvoie un tableau de concepts SKOS correspondants (au format JSON).  \n\n📝 **Note** : les services sont accessibles via une route\n`/v1/service?loterreID={loterreID}`, où `{loterreID}` est l'identifiant du\nvocabulaire Loterre à utiliser (ex: `9SD` pour le vocabulaire des pays).  \n\n⚠️ **Avertissement** : les anciennes routes des services sont toujours\ndisponibles, mais sont dépréciées. Il s'agit des routes `/v1/{loterreID}/service`, où\n`{loterreID}` est l'identifiant du vocabulaire Loterre à utiliser (ex: `9SD`\npour le vocabulaire des pays).  \n\n### Vocabulaires disponibles\n\n- `1WB` : Transferts de chaleur\n- `216` : Éducation\n- `26L` : Sciences de la terre\n- `27X` : Art et Archéologie\n- `2XK` : Laboratoires\n- `3JP` : Sociologie\n- `3WV` : Écotoxicologie\n- `4V5` : Histoire et sciences des religions\n- `73G` : Philosophie\n- `8HQ` : Tableau périodique des éléments\n- `8LP` : Traitement automatique des langues\n- `905` : Préhistoire\n- `9SD` : Pays et subdivisions\n- `BLH` : Biodiversité\n- `BRMH` : Biotechnologies de la reproduction\n- `BVM` : NETSCITY\n- `C0X` : Covid-19\n- `CUEX` : Cuisson-extrusion\n- `D63` : Communes (France)\n- `DOM` : Domaines scientifiques\n- `EMTD` : Écologie microbienne du tube digestif\n- `ERC` : Classification de l'ERC\n- `FMC` : Optique\n- `G9G` : Taxonomie des poissons\n- `GGMGG` : Génétique moléculaire\n- `GT` : Géographie\n- `IDIA` : Ionisation dans l'industrie agro-alimentaire\n- `JVR` : MESH\n- `KG7` : Géographie de l'Amérique du Nord\n- `KW5` : Ethnologie\n- `LTK` : ThesoTM\n- `MDL` : Astronomie\n- `N9J` : SAGE\n- `NHT` : Physique de l'état condensé\n- `P21` : Littérature\n- `P66` : Mémoire\n- `PAN` : Panification au levain naturel\n- `PSR` : Mathématiques\n- `QX8` : Paléoclimatologie\n- `RDR` : Électronique\n- `RVQ` : Composés inorganiques\n- `SN8` : Traitement du signal\n- `th63` : Nomenclature zoologique\n- `TSM` : Techniques de séparation par membranes\n- `TSO` : Science ouverte\n- `TSP` : Santé publique\n- `VH8` : Pathologies humaines\n- `VPAC` : Politique Agricole Commune\n- `W7B` : Transfusion sanguine\n- `XD4` : Histoire des sciences et techniques"
     },
     "servers": [
         {
             "x-comment": "Will be automatically completed by the ezs server."
         },
         {
-            "url": "http://vptermsuite.intra.inist.fr:49176/",
+            "url": "http://vptermsuite.intra.inist.fr:49177/",
             "description": "Latest version for production",
             "x-profil": "Standard"
         }
