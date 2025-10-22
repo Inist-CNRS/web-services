@@ -6159,170 +6159,11 @@ content-type: application/json
 HTTP 200
 [{
     "value": {
-        "rdf$about": "http://data.loterre.fr/ark:/67375/9SD-QDWJ08N6-7",
-        "skos$inScheme": {
-            "rdf$resource": "http://data.loterre.fr/ark:/67375/9SD"
-        },
-        "skos$prefLabel": [
-            {
-                "xml$lang": "fr",
-                "xml$t": "Canada"
-            },
-            {
-                "xml$lang": "en",
-                "xml$t": "Canada"
-            }
-        ],
-        "gvp$tgn3202_capital_is": {
-            "rdf$resource": "http://data.loterre.fr/ark:/67375/9SD-HG1FKQGP-C"
-        },
-        "inist$lodexPlacenameCode": {
-            "xml$t": "CAN"
-        },
-        "gn$geonamesID": {
-            "xml$t": "6251999"
-        },
-        "obo$GEO_000035330": {
-            "xml$t": "6251999"
-        },
-        "gn$featureClass": {
-            "rdf$resource": "https://www.geonames.org/ontology#A"
-        },
-        "gn$featureCode": {
-            "rdf$resource": "https://www.geonames.org/ontology#A.PCLI"
-        },
-        "geo$lat": {
-            "rdf$datatype": "http://www.w3.org/2001/XMLSchema#double",
-            "xml$t": "57.7487688035733"
-        },
-        "geo$long": {
-            "rdf$datatype": "http://www.w3.org/2001/XMLSchema#double",
-            "xml$t": "-101.569822125212"
-        },
-        "skosxl$altLabel": [
-            {
-                "rdf$resource": "http://data.loterre.fr/ark:/67375/9SD/d1e4500/xl-fr-16"
-            },
-            {
-                "rdf$resource": "http://data.loterre.fr/ark:/67375/9SD/d1e4500/xl-en-16"
-            },
-            {
-                "rdf$resource": "http://data.loterre.fr/ark:/67375/9SD/d1e4500/xl-fr-18"
-            },
-            {
-                "rdf$resource": "http://data.loterre.fr/ark:/67375/9SD/d1e4500/xl-en-18"
-            },
-            {
-                "rdf$resource": "http://data.loterre.fr/ark:/67375/9SD/d1e4500/xl-fr-19"
-            },
-            {
-                "rdf$resource": "http://data.loterre.fr/ark:/67375/9SD/d1e4500/xl-en-19"
-            },
-            {
-                "rdf$resource": "http://data.loterre.fr/ark:/67375/9SD/d1e4500/xl-fr-23"
-            },
-            {
-                "rdf$resource": "http://data.loterre.fr/ark:/67375/9SD/d1e4500/xl-en-23"
-            }
-        ],
-        "obo$GEO_000000022": {
-            "xml$t": "CAN"
-        },
-        "gn$countryCode": {
-            "xml$t": "CA"
-        },
-        "obo$GEO_000000023": {
-            "xml$t": "CA"
-        },
-        "obo$GEO_000000021": {
-            "xml$t": "124"
-        },
-        "skos$exactMatch": [
-            {
-                "rdf$resource": "https://www.wikidata.org/wiki/Q16"
-            },
-            {
-                "rdf$resource": "https://en.wikipedia.org/wiki/Canada"
-            },
-            {
-                "rdf$resource": "https://fr.wikipedia.org/wiki/Canada"
-            },
-            {
-                "rdf$resource": "http://dbpedia.org/page/Canada"
-            },
-            {
-                "rdf$resource": "https://www.geonames.org/6251999/"
-            }
-        ],
-        "wdt$P36": {
-            "rdf$resource": "https://www.wikidata.org/wiki/Q1930"
-        },
-        "wdt$P3422": {
-            "xml$t": "99401"
-        },
-        "skos$altLabel": [
-            {
-                "xml$lang": "fr",
-                "xml$t": "CAN"
-            },
-            {
-                "xml$lang": "en",
-                "xml$t": "CAN"
-            },
-            {
-                "xml$lang": "fr",
-                "xml$t": "CA"
-            },
-            {
-                "xml$lang": "en",
-                "xml$t": "CA"
-            },
-            {
-                "xml$lang": "fr",
-                "xml$t": "124"
-            },
-            {
-                "xml$lang": "en",
-                "xml$t": "124"
-            }
-        ],
-        "skos$broader": [
-            {
-                "skos$prefLabel": [
-                    {
-                        "xml$lang": "fr",
-                        "xml$t": "Amérique septentrionale"
-                    },
-                    {
-                        "xml$lang": "en",
-                        "xml$t": "Northern America"
-                    }
-                ],
-                "rdf$about": "http://data.loterre.fr/ark:/67375/9SD-WFRKZV0L-5"
-            }
-        ],
-        "skos$narrower": [
-            {
-                "skos$prefLabel": [
-                    {
-                        "xml$lang": "fr",
-                        "xml$t": "Ottawa"
-                    },
-                    {
-                        "xml$lang": "en",
-                        "xml$t": "Ottawa"
-                    }
-                ],
-                "rdf$about": "http://data.loterre.fr/ark:/67375/9SD-HG1FKQGP-C"
-            }
-        ],
-        "indexKeys": [
-            "canada",
-            "can",
-            "ca",
-            "124"
-        ],
-        "score": 2
+        "about": "http://data.loterre.fr/ark:/67375/9SD-QDWJ08N6-7",
+        "prefLabel@fr": "Canada",
+        "prefLabel@en": "Canada",
+        "latitude": "57.7487688035733",
+        "longitude": "-101.569822125212"
     }
 },
 {
@@ -9457,7 +9298,6 @@ content-type: application/json
   { "value": "Indexing biomedical articles with MeSH terms facilitated the identification of 12,000 publications on the molecular mechanisms of antibiotic resistance." }
 ]
 
-
 HTTP 200
 [{
     "value": [
@@ -9502,4 +9342,723 @@ HTTP 200
             "frequence": "1"
         }
     ]
+}]
+
+POST {{host}}/v1/identify?indent=true&loterreID=EMTD
+content-type: application/json
+[
+  { "value": "adhesin"}, {"value": "anaerobiosis"}
+]
+
+HTTP 200
+[{
+    "value": {
+        "about": "https://opendata.inra.fr/EMTD/2",
+        "prefLabel@fr": "adhésine",
+        "prefLabel@en": "adhesin"
+    }
+},
+{
+    "value": {
+        "about": "https://opendata.inra.fr/EMTD/5",
+        "prefLabel@fr": "anaérobiose",
+        "prefLabel@en": "anaerobiosis"
+    }
+}]
+
+POST {{host}}/v1/identify?indent=true&loterreID=VPAC
+content-type: application/json
+[
+  { "value": "income aid"}, {"value": "indicative price"}, {"value": "investment aid"}
+]
+
+HTTP 200
+[{
+    "value": {
+        "about": "https://opendata.inra.fr/VPAC/7",
+        "prefLabel@fr": "aide au revenu",
+        "prefLabel@en": "income aid"
+    }
+},
+{
+    "value": {
+        "about": "https://opendata.inra.fr/VPAC/116",
+        "prefLabel@fr": "prix indicatif",
+        "prefLabel@en": "indicative price"
+    }
+},
+{
+    "value": {
+        "about": "https://opendata.inra.fr/VPAC/13",
+        "prefLabel@fr": "aides aux investissements",
+        "prefLabel@en": "investment aid"
+    }
+}]
+
+POST {{host}}/v1/identify?indent=true&loterreID=PAN
+content-type: application/json
+[
+  { "value": "acidité"}
+]
+
+HTTP 200
+[{
+    "value": {
+        "about": "http://opendata.inrae.fr/PAN/C_142"
+    }
+}]
+
+POST {{host}}/v1/identify?indent=true&loterreID=TSM
+content-type: application/json
+[
+  { "value": "boucle de circulation"}
+]
+
+HTTP 200
+[{
+    "value": {
+        "about": "https://opendata.inra.fr/TSM/1",
+        "prefLabel@fr": "boucle de circulation",
+        "prefLabel@en": "internal loop"
+    }
+}]
+
+POST {{host}}/v1/identify?indent=true&loterreID=CUEX
+content-type: application/json
+[
+  { "value": "base humide"}
+]
+
+HTTP 200
+[{
+    "value": {
+        "about": "https://opendata.inra.fr/CUEX/6",
+        "prefLabel@fr": "base humide",
+        "prefLabel@en": "wet basis"
+    }
+}]
+
+POST {{host}}/v1/identify?indent=true&loterreID=8HQ
+content-type: application/json
+[
+  { "value": "uranium hexafluoride"}
+]
+
+HTTP 200
+[{
+    "value": "n/a"
+}]
+
+POST {{host}}/v1/identify?indent=true&loterreID=BRMH
+content-type: application/json
+[
+  { "value": "cytoplasme"}
+]
+
+HTTP 200
+[{
+    "value": {
+        "about": "https://opendata.inra.fr/BRMH/48",
+        "prefLabel@fr": "cytoplasme",
+        "prefLabel@en": "cytoplasm"
+    }
+}]
+
+POST {{host}}/v1/identify?indent=true&loterreID=IDIA
+content-type: application/json
+[
+  { "value": "caesium-137"}
+]
+
+HTTP 200
+[{
+    "value": {
+        "about": "https://opendata.inra.fr/IDIA/16",
+        "prefLabel@fr": "césium 137",
+        "prefLabel@en": "caesium-137"
+    }
+}]
+
+POST {{host}}/v1/identify?indent=true&loterreID=GGMGG
+content-type: application/json
+[
+  { "value": "capside"}
+]
+
+HTTP 200
+[{
+    "value": {
+        "about": "https://opendata.inra.fr/GGMGG/71",
+        "prefLabel@fr": "capside",
+        "prefLabel@en": "capsid"
+    }
+}]
+
+POST {{host}}/v1/identify?indent=true&loterreID=TSO
+content-type: application/json
+[
+  { "value": "open science"}
+]
+
+HTTP 200
+[{
+    "value": {
+        "about": "http://data.loterre.fr/ark:/67375/TSO-JFJGKFN2-H",
+        "prefLabel@fr": "science ouverte",
+        "prefLabel@en": "open science"
+    }
+}]
+
+POST {{host}}/v1/identify?indent=true&loterreID=1WB
+content-type: application/json
+[
+  { "value": "heat transfer coefficient"}
+]
+
+HTTP 200
+[{
+    "value": {
+        "about": "http://data.loterre.fr/ark:/67375/1WB-H28CTZKJ-3",
+        "prefLabel@fr": "coefficient de transfert de chaleur",
+        "prefLabel@en": "heat transfer coefficient"
+    }
+}]
+
+POST {{host}}/v1/identify?indent=true&loterreID=GT
+content-type: application/json
+[
+  { "value": "dune"}
+]
+
+HTTP 200
+[{
+    "value": {
+        "about": "http://data.loterre.fr/vocabs/BGI/GT/985",
+        "prefLabel@fr": "Dune",
+        "prefLabel@en": "Dune"
+    }
+}]
+
+POST {{host}}/v1/identify?indent=true&loterreID=C0X
+content-type: application/json
+[
+  { "value": "vaccin"}
+]
+
+HTTP 200
+[{
+    "value": {
+        "about": "http://data.loterre.fr/ark:/67375/C0X-KZ9WGQ59-9",
+        "prefLabel@fr": "vaccin",
+        "prefLabel@en": "vaccine"
+    }
+}]
+
+POST {{host}}/v1/identify?indent=true&loterreID=th63
+content-type: application/json
+[
+  { "value": "choronyme"}
+]
+
+HTTP 200
+[{
+    "value": {
+        "about": "http://data.loterre.fr/ark:/67375/FM8-JNXNXV5X-T",
+        "prefLabel@fr": "choronyme",
+        "prefLabel@en": "choronym"
+    }
+}]
+
+POST {{host}}/v1/identify?indent=true&loterreID=W7B
+content-type: application/json
+[
+  { "value": "cancer"}
+]
+
+HTTP 200
+[{
+    "value": {
+        "about": "http://data.loterre.fr/ark:/67375/W7B-CNSR9B3Z-3",
+        "prefLabel@fr": "tumeur maligne",
+        "prefLabel@en": "malignant tumor"
+    }
+}]
+
+POST {{host}}/v1/identify?indent=true&loterreID=8LP
+content-type: application/json
+[
+  { "value": "machine learning"}
+]
+
+HTTP 200
+[{
+    "value": {
+        "about": "http://data.loterre.fr/ark:/67375/8LP-CJQ73GWH-5",
+        "prefLabel@fr": "apprentissage automatique",
+        "prefLabel@en": "machine learning"
+    }
+}]
+
+POST {{host}}/v1/identify?indent=true&loterreID=DOM
+content-type: application/json
+[
+  { "value": "neurobiologie"}
+]
+
+HTTP 200
+[{
+    "value": {
+        "about": "http://data.loterre.fr/ark:/67375/DOM-TMQF71FL-7",
+        "prefLabel@fr": "neurobiologie",
+        "prefLabel@en": "neurobiology"
+    }
+}]
+
+POST {{host}}/v1/identify?indent=true&loterreID=27X
+content-type: application/json
+[
+  { "value": "Sargon III"}
+]
+
+HTTP 200
+[{
+    "value": {
+        "about": "http://data.loterre.fr/ark:/67375/27X-LTZ93FS8-6",
+        "prefLabel@fr": "Sargon III",
+        "prefLabel@en": "Sargon III"
+    }
+}]
+
+POST {{host}}/v1/identify?indent=true&loterreID=216
+content-type: application/json
+[
+  { "value": "learning"}
+]
+
+HTTP 200
+[{
+    "value": {
+        "about": "http://data.loterre.fr/ark:/67375/216-VJM7VMG1-F",
+        "prefLabel@fr": "apprentissage",
+        "prefLabel@en": "learning"
+    }
+}]
+
+POST {{host}}/v1/identify?indent=true&loterreID=4V5
+content-type: application/json
+[
+  { "value": "sabéen"}
+]
+
+HTTP 200
+[{
+    "value": {
+        "about": "http://data.loterre.fr/ark:/67375/4V5-K0767RCX-V",
+        "prefLabel@fr": "sabéen",
+        "prefLabel@en": "Sabeans"
+    }
+}]
+
+POST {{host}}/v1/identify?indent=true&loterreID=QX8
+content-type: application/json
+[
+  { "value": "glaciaire"}
+]
+
+HTTP 200
+[{
+    "value": {
+        "about": "http://data.loterre.fr/ark:/67375/QX8-5K8FD2VC-9",
+        "prefLabel@fr": "glaciation",
+        "prefLabel@en": "glaciation"
+    }
+}]
+
+POST {{host}}/v1/identify?indent=true&loterreID=FMC
+content-type: application/json
+[
+  { "value": "laser"}
+]
+
+HTTP 200
+[{
+    "value": {
+        "about": "http://data.loterre.fr/ark:/67375/FMC-HFN6F6KN-T",
+        "prefLabel@fr": "laser",
+        "prefLabel@en": "laser"
+    }
+}]
+
+POST {{host}}/v1/identify?indent=true&loterreID=BLH
+content-type: application/json
+[
+  { "value": "biodiversité"}
+]
+
+HTTP 200
+[{
+    "value": {
+        "about": "http://data.loterre.fr/ark:/67375/BLH-FHNG3BCR-H",
+        "prefLabel@fr": "biodiversité",
+        "prefLabel@en": "biodiversity"
+    }
+}]
+
+POST {{host}}/v1/identify?indent=true&loterreID=RVQ
+content-type: application/json
+[
+  { "value": "silicate d'argent"}
+]
+
+HTTP 200
+[{
+    "value": {
+        "about": "http://data.loterre.fr/ark:/67375/RVQ-ZFQSLDGQ-R",
+        "prefLabel@fr": "silicate d'argent",
+        "prefLabel@en": "silver silicate"
+    }
+}]
+
+POST {{host}}/v1/identify?indent=true&loterreID=3JP
+content-type: application/json
+[
+  { "value": "économie"}
+]
+
+HTTP 200
+[{
+    "value": {
+        "about": "http://data.loterre.fr/ark:/67375/3JP-B2PX2RJ6-K",
+        "prefLabel@fr": "économie",
+        "prefLabel@en": "economy"
+    }
+}]
+
+POST {{host}}/v1/identify?indent=true&loterreID=SN8
+content-type: application/json
+[
+  { "value": "élection de leader"}
+]
+
+HTTP 200
+[{
+    "value": {
+        "about": "http://data.loterre.fr/ark:/67375/SN8-T3ZSBSHX-K",
+        "prefLabel@fr": "élection de leader",
+        "prefLabel@en": "leader election"
+    }
+}]
+
+POST {{host}}/v1/identify?indent=true&loterreID=XD4
+content-type: application/json
+[
+  { "value": "évolution"}
+]
+
+HTTP 200
+[{
+    "value": {
+        "about": "http://data.loterre.fr/ark:/67375/XD4-NHPN5893-R",
+        "prefLabel@fr": "évolution",
+        "prefLabel@en": "evolution"
+    }
+}]
+
+POST {{host}}/v1/identify?indent=true&loterreID=G9G
+content-type: application/json
+[
+  { "value": "poisson rouge"}
+]
+
+HTTP 200
+[{
+    "value": {
+        "about": "http://data.loterre.fr/ark:/67375/G9G-CFMGZ0JL-C",
+        "prefLabel@fr": "Carassius auratus",
+        "prefLabel@en": "Carassius auratus"
+    }
+}]
+
+POST {{host}}/v1/identify?indent=true&loterreID=905
+content-type: application/json
+[
+  { "value": "étrusque"}
+]
+
+HTTP 200
+[{
+    "value": {
+        "about": "http://data.loterre.fr/ark:/67375/905-J52MDGCR-3",
+        "prefLabel@fr": "Étrusque",
+        "prefLabel@en": "Etruscan"
+    }
+}]
+
+POST {{host}}/v1/identify?indent=true&loterreID=LTK
+content-type: application/json
+[
+  { "value": "électrotechnique"}
+]
+
+HTTP 200
+[{
+    "value": {
+        "about": "http://data.loterre.fr/ark:/67375/LTK-MMHT6436-T",
+        "prefLabel@fr": "électrotechnique",
+        "prefLabel@en": "electrical engineering"
+    }
+}]
+
+POST {{host}}/v1/identify?indent=true&loterreID=3WV
+content-type: application/json
+[
+  { "value": "cadmium"}
+]
+
+HTTP 200
+[{
+    "value": {
+        "about": "http://data.loterre.fr/ark:/67375/3WV-QNV25LPJ-J",
+        "prefLabel@fr": "cadmium",
+        "prefLabel@en": "cadmium"
+    }
+}]
+
+POST {{host}}/v1/identify?indent=true&loterreID=73G
+content-type: application/json
+[
+  { "value": "évolution"}
+]
+
+HTTP 200
+[{
+    "value": {
+        "about": "http://data.loterre.fr/ark:/67375/73G-H51DVM6Z-S",
+        "prefLabel@fr": "évolution",
+        "prefLabel@en": "evolution"
+    }
+}]
+
+POST {{host}}/v1/identify?indent=true&loterreID=KG7
+content-type: application/json
+[
+  { "value": "Québec"}
+]
+
+HTTP 200
+[{
+    "value": {
+        "about": "http://data.loterre.fr/ark:/67375/KG7-JH903LH8-5",
+        "prefLabel@fr": "Québec",
+        "prefLabel@en": "Quebec",
+        "latitude": "32.42681",
+        "longitude": "-91.30289"
+    }
+}]
+
+POST {{host}}/v1/identify?indent=true&loterreID=RDR
+content-type: application/json
+[
+  { "value": "éconception"}
+]
+
+HTTP 200
+[{
+    "value": "n/a"
+}]
+
+POST {{host}}/v1/identify?indent=true&loterreID=MDL
+content-type: application/json
+[
+  { "value": "éclair"}
+]
+
+HTTP 200
+[{
+    "value": {
+        "about": "http://data.loterre.fr/ark:/67375/MDL-HDLQGQLM-1",
+        "prefLabel@fr": "éclair",
+        "prefLabel@en": "flash of lightning"
+    }
+}]
+
+POST {{host}}/v1/identify?indent=true&loterreID=VH8
+content-type: application/json
+[
+  { "value": "diabète"}
+]
+
+HTTP 200
+[{
+    "value": {
+        "about": "http://data.loterre.fr/ark:/67375/VH8-J57SNMZ0-N",
+        "prefLabel@fr": "diabète",
+        "prefLabel@en": "diabetes"
+    }
+}]
+
+POST {{host}}/v1/identify?indent=true&loterreID=KW5
+content-type: application/json
+[
+  { "value": "éducation"}
+]
+
+HTTP 200
+[{
+    "value": {
+        "about": "http://data.loterre.fr/ark:/67375/KW5-JGZ3X33L-J",
+        "prefLabel@fr": "éducation",
+        "prefLabel@en": "education"
+    }
+}]
+
+POST {{host}}/v1/identify?indent=true&loterreID=TSP
+content-type: application/json
+[
+  { "value": "éducation"}
+]
+
+HTTP 200
+[{
+    "value": {
+        "about": "http://data.loterre.fr/ark:/67375/TSP-BQC5FT5R-1"
+    }
+}]
+
+POST {{host}}/v1/identify?indent=true&loterreID=P66
+content-type: application/json
+[
+  { "value": "émotion"}
+]
+
+HTTP 200
+[{
+    "value": {
+        "about": "http://data.loterre.fr/ark:/67375/P66-J6P7BVWC-2",
+        "prefLabel@fr": "émotion",
+        "prefLabel@en": "emotion"
+    }
+}]
+
+POST {{host}}/v1/identify?indent=true&loterreID=P21
+content-type: application/json
+[
+  { "value": "émotion"}
+]
+
+HTTP 200
+[{
+    "value": {
+        "about": "http://data.loterre.fr/ark:/67375/P21-HTV2F8PB-C",
+        "prefLabel@fr": "émotion",
+        "prefLabel@en": "emotion"
+    }
+}]
+
+POST {{host}}/v1/identify?indent=true&loterreID=NHT
+content-type: application/json
+[
+  { "value": "éclairement"}
+]
+
+HTTP 200
+[{
+    "value": {
+        "about": "http://data.loterre.fr/ark:/67375/NHT-MBH1KXST-M",
+        "prefLabel@fr": "éclairement",
+        "prefLabel@en": "illumination"
+    }
+}]
+
+POST {{host}}/v1/identify?indent=true&loterreID=BVM
+content-type: application/json
+[
+  { "value": "Rognes"}
+]
+
+HTTP 200
+[{
+    "value": {
+        "about": "http://data.loterre.fr/ark:/67375/BVM-XTWQG2VJ-9",
+        "prefLabel@fr": "Rognes",
+        "prefLabel@en": "Rognes",
+        "latitude": "43.6633",
+        "longitude": "5.3472"
+    }
+}]
+
+POST {{host}}/v1/identify?indent=true&loterreID=26L
+content-type: application/json
+[
+  { "value": "volcan"}
+]
+
+HTTP 200
+[{
+    "value": {
+        "about": "http://data.loterre.fr/ark:/67375/26L-LWZ0VDKG-Q",
+        "prefLabel@fr": "volcan",
+        "prefLabel@en": "volcano"
+    }
+}]
+
+POST {{host}}/v1/identify?indent=true&loterreID=PSR
+content-type: application/json
+[
+  { "value": "factorisation"}
+]
+
+HTTP 200
+[{
+    "value": {
+        "about": "http://data.loterre.fr/ark:/67375/PSR-PQ16LFVV-N",
+        "prefLabel@fr": "factorisation",
+        "prefLabel@en": "factorization"
+    }
+}]
+
+POST {{host}}/v1/identify?indent=true&loterreID=N9J
+content-type: application/json
+[
+  { "value": "fabianism"}
+]
+
+HTTP 200
+[{
+    "value": {
+        "about": "http://data.loterre.fr/ark:/67375/N9J-CNZNCKSQ-Z"
+    }
+}]
+
+POST {{host}}/v1/identify?indent=true&loterreID=D63
+content-type: application/json
+[
+  { "value": "Richardménil"}
+]
+
+HTTP 200
+[{
+    "value": {
+        "about": "http://data.loterre.fr/ark:/67375/D63-XLF5XQS0-R",
+        "prefLabel@fr": "Richardménil",
+        "prefLabel@en": "Richardménil",
+        "latitude": "48.59851",
+        "longitude": "6.16992"
+    }
+}]
+
+POST {{host}}/v1/identify?indent=true&loterreID=JVR
+content-type: application/json
+[
+  { "value": "cancer"}
+]
+
+
+HTTP 200
+[{
+    "value": {
+        "about": "http://data.loterre.fr/ark:/67375/JVR-LD9NLJGT-3",
+        "prefLabel@fr": "Tumeurs",
+        "prefLabel@en": "Neoplasms"
+    }
 }]
