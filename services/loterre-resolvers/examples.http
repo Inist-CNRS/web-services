@@ -178,6 +178,15 @@ Content-Type: application/json
 ]
 
 ###
+# @name v1expand2XK
+POST {{host}}/v1/expand?indent=true&loterreID=2XK HTTP/1.1
+Content-Type: application/json
+
+[
+  { "value": "GDR3753"}
+]
+
+###
 # @name v1annotateEMTD
 # en: KO
 # fr: KO

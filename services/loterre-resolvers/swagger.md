@@ -11,16 +11,16 @@ Trois services sont proposés :
 3. [`/v1/annotate`](#loterre-resolvers/post-v1-annotate) : à partir d'un texte,
    renvoie un tableau de concepts SKOS correspondants (au format JSON).  
 
-> 📝 **Note** : les services sont accessibles via une route
-> `/v1/service?loterreID={loterreID}`, où `{loterreID}` est l'identifiant du
-> vocabulaire Loterre à utiliser (ex: `9SD` pour le vocabulaire des pays).  
+📝 **Note** : les services sont accessibles via une route
+`/v1/service?loterreID={loterreID}`, où `{loterreID}` est l'identifiant du
+vocabulaire Loterre à utiliser (ex: `9SD` pour le vocabulaire des pays).  
 
-> ⚠️ **Avertissement** : les anciennes routes des services sont toujours
-> disponibles, mais sont dépréciées. Il s'agit des routes `/v1/{loterreID}/service`, où
-> `{loterreID}` est l'identifiant du vocabulaire Loterre à utiliser (ex: `9SD`
-> pour le vocabulaire des pays).  
+⚠️ **Avertissement** : les anciennes routes des services sont toujours
+disponibles, mais sont dépréciées. Il s'agit des routes `/v1/{loterreID}/service`, où
+`{loterreID}` est l'identifiant du vocabulaire Loterre à utiliser (ex: `9SD`
+pour le vocabulaire des pays).  
 
-### Liste des vocabulaires disponibles
+### Vocabulaires disponibles
 
 - `1WB` : Transferts de chaleur
 - `216` : Éducation
