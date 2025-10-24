@@ -67,3 +67,36 @@ body contains "<node id=\"intracellular\" label=\"intracellular\">"
 body contains "<node id=\"mg ml\" label=\"mg ml\">"
 body contains "<node id=\"pathway\" label=\"pathway\">"
 body contains "<node id=\"emissions\" label=\"emissions\">"
+
+
+POST {{host}}/v1/retrieve-gexf-json
+content-type: application/json
+```
+[
+	{
+		"value":"{{computing_token}}"
+	}
+]
+```
+
+HTTP 200
+Content-Type: application/json
+[Asserts]
+
+jsonpath "$" count > 0
+
+jsonpath "$[*].id" exists
+
+jsonpath "$[*].value" exists
+jsonpath "$[*].value.label" exists
+
+jsonpath "$[*].value['viz$color'].r" exists
+jsonpath "$[*].value['viz$color'].g" exists
+jsonpath "$[*].value['viz$color'].b" exists
+jsonpath "$[*].value['viz$color'].a" exists
+
+jsonpath "$[*].value['viz$size'].value" exists
+
+jsonpath "$[*].value['viz$position'].x" exists
+jsonpath "$[*].value['viz$position'].y" exists
+jsonpath "$[*].value['viz$position'].z" exists
