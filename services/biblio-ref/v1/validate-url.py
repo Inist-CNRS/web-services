@@ -6,7 +6,9 @@ import bibref.extract_references_grobid as erg
 import os
 import json
 import sys
+from requests_ratelimiter import LimiterSession
 
+session_pdf = LimiterSession(per_second=10)
 
 for line in sys.stdin:
     line0 = json.loads(line)
@@ -18,7 +20,7 @@ for line in sys.stdin:
     pdf_filename = '/tmp/'+name
 
     try:
-        response = bf.session_pdf.get(url)
+        response = session_pdf.get(url)
         response.raise_for_status()  # check if request succeeded
 
         with open(pdf_filename, 'wb') as pdf_file:
@@ -32,7 +34,8 @@ for line in sys.stdin:
         except Exception:
             pass
 
-    except Exception:
+    except Exception as e:
+        sys.stderr.write(str(e))
         references = []
 
     all_res = []
