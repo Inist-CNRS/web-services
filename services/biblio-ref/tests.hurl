@@ -19,7 +19,7 @@ skip: {{blocked}}
     "value": "HALUCINATED > Zohuri, B. (2019). Selective herbivory of thyme chemotypes by a mollusk and a grasshopper (pp. 81-98). Woodhead Publishing."
   },
   {
-    "value": "10.48433/cr_he6 42"
+    "value": "DataCite DOI > 10.48433/cr_he6 42"
   }
 ]
 
@@ -27,37 +27,43 @@ HTTP 200
 [{
     "value": {
         "doi": "10.3406/ecmed.1999.1879",
-        "status": "found"
+        "status": "found",
+        "reference": "Y. B. LINHART. L. CHAOUNI-BENABDALLAH, J.-M. PARRY & J. D. THOMPSON - Selective herbivory of thyme chemotypes by a mollusk and a grasshopper"
     }
 },
 {
     "value": {
         "doi": "10.1016/b978-0-323-90638-8.00002-3",
-        "status": "found"
+        "status": "found",
+        "reference": "https://doi.org/10.1016/b978-0-323-90638-8.00002-3"
     }
 },
 {
     "value": {
         "doi": "10.1016/b978-0-323-90638-8.00002-3",
-        "status": "found"
+        "status": "found",
+        "reference": "OCR problem > https://doi.org/10.1016/b978-0-323-90638- 8.00002-3"
     }
 },
 {
     "value": {
         "doi": "10.1056/nejmoa1200303",
-        "status": "retracted"
+        "status": "retracted",
+        "reference": "RETRACTED > Estruch R., Primary Prevention of Cardiovascular Disease with a Mediterranean Diet, 10.1056/nejmoa1200303"
     }
 },
 {
     "value": {
         "doi": "",
-        "status": "to_be_verified"
+        "status": "to_be_verified",
+        "reference": "HALUCINATED > Zohuri, B. (2019). Selective herbivory of thyme chemotypes by a mollusk and a grasshopper (pp. 81-98). Woodhead Publishing."
     }
 },
 {
     "value": {
         "doi": "10.48433/cr_he642",
-        "status": "found"
+        "status": "found",
+        "reference": "DataCite DOI > 10.48433/cr_he6 42"
     }
 }]
 

@@ -13,5 +13,6 @@ for line in sys.stdin:
     res = bf.biblio_ref(ref_biblio)
     
     data["value"] = res
+    data["value"]["reference"] = ref_biblio
     json.dump(data, sys.stdout)
     sys.stdout.write("\n")
