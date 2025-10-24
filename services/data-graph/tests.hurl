@@ -71,8 +71,6 @@ body contains "<node id=\"emissions\" label=\"emissions\">"
 
 POST {{host}}/v1/retrieve-gexf-json
 content-type: application/json
-[Options]
-delay: 20000
 ```
 [
 	{
