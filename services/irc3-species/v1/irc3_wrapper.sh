@@ -55,20 +55,22 @@ fi
 
 function travail
 {
-if [[ -p /tmp/fifo_irc3 ]]
-then
-    data=$(cat)
+    if [[ -p /tmp/fifo_irc3 ]]
+    then
+        data=$(cat)
+        fifo_name="/tmp/fifo_job_$$_$(date +%s)"
 
-    mkfifo -m 0666 /tmp/fifo_job_$$
 
-    (echo "%% JOB POUR FIFO /tmp/fifo_job_$$";
-     echo "$data";
-     echo "%% FIN JOB") > /tmp/fifo_irc3
+        mkfifo -m 0666 $fifo_name
 
-    cat /tmp/fifo_job_$$
-    rm -f /tmp/fifo_job_$$
+        (echo "%% JOB POUR FIFO $fifo_name";
+         echo "$data";
+         echo "%% FIN JOB") > /tmp/fifo_irc3
 
-fi
+        cat $fifo_name
+
+        rm -f $fifo_name
+    fi
 }
 
 trap 'if [[ -p /tmp/fifo_job_$$ ]]; then rm /tmp/fifo_job_$$; fi' HUP INT TERM EXIT
