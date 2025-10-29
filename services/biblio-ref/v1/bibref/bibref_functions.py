@@ -108,14 +108,10 @@ def get_title_authors_doi_source_date(message):
     """
     doi = message["DOI"] if "DOI" in message else ""
 
-    raw_ref = "FROM CROSSREF > "
-
     try:
         title = message["title"][0] if "title" in message else ""
     except Exception:
         title = ""
-
-    raw_ref += title
 
     try:
         first_author_name = message["author"][0]["family"]
@@ -125,17 +121,6 @@ def get_title_authors_doi_source_date(message):
         first_author_given = message["author"][0]["given"]
     except Exception:
         first_author_given = ""
-
-    try:
-        if len(message["author"]) >= 2:
-            raw_ref += f" ({first_author_name} et al.),"
-        # I keep this other possibility for later
-        # elif len(message["author"])==2:
-        #     raw_ref += f' ({message["author"][0]["given"]} {message["author"][0]["family"]} and {message["author"][1]["given"]} {message["author"][1]["family"]}), '
-        else:
-            raw_ref += f' ({first_author_given} {first_author_name}), '
-    except Exception:
-        raw_ref += ", "
 
     date = ""
 
@@ -150,9 +135,6 @@ def get_title_authors_doi_source_date(message):
                     break
     except Exception:
         date = ""
-
-    if len(date) > 0:
-        raw_ref += f"{date}, "
 
     source = {}
 
@@ -171,14 +153,33 @@ def get_title_authors_doi_source_date(message):
         except Exception:
             source["source-short"] = ""
 
+    # RAW_REF
+    raw_ref = "FROM CROSSREF > "
+
+    try:
+        if len(message["author"]) >= 2:
+            raw_ref += f"{first_author_name} et al."
+        # I keep this other possibility for later
+        # elif len(message["author"])==2:
+        #     raw_ref += f' ({message["author"][0]["given"]} {message["author"][0]["family"]} and {message["author"][1]["given"]} {message["author"][1]["family"]}), '
+        else:
+            raw_ref += f'{first_author_given} {first_author_name}.'
+    except Exception:
+        raw_ref += " "
+        
+    if len(date) > 0:
+        raw_ref += f" ({date}). "
+
+    raw_ref += " "+title+". "
+
     if len(source["source-long"]) > 0:
-        raw_ref += f'{source["source-long"]}, '
+        raw_ref += f' {source["source-long"]}. '
     else:
         if len(source["source-short"]) > 0:
-            raw_ref += f'{source["source-short"]}, '
+            raw_ref += f' {source["source-short"]}. '
 
     if len(doi) > 0:
-        raw_ref += f"{doi}"
+        raw_ref += f" {doi}."
 
     return {
         "title": title,
@@ -187,7 +188,7 @@ def get_title_authors_doi_source_date(message):
         "doi": doi,
         "date": str(date),
         "source": source,
-        "raw_ref": raw_ref
+        "raw_ref": raw_ref.replace("  ", " ")
         }
 
 
@@ -415,14 +416,10 @@ def get_title_authors_doi_source_date_metadore(message):
     """
     doi = message["doi"] if "doi" in message else ""
 
-    raw_ref = "FROM DATACITE > "
-
     try:
         title = message["titles"][0]["title"]
     except Exception:
         title = ""
-
-    raw_ref += title
 
     try:
         first_author_name = message["creators"][0]["familyName"]
@@ -434,28 +431,33 @@ def get_title_authors_doi_source_date_metadore(message):
         first_author_given = ""
 
     try:
-        if len(message["creators"]) >= 2:
-            raw_ref += f" ({first_author_name} et al.),"
-        else:
-            raw_ref += f' ({first_author_given} {first_author_name}), '
-    except Exception:
-        raw_ref += ", "
-
-    try:
         date = message["dates"][0]["date"].split("-")[0]
     except Exception:
         date = ""
-
-    if len(date) > 0:
-        raw_ref += f"{date}, "
 
     try:
         source = message["publisher"]
     except Exception:
         source = ""
 
+    # RAW REF
+    raw_ref = "FROM DATACITE > "
+
+    try:
+        if len(message["creators"]) >= 2:
+            raw_ref += f"{first_author_name} et al. "
+        else:
+            raw_ref += f'{first_author_given} {first_author_name}. '
+    except Exception:
+        raw_ref += " "
+
+    if len(date) > 0:
+        raw_ref += f" ({date}). "
+
+    raw_ref += " "+title+". "
+
     if len(source) > 0:
-        raw_ref += f"{source}, "
+        raw_ref += f"{source}. "
 
     if len(doi) > 0:
         raw_ref += f"{doi}"
@@ -470,7 +472,7 @@ def get_title_authors_doi_source_date_metadore(message):
             "source-short": source,
             "source-long": source
         },
-        "raw_ref": raw_ref
+        "raw_ref": raw_ref.replace("  ", " ")
     }
 
 
