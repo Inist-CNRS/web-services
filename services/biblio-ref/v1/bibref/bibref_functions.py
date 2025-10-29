@@ -27,6 +27,7 @@ with open("v1/annulled.pickle", "rb") as file:
 
 retracted_doi = set(retracted_doi)
 
+
 def remove_accents(text):
     """
     Remove accents from the input text and return the text with no accents.
@@ -77,11 +78,11 @@ def find_doi(text, delete_line_break=False, process_deleted_underscore=False):
         doi_regex = r"10\.\d{4,}\/[^\,]+"
     else:
         doi_regex = r"10\.\d{4,}\/[^\s\,]+"
-    
+
     doi = re.search(doi_regex, text)
     if doi is None:
         return ""
-    
+
     try:
         doiStr = doi.group()
         if process_deleted_underscore:
@@ -106,16 +107,16 @@ def get_title_authors_doi_source_date(message):
         first author's family name, and DOI.
     """
     doi = message["DOI"] if "DOI" in message else ""
-    
+
     raw_ref = "FROM CROSSREF > "
-    
+
     try:
         title = message["title"][0] if "title" in message else ""
     except Exception:
         title = ""
-    
+
     raw_ref += title
-    
+
     try:
         first_author_name = message["author"][0]["family"]
     except Exception:
@@ -124,7 +125,7 @@ def get_title_authors_doi_source_date(message):
         first_author_given = message["author"][0]["given"]
     except Exception:
         first_author_given = ""
-    
+
     try:
         if len(message["author"]) >= 2:
             raw_ref += f" ({first_author_name} et al.),"
@@ -135,12 +136,12 @@ def get_title_authors_doi_source_date(message):
             raw_ref += f' ({first_author_given} {first_author_name}), '
     except Exception:
         raw_ref += ", "
-    
+
     date = ""
 
     try:
         date_fields = ["issued", "published", "published-print", "published-online"]
-        
+
         for field in date_fields:
             if field in message and "date-parts" in message[field]:
                 date_parts = message[field]["date-parts"]
@@ -149,10 +150,9 @@ def get_title_authors_doi_source_date(message):
                     break
     except Exception:
         date = ""
-    
+
     if len(date) > 0:
         raw_ref += f"{date}, "
-
 
     source = {}
 
@@ -170,13 +170,13 @@ def get_title_authors_doi_source_date(message):
             source["source-short"] = message["event"]["acronym"]
         except Exception:
             source["source-short"] = ""
-    
-    if len(source["source-long"]) > 0 :
+
+    if len(source["source-long"]) > 0:
         raw_ref += f'{source["source-long"]}, '
     else:
         if len(source["source-short"]) > 0:
             raw_ref += f'{source["source-short"]}, '
-    
+
     if len(doi) > 0:
         raw_ref += f"{doi}"
 
@@ -193,12 +193,12 @@ def get_title_authors_doi_source_date(message):
 
 def verify_doi_crossref(doi, headers=crossref_headers):
     """
-    Verify a Digital Object Identifier (DOI) by making a GET request to 
+    Verify a Digital Object Identifier (DOI) by making a GET request to
     the Crossref API.
 
     Args:
         doi (str): The DOI to be verified.
-        mail (str): The email address to be included in the API request. 
+        mail (str): The email address to be included in the API request.
         Defaults to the value of mail_address.
 
     Returns:
@@ -211,19 +211,19 @@ def verify_doi_crossref(doi, headers=crossref_headers):
         response = session_crossref.get(url, headers=headers)
         status_code = response.status_code
     except Exception as e:
-        sys.stderr.write("Error while checking DOI : "+str(e)+ "\n")
+        sys.stderr.write("Error while checking DOI : " + str(e) + "\n")
         return (503, None)  # if there is an unexpected error from crossref
-    
+
     if status_code != 200:
         return (status_code, None)
-    
+
     try:
         message = response.json()["message"]
         others_biblio_info = get_title_authors_doi_source_date(message)
         return (response.status_code, others_biblio_info)
 
     except Exception as e:
-        sys.stderr.write("Error while processing crossref response : "+str(e)+ "\n")
+        sys.stderr.write("Error while processing crossref response : " + str(e) + "\n")
         return (503, None)  # if there is an unexpected error from crossref
 
 
@@ -250,7 +250,7 @@ def clean_crossref_title(text):
     return text.strip()
 
 
-# Functions that compare informations between the Crossref metadata and 
+# Functions that compare informations between the Crossref metadata and
 # the bibliographic reference given.
 def compare_pubinfo_refbiblio(item, ref_biblio):
     """
@@ -263,13 +263,13 @@ def compare_pubinfo_refbiblio(item, ref_biblio):
     author name
 
     Args:
-        item (json): 
+        item (json):
             title, authors name and doi from a crossref publi
         ref_biblio (str):
             the whole biblio reference
 
     Returns:
-        tuple (bool, str): 
+        tuple (bool, str):
             True if it's match with the doi, else false + empty
         string
     """
@@ -335,18 +335,19 @@ def verify_biblio_without_doi(ref_biblio, headers=crossref_headers, wrong_doi=Fa
             # Matches criteria when there is no doi in the reference
             if match_items_score >= 3:
                 return "found", doi, item_info
-            
+
             # if doi is wrong
             if wrong_doi:
                 continue
 
             if title_score < 0.6:
                 continue
-            
+
             if title_score > 0.9 and match_items_score < 2:
                 hallucinated = True
+                most_similar_publicsation_items_info = item_info
                 continue
-            
+
             if match_items_score == 2 and title_score > 0.98:
                 return "found", doi, item_info
 
@@ -356,9 +357,9 @@ def verify_biblio_without_doi(ref_biblio, headers=crossref_headers, wrong_doi=Fa
 
         if wrong_doi:
             return "to_be_verified", "", {"raw_ref": ""}
-        
+
         if hallucinated:
-            return "to_be_verified", "", {"raw_ref": ""}
+            return "to_be_verified", "", most_similar_publicsation_items_info
 
         else:
             return "not_found", "", {"raw_ref": ""}
@@ -386,7 +387,7 @@ def process_crossref_doi(doi, raw_ref):
         else:
             doi = doi.strip(".")
             crossref_status_code, others_biblio_info = verify_doi_crossref(doi)
-            
+
     # # If doi isn't found, try to process supressed "_"
     if crossref_status_code == 404:
         doi = find_doi(raw_ref, process_deleted_underscore=True)
@@ -413,16 +414,16 @@ def get_title_authors_doi_source_date_metadore(message):
         first author's family name, and DOI.
     """
     doi = message["doi"] if "doi" in message else ""
-    
+
     raw_ref = "FROM DATACITE > "
-    
+
     try:
         title = message["titles"][0]["title"]
     except Exception:
         title = ""
-        
+
     raw_ref += title
-    
+
     try:
         first_author_name = message["creators"][0]["familyName"]
     except Exception:
@@ -447,7 +448,7 @@ def get_title_authors_doi_source_date_metadore(message):
 
     if len(date) > 0:
         raw_ref += f"{date}, "
-        
+
     try:
         source = message["publisher"]
     except Exception:
@@ -455,7 +456,7 @@ def get_title_authors_doi_source_date_metadore(message):
 
     if len(source) > 0:
         raw_ref += f"{source}, "
-        
+
     if len(doi) > 0:
         raw_ref += f"{doi}"
 
@@ -471,16 +472,16 @@ def get_title_authors_doi_source_date_metadore(message):
         },
         "raw_ref": raw_ref
     }
-    
-    
+
+
 def verify_doi_metadore(doi, headers=metadore_headers):
     """
-    Verify a Digital Object Identifier (DOI) by making a GET request to 
+    Verify a Digital Object Identifier (DOI) by making a GET request to
     the Metadore API.
 
     Args:
         doi (str): The DOI to be verified.
-        mail (str): The email address to be included in the API request. 
+        mail (str): The email address to be included in the API request.
         Defaults to the value of mail_address.
 
     Returns:
@@ -494,10 +495,10 @@ def verify_doi_metadore(doi, headers=metadore_headers):
     except Exception as e:
         sys.stderr.write("Error while checking DOI on metadore : "+str(e)+ "\n")
         return (503, None)  # if there is an unexpected error from metadore
-    
+
     if status_code != 200:
         return (status_code, None)
-    
+
     try:
         if response.json()["data"] == []:
             return (404, None)
@@ -519,7 +520,7 @@ def process_metadore_doi(doi, raw_ref):
     """
     doi = doi.strip(".")
     metadore_status_code, others_biblio_info = verify_doi_metadore(doi)  # Verify doi using crossref api
-    
+
     # # If doi isn't found, try to delete \n
     if metadore_status_code == 404:
         doi = find_doi(raw_ref, delete_line_break=True)
@@ -528,7 +529,7 @@ def process_metadore_doi(doi, raw_ref):
         else:
             doi = doi.strip(".")
             metadore_status_code, others_biblio_info = verify_doi_metadore(doi)
-            
+
     # # If doi isn't found, try to process supressed "_"
     if metadore_status_code == 404:
         doi = find_doi(raw_ref, process_deleted_underscore=True)
@@ -554,75 +555,75 @@ def biblio_ref(ref_biblio, retracted_doi=retracted_doi):
         return {"doi": "", "status": "error_data", "reference_found": reference_found}
 
     doi = find_doi(ref_biblio)
-    save_ref_biblio=ref_biblio
+    save_ref_biblio = ref_biblio
     ref_biblio = uniformize(ref_biblio)  # Warining : in the rest of code, the biblio ref is uniformize (remove some informations)
     # First case : doi is found
     if doi:
         crossref_status_code, doi, others_biblio_info = process_crossref_doi(doi, save_ref_biblio)
-                        
+
         # # If DOI exists
         if crossref_status_code==200:
             status = "found"
             reference_found = others_biblio_info["raw_ref"]
-            
+
             # # # Can be retracted
             if doi in retracted_doi:
                 return {"doi": doi, "status": "retracted", "reference_found": reference_found}
-                  
+
             # # # can be hallucinated
             if len(doi)*1.5 < len(ref_biblio): 
-                match_items_score, title_score, doi = compare_pubinfo_refbiblio(others_biblio_info,ref_biblio)
-                
+                match_items_score, title_score, doi = compare_pubinfo_refbiblio(others_biblio_info, ref_biblio)
+
                 if match_items_score < 3:
                     if title_score < 0.7:
                         # We return "REFERENCE ASSOCIATED WITH THE DOI FROM CROSSREF >" when we suspect an hallucination
                         reference_found = "REFERENCE ASSOCIATED WITH THE DOI " + reference_found
                         return {"doi": "", "status": "to_be_verified", "reference_found": reference_found}
-                                
+
             return {"doi": doi, "status": status, "reference_found": reference_found}
-        
+
         # # If DOI doesn't exist
         elif crossref_status_code == 404:
-            
+
             # # Check if it is a DataCite DOI using MetaDoRe
             metadore_status_code, doi, others_biblio_info = process_metadore_doi(doi, save_ref_biblio)
             if metadore_status_code == 200:
                 status = "found"
                 reference_found = others_biblio_info["raw_ref"]
-                
+
                 # # # Can be retracted
                 if doi in retracted_doi:
                     return {"doi": doi, "status": "retracted", "reference_found": reference_found}
-                    
+
                 # # # can be hallucinated
                 if len(doi)*1.5 < len(ref_biblio): 
-                    match_items_score, title_score, doi = compare_pubinfo_refbiblio(others_biblio_info,ref_biblio)
-                    
+                    match_items_score, title_score, doi = compare_pubinfo_refbiblio(others_biblio_info, ref_biblio)
+
                     if match_items_score < 3:
                         if title_score < 0.7:
-                        # We return "REFERENCE ASSOCIATED WITH THE DOI FROM DATACITE >" when we suspect an hallucination
+                            # We return "REFERENCE ASSOCIATED WITH THE DOI FROM DATACITE >" when we suspect an hallucination
                             reference_found = "REFERENCE ASSOCIATED WITH THE DOI " + reference_found
                             return {"doi": "", "status": "to_be_verified", "reference_found": reference_found}
-                
+
                 return {"doi": doi, "status": status, "reference_found": reference_found}
 
             status, doi, others_biblio_info = verify_biblio_without_doi(ref_biblio, wrong_doi=True)
             reference_found = others_biblio_info["raw_ref"]
-            
+
             # # # Can be retracted
             if doi in retracted_doi:
 
                 return {"doi": doi, "status": "retracted", "reference_found": reference_found}
-            
+
             # # # can't be not found : there is a doi. Should be on Crossref or DataCite.
             if status == "not_found":
                 return {"doi": "", "status": "to_be_verified", "reference_found": ""}
-            
+
             return {"doi": doi, "status": status, "reference_found": reference_found}
-                    
+
         # # # for others errors
         else:
-            sys.stderr.write("DOI requests failed. Crossref status code :" + str(crossref_status_code)+"\n")
+            sys.stderr.write("DOI requests failed. Crossref status code :" + str(crossref_status_code) + "\n")
             return {"doi": "", "status": "error_service", "reference_found": ""}
 
     # second case : no doi is found
@@ -632,5 +633,5 @@ def biblio_ref(ref_biblio, retracted_doi=retracted_doi):
         # # # Can be retracted
         if doi in retracted_doi:
             return {"doi": doi, "status": "retracted", "reference_found": reference_found}
-            
+
         return {"doi": doi, "status": status, "reference_found": reference_found}

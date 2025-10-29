@@ -42,6 +42,13 @@ for line in sys.stdin:
     for reference in references:
         res = bf.biblio_ref(reference)
         res['reference'] = reference
+
+        # Put the online reference after
+        if "reference_found" in res:
+            ref_found = res["reference_found"]
+            del res["reference_found"]
+            res["reference_found"] = ref_found
+
         res['url_pdf'] = url
         all_res.append(res)
 
