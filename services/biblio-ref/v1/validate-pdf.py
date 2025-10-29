@@ -13,7 +13,7 @@ for line in sys.stdin:
 
     try:
         tei_references = erg.extract_references_tei(pdf_filename)
-    except Exception as e:
+    except Exception:
         tei_references = None
 
     try:
@@ -23,21 +23,30 @@ for line in sys.stdin:
 
     try:
         references = erg.extract_raw_refs(tei_references)
-    except Exception as e:
+    except Exception:
         references = []
 
     idx = 0
+
     if len(references) == 0:
         sys.stdout.write(json.dumps({
             "id": idx,
             "value": {"doi": "", "status": "error_data"}
             }))
         sys.stdout.write('\n')
+
     else:
         for reference in references:
             idx += 1
             res = bf.biblio_ref(reference)
             res['reference'] = reference
+
+            # Put the online reference after
+            if "reference_found" in res:
+                ref_found = res["reference_found"]
+                del res["reference_found"]
+                res["reference_found"] = ref_found
+
             sys.stdout.write(json.dumps({
                 "id": idx,
                 "value": res
