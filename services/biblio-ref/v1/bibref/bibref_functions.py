@@ -431,7 +431,10 @@ def get_title_authors_doi_source_date_metadore(message):
         first_author_given = ""
 
     try:
-        date = message["dates"][0]["date"].split("-")[0]
+        pattern = r'(19|20)\d{2}'
+        match = re.search(pattern, message["dates"][0]["date"])
+        if match:
+            date = match.group()
     except Exception:
         date = ""
 
