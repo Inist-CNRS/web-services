@@ -1,0 +1,17 @@
+# These examples can be used directly in VSCode, using HTTPYac extension (anweber.vscode-httpyac)
+# They are important, because used to generate the tests.hurl file.
+
+# Décommenter/commenter les lignes voulues pour tester localement
+@host=http://localhost:31976
+# @host=https://tabbr-mine.services.istex.fr
+
+###
+# @name v1mine
+# Description de la route
+POST {{host}}/v1/mine?indent=true HTTP/1.1
+Content-Type: application/json
+
+[
+	{ "value": "Convolutional neural network (CNN)" },
+	{ "value": "Convolutional brain organization (CNN)" }
+]
