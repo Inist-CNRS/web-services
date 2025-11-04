@@ -3,7 +3,7 @@
     "info": {
         "title": "tabbr-mine - Détection d'abréviations torturées",
         "description": "Service d'extraction et de classification d'abréviations (légitimes ou torturées).",
-        "version": "1.0.0",
+        "version": "1.0.1",
         "termsOfService": "https://services.istex.fr/",
         "contact": {
             "name": "Inist-CNRS",

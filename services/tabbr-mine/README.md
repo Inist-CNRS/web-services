@@ -1,4 +1,4 @@
-# ws-tabbr-mine@1.0.0
+# ws-tabbr-mine@1.0.1
 
 Détection d'abréviations torturées
 
