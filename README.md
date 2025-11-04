@@ -54,6 +54,7 @@ All contributing instructions are in [CONTRIBUTING](CONTRIBUTING.md).
 - [person-ner](./services/person-ner) [![Docker Pulls](https://img.shields.io/docker/pulls/cnrsinist/ws-person-ner.svg)](https://hub.docker.com/r/cnrsinist/ws-person-ner/)
 - [sciencemetrix-classification](./services/sciencemetrix-classification) [![Docker Pulls](https://img.shields.io/docker/pulls/cnrsinist/ws-sciencemetrix-classification.svg)](https://hub.docker.com/r/cnrsinist/ws-sciencemetrix-classification/)
 - [software-extract](./services/software-extract) [![Docker Pulls](https://img.shields.io/docker/pulls/cnrsinist/ws-software-extract.svg)](https://hub.docker.com/r/cnrsinist/ws-software-extract/)
+- [tabbr-mine](./services/tabbr-mine) [![Docker Pulls](https://img.shields.io/docker/pulls/cnrsinist/ws-tabbr-mine.svg)](https://hub.docker.com/r/cnrsinist/ws-tabbr-mine/)
 - [terms-extraction](./services/terms-extraction) [![Docker Pulls](https://img.shields.io/docker/pulls/cnrsinist/ws-terms-extraction.svg)](https://hub.docker.com/r/cnrsinist/ws-terms-extraction/)
 - [terms-tools](./services/terms-tools) [![Docker Pulls](https://img.shields.io/docker/pulls/cnrsinist/ws-terms-tools.svg)](https://hub.docker.com/r/cnrsinist/ws-terms-tools/)
 - [text-clustering](./services/text-clustering) [![Docker Pulls](https://img.shields.io/docker/pulls/cnrsinist/ws-text-clustering.svg)](https://hub.docker.com/r/cnrsinist/ws-text-clustering/)
