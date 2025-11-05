@@ -23,7 +23,12 @@ WORKDIR /app
 # Install all python dependencies
 RUN pip install --no-cache-dir \
     pandas==1.5.0 \
-    accelerate==1.8.1
+    accelerate==1.8.1 \
+    requests==2.32.3 \
+    beautifulsoup4==4.12.3 \
+    lxml==5.2.2 \
+    numpy==1.26.4
+
 
 WORKDIR /app/public
 # Declare files to copy in .dockerignore
