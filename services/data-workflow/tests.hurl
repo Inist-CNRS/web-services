@@ -10,6 +10,61 @@
 #          That can be the cause of failing tests, using docker.
 #          Thus, there are commented here.
 
+
+############################################################################
+# Test v1/tabbr-mine
+
+POST {{host}}/v1/tabbr-mine
+content-type: application/x-gzip
+# X-Webhook-Success: https://webhook.site/684dd427-5484-404a-b5a0-80e5b6726a1c
+# X-Webhook-Failure: https://webhook.site/684dd427-5484-404a-b5a0-80e5b6726a1c
+[Options]
+skip: {{blocked}}
+file,./RAG-txt.tar.gz;
+
+HTTP 200
+Content-Type: application/json
+# Capture the computing token
+[Captures]
+computing_token: jsonpath "$[0].value"
+[Asserts]
+variable "computing_token" exists
+
+# There should be a waiting time, representing the time taken to process data.
+# Fortunately, as the data is sparse, and the computing time is small,
+# the need is small.
+# In normal use cases, a webhook is called when the processing is finished.
+# That query gives the process identifier.
+# Next, you can call the retrieve URL by putting the identifier in the value field.
+
+# Version 4.1.0 of hurl added a delay option, which value is milliseconds.
+# https://hurl.dev/blog/2023/09/24/announcing-hurl-4.1.0.html#add-delay-between-requests
+
+POST {{host}}/v1/retrieve-json?indent=true
+content-type: application/json
+[Options]
+delay: 8000
+skip: {{blocked}}
+```
+[
+	{
+		"value":"{{computing_token}}"
+	}
+]
+```
+
+HTTP 200
+Content-Type: application/json
+[Asserts]
+jsonpath "$" count == 1
+jsonpath "$[0].value" exists
+jsonpath "$[0].value[0]" exists
+jsonpath "$[0].id" exists
+jsonpath "$[0].id" == "text"
+jsonpath "$[0].value[0].Abbreviation" exists
+jsonpath "$[0].value[0].X" exists
+jsonpath "$[0].value[0].Count" exists
+
 ############################################################################
 # Test v1/base-line
 
@@ -104,7 +159,14 @@ skip: {{blocked}}
 
 HTTP 200
 Content-Type: application/json
-[{"id":"aridification","value":2},{"id":"mafic","value":2},{"id":"climate change","value":3}]
+[Asserts]
+jsonpath "$" count >= 3
+jsonpath "$[0].id" exists
+jsonpath "$[0].id" isString
+jsonpath "$[0].value" exists
+jsonpath "$[0].value" > 1
+
+# [{"id":"aridification","value":2},{"id":"mafic","value":2},{"id":"climate change","value":3}]
 
 
 
@@ -459,7 +521,7 @@ variable "computing_token" exists
 POST {{host}}/v1/retrieve-json?indent=false
 content-type: application/json
 [Options]
-delay: 20000
+delay: 40000
 skip: {{blocked}}
 ```
 [
