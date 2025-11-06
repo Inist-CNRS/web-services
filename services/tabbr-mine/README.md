@@ -1,5 +1,13 @@
 # ws-tabbr-mine@1.0.1
 
+## Variables d'environnement
+
+En production, il faut renseigner la variable `GROBID_API_URL`.
+
+En développement, il faut en plus donner `WEBDAV_LOGIN`, `WEBDAV_PASSWORD` et
+`WEBDAV_URL`. Pour cet environnement, il suffit de les mettre dans un fichier
+`.env` sous `services/tabbr-mine`.
+
 ## TabbrMine - Service d'extraction d'abréviations torturées
 
 Version : 5-NOV-2025.
@@ -14,14 +22,14 @@ Ce service permet l'extraction et la classifications d'abréviations (i.e. "lég
 
 Ce service utilise une expression régulière pour l'extraction des abréviations contenues dans du texte (i.e. du text entre parenthèses, non séparé par des espaces), ainsi qu'un' modèle de langue ré-entrainé sur un corpus d'abréviations préalablement annoté \[3\] pour la classification des abréviations extraites. Nous avons évalué ses performances avec les mesures suivantes :
 
-|   | Extraction d'abréviations | Classification d'abréviations | Extraction d'abréviations et classification en "torturée" |
-| --- | --- | --- | --- |
-| Rappel | 0.90 | 0.77 | 0.72 |
-| Précision | 0.90 | 0.64 | 0.53 |
-| F-mesure binaire | 0.90 | 0.70 | 0.61 |
-| F-mesure micro | 0.82 | 0.86 | 0.44 |
-| F-mesure macro | 0.45 | 0.80 | 0.30 |
-| F-mesure pondérée | 0.81 | 0.86 | 0.37 |
+|                   | Extraction d'abréviations | Classification d'abréviations | Extraction d'abréviations et classification en "torturée" |
+| ----------------- | ------------------------- | ----------------------------- | --------------------------------------------------------- |
+| Rappel            | 0.90                      | 0.77                          | 0.72                                                      |
+| Précision         | 0.90                      | 0.64                          | 0.53                                                      |
+| F-mesure binaire  | 0.90                      | 0.70                          | 0.61                                                      |
+| F-mesure micro    | 0.82                      | 0.86                          | 0.44                                                      |
+| F-mesure macro    | 0.45                      | 0.80                          | 0.30                                                      |
+| F-mesure pondérée | 0.81                      | 0.86                          | 0.37                                                      |
 
 ### Variantes
 
