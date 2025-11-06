@@ -2,13 +2,15 @@
 # -*- coding: utf-8 -*-
 
 # Pipeline to extract tortured abbreviations from suspect scientific articles.
-# Developped using the following (unziped) dataset: ../Datasets/PPS/dec_2022_dataset/formatted_data.zip.
-# @uthors: Alexandre Clausse, Guillaume Cabanac, Pascal Cuxac, and Cyril Labbé
+# Developed using the following (unzipped) dataset:
+# ../Datasets/PPS/dec_2022_dataset/formatted_data.zip.
+# @authors: Alexandre Clausse, Guillaume Cabanac, Pascal Cuxac, and Cyril Labbé
 # @since: 2023
 # @version: 4-NOV-2025 -- Pipeline for INIST web service
 
 # Requirements: pip3 install transformers==4.51.3 pandas==1.5.0 torch==2.7.1
-# Model download: hf download allenai/scibert_scivocab_uncased --local-dir scibert_model
+# Model download:
+# hf download allenai/scibert_scivocab_uncased --local-dir scibert_model
 
 # Requirements
 from transformers import BertTokenizer, BertModel
@@ -64,7 +66,8 @@ class ContentProcessor:
         self, abbreviation: str, ignore_lower: bool = False
     ) -> str:
 
-        # Ignoring anomalies such as capitalized, digit-only, lower-only, containing underscore and mono-letter abbreviation
+        # Ignoring anomalies such as capitalized, digit-only, lower-only,
+        # containing underscore and mono-letter abbreviation
         if not ignore_lower:
             if (
                 len(abbreviation[1:-1]) > 2
