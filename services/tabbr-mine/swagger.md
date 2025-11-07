@@ -25,6 +25,11 @@ Ce service utilise une expression régulière pour l'extraction des abréviation
 
 Une première version de ce service utilisait un moteur de filtrage basé sur des règles syntaxiques \[3\] plutôt que l'utilisation d'un modèle de langue.
 
+## Financement
+
+Ce service a été développé par l'[Université de Toulouse](https://www.univ-tlse3.fr/) au sein du projet européen [NanoBubbles](https://nanobubbles.hypotheses.org/).  
+Le projet a reçu une subvention Synergy du Conseil Européen de la Recherche (CER), dans le cadre du programme [Horizon 2020](https://ec.europa.eu/info/funding-tenders/opportunities/portal/screen/programmes/h2020) de l'Union Européenne, convention de subvention n° [951393](https://cordis.europa.eu/project/id/951393/results).
+
 ## Références
 
 \[1\] [Guillaume Cabanac](https://orcid.org/0000-0003-3060-6241), [Cyril Labbé](https://orcid.org/0000-0003-4855-7038), [Alexander Magazinov](https://orcid.org/0000-0002-9406-013X). 2021. Tortured phrases: A dubious writing style emerging in science. Evidence of critical issues affecting established journals. Prépublication _arXiv_: [doi.org/10.48550/arXiv.2107.06751](doi.org/10.48550/arXiv.2107.06751).
