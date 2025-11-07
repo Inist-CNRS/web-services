@@ -3,7 +3,7 @@
     "info": {
         "title": "irc3-species - IRC3 dédiée à la recherche des noms scientifiques",
         "description": "IRC3sp est une version de l’outil IRC3 dédiée à la recherche des noms scientifiques — ou noms binominaux — d’espèces animales, végétales ou autres dans un corpus de textes en se référant à une liste finie (mais, aussi exhaustive que possible).",
-        "version": "1.1.8",
+        "version": "1.1.9",
         "termsOfService": "https://services.istex.fr/",
         "contact": {
             "name": "Inist-CNRS",
