@@ -8,7 +8,8 @@
 # @since: 2023
 # @version: 4-NOV-2025 -- Pipeline for INIST web service
 
-# Requirements: pip3 install transformers==4.51.3 pandas==1.5.0 torch==2.7.1
+# Requirements:
+# pip3 install transformers==4.51.3 pandas==1.5.0 torch==2.7.1 accelerate==1.8.1
 # Model download:
 # hf download allenai/scibert_scivocab_uncased --local-dir scibert_model
 
@@ -255,9 +256,13 @@ class AbbreviationExtractor:
                 list(result.index[i]) + [result.values[i]]
                 for i in range(len(result.index))
             ],
-            columns=["Source", "Abbreviation", "X", "Count"],
+            columns=["Source", "Abbreviation", "Prediction", "Count"],
         )
-        result = result.drop_duplicates().sort_values(by="Source")
+        result = (
+            result[["Abbreviation", "Prediction", "Count"]]
+            .drop_duplicates()
+            .sort_values(by="Abbreviation")
+        )
         return result.to_dict(orient="records")
 
 
