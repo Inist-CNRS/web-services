@@ -14,3 +14,5 @@ Pour le développement: mettez cette variable d'environnement dans le fichier
 ```sh
 export OPENALEX_API_KEY=LA_CLE_API
 ```
+
+Information : contrairement aux autres ws, le `retrieve-json.ini` renvoie un json avec des champs gexf. 
