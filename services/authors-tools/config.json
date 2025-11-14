@@ -9,6 +9,8 @@
         "EZS_CACHE": true,
         "EZS_VERBOSE": false,
         "NODE_OPTIONS": "--max_old_space_size=1024",
-        "NODE_ENV": "production"
+        "NODE_ENV": "production",
+        "ORCID_CLIENT_ID" : "ORCID_CLIENT_ID",
+        "ORCID_SECRET" : "ORCID_SECRET"
     }
 }
