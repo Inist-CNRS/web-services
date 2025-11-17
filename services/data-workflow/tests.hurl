@@ -42,7 +42,7 @@ variable "computing_token" exists
 POST {{host}}/v1/retrieve-json?indent=true
 content-type: application/json
 [Options]
-delay: 7000
+delay: 9000
 skip: {{blocked}}
 ```
 [
@@ -62,7 +62,7 @@ jsonpath "$[0].value[0]" exists
 jsonpath "$[0].id" exists
 jsonpath "$[0].id" isString
 jsonpath "$[0].value[0].Abbreviation" exists
-jsonpath "$[0].value[0].X" exists
+jsonpath "$[0].value[0].Prediction" exists
 jsonpath "$[0].value[0].Count" exists
 
 ############################################################################
@@ -97,7 +97,7 @@ variable "computing_token" exists
 POST {{host}}/v1/retrieve-json?indent=true
 content-type: application/json
 [Options]
-delay: 8000
+delay: 9000
 skip: {{blocked}}
 ```
 [
@@ -116,7 +116,7 @@ jsonpath "$[0].value[0]" exists
 jsonpath "$[0].id" exists
 jsonpath "$[0].id" == "text"
 jsonpath "$[0].value[0].Abbreviation" exists
-jsonpath "$[0].value[0].X" exists
+jsonpath "$[0].value[0].Prediction" exists
 jsonpath "$[0].value[0].Count" exists
 
 ############################################################################
@@ -575,7 +575,7 @@ variable "computing_token" exists
 POST {{host}}/v1/retrieve-json?indent=false
 content-type: application/json
 [Options]
-delay: 40000
+delay: 70000
 skip: {{blocked}}
 ```
 [
