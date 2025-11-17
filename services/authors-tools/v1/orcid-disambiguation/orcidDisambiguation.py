@@ -3,6 +3,7 @@ from disambiguate import disambiguate
 import sys
 import json
 import plac
+import time
 
 @plac.annotations(
     nameDepth = ("Maximum number of people to check" ,"option", "p", int ),
@@ -10,6 +11,7 @@ import plac
 )
 
 def main(nameDepth = 20, worksDepth = 20):
+    print("Date and time :", time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()), file=sys.stderr)
     for line in sys.stdin:
         data = json.loads(line)
         res = []
