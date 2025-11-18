@@ -377,43 +377,43 @@ Content-Type: application/json
     }
 }]
 
-    ############################################################################
-    # Test v1/topcitation
+############################################################################
+# Test v1/topcitation
 
-    POST {{host}}/v1/topcitation?nbCitations=3
-    content-type: application/x-gzip
-    # X-Webhook-Success: https://webhook.site/2caab8b5-fc96-4d7a-bb94-bdda20977830
-    # X-Webhook-Failure: https://webhook.site/2caab8b5-fc96-4d7a-bb94-bdda20977830
-    file,./examples/list-doi.tar.gz;
+POST {{host}}/v1/topcitation?nbCitations=3
+content-type: application/x-gzip
+# X-Webhook-Success: https://webhook.site/2caab8b5-fc96-4d7a-bb94-bdda20977830
+# X-Webhook-Failure: https://webhook.site/2caab8b5-fc96-4d7a-bb94-bdda20977830
+file,./examples/list-doi.tar.gz;
 
-    HTTP 200
-    # Capture the computing token
-    [Captures]
-    computing_token: jsonpath "$[0].value"
-    [Asserts]
-    variable "computing_token" exists
+HTTP 200
+# Capture the computing token
+[Captures]
+computing_token: jsonpath "$[0].value"
+[Asserts]
+variable "computing_token" exists
 
-    # There should be a waiting time, representing the time taken to process data.
-    # Fortunately, as the data is sparse, and the computing time is small,
-    # the need is small.
-    # In normal use cases, a webhook is called when the processing is finished.
-    # That query gives the process identifier.
-    # Next, you can call the retrieve URL by putting the identifier in the value field.
+# There should be a waiting time, representing the time taken to process data.
+# Fortunately, as the data is sparse, and the computing time is small,
+# the need is small.
+# In normal use cases, a webhook is called when the processing is finished.
+# That query gives the process identifier.
+# Next, you can call the retrieve URL by putting the identifier in the value field.
 
-    # Version 4.1.0 of hurl added a delay option, which value is milliseconds.
-    # https://hurl.dev/blog/2023/09/24/announcing-hurl-4.1.0.html#add-delay-between-requests
+# Version 4.1.0 of hurl added a delay option, which value is milliseconds.
+# https://hurl.dev/blog/2023/09/24/announcing-hurl-4.1.0.html#add-delay-between-requests
 
-    POST {{host}}/v1/retrieve-json?indent=true
-    content-type: application/json
-    [Options]
-    delay: 15000
-    ```
-    [
+POST {{host}}/v1/retrieve-json?indent=true
+content-type: application/json
+[Options]
+delay: 15000
+```
+[
     {
         "value":"{{computing_token}}"
     }
-    ]
-    ```
+]
+```
 
 HTTP 200
 Content-Type: application/json
@@ -580,8 +580,8 @@ Content-Type: application/xml
 xpath "/*[name()='gexf']" exists
 xpath "substring(//*[name()='meta']/@lastmodifieddate,1,2)" == "20"
 xpath "string(//*[name()='creator'])" == "NetworkX 3.2.1"
-xpath "//*[name()='node']" count >= 6 # 15 in reality, hurl bug ?
-xpath "//*[name()='edge']" count >= 8 # 26 in reality
+xpath "//*[name()='node']" count >= 6 # 14 in reality, hurl bug ?
+xpath "//*[name()='edge']" count >= 8 # 19 in reality
 # ```xml
 # <gexf xmlns:viz="http://www.gexf.net/1.2draft/viz" xmlns="http://www.gexf.net/1.2draft" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.gexf.net/1.2draft http://www.gexf.net/1.2draft/gexf.xsd" version="1.2">
 #   <meta lastmodifieddate="2025-11-18">
