@@ -13,6 +13,8 @@ for citation in json_data:
     if "message" in citation["value"].keys() :
         continue
     citation_id = citation["id"]
+    if citation_id is None :
+        continue
     count = citation["value"]["count"]
     citing_dois = citation["value"]["citing_doi"]
 
