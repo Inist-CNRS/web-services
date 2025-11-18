@@ -21,7 +21,6 @@ def extract_doi_referenced_works(data):
     if data:
         doi_url = data.get('doi')
         referenced_works = data.get('referenced_works', [])
-        
         if not referenced_works:
             return {doi_url: "champ referenced_works vide"}
         else :
@@ -40,28 +39,27 @@ def openAlex_to_doi(url) :
     if response.status_code == 200:
         data = response.json()
         doi = data.get('doi')
-        if doi is not None :
+        if doi:
             return doi
-        else:
-            return f"https://openalex.org/{id}"
+    return f"https://openalex.org/{id}"
     
 
 def main():
-     # Définition de la limite par défaut à 10 citations
+    # Définition de la limite par défaut à 10 citations
     nbCitations = int(sys.argv[sys.argv.index('-p') + 1]) if '-p' in sys.argv else 10
 
     dois = []
     for line in sys.stdin:
         data = json.loads(line)
-        if "value" in data :
-            dois.append(data["value"])
+        if "value" not in data:
+            continue
+        dois.append(data["value"])
 
     all_references = {}
     
     for doi in dois:
         get_info_doi = get_openalex_info(doi)
         references = extract_doi_referenced_works(get_info_doi)
-        
         all_references.update(references)
 
     # inialisation du dict avec deux clés possibles :
