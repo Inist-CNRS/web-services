@@ -75,10 +75,10 @@ Content-Type: application/json
                 "id": "https://doi.org/10.1093/mnras/sts454"
             },
             {
-                "id": "https://openalex.org/W3121968724"
+                "id": "https://openalex.org/W3125762999"
             },
             {
-                "id": "https://openalex.org/W3125762999"
+                "id": "https://openalex.org/W3121968724"
             }
         ]
     },
@@ -133,10 +133,10 @@ Content-Type: application/json
                 "id": "https://doi.org/10.1093/mnras/sts454"
             },
             {
-                "id": "https://openalex.org/W3121968724"
+                "id": "https://openalex.org/W3125762999"
             },
             {
-                "id": "https://openalex.org/W3125762999"
+                "id": "https://openalex.org/W3121968724"
             }
         ]
     },
@@ -252,9 +252,9 @@ Content-Type: application/json
     }
 },
 {
-    "id": "https://openalex.org/W3121968724",
+    "id": "https://openalex.org/W3125762999",
     "value": {
-        "label": "https://openalex.org/W3121968724",
+        "label": "https://openalex.org/W3125762999",
         "viz$color": {
             "r": "255",
             "g": "0",
@@ -271,9 +271,9 @@ Content-Type: application/json
     }
 },
 {
-    "id": "https://openalex.org/W3125762999",
+    "id": "https://openalex.org/W3121968724",
     "value": {
-        "label": "https://openalex.org/W3125762999",
+        "label": "https://openalex.org/W3121968724",
         "viz$color": {
             "r": "255",
             "g": "0",
