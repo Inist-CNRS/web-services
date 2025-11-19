@@ -3,7 +3,7 @@
     "info": {
         "title": "data-graph - ws to create graph in gexf format",
         "description": "Web service that takes keywords from documents to create a partitionned graph in gexf format",
-        "version": "1.1.0",
+        "version": "1.1.1",
         "termsOfService": "https://services.istex.fr/",
         "contact": {
             "name": "Inist-CNRS",
