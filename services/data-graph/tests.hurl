@@ -69,7 +69,7 @@ body contains "<node id=\"pathway\" label=\"pathway\">"
 body contains "<node id=\"emissions\" label=\"emissions\">"
 
 
-POST {{host}}/v1/retrieve-gexf-json
+POST {{host}}/v1/retrieve-json
 content-type: application/json
 ```
 [
