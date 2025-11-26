@@ -29,6 +29,10 @@ RUN pip install --no-cache-dir --no-build-isolation \
     sentence-transformers==3.3.1 \
     huggingface_hub==0.23.2
 
+# Temporary install of the latest ezs-core (until yearly update of base images)
+RUN npm install --omit=dev @ezs/core@4.1.2 && \
+    npm cache clean --force
+
 # Declare files to copy in .dockerignore
 COPY --chown=daemon:daemon . /app/public
 COPY --chown=daemon:daemon ./config.json /app/config.json
