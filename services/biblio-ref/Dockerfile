@@ -10,9 +10,6 @@ RUN pip3 install --no-cache-dir \
 
 WORKDIR /app/public
 
-RUN npm install --omit=dev @ezs/core@4.1.2 && \
-    npm cache clean --force
-
 # Declare files to copy in .dockerignore
 # A modifier : (utiliser le .dockerignore)
 COPY --chown=daemon:daemon . /app/public
