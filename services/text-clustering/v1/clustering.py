@@ -7,10 +7,11 @@ from sentence_transformers import SentenceTransformer
 from sklearn.preprocessing import StandardScaler
 from sklearn.cluster import KMeans
 from sklearn.metrics import silhouette_score
-from sklearn.decomposition import PCA
 import random
 import umap
 import os
+import numpy as np
+
 
 os.environ["TOKENIZERS_PARALLELISM"] = "false"
 model = SentenceTransformer("./v1/all-MiniLM-L6-v2")
@@ -199,32 +200,41 @@ for i in range(len_data):
     except Exception:
         indice_out_cluster.append(i)
 
-try:
-    # Dimension reduction
-    umap_model = umap.UMAP(
-        n_neighbors=max(10, min(30, int(len_data/20))),
-        n_components=10,
-        metric="cosine",
-        random_state=42,
-        min_dist=0.0,
-        n_jobs=1
-    )
-    reduced_embeddings = umap_model.fit_transform(texts)
-except Exception:
+
+texts = np.array(texts)
+
+if len(texts) == 0:
+    indice_out_cluster = list(range(len_data))
+    reduced_embeddings = np.empty((0, 10))
+else:
     try:
-        pca_model = PCA(n_components=min(10, texts.shape[1]))
-        reduced_embeddings = pca_model.fit_transform(texts)
-    except Exception:
-        indice_out_cluster = [i for i in range(len_data)]
-        reduced_embeddings = []
+        umap_model = umap.UMAP(
+            n_neighbors=max(10, min(30, int(len(texts)/20))),
+            n_components=10,
+            metric="cosine",
+            random_state=42,
+            min_dist=0.0,
+            n_jobs=1
+        )
+        reduced_embeddings = umap_model.fit_transform(texts)
+    except Exception as e:
+        sys.stderr.write(f"Error in textClustering while UMAP processing : {e}")
+        reduced_embeddings = center_reduce(texts)
 
+if reduced_embeddings.shape[0] < nb_cluster:
+    nb_cluster = max(1, reduced_embeddings.shape[0] - 1)
+else:
+    if nb_cluster == 0:
+        nb_cluster = find_optimal_k(reduced_embeddings, max_k=min(21, len(texts)-2))
 
-if nb_cluster == 0:
-    nb_cluster = find_optimal_k(reduced_embeddings, max_k=min(21, len(texts)-2))
+try:
+    clusterer = KMeans(n_clusters=nb_cluster, random_state=42)
+    clusterer.fit(reduced_embeddings)
+    clustering_done = True
+except Exception as e:
+    sys.stderr.write(f"Error in textClustering while KMEANS processing : {e}")
+    clustering_done = False
 
-# Clustering
-clusterer = KMeans(n_clusters=nb_cluster, random_state=42)
-clusterer.fit(reduced_embeddings)
 
 
 # Create datas for teeft
@@ -232,33 +242,37 @@ indice_in_cluster = 0
 keywords = (
     {}
 )  # keywords is a dictionary, the key is the cluster and value texts from clus
-for i in range(len_data):
-    if i not in indice_out_cluster:
-        label = int(clusterer.labels_[indice_in_cluster] + 1)
-        if label != 0:
-            if label in keywords:
-                keywords[label] += "\n\n" + str(all_data[i]["value"])
-            else:
-                keywords[label] = str(all_data[i]["value"])
-        indice_in_cluster += 1
 
-# Execute teeft
-n_clusters = len(keywords)
-for i in range(n_clusters):
-    if i+1 in keywords:
-        keywords[i+1] = truncate_text_for_teeft(keywords[i+1])
-        data = {"id": i + 1, "value": keywords[i + 1]}
-        keywords[i + 1] = teeft(data, n_keywords)
-    else:
-        continue
+if clustering_done:
+    for i in range(len_data):
+        if i not in indice_out_cluster:
+            label = int(clusterer.labels_[indice_in_cluster] + 1)
+            if label != 0:
+                if label in keywords:
+                    keywords[label] += "\n\n" + str(all_data[i]["value"])
+                else:
+                    keywords[label] = str(all_data[i]["value"])
+            indice_in_cluster += 1
 
-# Filter dict : delete every keywords who has a to big frequency
-try:
-    keywords = filter_keywords(keywords, threshold=0.5)
-except Exception:
-    pass
-# Add res for noise cluster
-keywords[0] = []
+    # Execute teeft
+    n_clusters = len(keywords)
+    for i in range(n_clusters):
+        if i+1 in keywords:
+            keywords[i+1] = truncate_text_for_teeft(keywords[i+1])
+            data = {"id": i + 1, "value": keywords[i + 1]}
+            keywords[i + 1] = teeft(data, n_keywords)
+        else:
+            continue
+
+    # Filter dict : delete every keywords who has a to big frequency
+    try:
+        keywords = filter_keywords(keywords, threshold=0.5)
+    except Exception:
+        pass
+    # Add res for noise cluster
+    keywords[0] = []
+else:
+    indice_out_cluster = [i for i in range(len_data)]
 
 # extract infos and return teeft res
 indice_in_cluster = 0
