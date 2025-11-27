@@ -17,6 +17,7 @@ for line in sys.stdin:
     if not len(lines):
         pid = data[[x for x in list(data.keys()) if x.startswith("PID")][0]][5:]
     lines.append(data["value"])
+
 print("PID ",pid, file=sys.stderr)
 
 keyword = []
@@ -33,22 +34,28 @@ for line in lines:
 freq = {k: v for k, v in sorted(freq.items(), key=lambda item: item[1],reverse=True)}
 
 if thresh_node == "auto":
-    threshold=0.2
-    total = sum(freq.values())
-    target = total * threshold
-    cumulative = 0
-    for key, value in freq.items():
-        cumulative += value
-        if cumulative >= target:
-            thresh_node = freq[key]
-            break
+    if len(freq) < 100:
+        thresh_node = 1
+    else:
+        threshold=0.2
+        total = sum(freq.values())
+        target = total * threshold
+        cumulative = 0
+        for key, value in freq.items():
+            cumulative += value
+            if cumulative >= target:
+                thresh_node = freq[key]
+                break
 else:
     thresh_node = int(thresh_node)
     
 if thresh_edge == "auto":
-    thresh_edge = thresh_node/6
-    if thresh_edge < 1 :
-        thresh_edge = 1
+    if thresh_node == 1:
+        thresh_edge = 0
+    else:
+        thresh_edge = thresh_node/6
+        if thresh_edge < 1 :
+            thresh_edge = 1
 else:
     thresh_edge = int(thresh_edge)
 
@@ -62,8 +69,9 @@ for liste in L:
         keyword.append(l)
 
 print(thresh_node, thresh_edge, file=sys.stderr)
-
+print(keyword, file=sys.stderr)
 node_weight,edge_weight,ignore_edge = get_weights(keyword,thresh_edge)
+print(node_weight, file=sys.stderr)
 G = build_graph(node_weight,edge_weight)
 partition,communities = build_partition(G)
 
