@@ -25,8 +25,6 @@ session_metadore = LimiterSession(per_second=10)
 with open("v1/annulled.pickle", "rb") as file:
     retracted_doi = pickle.load(file)
 
-retracted_doi = set(retracted_doi)
-
 
 def remove_accents(text):
     """
