@@ -9,8 +9,6 @@ import pickle
 with open("v1/annulled.pickle", "rb") as file:
     retracted_doi = pickle.load(file)
 
-retracted_doi = set(retracted_doi)
-
 # WS
 for line in sys.stdin:
     data = json.loads(line)
