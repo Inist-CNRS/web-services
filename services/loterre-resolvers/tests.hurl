@@ -6163,7 +6163,8 @@ HTTP 200
         "prefLabel@fr": "Canada",
         "prefLabel@en": "Canada",
         "latitude": "57.7487688035733",
-        "longitude": "-101.569822125212"
+        "longitude": "-101.569822125212",
+        "cartographyCode": "CAN"
     }
 },
 {
