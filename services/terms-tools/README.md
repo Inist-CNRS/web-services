@@ -1,17 +1,31 @@
 # terms_tools
 
-terms_tools est une bibliothèque d'outils qui permet :  
+**terms_tools** est une bibliothèque d'outils accessible par WebService qui permet :  
+
 - l'étiquetage en partie du discours (POStag) d'une liste de termes,  
-- la reconnaissance de termes Loterre [https://loterre.istex.fr/fr/](https://loterre.istex.fr/fr/) dans un document,  
   
-En français et en anglais
+- la reconnaissance de termes Loterre [https://loterre.istex.fr/fr/](https://loterre.istex.fr/fr/) dans un texte,  
+  
+- en français et en anglais
 
-## POSTag et lemmatisation d'une liste de termes  
+#### URL générique du service 
 
-### INPUT
 
-Prnd un fichier tsv en entrée
-exemple : `test_labelEN.tsv`
+  
+>       https://terms-tools.services.istex.fr
+   
+
+NB = auquel au adjoint une ROUTE qui spécifie la nature du service,    
+exemple :  https://terms-tools.services.istex.fr//v1/en/dico-pos/postag?input=terms  
+
+---  
+
+### POStag et lemmatisation d'une liste de termes  
+
+#### INPUT
+
+Cette gamme de services prend un fichier **tsv** en entrée,  
+exemple : test_labelEN.tsv
 
 ```tsv
 id	text  
@@ -23,33 +37,36 @@ http://data.loterre.fr/ark:/67375/P66#xl_en_ba359dd0	empirical generalization
 http://data.loterre.fr/ark:/67375/P66#xl_en_06b45a8a	general empirical observation
 http://data.loterre.fr/ark:/67375/P66#xl_en_d9a365b6	empirical generalisations
 ```
+  
+  
+Trois types de sorties sont disponibles :
 
-### Trois types de sorties sont disponibles  
+##### 1 - Sous la forme d'un dictionnaire avec l'ensemble des informations  - morpho syntaxique
 
-#### Sous la forme d'un dictionnaire avec l'ensemble des informations morpho syntaxique => option -o json
+##### Exemple de sortie 
 
-##### Exemple de sortie :  
-
-```tsv
+```
 http://data.loterre.fr/ark:/67375/P66#xl_en_53acd26b	[{"id": 0, "start": 0, "end": 7, "tag": "JJ", "pos": "ADJ", "morph": "Degree=Pos", "lemma": "general"}, {"id": 1, "start": 8, "end": 17, "tag": "JJ", "pos": "ADJ", "morph": "Degree=Pos", "lemma": "empirical"}, {"id": 2, "start":18, "end": 30, "tag": "NNS", "pos": "NOUN", "morph": "Number=Plur", "lemma": "observation"}]
 ```
 ##### WebService :  
 
-```bash  
-ROUTE = v1/en/full-morph/postag?input=terms  
-URL = https://terms-tools.services.istex.fr  
+###### ROUTE
+> v1/en/full-morph/postag?input=terms
 
+Exemple :  
+
+``` 
 curl -X 'POST' '$URL/v1/en/full-morph/postag?input=terms' --data-binary '@../terms_tools/data/test_labelEN.tsv'  
 
 curl -X 'POST' '$URL/v1/fr/full-morph/postag?input=terms' --data-binary '@../terms_tools/data/test_labelFR.tsv'  
 ```
 
 
-#### Sous une forme tabulée aux informations simplifiées  => option -o dico_pos
+##### 2 - Sous une forme tabulée aux informations simplifiées 
         
- format :   URI   POSTAG LEMMA    
+ **format :**   URI   POSTAG    LEMMA    
 
-##### Exemple de sortie :  
+##### Exemple de sortie 
 
 ```tsv
 http://data.loterre.fr/ark:/67375/P66#xl_en_542d3e8b	cognitive qualities	JJ NNS	cognitive quality
@@ -58,12 +75,14 @@ http://data.loterre.fr/ark:/67375/P66#xl_en_ef4050c0	objects	NNS	object
 ```
 
 
-##### WebService :
+##### WebService
 
-```bash
-ROUTE = /v1/en/dico-pos/postag?input=terms    
-URL = https://terms-tools.services.istex.fr    
 
+###### ROUTE
+>/v1/en/dico-pos/postag?input=terms
+
+Exemple :
+```bash  
 curl -X 'POST' '$URL/v1/en/dico-pos/postag?input=terms' --data-binary '@../terms_tools/data/test_labelEN.tsv'  
 
 curl -X 'POST' '$URL/v1/fr/dico-pos/postag?input=terms' --data-binary '@../terms_tools/data/test_labelFR.tsv'  
@@ -71,58 +90,76 @@ curl -X 'POST' '$URL/v1/fr/dico-pos/postag?input=terms' --data-binary '@../terms
 
 
 
-#### Sous la forme d'un dictionnaire pour un Matcher Spacy
+##### 3 - Sous la forme d'un dictionnaire pour un Matcher Spacy
 
-##### Exemple de sortie :  
+##### Exemple de sortie 
 
-```tsv
+```
 http://data.loterre.fr/ark:/67375/P66#xl_en_d2b95b32	{"label": "empirical generalisation ", "pattern": [{"pos": "ADJ", "lemma": "empirical"}, {"pos": "NOUN", "lemma": "generalisation"}], "id": "http://data.loterre.fr/ark:/67375/P66#xl_en_d2b95b32"}  
 
 ```
 
-##### WebService :  
+##### WebService  
 
-```bash
-ROUTE = v1/en/dico-annot/postag?input=terms  
-URL =  https://terms-tools.services.istex.fr   
+###### ROUTE
+>v1/en/dico-annot/postag?input=terms 
 
+Exemple :
+```
 curl -X 'POST' '$URL/v1/en/dico-annot/postag?input=terms' --data-binary '@../terms_tools/data/test_labelEN.tsv'
 
 curl -X 'POST' '$URL/v1/fr/dico-annot/postag?input=terms' --data-binary '@../terms_tools/data/test_labelFR.tsv'
 ```
+---
 
+  
+### Reconnaissance de termes Loterre
 
+Ce service projete un vocabulaire sur un texte afin d'identifier toutes les occurrences des termes qui sont présentes dans ce texte, en francais ou en anglais, voir la [Liste des vocabulaires](#liste-des-vocabulaires) disponibles parmi ceux accessibles sur Loterre [https://loterre.istex.fr/fr/](https://loterre.istex.fr/fr/).  
 
-## Reconnaissance de termes Loterre
-
-Ce service projete un vocabulaire sur un texte afin d'identifier toutes les occurrences de termes présents dans ce texte, en francais ou en anglais, voir la [Liste des vocabulaires](#liste-des-vocabulaires) disponibles sur Loterre [https://loterre.istex.fr/fr/](https://loterre.istex.fr/fr/).  
-
-##### WebService :  
-
+#### INPUT
+Ce web service prend en entrée un flux json au format Lodex (id,value)
+Exemple : 
 ```
-ROUTE = /v1/<CODE_LANGUE>/terms_matcher/<CODE_VOC>/format=<FORMAT>  
-URL = https://terms-tools.services.istex.fr  
+[
+    {
+        "id": "1",
+        "value": "The Mem-Pro-Clinic test is a clinical test to assess difficulties in event- and time-based prospective thoughts. This result implies that activated long-term memory provides a representational basis for semantic verbal short-term signal."
+    },
+    {
+        "id": "2",
+        "value": "A new method to implant false autobiographical books: Blind implantation call blind implantation methods."
+    }
+]
+   
 ```
 
-##### Parametres :
 
-<CODE_LANGUE> = fr, en
+#### WebService  
 
-<FORMAT> = json-standoff | json-indoc |  xml-standoff  
+##### ROUTE
+> /v1/CODE_LANGUE/terms-matcher/CODE_VOC/format=FORMAT
+
+
+##### Parametres
+
+**- CODE_LANGUE** = fr, en  
+
+**- FORMAT** = json-standoff | json-indoc |  xml-standoff  
 |  format | description |
 | :--------------- | :--------------- |
 | json-standoff | liste des termes reconnus sous le forme json |
 | json-indoc| document avec les termes identifiés, format json id, value |
 | xml-standoff | liste des termes reconnus sous le forme xml (loterre widget) |
 
-<CODE_VOC> = voir la liste des codes( ) 
+**- CODE_VOC** = voir la [liste des codes vocabulaires](#liste-des-vocabulaires)  
 
 
-#### Exemples :
+#### Exemples
 
 - Dans un texte anglais, identification des termes appartenant au vocabulaire  https://loterre.istex.fr/P66/  :  
 
-#### Requête :  
+#### Requête 
 
 ```
 cat <<EOF | curl -v --proxy "" -X POST --data-binary @- https://terms-tools.services.istex.fr/v1/en/terms-matcher/P66?<FORMAT>
@@ -244,100 +281,101 @@ EOF
 
 - Sortie avec les termes annoté dans le texte initial => format = json-indoc   
 
- Le marquage des termes suit la convention : TERM||terme||id du concept   
- NB : En francais, le texte rendu est la version lemmatisée  
+ Le marquage des termes suit la convention : [TERM](id du concept)   
+ **NB : ATTENTION :  En francais, le texte rendu n'est pas la version initiale mais la version lemmatisée **
 
 ```
 [
    {
       "id":"18",
-      "value":"the TERM||mem-pro-clinic test||http://data.loterre.fr/ark:/67375/p66-wg17xbg4-v is a clinical test to assess difficulties in event- and time-based TERM||prospective thought||http://data.loterre.fr/ark:/67375/p66-vlj0cqh4-g. this implies that activated TERM||long-term memory||http://data.loterre.fr/ark:/67375/p66-j8fc45m1-6 provides a representational basis for semantic verbal short-term signal."
+      "value":"the [Mem-Pro-Clinic test](http://data.loterr.fr/ark:/67375/P66-WG17XBG4-V) is a clinical test to assess difficulties in [events](http://data.loterre.fr/ark:/67375/P66-ZVGCX1H2-G)- and time-based [prospective thought](http://data.loterre.fr/ark:/67375/P66-VLJ0CQH4-G). this   implies that activated [long-term memory](http://data.loterre.fr/ark:/67375/P66-J8FC45M1-6) provides a representational basis for semantic verbal short-term signal."
    },
    {
       "id":"27",
-      "value":"a new method to implant false autobiographical books: blind implantation call TERM||blind implantation method||http://data.loterre.fr/ark:/67375/p66-d6xl3pdr-m."
+      "value":"a new method to implant false autobiographical books: blind implantation call [blind implantation method](http://data.loterre.fr/ark:/67375/P66-D6XL3PDR-M)."
    },
    {
       "id":"35",
-      "value":"a guy with TERM||hypermnesia (pathology)||http://data.loterre.fr/ark:/67375/p66-fqxk8kbn-c is capable of storing idea in an extraordinarily efficient manner."
+      "value":"a guy with [hypermnesia](http,://data.loterre.fr/ark:/67375/P66-JX046THS-T) is capable of storing idea in an extraordinarily efficient manner."
    }
 ]
 ```
 
-### Liste des vocabulaires
+### Liste des vocabulaires  
 
-|Code| Nom du vocabualire|
-|:---:|:----|
-|1WB|Heat transfers|
-|26L|Earth Sciences|
-|27X|Art and Archaeology|
-|2CX|SantéPsy (thesaurus)|
-|2QZ|Fluid mechanics|
-|37T|Chemistry|
-|3JP|Social Sciences|
-|3WV|Ecotoxicology (thesaurus)|
-|45G|Geographic Places (GP) Terminology Resource (Getty Research Institute)|
-|4V5|History and Sciences of Religions|
-|73G|Philosophy|
-|8HQ|Periodic table of the elements (thesaurus)|
-|8LP|Vocabulary of natural language processing (POC)|
-|9SD|Countries and subdivisions (thesaurus)|
-|ADM|Administrative Sciences|
-|ASYSEL|Agriculture and breeding systems|
-|BJW|Electrical engineering - Electro-energetics|
-|BL8|Artificial Nutrition (thesaurus)|
-|BLH|Biodiversity (thesaurus)|
-|BQ7|Corporate Bodies (CB) Terminology Resource (Getty Research Institute)|
-|BRMH|Reproduction biotechnology|
-|BVM|NETSCITY Toponyms (France)|
-|C0X|Covid-19 (thesaurus)|
-|CHC|Climate change (Thesaurus)|
-|CUEX|Extrusion cooking|
-|D63|French Communes (thesaurus)|
-|DOM|Scientific fields|
-|EMTD|Microbial ecology of the digestive tract|
-|ERC|ERC panel structure|
-|FMC|Optics|
-|G9G|Fish Taxonomy|
-|GGMGG|Glossary of molecular genetics and genetic engineering|
-|GT|Thematic Vocabulary of Geography|
-|HTR|Artist Location (TAL) Terminology Resource (Getty Research Institute)|
-|IDIA|Ionization in food industry|
-|INS|Health at the INSB (Proof of concept)|
-|JLC|Subjects (SH) Terminology Resource (Getty Research Institute)|
-|JVN|Personal Names (PN) Terminology Resource (Getty Research Institute)|
-|JVR|Medical Subject Headings (thesaurus)|
-|KFP|Chemical Entities of Biological Interest Ontology (CHEBI)|
-|KG7|Geography of North America|
-|KW5|Ethnology|
-|LTK|ThesoTM thesaurus|
-|MDL|Astronomy (thesaurus)|
-|N9J|SAGE Social Science Thesaurus|
-|NHT|Condensed matter physics|
-|P21|Litterature|
-|P66|Cognitive psychology of human memory (CogMemo thesaurus)|
-|PAN|Sourdough breadmaking glossary|
-|PLP|Pedology lexicon|
-|PSR|Mathematics (thesaurus)|
-|Q1W|Agri-food vocabulary|
-|QJP|Engineering sciences vocabulary|
-|QX8|Paleoclimatology (thesaurus)|
-|RDR|Electronics - Optoelectronics|
-|RVQ|Inorganic compounds (thesaurus)|
-|SCO|Sections of the National Committee for Scientific Research (Proof of concept)|
-|SEN|Health and environment (proof of concept)|
-|SN8|Signal theory and processing|
-|TECSEM|Technology of seeds|
-|TSM|Membrane-based separation techniques|
-|TSO|Open science (thesaurus)|
-|TSP|Public Health (thesaurus)|
-|Theremy|Taxonomy & Thesaurus for Health Research Methodology (THEREMY)|
-|VH8|Human Diseases (thesaurus)|
-|VPAC|Vocabulary of the Common Agricultural Policy|
-|W7B|Blood Transfusion (thesaurus)|
-|X64|Linguistics|
-|XD4|History of Science and Technology|
-|ZHG|Conference Exhibition (CX) Terminology Resource (Getty Research Institute)|
-|th63|Zoological Nomenclature (thesaurus)|
-|216|Educational sciences|
-|905|Prehistory and Protohistory|
+|Code| Nom du vocabulaire (01/12/2025)|Etat|
+|:---:|:----|:----|
+|1WB|Heat transfers|disponible|
+|26L|Earth Sciences|disponible|
+|27X|Art and Archaeology|disponible|
+|2CX|SantéPsy (thesaurus)|disponible fr|
+|2QZ|Fluid mechanics|disponible|
+|37T|Chemistry|disponible|
+|3JP|Social Sciences|disponible|
+|3WV|Ecotoxicology (thesaurus)|disponible|
+|45G|Geographic Places (GP) Terminology Resource (Getty Research Institute)|non disponible|
+|4V5|History and Sciences of Religions|disponible|
+|73G|Philosophy|disponible|
+|8HQ|Periodic table of the elements (thesaurus)|disponible|
+|8LP|Vocabulary of natural language processing (POC)|disponible|
+|9SD|Countries and subdivisions (thesaurus)|disponible|
+|ADM|Administrative Sciences|disponible|
+|ASYSEL|Agriculture and breeding systems|disponible|
+|B9M|Primatology (thesaurus)|disponible|
+|BJW|Electrical engineering - Electro-energetics|disponible|
+|BL8|Artificial Nutrition (thesaurus)|disponible|
+|BLH|Biodiversity (thesaurus)|disponible|
+|BQ7|Corporate Bodies (CB) Terminology Resource (Getty Research Institute)|non disponible|
+|BRMH|Reproduction biotechnology|disponible|
+|BVM|NETSCITY Toponyms (France)|disponible|
+|C0X|Covid-19 (thesaurus)|disponible|
+|CHC|Climate change (Thesaurus)|disponible|
+|CUEX|Extrusion cooking|disponible|
+|D63|French Communes (thesaurus)|disponible|
+|DOM|Scientific fields|disponible|
+|EMTD|Microbial ecology of the digestive tract|disponible|
+|ERC|ERC panel structure|disponible|
+|FMC|Optics|disponible|
+|G9G|Fish Taxonomy|disponible|
+|GGMGG|Glossary of molecular genetics and genetic engineering|disponible|
+|GT|Thematic Vocabulary of Geography|non disponible|
+|HTR|Artist Location (TAL) Terminology Resource (Getty Research Institute)|non disponible|
+|IDIA|Ionization in food industry|disponible|
+|INS|Health at the INSB (Proof of concept)|non disponible|
+|JLC|Subjects (SH) Terminology Resource (Getty Research Institute)|non disponible|
+|JVN|Personal Names (PN) Terminology Resource (Getty Research Institute)|non disponible|
+|JVR|Medical Subject Headings (thesaurus)|disponible|
+|KFP|Chemical Entities of Biological Interest Ontology (CHEBI)|non disponible|
+|KG7|Geography of North America|disponible|
+|KW5|Ethnology|disponible|
+|LTK|ThesoTM thesaurus|disponible|
+|MDL|Astronomy (thesaurus)|disponible|
+|N9J|SAGE Social Science Thesaurus|non disponible|
+|NHT|Condensed matter physics|disponible|
+|P21|Litterature|disponible|
+|P66|Cognitive psychology of human memory (CogMemo thesaurus)|disponible|
+|PAN|Sourdough breadmaking glossary|disponible fr|
+|PLP|Pedology lexicon|disponible|
+|PSR|Mathematics (thesaurus)|disponible|
+|Q1W|Agri-food vocabulary|disponible|
+|QJP|Engineering sciences vocabulary|disponible|
+|QX8|Paleoclimatology (thesaurus)|disponible|
+|RDR|Electronics - Optoelectronics|disponible|
+|RVQ|Inorganic compounds (thesaurus)|disponible|
+|SCO|Sections of the National Committee for Scientific Research (Proof of concept)|non disponible|
+|SEN|Health and environment (proof of concept)|non disponible|
+|SN8|Signal theory and processing|disponible|
+|TECSEM|Technology of seeds|disponible|
+|TSM|Membrane-based separation techniques|disponible|
+|TSO|Open science (thesaurus)|disponible|
+|TSP|Public Health (thesaurus)|disponible fr|
+|Theremy|Taxonomy & Thesaurus for Health Research Methodology (THEREMY)|disponible en|
+|VH8|Human Diseases (thesaurus)|disponible|
+|VPAC|Vocabulary of the Common Agricultural Policy|disponible|
+|W7B|Blood Transfusion (thesaurus)|disponible|
+|X64|Linguistics|disponible|
+|XD4|History of Science and Technology|disponible|
+|ZHG|Conference Exhibition (CX) Terminology Resource (Getty Research Institute)|non disponible|
+|th63|Zoological Nomenclature (thesaurus)|disponible|
+|216|Educational sciences|disponible|
+|905|Prehistory and Protohistory|disponible|

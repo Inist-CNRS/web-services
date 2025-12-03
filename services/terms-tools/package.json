@@ -2,7 +2,7 @@
   "private": true,
   "name": "ws-terms-tools",
   "version": "2.1.0",
-  "description": "POStagging de termes et annotation",
+  "description": "POStagging de termes et annotation de textes par une ressource Loterre",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Inist-CNRS/web-services.git"
