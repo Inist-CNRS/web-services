@@ -18,8 +18,11 @@ HTTP 200
 # Capture the computing token
 [Captures]
 computing_token: jsonpath "$[0].value"
+retrieve_route: jsonpath "$[0].retrieve-json"
 [Asserts]
 variable "computing_token" exists
+variable "retrieve_route" exists
+variable "retrieve_route" == "/v1/retrieve-json"
 
 # There should be a waiting time, representing the time taken to process data.
 # Fortunately, as the data is sparse, and the computing time is small,
@@ -108,8 +111,11 @@ HTTP 200
 # Capture the computing token
 [Captures]
 fr_computing_token: jsonpath "$[0].value"
+retrieve_route: jsonpath "$[0].retrieve-json"
 [Asserts]
 variable "fr_computing_token" exists
+variable "retrieve_route" exists
+variable "retrieve_route" == "/v1/retrieve-json"
 
 # There should be a waiting time, representing the time taken to process data.
 # Fortunately, as the data is sparse, and the computing time is small,
@@ -177,8 +183,11 @@ HTTP 200
 # Capture the computing token
 [Captures]
 fr_computing_token: jsonpath "$[0].value"
+retrieve_route: jsonpath "$[0].retrieve-json"
 [Asserts]
 variable "fr_computing_token" exists
+variable "retrieve_route" exists
+variable "retrieve_route" == "/v1/retrieve-json"
 
 # There should be a waiting time, representing the time taken to process data.
 # Fortunately, as the data is sparse, and the computing time is small,
@@ -211,5 +220,3 @@ jsonpath "$[*].id" includes "n: fission"
 jsonpath "$[*].id" includes "n: biomasse"
 jsonpath "$[*].id" includes "na: énergie éolien"
 jsonpath "$[*].id" includes "a: électrique"
-
-
