@@ -90,6 +90,13 @@ jsonpath "$[*].id" exists
 jsonpath "$[*].value" exists
 jsonpath "$[*].value.label" exists
 
+jsonpath "$[*].attributes.weight" exists
+jsonpath "$[*].attributes.subset" exists
+
+jsonpath "$[0].value.targets[0].id" exists
+jsonpath "$[0].value.targets[1].id" exists
+jsonpath "$[0].value.targets[1].thickness" exists
+
 jsonpath "$[*].value['viz$color'].r" exists
 jsonpath "$[*].value['viz$color'].g" exists
 jsonpath "$[*].value['viz$color'].b" exists
