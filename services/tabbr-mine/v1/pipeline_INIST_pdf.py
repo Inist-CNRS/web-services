@@ -170,7 +170,7 @@ class AbbreviationExtractor:
     def __init__(self, acr_regex: str, model_name: str, state_dict: str) -> None:
         self._acr_regex = acr_regex
         self._cp = ContentProcessor()
-        self._labels = {0: "genuine", 1: "tortured"}
+        self._labels = {0: "genuine", 1: "to be checked"}
         self._state_dict = state_dict
         self._tokenizer = BertTokenizer.from_pretrained(
             model_name, local_files_only=True, device_map="auto"
