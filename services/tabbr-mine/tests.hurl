@@ -20,7 +20,7 @@ HTTP 200
     "value": [
         {
             "Abbreviation": "convolutional brain organization (cnn)",
-            "Prediction": "tortured",
+            "Prediction": "to be checked",
             "Count": 1
         }
     ]
@@ -38,20 +38,20 @@ HTTP 200
 # Ignore filename field
 jsonpath "$[0].value" count == 6
 jsonpath "$[0].value[0].Abbreviation" == "de neurones récurrents (rnn)"
-jsonpath "$[0].value[0].Prediction" == "tortured"
+jsonpath "$[0].value[0].Prediction" == "to be checked"
 jsonpath "$[0].value[0].Count" == 1
 jsonpath "$[0].value[1].Abbreviation" == "géographique et forestière (ign)"
 jsonpath "$[0].value[1].Prediction" == "genuine"
 jsonpath "$[0].value[1].Count" == 1
 jsonpath "$[0].value[2].Abbreviation" == "nommés dans le code respectivement flairembeddings (fr) flairembeddings (frforward) et flairembeddings (fr-backward)"
-jsonpath "$[0].value[2].Prediction" == "tortured"
+jsonpath "$[0].value[2].Prediction" == "to be checked"
 jsonpath "$[0].value[2].Count" == 1
 jsonpath "$[0].value[3].Abbreviation" == "océanographique de la marine (shom)"
 jsonpath "$[0].value[3].Prediction" == "genuine"
 jsonpath "$[0].value[3].Count" == 1
 jsonpath "$[0].value[4].Abbreviation" == "respectivement flairembeddings (fr)"
-jsonpath "$[0].value[4].Prediction" == "tortured"
+jsonpath "$[0].value[4].Prediction" == "to be checked"
 jsonpath "$[0].value[4].Count" == 1
 jsonpath "$[0].value[5].Abbreviation" == "sont nommés dans le code respectivement flairembeddings (fr) flairembeddings (frforward)"
-jsonpath "$[0].value[5].Prediction" == "tortured"
+jsonpath "$[0].value[5].Prediction" == "to be checked"
 jsonpath "$[0].value[5].Count" == 1
