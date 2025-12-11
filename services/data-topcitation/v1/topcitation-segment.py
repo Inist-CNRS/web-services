@@ -1,15 +1,25 @@
 #!/usr/bin/env python3
+# -*- coding: utf-8 -*-
 import networkx as nx
 import json
 import math
 import sys
+import os
+import tarfile, json
 
-json_data = json.load(sys.stdin)
+
+retrieve_id = str(sys.argv[sys.argv.index('-p') + 1])
+path_file = str(os.path.join("/tmp/retrieve", retrieve_id))
+
+with tarfile.open(path_file, "r:gz") as tar:
+    json_data = [json.load(f) for f in (tar.extractfile(m) for m in tar) if f]
 
 G = nx.DiGraph()
 
 doi_info = {}
 for citation in json_data:
+    if "value" not in citation:
+        continue
     if "message" in citation["value"].keys() :
         continue
     citation_id = citation["id"]
