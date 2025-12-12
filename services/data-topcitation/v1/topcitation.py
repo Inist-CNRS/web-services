@@ -5,6 +5,7 @@ import json
 import sys
 import os
 import time
+import re
 
 OPENALEX_TOKEN = os.getenv("OPENALEX_API_KEY")
 
@@ -82,6 +83,19 @@ def openAlex_to_doi_and_title(url) :
             return {"doi": doi, "title": title}
     return {"doi":f"https://openalex.org/{id}", "title": "Titre non disponible"}
 
+def normalize_title(title):
+    if not title:
+        return "Titre non disponible"
+
+    # <tag>contenu</tag> → contenu
+    title = re.sub(r"<\s*[^>/]+\s*>(.*?)</\s*[^>]+\s*>", r"\1", title)
+
+    # supprimer toutes les autres balises
+    title = re.sub(r"<[^>]+>", "", title)
+
+    return title
+
+
 def main():
     # Définition de la limite par défaut à 10 citations
     nbCitations = int(sys.argv[sys.argv.index('-p') + 1]) if '-p' in sys.argv else 10
@@ -136,7 +150,14 @@ def main():
     # on itère sur la liste qui contient les tuples citation, count et doi pour les ajouter aux différents champs
     for citation, info in top_citations:
         citation_info = openAlex_to_doi_and_title(citation)
-        sys.stdout.write(json.dumps({"id":citation_info["doi"], "value":{"title": citation_info["title"],"count": info["count"],"citing_doi": info["doi"]}}))
+
+        clean_title = normalize_title(citation_info["title"])  # <-- NEW
+
+        # Normaliser aussi les titres des citing_doi
+        clean_citers = []
+        for entry in info["doi"]:
+            clean_citers.append({"doi": entry["doi"],"title": normalize_title(entry["title"])})
+        sys.stdout.write(json.dumps({"id": citation_info["doi"],"value": {"title": clean_title,"count": info["count"],"citing_doi": clean_citers}}))
         sys.stdout.write("\n")
 
 if __name__ == "__main__":
