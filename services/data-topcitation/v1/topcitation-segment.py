@@ -12,26 +12,43 @@ doi_info = {}
 for citation in json_data:
     if "message" in citation["value"].keys() :
         continue
+
     citation_id = citation["id"]
     if citation_id is None :
         continue
+
     count = citation["value"]["count"]
     citing_dois = citation["value"]["citing_doi"]
+    title = citation["value"].get("title")
 
-
-    # Mettre à jour le statut du DOI cité
+    # --- DOI CITÉ ---
     if citation_id not in doi_info:
-        doi_info[citation_id] = {"count": count, "cité": True, "citant": False}
+        doi_info[citation_id] = {"count": count, "cité": True, "citant": False, "title": title}
     else:
         doi_info[citation_id]["count"] = count
         doi_info[citation_id]["cité"] = True
+        doi_info[citation_id]["title"] = title
 
-    # Parcourir les DOIs citants
-    for citing_doi in citing_dois:
+    # --- DOI CITANT ---
+    for citing in citing_dois:
+
+        # Extraction DOI + titre
+        if isinstance(citing, dict):
+            citing_doi = citing.get("doi")
+            citing_title = citing.get("title") or citing_doi
+        else :
+            citing_doi = citing
+            citing_title = citing # Pas de titre dispo
+
+        if citing_doi is None :
+            continue
+
+        # Mettre à jour le statut du DOI citant
         if citing_doi not in doi_info:
-            doi_info[citing_doi] = {"count": 1, "cité": False, "citant": True}
+            doi_info[citing_doi] = {"count": 0, "cité": False, "citant": True, "title": citing_title}
         else:
             doi_info[citing_doi]["citant"] = True
+            doi_info[citing_doi]["title"] = citing_title
 
         # Ajouter l'arête
         G.add_edge(citing_doi, citation_id)
@@ -39,6 +56,7 @@ for citation in json_data:
 # Ajouter les nœuds avec leurs attributs
 for doi, info in doi_info.items():
     count = info["count"]
+    title = info["title"] or doi
     size = math.log(count + 1, 10) * 50 + 50
 
     # Déterminer la couleur
@@ -55,7 +73,7 @@ for doi, info in doi_info.items():
         statut = "citant"
 
     # Ajouter le nœud avec les attributs
-    G.add_node(doi, viz={"size": size, "color": color}, count=count, statut=statut)
+    G.add_node(doi,label = title, viz={"size": size, "color": color}, count=count, statut=statut,title=title)
 
 # Sauvegarder le graphe en format GEXF
 linefeed = "\n"
