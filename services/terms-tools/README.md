@@ -6,7 +6,7 @@
   
 - la reconnaissance de termes Loterre [https://loterre.istex.fr/fr/](https://loterre.istex.fr/fr/) dans un texte,  
   
-- en français et en anglais
+en français et en anglais
 
 #### URL générique du service 
 
@@ -24,7 +24,8 @@ exemple :  https://terms-tools.services.istex.fr//v1/en/dico-pos/postag?input=te
 
 #### INPUT
 
-Cette gamme de services prend un fichier **tsv** en entrée,  
+Ce service prend un fichier **tsv** en entrée,  
+
 exemple : test_labelEN.tsv
 
 ```tsv
@@ -38,35 +39,13 @@ http://data.loterre.fr/ark:/67375/P66#xl_en_06b45a8a	general empirical observati
 http://data.loterre.fr/ark:/67375/P66#xl_en_d9a365b6	empirical generalisations
 ```
   
-  
-Trois types de sorties sont disponibles :
+#### OUTPUT  
 
-##### 1 - Sous la forme d'un dictionnaire avec l'ensemble des informations  - morpho syntaxique
-
-##### Exemple de sortie 
-
-```
-http://data.loterre.fr/ark:/67375/P66#xl_en_53acd26b	[{"id": 0, "start": 0, "end": 7, "tag": "JJ", "pos": "ADJ", "morph": "Degree=Pos", "lemma": "general"}, {"id": 1, "start": 8, "end": 17, "tag": "JJ", "pos": "ADJ", "morph": "Degree=Pos", "lemma": "empirical"}, {"id": 2, "start":18, "end": 30, "tag": "NNS", "pos": "NOUN", "morph": "Number=Plur", "lemma": "observation"}]
-```
-##### WebService :  
-
-###### ROUTE
-> v1/en/full-morph/postag?input=terms
-
-Exemple :  
-
-``` 
-curl -X 'POST' '$URL/v1/en/full-morph/postag?input=terms' --data-binary '@../terms_tools/data/test_labelEN.tsv'  
-
-curl -X 'POST' '$URL/v1/fr/full-morph/postag?input=terms' --data-binary '@../terms_tools/data/test_labelFR.tsv'  
-```
-
-
-##### 2 - Sous une forme tabulée aux informations simplifiées 
+Sous une forme tabulée d'informations morpho-syntaxiques simplifiées 
         
  **format :**   URI   POSTAG    LEMMA    
 
-##### Exemple de sortie 
+##### Exemple  
 
 ```tsv
 http://data.loterre.fr/ark:/67375/P66#xl_en_542d3e8b	cognitive qualities	JJ NNS	cognitive quality
@@ -76,7 +55,6 @@ http://data.loterre.fr/ark:/67375/P66#xl_en_ef4050c0	objects	NNS	object
 
 
 ##### WebService
-
 
 ###### ROUTE
 >/v1/en/dico-pos/postag?input=terms
@@ -88,58 +66,10 @@ curl -X 'POST' '$URL/v1/en/dico-pos/postag?input=terms' --data-binary '@../terms
 curl -X 'POST' '$URL/v1/fr/dico-pos/postag?input=terms' --data-binary '@../terms_tools/data/test_labelFR.tsv'  
 ```
 
-
-
-##### 3 - Sous la forme d'un dictionnaire pour un Matcher Spacy
-
-##### Exemple de sortie 
-
-```
-http://data.loterre.fr/ark:/67375/P66#xl_en_d2b95b32	{"label": "empirical generalisation ", "pattern": [{"pos": "ADJ", "lemma": "empirical"}, {"pos": "NOUN", "lemma": "generalisation"}], "id": "http://data.loterre.fr/ark:/67375/P66#xl_en_d2b95b32"}  
-
-```
-
-##### WebService  
-
-###### ROUTE
->v1/en/dico-annot/postag?input=terms 
-
-Exemple :
-```
-curl -X 'POST' '$URL/v1/en/dico-annot/postag?input=terms' --data-binary '@../terms_tools/data/test_labelEN.tsv'
-
-curl -X 'POST' '$URL/v1/fr/dico-annot/postag?input=terms' --data-binary '@../terms_tools/data/test_labelFR.tsv'
-```
----
-
-  
-### Reconnaissance de termes Loterre
-
-Ce service projete un vocabulaire sur un texte afin d'identifier toutes les occurrences des termes qui sont présentes dans ce texte, en francais ou en anglais, voir la [Liste des vocabulaires](#liste-des-vocabulaires) disponibles parmi ceux accessibles sur Loterre [https://loterre.istex.fr/fr/](https://loterre.istex.fr/fr/).  
-
-#### INPUT
-Ce web service prend en entrée un flux json au format Lodex (id,value)
-Exemple : 
-```
-[
-    {
-        "id": "1",
-        "value": "The Mem-Pro-Clinic test is a clinical test to assess difficulties in event- and time-based prospective thoughts. This result implies that activated long-term memory provides a representational basis for semantic verbal short-term signal."
-    },
-    {
-        "id": "2",
-        "value": "A new method to implant false autobiographical books: Blind implantation call blind implantation methods."
-    }
-]
-   
-```
-
-
 #### WebService  
 
 ##### ROUTE
-> /v1/CODE_LANGUE/terms-matcher/CODE_VOC/format=FORMAT
-
+> /v1/CODE_LANGUE/terms-matcher/annotate?format=FORMAT&loterreID=CODE_VOC
 
 ##### Parametres
 
@@ -162,7 +92,7 @@ Exemple :
 #### Requête 
 
 ```
-cat <<EOF | curl -v --proxy "" -X POST --data-binary @- https://terms-tools.services.istex.fr/v1/en/terms-matcher/P66?<FORMAT>
+cat <<EOF | curl -v --proxy "" -X POST --data-binary @- https://terms-tools.services.istex.fr/v1/en/terms-matcher/annotate?format=<FORMAT>&loterreID=P66
 [
     {
         "id": "1",
