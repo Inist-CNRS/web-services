@@ -32,12 +32,13 @@ for line in lines:
             freq[w] += 1
 
 freq = {k: v for k, v in sorted(freq.items(), key=lambda item: item[1],reverse=True)}
+print(freq, file=sys.stderr)
 
 if thresh_node == "auto":
     if len(freq) < 100:
         thresh_node = 1
     else:
-        threshold=0.2
+        threshold=0.4
         total = sum(freq.values())
         target = total * threshold
         cumulative = 0
