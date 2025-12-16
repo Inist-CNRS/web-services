@@ -31,8 +31,8 @@ delay: 40000
 HTTP 200
 Content-type: image/png
 [Asserts]
-bytes count >= 23800000
-bytes count <= 25800000
+bytes count >= 26800000
+bytes count <= 28800000
 
 
 POST {{host}}/v1/retrieve-gexf
@@ -56,7 +56,7 @@ body contains "<attribute id=\"2\" title=\"alpha\" type=\"double\" />"
 body contains "<attribute id=\"3\" title=\"zorder\" type=\"long\" />"
 body contains "<attribute id=\"4\" title=\"linewidth\" type=\"double\" />"
 body contains "<attributes mode=\"static\" class=\"node\">"
-body contains "<attribute id=\"0\" title=\"weight\" type=\"long\" />"
+body contains "<attribute id=\"0\" title=\"weight\" type=\"double\" />"
 body contains "<attribute id=\"1\" title=\"subset\" type=\"long\" />"
 
 # Assert nodes

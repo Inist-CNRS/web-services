@@ -85,13 +85,14 @@ def center_gravity(p, partition,r_all):
             
             #Pour degrès e pas d'aleatoire : diviser 360 degrès par le nombre de points ayant (0,0) pour coordonnée. Assigner à chaque angle un points ayant un rayon de 1e-8
             #Puis assigner dans l'ordre chaque ancien points ayant (0,0) par les nouveaux points se trouvant sur le cercle de rayon 1e-8
-    angle_interval = 2*math.pi/nb_0_0
-    count_interval = 0
-    for i in range(len(pos)):
-        if pos[i][0] == 0 and pos[i][1] == 0:
-            pos[i][0] = 1e-10*math.cos(count_interval*angle_interval+1e-11)
-            pos[i][1] = 1e-10*math.sin(count_interval*angle_interval+1e-11)
-            count_interval += 1 
+    if nb_0_0 != 0:
+        angle_interval = 2*math.pi/nb_0_0
+        count_interval = 0
+        for i in range(len(pos)):
+            if pos[i][0] == 0 and pos[i][1] == 0:
+                pos[i][0] = 1e-10*math.cos(count_interval*angle_interval+1e-11)
+                pos[i][1] = 1e-10*math.sin(count_interval*angle_interval+1e-11)
+                count_interval += 1 
 
     #ramener les points trop éloignés de chaque cluster vers le centre du cluster
     #calculer le rayon moyen du cluster

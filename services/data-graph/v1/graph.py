@@ -38,7 +38,7 @@ if thresh_node == "auto":
     if len(freq) < 100:
         thresh_node = 1
     else:
-        threshold=0.4
+        threshold = 0.2
         total = sum(freq.values())
         target = total * threshold
         cumulative = 0
