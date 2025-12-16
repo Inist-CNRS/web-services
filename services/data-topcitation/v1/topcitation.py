@@ -88,7 +88,7 @@ def normalize_title(title):
         return "Titre non disponible"
 
     # <tag>contenu</tag> → contenu
-    title = re.sub(r"<\s*[^>/]+\s*>(.*?)</\s*[^>]+\s*>", r"\1", title)
+    title = re.sub(r"<[^>/]+>(.*?)</[^>]+>", r"\1", title)
 
     # supprimer toutes les autres balises
     title = re.sub(r"<[^>]+>", "", title)
