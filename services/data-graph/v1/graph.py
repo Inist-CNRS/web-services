@@ -3,7 +3,7 @@
 import json
 import sys
 from ressources import *
-
+import time
 
 thresh_edge = sys.argv[sys.argv.index('-p') + 1] if '-p' in sys.argv else "auto"
 thresh_node = sys.argv[sys.argv.index('-q') + 1] if '-q' in sys.argv else "auto"
@@ -19,7 +19,7 @@ for line in sys.stdin:
     lines.append(data["value"])
 
 print("PID ",pid, file=sys.stderr)
-
+print(time.strftime("%A %d %B %Y %H:%M:%S"), file=sys.stderr)
 keyword = []
 L = []
 freq = {}
@@ -32,24 +32,41 @@ for line in lines:
             freq[w] += 1
 
 freq = {k: v for k, v in sorted(freq.items(), key=lambda item: item[1],reverse=True)}
-print(freq, file=sys.stderr)
+#print(freq, file=sys.stderr)
 
+#Seuil node
 if thresh_node == "auto":
     if len(freq) < 100:
         thresh_node = 1
     else:
-        threshold = 0.2
-        total = sum(freq.values())
-        target = total * threshold
-        cumulative = 0
-        for key, value in freq.items():
-            cumulative += value
-            if cumulative >= target:
-                thresh_node = freq[key]
-                break
+        diff_words = 0
+        threshold = 0.175
+        threshold_step = 0.025
+        while diff_words < 50 and threshold < 0.6:
+            diff_words = 0
+            threshold += threshold_step
+            total = sum(freq.values())
+            target = total * threshold
+            cumulative = 0
+            for key, value in freq.items():
+                diff_words += 1
+                cumulative += value
+                if cumulative >= target:
+                    thresh_node = freq[key]
+                    break
+        print("Selected treshold : ",threshold, "differents words : ", diff_words, file=sys.stderr)
 else:
     thresh_node = int(thresh_node)
-    
+
+for liste in L:
+    l = []
+    for w in liste:
+        if freq[w] >= thresh_node:
+            l.append(w)
+    if len(l) > 0:
+        keyword.append(l)
+
+#Seuil edge
 if thresh_edge == "auto":
     if thresh_node == 1:
         thresh_edge = 0
@@ -61,18 +78,10 @@ else:
     thresh_edge = int(thresh_edge)
 
 
-for liste in L:
-    l = []
-    for w in liste:
-        if freq[w] >= thresh_node:
-            l.append(w)
-    if len(l) > 0:
-        keyword.append(l)
-
 print(thresh_node, thresh_edge, file=sys.stderr)
-print(keyword, file=sys.stderr)
+#print(keyword, file=sys.stderr)
 node_weight,edge_weight,ignore_edge = get_weights(keyword,thresh_edge)
-print(node_weight, file=sys.stderr)
+#print(node_weight, file=sys.stderr)
 G = build_graph(node_weight,edge_weight)
 partition,communities = build_partition(G)
 

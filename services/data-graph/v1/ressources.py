@@ -80,9 +80,6 @@ def center_gravity(p, partition,r_all):
         #FIX rajouter du flou pour par avoir de points en 0,0
         if pos[i][0] == 0 and pos[i][1] == 0:
             nb_0_0 += 1
-            #pos[i][0] = random.uniform(-1e-8,1e-8)
-            #pos[i][1] = random.uniform(-1e-8,1e-8)
-            
             #Pour degrès e pas d'aleatoire : diviser 360 degrès par le nombre de points ayant (0,0) pour coordonnée. Assigner à chaque angle un points ayant un rayon de 1e-8
             #Puis assigner dans l'ordre chaque ancien points ayant (0,0) par les nouveaux points se trouvant sur le cercle de rayon 1e-8
     if nb_0_0 != 0:
@@ -90,10 +87,9 @@ def center_gravity(p, partition,r_all):
         count_interval = 0
         for i in range(len(pos)):
             if pos[i][0] == 0 and pos[i][1] == 0:
-                pos[i][0] = 1e-10*math.cos(count_interval*angle_interval+1e-11)
-                pos[i][1] = 1e-10*math.sin(count_interval*angle_interval+1e-11)
+                pos[i][0] = 1e-4*math.cos(count_interval*angle_interval+1e-4)
+                pos[i][1] = 1e-4*math.sin(count_interval*angle_interval+1e-4)
                 count_interval += 1 
-
     #ramener les points trop éloignés de chaque cluster vers le centre du cluster
     #calculer le rayon moyen du cluster
     mean_r_part = [0]*len(center_all)
@@ -151,11 +147,11 @@ def center_gravity(p, partition,r_all):
                 r = np.sqrt((center_all[i][0]-pos[j][0])**2+(center_all[i][1]-pos[j][1])**2)+r_all[j]
                 if max_r_part[i] < r:
                     max_r_part[i] = r
-    for i in range(len(max_r_part)):
-        print("partition = ",i, file=sys.stderr)
-        print("nb elemnt: ", len([x for x in partition if x == i]),file=sys.stderr)
-        print("max rayon : ",max_r_part[i],file=sys.stderr)
-        print("center pos : ", center_all[i], "\n", file=sys.stderr)
+    #for i in range(len(max_r_part)):
+    #    print("partition = ",i, file=sys.stderr)
+    #    print("nb elemnt: ", len([x for x in partition if x == i]),file=sys.stderr)
+    #    print("max rayon : ",max_r_part[i],file=sys.stderr)
+    #    print("center pos : ", center_all[i], "\n", file=sys.stderr)
     #Appliquer la gravité au nouveau centre
     new_center = gravity(max_r_part,center_all)
 
@@ -179,9 +175,7 @@ def gravity(r_nodes,nodes_xy):
         y = xy_sort[i][1]
         if x == y and x==0: # Prévoit un bug ou l'algo reste coincé dans une boucle infinie quand un point à pour coordonnée (0,0)
             x = 1e-9
-            #x = random.uniform(1e-9,9e-9)
             y = 1e-9
-            #y = random.uniform(1e-9,9e-9)
         p = x/y
         k = 0
 
@@ -227,6 +221,8 @@ def gravity(r_nodes,nodes_xy):
                 k += 1
         new_pos.append(np.array([x,y]))
         xy_sort[i] = np.array([x,y])
+        if y > 1000 :
+            exit()
 
         i+= 1
 
