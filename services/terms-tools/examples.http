@@ -2,19 +2,72 @@
 # They are important, because used to generate the tests.hurl file.
 
 # Décommenter/commenter les lignes voulues pour tester localement
-@host=http://localhost:31976
-# @host=https://nlp-tools2.services.istex.fr
+
+#@host=https://terms-tools.services.istex.fr
+#@host=http://localhost:31976
 
 ###
-# @name v1terms/dico_pos
-# Postag et lemmatisatoin de termes, display Loterre
-POST {{host}}/v1/en/dico_pos/postag?input=terms HTTP/1.1
-Content-Type: text/tab-separated-values
-
-id	text
+# @name v1EnDicoPos
+# Postag et lemmatisation de termes, format Loterre, in english
+POST {{host}}/v1/en/dico-pos/postag?input=terms
+content-type: text/tab-separated-values
+```
+id	value
 http://data.loterre.fr/ark:/67375/P66#xl_en_9278939f	qualities
 http://data.loterre.fr/ark:/67375/P66#xl_en_60f6687f	quality
 http://data.loterre.fr/ark:/67375/P66#xl_en_696ab94f	material entities
 http://data.loterre.fr/ark:/67375/P66#xl_en_c0a4dac9	material entity
 http://data.loterre.fr/ark:/67375/P66#xl_en_ded9af98	processes
+```
 
+###
+# @name v1FrDicoPos 
+# Postag et lemmatisatoin de termes, format Loterre, in french
+POST {{host}}/v1/fr/dico-pos/postag?input=terms
+content-Type: text/tab-separated-values
+```
+id	value
+http://data.loterre.fr/ark:/67375/P66#xl_fr_f50b83a0	qualités
+http://data.loterre.fr/ark:/67375/P66#xl_fr_34241fc9	qualité
+http://data.loterre.fr/ark:/67375/P66#xl_fr_b417452d	entités matérielles
+http://data.loterre.fr/ark:/67375/P66#xl_fr_dc89e46c	entité matérielle
+http://data.loterre.fr/ark:/67375/P66#xl_fr_b3ab2f06	processus
+```
+
+###
+# @name v1EnTermsMatcherJsonStandoff
+# Reconnaissance de terme en format json-standoff 
+POST {{host}}/v1/en/terms-matcher/annotate?format=json-standoff&loterreID=9SD
+Content-Type: application/json; application/json
+[
+{"id":"1","value":"The United States of America (USA), also known as the United States (U.S.) or America, is a country primarily located in North America. It is a federal republic of 50 states and Washington, D.C. as its federal capital district."}
+]
+
+###
+# @name  v1FrTermsMatcherJsonStandoff
+# Reconnaissance de terme fr format json-standof  
+POST {{host}}/v1/fr/terms-matcher/annotate?format=json-standoff&loterreID=P66
+Content-Type: application/json
+[
+{"id":"1","value":"Les pertes de mémoire subjective appelés aussi troubles mnésiques correspondent à la difficulté à mémoriser un fait actuel à retrouver un souvenir."}
+]
+
+###
+# @name v1EnTermMatcherJsonIndoc
+# Reconnaissance de terme en format json-indoc 
+POST {{host}}/v1/en/terms-matcher/annotate?format=json-indoc&loterreID=P66
+Content-Type: application/json
+[
+{"id":"18","value":"The Mem-Pro-Clinic test is a clinical test to assess difficulties in event- and time-based prospective thoughts. This result implies that activated long-term memory provides a representational basis for semantic verbal short-term signal."},
+{"id":"27","value":"A new method to implant false autobiographical books: Blind implantation call blind implantation methods."},
+{"id":"35","value":"A guy with hypermnesia (Pathology) is capable of storing idea in an extraordinarily efficient manner."}
+]
+
+###
+# @name v1EnTermMatcherXmlStandoff
+# Reconnaissance de terme en format xml-standoff
+POST {{host}}/v1/en/terms-matcher/annotate?format=xml-standoff&loterreID=QX8
+Content-Type: application/json
+[
+{"id":"1","value":"Sustainable agriculture is farming in sustainable ways meeting society's present food and textile needs, without compromising the ability for current or future generations to meet their needs.[1] It can be based on an understanding of ecosystem services. There are many methods to increase the sustainability of agriculture. When developing agriculture within the sustainable food systems, it is important to develop flexible business processes and farming practices.[2] Agriculture has an enormous environmental footprint, playing a significant role in causing climate change (food systems are responsible for one third of the anthropogenic greenhouse gas emissions),[3][4] water scarcity, water pollution, land degradation, deforestation and other processes;[5] it is simultaneously causing environmental changes and being impacted by these changes.[6] Sustainable agriculture consists of environment friendly methods of farming that allow the production of crops or livestock without causing damage to human or natural systems. It involves preventing adverse effects on soil, water, biodiversity, and surrounding or downstream resources, as well as to those working or living on the farm or in neighboring areas. Elements of sustainable agriculture can include permaculture, agroforestry, mixed farming, multiple cropping, and crop rotation"}
+]
