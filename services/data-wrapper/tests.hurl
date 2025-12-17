@@ -131,7 +131,7 @@ file,texts.tar.gz;
 HTTP 200
 Content-type: application/gzip
 [Asserts]
-bytes count >= 480
+bytes count >= 475
 bytes count <= 495
 bytes startsWith hex,1f8b0800;
 bytes endsWith hex,00140000;

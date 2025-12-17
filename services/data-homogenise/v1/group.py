@@ -79,6 +79,20 @@ for i, sous_liste in enumerate(texts):
         phrases.append(phrase)
         indices_lignes.append(i)
 
+if len(phrases) < 2:
+    output = {}
+    output["value"] = "ERROR NO DATA : can't homogenise 1 word or less"
+    sys.stdout.write(json.dumps(output))
+    sys.stdout.write("\n")
+    sys.exit(0)
+
+if len(phrases) > 80000:
+    output = all_data[0]
+    output["value"] = "ERROR TO MUCH DATA : can't homogenise more than 80000 words"
+    sys.stdout.write(json.dumps(output))
+    sys.stdout.write("\n")
+    sys.exit(0)
+
 embeddings = model.encode(phrases)
 similarity_matrix = model.similarity(embeddings, embeddings)
 

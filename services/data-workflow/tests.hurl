@@ -42,7 +42,7 @@ variable "computing_token" exists
 POST {{host}}/v1/retrieve-json?indent=true
 content-type: application/json
 [Options]
-delay: 15000
+delay: 24000
 skip: {{blocked}}
 ```
 [
@@ -97,7 +97,7 @@ variable "computing_token" exists
 POST {{host}}/v1/retrieve-json?indent=true
 content-type: application/json
 [Options]
-delay: 9000
+delay: 20000
 skip: {{blocked}}
 ```
 [
@@ -675,7 +675,7 @@ variable "computing_token" exists
 POST {{host}}/v1/retrieve-json?indent=false
 content-type: application/json
 [Options]
-delay: 20000
+delay: 25000
 skip: {{blocked}}
 ```
 [

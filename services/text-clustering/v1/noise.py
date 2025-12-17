@@ -24,6 +24,8 @@ def center_reduce(matrix):
     array-like: The centered and reduced matrix.
     """
     # center and reduce
+    if matrix is None or len(matrix) == 0:
+        return matrix
     scaler = StandardScaler()
     scaler.fit(matrix)
     matrix_center_reduce = scaler.transform(matrix) 
@@ -83,8 +85,11 @@ umap_model = umap.UMAP(
     random_state=42,
     n_jobs=1)
 
-reduced_embeddings = umap_model.fit_transform(texts)
-
+try:
+    reduced_embeddings = umap_model.fit_transform(texts)
+except Exception as e:
+    sys.stderr.write(f"Error in noiseDetect while UMAP processing : {e}")
+    reduced_embeddings = center_reduce(texts)
 
 # HDBSCAN with scikit-learn
 clusterer = HDBSCAN(
@@ -96,7 +101,11 @@ clusterer = HDBSCAN(
     cluster_selection_method="eom",
     n_jobs=-1) 
 
-clusterer.fit(reduced_embeddings)
+try:
+    clusterer.fit(reduced_embeddings)
+except Exception as e:
+    sys.stderr.write(f"Error in noiseDetect while HDBSCAN processing : {e}")
+    indice_out_cluster = [i for i in range(len_data)]
 
 
 # extract infos
@@ -114,7 +123,5 @@ for i in range(len_data):
             line["value"] = "relevant"
         # Increment only if the row isn't noise (they aren't count in "clusterer model")
         indice_in_cluster += 1
-    text_output += json.dumps(line)
-    text_output += "\n"
-    
-sys.stdout.write(text_output)
+    sys.stdout.write(json.dumps(line))
+    sys.stdout.write("\n")

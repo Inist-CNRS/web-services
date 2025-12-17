@@ -14,6 +14,7 @@ with open(input_file, 'r') as file:
         data.append(row[0])
 
 data_lower = [elt.lower() for elt in data]
+data_lower = set(data_lower)
 
 with open(output_file, 'wb') as file:
     pickle.dump(data_lower, file)
