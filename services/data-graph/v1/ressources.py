@@ -5,8 +5,8 @@ import matplotlib.cm as cm
 import matplotlib.colors
 from itertools import combinations
 import numpy as np
-import sys
 import math
+
 
 def hex_to_rgb(value):
    value = value.lstrip('#')
@@ -147,11 +147,6 @@ def center_gravity(p, partition,r_all):
                 r = np.sqrt((center_all[i][0]-pos[j][0])**2+(center_all[i][1]-pos[j][1])**2)+r_all[j]
                 if max_r_part[i] < r:
                     max_r_part[i] = r
-    #for i in range(len(max_r_part)):
-    #    print("partition = ",i, file=sys.stderr)
-    #    print("nb elemnt: ", len([x for x in partition if x == i]),file=sys.stderr)
-    #    print("max rayon : ",max_r_part[i],file=sys.stderr)
-    #    print("center pos : ", center_all[i], "\n", file=sys.stderr)
     #Appliquer la gravité au nouveau centre
     new_center = gravity(max_r_part,center_all)
 
@@ -159,8 +154,6 @@ def center_gravity(p, partition,r_all):
     for j in range(len(pos)):
         pos[j] = pos[j]+np.array(new_center[partition[j]])
     return pos
-
-import random
 
 def gravity(r_nodes,nodes_xy):
     save = [k for k in range(len(r_nodes))]
