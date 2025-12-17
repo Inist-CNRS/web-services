@@ -1,95 +1,34 @@
-# terms_tools
+# Loterre Terms-Matcher
 
-**terms_tools** est une bibliothèque d'outils accessible par WebService qui permet :  
+**Loterre Terms-Matcher** est outil accessible par WebService qui permet la reconnaissance de termes Loterre [https://loterre.istex.fr/fr/](https://loterre.istex.fr/fr/) dans un texte, en français et en anglais
 
-- l'étiquetage en partie du discours (POStag) d'une liste de termes,  
-  
-- la reconnaissance de termes Loterre [https://loterre.istex.fr/fr/](https://loterre.istex.fr/fr/) dans un texte,  
-  
-en français et en anglais
+## Accès au service   
 
-#### URL générique du service 
+### URL du service 
 
+> https://terms-tools.services.istex.fr/v1/CODE_LANGUE/terms-matcher/annotate?format=FORMAT&loterreID=CODE_VOC
 
-  
->       https://terms-tools.services.istex.fr
-   
+### Parametres
 
-NB = auquel au adjoint une ROUTE qui spécifie la nature du service,    
-exemple :  https://terms-tools.services.istex.fr//v1/en/dico-pos/postag?input=terms  
+**- CODE_LANGUE** = deux langues disponibles   [ fr | en ]  
 
----  
-
-### POStag et lemmatisation d'une liste de termes  
-
-#### INPUT
-
-Ce service prend un fichier **tsv** en entrée,  
-
-exemple : test_labelEN.tsv
-
-```tsv
-id	text  
-http://data.loterre.fr/ark:/67375/P66#xl_en_9278939f	qualities 
-http://data.loterre.fr/ark:/67375/P66#xl_en_696ab94f	material entities
-http://data.loterre.fr/ark:/67375/P66#xl_en_d9fccd58	process
-http://data.loterre.fr/ark:/67375/P66#xl_en_0fa9a1f2	empirical effect
-http://data.loterre.fr/ark:/67375/P66#xl_en_ba359dd0	empirical generalization
-http://data.loterre.fr/ark:/67375/P66#xl_en_06b45a8a	general empirical observation
-http://data.loterre.fr/ark:/67375/P66#xl_en_d9a365b6	empirical generalisations
-```
-  
-#### OUTPUT  
-
-Sous une forme tabulée d'informations morpho-syntaxiques simplifiées 
-        
- **format :**   URI   POSTAG    LEMMA    
-
-##### Exemple  
-
-```tsv
-http://data.loterre.fr/ark:/67375/P66#xl_en_542d3e8b	cognitive qualities	JJ NNS	cognitive quality
-http://data.loterre.fr/ark:/67375/P66#xl_en_9ac2b72c	cognitive quality	 JJ NN	cognitive quality
-http://data.loterre.fr/ark:/67375/P66#xl_en_ef4050c0	objects	NNS	object  
-```
+**- FORMAT** = Trois types de sorties proposées  [ json-standoff | json-indoc |  xml-standoff  ]  
 
 
-##### WebService
-
-###### ROUTE
->/v1/en/dico-pos/postag?input=terms
-
-Exemple :
-```bash  
-curl -X 'POST' '$URL/v1/en/dico-pos/postag?input=terms' --data-binary '@../terms_tools/data/test_labelEN.tsv'  
-
-curl -X 'POST' '$URL/v1/fr/dico-pos/postag?input=terms' --data-binary '@../terms_tools/data/test_labelFR.tsv'  
-```
-
-#### WebService  
-
-##### ROUTE
-> /v1/CODE_LANGUE/terms-matcher/annotate?format=FORMAT&loterreID=CODE_VOC
-
-##### Parametres
-
-**- CODE_LANGUE** = fr, en  
-
-**- FORMAT** = json-standoff | json-indoc |  xml-standoff  
 |  format | description |
 | :--------------- | :--------------- |
 | json-standoff | liste des termes reconnus sous le forme json |
 | json-indoc| document avec les termes identifiés, format json id, value |
-| xml-standoff | liste des termes reconnus sous le forme xml (loterre widget) |
+| xml-standoff | liste des termes reconnus sous la forme xml (format loterre annotator widget) |
 
 **- CODE_VOC** = voir la [liste des codes vocabulaires](#liste-des-vocabulaires)  
 
 
-#### Exemples
+## Exemples
 
-- Dans un texte anglais, identification des termes appartenant au vocabulaire  https://loterre.istex.fr/P66/  :  
+- Dans un texte anglais, identification des termes appartenant au vocabulaire "Psychologie cognitive de la mémoire humaine"  https://loterre.istex.fr/P66/  dont le loterreID est P66 :
 
-#### Requête 
+### Requête 
 
 ```
 cat <<EOF | curl -v --proxy "" -X POST --data-binary @- https://terms-tools.services.istex.fr/v1/en/terms-matcher/annotate?format=<FORMAT>&loterreID=P66
@@ -209,10 +148,10 @@ EOF
 ]"s"
 ```
 
-- Sortie avec les termes annoté dans le texte initial => format = json-indoc   
+- Sortie avec les termes annotés dans le texte initial => format=json-indoc   
 
- Le marquage des termes suit la convention : [TERM](id du concept)   
- **NB : ATTENTION :  En francais, le texte rendu n'est pas la version initiale mais la version lemmatisée **
+ Le marquage des termes suit la convention markdown pour la représentation des hyperliens : [TERM](ID du concept)   
+ **NB** : ATTENTION !! En francais, le texte rendu n'est pas la version initiale mais la version lemmatisée  
 
 ```
 [
@@ -230,8 +169,16 @@ EOF
    }
 ]
 ```
+  
+- Sortie au format xml  => format=xml-standoff  
 
-### Liste des vocabulaires  
+NB : Ne tolère qu'un seul enregistrement (value) par envoi.  
+```
+<?xml version="1.0" encoding="UTF-8"?>
+<result><text><tag idx_start="4" idx_end="23" id="http://data.loterre.fr/ark:/67375/P66-WG17XBG4-V" text="mem-pro-clinic test" termeReconnu="Mem-Pro-Clinic test" pref="Mem-Pro-Clinic test" lang="en"/><tag idx_start="69" idx_end="74" id="http://data.loterre.fr/ark:/67375/P66-ZVGCX1H2-G" text="event" termeReconnu="events" pref="event" lang="en"/><tag idx_start="91" idx_end="111" id="http://data.loterre.fr/ark:/67375/P66-VLJ0CQH4-G" text="prospective thoughts" termeReconnu="prospective thought" pref="predictive brain" lang="en"/><tag idx_start="118" idx_end="124" id=" " lang="en"/><tag idx_start="148" idx_end="164" id="http://data.loterre.fr/ark:/67375/P66-J8FC45M1-6" text="long-term memory" termeReconnu="long-term memory" pref="long-term memory" lang="en"/></text><text><tag idx_start="78" idx_end="104" id="http://data.loterre.fr/ark:/67375/P66-D6XL3PDR-M" text="blind implantation methods" termeReconnu="blind implantation method" pref="blind implantation method" lang="en"/></text><text><tag idx_start="11" idx_end="34" id="http://data.loterre.fr/ark:/67375/P66-FQXK8KBN-C" text="hypermnesia (pathology)" termeReconnu="hypermnesia (pathology)" pref="hypermnesia (pathology)" lang="en"/></text></result>
+```
+
+## Liste des vocabulaires  
 
 |Code| Nom du vocabulaire (01/12/2025)|Etat|
 |:---:|:----|:----|
