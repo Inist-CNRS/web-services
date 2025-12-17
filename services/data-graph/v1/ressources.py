@@ -5,6 +5,8 @@ import matplotlib.cm as cm
 import matplotlib.colors
 from itertools import combinations
 import numpy as np
+import math
+
 
 def hex_to_rgb(value):
    value = value.lstrip('#')
@@ -72,9 +74,22 @@ def center_gravity(p, partition,r_all):
         center_all.append([center_x/nb,center_y/nb])
 
     #ramener au centre
+    nb_0_0 = 0
     for i in range(len(pos)):
         pos[i] = pos[i]-center_all[partition[i]]
-
+        #FIX rajouter du flou pour par avoir de points en 0,0
+        if pos[i][0] == 0 and pos[i][1] == 0:
+            nb_0_0 += 1
+            #Pour degrès e pas d'aleatoire : diviser 360 degrès par le nombre de points ayant (0,0) pour coordonnée. Assigner à chaque angle un points ayant un rayon de 1e-8
+            #Puis assigner dans l'ordre chaque ancien points ayant (0,0) par les nouveaux points se trouvant sur le cercle de rayon 1e-8
+    if nb_0_0 != 0:
+        angle_interval = 2*math.pi/nb_0_0
+        count_interval = 0
+        for i in range(len(pos)):
+            if pos[i][0] == 0 and pos[i][1] == 0:
+                pos[i][0] = 1e-4*math.cos(count_interval*angle_interval+1e-4)
+                pos[i][1] = 1e-4*math.sin(count_interval*angle_interval+1e-4)
+                count_interval += 1 
     #ramener les points trop éloignés de chaque cluster vers le centre du cluster
     #calculer le rayon moyen du cluster
     mean_r_part = [0]*len(center_all)
@@ -95,7 +110,7 @@ def center_gravity(p, partition,r_all):
                 if r > 1.5*mean_r_part[i]:
                     pos[j] = pos[j]*mean_r_part[i]/r
 
-
+    
     #appliquer la gravité pour chaque cluster
     for i in range(max(partition)+1):
         pos_i = []
@@ -109,6 +124,7 @@ def center_gravity(p, partition,r_all):
         pos_i = gravity(r_i,pos_i)
         for j in range(len(pos_i)):
             pos[pos_ind[j]] = pos_i[j]  #+np.array(center_all[i])*10
+    
 
     #calculer le nouveau centre après la gravité
     center_all = []
@@ -131,7 +147,6 @@ def center_gravity(p, partition,r_all):
                 r = np.sqrt((center_all[i][0]-pos[j][0])**2+(center_all[i][1]-pos[j][1])**2)+r_all[j]
                 if max_r_part[i] < r:
                     max_r_part[i] = r
-
     #Appliquer la gravité au nouveau centre
     new_center = gravity(max_r_part,center_all)
 
@@ -139,7 +154,6 @@ def center_gravity(p, partition,r_all):
     for j in range(len(pos)):
         pos[j] = pos[j]+np.array(new_center[partition[j]])
     return pos
-
 
 def gravity(r_nodes,nodes_xy):
     save = [k for k in range(len(r_nodes))]
@@ -200,6 +214,8 @@ def gravity(r_nodes,nodes_xy):
                 k += 1
         new_pos.append(np.array([x,y]))
         xy_sort[i] = np.array([x,y])
+        if y > 1000 :
+            exit()
 
         i+= 1
 
@@ -226,7 +242,7 @@ def get_weights(autors_list,seuil_edge):
     all_autors = []
     for i in autors_list:
         all_autors += i
-    node_weight = {x:all_autors.count(x) for x in all_autors}
+    node_weight = {x:1.5*all_autors.count(x) for x in all_autors}
     return node_weight,edge_weight,ignore_edge
 
 
@@ -283,7 +299,7 @@ def export_to_gexf_full(
 def plot_2D(G,partition,ignore_edge, pid):
     for i,v in enumerate(G.nodes()):
         G.nodes[v]["subset"] = partition[i]
-    pos = nx.spring_layout(G, dim=2, seed=779,center=[0,0])
+    pos = nx.spring_layout(G, dim=2, seed=779,center=[0,0])  
 
     L = {}
     for v in G:
