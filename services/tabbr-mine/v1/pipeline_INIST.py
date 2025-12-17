@@ -2,16 +2,13 @@
 # -*- coding: utf-8 -*-
 
 # Pipeline to extract tortured abbreviations from suspect scientific articles.
-# Developed using the following (unzipped) dataset:
-# ../Datasets/PPS/dec_2022_dataset/formatted_data.zip.
-# @authors: Alexandre Clausse, Guillaume Cabanac, Pascal Cuxac, and Cyril Labbé
+# Developped using the following (unziped) dataset: ../Datasets/PPS/dec_2022_dataset/formatted_data.zip.
+# @uthors: Alexandre Clausse, Guillaume Cabanac, Pascal Cuxac, and Cyril Labbé
 # @since: 2023
 # @version: 4-NOV-2025 -- Pipeline for INIST web service
 
-# Requirements:
-# pip3 install transformers==4.51.3 pandas==1.5.0 torch==2.7.1 accelerate==1.8.1
-# Model download:
-# hf download allenai/scibert_scivocab_uncased --local-dir scibert_model
+# Requirements: pip3 install transformers==4.51.3 pandas==1.5.0 torch==2.7.1 accelerate==1.8.1
+# Model download: hf download allenai/scibert_scivocab_uncased --local-dir scibert_model
 
 # Requirements
 from transformers import BertTokenizer, BertModel
@@ -153,7 +150,7 @@ class AbbreviationExtractor:
     def __init__(self, acr_regex: str, model_name: str, state_dict: str) -> None:
         self._acr_regex = acr_regex
         self._cp = ContentProcessor()
-        self._labels = {0: "genuine", 1: "tortured"}
+        self._labels = {0: "genuine", 1: "to be checked"}
         self._state_dict = state_dict
         self._tokenizer = BertTokenizer.from_pretrained(
             model_name, local_files_only=True, device_map="auto"

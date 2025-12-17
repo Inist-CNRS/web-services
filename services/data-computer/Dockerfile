@@ -14,6 +14,10 @@ RUN pip install --no-cache-dir \
     scipy==1.10.1 \
     prometheus-client==0.19.0
 
+# Temporary install of the latest ezs-core (until yearly update of base images)
+RUN npm install --omit=dev @ezs/core@4.1.2 && \
+    npm cache clean --force
+
 WORKDIR /app/public
 
 ENV NUMBA_CACHE_DIR=/tmp/numba_cache

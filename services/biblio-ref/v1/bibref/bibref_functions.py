@@ -25,8 +25,6 @@ session_metadore = LimiterSession(per_second=10)
 with open("v1/annulled.pickle", "rb") as file:
     retracted_doi = pickle.load(file)
 
-retracted_doi = set(retracted_doi)
-
 
 def remove_accents(text):
     """
@@ -62,7 +60,7 @@ def uniformize(text):
 
 
 # DOI funtions
-def find_doi(text, delete_line_break=False, process_deleted_underscore=False):
+def find_doi(text, delete_line_break=True, process_deleted_underscore=False):
     """
     Function to find a DOI (Digital Object Identifier) in the given text.
     Args:
@@ -72,12 +70,14 @@ def find_doi(text, delete_line_break=False, process_deleted_underscore=False):
     Returns
         str: the found DOI, or an empty string if not found
     """
+    
+    doi_regex = r"10\.\d{4,}\/[^\s\,]+"
+
     if delete_line_break:
-        doi_regex = r"10\.\d{4,}\/[^\s,]+\s[^\s,]+"
-    elif process_deleted_underscore:
+        text = text.replace(" ", "")
+        
+    if process_deleted_underscore:
         doi_regex = r"10\.\d{4,}\/[^\,]+"
-    else:
-        doi_regex = r"10\.\d{4,}\/[^\s\,]+"
 
     doi = re.search(doi_regex, text)
     if doi is None:
@@ -382,7 +382,7 @@ def process_crossref_doi(doi, raw_ref):
 
     # # If doi isn't found, try to delete \n
     if crossref_status_code == 404:
-        doi = find_doi(raw_ref, delete_line_break=True)
+        doi = find_doi(raw_ref, delete_line_break=False)
         if not doi:
             crossref_status_code = 404
         else:
@@ -528,7 +528,7 @@ def process_metadore_doi(doi, raw_ref):
 
     # # If doi isn't found, try to delete \n
     if metadore_status_code == 404:
-        doi = find_doi(raw_ref, delete_line_break=True)
+        doi = find_doi(raw_ref, delete_line_break=False)
         if not doi:
             metadore_status_code = 404
         else:
