@@ -5,7 +5,7 @@ FROM cnrsinist/ezs-python-server:py3.9-no24-1.0.13
 RUN pip --no-cache-dir install \
     matplotlib==3.9.4 \
     networkx==3.2.1 \
-    numpy==2.0.2 \
+    numpy==1.26.4 \
     scipy==1.13.1
 
 WORKDIR /app/public
