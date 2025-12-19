@@ -158,7 +158,10 @@ def center_gravity(p, partition,r_all):
 def gravity(r_nodes,nodes_xy):
     save = [k for k in range(len(r_nodes))]
     d = [x*x+y*y for x,y in nodes_xy]
-    r_sort,d_sort,xy_sort,save = (list(t) for t in zip(*sorted(zip(r_nodes,d,nodes_xy,save),reverse=True)))
+    r_sort, d_sort, xy_sort, save = map(
+    list,
+    zip(*sorted(zip(r_nodes, d, nodes_xy, save), key=lambda x: x[0], reverse=True))
+)
     new_pos = [xy_sort[0]]
     move_factor = 0.0001
     i = 1
