@@ -124,9 +124,10 @@ def main():
         references = data["referenced_works"]
         title = data["title"]
         if references == "champ referenced_works vide":
+            continue
             # Ajouter une entrée dans le JSON indiquant que le champ referenced_works est vide
-            sys.stdout.write(json.dumps({"id": doi, "value": {"title": title, "message": "champ referenced_works vide"}}))
-            sys.stdout.write("\n")
+            # sys.stdout.write(json.dumps({"id": doi, "value": {"title": title, "message": "champ referenced_works vide"}}))
+            # sys.stdout.write("\n")
         else : 
         # itération de la liste des références
             for citation in references:
