@@ -20,7 +20,7 @@ RUN dvc pull -v
 FROM cnrsinist/ezs-python-server:py3.9-no24-1.0.13
 
 
-ENV TERMS_TOOLS_VERSION=2.0
+ENV TERMS_TOOLS_VERSION=2.1
 ENV GIT=https://github.com/stephane54/terms-tools.git
 ENV DICO_PATH="/app/public/dictionary"
 
@@ -40,7 +40,6 @@ RUN pip install  --no-cache-dir \
 
 # rendre possible installation des ressources stanza lors 1er execution (mkdir en user daemon)
 RUN chmod 777 /usr/sbin/
-
 
 WORKDIR /app/public
 
