@@ -7,7 +7,6 @@ import unicodedata
 import re
 import spacy
 import numpy as np
-import time
 from itertools import islice
 
 # Test for stats with prometheus :
@@ -19,7 +18,7 @@ job_name = 'lda'
 
 
 # Get the index of "p" param (given by the user) and assign it to "nbTopic". 6 if not found
-nbTopic = sys.argv[sys.argv.index('-p') + 1] if '-p' in sys.argv else 0
+nbTopic = int(sys.argv[sys.argv.index('-p') + 1] if '-p' in sys.argv else 0)
 if nbTopic < 0:
     nbTopic = 0
 if nbTopic > 18:
@@ -60,7 +59,7 @@ def preprocess_spacy(texts, batch_size=2, n_process=-1):
             for tok in islice(doc, 1000)
             if tok.is_alpha
             and not tok.is_stop
-            and len(tok) > 2
+            and len(tok) > 3
         ]
 
         if tokens:
@@ -106,6 +105,7 @@ def find_optimal_k_lda(
 
         run_scores = []
         # Here we can simply improve perf by using sampling
+        # (by increasing runs_per_k, but it increase computing time)
         for r in range(runs_per_k):
             lda = models.LdaMulticore(
                 corpus=corpus,
@@ -129,7 +129,6 @@ def find_optimal_k_lda(
 
     coarse_ks = list(range(min_k, max_k + 1, step))
 
-    t2 = time.time()
     for k in coarse_ks:
         evaluate_k(k)
     best_coarse_k = max(coarse_ks, key=lambda k: scores[k])
@@ -147,7 +146,6 @@ def find_optimal_k_lda(
 
 # WS
 # load all datas
-t1 = time.time()
 all_data = []
 for line in sys.stdin:
     data=json.loads(line)
@@ -176,10 +174,10 @@ texts, empty = preprocess_spacy(raw_texts)
 
 index_without_value.extend(raw_indices[i] for i in empty)
 
-bigram_model = models.Phrases(texts, min_count=3, threshold=1)
+no_below = 5 if len(texts) > 1000 else 2
+bigram_model = models.Phrases(texts, min_count=no_below, threshold=1)
 bigram_texts = [bigram_model[doc] for doc in texts]
 dictionary = corpora.Dictionary(bigram_texts)
-no_below = 5 if len(texts) > 1000 else 3
 dictionary.filter_extremes(no_below=no_below, no_above=0.5)
 corpus = [dictionary.doc2bow(text) for text in bigram_texts] 
 
@@ -190,7 +188,7 @@ if nbTopic == 0:
         minimum_probabilty = 1/float(nbTopic)
 
     except Exception as e:
-        sys.stderr.write(str(e))
+        sys.stderr.write("\nError in find_optimal_k funct : " + str(e) + "\n")
         index_without_value = [i for i in range(len_data)]
         nbTopic = 0
 
@@ -207,16 +205,18 @@ if nbTopic > 0:
                                 random_state=42
             )
     except Exception as e:
-        sys.stderr.write(str(e))
+        sys.stderr.write("\nError while training lda: " + str(e) + "\n")
         index_without_value = [i for i in range(len_data)]
+
 
 i_decal = 0
 # extract infos
 for i in range(len_data):
     c.inc()
     push_to_gateway('jobs-metrics.daf.intra.inist.fr', job=job_name, registry=registry)
-
-    #return n/a if docs wasn't in model
+    line = all_data[i]
+    
+    # return n/a if docs wasn't in model
     if i in index_without_value:
         line["value"] = "n/a"
         i_decal += 1
@@ -243,7 +243,8 @@ for i in range(len_data):
         line["value"]["topics"] = topic_info
         try:
             line["value"]["best_topic"] = max_topic(topic_info)
-        except Exception:
+        except Exception as e:
+            sys.stderr.write("\n Error with max_topic function : " + str(e) + "\n")
             line["value"]["best_topic"] = "n/a"
         sys.stdout.write(json.dumps(line))
         sys.stdout.write("\n")
