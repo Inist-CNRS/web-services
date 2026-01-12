@@ -180,17 +180,26 @@ bigram_texts = [bigram_model[doc] for doc in texts]
 dictionary = corpora.Dictionary(bigram_texts)
 dictionary.filter_extremes(no_below=no_below, no_above=0.5)
 corpus = [dictionary.doc2bow(text) for text in bigram_texts] 
+minimum_probability = 0
 
 # Find optimal number of topic
 if nbTopic == 0:
     try:
         nbTopic = find_optimal_k_lda(corpus, dictionary, bigram_texts)
-        minimum_probabilty = 1/float(nbTopic)
+
 
     except Exception as e:
         sys.stderr.write("\nError in find_optimal_k funct : " + str(e) + "\n")
         index_without_value = [i for i in range(len_data)]
         nbTopic = 0
+
+if nbTopic < 6:
+    minimum_probability = 0.2
+elif nbTopic < 11:
+    minimum_probability = 0.15
+else:
+    minimum_probability = 0.1
+
 
 # Train the LDA model
 if nbTopic > 0:
@@ -199,13 +208,13 @@ if nbTopic > 0:
                                 corpus=corpus,
                                 id2word=dictionary,
                                 num_topics=nbTopic,
-                                minimum_probability=minimum_probabilty,
+                                minimum_probability=minimum_probability,
                                 passes=20,
                                 iterations=200,
                                 random_state=42
             )
     except Exception as e:
-        sys.stderr.write("\nError while training lda: " + str(e) + "\n")
+        sys.stderr.write("\nError while training lda: " + str(e) + "\n"+ str(minimum_probability))
         index_without_value = [i for i in range(len_data)]
 
 
@@ -225,7 +234,7 @@ for i in range(len_data):
     else:
         topics = lda_model.get_document_topics(
             corpus[i-i_decal],
-            minimum_probability=minimum_probabilty
+            minimum_probability=minimum_probability
             )
         topic_info = {}
         for topic_id, topic_weight in topics:
