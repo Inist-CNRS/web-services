@@ -1,3 +1,6 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+
 import json
 import networkx as nx
 from collections import defaultdict
@@ -89,5 +92,5 @@ for line in sys.stdin:
         continue
 
 gexf_string = create_gexf_from_topics(topics_data, topic_colors)
-sys.stdout.write(gexf_string)
+sys.stdout.write(json.dumps({"value": gexf_string}))
 sys.stdout.write("\n")
