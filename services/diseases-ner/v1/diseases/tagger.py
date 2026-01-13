@@ -42,22 +42,53 @@ def predict_formula_ml(input_text):
     #convert the predictions to labels
     predicted_labels = [model.config.id2label[pred.item()] for pred in predictions[0]]
 
+
+    def preprocess_model_error(token, label, prev_label):
+        is_subword = token.startswith("##")
+
+        # "##xxx" cannot start an entity
+        if is_subword and label.startswith("B-"):
+            label = "I-CHEMICAL"
+
+        # "##xxx" cannot be O if previous token was an entity
+        if is_subword and label == "O" and prev_label in ["B-CHEMICAL", "I-CHEMICAL"]:
+            label = "I-CHEMICAL"
+
+        # If model emits I- after O treat as B-
+        if label == "I-CHEMICAL" and prev_label == "O":
+            label = "B-CHEMICAL"
+
+        return token, label
+    
+    
     diseases_entities = []
     current_entity = []
-
+    prev_label = "O"
+    
     # Iterate over both tokens and entity directly
     for token, label in zip(tokenizer.convert_ids_to_tokens(tokens['input_ids'][0]), predicted_labels):
+        
+        token, label = preprocess_model_error(token, label, prev_label)
+
+        # Now, process prediction
         if label.startswith("B-"):  # Beginning of an entity
             if current_entity:
                 diseases_entities.append(current_entity)
                 current_entity = []
             current_entity.append(token)
-        elif label.startswith("I-") and current_entity:  # Continuation of an entity
-            current_entity.append(token)
+            
+        elif label.startswith("I-"):
+            if not current_entity:
+                current_entity = [token]   # restart entity
+            else:
+                current_entity.append(token)
+
         else:
             if current_entity:
                 diseases_entities.append(current_entity)
                 current_entity = []
+        
+        prev_label = label
 
     # If there's an entity left at the end (here was a bug with last version)
     if current_entity:
