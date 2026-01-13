@@ -122,7 +122,6 @@ def main():
     # parcours le dictionnaire où les dois sont des clés et les datas qui contient le titre du document et la liste des références
     for doi, data in all_references.items():
         references = data["referenced_works"]
-        title = data["title"]
         if references == "champ referenced_works vide":
             continue
             # Ajouter une entrée dans le JSON indiquant que le champ referenced_works est vide
@@ -144,17 +143,26 @@ def main():
 
     # utilisation de la méthode sorted() pour trier le dictionnaire en fonciton de count
     sorted_citations = sorted(citation_count.items(), key=lambda item: item[1]['count'], reverse=True)
-    # on récupère les n valeurs les plus grandes, par défaut 10
-    # voir pour modifier ce paramètre
-    top_citations = sorted_citations[:nbCitations]
+    # on récupère les n valeurs les plus grandes (en enlevant les id dont le titre n'est pas dispo), par défaut 10
+    top_citations = []
 
-    # on itère sur la liste qui contient les tuples citation, count et doi pour les ajouter aux différents champs
-    for citation, info in top_citations:
+    # parcours des citations triées
+    for citation, info in sorted_citations:
         citation_info = openAlex_to_doi_and_title(citation)
+        clean_title = normalize_title(citation_info["title"])
 
-        clean_title = normalize_title(citation_info["title"])  # <-- NEW
+        # on ajoute uniquement les citations avec un titre disponible
+        if clean_title != "Titre non disponible":
+            top_citations.append((citation, info, citation_info))
 
-        # Normaliser aussi les titres des citing_doi
+        # on arrête dès qu'on a le nombre de citations demandé
+        if len(top_citations) == nbCitations:
+            break
+    
+    #
+    for citation, info, citation_info in top_citations:
+        clean_title = normalize_title(citation_info["title"])
+
         clean_citers = []
         for entry in info["doi"]:
             clean_citers.append({"doi": entry["doi"],"title": normalize_title(entry["title"])})
