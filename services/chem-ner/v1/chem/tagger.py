@@ -47,7 +47,7 @@ def predict_formula_ml(input_text):
     predicted_labels = [model.config.id2label[pred.item()] for pred in predictions[0]]
     
     
-    def preprocess_model_error(token, label):
+    def preprocess_model_error(token, label, prev_label):
         is_subword = token.startswith("##")
 
         # "##xxx" cannot start an entity
@@ -72,7 +72,7 @@ def predict_formula_ml(input_text):
     # Iterate over both tokens and entity directly
     for token, label in zip(tokenizer.convert_ids_to_tokens(tokens['input_ids'][0]), predicted_labels):
         
-        token, label = preprocess_model_error(token, label)
+        token, label = preprocess_model_error(token, label, prev_label)
 
         # Now, process prediction
         if label.startswith("B-"):  # Beginning of an entity
@@ -80,8 +80,13 @@ def predict_formula_ml(input_text):
                 chemical_entities.append(current_entity)
                 current_entity = []
             current_entity.append(token)
-        elif label.startswith("I-") and current_entity:  # Continuation of an entity
-            current_entity.append(token)
+            
+        elif label.startswith("I-"):
+            if not current_entity:
+                current_entity = [token]   # restart entity
+            else:
+                current_entity.append(token)
+                
         else:
             if current_entity:
                 chemical_entities.append(current_entity)
