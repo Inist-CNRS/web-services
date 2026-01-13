@@ -4,15 +4,9 @@
 import torch
 from transformers import AutoTokenizer, AutoModelForTokenClassification
 import re
-import os
 import sys
 import json
-import logging
 import unicodedata
-
-# Remove logs from TF
-os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'
-logging.getLogger('tensorflow').setLevel(logging.ERROR)
 
 # Normalize 
 # Normalisation du texte :
