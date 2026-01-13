@@ -1,4 +1,4 @@
-# ws-diseases-ner@1.0.17
+# ws-diseases-ner@1.1.0
 
 Trouve des entités nommées de maladies dans un texte
 
