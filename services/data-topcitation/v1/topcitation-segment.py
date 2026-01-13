@@ -4,7 +4,11 @@ import json
 import math
 import sys
 
-json_data = json.load(sys.stdin)
+for line in sys.stdin:
+    try:
+        json_data = json.loads(line)
+    except json.JSONDecodeError:
+        continue
 
 G = nx.DiGraph()
 

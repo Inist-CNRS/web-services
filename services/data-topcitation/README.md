@@ -1,4 +1,4 @@
-# ws-data-topcitation@3.1.0
+# ws-data-topcitation@3.1.1
 
 Référence phare d'un corpus
 
