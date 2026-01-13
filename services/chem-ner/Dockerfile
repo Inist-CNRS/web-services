@@ -2,7 +2,7 @@
 FROM python:3.9-slim-bullseye AS build1
 WORKDIR /dvc
 RUN apt-get update && apt-get -y --no-install-recommends install git=1:2.30.2-1+deb11u5 && apt-get clean && rm -rf /var/lib/apt/lists/*
-RUN pip install --no-cache-dir dvc[webdav]==3.39.0
+RUN pip install --no-cache-dir dvc[webdav]==3.66.1
 RUN --mount=type=secret,id=webdav_login \
     --mount=type=secret,id=webdav_password \
     --mount=type=secret,id=webdav_url \
