@@ -45,12 +45,36 @@ def predict_formula_ml(input_text):
 
     #convert the predictions to labels
     predicted_labels = [model.config.id2label[pred.item()] for pred in predictions[0]]
+    
+    
+    def preprocess_model_error(token, label):
+        is_subword = token.startswith("##")
+
+        # "##xxx" cannot start an entity
+        if is_subword and label.startswith("B-"):
+            label = "I-CHEMICAL"
+
+        # "##xxx" cannot be O if previous token was an entity
+        if is_subword and label == "O" and prev_label in ["B-CHEMICAL", "I-CHEMICAL"]:
+            label = "I-CHEMICAL"
+
+        # If model emits I- after O treat as B-
+        if label == "I-CHEMICAL" and prev_label == "O":
+            label = "B-CHEMICAL"
+            
+        return token, label
+
 
     chemical_entities = []
     current_entity = []
-
+    prev_label = "O"
+    
     # Iterate over both tokens and entity directly
     for token, label in zip(tokenizer.convert_ids_to_tokens(tokens['input_ids'][0]), predicted_labels):
+        
+        token, label = preprocess_model_error(token, label)
+
+        # Now, process prediction
         if label.startswith("B-"):  # Beginning of an entity
             if current_entity:
                 chemical_entities.append(current_entity)
@@ -62,6 +86,8 @@ def predict_formula_ml(input_text):
             if current_entity:
                 chemical_entities.append(current_entity)
                 current_entity = []
+                
+        prev_label = label
 
     # If there's an entity left at the end (here was a bug with last version)
     if current_entity:
