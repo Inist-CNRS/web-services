@@ -48,15 +48,15 @@ def predict_formula_ml(input_text):
 
         # "##xxx" cannot start an entity
         if is_subword and label.startswith("B-"):
-            label = "I-CHEMICAL"
+            label = "I-DISEASE"
 
         # "##xxx" cannot be O if previous token was an entity
-        if is_subword and label == "O" and prev_label in ["B-CHEMICAL", "I-CHEMICAL"]:
-            label = "I-CHEMICAL"
+        if is_subword and label == "0" and prev_label != "0":
+            label = "I-DISEASE"
 
         # If model emits I- after O treat as B-
-        if label == "I-CHEMICAL" and prev_label == "O":
-            label = "B-CHEMICAL"
+        if label == "I-DISEASE" and prev_label == "0":
+            label = "B-DISEASE"
 
         return token, label
     
