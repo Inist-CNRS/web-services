@@ -1,4 +1,4 @@
-# ws-chem-ner@4.1.1
+# ws-chem-ner@4.1.2
 
 Trouve des entités nommées de Chimie dans un texte
 
