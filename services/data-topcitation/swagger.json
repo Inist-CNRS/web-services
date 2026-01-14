@@ -15,7 +15,7 @@
             "x-comment": "Will be automatically completed by the ezs server."
         },
         {
-            "url": "http://vptdmjobs.intra.inist.fr:49259/",
+            "url": "http://vptdmjobs.intra.inist.fr:49260/",
             "description": "Latest version for production",
             "x-profil": "Standard"
         }
