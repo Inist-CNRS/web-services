@@ -12,9 +12,11 @@ print(thresh_edge, thresh_node, file=sys.stderr)
 
 # load all datas
 lines = []
+pid = ""
 for line in sys.stdin:
     data = json.loads(line)
-    if not len(lines):
+    print("Received data: ", data, file=sys.stderr)
+    if pid == "" and data["value"] != []:
         pid = data[[x for x in list(data.keys()) if x.startswith("PID")][0]][5:]
     lines.append(data["value"])
 
