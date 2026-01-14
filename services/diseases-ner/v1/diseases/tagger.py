@@ -44,6 +44,7 @@ def predict_formula_ml(input_text):
 
 
     def preprocess_model_error(token, label, prev_label):
+        entities = {"B-DISEASE", "I-DISEASE"}
         is_subword = token.startswith("##")
 
         # "##xxx" cannot start an entity
@@ -51,11 +52,11 @@ def predict_formula_ml(input_text):
             label = "I-DISEASE"
 
         # "##xxx" cannot be O if previous token was an entity
-        if is_subword and label == "0" and prev_label != "0":
+        if is_subword and label not in entities and prev_label in entities:
             label = "I-DISEASE"
 
         # If model emits I- after O treat as B-
-        if label == "I-DISEASE" and prev_label == "0":
+        if label == "I-DISEASE" and prev_label not in entities:
             label = "B-DISEASE"
 
         return token, label
@@ -63,11 +64,10 @@ def predict_formula_ml(input_text):
     
     diseases_entities = []
     current_entity = []
-    prev_label = "O"
+    prev_label = "0"
     
     # Iterate over both tokens and entity directly
     for token, label in zip(tokenizer.convert_ids_to_tokens(tokens['input_ids'][0]), predicted_labels):
-        
         token, label = preprocess_model_error(token, label, prev_label)
 
         # Now, process prediction
