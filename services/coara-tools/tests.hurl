@@ -8,17 +8,6 @@ HTTP 200
 [{
     "value": [
         {
-            "tool": "research integrity",
-            "tool_homogenised": "research integrity",
-            "other_tool_form": [
-                "research integrity",
-                "research integrity code",
-                "research integrity practices"
-            ],
-            "definition": "Update this terminology with a definition of the given tool.",
-            "other_tool_form_flatten": "research integrity ; research integrity code ; research integrity practices"
-        },
-        {
             "tool": "san francisco declaration on research assessment",
             "tool_homogenised": "dora",
             "other_tool_form": [
@@ -26,7 +15,7 @@ HTTP 200
                 "declaration on research assessment",
                 "san francisco declaration on research assessment"
             ],
-            "definition": "Update this terminology with a definition of the given tool.",
+            "definition": "No definition provided.",
             "other_tool_form_flatten": "dora ; declaration on research assessment ; san francisco declaration on research assessment"
         },
         {
@@ -37,17 +26,18 @@ HTTP 200
                 "declaration on research assessment",
                 "san francisco declaration on research assessment"
             ],
-            "definition": "Update this terminology with a definition of the given tool.",
+            "definition": "No definition provided.",
             "other_tool_form_flatten": "dora ; declaration on research assessment ; san francisco declaration on research assessment"
         },
         {
             "tool": "leiden manifesto",
             "tool_homogenised": "leiden manifesto",
             "other_tool_form": [
-                "leiden manifesto"
+                "leiden manifesto",
+                "leiden principles"
             ],
-            "definition": "Update this terminology with a definition of the given tool.",
-            "other_tool_form_flatten": "leiden manifesto"
+            "definition": "No definition provided.",
+            "other_tool_form_flatten": "leiden manifesto ; leiden principles"
         }
     ]
 }]
