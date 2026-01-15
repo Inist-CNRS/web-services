@@ -12,11 +12,21 @@ print(thresh_edge, thresh_node, file=sys.stderr)
 
 # load all datas
 lines = []
+pid = ""
 for line in sys.stdin:
     data = json.loads(line)
-    if not len(lines):
-        pid = data[[x for x in list(data.keys()) if x.startswith("PID")][0]][5:]
+    print("Received data: ", data, file=sys.stderr)
+    if pid == "":
+        keys = data.keys()
+        for k in keys:
+            if k.startswith("PID"):
+                pid = data[k][5:]
+                break
     lines.append(data["value"])
+
+
+    # if pid == "" and data["value"] != []:
+    #     pid = data[[x for x in list(data.keys()) if x.startswith("PID")][0]][5:]
 
 print("PID ",pid, file=sys.stderr)
 print(time.strftime("%A %d %B %Y %H:%M:%S"), file=sys.stderr)

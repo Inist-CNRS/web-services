@@ -2,6 +2,11 @@
 # DON'T OVERWRITE IT
 # Use it to test:
 # npx hurl --test data-computer/tests.hurl
+# Use it to test:
+# 	HURL_blocked=false npx hurl --test --variable host="http://localhost:31976" tests.hurl
+# or (from root of the repo)
+#   HURL_blocked=false npm run test:local data-graph
+
 
 POST {{host}}/v1/graph
 content-type: application/x-tar
@@ -71,6 +76,64 @@ body contains "<node id=\"emissions\" label=\"emissions\">"
 
 POST {{host}}/v1/retrieve-json
 content-type: application/json
+```
+[
+	{
+		"value":"{{computing_token}}"
+	}
+]
+```
+
+HTTP 200
+Content-Type: application/json
+[Asserts]
+
+jsonpath "$" count > 0
+
+jsonpath "$[*].id" exists
+
+jsonpath "$[*].value" exists
+jsonpath "$[*].value.label" exists
+
+jsonpath "$[*].attributes.weight" exists
+jsonpath "$[*].attributes.subset" exists
+
+jsonpath "$[0].value.targets[0].id" exists
+jsonpath "$[0].value.targets[1].id" exists
+jsonpath "$[0].value.targets[1].thickness" exists
+
+jsonpath "$[*].value['viz$color'].r" exists
+jsonpath "$[*].value['viz$color'].g" exists
+jsonpath "$[*].value['viz$color'].b" exists
+jsonpath "$[*].value['viz$color'].a" exists
+
+jsonpath "$[*].value['viz$size'].value" exists
+
+jsonpath "$[*].value['viz$position'].x" exists
+jsonpath "$[*].value['viz$position'].y" exists
+jsonpath "$[*].value['viz$position'].z" exists
+
+
+# ------------------------------
+POST {{host}}/v1/teeft-graph
+content-type: application/x-tar
+x-hook: https://webhook.site/69300b22-a251-4c16-9905-f7ba218ae7e9
+[Options]
+skip: {{blocked}}
+file,test-empty-abstract.tar.gz;
+
+HTTP 200
+# Capture the computing token
+[Captures]
+computing_token: jsonpath "$[0].value"
+[Asserts]
+variable "computing_token" exists
+
+POST {{host}}/v1/retrieve-json
+content-type: application/json
+[Options]
+delay: 40000
+skip: {{blocked}}
 ```
 [
 	{
