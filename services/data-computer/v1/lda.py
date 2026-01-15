@@ -143,15 +143,22 @@ def find_optimal_k_lda(
     return best_k
 
 
-
 # WS
 # load all datas
+grafana_avaible = True
 all_data = []
 for line in sys.stdin:
-    data=json.loads(line)
+    data = json.loads(line)
     all_data.append(data)
-    c.inc()
-    push_to_gateway('jobs-metrics.daf.intra.inist.fr', job=job_name, registry=registry)
+    
+    # Send metrics to grafana
+    if grafana_avaible:
+        try:
+            c.inc()
+            push_to_gateway('jobs-metrics.daf.intra.inist.fr', job=job_name, registry=registry)
+        except Exception:
+            grafana_avaible = False
+            continue
 
 len_data = len(all_data)
 
@@ -221,8 +228,15 @@ if nbTopic > 0:
 i_decal = 0
 # extract infos
 for i in range(len_data):
-    c.inc()
-    push_to_gateway('jobs-metrics.daf.intra.inist.fr', job=job_name, registry=registry)
+    # Send metrics to grafana
+    if grafana_avaible:
+        try:
+            c.inc()
+            push_to_gateway('jobs-metrics.daf.intra.inist.fr', job=job_name, registry=registry)
+        except Exception:
+            grafana_avaible = False
+            continue
+    
     line = all_data[i]
     
     # return n/a if docs wasn't in model

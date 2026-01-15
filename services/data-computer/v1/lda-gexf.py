@@ -92,5 +92,6 @@ for line in sys.stdin:
         continue
 
 gexf_string = create_gexf_from_topics(topics_data, topic_colors)
+gexf_string = "<?xml version='1.0' encoding='utf-8'?>\n" + gexf_string
 sys.stdout.write(json.dumps({"value": gexf_string}))
 sys.stdout.write("\n")
