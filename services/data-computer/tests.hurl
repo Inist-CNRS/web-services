@@ -216,7 +216,7 @@ HTTP 200
 # v1/lda
 POST {{host}}/v1/lda
 content-type: application/x-tar
-x-hook: https://webhook.site/69300b22-a251-4c16-9905-f7ba218ae7e9
+# x-hook: https://webhook.site/69300b22-a251-4c16-9905-f7ba218ae7e9
 [Options]
 skip: {{blocked}}
 file,example-lda.tar.gz;
