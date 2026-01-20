@@ -247,3 +247,24 @@ Content-Type: application/json
 jsonpath "$" count == 10
 jsonpath "$[*].value.topics" exists
 jsonpath "$[*].value.best_topic" exists
+
+POST {{host}}/v1/retrieve-gexf
+content-type: application/json
+[Options]
+skip: {{blocked}}
+```
+[
+	{
+		"value":"{{computing_token}}"
+	}
+]
+```
+
+HTTP 200
+Content-Type: application/xml
+[Asserts]
+xpath "/*[name()='gexf']" exists
+xpath "substring(//*[name()='meta']/@lastmodifieddate,1,2)" == "20"
+xpath "string(//*[name()='creator'])" == "NetworkX 3.2.1"
+xpath "//*[name()='node']" count >= 5
+xpath "//*[name()='edge']" count >= 10
