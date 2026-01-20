@@ -145,20 +145,18 @@ def find_optimal_k_lda(
 
 # WS
 # load all datas
-grafana_avaible = True
 all_data = []
 for line in sys.stdin:
     data = json.loads(line)
     all_data.append(data)
-    
-    # Send metrics to grafana
-    if grafana_avaible:
-        try:
-            c.inc()
-            push_to_gateway('jobs-metrics.daf.intra.inist.fr', job=job_name, registry=registry)
-        except Exception:
-            grafana_avaible = False
-            continue
+    # Increment data for prometheus
+    c.inc()
+
+# Send metrics to prometheus
+try:
+    push_to_gateway('https://jobs-metrics.daf.intra.inist.fr', job=job_name, registry=registry)
+except Exception as e:
+    sys.stderr.write(str(e) + "\n")
 
 len_data = len(all_data)
 
@@ -228,14 +226,7 @@ if nbTopic > 0:
 i_decal = 0
 # extract infos
 for i in range(len_data):
-    # Send metrics to grafana
-    if grafana_avaible:
-        try:
-            c.inc()
-            push_to_gateway('jobs-metrics.daf.intra.inist.fr', job=job_name, registry=registry)
-        except Exception:
-            grafana_avaible = False
-            continue
+    c.inc()
     
     line = all_data[i]
     
@@ -271,3 +262,8 @@ for i in range(len_data):
             line["value"]["best_topic"] = "n/a"
         sys.stdout.write(json.dumps(line))
         sys.stdout.write("\n")
+
+try:
+    push_to_gateway('https://jobs-metrics.daf.intra.inist.fr', job=job_name, registry=registry)
+except Exception as e:
+    sys.stderr.write(str(e) + "\n")
