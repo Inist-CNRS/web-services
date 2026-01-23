@@ -6,7 +6,7 @@
 
 ### URL du service 
 
-> https://terms-tools.services.istex.fr/v1/CODE_LANGUE/terms-matcher/annotate?format=FORMAT&loterreID=CODE_VOC
+> https://terms-tools.services.istex.fr/v1/CODE_LANGUE/terms-matcher/FORMAT/annotate?&loterreID=CODE_VOC
 
 ### Parametres
 
@@ -31,7 +31,7 @@
 ### Requête 
 
 ```
-cat <<EOF | curl -v --proxy "" -X POST --data-binary @- https://terms-tools.services.istex.fr/v1/en/terms-matcher/annotate?format=<FORMAT>&loterreID=P66
+cat <<EOF | curl -v --proxy "" -X POST --data-binary @- https://terms-tools.services.istex.fr/v1/en/terms-matcher/FORMAT/annotate?&loterreID=P66
 [
     {
         "id": "1",
@@ -50,7 +50,9 @@ EOF
    
 ```
 
-- Sortie au format json standoff => format=json-standoff  
+#####  Sortie au format 'json standoff' :
+ FORMAT = json-standoff  
+>https://terms-tools.services.istex.fr/v1/en/terms-matcher/json-standoff/annotate?&loterreID=P66
 
 |nom du champ|contenu|
 |:---:|:---|
@@ -148,7 +150,9 @@ EOF
 ]"s"
 ```
 
-- Sortie avec les termes annotés dans le texte initial => format=json-indoc   
+##### Sortie avec les termes annotés dans le texte initial :
+  FORMAT = json-indoc  
+>https://terms-tools.services.istex.fr/v1/en/terms-matcher/json-indoc/annotate?&loterreID=P66  
 
  Le marquage des termes suit la convention markdown pour la représentation des hyperliens : [TERM](ID du concept)   
  **NB** : ATTENTION !! En francais, le texte rendu n'est pas la version initiale mais la version lemmatisée  
@@ -170,17 +174,22 @@ EOF
 ]
 ```
   
-- Sortie au format xml  => format=xml-standoff  
+#####  Sortie au format xml :
+ FORMAT = xml-standoff  
+>https://terms-tools.services.istex.fr/v1/en/terms-matcher/xml-standoff/annotate?&loterreID=P66  
+
 
 NB : Ne tolère qu'un seul enregistrement (value) par envoi.  
 ```
 <?xml version="1.0" encoding="UTF-8"?>
 <result><text><tag idx_start="4" idx_end="23" id="http://data.loterre.fr/ark:/67375/P66-WG17XBG4-V" text="mem-pro-clinic test" termeReconnu="Mem-Pro-Clinic test" pref="Mem-Pro-Clinic test" lang="en"/><tag idx_start="69" idx_end="74" id="http://data.loterre.fr/ark:/67375/P66-ZVGCX1H2-G" text="event" termeReconnu="events" pref="event" lang="en"/><tag idx_start="91" idx_end="111" id="http://data.loterre.fr/ark:/67375/P66-VLJ0CQH4-G" text="prospective thoughts" termeReconnu="prospective thought" pref="predictive brain" lang="en"/><tag idx_start="118" idx_end="124" id=" " lang="en"/><tag idx_start="148" idx_end="164" id="http://data.loterre.fr/ark:/67375/P66-J8FC45M1-6" text="long-term memory" termeReconnu="long-term memory" pref="long-term memory" lang="en"/></text><text><tag idx_start="78" idx_end="104" id="http://data.loterre.fr/ark:/67375/P66-D6XL3PDR-M" text="blind implantation methods" termeReconnu="blind implantation method" pref="blind implantation method" lang="en"/></text><text><tag idx_start="11" idx_end="34" id="http://data.loterre.fr/ark:/67375/P66-FQXK8KBN-C" text="hypermnesia (pathology)" termeReconnu="hypermnesia (pathology)" pref="hypermnesia (pathology)" lang="en"/></text></result>
 ```
-
+  
+   
+    
 ## Liste des vocabulaires  
 
-|Code| Nom du vocabulaire (01/12/2025)|Etat|
+|Code| Nom du vocabulaire (01/12/2025)|Etat|  
 |:---:|:----|:----|
 |1WB|Heat transfers|disponible|
 |26L|Earth Sciences|disponible|

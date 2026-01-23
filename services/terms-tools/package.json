@@ -32,11 +32,5 @@
     "build": ". ./.env 2> /dev/null; DOCKER_BUILDKIT=1 docker build -t cnrsinist/${npm_package_name}:${npm_package_version} --secret id=webdav_login,env=WEBDAV_LOGIN --secret id=webdav_password,env=WEBDAV_PASSWORD --secret id=webdav_url,env=WEBDAV_URL .",
     "start": "docker run --rm -p 31976:31976 cnrsinist/${npm_package_name}:${npm_package_version}",
     "publish": "docker push cnrsinist/${npm_package_name}:${npm_package_version}"
-  },
-  "dependencies": {
-    "@ezs/analytics": "2.3.5",
-    "@ezs/basics": "2.9.2",
-    "@ezs/core": "4.0.2",
-    "@ezs/spawn": "1.4.9"
   }
 }
