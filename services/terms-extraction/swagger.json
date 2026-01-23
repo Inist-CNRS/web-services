@@ -3,7 +3,7 @@
     "info": {
         "title": "terms-extraction - Extraction de termes",
         "summary": "Extraction de termes à partir de textes en anglais ou en français.",
-        "version": "1.9.3",
+        "version": "1.9.4",
         "termsOfService": "https://services.istex.fr/",
         "contact": {
             "name": "Inist-CNRS",
