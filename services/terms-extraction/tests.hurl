@@ -12,7 +12,11 @@ content-type: application/json
 	{
 		"value": "Pour faciliter l’accès aux techniques de fouille de données notamment pour les non spécialistes, le service TDM de l’Inist-CNRS développe des web services autour du traitement de l’information scientifique et technique. Ces services peuvent être appelés en ligne de commande ou au sein de LODEX, outil libre de visualisation. La démonstration montre comment, à partir des informations présentes dans une notice bibliographique et plus particulièrement à partir d’une adresse d’auteur, l’identifiant RNSR (Répertoire national des structures de recherche) est attribué automatiquement au document initial et comment cette nouvelle donnée est exploitée au sein de LODEX. Ainsi, programme ou algorithme développé par des enseignants chercheurs pourrait être adapté pour devenir un web service et être utilisé par le plus grand nombre.",
 		"id": "EGC2022"
-	}
+	},
+    {
+        "value": "[epm",
+        "id": "error"
+    }
 ]
 
 HTTP 200
@@ -45,6 +49,10 @@ HTTP 200
         "outil libre",
         "informations présentes"
     ]
+},
+{
+    "id": "error",
+    "value": []
 }]
 
 POST {{host}}/v2/teeft/fr?indent=true

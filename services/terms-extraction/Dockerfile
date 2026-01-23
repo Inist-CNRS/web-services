@@ -24,7 +24,7 @@ RUN pip install --no-cache-dir \
 
 # Install all node dependencies
 RUN npm install --omit=dev \
-    @ezs/teeft@2.3.2 \
+    @ezs/teeft@2.3.3 \
     @ezs/strings@1.0.5 && \
     npm cache clean --force
 
