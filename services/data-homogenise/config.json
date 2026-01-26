@@ -5,7 +5,7 @@
         "EZS_METRICS": true,
         "EZS_CONCURRENCY": 2,
         "EZS_CONTINUE_DELAY": 18000,
-        "EZS_PIPELINE_DELAY": 10800,
+        "EZS_PIPELINE_DELAY": 180000,
         "EZS_NSHARDS": 32,
         "EZS_CACHE": true,
         "EZS_VERBOSE": false,
