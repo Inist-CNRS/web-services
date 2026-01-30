@@ -208,3 +208,63 @@ HTTP 200
 [{"id":"#1","value":["#4"]},{"id":"#4","value":["#1"]},{"id":"#2","value":["#5"]},{"id":"#5","value":["#2"]},{"id":"#3","value":[]}]
 
 #
+
+
+
+
+##################################################################
+# v1/lda
+POST {{host}}/v1/lda
+content-type: application/x-tar
+# x-hook: https://webhook.site/69300b22-a251-4c16-9905-f7ba218ae7e9
+[Options]
+skip: {{blocked}}
+file,example-lda.tar.gz;
+
+HTTP 200
+# Capture the computing token
+[Captures]
+computing_token: jsonpath "$[0].value"
+[Asserts]
+variable "computing_token" exists
+
+POST {{host}}/v1/retrieve-json
+content-type: application/json
+[Options]
+delay: 5000
+skip: {{blocked}}
+```
+[
+	{
+		"value":"{{computing_token}}"
+	}
+]
+```
+
+HTTP 200
+Content-Type: application/json
+[Asserts]
+jsonpath "$" count == 10
+jsonpath "$[*].value.topics" exists
+jsonpath "$[*].value.best_topic" exists
+
+POST {{host}}/v1/retrieve-gexf
+content-type: application/json
+[Options]
+skip: {{blocked}}
+```
+[
+	{
+		"value":"{{computing_token}}"
+	}
+]
+```
+
+HTTP 200
+Content-Type: application/xml
+[Asserts]
+xpath "/*[name()='gexf']" exists
+xpath "substring(//*[name()='meta']/@lastmodifieddate,1,2)" == "20"
+xpath "string(//*[name()='creator'])" == "NetworkX 3.2.1"
+xpath "//*[name()='node']" count >= 5
+xpath "//*[name()='edge']" count >= 10

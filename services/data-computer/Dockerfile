@@ -12,6 +12,7 @@ RUN pip install --no-cache-dir \
     lxml==4.7.1 \
     fr_core_news_sm@https://github.com/explosion/spacy-models/releases/download/fr_core_news_sm-3.6.0/fr_core_news_sm-3.6.0-py3-none-any.whl \
     scipy==1.10.1 \
+    networkx==3.2.1 \
     prometheus-client==0.19.0
 
 # Temporary install of the latest ezs-core (until yearly update of base images)
