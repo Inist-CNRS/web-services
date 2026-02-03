@@ -3,8 +3,9 @@
 FROM python:3.9-slim-bullseye AS dvc-files
 WORKDIR /dvc
 RUN apt-get update && apt-get -y --no-install-recommends install git=1:2.30.2-1+deb11u5 curl=7.74.0-1.3+deb11u16 && apt-get clean && rm -rf /var/lib/apt/lists/*
-RUN pip install --no-cache-dir dvc[webdav]==3.39.0 
-RUN pip install --no-cache-dir pathspec==0.12.1
+RUN pip install --no-cache-dir \
+    dvc[webdav]==3.39.0 \
+    pathspec==0.12.1
 
 RUN --mount=type=secret,id=webdav_login \
     --mount=type=secret,id=webdav_password \
@@ -37,7 +38,6 @@ RUN pip install --no-cache-dir git+$GIT@$TERMS_TOOLS_VERSION#egg=terms_tools
 RUN pip install  --no-cache-dir \
     en_core_web_trf@https://github.com/explosion/spacy-models/releases/download/en_core_web_trf-3.8.0/en_core_web_trf-3.8.0-py3-none-any.whl \
     fr_dep_news_trf@https://github.com/explosion/spacy-models/releases/download/fr_dep_news_trf-3.8.0/fr_dep_news_trf-3.8.0-py3-none-any.whl
-
 
 # rendre possible installation des ressources stanza lors 1er execution (mkdir en user daemon)
 RUN chmod 777 /usr/sbin/
