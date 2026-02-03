@@ -13,9 +13,19 @@ jsonpath "$[0].value" matches /^.{6500,10100}$/
 #########
 POST {{host}}/v1/pdf-raw?indent=true
 content-type: application/pdf
-skip: {{blocked}}
 file,./article.pdf;
 
 HTTP 200
 [Asserts]
 jsonpath "$[0].value" startsWith "Systèmes d’écriture et qualité des données"
+
+#########
+POST {{host}}/v1/grobid
+content-type: application/pdf
+[Options]
+skip: {{blocked}}
+file,./article.pdf;
+
+HTTP 200
+[Asserts]
+# body startsWith "<TEI xmlns=""http://www.tei-c.org/ns/1.0"">"
