@@ -2,13 +2,16 @@
 
 FROM python:3.9-slim-bullseye AS dvc-files
 WORKDIR /dvc
-RUN apt-get update && apt-get -y --no-install-recommends install git=1:2.30.2-1+deb11u5 curl=7.74.0-1.3+deb11u15 && apt-get clean && rm -rf /var/lib/apt/lists/*
-RUN pip install --no-cache-dir dvc[webdav]==3.39.0
+RUN apt-get update && apt-get -y --no-install-recommends install git=1:2.30.2-1+deb11u5 curl=7.74.0-1.3+deb11u16 && apt-get clean && rm -rf /var/lib/apt/lists/*
+RUN pip install --no-cache-dir dvc[webdav]==3.39.0 
+RUN pip install --no-cache-dir pathspec==0.12.1
+
 RUN --mount=type=secret,id=webdav_login \
     --mount=type=secret,id=webdav_password \
     --mount=type=secret,id=webdav_url \
-    git init && \
-    dvc init && \
+    git config --global init.defaultBranch master  && \
+    git init && \ 
+    dvc init  && \
     dvc remote add -d webdav-remote "$(cat /run/secrets/webdav_url)" && \
     dvc remote modify --local webdav-remote user "$(cat /run/secrets/webdav_login)" && \
     dvc remote modify --local webdav-remote password "$(cat /run/secrets/webdav_password)"
@@ -19,15 +22,13 @@ RUN dvc pull -v
 
 FROM cnrsinist/ezs-python-server:py3.9-no24-1.0.13
 
-
 ENV TERMS_TOOLS_VERSION=2.1
 ENV GIT=https://github.com/stephane54/terms-tools.git
 ENV DICO_PATH="/app/public/dictionary"
 
 # Install required dependencies to build terms_tools
-
 RUN apt update && \
-    apt install -y unzip curl autoconf automake libtool pkg-config build-essential git
+    apt install -y unzip autoconf automake libtool pkg-config build-essential git
     # Download libpostal 
 RUN pip install --upgrade pip
 RUN pip install --no-cache-dir git+$GIT@$TERMS_TOOLS_VERSION#egg=terms_tools
