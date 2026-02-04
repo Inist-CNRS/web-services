@@ -2,7 +2,7 @@
     "openapi": "3.0.0",
     "info": {
         "title": "ws-terms-tools",
-        "description": "Boite à outils de POS tagging et d'annotation de termes",
+        "description": "",
         "version": "2.1.0",
         "termsOfService": "https://services.istex.fr/",
         "contact": {

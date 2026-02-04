@@ -2,7 +2,8 @@
 
 FROM python:3.9-slim-bullseye AS dvc-files
 WORKDIR /dvc
-RUN apt-get update && apt-get -y --no-install-recommends install git=1:2.30.2-1+deb11u5 curl=7.74.0-1.3+deb11u16 && apt-get clean && rm -rf /var/lib/apt/lists/*
+RUN apt-get update && apt-get -y --no-install-recommends install git=1:2.30.2-1+deb11u5 && apt-get clean && rm -rf /var/lib/apt/lists/* && \
+    apt-get clean && rm -rf /var/lib/apt/lists/*
 RUN pip install --no-cache-dir \
     dvc[webdav]==3.39.0 \
     pathspec==0.12.1
@@ -28,9 +29,9 @@ ENV GIT=https://github.com/stephane54/terms-tools.git
 ENV DICO_PATH="/app/public/dictionary"
 
 # Install required dependencies to build terms_tools
-RUN apt update && \
-    apt install -y unzip autoconf automake libtool pkg-config build-essential git
-    # Download libpostal 
+RUN apt-get update && \
+    apt-get -y --no-install-recommends install -y unzip autoconf automake libtool pkg-config build-essential git && \
+    apt-get clean && rm -rf /var/lib/apt/lists/*
 RUN pip install --upgrade pip
 RUN pip install --no-cache-dir git+$GIT@$TERMS_TOOLS_VERSION#egg=terms_tools
 
