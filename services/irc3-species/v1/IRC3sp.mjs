@@ -26,7 +26,6 @@ let str = {};
 let fleche = '';
 let casse = false;
 let quiet = false;
-let json = false;
 /** @type {fs.WriteStream | { write: () => void, end: () => void } | null} */
 let logStream = null;
 
@@ -55,16 +54,13 @@ if (!options.json) {
 }
 
 // Set global flags
-casse = options.casse || false;
-quiet = options.quiet || false;
-json = options.json || false;
+casse = options.casse ?? false;
+quiet = options.quiet ?? false;
 
 // Setup log stream
-if (options.log) {
-    logStream = fs.createWriteStream(options.log, { encoding: 'utf8' });
-} else {
-    logStream = { write: () => { }, end: () => { } };
-}
+logStream = options.log
+    ? fs.createWriteStream(options.log, { encoding: 'utf8' })
+    : { write: () => { }, end: () => { } };
 
 /**
  * Normalize a term by splitting on word boundaries
@@ -73,9 +69,9 @@ if (options.log) {
  */
 const normalizeTerm = (term) => term
     .split(/(\W)/)          // Split on non-word characters while preserving them
-    .filter(p => p.trim().length > 0 && /\S/.test(p))
+    .filter(p => /\S/.test(p))  // Keep only parts with non-whitespace
     .join(' ')
-    .replace(/  +/g, ' ');
+    .replace(/  +/g, ' ');  // Collapse multiple spaces
 
 /**
  * Extract genus from a scientific name
@@ -157,7 +153,7 @@ async function loadTable(tablePath) {
             str[normalizedKey] = originalStr;
 
             const genusStr = extractGenus(originalStr);
-            genre[genusStr] = (genre[genusStr] || 0) + 1;
+            genre[genusStr] = (genre[genusStr] ?? 0) + 1;
 
             const genusNorm = normalizeTerm(genusStr);
             const genusKey = casse ? genusNorm : genusNorm.toLowerCase();
@@ -191,7 +187,7 @@ async function loadTable(tablePath) {
                 str[prefKey] = prefOriginal;
 
                 const prefGenus = extractGenus(prefOriginal);
-                genre[prefGenus] = (genre[prefGenus] || 0) + 1;
+                genre[prefGenus] = (genre[prefGenus] ?? 0) + 1;
 
                 const prefGenusNorm = normalizeTerm(prefGenus);
                 const prefGenusKey = casse ? prefGenusNorm : prefGenusNorm.toLowerCase();
@@ -486,14 +482,10 @@ function passe2(id, refListe, refPara) {
 
             if (!quiet) process.stderr.write('\r' + ' '.repeat(75) + '\r');
 
-            if (!json) {
-                console.log(`${id}\t${formatted}`);
-            } else {
-                output.push(formatted);
-            }
+            output.push(formatted);
 
             // Log ambiguities
-            if (champs[2] && champs[2].match(/^\?.+\?$/) && !json && !quiet) {
+            if (champs[2] && champs[2].match(/^\?.+\?$/) && !quiet) {
                 const msg = `WARNING! ${id}: ambiguity on non-abbreviated form of "${champs[0]}"!\n`;
                 process.stderr.write(msg);
                 logStream?.write(msg);
@@ -511,7 +503,7 @@ function passe2(id, refListe, refPara) {
             const champs = resultat.split('\t');
             const ref = champs[2] || champs[0];
             if (ref && !ref.match(/^\?.+\?$/)) {
-                uniqueTerms[ref] = (uniqueTerms[ref] || 0) + 1;
+                uniqueTerms[ref] = (uniqueTerms[ref] ?? 0) + 1;
             }
         }
 
@@ -521,7 +513,7 @@ function passe2(id, refListe, refPara) {
 
         logStream?.write(`${nbRefs}\t${nbOccs}\t${id}\n`);
 
-        return json ? output : [];
+        return output;
     } catch (err) {
         const error = err instanceof Error ? err : new Error(String(err));
         console.error(`Error in passe2: ${error.message}`);
