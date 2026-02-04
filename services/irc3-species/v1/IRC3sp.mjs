@@ -29,7 +29,6 @@ let fleche = '';
 let casse = false;
 let quiet = false;
 let json = false;
-let ws = false;
 /** @type {fs.WriteStream | { write: () => void, end: () => void } | null} */
 let logStream = null;
 
@@ -42,7 +41,6 @@ program
     .option('-l, --log <file>', 'log file for statistics')
     .option('-q, --quiet', 'suppress progress display')
     .option('-t, --table <file>', 'resource table file (required)')
-    .option('-w, --webservice', 'webservice mode (modifies JSON output)')
     .parse(process.argv);
 
 const options = program.opts();
@@ -62,7 +60,6 @@ if (!options.json) {
 casse = options.casse || false;
 quiet = options.quiet || false;
 json = options.json || false;
-ws = options.webservice || false;
 
 // Setup log stream
 if (options.log) {
@@ -552,16 +549,12 @@ function passe1(input) {
             data = JSON.parse(input);
         } catch (err) {
             const msg = err.message.replace(/"/g, '\\"');
-            if (ws) {
-                console.error("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx");
-                console.error(`JSON parsing error:`);
-                console.error(input);
-                console.error("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx");
+            console.error("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx");
+            console.error(`JSON parsing error:`);
+            console.error(input);
+            console.error("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx");
 
-                return `{"message": "JSON parsing error", "explanation": "${msg}"}\n`;
-            } else {
-                return [`[{"message": "JSON parsing error", "explanation": "${msg}"}]\n`, 4];
-            }
+            return `{"message": "JSON parsing error", "explanation": "${msg}"}\n`;
         }
 
         const inputArray = Array.isArray(data) ? data : [data];
@@ -603,32 +596,20 @@ function passe1(input) {
             // Remove duplicates and sort
             species = [...new Set(species)].sort();
 
-            // Format output
-            if (ws) {
-                // Webservice mode: compact JSON
-                const obj = { id: id.toString(), value: species };
-                results.push(JSON.stringify(obj));
-            } else {
-                // Standard mode: pretty JSON
-                const obj = { id: id.toString(), species: species };
-                const output = JSON.stringify(obj, null, 2);
-                results.push(output);
-            }
+            // Format output (webservice mode: compact JSON)
+            const obj = { id: id.toString(), value: species };
+            results.push(JSON.stringify(obj));
         }
 
-        if (ws) {
-            console.error('passe1: ws mode ********************************');
-            console.error(results);
-            console.error('************************************************');
-            return [`${results.join('\n')}\n`, 0];
-            // return results;
-        } else {
-            return [`[\n${results.join(',\n')}\n]\n`, 0];
-        }
+        console.error('passe1: ws mode ********************************');
+        console.error(results);
+        console.error('************************************************');
+        return [`${results.join('\n')}\n`, 0];
     } catch (err) {
-        console.error(`Error in passe1: ${err.message}`);
-        console.error(err.stack);
-        throw err;
+        const error = err instanceof Error ? err : new Error(String(err));
+        console.error(`Error in passe1: ${error.message}`);
+        console.error(error.stack);
+        throw error;
     }
 }
 
