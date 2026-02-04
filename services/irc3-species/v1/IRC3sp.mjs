@@ -37,13 +37,10 @@ let logStream = null;
 program
     .version(VERSION)
     .option('-c, --casse', 'case-sensitive search')
-    .option('-e, --extension <ext...>', 'file extensions to process')
     .option('-f, --fichier <file>', 'input file (use "-" for stdin)')
     .option('-j, --json', 'JSON input/output mode')
     .option('-l, --log <file>', 'log file for statistics')
     .option('-q, --quiet', 'suppress progress display')
-    .option('-r, --repertoire <dir>', 'directory containing text files')
-    .option('-s, --sortie <file>', 'output file')
     .option('-t, --table <file>', 'resource table file (required)')
     .option('-w, --webservice', 'webservice mode (modifies JSON output)')
     .parse(process.argv);
@@ -56,8 +53,8 @@ if (!options.table) {
     process.exit(2);
 }
 
-if (!options.fichier && !options.repertoire && !options.json) {
-    console.error('Error: one of -f, -r, or -j is required');
+if (!options.json) {
+    console.error('Error: -j (json) option is required');
     process.exit(2);
 }
 
@@ -683,34 +680,12 @@ async function main() {
         // Load resource table
         await loadTable(options.table);
 
-        // Setup output stream
-        let outputStream = process.stdout;
-        if (options.sortie) {
-            outputStream = fs.createWriteStream(options.sortie, { encoding: 'utf8' });
-            // Redirect stdout
-            process.stdout.write = outputStream.write.bind(outputStream);
-        }
-
-        // Process input
-        if (json) {
-            await traiteJson(options.fichier || '-');
-        } else if (options.fichier) {
-            // Process single file (not implemented in this simplified version)
-            console.error('Non-JSON file processing not yet implemented');
-            process.exit(1);
-        } else if (options.repertoire) {
-            // Process directory (not implemented in this simplified version)
-            console.error('Directory processing not yet implemented');
-            process.exit(1);
-        }
+        // Process JSON input
+        await traiteJson(options.fichier || '-');
 
         // Cleanup
         if (logStream && logStream.end) {
             logStream.end();
-        }
-
-        if (options.sortie && outputStream !== process.stdout) {
-            outputStream.end();
         }
 
         if (!quiet) {
@@ -718,7 +693,8 @@ async function main() {
         }
 
     } catch (err) {
-        console.error(`Error: ${err.message}`);
+        const error = err instanceof Error ? err : new Error(String(err));
+        console.error(`Error: ${error.message}`);
         process.exit(1);
     }
 }
