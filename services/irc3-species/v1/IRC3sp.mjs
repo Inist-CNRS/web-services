@@ -33,7 +33,6 @@ let logStream = null;
 program
     .version(VERSION)
     .option('-c, --casse', 'case-sensitive search')
-    .option('-l, --log <file>', 'log file for statistics')
     .option('-t, --table <file>', 'resource table file (required)')
     .parse(process.argv);
 
@@ -50,8 +49,9 @@ casse = options.casse ?? false;
 debug = process.env.IRC3SP_DEBUG === 'true';
 
 // Setup log stream
-logStream = options.log
-    ? fs.createWriteStream(options.log, { encoding: 'utf8' })
+const logFile = process.env.IRC3SP_LOG;
+logStream = logFile && logFile !== 'false'
+    ? fs.createWriteStream(logFile, { encoding: 'utf8' })
     : { write: () => { }, end: () => { } };
 
 /**
