@@ -34,7 +34,6 @@ program
     .version(VERSION)
     .option('-c, --casse', 'case-sensitive search')
     .option('-f, --fichier <file>', 'input file (use "-" for stdin)')
-    .option('-j, --json', 'JSON input/output mode')
     .option('-l, --log <file>', 'log file for statistics')
     .option('-q, --quiet', 'suppress progress display')
     .option('-t, --table <file>', 'resource table file (required)')
@@ -45,11 +44,6 @@ const options = program.opts();
 // Validate required options
 if (!options.table) {
     console.error('Error: -t (table) option is required');
-    process.exit(2);
-}
-
-if (!options.json) {
-    console.error('Error: -j (json) option is required');
     process.exit(2);
 }
 
@@ -351,17 +345,12 @@ function passe2(id, refListe, refPara) {
     try {
         fleche = '=>';
 
-        // Remove duplicates
-        /** @type {Record<string, boolean>} */
-        const tmp = {};
-        let tmp1 = refListe
-            .filter(item => tmp[item] ? false : tmp[item] = true)
-            .sort();
+        // Remove duplicates and sort
+        let tmp1 = [...new Set(refListe)].sort();
 
         // Build expanded table with abbreviated forms
         /** @type {string[]} */
         let tmp2 = [];
-        Object.keys(tmp).forEach(k => delete tmp[k]);
 
         for (const item of tmp1) {
             if (!item) continue;
@@ -382,11 +371,8 @@ function passe2(id, refListe, refPara) {
             }
         }
 
-        // Remove duplicates again
-        Object.keys(tmp).forEach(k => delete tmp[k]);
-        tmp1 = tmp2
-            .filter(item => tmp[item] ? false : tmp[item] = true)
-            .sort();
+        // Remove duplicates and sort
+        tmp1 = [...new Set(tmp2)].sort();
 
         // Build abbreviated forms
         /** @type {Record<string, string>} */
@@ -426,11 +412,8 @@ function passe2(id, refListe, refPara) {
             }
         }
 
-        // Remove duplicates one more time
-        Object.keys(tmp).forEach(k => delete tmp[k]);
-        tmp1 = tmp2
-            .filter(item => tmp[item] ? false : tmp[item] = true)
-            .sort();
+        // Remove duplicates and sort
+        tmp1 = [...new Set(tmp2)].sort();
 
         // Second pass search
         /** @type {string[]} */
