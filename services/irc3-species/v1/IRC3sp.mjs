@@ -25,7 +25,7 @@ let pref = {};
 let str = {};
 let fleche = '';
 let casse = false;
-let quiet = false;
+let debug = false;
 /** @type {fs.WriteStream | { write: () => void, end: () => void } | null} */
 let logStream = null;
 
@@ -34,7 +34,6 @@ program
     .version(VERSION)
     .option('-c, --casse', 'case-sensitive search')
     .option('-l, --log <file>', 'log file for statistics')
-    .option('-q, --quiet', 'suppress progress display')
     .option('-t, --table <file>', 'resource table file (required)')
     .parse(process.argv);
 
@@ -48,7 +47,7 @@ if (!options.table) {
 
 // Set global flags
 casse = options.casse ?? false;
-quiet = options.quiet ?? false;
+debug = process.env.IRC3SP_DEBUG === 'true';
 
 // Setup log stream
 logStream = options.log
@@ -107,7 +106,7 @@ function binarySearch(key, arr) {
  * @returns {Promise<void>}
  */
 async function loadTable(tablePath) {
-    if (!quiet) {
+    if (debug) {
         process.stderr.write('\r' + ' '.repeat(75) + '\r Loading resource ...  ');
     }
 
@@ -134,7 +133,7 @@ async function loadTable(tablePath) {
 
         terme = terme.trim();
         if (!terme || /^\s*$/.test(terme) || /^\w-?$/.test(terme)) {
-            if (!quiet) console.error(`Term refused: "${terme}"`);
+            if (debug) console.error(`Term refused: "${terme}"`);
             continue;
         }
 
@@ -168,7 +167,7 @@ async function loadTable(tablePath) {
         if (prefForm) {
             prefForm = prefForm.trim();
             if (!prefForm || /^\s*$/.test(prefForm) || /^\w-?$/.test(prefForm)) {
-                if (!quiet) console.error(`Preferential refused: "${prefForm}"`);
+                if (debug) console.error(`Preferential refused: "${prefForm}"`);
                 continue;
             }
 
@@ -211,7 +210,7 @@ async function loadTable(tablePath) {
         process.exit(3);
     }
 
-    if (!quiet) {
+    if (debug) {
         const nb = table.length.toLocaleString();
         process.stderr.write('\r' + ' '.repeat(75) + `\r ${nb} terms in the list\n`);
     }
@@ -241,7 +240,7 @@ function recherche(cle, orig, tref = null) {
 
         if (retour > -1) {
             // Exact match found
-            if (!quiet) process.stderr.write('\r' + ' '.repeat(75) + '\r');
+            if (debug) process.stderr.write('\r' + ' '.repeat(75) + '\r');
 
             const terme = searchTable[retour];
             let pattern = terme.replace(/(\W)/g, '\\$1').replace(/\\ /g, '\\s*');
@@ -262,7 +261,7 @@ function recherche(cle, orig, tref = null) {
                 }
             }
 
-            if (!quiet && !genre[str[terme]]) {
+            if (debug && !genre[str[terme]]) {
                 process.stderr.write(`${cle} ${fleche} ${str[terme]}\n`);
                 process.stderr.write(` Processing file ${cle}  `);
             }
@@ -286,7 +285,7 @@ function recherche(cle, orig, tref = null) {
                             const termRegex = new RegExp(`^${termPattern}\\b`);
 
                             if (rec.match(termRegex)) {
-                                if (!quiet) process.stderr.write('\r' + ' '.repeat(75) + '\r');
+                                if (debug) process.stderr.write('\r' + ' '.repeat(75) + '\r');
 
                                 termPattern = termPattern.replace(/\\ /g, '\\s*').replace(/[^\x20-\x7F]/g, '.');
                                 const textRegex = casse ? new RegExp(`^${termPattern}`) : new RegExp(`^${termPattern}`, 'i');
@@ -303,7 +302,7 @@ function recherche(cle, orig, tref = null) {
                                     }
                                 }
 
-                                if (!quiet && !genre[str[currentTerm]]) {
+                                if (debug && !genre[str[currentTerm]]) {
                                     process.stderr.write(`${cle} ${fleche} ${str[currentTerm]}\n`);
                                     process.stderr.write(` Processing file ${cle}  `);
                                 }
@@ -325,7 +324,7 @@ function recherche(cle, orig, tref = null) {
         } else if (/^\W\s*/.test(text)) {
             text = text.replace(/^\W\s*/, '');
         } else {
-            if (!quiet) console.error(`ERROR advancing text: "${text.substring(0, 50)}"`);
+            if (debug) console.error(`ERROR advancing text: "${text.substring(0, 50)}"`);
             break;
         }
     }
@@ -388,7 +387,7 @@ function passe2(id, refListe, refPara) {
             if (str[terme]) {
                 tmpStr[terme] = str[terme];
             } else {
-                if (!quiet) console.error(`No canonical form for "${terme}"`);
+                if (debug) console.error(`No canonical form for "${terme}"`);
                 continue;
             }
 
@@ -462,12 +461,12 @@ function passe2(id, refListe, refPara) {
                 formatted = `${champs[1]}\t\t${champs[0]}\t${pref[champs[0]] || ''}`;
             }
 
-            if (!quiet) process.stderr.write('\r' + ' '.repeat(75) + '\r');
+            if (debug) process.stderr.write('\r' + ' '.repeat(75) + '\r');
 
             output.push(formatted);
 
             // Log ambiguities
-            if (champs[2] && champs[2].match(/^\?.+\?$/) && !quiet) {
+            if (champs[2] && champs[2].match(/^\?.+\?$/) && debug) {
                 const msg = `WARNING! ${id}: ambiguity on non-abbreviated form of "${champs[0]}"!\n`;
                 process.stderr.write(msg);
                 logStream?.write(msg);
@@ -620,7 +619,7 @@ async function main() {
             logStream.end();
         }
 
-        if (!quiet) {
+        if (debug) {
             process.stderr.write('\r' + ' '.repeat(75) + '\r\n');
         }
 

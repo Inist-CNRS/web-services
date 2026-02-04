@@ -8,6 +8,7 @@
         "EZS_NSHARDS": 32,
         "EZS_CACHE": true,
         "EZS_VERBOSE": false,
+        "IRC3SP_DEBUG": false,
         "NODE_OPTIONS": "--max_old_space_size=1024",
         "NODE_ENV": "production"
     }
