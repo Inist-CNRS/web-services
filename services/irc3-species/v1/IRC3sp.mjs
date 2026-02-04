@@ -3,7 +3,6 @@
 /**
  * IRC3sp.js - Scientific name extraction tool
  * Node.js port of IRC3sp.pl
- * Version 4.5.1
  */
 
 import fs from 'fs';
@@ -11,8 +10,7 @@ import { createReadStream } from 'fs';
 import { createInterface } from 'readline';
 import { program } from 'commander';
 
-const VERSION = '4.5.1';
-const DATE_MODIF = '2024-01-27';
+const VERSION = '4.5.2';
 
 // Global variables
 /** @type {string[]} */
@@ -238,7 +236,6 @@ async function loadTable(tablePath) {
  * @returns {string[]}
  */
 function recherche(cle, orig, tref = null) {
-    const nbi = tref ? tref.length : table.length;
     const searchTable = tref || table;
 
     let text = orig.trim();
@@ -526,11 +523,10 @@ function passe2(id, refListe, refPara) {
 
         return json ? output : [];
     } catch (err) {
-        /** @type {Error} */
-        const error = err;
+        const error = err instanceof Error ? err : new Error(String(err));
         console.error(`Error in passe2: ${error.message}`);
         console.error(error.stack);
-        throw err;
+        throw error;
     }
 }
 
@@ -548,12 +544,8 @@ function passe1(input) {
         try {
             data = JSON.parse(input);
         } catch (err) {
-            const msg = err.message.replace(/"/g, '\\"');
-            console.error("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx");
-            console.error(`JSON parsing error:`);
-            console.error(input);
-            console.error("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx");
-
+            const error = err instanceof Error ? err : new Error(String(err));
+            const msg = error.message.replace(/"/g, '\\"');
             return `{"message": "JSON parsing error", "explanation": "${msg}"}\n`;
         }
 
@@ -601,9 +593,6 @@ function passe1(input) {
             results.push(JSON.stringify(obj));
         }
 
-        console.error('passe1: ws mode ********************************');
-        console.error(results);
-        console.error('************************************************');
         return [`${results.join('\n')}\n`, 0];
     } catch (err) {
         const error = err instanceof Error ? err : new Error(String(err));
@@ -621,7 +610,6 @@ async function traiteJson(inputFile) {
     let input = '[';
 
     if (inputFile === '-') {
-        console.error('Reading from stdin...');
         // Read from stdin
         const rl = createInterface({
             input: process.stdin,
@@ -632,7 +620,6 @@ async function traiteJson(inputFile) {
             input += input === '[' ? line : ',' + line;
         }
     } else {
-        console.error(`Reading from ${inputFile}...`);
         input = fs.readFileSync(inputFile, 'utf8');
     }
     input += input.endsWith(']') ? '' : ']';
@@ -640,11 +627,6 @@ async function traiteJson(inputFile) {
     const result = passe1(input);
 
     const [output, retour] = Array.isArray(result) ? result : [result, 0];
-
-    console.error("-------------------------------------")
-    console.error("Output:");
-    console.error(typeof output, output);
-    console.error("-------------------------------------")
 
     console.log(output);
 
