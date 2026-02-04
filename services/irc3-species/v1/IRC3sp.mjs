@@ -33,7 +33,6 @@ let logStream = null;
 program
     .version(VERSION)
     .option('-c, --casse', 'case-sensitive search')
-    .option('-f, --fichier <file>', 'input file (use "-" for stdin)')
     .option('-l, --log <file>', 'log file for statistics')
     .option('-q, --quiet', 'suppress progress display')
     .option('-t, --table <file>', 'resource table file (required)')
@@ -578,24 +577,19 @@ function passe1(input) {
 }
 
 /**
- * Process JSON input
- * @param {string} inputFile
+ * Process JSON input from stdin
  */
-async function traiteJson(inputFile) {
+async function traiteJson() {
     let input = '[';
 
-    if (inputFile === '-') {
-        // Read from stdin
-        const rl = createInterface({
-            input: process.stdin,
-            crlfDelay: Infinity
-        });
+    // Read from stdin
+    const rl = createInterface({
+        input: process.stdin,
+        crlfDelay: Infinity
+    });
 
-        for await (const line of rl) {
-            input += input === '[' ? line : ',' + line;
-        }
-    } else {
-        input = fs.readFileSync(inputFile, 'utf8');
+    for await (const line of rl) {
+        input += input === '[' ? line : ',' + line;
     }
     input += input.endsWith(']') ? '' : ']';
 
@@ -618,8 +612,8 @@ async function main() {
         // Load resource table
         await loadTable(options.table);
 
-        // Process JSON input
-        await traiteJson(options.fichier || '-');
+        // Process JSON input from stdin
+        await traiteJson();
 
         // Cleanup
         if (logStream && logStream.end) {
