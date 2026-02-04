@@ -10,7 +10,6 @@ import fs from 'fs';
 import { createReadStream } from 'fs';
 import { createInterface } from 'readline';
 import { program } from 'commander';
-import { createGunzip } from 'zlib';
 
 const VERSION = '4.5.1';
 const DATE_MODIF = '2024-01-27';
@@ -131,16 +130,7 @@ async function loadTable(tablePath) {
         process.stderr.write('\r' + ' '.repeat(75) + '\r Loading resource ...  ');
     }
 
-    let stream;
-
-    if (tablePath.endsWith('.gz') || tablePath.endsWith('.Z')) {
-        stream = createReadStream(tablePath).pipe(createGunzip());
-    } else if (tablePath.endsWith('.bz2')) {
-        // Node.js doesn't have built-in bzip2, would need a library
-        throw new Error('bzip2 compression not yet supported in Node.js version');
-    } else {
-        stream = createReadStream(tablePath, { encoding: 'utf8' });
-    }
+    const stream = createReadStream(tablePath, { encoding: 'utf8' });
 
     const rl = createInterface({
         input: stream,
