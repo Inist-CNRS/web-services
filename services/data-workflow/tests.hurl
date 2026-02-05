@@ -856,51 +856,6 @@ content-type: application/x-gzip
 # X-Webhook-Failure: https://webhook.site/684dd427-5484-404a-b5a0-80e5b6726a1c
 [Options]
 skip: {{blocked}}
-file,./example-pdf-text.tar.gz;
-
-HTTP 200
-Content-Type: application/json
-[Captures]
-computing_token: jsonpath "$[0].value"
-[Asserts]
-variable "computing_token" exists
-
-# There should be a waiting time, representing the time taken to process data.
-# Fortunately, as the data is sparse, and the computing time is small,
-# the need is small.
-# In normal use cases, a webhook is called when the processing is finished.
-# That query gives the process identifier.
-# Next, you can call the retrieve URL by putting the identifier in the value field.
-
-# Version 4.1.0 of hurl added a delay option, which value is milliseconds.
-# https://hurl.dev/blog/2023/09/24/announcing-hurl-4.1.0.html#add-delay-between-requests
-
-POST {{host}}/v1/retrieve-json
-content-type: application/json
-[Options]
-delay: 10000
-skip: {{blocked}}
-```
-[
-	{
-		"value":"{{computing_token}}"
-	}
-]
-```
-
-HTTP 200
-Content-Type: application/xml
-
-
-############################################################################
-# Test v1/grobid
-
-POST {{host}}/v1/grobid
-content-type: application/x-gzip
-# X-Webhook-Success: https://webhook.site/684dd427-5484-404a-b5a0-80e5b6726a1c
-# X-Webhook-Failure: https://webhook.site/684dd427-5484-404a-b5a0-80e5b6726a1c
-[Options]
-skip: {{blocked}}
 file,./example-grobid.tar.gz;
 
 HTTP 200
