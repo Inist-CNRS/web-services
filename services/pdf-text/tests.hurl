@@ -28,4 +28,6 @@ file,./article.pdf;
 
 HTTP 200
 [Asserts]
-# body startsWith "<TEI xmlns=""http://www.tei-c.org/ns/1.0"">"
+xpath "/*[name()='TEI']" exists
+xpath "//*[name()='teiHeader']" exists
+xpath "//*[name()='titleStmt']/*[name()='title']" exists
