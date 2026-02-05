@@ -42,5 +42,10 @@ for line in sys.stdin:
         tei_article = "n/a"
         sys.stderr.write(f"Error processing ref : {str(e)}\n")
 
+    try:
+        os.remove(pdf_filename)
+    except Exception as e:
+        sys.stderr.write(f"Error : can t delete pdf ({str(e)})\n")
+        
     sys.stdout.write(json.dumps({"id": pdf_filename, "value": tei_article}))
     sys.stdout.write("\n")
