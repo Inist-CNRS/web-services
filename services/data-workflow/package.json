@@ -1,7 +1,7 @@
 {
   "private": true,
   "name": "ws-data-workflow",
-  "version": "1.14.0",
+  "version": "1.15.0",
   "description": "Enchaînement asynchrone de traitements",
   "repository": {
     "type": "git",
