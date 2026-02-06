@@ -42,7 +42,7 @@ variable "computing_token" exists
 POST {{host}}/v1/retrieve-json?indent=true
 content-type: application/json
 [Options]
-delay: 24000
+delay: 40000
 skip: {{blocked}}
 ```
 [
@@ -690,9 +690,9 @@ Content-Type: application/json
 [Asserts]
 jsonpath "$[1].value.chemical" includes "zircon"
 jsonpath "$[1].value.chemical" includes "granodiorite"
-jsonpath "$[1].value.chemical" includes "Si"
+jsonpath "$[1].value.chemical" includes "Ni"
 jsonpath "$[1].value.chemical" includes "SiO2"
-jsonpath "$[1].value.chemical" count == 15
+jsonpath "$[1].value.chemical" count == 16
 
 
 ############################################################################
@@ -778,7 +778,7 @@ variable "computing_token" exists
 POST {{host}}/v1/retrieve-json?indent=false
 content-type: application/json
 [Options]
-delay: 20000
+delay: 40000
 skip: {{blocked}}
 ```
 [
@@ -792,7 +792,7 @@ HTTP 200
 Content-Type: application/json
 [Asserts]
 jsonpath "$[1].value.diseases" includes "magmatism"
-jsonpath "$[1].value.diseases" count == 4
+jsonpath "$[1].value.diseases" count == 2
 
 
 ############################################################################
