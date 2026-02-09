@@ -65,7 +65,9 @@ class exportJson:
             app : bool
                 whether or not it's phase 2 (Machine Learning phase) (Default is False)
         '''
-        siteDic = {"amathonte":"https://www.idref.fr/027523217","délos":"https://www.idref.fr/183212118","thasos":"https://www.idref.fr/182710335","delphes":"https://www.idref.fr/027322505","rome":"https://www.idref.fr/02724301X"}
+        siteDic = {"amathonte":"https://www.idref.fr/027523217","délos":"https://www.idref.fr/183212118",
+                   "thasos":"https://www.idref.fr/182710335","delphes":"https://www.idref.fr/027322505",
+                   "rome":"https://www.idref.fr/02724301X", "italie":"https://www.idref.fr/027235408"}
         copyDIc = dic.copy()
         for key in rmv: #~check
             if key[0] not in self.ignoreWords:

@@ -12,16 +12,11 @@ from flair.models import SequenceTagger
 import pickle
 import ast
 import logging
-
-
-path = "v1/rapido/"
-tei_path = path + "new-persee-tei.xsl"
-annotations_path = path + "annotations.csv"
-annotations_pickle_path = path + "annotations.pkl"
-ignore_path = path + "ignore.txt"
+import time
 
 from spacy_lefff import LefffLemmatizer, POSTagger
 from spacy.language import Language
+
 
 @Language.factory('french_lemmatizer')
 def create_french_lemmatizer(nlp, name):
@@ -168,10 +163,25 @@ def rapido(dfAnnotations,dfText,ignoreWords,nlp,lAnnot, dicAnnot, app=False):
 
 # Args
 app = False
+perimeter = "grece"
 if '-p' in sys.argv:
     arg = int(sys.argv[sys.argv.index('-p') + 1])
     if arg != 0:
         app = True
+if '-q' in sys.argv:
+    perimeter = sys.argv[sys.argv.index('-q') + 1]
+    if perimeter != "grece" and perimeter != "italie":
+        perimeter = "grece"
+
+print(time.strftime("%A %d %B %Y %H:%M:%S"), file=sys.stderr)
+print("app:", app, "  perimeter:",perimeter, file=sys.stderr)
+
+path = "v1/rapido/"
+tei_path = path + "new-persee-tei.xsl"
+annotations_path = path + "annotations_"+perimeter+".csv"
+annotations_pickle_path = path + "annotations_"+perimeter+".pkl"
+ignore_path = path + "ignore.txt"
+
 
 # Pre-loading
 dfAnnotations = pd.read_csv(annotations_path)

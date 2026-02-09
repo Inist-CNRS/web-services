@@ -15,20 +15,33 @@
             <xsl:apply-templates select="//tei:body"/>
         </TEI>
     </xsl:template>
-    
+
     <xsl:template match="//tei:teiHeader">
         <teiHeader>
-            <title>
-                <xsl:value-of
-                    select="//tei:fileDesc/tei:titleStmt/tei:title"/>
-            </title>
+        <!-- traitement des titres -->
+            <titleStmt>
+                <xsl:apply-templates select="//tei:fileDesc/tei:titleStmt/tei:title[@level='a']" mode="levelAM"/>
+                <xsl:apply-templates select="//tei:fileDesc/tei:titleStmt/tei:title[@level='m']" mode="levelAM"/>
+            </titleStmt>
             <idno type="local">
                 <xsl:value-of select="//tei:fileDesc/tei:publicationStmt/tei:idno[@type = 'local']"/>
             </idno>
         </teiHeader>
     </xsl:template>
 
-    
+    <!-- Récupération des titres -->
+    <xsl:template match="//tei:title" mode="levelAM">
+            <title>
+                <xsl:attribute name="level">
+                    <xsl:value-of select="@level"/>
+                </xsl:attribute>
+                <xsl:attribute name="type">
+                    <xsl:value-of select="@type"/>
+                </xsl:attribute>
+                <xsl:apply-templates/>
+            </title>
+    </xsl:template>
+
     <xsl:template match="//tei:front"/>
     <xsl:template match="//tei:figure"/>
     <xsl:template match="//tei:note"/>

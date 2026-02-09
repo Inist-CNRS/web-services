@@ -52,7 +52,7 @@ class extractTei:
             line = file[ind]
             ind += 1
 
-            xTitle = re.search('<title>(.*)</title>',line) 
+            xTitle = re.search('<title level="a" type="main">(.*)</title>',line)
             if xTitle != None:
                 title = xTitle.group(1)
             
