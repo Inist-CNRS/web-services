@@ -1,4 +1,4 @@
-# ws-data-graph@1.3.2
+# ws-data-graph@1.3.3
 
 ws to create graph in gexf format
 
