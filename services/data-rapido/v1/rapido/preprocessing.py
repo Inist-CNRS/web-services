@@ -2,7 +2,6 @@ import re
 import pandas as pd
 from itertools import chain
 from lxml import etree
-import sys 
 
 class extractTei:
     '''
