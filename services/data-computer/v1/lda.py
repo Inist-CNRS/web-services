@@ -28,7 +28,6 @@ try:
 except Exception:
     nb_Topic = 0
 
-sys.stderr.write(str(nbTopic)+"\n")
 
 nlp = spacy.load(
     "en_core_web_sm",
