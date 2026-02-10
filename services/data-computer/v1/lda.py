@@ -17,13 +17,18 @@ c = Counter('documents', 'Number of documents processed', registry=registry)
 job_name = 'lda'
 
 
-# Get the index of "p" param (given by the user) and assign it to "nbTopic". 6 if not found
-nbTopic = int(sys.argv[sys.argv.index('-p') + 1] if '-p' in sys.argv else 0)
-if nbTopic < 0:
-    nbTopic = 0
-if nbTopic > 18:
-    nbTopic = 18
+# Get the index of "p" param (given by the user) and assign it to "nbTopic". 
+# Automatic detemination if not.
+try:
+    nbTopic = int(sys.argv[sys.argv.index('-p') + 1] if '-p' in sys.argv else 0)
+    if nbTopic <= 1:
+        nbTopic = 0
+    if nbTopic > 18:
+        nbTopic = 18
+except Exception:
+    nb_Topic = 0
 
+sys.stderr.write(str(nbTopic)+"\n")
 
 nlp = spacy.load(
     "en_core_web_sm",
