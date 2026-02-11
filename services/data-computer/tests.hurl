@@ -247,6 +247,7 @@ Content-Type: application/json
 jsonpath "$" count == 10
 jsonpath "$[*].value.topics" exists
 jsonpath "$[*].value.best_topic" exists
+jsonpath "$[0].value.best_topic.topic_10" exists
 
 POST {{host}}/v1/retrieve-gexf
 content-type: application/json

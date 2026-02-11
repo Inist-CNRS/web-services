@@ -3,7 +3,7 @@
     "info": {
         "title": "data-computer - Calculs sur fichier corpus compressé",
         "summary": "Calculs sur un corpus compressé",
-        "version": "2.19.0",
+        "version": "2.19.1",
         "termsOfService": "https://services.istex.fr/",
         "contact": {
             "name": "Inist-CNRS",
@@ -15,7 +15,7 @@
             "x-comment": "Will be automatically completed by the ezs server."
         },
         {
-            "url": "http://vptdmjobs.intra.inist.fr:49261/",
+            "url": "http://vptdmjobs.intra.inist.fr:49265/",
             "description": "Latest version for production",
             "x-profil": "Standard"
         }
