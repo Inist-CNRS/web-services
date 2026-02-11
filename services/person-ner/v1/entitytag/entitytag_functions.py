@@ -89,14 +89,21 @@ def extract_entities(data, model, word2idx, idx2tag, max_length, threshold=0.8):
                 confidence_score = []
             else:
                 if current_entity is not None:
-                    # Here we consider the thereshold
-                    if np.mean(confidence_score) > threshold:
+                    if (
+                        1 < len(current_entity.strip()) < 100
+                        and any(c.isalnum() for c in current_entity)
+                        and np.mean(confidence_score) > threshold
+                    ):
                         output[current_tag].append(current_entity)
                     current_entity = None
                     confidence_score = []
 
         if current_entity is not None:
-            if len(current_entity) < 100:
+            if (
+                1 < len(current_entity.strip()) < 100
+                and any(c.isalnum() for c in current_entity)
+                and np.mean(confidence_score) > threshold
+            ):
                 output[current_tag].append(current_entity)
 
     return output
