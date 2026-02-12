@@ -1,0 +1,16 @@
+{
+    "environnement": {
+        "EZS_TITLE": "Extrait les termes sémantiquement proches à un ou plusieurs mots-clés.",
+        "EZS_DESCRIPTION": "Permet d'extraire les termes sémantiquement proches à un ou plusieurs mots-clés dans la requête ayant permis de créer le corpus.",
+        "EZS_METRICS": true,
+        "EZS_CONCURRENCY": 2,
+        "EZS_CONTINUE_DELAY": 18000,
+        "EZS_PIPELINE_DELAY": 180000,
+        "EZS_NSHARDS": 32,
+        "EZS_CACHE": true,
+        "EZS_VERBOSE": false,
+        "NODE_OPTIONS": "--max_old_space_size=1024",
+        "NODE_ENV": "production"
+
+    }
+}
