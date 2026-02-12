@@ -19,22 +19,28 @@ from nltk.corpus import stopwords
 
 def get_keywords(query):
     list_keywords = []
-    patterns = re.findall(r'(?:abstract|title):\(([^)]+)\)|(?:abstract|title):\"([^\"]+)\"|(?:abstract|title):(\w+)', query,re.MULTILINE)
-    print(f"Extracted patterns: {patterns}", file=sys.stderr)
-    parts = ["".join(x) for x in patterns]
-    for part in parts :
-        print(f"Processing part: {part}", file=sys.stderr)
-        pattern_kw = re.findall(r'\"([^\n\"]+)\"|([^\n ]+)',part,re.MULTILINE)
-        keywords = ["".join(x) for x in pattern_kw]
-        for kw in keywords :
-            if kw != "" :
-                list_keywords.append(kw)
-    print(list_keywords, file=sys.stderr)
+    # Premier cas (monoterme) : title:("keyword1" "keyword2" "keyword3") et title:(keyword1 keyword2 keyword3)
+    # Deuxième cas (monoterme) : title:keyword
+    # Troisième cas (bigramme et monoterme) : title:("keyword1 keyword2" "keyword3")
+    # Quatrième cas (bigramme) : title:"keyword1 keyword2"
+    # on ignore : Cinquième cas (bigramme) : (title:"keyword1 keyword2" "keyword3")
+
+    # pattern 1 : (?:abstract|title):\(([^)]+)\) (cas 1 et 3)
+    # pattern 2 : (?:abstract|title):\"([^\"]+)\" (cas 4 et 5)
+    # pattern 3 : (?:abstract|title):(\w+) (cas 2)
+
+    pattern1 = re.findall(r'(?:abstract|title):\(([^)]+)\)', query, re.MULTILINE)
+    print(f"Pattern 1 raw matches: {pattern1}", file=sys.stderr)
+    parts = ["".join(x) for x in pattern1]
+    parts = [x.replace('" "','","').replace('"','').split(',') for x in parts]
+    print(f"Pattern 1 matches: {parts}", file=sys.stderr)
+
     return list_keywords
 
 def cleaned_keywords(list_keywords):
     cleaned_list = []
     for kw in list_keywords :
+        kw = kw.strip()
         kw = kw.lower()
         kw = kw.replace(" ","_")
         cleaned_list.append(kw)
