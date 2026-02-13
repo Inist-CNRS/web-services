@@ -579,7 +579,7 @@ HTTP 200
         "status": "Found",
         "id_ror": "https://ror.org/0323bey33",
         "score": 0.79,
-        "name": "ILM",
+        "name": "Institut Lumière Matière",
         "type": [
             "facility"
         ],
@@ -593,7 +593,7 @@ HTTP 200
         "status": "Found",
         "id_ror": "https://ror.org/03zmsge54",
         "score": 1,
-        "name": "NOIRLab",
+        "name": "NSF NOIRLab",
         "type": [
             "facility"
         ],
