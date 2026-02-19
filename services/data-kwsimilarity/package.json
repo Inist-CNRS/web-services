@@ -1,0 +1,37 @@
+{
+  "private": true,
+  "name": "ws-data-kwsimilarity",
+  "version": "2.1.2",
+  "description": "Extrait les termes sémantiquement proches à un ou plusieurs mots-clés.",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Inist-CNRS/web-services.git"
+  },
+  "keywords": [
+    "ezmaster"
+  ],
+  "author": "Justine Revol <justine.revol@cnrs.fr>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Inist-CNRS/web-services/issues"
+  },
+  "homepage": "https://github.com/Inist-CNRS/web-services/#readme",
+  "scripts": {
+    "version:insert:readme": "sed -i \"s#\\(${npm_package_name}.\\)\\([\\.a-z0-9]\\+\\)#\\1${npm_package_version}#g\" README.md && git add README.md",
+    "version:insert:swagger": "sed -i \"s/\\\"version\\\": \\\"[0-9]\\+.[0-9]\\+.[0-9]\\+\\\"/\\\"version\\\": \\\"${npm_package_version}\\\"/g\" swagger.json && git add swagger.json",
+    "version:insert": "npm run version:insert:readme && npm run version:insert:swagger",
+    "version:commit": "git commit -a -m \"release ${npm_package_name}@${npm_package_version}\"",
+    "version:tag": "git tag \"${npm_package_name}@${npm_package_version}\" -m \"${npm_package_name}@${npm_package_version}\"",
+    "version:push": "git push && git push --tags",
+    "version": "npm run version:insert && npm run version:commit && npm run version:tag",
+    "postversion": "npm run version:push",
+    "build:check": "docker build --check -t cnrsinist/${npm_package_name}:latest . && docker run --rm -i hadolint/hadolint hadolint - < Dockerfile ",
+    "build:dev": ". ./.env 2> /dev/null; DOCKER_BUILDKIT=1 docker build -t cnrsinist/${npm_package_name}:latest --secret id=webdav_login,env=WEBDAV_LOGIN --secret id=webdav_password,env=WEBDAV_PASSWORD --secret id=webdav_url,env=WEBDAV_URL .",
+    "start:dev": "npm run build:dev && docker run --name dev --rm --detach -p 31976:31976 cnrsinist/${npm_package_name}:latest",
+    "stop:dev": "docker stop dev",
+    "build": ". ./.env 2> /dev/null; DOCKER_BUILDKIT=1 docker build -t cnrsinist/${npm_package_name}:${npm_package_version} --secret id=webdav_login,env=WEBDAV_LOGIN --secret id=webdav_password,env=WEBDAV_PASSWORD --secret id=webdav_url,env=WEBDAV_URL .",
+    "start": "docker run --rm -p 31976:31976 cnrsinist/${npm_package_name}:${npm_package_version}",
+    "publish": "docker push cnrsinist/${npm_package_name}:${npm_package_version}"
+  },
+  "avoid-testing": false
+}

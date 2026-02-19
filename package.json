@@ -53,6 +53,7 @@
     "services/data-computer",
     "services/data-graph",
     "services/data-homogenise",
+    "services/data-kwsimilarity",
     "services/data-rapido",
     "services/data-table",
     "services/data-termsuite",

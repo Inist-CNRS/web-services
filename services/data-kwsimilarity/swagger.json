@@ -1,0 +1,33 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "data-kwsimilarity - Extrait les termes sémantiquement proches à un ou plusieurs mots-clés.",
+        "description": "Permet d'extraire les termes sémantiquement proches à un ou plusieurs mots-clés dans la requête ayant permis de créer le corpus.",
+        "version": "0.0.0",
+        "termsOfService": "https://services.istex.fr/",
+        "contact": {
+            "name": "Inist-CNRS",
+            "url": "https://www.inist.fr/nous-contacter/"
+        }
+    },
+    "servers": [
+        {
+            "x-comment": "Will be automatically completed by the ezs server."
+        },
+        {
+            "url": "http://vptdmjobs.intra.inist.fr:49252/",
+            "description": "Latest version for production",
+            "x-profil": "Standard"
+        }
+    ],
+    "tags": [
+        {
+            "name": "data-kwsimilarity",
+            "description": "Extrait les termes sémantiquement proches à un ou plusieurs mots-clés.",
+            "externalDocs": {
+                "description": "Plus de documentation",
+                "url": "https://github.com/inist-cnrs/web-services/tree/main/services/data-kwsimilarity"
+            }
+        }
+    ]
+}
