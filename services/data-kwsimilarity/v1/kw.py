@@ -17,34 +17,74 @@ import nltk
 from nltk import word_tokenize, pos_tag
 from nltk.corpus import stopwords
 
-def get_keywords(query):
-    list_keywords = []
-    # Premier cas (monoterme) : title:("keyword1" "keyword2" "keyword3") et title:(keyword1 keyword2 keyword3)
-    # Deuxième cas (monoterme) : title:keyword
-    # Troisième cas (bigramme et monoterme) : title:("keyword1 keyword2" "keyword3")
-    # Quatrième cas (bigramme) : title:"keyword1 keyword2"
-    # on ignore : Cinquième cas (bigramme) : (title:"keyword1 keyword2" "keyword3")
+def get_keywords(query: str):
 
-    # pattern 1 : (?:abstract|title):\(([^)]+)\) (cas 1 et 3)
-    # pattern 2 : (?:abstract|title):\"([^\"]+)\" (cas 4 et 5)
-    # pattern 3 : (?:abstract|title):(\w+) (cas 2)
+    # Pattern 1 : (cas 1 et 3)
+    # title:("keyword1" "keyword2" "keyword3")
+    # title:("keyword1 keyword2" "keyword3")
+    m1 = re.findall(r'(?:abstract|title):\(([^)]+)\)', query, re.MULTILINE)
+    if m1:
+        parts = ["".join(x) for x in m1]
+        parts = [x.replace('" "', '","').replace('"', '').split(',') for x in parts]
+        print(f"Pattern 1 raw matches: {parts}", file=sys.stderr)
+        return parts 
 
-    pattern1 = re.findall(r'(?:abstract|title):\(([^)]+)\)', query, re.MULTILINE)
-    print(f"Pattern 1 raw matches: {pattern1}", file=sys.stderr)
-    parts = ["".join(x) for x in pattern1]
-    parts = [x.replace('" "','","').replace('"','').split(',') for x in parts]
-    print(f"Pattern 1 matches: {parts}", file=sys.stderr)
+    # Pattern 2 : (cas 4 et 5)
+    # title:"keyword1 keyword2"
+    m2 = re.findall(r'(?:abstract|title):"([^"]+)"', query, re.MULTILINE)
+    if m2:
+        print(f"Pattern 2 raw matches: {m2}", file=sys.stderr)
+        return m2
 
-    return list_keywords
+    # Pattern 3 : (cas 2)
+    # title:keyword
+    m3 = re.findall(r'(?:abstract|title):(\w+)', query, re.MULTILINE)
+    if m3:
+        print(f"Pattern 3 raw matches: {m3}", file=sys.stderr)
+        return m3
+
+    # Aucun pattern trouvé
+    return None, []
+
+#     # Premier cas (monoterme) : title:("keyword1" "keyword2" "keyword3") et title:(keyword1 keyword2 keyword3)
+#     # Deuxième cas (monoterme) : title:keyword
+#     # Troisième cas (bigramme et monoterme) : title:("keyword1 keyword2" "keyword3")
+#     # Quatrième cas (bigramme) : title:"keyword1 keyword2"
+#     # on ignore : Cinquième cas (bigramme) : (title:"keyword1 keyword2" "keyword3")
+
+#     # pattern 1 : (?:abstract|title):\(([^)]+)\) (cas 1 et 3)
+#     # pattern 2 : (?:abstract|title):\"([^\"]+)\" (cas 4 et 5)
+#     # pattern 3 : (?:abstract|title):(\w+) (cas 2)
 
 def cleaned_keywords(list_keywords):
     cleaned_list = []
-    for kw in list_keywords :
-        kw = kw.strip()
-        kw = kw.lower()
-        kw = kw.replace(" ","_")
-        cleaned_list.append(kw)
+    print(f"Cleaning keywords: {list_keywords}", file=sys.stderr)
+    
+    # Si la liste de mots-clés est une liste de listes (pattern 1 : cas 1 et 3)
+    if isinstance(list_keywords, list) and len(list_keywords) > 0 and isinstance(list_keywords[0], list):
+        keywords_to_process = list_keywords[0]
+        print(f"Traitement liste de listes: {keywords_to_process}", file=sys.stderr)
+    # Cas liste plate (pattern 2 et 3 : cas 2 et 4)
+    elif isinstance(list_keywords, list):
+        keywords_to_process = list_keywords
+        print(f"Traitement liste plate: {keywords_to_process}", file=sys.stderr)
+    else:
+        print(f"Unexpected format for keywords: {list_keywords}", file=sys.stderr)
+        return cleaned_list  # Retourne liste vide si format invalide
+    
+    # Traitement commun aux deux cas
+    for kw in keywords_to_process:
+        if " " in kw:
+            bigram = kw.strip().lower().replace(" ", "_")
+            cleaned_list.append(bigram)
+            print(f"bigram: {bigram}", file=sys.stderr)
+        else:
+            unigram = kw.strip().lower()
+            cleaned_list.append(unigram)
+            print(f"unigram: {unigram}", file=sys.stderr)
+
     return cleaned_list
+
 
 def extract_ngramsPOS_nltk(text):
     tokens = word_tokenize(text.lower())
