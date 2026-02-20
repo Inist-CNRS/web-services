@@ -1,0 +1,634 @@
+#!/usr/bin/env node
+
+/**
+ * IRC3sp.js - Scientific name extraction tool
+ * Node.js port of IRC3sp.pl
+ */
+
+import fs from 'fs';
+import { createReadStream } from 'fs';
+import { createInterface } from 'readline';
+import { program } from 'commander';
+
+const VERSION = '4.5.2';
+
+// Global variables
+/** @type {string[]} */
+let table = [];
+/** @type {Record<string, number>} */
+let genre = {};
+/** @type {Record<string, string[]>} */
+let liste = {};
+/** @type {Record<string, string>} */
+let pref = {};
+/** @type {Record<string, string>} */
+let str = {};
+let fleche = '';
+let casse = false;
+let debug = false;
+/** @type {fs.WriteStream | { write: () => void, end: () => void } | null} */
+let logStream = null;
+
+// Setup command line options
+program
+    .version(VERSION)
+    .option('-c, --casse', 'case-sensitive search')
+    .option('-t, --table <file>', 'resource table file (required)')
+    .parse(process.argv);
+
+const options = program.opts();
+
+// Validate required options
+if (!options.table) {
+    console.error('Error: -t (table) option is required');
+    process.exit(2);
+}
+
+// Set global flags
+casse = options.casse ?? false;
+debug = process.env.IRC3SP_DEBUG === 'true';
+
+// Setup log stream
+const logFile = process.env.IRC3SP_LOG;
+logStream = logFile && logFile !== 'false'
+    ? fs.createWriteStream(logFile, { encoding: 'utf8' })
+    : { write: () => { }, end: () => { } };
+
+/**
+ * Normalize a term by splitting on word boundaries
+ * @param {string} term
+ * @returns {string}
+ */
+const normalizeTerm = (term) => term
+    .split(/(\W)/)          // Split on non-word characters while preserving them
+    .filter(p => /\S/.test(p))  // Keep only parts with non-whitespace
+    .join(' ')
+    .replace(/  +/g, ' ');  // Collapse multiple spaces
+
+/**
+ * Extract genus from a scientific name
+ * @param {string} term
+ * @returns {string}
+ */
+function extractGenus(term) {
+    const match = term.match(/^(\W*\w.*?) .+/);
+    return match ? match[1] : term;
+}
+
+/**
+ * Binary search in sorted array
+ * @param {string} key
+ * @param {string[]} arr
+ * @returns {number}
+ */
+function binarySearch(key, arr) {
+    let binf = -1;
+    let bsup = arr.length;
+
+    while (bsup > binf + 1) {
+        const bmid = Math.floor((bsup + binf) / 2);
+        const comp = key.localeCompare(arr[bmid]);
+
+        if (comp === 0) return bmid;
+        if (comp > 0) {
+            binf = bmid;
+        } else {
+            bsup = bmid;
+        }
+    }
+
+    return -bsup - 1;
+}
+
+/**
+ * Load resource table
+ * @param {string} tablePath
+ * @returns {Promise<void>}
+ */
+async function loadTable(tablePath) {
+    if (debug) {
+        process.stderr.write('\r' + ' '.repeat(75) + '\r Loading resource ...  ');
+    }
+
+    const stream = createReadStream(tablePath, { encoding: 'utf8' });
+
+    const rl = createInterface({
+        input: stream,
+        crlfDelay: Infinity
+    });
+
+    for await (const line of rl) {
+        // Skip comments and empty lines
+        if (line.startsWith('#') || line.trim() === '') continue;
+
+        const cleanLine = line.replace(/\r/g, '');
+        let terme, prefForm;
+
+        if (cleanLine.includes('\t')) {
+            [terme, prefForm] = cleanLine.split(/\t+/);
+        } else {
+            terme = cleanLine;
+            prefForm = '';
+        }
+
+        terme = terme.trim();
+        if (!terme || /^\s*$/.test(terme) || /^\w-?$/.test(terme)) {
+            if (debug) console.error(`Term refused: "${terme}"`);
+            continue;
+        }
+
+        const originalStr = terme;
+        const normalized = normalizeTerm(terme);
+        const normalizedKey = casse ? normalized : normalized.toLowerCase();
+
+        if (!str[normalizedKey]) {
+            str[normalizedKey] = originalStr;
+
+            const genusStr = extractGenus(originalStr);
+            genre[genusStr] = (genre[genusStr] ?? 0) + 1;
+
+            const genusNorm = normalizeTerm(genusStr);
+            const genusKey = casse ? genusNorm : genusNorm.toLowerCase();
+
+            if (!str[genusKey]) {
+                str[genusKey] = genusStr;
+            }
+
+            if (!liste[genusKey]) {
+                liste[genusKey] = [];
+            }
+            liste[genusKey].push(normalizedKey);
+        } else {
+            logStream?.write(`doublon "${str[normalizedKey]}" et "${originalStr}"\n`);
+            continue;
+        }
+
+        // Handle preferential form
+        if (prefForm) {
+            prefForm = prefForm.trim();
+            if (!prefForm || /^\s*$/.test(prefForm) || /^\w-?$/.test(prefForm)) {
+                if (debug) console.error(`Preferential refused: "${prefForm}"`);
+                continue;
+            }
+
+            const prefOriginal = prefForm;
+            const prefNorm = normalizeTerm(prefForm);
+            const prefKey = casse ? prefNorm : prefNorm.toLowerCase();
+
+            if (!str[prefKey]) {
+                str[prefKey] = prefOriginal;
+
+                const prefGenus = extractGenus(prefOriginal);
+                genre[prefGenus] = (genre[prefGenus] ?? 0) + 1;
+
+                const prefGenusNorm = normalizeTerm(prefGenus);
+                const prefGenusKey = casse ? prefGenusNorm : prefGenusNorm.toLowerCase();
+
+                if (!str[prefGenusKey]) {
+                    str[prefGenusKey] = prefGenus;
+                }
+
+                if (!liste[prefGenusKey]) {
+                    liste[prefGenusKey] = [];
+                }
+                liste[prefGenusKey].push(prefKey);
+            }
+
+            pref[normalizedKey] = prefOriginal;
+        }
+    }
+
+    // Build sorted table
+    for (const genusKey of Object.keys(liste).sort()) {
+        const genusValue = casse ? genusKey : genusKey.toLowerCase();
+        // Add genus first, then species (sorted)
+        table.push(genusValue, ...liste[genusKey].sort());
+    }
+
+    if (table.length === 0) {
+        console.error('\r' + ' '.repeat(75) + '\r No terms in the list\n');
+        process.exit(3);
+    }
+
+    if (debug) {
+        process.stderr.write('\r' + ' '.repeat(75) + `\r ${table.length} terms in the list\n`);
+    }
+}
+
+/**
+ * Search for terms in text
+ * @param {string} cle
+ * @param {string} orig
+ * @param {string[] | null} [tref]
+ * @returns {string[]}
+ */
+function recherche(cle, orig, tref = null) {
+    const searchTable = tref || table;
+
+    let text = orig.trim();
+    let rec = normalizeTerm(text);
+    if (!casse) {
+        rec = rec.toLowerCase();
+    }
+
+    /** @type {string[]} */
+    const matches = [];
+
+    while (rec.length > 0) {
+        const retour = binarySearch(rec, searchTable);
+
+        if (retour > -1) {
+            // Exact match found
+            if (debug) process.stderr.write('\r' + ' '.repeat(75) + '\r');
+
+            const terme = searchTable[retour];
+            let pattern = terme.replace(/(\W)/g, '\\$1').replace(/\\ /g, '\\s*');
+            pattern = pattern.replace(/[^\x20-\x7F]/g, '.');
+
+            const regex = casse ? new RegExp(`^${pattern}\\b`) : new RegExp(`^${pattern}\\b`, 'i');
+            const match = text.match(regex);
+
+            if (match) {
+                const chaine = match[0];
+                if (/[A-Z]/.test(chaine)) {
+                    matches.push(`${str[terme]}\t${chaine}`);
+
+                    // Handle preferential forms (simplified - no disambiguation yet)
+                    if (pref[terme]) {
+                        matches[matches.length - 1] += `\t${str[pref[terme]]}`;
+                    }
+                }
+            }
+
+            if (debug && !genre[str[terme]]) {
+                process.stderr.write(`${cle} ${fleche} ${str[terme]}\n`);
+                process.stderr.write(` Processing file ${cle}  `);
+            }
+        } else {
+            // Partial match search
+            const insertPos = -2 - retour;
+            if (insertPos < searchTable.length && searchTable[insertPos]) {
+                const terme = searchTable[insertPos];
+                const debut = terme.match(/^(.*?\w+)/);
+
+                if (debut) {
+                    let debPattern = debut[1].replace(/(\W)/g, '\\$1');
+                    const debRegex = new RegExp(`^${debPattern}\\b`);
+
+                    if (rec.match(debRegex)) {
+                        for (let i = insertPos; i < searchTable.length; i++) {
+                            const currentTerm = searchTable[i];
+                            if (!currentTerm.startsWith(debut[1])) break;
+
+                            let termPattern = currentTerm.replace(/(\W)/g, '\\$1');
+                            const termRegex = new RegExp(`^${termPattern}\\b`);
+
+                            if (rec.match(termRegex)) {
+                                if (debug) process.stderr.write('\r' + ' '.repeat(75) + '\r');
+
+                                termPattern = termPattern.replace(/\\ /g, '\\s*').replace(/[^\x20-\x7F]/g, '.');
+                                const textRegex = casse ? new RegExp(`^${termPattern}`) : new RegExp(`^${termPattern}`, 'i');
+                                const textMatch = text.match(textRegex);
+
+                                if (textMatch) {
+                                    const chaine = textMatch[0];
+                                    if (/[A-Z]/.test(chaine)) {
+                                        matches.push(`${str[currentTerm]}\t${chaine}`);
+
+                                        if (pref[currentTerm]) {
+                                            matches[matches.length - 1] += `\t${str[pref[currentTerm]]}`;
+                                        }
+                                    }
+                                }
+
+                                if (debug && !genre[str[currentTerm]]) {
+                                    process.stderr.write(`${cle} ${fleche} ${str[currentTerm]}\n`);
+                                    process.stderr.write(` Processing file ${cle}  `);
+                                }
+                                break;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        // Move to next word
+        rec = rec.replace(/^\S+\s?/, '');
+        // Advance text similar to Perl logic
+        if (/^\w+\s*/.test(text)) {
+            text = text.replace(/^\w+\s*/, '');
+        } else if (/^\s+\W\s*/.test(text)) {
+            text = text.replace(/^\s+\W\s*/, '');
+        } else if (/^\W\s*/.test(text)) {
+            text = text.replace(/^\W\s*/, '');
+        } else {
+            if (debug) console.error(`ERROR advancing text: "${text.substring(0, 50)}"`);
+            break;
+        }
+    }
+
+    return matches;
+}
+
+/**
+ * Pass 2: Search for abbreviated forms
+ * @param {string} id
+ * @param {string[]} refListe
+ * @param {string[]} refPara
+ * @returns {string[]}
+ */
+function passe2(id, refListe, refPara) {
+    try {
+        fleche = '=>';
+
+        // Step 1: Deduplicate and sort the initial list from pass 1
+        const uniqueTermsFromPass1 = [...new Set(refListe)].sort();
+
+        // Step 2: Expand to include all terms for each genus found
+        /** @type {string[]} */
+        const expandedTermsWithGenus = [];
+
+        for (const item of uniqueTermsFromPass1) {
+            if (!item) continue;
+            const parts = item.split('\t');
+            const terme = parts[0];
+            if (!terme) continue;
+
+            // Extract genus (first word of scientific name)
+            const genusMatch = terme.match(/^(\W*\w.*?) .+/);
+            let genusStr = normalizeTerm(genusMatch ? genusMatch[1] : terme);
+            if (!casse) genusStr = genusStr.toLowerCase();
+
+            expandedTermsWithGenus.push(genusStr);
+            if (liste[genusStr]) {
+                // Use precomputed list of terms for this genus
+                expandedTermsWithGenus.push(...liste[genusStr]);
+            } else {
+                // Find all terms starting with this genus
+                expandedTermsWithGenus.push(...table.filter(t => t.startsWith(genusStr + ' ')));
+            }
+        }
+
+        // Step 3: Deduplicate and sort the expanded list
+        const uniqueExpandedTerms = [...new Set(expandedTermsWithGenus)].sort();
+
+        // Step 4: Build search table with abbreviated forms
+        /** @type {Record<string, string>} */
+        const abbreviationToPossibleForms = {};
+        /** @type {Record<string, string>} */
+        const termToCanonicalForm = {};
+        /** @type {string[]} */
+        const searchTableWithAbbreviations = [];
+
+        for (const terme of uniqueExpandedTerms) {
+            if (!terme) continue;
+            searchTableWithAbbreviations.push(terme);
+
+            if (str[terme]) {
+                termToCanonicalForm[terme] = str[terme];
+            } else {
+                if (debug) console.error(`No canonical form for "${terme}"`);
+                continue;
+            }
+
+            // Create abbreviated form (e.g., "Canis lupus" -> "C. lupus")
+            const abbrevMatch = casse
+                ? terme.match(/^([A-Z])\S+\s+(.+)/)
+                : terme.match(/^([a-z])\S+\s+(.+)/);
+
+            if (abbrevMatch) {
+                const abbreviation = `${abbrevMatch[1]}. ${abbrevMatch[2]}`;
+                const abbreviationNormalized = normalizeTerm(casse ? abbreviation : abbreviation.toLowerCase());
+                searchTableWithAbbreviations.push(abbreviationNormalized);
+                termToCanonicalForm[abbreviationNormalized] = casse ? abbreviation : abbreviation.charAt(0).toUpperCase() + abbreviation.slice(1);
+
+                // Track possible full forms for this abbreviation (for ambiguity detection)
+                if (abbreviationToPossibleForms[abbreviationNormalized]) {
+                    abbreviationToPossibleForms[abbreviationNormalized] += ` ; ${str[terme]}`;
+                } else {
+                    abbreviationToPossibleForms[abbreviationNormalized] = str[terme];
+                }
+            }
+        }
+
+        // Step 5: Deduplicate and sort the final search table
+        const finalSearchTable = [...new Set(searchTableWithAbbreviations)].sort();
+
+        // Step 6: Search for terms (including abbreviations) in paragraphs
+        /** @type {string[]} */
+        const matchesWithResolvedAbbreviations = [];
+        for (const para of refPara) {
+            const matches = recherche(id, para, finalSearchTable);
+            for (const match of matches) {
+                if (!match) continue;
+                const parts = match.split('\t');
+                // Resolve abbreviated forms to their full canonical forms
+                if (parts.length >= 2 && parts[0]) {
+                    const normalized = normalizeTerm(parts[0]);
+                    const key = casse ? normalized : normalized.toLowerCase();
+
+                    if (abbreviationToPossibleForms[key]) {
+                        const possibleFullForms = abbreviationToPossibleForms[key].split(' ; ');
+                        if (possibleFullForms.length === 1) {
+                            matchesWithResolvedAbbreviations.push(`${parts[0]}\t${parts[1]}\t${possibleFullForms[0]}`);
+                        } else {
+                            // Ambiguous - mark with ?
+                            const ambiguousForms = possibleFullForms.join('?');
+                            matchesWithResolvedAbbreviations.push(`${parts[0]}\t${parts[1]}\t?${ambiguousForms}?`);
+                        }
+                    } else if (termToCanonicalForm[key]) {
+                        matchesWithResolvedAbbreviations.push(`${parts[0]}\t\t${termToCanonicalForm[key]}`);
+                    } else {
+                        matchesWithResolvedAbbreviations.push(match);
+                    }
+                }
+            }
+        }
+
+        // Step 7: Format output and deduplicate by term
+        /** @type {Record<string, boolean>} */
+        const seenTerms = {};
+        /** @type {string[]} */
+        const output = [];
+
+        for (const resultat of matchesWithResolvedAbbreviations) {
+            const champs = resultat.split('\t');
+            if (seenTerms[champs[0]]) continue;
+            seenTerms[champs[0]] = true;
+
+            let formatted;
+            if (champs[2]) {
+                formatted = `${champs[1]}\t${champs[0]}\t${champs[2]}\t${pref[champs[2]] || ''}`;
+            } else {
+                formatted = `${champs[1]}\t\t${champs[0]}\t${pref[champs[0]] || ''}`;
+            }
+
+            if (debug) process.stderr.write('\r' + ' '.repeat(75) + '\r');
+
+            output.push(formatted);
+
+            // Log ambiguities
+            if (champs[2] && champs[2].match(/^\?.+\?$/) && debug) {
+                const msg = `WARNING! ${id}: ambiguity on non-abbreviated form of "${champs[0]}"!\n`;
+                process.stderr.write(msg);
+                logStream?.write(msg);
+            }
+        }
+
+        // Step 8: Write statistics to log
+        /** @type {Record<string, number>} */
+        const uniqueTerms = {};
+
+        for (const resultat of matchesWithResolvedAbbreviations) {
+            if (!resultat) continue;
+            const champs = resultat.split('\t');
+            const ref = champs[2] || champs[0];
+            if (ref && !ref.match(/^\?.+\?$/)) {
+                uniqueTerms[ref] = (uniqueTerms[ref] ?? 0) + 1;
+            }
+        }
+
+        const nbRefs = Object.keys(uniqueTerms).length;
+        const nbOccs = Object.values(uniqueTerms).reduce((a, b) => a + b, 0);
+
+        logStream?.write(`${nbRefs}\t${nbOccs}\t${id}\n`);
+
+        return output;
+    } catch (err) {
+        const error = err instanceof Error ? err : new Error(String(err));
+        console.error(`Error in passe2: ${error.message}`);
+        console.error(error.stack);
+        throw error;
+    }
+}
+
+/**
+ * Pass 1: Process JSON input
+ *
+ * Returns string when error.
+ * @param {string} input  JSON array of objects with id and value properties
+ * @returns {string[] | [string, number] | string}
+ */
+function passe1(input) {
+    try {
+        let data;
+
+        try {
+            data = JSON.parse(input);
+        } catch (err) {
+            const error = err instanceof Error ? err : new Error(String(err));
+            const msg = error.message.replace(/"/g, '\\"');
+            return `{"message": "JSON parsing error", "explanation": "${msg}"}\n`;
+        }
+
+        const inputArray = Array.isArray(data) ? data : [data];
+        /** @type {string[]} */
+        const results = [];
+
+        for (const doc of inputArray) {
+            const id = doc.id;
+            /** @type {string[]} */
+            const values = Array.isArray(doc.value) ? doc.value : [doc.value];
+
+            // First pass
+            fleche = '->';
+            /** @type {string[]} */
+            const para = [];
+            /** @type {string[]} */
+            const matches = [];
+
+            for (const value of values) {
+                para.push(value);
+                matches.push(...recherche(id, value));
+            }
+
+            // Second pass
+            /** @type {string[]} */
+            let species = [];
+            if (matches.length > 0) {
+                const pass2Results = passe2(id, matches, para);
+
+                for (const item of pass2Results) {
+                    if (!item) continue;
+                    const champs = item.split('\t');
+                    if (champs[2] && champs[2].length > 0 && !champs[2].match(/^\?.+\?$/)) {
+                        species.push(champs[2]);
+                    }
+                }
+            }
+
+            // Remove duplicates and sort
+            species = [...new Set(species)].sort();
+
+            // Format output (webservice mode: compact JSON)
+            const obj = { id: id.toString(), value: species };
+            results.push(JSON.stringify(obj));
+        }
+
+        return [`${results.join('\n')}\n`, 0];
+    } catch (err) {
+        const error = err instanceof Error ? err : new Error(String(err));
+        console.error(`Error in passe1: ${error.message}`);
+        console.error(error.stack);
+        throw error;
+    }
+}
+
+/**
+ * Process JSON input from stdin
+ */
+async function traiteJson() {
+    let input = '[';
+
+    // Read from stdin
+    const rl = createInterface({
+        input: process.stdin,
+        crlfDelay: Infinity
+    });
+
+    for await (const line of rl) {
+        input += input === '[' ? line : ',' + line; // Add comma if not the first line
+    }
+    input += ']';
+
+    const result = passe1(input);
+
+    const [output, retour] = Array.isArray(result) ? result : [result, 0];
+
+    console.log(output);
+
+    if (retour) {
+        process.exit(String(retour));
+    }
+}
+
+/**
+ * Main function
+ */
+async function main() {
+    try {
+        // Load resource table
+        await loadTable(options.table);
+
+        // Process JSON input from stdin
+        await traiteJson();
+
+        // Cleanup
+        if (logStream && logStream.end) {
+            logStream.end();
+        }
+
+        if (debug) {
+            process.stderr.write('\r' + ' '.repeat(75) + '\r\n');
+        }
+
+    } catch (err) {
+        const error = err instanceof Error ? err : new Error(String(err));
+        console.error(`Error: ${error.message}`);
+        process.exit(1);
+    }
+}
+
+// Run main function
+main();
