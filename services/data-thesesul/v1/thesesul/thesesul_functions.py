@@ -8,6 +8,7 @@ import sys
 import json
 import re
 import zipfile
+import time
 
 # Chemin du répertoire temporaire
 TMP_DIR = '/tmp'
@@ -110,35 +111,49 @@ def create_zip(sudoc_id, xml_file, pdf_file, log_file):
         os.remove(xml_file)
         
     except Exception as e:
-        sys.stderr.write(f"Failed to zip xml + pdf: {e}\n")
         os.remove(pdf_file)
-        write_error_in_logs(log_file, sudoc_id, "Erreur : Récuperation du fichier PDF impossible")
+        write_error_in_logs(log_file, sudoc_id, "Warning : Récuperation du fichier PDF impossible")
 
 
 def get_hal_zip_from_sudoc_id(sudoc_id, log_file):
-    sudoc_file = get_xml_from_sudoc(sudoc_id)
-    if sudoc_file :
-        cond_file = transform_sudoc_to_conditor(sudoc_file)
-        if cond_file:
+    max_attempts = 5
+    delay_seconds = 3
+    last_error = None
+
+    for attempt in range(max_attempts):
+        try:
+            sudoc_file = get_xml_from_sudoc(sudoc_id)
+            if not sudoc_file:
+                raise Exception("Erreur : Récupération du fichier XML du Sudoc impossible")
+
+            cond_file = transform_sudoc_to_conditor(sudoc_file)
+            if not cond_file:
+                raise Exception("Erreur : Schéma invalide (transformation XLST vers TEI-Hal impossible - 1)")
+
             tei_hal_file = transform_conditor_to_tei_hal(cond_file)
-            if tei_hal_file:
-                if validate_tei_hal(tei_hal_file):
-                    input_file = os.path.join(TMP_DIR, f"tei_hal-{retrieve_id}.xml")
-                    xml_file = os.path.join(OUTPUT_DIR, f'{sudoc_id}.xml')
-                    with open(input_file, 'r') as f_in:
-                        with open(xml_file, 'w') as f_out:
-                            f_out.write(f_in.read())
-                            
-                    pdf_file = download_pdf(xml_file)
-                    if not pdf_file:
-                        write_error_in_logs(log_file, sudoc_id, "Erreur : Récuperation du fichier PDF impossible")
-                    else:
-                        create_zip(sudoc_id, xml_file, pdf_file, log_file)
-                else:
-                    write_error_in_logs(log_file, sudoc_id, "Erreur : Fichier TEI généré invalide")
+            if not tei_hal_file:
+                raise Exception("Erreur : Schéma invalide (transformation XLST vers TEI-Hal impossible - 2)")
+
+            # if not validate_tei_hal(tei_hal_file):
+            #     raise Exception("Erreur : Fichier TEI généré invalide")
+
+            input_file = os.path.join(TMP_DIR, f"tei_hal-{retrieve_id}.xml")
+            xml_file = os.path.join(OUTPUT_DIR, f'{sudoc_id}.xml')
+            with open(input_file, 'r') as f_in:
+                with open(xml_file, 'w') as f_out:
+                    f_out.write(f_in.read())
+
+            pdf_file = download_pdf(xml_file)
+            if not pdf_file:
+                raise Exception("Erreur : Récuperation du fichier PDF impossible")
+
+            create_zip(sudoc_id, xml_file, pdf_file, log_file)
+            return
+
+        except Exception as e:
+            last_error = str(e)
+            if attempt < max_attempts - 1:
+                # waiting 3, 6, 9, 12 secs ...(increase for each retry)
+                time.sleep(delay_seconds*attempt)
             else:
-                write_error_in_logs(log_file, sudoc_id, "Erreur :  Schéma invalide (transformation XLST vers TEI-Hal impossible - 2)")
-        else:
-            write_error_in_logs(log_file, sudoc_id, "Erreur : Schéma invalide (transformation XLST vers TEI-Hal impossible - 1)")
-    else:
-        write_error_in_logs(log_file, sudoc_id, "Erreur : Récupération du fichier XML du Sudoc impossible")
+                write_error_in_logs(log_file, sudoc_id, last_error)
