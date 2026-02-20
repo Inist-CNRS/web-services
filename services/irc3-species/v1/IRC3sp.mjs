@@ -587,9 +587,9 @@ async function traiteJson() {
     });
 
     for await (const line of rl) {
-        input += input === '[' ? line : ',' + line;
+        input += input === '[' ? line : ',' + line; // Add comma if not the first line
     }
-    input += input.endsWith(']') ? '' : ']';
+    input += ']';
 
     const result = passe1(input);
 
