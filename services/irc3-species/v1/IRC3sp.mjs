@@ -211,8 +211,7 @@ async function loadTable(tablePath) {
     }
 
     if (debug) {
-        const nb = table.length.toLocaleString();
-        process.stderr.write('\r' + ' '.repeat(75) + `\r ${nb} terms in the list\n`);
+        process.stderr.write('\r' + ' '.repeat(75) + `\r ${table.length} terms in the list\n`);
     }
 }
 
