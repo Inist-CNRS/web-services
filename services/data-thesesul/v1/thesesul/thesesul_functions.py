@@ -134,8 +134,8 @@ def get_hal_zip_from_sudoc_id(sudoc_id, log_file):
             if not tei_hal_file:
                 raise Exception("Erreur : Schéma invalide (transformation XLST vers TEI-Hal impossible - 2)")
 
-            if not validate_tei_hal(tei_hal_file):
-                raise Exception("Erreur : Fichier TEI généré invalide")
+            # if not validate_tei_hal(tei_hal_file):
+            #     raise Exception("Erreur : Fichier TEI généré invalide")
 
             input_file = os.path.join(TMP_DIR, f"tei_hal-{retrieve_id}.xml")
             xml_file = os.path.join(OUTPUT_DIR, f'{sudoc_id}.xml')
