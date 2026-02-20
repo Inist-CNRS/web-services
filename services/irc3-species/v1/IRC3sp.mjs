@@ -342,49 +342,51 @@ function passe2(id, refListe, refPara) {
     try {
         fleche = '=>';
 
-        // Remove duplicates and sort
-        let tmp1 = [...new Set(refListe)].sort();
+        // Step 1: Deduplicate and sort the initial list from pass 1
+        const uniqueTermsFromPass1 = [...new Set(refListe)].sort();
 
-        // Build expanded table with abbreviated forms
+        // Step 2: Expand to include all terms for each genus found
         /** @type {string[]} */
-        let tmp2 = [];
+        const expandedTermsWithGenus = [];
 
-        for (const item of tmp1) {
+        for (const item of uniqueTermsFromPass1) {
             if (!item) continue;
             const parts = item.split('\t');
             const terme = parts[0];
             if (!terme) continue;
 
+            // Extract genus (first word of scientific name)
             const genusMatch = terme.match(/^(\W*\w.*?) .+/);
             let genusStr = normalizeTerm(genusMatch ? genusMatch[1] : terme);
             if (!casse) genusStr = genusStr.toLowerCase();
 
-            tmp2.push(genusStr);
+            expandedTermsWithGenus.push(genusStr);
             if (liste[genusStr]) {
-                tmp2.push(...liste[genusStr]);
+                // Use precomputed list of terms for this genus
+                expandedTermsWithGenus.push(...liste[genusStr]);
             } else {
-                // Find terms starting with this genus
-                tmp2.push(...table.filter(t => t.startsWith(genusStr + ' ')));
+                // Find all terms starting with this genus
+                expandedTermsWithGenus.push(...table.filter(t => t.startsWith(genusStr + ' ')));
             }
         }
 
-        // Remove duplicates and sort
-        tmp1 = [...new Set(tmp2)].sort();
+        // Step 3: Deduplicate and sort the expanded list
+        const uniqueExpandedTerms = [...new Set(expandedTermsWithGenus)].sort();
 
-        // Build abbreviated forms
+        // Step 4: Build search table with abbreviated forms
         /** @type {Record<string, string>} */
-        const tmpPref = {};
+        const abbreviationToPossibleForms = {};
         /** @type {Record<string, string>} */
-        const tmpStr = {};
+        const termToCanonicalForm = {};
         /** @type {string[]} */
-        tmp2 = [];
+        const searchTableWithAbbreviations = [];
 
-        for (const terme of tmp1) {
+        for (const terme of uniqueExpandedTerms) {
             if (!terme) continue;
-            tmp2.push(terme);
+            searchTableWithAbbreviations.push(terme);
 
             if (str[terme]) {
-                tmpStr[terme] = str[terme];
+                termToCanonicalForm[terme] = str[terme];
             } else {
                 if (debug) console.error(`No canonical form for "${terme}"`);
                 continue;
@@ -396,62 +398,64 @@ function passe2(id, refListe, refPara) {
                 : terme.match(/^([a-z])\S+\s+(.+)/);
 
             if (abbrevMatch) {
-                const abrev = `${abbrevMatch[1]}. ${abbrevMatch[2]}`;
-                const abrevNorm = normalizeTerm(casse ? abrev : abrev.toLowerCase());
-                tmp2.push(abrevNorm);
-                tmpStr[abrevNorm] = casse ? abrev : abrev.charAt(0).toUpperCase() + abrev.slice(1);
+                const abbreviation = `${abbrevMatch[1]}. ${abbrevMatch[2]}`;
+                const abbreviationNormalized = normalizeTerm(casse ? abbreviation : abbreviation.toLowerCase());
+                searchTableWithAbbreviations.push(abbreviationNormalized);
+                termToCanonicalForm[abbreviationNormalized] = casse ? abbreviation : abbreviation.charAt(0).toUpperCase() + abbreviation.slice(1);
 
-                if (tmpPref[abrevNorm]) {
-                    tmpPref[abrevNorm] += ` ; ${str[terme]}`;
+                // Track possible full forms for this abbreviation (for ambiguity detection)
+                if (abbreviationToPossibleForms[abbreviationNormalized]) {
+                    abbreviationToPossibleForms[abbreviationNormalized] += ` ; ${str[terme]}`;
                 } else {
-                    tmpPref[abrevNorm] = str[terme];
+                    abbreviationToPossibleForms[abbreviationNormalized] = str[terme];
                 }
             }
         }
 
-        // Remove duplicates and sort
-        tmp1 = [...new Set(tmp2)].sort();
+        // Step 5: Deduplicate and sort the final search table
+        const finalSearchTable = [...new Set(searchTableWithAbbreviations)].sort();
 
-        // Second pass search
+        // Step 6: Search for terms (including abbreviations) in paragraphs
         /** @type {string[]} */
-        const liste2 = [];
+        const matchesWithResolvedAbbreviations = [];
         for (const para of refPara) {
-            const matches = recherche(id, para, tmp1);
+            const matches = recherche(id, para, finalSearchTable);
             for (const match of matches) {
                 if (!match) continue;
                 const parts = match.split('\t');
-                // Resolve abbreviated forms
+                // Resolve abbreviated forms to their full canonical forms
                 if (parts.length >= 2 && parts[0]) {
                     const normalized = normalizeTerm(parts[0]);
                     const key = casse ? normalized : normalized.toLowerCase();
 
-                    if (tmpPref[key]) {
-                        const possibles = tmpPref[key].split(' ; ');
-                        if (possibles.length === 1) {
-                            liste2.push(`${parts[0]}\t${parts[1]}\t${possibles[0]}`);
+                    if (abbreviationToPossibleForms[key]) {
+                        const possibleFullForms = abbreviationToPossibleForms[key].split(' ; ');
+                        if (possibleFullForms.length === 1) {
+                            matchesWithResolvedAbbreviations.push(`${parts[0]}\t${parts[1]}\t${possibleFullForms[0]}`);
                         } else {
                             // Ambiguous - mark with ?
-                            const ambig = possibles.join('?');
-                            liste2.push(`${parts[0]}\t${parts[1]}\t?${ambig}?`);
+                            const ambiguousForms = possibleFullForms.join('?');
+                            matchesWithResolvedAbbreviations.push(`${parts[0]}\t${parts[1]}\t?${ambiguousForms}?`);
                         }
-                    } else if (tmpStr[key]) {
-                        liste2.push(`${parts[0]}\t\t${tmpStr[key]}`);
+                    } else if (termToCanonicalForm[key]) {
+                        matchesWithResolvedAbbreviations.push(`${parts[0]}\t\t${termToCanonicalForm[key]}`);
                     } else {
-                        liste2.push(match);
+                        matchesWithResolvedAbbreviations.push(match);
                     }
                 }
             }
         }
 
-        // Format output
+        // Step 7: Format output and deduplicate by term
         /** @type {Record<string, boolean>} */
-        const genreSet = {};
+        const seenTerms = {};
         /** @type {string[]} */
         const output = [];
 
-        for (const resultat of liste2) {
+        for (const resultat of matchesWithResolvedAbbreviations) {
             const champs = resultat.split('\t');
-            if (genreSet[champs[0]]) continue;
+            if (seenTerms[champs[0]]) continue;
+            seenTerms[champs[0]] = true;
 
             let formatted;
             if (champs[2]) {
@@ -472,13 +476,11 @@ function passe2(id, refListe, refPara) {
             }
         }
 
-        // Write statistics to log
+        // Step 8: Write statistics to log
         /** @type {Record<string, number>} */
         const uniqueTerms = {};
-        let nbRefs = 0;
-        let nbOccs = 0;
 
-        for (const resultat of liste2) {
+        for (const resultat of matchesWithResolvedAbbreviations) {
             if (!resultat) continue;
             const champs = resultat.split('\t');
             const ref = champs[2] || champs[0];
@@ -487,9 +489,8 @@ function passe2(id, refListe, refPara) {
             }
         }
 
-        nbRefs = Object.keys(uniqueTerms).length;
-
-        nbOccs = Object.values(uniqueTerms).reduce((a, b) => a + b);
+        const nbRefs = Object.keys(uniqueTerms).length;
+        const nbOccs = Object.values(uniqueTerms).reduce((a, b) => a + b, 0);
 
         logStream?.write(`${nbRefs}\t${nbOccs}\t${id}\n`);
 
