@@ -1,0 +1,18 @@
+# These examples can be used directly in VSCode, using HTTPYac extension (anweber.vscode-httpyac)
+# They are important, because used to generate the tests.hurl file.
+
+# Décommenter/commenter les lignes voulues pour tester localement
+@host=http://localhost:31976
+# @host=https://openalex-doctype.services.istex.fr
+
+###
+# @name v1IsresearchId
+# Classification en type de document en fonction de l'ID OpenAlex
+POST {{host}}/v1/isresearch-id?indent=true HTTP/1.1
+Content-Type: application/json
+
+[
+	{ "value": "w4405561029" },
+	{ "value": "w4405561030" },
+	{ "value": "not an ID" }
+]
