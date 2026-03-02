@@ -216,16 +216,16 @@ async function loadTable(tablePath) {
 }
 
 /**
- * Search for terms in text
- * @param {string} cle
- * @param {string} orig
- * @param {string[] | null} [tref]
- * @returns {string[]}
+ * Search for scientific terms in text
+ * @param {string} documentId - Document identifier (used for debug output only)
+ * @param {string} textToSearch - The text in which to search for scientific names
+ * @param {string[] | null} [sortedTermsTable] - Sorted array of terms to search for (MUST be sorted for binary search). If null, uses global `table`
+ * @returns {string[]} Array of matches in format "canonical_form\tfound_form" or "canonical_form\tfound_form\tpreferential_form"
  */
-function recherche(cle, orig, tref = null) {
-    const searchTable = tref || table;
+function recherche(documentId, textToSearch, sortedTermsTable = null) {
+    const searchTable = sortedTermsTable || table;
 
-    let text = orig.trim();
+    let text = textToSearch.trim();
     let rec = normalizeTerm(text);
     if (!casse) {
         rec = rec.toLowerCase();
@@ -261,8 +261,8 @@ function recherche(cle, orig, tref = null) {
             }
 
             if (debug && !genre[str[terme]]) {
-                process.stderr.write(`${cle} ${fleche} ${str[terme]}\n`);
-                process.stderr.write(` Processing file ${cle}  `);
+                process.stderr.write(`${documentId} ${fleche} ${str[terme]}\n`);
+                process.stderr.write(` Processing file ${documentId}  `);
             }
         } else {
             // Partial match search
@@ -302,8 +302,8 @@ function recherche(cle, orig, tref = null) {
                                 }
 
                                 if (debug && !genre[str[currentTerm]]) {
-                                    process.stderr.write(`${cle} ${fleche} ${str[currentTerm]}\n`);
-                                    process.stderr.write(` Processing file ${cle}  `);
+                                    process.stderr.write(`${documentId} ${fleche} ${str[currentTerm]}\n`);
+                                    process.stderr.write(` Processing file ${documentId}  `);
                                 }
                                 break;
                             }
