@@ -219,12 +219,10 @@ async function loadTable(tablePath) {
  * Search for scientific terms in text
  * @param {string} documentId - Document identifier (used for debug output only)
  * @param {string} textToSearch - The text in which to search for scientific names
- * @param {string[] | null} [sortedTermsTable] - Sorted array of terms to search for (MUST be sorted for binary search). If null, uses global `table`
+ * @param {string[]} [sortedTermsTable] - Sorted array of terms to search for (MUST be sorted for binary search). Defaults to global `table`
  * @returns {string[]} Array of matches in format "canonical_form\tfound_form" or "canonical_form\tfound_form\tpreferential_form"
  */
-function recherche(documentId, textToSearch, sortedTermsTable = null) {
-    const searchTable = sortedTermsTable || table;
-
+function recherche(documentId, textToSearch, sortedTermsTable = table) {
     let text = textToSearch.trim();
     let rec = normalizeTerm(text);
     if (!casse) {
@@ -235,13 +233,13 @@ function recherche(documentId, textToSearch, sortedTermsTable = null) {
     const matches = [];
 
     while (rec.length > 0) {
-        const retour = binarySearch(rec, searchTable);
+        const retour = binarySearch(rec, sortedTermsTable);
 
         if (retour > -1) {
             // Exact match found
             if (debug) process.stderr.write('\r' + ' '.repeat(75) + '\r');
 
-            const terme = searchTable[retour];
+            const terme = sortedTermsTable[retour];
             let pattern = terme.replace(/(\W)/g, '\\$1').replace(/\\ /g, '\\s*');
             pattern = pattern.replace(/[^\x20-\x7F]/g, '.');
 
@@ -267,8 +265,8 @@ function recherche(documentId, textToSearch, sortedTermsTable = null) {
         } else {
             // Partial match search
             const insertPos = -2 - retour;
-            if (insertPos < searchTable.length && searchTable[insertPos]) {
-                const terme = searchTable[insertPos];
+            if (insertPos < sortedTermsTable.length && sortedTermsTable[insertPos]) {
+                const terme = sortedTermsTable[insertPos];
                 const debut = terme.match(/^(.*?\w+)/);
 
                 if (debut) {
@@ -276,8 +274,8 @@ function recherche(documentId, textToSearch, sortedTermsTable = null) {
                     const debRegex = new RegExp(`^${debPattern}\\b`);
 
                     if (rec.match(debRegex)) {
-                        for (let i = insertPos; i < searchTable.length; i++) {
-                            const currentTerm = searchTable[i];
+                        for (let i = insertPos; i < sortedTermsTable.length; i++) {
+                            const currentTerm = sortedTermsTable[i];
                             if (!currentTerm.startsWith(debut[1])) break;
 
                             let termPattern = currentTerm.replace(/(\W)/g, '\\$1');
