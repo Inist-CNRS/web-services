@@ -101,17 +101,17 @@ HTTP 200
             "url_pdf": "https://cnrs.hal.science/hal-04461354/file/anki-gaillard-revol.pdf"
         },
         {
-            "doi": "",
-            "status": "not_found",
+            "doi": "10.63317/375ba8vd9q2v",
+            "status": "found",
             "reference": "In COLING 2018, 27th International Conference on Computational Linguistics, pp. 1638-1649.",
-            "reference_found": "",
+            "reference_found": "FROM CROSSREF >  (2024). Proceedings of the 2024 Joint International Conference on Computational Linguistics, Language Resources and Evaluation (LREC-COLING 2024). Joint International Conference on Computational Linguistics, Language Resources and Evaluation. 10.63317/375ba8vd9q2v.",
             "url_pdf": "https://cnrs.hal.science/hal-04461354/file/anki-gaillard-revol.pdf"
         },
         {
-            "doi": "",
-            "status": "not_found",
+            "doi": "10.48550/arxiv.1607.04606",
+            "status": "found",
             "reference": "Bojanowski, P., E. Grave, A. Joulin, et T. Mikolov (2016). Enriching word vectors with sub- word information. arXiv preprint arXiv :1607.04606.",
-            "reference_found": "",
+            "reference_found": "FROM DATACITE > Bojanowski et al. (2016). Enriching Word Vectors with Subword Information. arXiv. 10.48550/arxiv.1607.04606",
             "url_pdf": "https://cnrs.hal.science/hal-04461354/file/anki-gaillard-revol.pdf"
         },
         {
