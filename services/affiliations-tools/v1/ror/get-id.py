@@ -119,10 +119,10 @@ def filter_api(json, city=None, short=False):
                 all_names = item["organization"]["names"]
                 name = all_names[0]["value"]
 
-                for names in all_names:
-                    for type_names in names["types"]:
-                        if type_names in ("label", "ror_display"):
-                            name = names["value"]
+                for name in all_names:
+                    for type_name in name["types"]:
+                        if type_name in ("label", "ror_display"):
+                            name = name["value"]
                             break
                     else:
                         continue
