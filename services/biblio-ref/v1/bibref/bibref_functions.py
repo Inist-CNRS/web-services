@@ -72,7 +72,6 @@ def find_doi(text, delete_line_break=True, process_deleted_underscore=False):
     """
     
     doi_regex = r"10\.\d{4,}\/[^\s\,]+"
-
     if delete_line_break:
         text = text.replace(" ", "")
         
@@ -81,7 +80,18 @@ def find_doi(text, delete_line_break=True, process_deleted_underscore=False):
 
     doi = re.search(doi_regex, text)
     if doi is None:
-        return ""
+        if "arxiv" in text.lower():
+            # Try to find an arXiv ID
+            arxiv_regex = r".*(\d{4}\.\d{4,5}(?:v\d+)?).*"
+            arxiv_id = re.search(arxiv_regex, text)
+            if arxiv_id is None:
+                return ""
+            else:
+                arxiv_id = arxiv_id.group(1)
+                doi = "10.48550/arXiv." + arxiv_id
+                return doi
+        else:
+            return ""
 
     try:
         doiStr = doi.group()
@@ -564,7 +574,11 @@ def biblio_ref(ref_biblio, retracted_doi=retracted_doi):
     ref_biblio = uniformize(ref_biblio)  # Warining : in the rest of code, the biblio ref is uniformize (remove some informations)
     # First case : doi is found
     if doi:
-        crossref_status_code, doi, others_biblio_info = process_crossref_doi(doi, save_ref_biblio)
+        # Use crossref API only if the doi is not from arxiv (DataCite DOI)
+        if "arxiv" not in doi.lower():
+            crossref_status_code, doi, others_biblio_info = process_crossref_doi(doi, save_ref_biblio)
+        else:
+            crossref_status_code = 404
 
         # # If DOI exists
         if crossref_status_code==200:
