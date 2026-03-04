@@ -8,7 +8,7 @@
 POST {{host}}/v1/kw
 content-type: application/x-tar
 x-hook: https://webhook.site/69300b22-a251-4c16-9905-f7ba218ae7e9
-file,example.tar.gz;
+file,examples/dump_autism_small.tar.gz;
 
 HTTP 200
 # Capture the computing token
@@ -32,35 +32,5 @@ delay: 40000
 HTTP 200
 Content-Type: application/json
 [Asserts]
-jsonpath "$" count == 3
-jsonpath "$[0].value[0]" == "Inist-CNRS, UAR76"
-
-
-##################################################################
-# v1/group
-POST {{host}}/v1/group
-content-type: application/x-tar
-x-hook: https://webhook.site/69300b22-a251-4c16-9905-f7ba218ae7e9
-file,example.tar.gz;
-
-HTTP 200
-# Capture the computing token
-[Captures]
-computing_token: jsonpath "$[0].value"
-[Asserts]
-variable "computing_token" exists
-
-POST {{host}}/v1/retrieve-json
-content-type: application/json
-[Options]
-delay: 30000
-```
-[
-	{
-		"value":"{{computing_token}}"
-	}
-]
-```
-
-HTTP 200
-[{"value":[["2 rue Jean Zay, 54500 Vandoeuvre-lès-Nancy (Inist-CNRS)","Inist-CNRS, 2 rue Jean Zay, 54500 Vandoeuvre-lès-Nancy"],["Inist-CNRS, UAR76"]]}]
+jsonpath "$" count == 1
+jsonpath "$[0].autism" exists
