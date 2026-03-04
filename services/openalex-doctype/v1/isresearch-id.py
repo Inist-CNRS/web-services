@@ -15,7 +15,7 @@ class DocumentTypeClassifierModel:
     def __init__(self,
                  model_path: str):
         """
-        This method initialize the class
+        Constructor
 
         Parameters
         ----------
