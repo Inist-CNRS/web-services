@@ -50,6 +50,7 @@ All contributing instructions are in [CONTRIBUTING](CONTRIBUTING.md).
 - [loterre-resolvers](./services/loterre-resolvers) [![Docker Pulls](https://img.shields.io/docker/pulls/cnrsinist/ws-loterre-resolvers.svg)](https://hub.docker.com/r/cnrsinist/ws-loterre-resolvers/)
 - [ner-tagger](./services/ner-tagger) [![Docker Pulls](https://img.shields.io/docker/pulls/cnrsinist/ws-ner-tagger.svg)](https://hub.docker.com/r/cnrsinist/ws-ner-tagger/)
 - [nlp-tools2](./services/nlp-tools2) [![Docker Pulls](https://img.shields.io/docker/pulls/cnrsinist/ws-nlp-tools2.svg)](https://hub.docker.com/r/cnrsinist/ws-nlp-tools2/)
+- [openalex-doctype](./services/openalex-doctype) [![Docker Pulls](https://img.shields.io/docker/pulls/cnrsinist/ws-openalex-doctype.svg)](https://hub.docker.com/r/cnrsinist/ws-openalex-doctype/)
 - [pdf-text](./services/pdf-text) [![Docker Pulls](https://img.shields.io/docker/pulls/cnrsinist/ws-pdf-text.svg)](https://hub.docker.com/r/cnrsinist/ws-pdf-text/)
 - [person-ner](./services/person-ner) [![Docker Pulls](https://img.shields.io/docker/pulls/cnrsinist/ws-person-ner.svg)](https://hub.docker.com/r/cnrsinist/ws-person-ner/)
 - [sciencemetrix-classification](./services/sciencemetrix-classification) [![Docker Pulls](https://img.shields.io/docker/pulls/cnrsinist/ws-sciencemetrix-classification.svg)](https://hub.docker.com/r/cnrsinist/ws-sciencemetrix-classification/)

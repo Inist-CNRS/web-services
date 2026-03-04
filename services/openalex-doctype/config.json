@@ -1,0 +1,15 @@
+{
+    "environnement": {
+        "EZS_TITLE": "Vérifie si un document OpenAlex est un document de recherche ou non",
+        "EZS_DESCRIPTION": "À partir d'un identifiant OpenAlex ou des métadonnées d'un document, le service établit si c'est un document de recherche ou non",
+        "EZS_METRICS": true,
+        "EZS_CONCURRENCY": 2,
+        "EZS_CONTINUE_DELAY": 60,
+        "EZS_NSHARDS": 32,
+        "EZS_CACHE": true,
+        "EZS_VERBOSE": false,
+        "NODE_OPTIONS": "--max_old_space_size=1024",
+        "NODE_ENV": "production",
+        "OPENALEX_API_KEY": "real_openalex_api_key"
+    }
+}
