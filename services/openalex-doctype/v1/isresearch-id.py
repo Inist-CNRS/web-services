@@ -27,8 +27,6 @@ class DocumentTypeClassifierModel:
 
     def load_model(self) -> KNeighborsClassifier:
         """
-        This method is used to load the model
-
         Returns
         -------
         dt_model : KNeighborsClassifier
@@ -44,8 +42,6 @@ class DocumentTypeClassifierModel:
     @staticmethod
     def get_label(proba: float) -> bool:
         """
-        This method is used to get the label
-
         Parameters
         ----------
         proba: float
@@ -68,7 +64,7 @@ class DocumentTypeClassifierModel:
     @staticmethod
     def page_counter(page_str: str) -> int:
         """
-        This method calculates the page count
+        Extract and compute page number from a string
 
         Parameters
         ----------
@@ -110,8 +106,6 @@ class DocumentTypeClassifierModel:
                        is_paratext: bool,
                        issue: str) -> Dict[str, float]:
         """
-        This method is used to get the prediction
-
         Parameters
         ----------
         source_type: str
