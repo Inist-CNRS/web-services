@@ -11,7 +11,7 @@ Si vous ne disposez pas de token, vous pouvez supprimer les  headers des requêt
 
 ## Télécharger le PPS en local
 
-Pour les tests en local, il peut être contraignant de télécharger le contenu du PPS à chaque build. Nous pouvons donc supprimer temporairement le [télchargement du dockerfile](https://github.com/Inist-CNRS/web-services/blob/b68b9b50f9fe17caeb8182c86b15fa624108397d/services/biblio-ref/Dockerfile#L20) et exploiter le résultat directement en local. Pour l'obtenir une fois "pour toute" en local, voici la commande (cas où le dépôt git `web-services` est clôné dans `~/workspace`):
+Pour les tests en local, il peut être contraignant de télécharger le contenu du PPS à chaque build. Nous pouvons donc supprimer temporairement le [téléchargement du dockerfile](https://github.com/Inist-CNRS/web-services/blob/b68b9b50f9fe17caeb8182c86b15fa624108397d/services/biblio-ref/Dockerfile#L20) et exploiter le résultat directement en local. Pour l'obtenir une fois "pour toute" en local, voici la commande (cas où le dépôt git `web-services` est clôné dans `~/workspace`):
 
 ```sh
 curl -go /tmp/pps.csv 'https://dbrech.irit.fr/pls/apex/f?p=9999:300::IR[allproblematicpapers]_CSV' && \
