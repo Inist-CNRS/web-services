@@ -1,7 +1,7 @@
 {
   "private": true,
   "name": "ws-openalex-doctype",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "description": "Vérifie si un document OpenAlex est un document de recherche ou non",
   "repository": {
     "type": "git",
