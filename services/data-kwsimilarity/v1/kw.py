@@ -17,11 +17,22 @@ import nltk
 from nltk import word_tokenize, pos_tag
 from nltk.corpus import stopwords
 
+# --------------------------------------- Explication des patterns ---------------------------------------
+
+# pattern 1 : (?:abstract|title):\(([^)]+)\) (cas 1 et 3)
+# Premier cas (monoterme) : title:("keyword1" "keyword2" "keyword3")
+# Troisième cas (bigramme et monoterme) : title:("keyword1 keyword2" "keyword3")
+
+# pattern 2 : (?:abstract|title):\"([^\"]+)\" (cas 4 et 5)
+# Quatrième cas (bigramme) : title:"keyword1 keyword2"
+# Cinquième cas (bigramme) : (title:"keyword1 keyword2" "keyword3") !!!!! On ne le gère pas encore
+
+# pattern 3 : (?:abstract|title):(\w+) (cas 2)
+# Deuxième cas (monoterme) : title:keyword
+
 def get_keywords(query: str):
 
     # Pattern 1 : (cas 1 et 3)
-    # title:("keyword1" "keyword2" "keyword3")
-    # title:("keyword1 keyword2" "keyword3")
     m1 = re.findall(r'(?:abstract|title):\(([^)]+)\)', query, re.MULTILINE)
     if m1:
         parts = ["".join(x) for x in m1]
@@ -30,14 +41,12 @@ def get_keywords(query: str):
         return parts 
 
     # Pattern 2 : (cas 4 et 5)
-    # title:"keyword1 keyword2"
     m2 = re.findall(r'(?:abstract|title):"([^"]+)"', query, re.MULTILINE)
     if m2:
         print(f"Pattern 2 raw matches: {m2}", file=sys.stderr)
         return m2
 
     # Pattern 3 : (cas 2)
-    # title:keyword
     m3 = re.findall(r'(?:abstract|title):(\w+)', query, re.MULTILINE)
     if m3:
         print(f"Pattern 3 raw matches: {m3}", file=sys.stderr)
@@ -45,35 +54,26 @@ def get_keywords(query: str):
 
     # Aucun pattern trouvé
     return None, []
-
-#     # Premier cas (monoterme) : title:("keyword1" "keyword2" "keyword3") et title:(keyword1 keyword2 keyword3)
-#     # Deuxième cas (monoterme) : title:keyword
-#     # Troisième cas (bigramme et monoterme) : title:("keyword1 keyword2" "keyword3")
-#     # Quatrième cas (bigramme) : title:"keyword1 keyword2"
-#     # on ignore : Cinquième cas (bigramme) : (title:"keyword1 keyword2" "keyword3")
-
-#     # pattern 1 : (?:abstract|title):\(([^)]+)\) (cas 1 et 3)
-#     # pattern 2 : (?:abstract|title):\"([^\"]+)\" (cas 4 et 5)
-#     # pattern 3 : (?:abstract|title):(\w+) (cas 2)
-
 def cleaned_keywords(list_keywords):
     cleaned_list = []
     print(f"Cleaning keywords: {list_keywords}", file=sys.stderr)
     
     # Si la liste de mots-clés est une liste de listes (pattern 1 : cas 1 et 3)
     if isinstance(list_keywords, list) and len(list_keywords) > 0 and isinstance(list_keywords[0], list):
-        keywords_to_process = list_keywords[0]
-        print(f"Traitement liste de listes: {keywords_to_process}", file=sys.stderr)
+        keywords = list_keywords[0]
+        print(f"Traitement liste de listes: {keywords}", file=sys.stderr)
+
     # Cas liste plate (pattern 2 et 3 : cas 2 et 4)
     elif isinstance(list_keywords, list):
-        keywords_to_process = list_keywords
-        print(f"Traitement liste plate: {keywords_to_process}", file=sys.stderr)
+        keywords = list_keywords
+        print(f"Traitement liste plate: {keywords}", file=sys.stderr)
+
     else:
         print(f"Unexpected format for keywords: {list_keywords}", file=sys.stderr)
         return cleaned_list  # Retourne liste vide si format invalide
     
     # Traitement commun aux deux cas
-    for kw in keywords_to_process:
+    for kw in keywords:
         if " " in kw:
             bigram = kw.strip().lower().replace(" ", "_")
             cleaned_list.append(bigram)
@@ -110,24 +110,29 @@ def extract_ngramsPOS_nltk(text):
     # Unigrammes simples : NOUN et PROPN
     simple_tokens = [word for word, tag in pos_tags if tag in {"NN", "NNS", "NNP", "NNPS"}]
 
+    print(f"Extracted unigrams: {simple_tokens}", file=sys.stderr)
+    print(f"Extracted bigrams: {bigrams}", file=sys.stderr)
     return simple_tokens + bigrams
 
-def clean_tokens(tokens):
-    stop_words = set(stopwords.words('english'))
-    my_stopwords = {"data","abstract","review","reviews","study","studies",
-                    "result","results","conclusion","exchanges","assessing",
-                    "article","articles","previous_work","previous_works"} 
-    stop_words.update(my_stopwords)
+# Chargement unique au module
+STOP_WORDS_EN = set(stopwords.words("english"))
 
+with open("./v1/stopwords/eng.json", "r", encoding="utf-8") as f_words:
+    CUSTOM_STOPWORDS_EN = set(json.load(f_words))
+
+ALL_STOPWORDS_EN = STOP_WORDS_EN | CUSTOM_STOPWORDS_EN
+
+
+def clean_tokens(tokens):
     cleaned = []
     for tok in tokens:
         tok = tok.lower()
         parts = tok.split("_")
-        if all(p not in stop_words for p in parts):
+        if all(p not in ALL_STOPWORDS_EN for p in parts):
             cleaned.append(tok)
     return cleaned
 
-id = int(time.time())
+id = f"{int(time.time())}_{os.getpid()}"
 temporary_corpus = f"/tmp/corpus_{id}.txt"
 temporary_model = f"/tmp/fasttext_model_{id}.bin"
 
@@ -225,9 +230,12 @@ for kw in cleaned_kw:
                     "tfidf": tfidf_score,
                     "ponderation": ponderation
                 })
-                sys.stdout.write(json.dumps(result))
-                sys.stdout.write("\n")
+            # print(result[kw], file=sys.stderr)
     else :
         print(f"Keyword NOT found in model: {kw}", file=sys.stderr)
+        # renvoyer un msg d'erreur 
         pass
+
+sys.stdout.write(json.dumps(result))
+sys.stdout.write("\n")
 print(f"Temp files: {temporary_corpus}, {temporary_model}", file=sys.stderr)
