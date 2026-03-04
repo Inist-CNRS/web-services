@@ -2,7 +2,7 @@
     "openapi": "3.0.0",
     "info": {
         "title": "openalex-doctype - Vérifie si un document OpenAlex est un document de recherche ou non",
-        "description": "A partir d'un identifiant OpenAlex ou des métadonnées d'un document, le service établie si c'est un document de recherche ou non",
+        "description": "à partir d'un identifiant OpenAlex ou des métadonnées d'un document, le service établit si c'est un document de recherche ou non",
         "version": "0.0.0",
         "termsOfService": "https://services.istex.fr/",
         "contact": {

@@ -2,7 +2,7 @@
 
 Vérifie si un document OpenAlex est un document de recherche ou non
 
-A partir d'un identifiant OpenAlex ou des métadonnées d'un document, le service établie si c'est un document de recherche ou non
+À partir d'un identifiant OpenAlex ou des métadonnées d'un document, le service établit si c'est un document de recherche ou non.
 
 ## Auteurs
 

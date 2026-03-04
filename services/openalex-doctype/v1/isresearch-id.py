@@ -183,7 +183,7 @@ class DocumentTypeClassifierModel:
     def make_api_call(self,
                       url: str) -> Dict[str, float]:
         """
-        This method is used to call the OpenAlex API and apply the classifier on the result
+        Call the OpenAlex API and apply the classifier on the result
 
         Parameters
         ----------
