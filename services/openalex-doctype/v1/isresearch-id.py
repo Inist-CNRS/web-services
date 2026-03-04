@@ -152,8 +152,7 @@ class DocumentTypeClassifierModel:
         dt_model = self.load_model()
 
         if not (source_type == 'journal' and item_type in ['article', 'review']):
-            print('Not source type = "journal" or item type in ("article", "review")')
-            return dict(label=None, proba=None)
+            return dict(label="not_processed", proba=1)
 
         probas = dt_model.predict_proba([[int(author_count),
                                           int(has_license),
@@ -201,8 +200,9 @@ class DocumentTypeClassifierModel:
         openalex_item = openalex_item_raw.json()
 
         if not isinstance(openalex_item, dict):
-            print('API Call error')
-            return dict(label=None, proba=None)
+            sys.stderr.write(f'API Call error for id {url.split("/")[-1].split("?")[0]}')
+            sys.stderr.write("\n")
+            return dict(label="n/a", proba="n/a")
 
         source_type = None
 
@@ -296,10 +296,10 @@ def main():
                     confidence = 1-confidence
                 value = {"isResearchDoc": is_research_doc, "score": confidence}
             except Exception:
-                value = {"isResearchDoc": None, "score": None}
+                value = {"isResearchDoc": "n/a", "score": "n/a"}
 
         else:
-            value = {"isResearchDoc": None, "score": None}
+            value = {"isResearchDoc": "n/a", "score": "n/a"}
 
         line["value"] = value
         sys.stdout.write(json.dumps(line))
