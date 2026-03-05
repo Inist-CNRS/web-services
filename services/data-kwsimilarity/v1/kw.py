@@ -30,6 +30,8 @@ from nltk.corpus import stopwords
 # pattern 3 : (?:abstract|title):(\w+) (cas 2)
 # Deuxième cas (monoterme) : title:keyword
 
+# --------------------------------------- Fin explication des patterns ---------------------------------------
+
 def get_keywords(query: str):
 
     # Pattern 1 : (cas 1 et 3)
@@ -230,10 +232,9 @@ for kw in cleaned_kw:
                     "tfidf": tfidf_score,
                     "ponderation": ponderation
                 })
-            # print(result[kw], file=sys.stderr)
     else :
         print(f"Keyword NOT found in model: {kw}", file=sys.stderr)
-        # renvoyer un msg d'erreur 
+        result[kw] = [{"word": f"Mot-clé '{kw}' absent du modèle, occurence < 5 dans le corpus."}]
         pass
 
 sys.stdout.write(json.dumps(result))
