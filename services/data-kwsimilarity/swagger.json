@@ -1,8 +1,8 @@
 {
     "openapi": "3.0.0",
     "info": {
-        "title": "data-kwsimilarity - Extrait les termes sémantiquement proches à un ou plusieurs mots-clés.",
-        "description": "Permet d'extraire les termes sémantiquement proches à un ou plusieurs mots-clés dans la requête ayant permis de créer le corpus.",
+        "title": "data-kwsimilarity - Extrait les termes sémantiquement proches d'un ou plusieurs mots-clés.",
+        "description": "Permet d'extraire, dans un corpus constitué à partir d’un ou plusieurs mots-clés, les termes qui leur sont sémantiquement proches.",
         "version": "0.0.0",
         "termsOfService": "https://services.istex.fr/",
         "contact": {
