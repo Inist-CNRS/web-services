@@ -8,6 +8,8 @@
 POST {{host}}/v1/sudoc
 content-type: application/x-tar
 x-hook: https://webhook.site/69300b22-a251-4c16-9905-f7ba218ae7e9
+[Options]
+skip: {{blocked}}
 file,example.tar.gz;
 
 HTTP 200
@@ -20,7 +22,8 @@ variable "computing_token" exists
 POST {{host}}/v1/retrieve
 content-type: application/json
 [Options]
-delay: 25000
+skip: {{blocked}}
+delay: 20000
 ```
 [
 	{
