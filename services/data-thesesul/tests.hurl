@@ -22,6 +22,7 @@ variable "computing_token" exists
 POST {{host}}/v1/retrieve
 content-type: application/json
 [Options]
+skip: {{blocked}}
 delay: 20000
 ```
 [
