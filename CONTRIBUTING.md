@@ -74,14 +74,17 @@ D'autres exemples de noms de branche:
 - `services/terms-teeft/add-teeft-with-number`
 - `docs/contributing/add-new-branch`
 
-> **Remarque** : seules branches commençant par `services/` et contenant deux
+> [!NOTE]  
+> Seules les branches commençant par `services/` et contenant deux
 > `/` déclencheront l'action de test du service.
 
-> **Remarque** : comme nous construisons des programmes *open source*, tâchons
+> [!NOTE]  
+> Comme nous construisons des programmes *open source*, tâchons
 > de garder tout ce qui est technique (ça peut exclure la documentation
 > elle-même) en anglais.
 
-> **Remarque** : assurez-vous de partir de la branche `main` *à jour* (en faisant un
+> [!NOTE]  
+> Assurez-vous de partir de la branche `main` *à jour* (en faisant un
 > `git pull origin main` *avant* de créer la branche).
 
 ## Création d'un service
@@ -89,96 +92,94 @@ D'autres exemples de noms de branche:
 Avant toute chose, il faut s'assurer qu'un service qui pourrait accueillir votre
 nouvelle route n'existe pas déjà. Cela évitera de créer un nouveau service.
 
-À noter: les sous-sections suivantes expliquent la structure du répertoire à
- créer pour un service, mais le script
- [`generate:service`](SCRIPTS.md#generateservice) se charge maintenant
- d'initialiser le répertoire pour vous. Voir [Script d'initialisation d'un
- nouveau service](#script-dinitialisation-dun-nouveau-service)
+### Méthode recommandée : utiliser le script de génération
 
-### Création du répertoire
-
-> 📘 Ceci est maintenant automatique quand on utilise le script
-> [`generate:service`](SCRIPTS.md#generateservice).
-> Voir [Script d'initialisation d'un nouveau service](#script-dinitialisation-dun-nouveau-service)
-
-Tous les services sont dans le répertoire `services`.  
-Chacun dans son propre répertoire.  
-Son nom suit la convention de nommage des instances ezmaster: au moins deux
-parties composées de lettres minuscules (et éventuellement de chiffres, mais ce
-n'est pas conseillé, à cause de la confusion avec le numéro de version de
-l'instance). Par exemple :`base-line`, `astro-ner`, ...
-
-Pour profiter du système de *workspaces* de npm, il faut déclarer le répertoire
-du nouveau service dans le `package.json` situé à la racine du dépôt.
-
-Par exemple, voici les services `base-line` et `base-line-python` déclarés dans
-le `package.json`:
-
-```json
-{
-  "workspaces": [
-    "services/base-line",
-    "services/base-line-python"
-  ]
-}
-```
-
-Ainsi, vous serez capable de lancer des scripts d'un service (par exemple
-`base-line`) depuis la racine du dépôt (à condition de disposer de npm 7+):
+Pour créer un nouveau service, utilisez le script npm [`generate:service`](SCRIPTS.md#generateservice):
 
 ```bash
-npm -w services/base-line run start:dev
-npm -w services/base-line run stop:dev
+npm run generate:service service-name
 ```
 
-### Fichiers du service
+Le nom du service doit être en minuscules, en au moins deux parties séparées
+par un tiret (ex: `base-line`, `astro-ner`).
 
-> 📘 Ceci est maintenant automatique quand on utilise le script
-> [`generate:service`](SCRIPTS.md#generateservice).
+Le script vous demandera :
+- Le titre du service (*short description*)
+- La description détaillée (*long description*)
+- Le nom de l'auteur et son email
 
-Chaque répertoire de service contient :
+Le script se charge automatiquement de :
+- Créer le répertoire `services/service-name`
+- Ajouter le service dans les *workspaces* du dépôt
+- Générer tous les fichiers nécessaires (voir [Structure d'un service](#structure-dun-service))
+- Ajouter le service dans la liste du [README](./README#services)
 
-- un répertoire `v1` (ou `v2`, ...) contenant son code source (contenant les
-  `.ini`, dans un arbre plus ou moins profond qui détermine les futures routes
-  du service).
-- un fichier `Dockerfile` qui part d'une image `ezs-python-server`
-- un fichier `.dockerignore` (le même que celui de `ezs-python-server`, mais
-  dans lequel on ajoute les fichiers sources)
-- le cas échéant, un fichier `config.json` contenant la configuration par défaut
-  de l'image (quand le service a besoin d'une configuration particulière).
-- un fichier `package.json`, sur le modèle de [celui de
-  `ezs-python-server`](./bases/ezs-python-server/package.json), où `ezs-python-server`
-  est remplacé par le nom du service (celui du répertoire, précédé de `ws-`;
-  exemple: `ws-base-line`), et où on réinitialise la version à `0.0.0`.
-- un fichier `swagger.json` dans lequel on modifie le title (devant commencer
-  par le nom du service, par exemple `base-line -`, c'est ce qui déterminera le
-  tri d'affichage des services dans l'OpenAPI).
-- un fichier `README.md` expliquant en quoi consiste le service.
-- un fichier `examples.http` avec un exemple de requête pour chaque route
-- un fichier `tests.hurl` généré à partir des exemples, pour éviter les
-  régressions du service
+> [!WARNING]  
+> Ne pas mettre de caractère `&` dans les réponses, ça provoque un
+> remplacement bizarre.
 
-### examples.http
+### Après la génération
 
-Le fichier `examples.http` se situe à la racine d'une instance (et donc de son
-répertoire).
+Une fois le service créé, vous devez :
 
-> 📘 Ce fichier est initialisé automatiquement par le script
-> [`generate:service`](SCRIPTS.md#generateservice).  
+1. **Écrire les exemples de requêtes** dans le fichier `examples.http`
+   (voir [Format du fichier examples.http](#format-du-fichier-exampleshttp))
+
+2. **Implémenter les routes** dans le répertoire `v1/`
+
+3. **Générer les tests** une fois le serveur lancé :
+   ```bash
+   npm -w services/<instance> run start:dev
+   # Dans un autre terminal :
+   npm run generate:example-tests services/<instance>
+   ```
+
+### Structure d'un service
+
+> [!NOTE]  
+> Cette section décrit la structure créée automatiquement par le script
+> `generate:service`. Elle sert de référence pour comprendre l'organisation
+d'un service.
+
+Chaque service est un répertoire dans `services/` contenant :
+
+| Fichier/Répertoire    | Description                                                               |
+| --------------------- | ------------------------------------------------------------------------- |
+| `v1/` (ou `v2/`, ...) | Code source du service (fichiers `.ini` définissant les routes)           |
+| `Dockerfile`          | Définition de l'image Docker, basée sur `ezs-python-server`               |
+| `.dockerignore`       | Fichiers à exclure de l'image Docker                                      |
+| `package.json`        | Configuration npm du service (nom: `ws-<service-name>`, version: `0.0.0`) |
+| `swagger.json`        | Documentation OpenAPI (le titre doit commencer par le nom du service)     |
+| `config.json`         | *(Optionnel)* Configuration par défaut du service                         |
+| `README.md`           | Documentation du service                                                  |
+| `examples.http`       | Exemples de requêtes HTTP pour chaque route                               |
+| `tests.hurl`          | Tests générés automatiquement depuis `examples.http`                      |
+
+Le nom du répertoire suit la convention ezmaster : au moins deux parties en
+minuscules séparées par un tiret (ex: `base-line`, `astro-ner`).
+
+Pour profiter du système de *workspaces* npm, le service est automatiquement
+déclaré dans le `package.json` racine, permettant de lancer :
+
+```bash
+npm -w services/<service-name> run start:dev
+npm -w services/<service-name> run stop:dev
+```
+
+### Format du fichier examples.http
+
+Le fichier `examples.http` se situe à la racine du service.
+
+> [!NOTE]  
+> Ce fichier est initialisé automatiquement par le script `generate:service`.
 > Il reste nécessaire d'écrire les requêtes pour chaque route créée.
 
-Il contient des exemples de requêtes HTTP, et constitue donc une partie de la
-documentation du service.  
-Il sert de base à la génération de métadonnées d'exemple en notation pointée
-qu'on peut généralement ajouter sans modification dans le `.ini` (via le script
-[`generate:example-metadata`](SCRIPTS.md#generateexample-metadata)).  
-De plus, il sert aussi à générer les tests (via le script
-[`generate:example-tests`](SCRIPTS.md#generateexample-tests)), il est donc
-doublement important de bien le renseigner.
+Il sert à :
+- Documenter les routes du service
+- Générer les métadonnées d'exemple (via `generate:example-metadata`)
+- Générer les tests (via `generate:example-tests`)
 
-Le début du fichier `examples.http` (attention, ce nom est utilisé dans
-plusieurs scripts, veillez à bien l'orthographier) contient une commentaire
-explicatif, et une variable permettant de changer le serveur cible des requêtes:
+Structure du fichier :
 
 ```ini
 # These examples can be used directly in VSCode, using REST Client extension (humao.rest-client)
@@ -186,108 +187,65 @@ explicatif, et une variable permettant de changer le serveur cible des requêtes
 # Décommenter/commenter les lignes voulues pour tester localement
 @host=http://localhost:31976
 # @host=https://base-line.services.istex.fr
-```
 
-Ensuite viennent les requêtes elles-mêmes.  
-Le début d'une requête est signalé par une ligne contenant uniquement `###`.  
-Puis, on assigne un identifiant (un `name`) à la requête. Cet identifiant doit
-être unique et facile à reconstituer, il est donc conseillé de le construire à
-partir de la route de la requête.  
-Par exemple, la route `/v1/true/json` donnera lieu à un `name` valant
-`v1TrueJson`:
-
-```ini
 ###
 # @name v1TrueJson
-# On met ici un commentaire décrivant ce que fait la route appelée
-```
-
-Après ces commentaires viennent les lignes décrivant la requête:
-
-```http
+# Description de la route
 POST {{host}}/v1/true/json HTTP/1.1
 Content-Type: application/json
 
 [
-  { "value": "à l'école" },
-  { "value": "où" }
+  { "value": "exemple" }
 ]
 ```
 
-En général on utilise la *méthode HTTP* `POST`, et le `Content-Type:
-application/json` (c'est le type du *body* envoyé), puis le tableau JSON envoyé
-(et en général, il contient un ou plusieurs objets avec un champ `value`).  
-
-> **Remarque**: comme ces exemples serviront aussi aux tests, il est utile d'y
-> mettre aussi des exemples dont on veut vérifier le comportement.
-
-### tests.hurl
-
-Le fichier `services/<instance>/tests.hurl` est la plupart du temps généré (sauf
-pour les enchaînements de services qu'on a dans les `data-*`).
-
-Pour ça, il faut d'abord lancer le serveur en local dans un terminal:
-
-```bash
-npm -w services/<instance> run start:dev
-```
-
-ou bien
-
-```bash
-npx ezs -v -m -d services/<instance>/
-```
-
-puis lancer la génération des tests (depuis la racine du dépôt) dans un autre
-terminal:
-
-```bash
-npm run generate:example-tests services/<instance>
-```
-
-> **Remarque**: le fichier `services/<instance>/examples.http` doit exister et
-> contenir au moins un exemple.  
-> Voir [examples.http](#exampleshttp)
-
-Ce fichier servira lors d'un *push* sur GitHub à tester toutes les routes du
-service en question, pour s'assurer de leur non-régression.  
-Pour que ce soit utile, toutes les routes doivent être testées.
-
-On peut aussi [tester le serveur local](#tests).
-
-> 📘 On peut aussi écrire ce fichier à la main, voir [hurl](https://hurl.dev/).
+Chaque requête doit avoir :
+- Un séparateur `###`
+- Un nom unique (`# @name`) construit à partir de la route
+- Une méthode HTTP (généralement `POST`)
+- Un `Content-Type` (généralement `application/json`)
+- Un corps de requête JSON
 
 > [!TIP]  
-> Lorsque le test ne passe pas sur GitHub, parce que la route en question
-> utilise une API vérifiant l'IP de l'appelant, on peut se contenter de
-> désactiver ce test en fonction d'une variable `blocked` (qui sera
-> automatiquement positionnée à `true` sur GitHub).  
+> Comme ces exemples servent aussi aux tests, il est utile d'y
+> mettre des cas de test variés.
+
+### Génération des tests (tests.hurl)
+
+Le fichier `tests.hurl` est généré automatiquement depuis `examples.http`.
+
+Étapes :
+
+1. Lancer le serveur :
+  
+  ```bash
+  npm -w services/<instance> run start:dev
+  # ou
+  npx ezs -v -m -d services/<instance>/
+  ```
+
+2. Générer les tests :
+  
+  ```bash
+  npm run generate:example-tests services/<instance>
+  ```
+
+> [!TIP]  
+> `examples.http` doit contenir au moins un exemple.
+
+Ce fichier sert lors des *push* sur GitHub pour tester la non-régression des
+routes. Toutes les routes doivent être testées.
+
+> [!NOTE]  
+> On peut aussi écrire ce fichier à la main, voir [hurl](https://hurl.dev/).
+
+> [!TIP]  
+> Pour désactiver un test sur GitHub (si l'API vérifie l'IP) :
 >
 > ```ini
 > [Options]
 > skip: {{blocked}}
 > ```
-
-### Script d'initialisation d'un nouveau service
-
-Pour faciliter la création d'un nouveau service, un script npm est disponible:
-[`generate:service`](SCRIPTS.md#generateservice).
-
-Il prend en paramètre le nom du service (tout en minuscules, en deux parties
-séparées par un tiret).  
-Il demande le titre du service (*short description*), sa description (*long
-description*), le nom de l'auteur et *mail*.  
-Il crée le répertoire `services/service-name`, l'ajoute dans les *workspaces* du
-dépôt, et dans la liste des services à la fin du [README](./README#services).
-
-Exemple:
-
-```bash
-npm run generate:service service-name
-```
-
-> ⚠ Ne pas mettre de caractère `&` dans les réponses, ça provoque un
-> remplacement bizarre.
 
 ### OpenAPI: ajout d'une description multi-lignes dans les métadonnées du .ini
 
@@ -414,7 +372,8 @@ RUN apt-get update && apt-get -y --no-install-recommends install \
 - `apt-get clean` supprime les caches des paquets téléchargés
 - `rm -rf /var/lib/apt/lists/*` supprime la liste des paquets
 
-> [!NOTE] On installe les paquets avec la version explicite, pour éviter les
+> [!NOTE]  
+> On installe les paquets avec la version explicite, pour éviter les
 > mises à jour involontaires.
 
 #### pip
@@ -551,7 +510,8 @@ un fichier `tests.hurl`):
 HURL_blocked=false npm run test:remotes service-name service2-name
 ```
 
-> 📘 Pour éviter qu'un service soit testé lorsqu'il est en production, on peut
+> [!TIP]  
+> Pour éviter qu'un service soit testé lorsqu'il est en production, on peut
 > positionner la propriété `avoid-testing` du `package.json` du service à
 > `true`.
 >
@@ -597,12 +557,14 @@ publié (sans URL externe), en se basant sur l'URL présente dans `swagger.json`
 Une fois que le nouveau service est créé, il faut l'ajouter à la liste du README
 de la racine du dépôt.
 
-> 📘 Ceci est automatique quand on utilise le script
+> [!NOTE]  
+> Ceci est automatique quand on utilise le script
 > [`generate:service`](SCRIPTS.md#generateservice).
 
 ## Les images de base
 
-> ⚠ Cette partie ne concerne pas directement l'écriture des services, mais plus
+> [!WARNING]  
+> Cette partie ne concerne pas directement l'écriture des services, mais plus
 > le mainteneur des images de base.
 
 Le répertoire `bases` contient les images de base, c'est-à-dire celles qui
@@ -646,14 +608,16 @@ Il y a plusieurs images de base:
   serveur ezs vide, acceptant les scripts ezs et python, embarquant saxon, sous
   la forme de la commande `xslt`.
 
-> **Note:** il existe maintenant un script qui se charge de la mise à jour des
+> [!NOTE]  
+> Il existe maintenant un script qui se charge de la mise à jour des
 > images qui dépendent directement d'une image de base: [`npm run update:images
-> <image-name>`](./SCRIPTS.md#updateimages).  Assurez-vous que l'image a été
-> créée (version, build, push) avant de lancer le script. De même, faites en
-> sorte que les dernières modifications de la branche `main` soient intégrées
-> dans la branche de travail de la *pull request* (un `git merge main` devrait
-> faire l'affaire), sous peine d'avoir des tags de version existant déjà, et
-> interrompant la mise à jour du/des service/s en question.
+> <image-name>`](./SCRIPTS.md#updateimages).  
+> Assurez-vous que l'image a été créée (version, build, push) avant de lancer le
+> script.  
+> De même, faites en sorte que les dernières modifications de la branche `main`
+> soient intégrées dans la branche de travail de la *pull request* (un `git
+> merge main` devrait faire l'affaire), sous peine d'avoir des tags de version
+> existant déjà, et interrompant la mise à jour du/des service/s en question.
 
 ## Création d'une version
 
@@ -666,10 +630,11 @@ Cela va créer un tag, modifier le numéro de version dans le README, et pousser
 le tout sur GitHub, déclenchant une action de Github qui poussera
 automatiquement l'image sur Docker Hub.
 
-> **Remarque**: on peut aussi créer la version manuellement. Pour ça il faut se déplacer dans le
-répertoire du `Dockerfile` et lancer `npm version` en utilisant l'argument
-`major`, `minor` ou `patch` suivant qu'il y a un changement majeur, un ajout de
-fonctionnalité ou une correction.
+> [!NOTE]  
+> On peut aussi créer la version manuellement. Pour ça il faut se déplacer dans
+> le répertoire du `Dockerfile` et lancer `npm version` en utilisant l'argument
+> `major`, `minor` ou `patch` suivant qu'il y a un changement majeur, un ajout de
+> fonctionnalité ou une correction.
 
 ## Mise en production
 
