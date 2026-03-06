@@ -56,6 +56,8 @@ def get_keywords(query: str):
 
     # Aucun pattern trouvé
     return None, []
+
+
 def cleaned_keywords(list_keywords):
     cleaned_list = []
     print(f"Cleaning keywords: {list_keywords}", file=sys.stderr)
