@@ -2,7 +2,7 @@
   "private": true,
   "name": "ws-data-kwsimilarity",
   "version": "2.1.2",
-  "description": "Permet de récupérer, dans un corpus constitué à partir d’un ou plusieurs mots-clés, les termes qui leur sont sémantiquement proches.",
+  "description": "Dans un corpus constitué à partir d’un ou plusieurs mots-clés, récupère les termes qui leur sont sémantiquement proches.",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Inist-CNRS/web-services.git"
