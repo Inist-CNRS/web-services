@@ -3,7 +3,7 @@
     "info": {
         "title": "data-kwsimilarity - Extrait les termes sémantiquement proches d'un ou plusieurs mots-clés.",
         "description": "Dans un corpus constitué à partir d’un ou plusieurs mots-clés, extrait les termes qui leur sont sémantiquement proches.",
-        "version": "0.0.0",
+        "version": "3.0.0",
         "termsOfService": "https://services.istex.fr/",
         "contact": {
             "name": "Inist-CNRS",

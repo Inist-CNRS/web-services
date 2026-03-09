@@ -1,7 +1,7 @@
 {
   "private": true,
   "name": "ws-data-kwsimilarity",
-  "version": "2.1.2",
+  "version": "3.0.0",
   "description": "Dans un corpus constitué à partir d’un ou plusieurs mots-clés, récupère les termes qui leur sont sémantiquement proches.",
   "repository": {
     "type": "git",
