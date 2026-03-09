@@ -115,7 +115,19 @@ def filter_api(json, city=None, short=False):
             try :
                 id_ror = item["organization"]["id"]
                 score_similarity = item["score"]
-                name = item["organization"]["names"][0]["value"]
+
+                all_names = item["organization"]["names"]
+                name_display = all_names[0]["value"]
+
+                for name in all_names:
+                    for type_name in name["types"]:
+                        if type_name in ("label", "ror_display"):
+                            name_display = name["value"]
+                            break
+                    else:
+                        continue
+                    break
+
                 type = item["organization"]["types"]
                 name_geonames = item["organization"]["locations"][0]["geonames_details"]["name"]
                 id_geonames = item["organization"]["locations"][0]["geonames_id"]
@@ -123,7 +135,7 @@ def filter_api(json, city=None, short=False):
                     "status": "Found",
                     "id_ror": id_ror,
                     "score": score_similarity,
-                    "name": name,
+                    "name": name_display,
                     "type": type,
                     "name_geonames": name_geonames,
                     "id_geonames": id_geonames,
