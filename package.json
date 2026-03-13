@@ -78,6 +78,7 @@
     "services/terms-extraction",
     "services/terms-tools",
     "services/text-clustering",
+    "services/text-lucene",
     "services/text-summarize",
     "services/transli-tal"
   ],
