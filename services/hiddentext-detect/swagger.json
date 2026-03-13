@@ -1,0 +1,33 @@
+{
+    "openapi": "0.0.0",
+    "info": {
+        "title": "hiddentext-detect - Détection de textes cachés",
+        "description": "Service de détection de textes cachés dans les documents.",
+        "version": "0.0.0",
+        "termsOfService": "https://services.istex.fr/",
+        "contact": {
+            "name": "Inist-CNRS",
+            "url": "https://www.inist.fr/nous-contacter/"
+        }
+    },
+    "servers": [
+        {
+            "x-comment": "Will be automatically completed by the ezs server."
+        },
+        {
+            "url": "http://vptdmservices.intra.inist.fr:49364/",
+            "description": "Latest version for production",
+            "x-profil": "Standard"
+        }
+    ],
+    "tags": [
+        {
+            "name": "hiddentext-detect",
+            "description": "Détection de textes cachés",
+            "externalDocs": {
+                "description": "Plus de documentation",
+                "url": "https://github.com/inist-cnrs/web-services/tree/main/services/hiddentext-detect"
+            }
+        }
+    ]
+}
