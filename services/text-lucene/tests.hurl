@@ -11,9 +11,11 @@ content-type: application/json
 
 
 HTTP 200
-[{
-    "value": "(title:(\"biodiversity\" \"marine biodiversity\" \"ocean biodiversity\" \"oceanic biodiversity\") OR abstract:(\"biodiversity\" \"marine biodiversity\" \"ocean biodiversity\" \"oceanic biodiversity\") OR subject.value:(\"biodiversity\" \"marine biodiversity\" \"ocean biodiversity\" \"oceanic biodiversity\")) AND (title:(\"north mediterranean\" \"north mediterranean sea\") OR abstract:(\"north mediterranean\" \"north mediterranean sea\") OR subject.value:(\"north mediterranean\" \"north mediterranean sea\")) AND language.raw:(\"eng\") AND genre.raw:\"research-article\" AND publicationDate:[2020 TO *]"
-},
-{
-    "value": ""
-}]
+Content-Type: application/json
+[Asserts]
+jsonpath "$[0].value" contains "title:("
+jsonpath "$[0].value" contains "abstract:("
+jsonpath "$[0].value" contains "language.raw:"
+jsonpath "$[0].value" matches /^.{100,1100}$/
+jsonpath "$[1].value" exists
+jsonpath "$[1].value" matches /^.{0,10}$/
