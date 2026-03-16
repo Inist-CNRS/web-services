@@ -1,7 +1,7 @@
 {
     "environnement": {
         "EZS_TITLE": "Assistance à la génération de requête dans Istex Search",
-        "EZS_DESCRIPTION": "Génère une requête en syntaxe Lucene a partir d'une requête en langue naturelle (multilingue)",
+        "EZS_DESCRIPTION": "Génère une requête en syntaxe Lucene à partir d'une requête en langue naturelle (multilingue)",
         "EZS_METRICS": true,
         "EZS_CONCURRENCY": 2,
         "EZS_CONTINUE_DELAY": 60,
