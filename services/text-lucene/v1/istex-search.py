@@ -137,7 +137,7 @@ def main():
             user_prompt = json.loads(line)
             value = user_prompt["value"]
             if len(value) < 10:
-                raise Exception("To short request")
+                raise Exception("Too short request")
             prompt = construct_llm_prompt(value)
             output = None
 
@@ -168,8 +168,7 @@ def main():
         except Exception as e:
             sys.stderr.write(f"Unexpected error: {str(e)}")
             sys.stderr.write("\n")
-            user_prompt = {"value": ""}
-
+            user_prompt["value"] = ""
         sys.stdout.write(json.dumps(user_prompt))
         sys.stdout.write("\n")
 
