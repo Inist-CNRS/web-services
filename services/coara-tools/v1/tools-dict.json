@@ -1,1774 +1,1402 @@
 {
-  "a global observatory of responsible research assessment": {
-    "tool_homogenised": "a global observatory of responsible research assessment",
-    "other_tool_form": [
-      "a global observatory of responsible research assessment",
-      " agorra"
-    ],
-    "other_tool_form_flatten": "a global observatory of responsible research assessment ;  agorra",
-    "definition": "No definition provided."
-  },
-  " agorra": {
-    "tool_homogenised": "a global observatory of responsible research assessment",
-    "other_tool_form": [
-      "a global observatory of responsible research assessment",
-      " agorra"
-    ],
-    "other_tool_form_flatten": "a global observatory of responsible research assessment ;  agorra",
-    "definition": "No definition provided."
-  },
-  "agreement on reforming research assessment": {
-    "tool_homogenised": "agreement on reforming research assessment",
-    "other_tool_form": [
-      "agreement on reforming research assessment",
-      "arra"
-    ],
-    "other_tool_form_flatten": "agreement on reforming research assessment ; arra",
-    "definition": "No definition provided."
-  },
-  "arra": {
-    "tool_homogenised": "agreement on reforming research assessment",
-    "other_tool_form": [
-      "agreement on reforming research assessment",
-      "arra"
-    ],
-    "other_tool_form_flatten": "agreement on reforming research assessment ; arra",
-    "definition": "No definition provided."
-  },
-  "anr": {
-    "tool_homogenised": "anr",
-    "other_tool_form": [
-      "anr"
-    ],
-    "other_tool_form_flatten": "anr",
-    "definition": "No definition provided."
-  },
-  "anvur": {
-    "tool_homogenised": "anvur",
-    "other_tool_form": [
-      "anvur",
-      "italian national agency for the evaluation of universities and research institutes"
-    ],
-    "other_tool_form_flatten": "anvur ; italian national agency for the evaluation of universities and research institutes",
-    "definition": "No definition provided."
-  },
-  "italian national agency for the evaluation of universities and research institutes": {
-    "tool_homogenised": "anvur",
-    "other_tool_form": [
-      "anvur",
-      "italian national agency for the evaluation of universities and research institutes"
-    ],
-    "other_tool_form_flatten": "anvur ; italian national agency for the evaluation of universities and research institutes",
-    "definition": "No definition provided."
-  },
-  "audit register for higher education institutions": {
-    "tool_homogenised": "audit register for higher education institutions",
-    "other_tool_form": [
-      "audit register for higher education institutions"
-    ],
-    "other_tool_form_flatten": "audit register for higher education institutions",
-    "definition": "No definition provided."
-  },
-  "barcelona declaration": {
-    "tool_homogenised": "barcelona declaration",
-    "other_tool_form": [
-      "barcelona declaration",
-      " barcelona declaration on open research information"
-    ],
-    "other_tool_form_flatten": "barcelona declaration ;  barcelona declaration on open research information",
-    "definition": "No definition provided."
-  },
-  " barcelona declaration on open research information": {
-    "tool_homogenised": "barcelona declaration",
-    "other_tool_form": [
-      "barcelona declaration",
-      " barcelona declaration on open research information"
-    ],
-    "other_tool_form_flatten": "barcelona declaration ;  barcelona declaration on open research information",
-    "definition": "No definition provided."
-  },
-  "berlin declaration": {
-    "tool_homogenised": "berlin declaration",
-    "other_tool_form": [
-      "berlin declaration",
-      "berlin declaration on open access to knowledge in the sciences and humanities"
-    ],
-    "other_tool_form_flatten": "berlin declaration ; berlin declaration on open access to knowledge in the sciences and humanities",
-    "definition": "No definition provided."
-  },
-  "berlin declaration on open access to knowledge in the sciences and humanities": {
-    "tool_homogenised": "berlin declaration",
-    "other_tool_form": [
-      "berlin declaration",
-      "berlin declaration on open access to knowledge in the sciences and humanities"
-    ],
-    "other_tool_form_flatten": "berlin declaration ; berlin declaration on open access to knowledge in the sciences and humanities",
-    "definition": "No definition provided."
-  },
-  "career assessment matrix": {
-    "tool_homogenised": "career assessment matrix",
-    "other_tool_form": [
-      "career assessment matrix",
-      "career-assessment matrix",
-      "cam"
-    ],
-    "other_tool_form_flatten": "career assessment matrix ; career-assessment matrix ; cam",
-    "definition": "No definition provided."
-  },
-  "career-assessment matrix": {
-    "tool_homogenised": "career assessment matrix",
-    "other_tool_form": [
-      "career assessment matrix",
-      "career-assessment matrix",
-      "cam"
-    ],
-    "other_tool_form_flatten": "career assessment matrix ; career-assessment matrix ; cam",
-    "definition": "No definition provided."
-  },
-  "cam": {
-    "tool_homogenised": "career assessment matrix",
-    "other_tool_form": [
-      "career assessment matrix",
-      "career-assessment matrix",
-      "cam"
-    ],
-    "other_tool_form_flatten": "career assessment matrix ; career-assessment matrix ; cam",
-    "definition": "No definition provided."
-  },
-  "coara national chapter": {
-    "tool_homogenised": "coara national chapter",
-    "other_tool_form": [
-      "coara national chapter"
-    ],
-    "other_tool_form_flatten": "coara national chapter",
-    "definition": "No definition provided."
-  },
-  "coara principles": {
-    "tool_homogenised": "coara principles",
-    "other_tool_form": [
-      "coara principles"
-    ],
-    "other_tool_form_flatten": "coara principles",
-    "definition": "No definition provided."
-  },
-  "coara working group": {
-    "tool_homogenised": "coara working group",
-    "other_tool_form": [
-      "coara working group",
-      "coara working groups"
-    ],
-    "other_tool_form_flatten": "coara working group ; coara working groups",
-    "definition": "No definition provided."
-  },
-  "coara working groups": {
-    "tool_homogenised": "coara working group",
-    "other_tool_form": [
-      "coara working group",
-      "coara working groups"
-    ],
-    "other_tool_form_flatten": "coara working group ; coara working groups",
-    "definition": "No definition provided."
-  },
-  "commission for the assessment of knowledge transfer activity": {
-    "tool_homogenised": "commission for the assessment of knowledge transfer activity",
-    "other_tool_form": [
-      "commission for the assessment of knowledge transfer activity",
-      "cneat"
-    ],
-    "other_tool_form_flatten": "commission for the assessment of knowledge transfer activity ; cneat",
-    "definition": "No definition provided."
-  },
-  "cneat": {
-    "tool_homogenised": "commission for the assessment of knowledge transfer activity",
-    "other_tool_form": [
-      "commission for the assessment of knowledge transfer activity",
-      "cneat"
-    ],
-    "other_tool_form_flatten": "commission for the assessment of knowledge transfer activity ; cneat",
-    "definition": "No definition provided."
-  },
-  "competence assessment matrix": {
-    "tool_homogenised": "competence assessment matrix",
-    "other_tool_form": [
-      "competence assessment matrix"
-    ],
-    "other_tool_form_flatten": "competence assessment matrix",
-    "definition": "No definition provided."
-  },
-  "conference of rectors of spanish universities": {
-    "tool_homogenised": "conference of rectors of spanish universities",
-    "other_tool_form": [
-      "conference of rectors of spanish universities",
-      "crue"
-    ],
-    "other_tool_form_flatten": "conference of rectors of spanish universities ; crue",
-    "definition": "No definition provided."
-  },
-  "crue": {
-    "tool_homogenised": "conference of rectors of spanish universities",
-    "other_tool_form": [
-      "conference of rectors of spanish universities",
-      "crue"
-    ],
-    "other_tool_form_flatten": "conference of rectors of spanish universities ; crue",
-    "definition": "No definition provided."
-  },
-  "repository for research data management and dissemination": {
-    "tool_homogenised": "repository for research data management and dissemination",
-    "other_tool_form": [
-      "repository for research data management and dissemination",
-      " creed"
-    ],
-    "other_tool_form_flatten": "repository for research data management and dissemination ;  creed",
-    "definition": "No definition provided."
-  },
-  " creed": {
-    "tool_homogenised": "repository for research data management and dissemination",
-    "other_tool_form": [
-      "repository for research data management and dissemination",
-      " creed"
-    ],
-    "other_tool_form_flatten": "repository for research data management and dissemination ;  creed",
-    "definition": "No definition provided."
-  },
-  "declaration of social responsibility": {
-    "tool_homogenised": "declaration of social responsibility",
-    "other_tool_form": [
-      "declaration of social responsibility",
-      "csr"
-    ],
-    "other_tool_form_flatten": "declaration of social responsibility ; csr",
-    "definition": "No definition provided."
-  },
-  "csr": {
-    "tool_homogenised": "declaration of social responsibility",
-    "other_tool_form": [
-      "declaration of social responsibility",
-      "csr"
-    ],
-    "other_tool_form_flatten": "declaration of social responsibility ; csr",
-    "definition": "No definition provided."
-  },
-  "diamas project": {
-    "tool_homogenised": "diamas project",
-    "other_tool_form": [
-      "diamas project",
-      "diamas"
-    ],
-    "other_tool_form_flatten": "diamas project ; diamas",
-    "definition": "No definition provided."
-  },
-  "diamas": {
-    "tool_homogenised": "diamas project",
-    "other_tool_form": [
-      "diamas project",
-      "diamas"
-    ],
-    "other_tool_form_flatten": "diamas project ; diamas",
-    "definition": "No definition provided."
-  },
-  "dora": {
-    "tool_homogenised": "dora",
-    "other_tool_form": [
-      "dora",
-      "declaration on research assessment",
-      "san francisco declaration on research assessment"
-    ],
-    "other_tool_form_flatten": "dora ; declaration on research assessment ; san francisco declaration on research assessment",
-    "definition": "No definition provided."
-  },
-  "declaration on research assessment": {
-    "tool_homogenised": "dora",
-    "other_tool_form": [
-      "dora",
-      "declaration on research assessment",
-      "san francisco declaration on research assessment"
-    ],
-    "other_tool_form_flatten": "dora ; declaration on research assessment ; san francisco declaration on research assessment",
-    "definition": "No definition provided."
-  },
-  "san francisco declaration on research assessment": {
-    "tool_homogenised": "dora",
-    "other_tool_form": [
-      "dora",
-      "declaration on research assessment",
-      "san francisco declaration on research assessment"
-    ],
-    "other_tool_form_flatten": "dora ; declaration on research assessment ; san francisco declaration on research assessment",
-    "definition": "No definition provided."
-  },
-  "eu recommendations": {
-    "tool_homogenised": "eu recommendations",
-    "other_tool_form": [
-      "eu recommendations",
-      "recommendations on recognition systems"
-    ],
-    "other_tool_form_flatten": "eu recommendations ; recommendations on recognition systems",
-    "definition": "No definition provided."
-  },
-  "recommendations on recognition systems": {
-    "tool_homogenised": "eu recommendations",
-    "other_tool_form": [
-      "eu recommendations",
-      "recommendations on recognition systems"
-    ],
-    "other_tool_form_flatten": "eu recommendations ; recommendations on recognition systems",
-    "definition": "No definition provided."
-  },
-  "european association for quality assurance in higher education": {
-    "tool_homogenised": "european association for quality assurance in higher education",
-    "other_tool_form": [
-      "european association for quality assurance in higher education",
-      "enqa"
-    ],
-    "other_tool_form_flatten": "european association for quality assurance in higher education ; enqa",
-    "definition": "No definition provided."
-  },
-  "enqa": {
-    "tool_homogenised": "european association for quality assurance in higher education",
-    "other_tool_form": [
-      "european association for quality assurance in higher education",
-      "enqa"
-    ],
-    "other_tool_form_flatten": "european association for quality assurance in higher education ; enqa",
-    "definition": "No definition provided."
-  },
-  "european charter": {
-    "tool_homogenised": "european charter",
-    "other_tool_form": [
-      "european charter",
-      "charter for researchers",
-      "european charter for researchers"
-    ],
-    "other_tool_form_flatten": "european charter ; charter for researchers ; european charter for researchers",
-    "definition": "No definition provided."
-  },
-  "charter for researchers": {
-    "tool_homogenised": "european charter",
-    "other_tool_form": [
-      "european charter",
-      "charter for researchers",
-      "european charter for researchers"
-    ],
-    "other_tool_form_flatten": "european charter ; charter for researchers ; european charter for researchers",
-    "definition": "No definition provided."
-  },
-  "european charter for researchers": {
-    "tool_homogenised": "european charter",
-    "other_tool_form": [
-      "european charter",
-      "charter for researchers",
-      "european charter for researchers"
-    ],
-    "other_tool_form_flatten": "european charter ; charter for researchers ; european charter for researchers",
-    "definition": "No definition provided."
-  },
-  "european competence framework": {
-    "tool_homogenised": "european competence framework",
-    "other_tool_form": [
-      "european competence framework",
-      "european competence framework for researchers",
-      "european framework for research careers",
-      "researchcomp"
-    ],
-    "other_tool_form_flatten": "european competence framework ; european competence framework for researchers ; european framework for research careers ; researchcomp",
-    "definition": "No definition provided."
-  },
-  "european competence framework for researchers": {
-    "tool_homogenised": "european competence framework",
-    "other_tool_form": [
-      "european competence framework",
-      "european competence framework for researchers",
-      "european framework for research careers",
-      "researchcomp"
-    ],
-    "other_tool_form_flatten": "european competence framework ; european competence framework for researchers ; european framework for research careers ; researchcomp",
-    "definition": "No definition provided."
-  },
-  "european framework for research careers": {
-    "tool_homogenised": "european competence framework",
-    "other_tool_form": [
-      "european competence framework",
-      "european competence framework for researchers",
-      "european framework for research careers",
-      "researchcomp"
-    ],
-    "other_tool_form_flatten": "european competence framework ; european competence framework for researchers ; european framework for research careers ; researchcomp",
-    "definition": "No definition provided."
-  },
-  "researchcomp": {
-    "tool_homogenised": "european competence framework",
-    "other_tool_form": [
-      "european competence framework",
-      "european competence framework for researchers",
-      "european framework for research careers",
-      "researchcomp"
-    ],
-    "other_tool_form_flatten": "european competence framework ; european competence framework for researchers ; european framework for research careers ; researchcomp",
-    "definition": "No definition provided."
-  },
-  "european higher education area": {
-    "tool_homogenised": "european higher education area",
-    "other_tool_form": [
-      "european higher education area",
-      "ehea",
-      "standards and guidelines for quality assurance in the european higher education area",
-      " european strategy for universities"
-    ],
-    "other_tool_form_flatten": "european higher education area ; ehea ; standards and guidelines for quality assurance in the european higher education area ;  european strategy for universities",
-    "definition": "No definition provided."
-  },
-  "ehea": {
-    "tool_homogenised": "european higher education area",
-    "other_tool_form": [
-      "european higher education area",
-      "ehea",
-      "standards and guidelines for quality assurance in the european higher education area",
-      " european strategy for universities"
-    ],
-    "other_tool_form_flatten": "european higher education area ; ehea ; standards and guidelines for quality assurance in the european higher education area ;  european strategy for universities",
-    "definition": "No definition provided."
-  },
-  "standards and guidelines for quality assurance in the european higher education area": {
-    "tool_homogenised": "european higher education area",
-    "other_tool_form": [
-      "european higher education area",
-      "ehea",
-      "standards and guidelines for quality assurance in the european higher education area",
-      " european strategy for universities"
-    ],
-    "other_tool_form_flatten": "european higher education area ; ehea ; standards and guidelines for quality assurance in the european higher education area ;  european strategy for universities",
-    "definition": "No definition provided."
-  },
-  " european strategy for universities": {
-    "tool_homogenised": "european higher education area",
-    "other_tool_form": [
-      "european higher education area",
-      "ehea",
-      "standards and guidelines for quality assurance in the european higher education area",
-      " european strategy for universities"
-    ],
-    "other_tool_form_flatten": "european higher education area ; ehea ; standards and guidelines for quality assurance in the european higher education area ;  european strategy for universities",
-    "definition": "No definition provided."
-  },
-  "european open science cloud": {
-    "tool_homogenised": "european open science cloud",
-    "other_tool_form": [
-      "european open science cloud",
-      "eosc"
-    ],
-    "other_tool_form_flatten": "european open science cloud ; eosc",
-    "definition": "No definition provided."
-  },
-  "eosc": {
-    "tool_homogenised": "european open science cloud",
-    "other_tool_form": [
-      "european open science cloud",
-      "eosc"
-    ],
-    "other_tool_form_flatten": "european open science cloud ; eosc",
-    "definition": "No definition provided."
-  },
-  "european quality assurance register for higher education": {
-    "tool_homogenised": "european quality assurance register for higher education",
-    "other_tool_form": [
-      "european quality assurance register for higher education",
-      "eqar"
-    ],
-    "other_tool_form_flatten": "european quality assurance register for higher education ; eqar",
-    "definition": "No definition provided."
-  },
-  "eqar": {
-    "tool_homogenised": "european quality assurance register for higher education",
-    "other_tool_form": [
-      "european quality assurance register for higher education",
-      "eqar"
-    ],
-    "other_tool_form_flatten": "european quality assurance register for higher education ; eqar",
-    "definition": "No definition provided."
-  },
-  "evaluation framework": {
-    "tool_homogenised": "evaluation framework",
-    "other_tool_form": [
-      "evaluation framework",
-      "evaluation methodology and transparency",
-      "evaluation tools and processes",
-      "framework for research assessment",
-      "national evaluation framework",
-      "national framework",
-      "new assessment framework"
-    ],
-    "other_tool_form_flatten": "evaluation framework ; evaluation methodology and transparency ; evaluation tools and processes ; framework for research assessment ; national evaluation framework ; national framework ; new assessment framework",
-    "definition": "No definition provided."
-  },
-  "evaluation methodology and transparency": {
-    "tool_homogenised": "evaluation framework",
-    "other_tool_form": [
-      "evaluation framework",
-      "evaluation methodology and transparency",
-      "evaluation tools and processes",
-      "framework for research assessment",
-      "national evaluation framework",
-      "national framework",
-      "new assessment framework"
-    ],
-    "other_tool_form_flatten": "evaluation framework ; evaluation methodology and transparency ; evaluation tools and processes ; framework for research assessment ; national evaluation framework ; national framework ; new assessment framework",
-    "definition": "No definition provided."
-  },
-  "evaluation tools and processes": {
-    "tool_homogenised": "evaluation framework",
-    "other_tool_form": [
-      "evaluation framework",
-      "evaluation methodology and transparency",
-      "evaluation tools and processes",
-      "framework for research assessment",
-      "national evaluation framework",
-      "national framework",
-      "new assessment framework"
-    ],
-    "other_tool_form_flatten": "evaluation framework ; evaluation methodology and transparency ; evaluation tools and processes ; framework for research assessment ; national evaluation framework ; national framework ; new assessment framework",
-    "definition": "No definition provided."
-  },
-  "framework for research assessment": {
-    "tool_homogenised": "evaluation framework",
-    "other_tool_form": [
-      "evaluation framework",
-      "evaluation methodology and transparency",
-      "evaluation tools and processes",
-      "framework for research assessment",
-      "national evaluation framework",
-      "national framework",
-      "new assessment framework"
-    ],
-    "other_tool_form_flatten": "evaluation framework ; evaluation methodology and transparency ; evaluation tools and processes ; framework for research assessment ; national evaluation framework ; national framework ; new assessment framework",
-    "definition": "No definition provided."
-  },
-  "national evaluation framework": {
-    "tool_homogenised": "evaluation framework",
-    "other_tool_form": [
-      "evaluation framework",
-      "evaluation methodology and transparency",
-      "evaluation tools and processes",
-      "framework for research assessment",
-      "national evaluation framework",
-      "national framework",
-      "new assessment framework"
-    ],
-    "other_tool_form_flatten": "evaluation framework ; evaluation methodology and transparency ; evaluation tools and processes ; framework for research assessment ; national evaluation framework ; national framework ; new assessment framework",
-    "definition": "No definition provided."
-  },
-  "national framework": {
-    "tool_homogenised": "evaluation framework",
-    "other_tool_form": [
-      "evaluation framework",
-      "evaluation methodology and transparency",
-      "evaluation tools and processes",
-      "framework for research assessment",
-      "national evaluation framework",
-      "national framework",
-      "new assessment framework"
-    ],
-    "other_tool_form_flatten": "evaluation framework ; evaluation methodology and transparency ; evaluation tools and processes ; framework for research assessment ; national evaluation framework ; national framework ; new assessment framework",
-    "definition": "No definition provided."
-  },
-  "new assessment framework": {
-    "tool_homogenised": "evaluation framework",
-    "other_tool_form": [
-      "evaluation framework",
-      "evaluation methodology and transparency",
-      "evaluation tools and processes",
-      "framework for research assessment",
-      "national evaluation framework",
-      "national framework",
-      "new assessment framework"
-    ],
-    "other_tool_form_flatten": "evaluation framework ; evaluation methodology and transparency ; evaluation tools and processes ; framework for research assessment ; national evaluation framework ; national framework ; new assessment framework",
-    "definition": "No definition provided."
-  },
-  "finnish career assessment matrix": {
-    "tool_homogenised": "finnish career assessment matrix",
-    "other_tool_form": [
-      "finnish career assessment matrix",
-      "fin-cam",
-      "finn-cam",
-      "finnish career-assessment matrix",
-      "rdio",
-      "rdio assessment matrix"
-    ],
-    "other_tool_form_flatten": "finnish career assessment matrix ; fin-cam ; finn-cam ; finnish career-assessment matrix ; rdio ; rdio assessment matrix",
-    "definition": "No definition provided."
-  },
-  "fin-cam": {
-    "tool_homogenised": "finnish career assessment matrix",
-    "other_tool_form": [
-      "finnish career assessment matrix",
-      "fin-cam",
-      "finn-cam",
-      "finnish career-assessment matrix",
-      "rdio",
-      "rdio assessment matrix"
-    ],
-    "other_tool_form_flatten": "finnish career assessment matrix ; fin-cam ; finn-cam ; finnish career-assessment matrix ; rdio ; rdio assessment matrix",
-    "definition": "No definition provided."
-  },
-  "finn-cam": {
-    "tool_homogenised": "finnish career assessment matrix",
-    "other_tool_form": [
-      "finnish career assessment matrix",
-      "fin-cam",
-      "finn-cam",
-      "finnish career-assessment matrix",
-      "rdio",
-      "rdio assessment matrix"
-    ],
-    "other_tool_form_flatten": "finnish career assessment matrix ; fin-cam ; finn-cam ; finnish career-assessment matrix ; rdio ; rdio assessment matrix",
-    "definition": "No definition provided."
-  },
-  "finnish career-assessment matrix": {
-    "tool_homogenised": "finnish career assessment matrix",
-    "other_tool_form": [
-      "finnish career assessment matrix",
-      "fin-cam",
-      "finn-cam",
-      "finnish career-assessment matrix",
-      "rdio",
-      "rdio assessment matrix"
-    ],
-    "other_tool_form_flatten": "finnish career assessment matrix ; fin-cam ; finn-cam ; finnish career-assessment matrix ; rdio ; rdio assessment matrix",
-    "definition": "No definition provided."
-  },
-  "rdio": {
-    "tool_homogenised": "finnish career assessment matrix",
-    "other_tool_form": [
-      "finnish career assessment matrix",
-      "fin-cam",
-      "finn-cam",
-      "finnish career-assessment matrix",
-      "rdio",
-      "rdio assessment matrix"
-    ],
-    "other_tool_form_flatten": "finnish career assessment matrix ; fin-cam ; finn-cam ; finnish career-assessment matrix ; rdio ; rdio assessment matrix",
-    "definition": "No definition provided."
-  },
-  "rdio assessment matrix": {
-    "tool_homogenised": "finnish career assessment matrix",
-    "other_tool_form": [
-      "finnish career assessment matrix",
-      "fin-cam",
-      "finn-cam",
-      "finnish career-assessment matrix",
-      "rdio",
-      "rdio assessment matrix"
-    ],
-    "other_tool_form_flatten": "finnish career assessment matrix ; fin-cam ; finn-cam ; finnish career-assessment matrix ; rdio ; rdio assessment matrix",
-    "definition": "No definition provided."
-  },
-  "hong kong manifesto": {
-    "tool_homogenised": "hong kong manifesto",
-    "other_tool_form": [
-      "hong kong manifesto",
-      " hong kong principles"
-    ],
-    "other_tool_form_flatten": "hong kong manifesto ;  hong kong principles",
-    "definition": "No definition provided."
-  },
-  " hong kong principles": {
-    "tool_homogenised": "hong kong manifesto",
-    "other_tool_form": [
-      "hong kong manifesto",
-      " hong kong principles"
-    ],
-    "other_tool_form_flatten": "hong kong manifesto ;  hong kong principles",
-    "definition": "No definition provided."
-  },
-  "horizon europe project": {
-    "tool_homogenised": "horizon europe project",
-    "other_tool_form": [
-      "horizon europe project",
-      "graspos",
-      " graspos eu project",
-      "pathos",
-      "scilake"
-    ],
-    "other_tool_form_flatten": "horizon europe project ; graspos ;  graspos eu project ; pathos ; scilake",
-    "definition": "No definition provided."
-  },
-  "graspos": {
-    "tool_homogenised": "horizon europe project",
-    "other_tool_form": [
-      "horizon europe project",
-      "graspos",
-      " graspos eu project",
-      "pathos",
-      "scilake"
-    ],
-    "other_tool_form_flatten": "horizon europe project ; graspos ;  graspos eu project ; pathos ; scilake",
-    "definition": "No definition provided."
-  },
-  " graspos eu project": {
-    "tool_homogenised": "horizon europe project",
-    "other_tool_form": [
-      "horizon europe project",
-      "graspos",
-      " graspos eu project",
-      "pathos",
-      "scilake"
-    ],
-    "other_tool_form_flatten": "horizon europe project ; graspos ;  graspos eu project ; pathos ; scilake",
-    "definition": "No definition provided."
-  },
-  "pathos": {
-    "tool_homogenised": "horizon europe project",
-    "other_tool_form": [
-      "horizon europe project",
-      "graspos",
-      " graspos eu project",
-      "pathos",
-      "scilake"
-    ],
-    "other_tool_form_flatten": "horizon europe project ; graspos ;  graspos eu project ; pathos ; scilake",
-    "definition": "No definition provided."
-  },
-  "scilake": {
-    "tool_homogenised": "horizon europe project",
-    "other_tool_form": [
-      "horizon europe project",
-      "graspos",
-      " graspos eu project",
-      "pathos",
-      "scilake"
-    ],
-    "other_tool_form_flatten": "horizon europe project ; graspos ;  graspos eu project ; pathos ; scilake",
-    "definition": "No definition provided."
-  },
-  "hr excellence in research": {
-    "tool_homogenised": "hr excellence in research",
-    "other_tool_form": [
-      "hr excellence in research",
-      " hr excellence in research strategy",
-      " human resources excellence in research"
-    ],
-    "other_tool_form_flatten": "hr excellence in research ;  hr excellence in research strategy ;  human resources excellence in research",
-    "definition": "No definition provided."
-  },
-  " hr excellence in research strategy": {
-    "tool_homogenised": "hr excellence in research",
-    "other_tool_form": [
-      "hr excellence in research",
-      " hr excellence in research strategy",
-      " human resources excellence in research"
-    ],
-    "other_tool_form_flatten": "hr excellence in research ;  hr excellence in research strategy ;  human resources excellence in research",
-    "definition": "No definition provided."
-  },
-  " human resources excellence in research": {
-    "tool_homogenised": "hr excellence in research",
-    "other_tool_form": [
-      "hr excellence in research",
-      " hr excellence in research strategy",
-      " human resources excellence in research"
-    ],
-    "other_tool_form_flatten": "hr excellence in research ;  hr excellence in research strategy ;  human resources excellence in research",
-    "definition": "No definition provided."
-  },
-  "hrs4r": {
-    "tool_homogenised": "hrs4r",
-    "other_tool_form": [
-      "hrs4r",
-      " hr strategy for researchers",
-      "human resources strategy for researchers"
-    ],
-    "other_tool_form_flatten": "hrs4r ;  hr strategy for researchers ; human resources strategy for researchers",
-    "definition": "No definition provided."
-  },
-  " hr strategy for researchers": {
-    "tool_homogenised": "hrs4r",
-    "other_tool_form": [
-      "hrs4r",
-      " hr strategy for researchers",
-      "human resources strategy for researchers"
-    ],
-    "other_tool_form_flatten": "hrs4r ;  hr strategy for researchers ; human resources strategy for researchers",
-    "definition": "No definition provided."
-  },
-  "human resources strategy for researchers": {
-    "tool_homogenised": "hrs4r",
-    "other_tool_form": [
-      "hrs4r",
-      " hr strategy for researchers",
-      "human resources strategy for researchers"
-    ],
-    "other_tool_form_flatten": "hrs4r ;  hr strategy for researchers ; human resources strategy for researchers",
-    "definition": "No definition provided."
-  },
-  "information system for academic staff performance evaluation": {
-    "tool_homogenised": "information system for academic staff performance evaluation",
-    "other_tool_form": [
-      "information system for academic staff performance evaluation",
-      "is hap"
-    ],
-    "other_tool_form_flatten": "information system for academic staff performance evaluation ; is hap",
-    "definition": "No definition provided."
-  },
-  "is hap": {
-    "tool_homogenised": "information system for academic staff performance evaluation",
-    "other_tool_form": [
-      "information system for academic staff performance evaluation",
-      "is hap"
-    ],
-    "other_tool_form_flatten": "information system for academic staff performance evaluation ; is hap",
-    "definition": "No definition provided."
-  },
-  "inorms": {
-    "tool_homogenised": "inorms",
-    "other_tool_form": [
-      "inorms",
-      " International Network of Research Management Societies"
-    ],
-    "other_tool_form_flatten": "inorms ;  International Network of Research Management Societies",
-    "definition": "No definition provided."
-  },
-  " International Network of Research Management Societies": {
-    "tool_homogenised": "inorms",
-    "other_tool_form": [
-      "inorms",
-      " International Network of Research Management Societies"
-    ],
-    "other_tool_form_flatten": "inorms ;  International Network of Research Management Societies",
-    "definition": "No definition provided."
-  },
-  "inter-regional equity lab project": {
-    "tool_homogenised": "inter-regional equity lab project",
-    "other_tool_form": [
-      "inter-regional equity lab project",
-      "pile"
-    ],
-    "other_tool_form_flatten": "inter-regional equity lab project ; pile",
-    "definition": "No definition provided."
-  },
-  "pile": {
-    "tool_homogenised": "inter-regional equity lab project",
-    "other_tool_form": [
-      "inter-regional equity lab project",
-      "pile"
-    ],
-    "other_tool_form_flatten": "inter-regional equity lab project ; pile",
-    "definition": "No definition provided."
-  },
-  "internal research and doctoral studies evaluation": {
-    "tool_homogenised": "internal research and doctoral studies evaluation",
-    "other_tool_form": [
-      "internal research and doctoral studies evaluation",
-      "irde"
-    ],
-    "other_tool_form_flatten": "internal research and doctoral studies evaluation ; irde",
-    "definition": "No definition provided."
-  },
-  "irde": {
-    "tool_homogenised": "internal research and doctoral studies evaluation",
-    "other_tool_form": [
-      "internal research and doctoral studies evaluation",
-      "irde"
-    ],
-    "other_tool_form_flatten": "internal research and doctoral studies evaluation ; irde",
-    "definition": "No definition provided."
-  },
-  "international school on research impact assessment": {
-    "tool_homogenised": "international school on research impact assessment",
-    "other_tool_form": [
-      "international school on research impact assessment",
-      "isria"
-    ],
-    "other_tool_form_flatten": "international school on research impact assessment ; isria",
-    "definition": "No definition provided."
-  },
-  "isria": {
-    "tool_homogenised": "international school on research impact assessment",
-    "other_tool_form": [
-      "international school on research impact assessment",
-      "isria"
-    ],
-    "other_tool_form_flatten": "international school on research impact assessment ; isria",
-    "definition": "No definition provided."
-  },
-  "label of quality in academic publishing": {
-    "tool_homogenised": "label of quality in academic publishing",
-    "other_tool_form": [
-      "label of quality in academic publishing",
-      "cea-apq"
-    ],
-    "other_tool_form_flatten": "label of quality in academic publishing ; cea-apq",
-    "definition": "No definition provided."
-  },
-  "cea-apq": {
-    "tool_homogenised": "label of quality in academic publishing",
-    "other_tool_form": [
-      "label of quality in academic publishing",
-      "cea-apq"
-    ],
-    "other_tool_form_flatten": "label of quality in academic publishing ; cea-apq",
-    "definition": "No definition provided."
-  },
-  "legal framework": {
-    "tool_homogenised": "legal framework",
-    "other_tool_form": [
-      "legal framework",
-      "quality assurance framework for research"
-    ],
-    "other_tool_form_flatten": "legal framework ; quality assurance framework for research",
-    "definition": "No definition provided."
-  },
-  "quality assurance framework for research": {
-    "tool_homogenised": "legal framework",
-    "other_tool_form": [
-      "legal framework",
-      "quality assurance framework for research"
-    ],
-    "other_tool_form_flatten": "legal framework ; quality assurance framework for research",
-    "definition": "No definition provided."
-  },
-  "leiden manifesto": {
-    "tool_homogenised": "leiden manifesto",
-    "other_tool_form": [
-      "leiden manifesto",
-      "leiden principles"
-    ],
-    "other_tool_form_flatten": "leiden manifesto ; leiden principles",
-    "definition": "No definition provided."
-  },
-  "leiden principles": {
-    "tool_homogenised": "leiden manifesto",
-    "other_tool_form": [
-      "leiden manifesto",
-      "leiden principles"
-    ],
-    "other_tool_form_flatten": "leiden manifesto ; leiden principles",
-    "definition": "No definition provided."
-  },
-  "more than our rank": {
-    "tool_homogenised": "more than our rank",
-    "other_tool_form": [
-      "more than our rank",
-      "more than our rank initiative",
-      "mtor"
-    ],
-    "other_tool_form_flatten": "more than our rank ; more than our rank initiative ; mtor",
-    "definition": "No definition provided."
-  },
-  "more than our rank initiative": {
-    "tool_homogenised": "more than our rank",
-    "other_tool_form": [
-      "more than our rank",
-      "more than our rank initiative",
-      "mtor"
-    ],
-    "other_tool_form_flatten": "more than our rank ; more than our rank initiative ; mtor",
-    "definition": "No definition provided."
-  },
-  "mtor": {
-    "tool_homogenised": "more than our rank",
-    "other_tool_form": [
-      "more than our rank",
-      "more than our rank initiative",
-      "mtor"
-    ],
-    "other_tool_form_flatten": "more than our rank ; more than our rank initiative ; mtor",
-    "definition": "No definition provided."
-  },
-  "hungarian national science bibliography": {
-    "tool_homogenised": "hungarian national science bibliography",
-    "other_tool_form": [
-      "hungarian national science bibliography",
-      " mtmt"
-    ],
-    "other_tool_form_flatten": "hungarian national science bibliography ;  mtmt",
-    "definition": "No definition provided."
-  },
-  " mtmt": {
-    "tool_homogenised": "hungarian national science bibliography",
-    "other_tool_form": [
-      "hungarian national science bibliography",
-      " mtmt"
-    ],
-    "other_tool_form_flatten": "hungarian national science bibliography ;  mtmt",
-    "definition": "No definition provided."
-  },
-  "national open access monitor": {
-    "tool_homogenised": "national open access monitor",
-    "other_tool_form": [
-      "national open access monitor",
-      "noam"
-    ],
-    "other_tool_form_flatten": "national open access monitor ; noam",
-    "definition": "No definition provided."
-  },
-  "noam": {
-    "tool_homogenised": "national open access monitor",
-    "other_tool_form": [
-      "national open access monitor",
-      "noam"
-    ],
-    "other_tool_form_flatten": "national open access monitor ; noam",
-    "definition": "No definition provided."
-  },
-  "national open science strategy": {
-    "tool_homogenised": "national open science strategy",
-    "other_tool_form": [
-      "national open science strategy",
-      "national open science",
-      "national strategy for open science"
-    ],
-    "other_tool_form_flatten": "national open science strategy ; national open science ; national strategy for open science",
-    "definition": "No definition provided."
-  },
-  "national open science": {
-    "tool_homogenised": "national open science strategy",
-    "other_tool_form": [
-      "national open science strategy",
-      "national open science",
-      "national strategy for open science"
-    ],
-    "other_tool_form_flatten": "national open science strategy ; national open science ; national strategy for open science",
-    "definition": "No definition provided."
-  },
-  "national strategy for open science": {
-    "tool_homogenised": "national open science strategy",
-    "other_tool_form": [
-      "national open science strategy",
-      "national open science",
-      "national strategy for open science"
-    ],
-    "other_tool_form_flatten": "national open science strategy ; national open science ; national strategy for open science",
-    "definition": "No definition provided."
-  },
-  "national regulations": {
-    "tool_homogenised": "national regulations",
-    "other_tool_form": [
-      "national regulations"
-    ],
-    "other_tool_form_flatten": "national regulations",
-    "definition": "No definition provided."
-  },
-  "norwegian career assessment matrix": {
-    "tool_homogenised": "norwegian career assessment matrix",
-    "other_tool_form": [
-      "norwegian career assessment matrix",
-      "national nor-cam network",
-      "nor-cam",
-      "nor-cam-network"
-    ],
-    "other_tool_form_flatten": "norwegian career assessment matrix ; national nor-cam network ; nor-cam ; nor-cam-network",
-    "definition": "No definition provided."
-  },
-  "national nor-cam network": {
-    "tool_homogenised": "norwegian career assessment matrix",
-    "other_tool_form": [
-      "norwegian career assessment matrix",
-      "national nor-cam network",
-      "nor-cam",
-      "nor-cam-network"
-    ],
-    "other_tool_form_flatten": "norwegian career assessment matrix ; national nor-cam network ; nor-cam ; nor-cam-network",
-    "definition": "No definition provided."
-  },
-  "nor-cam": {
-    "tool_homogenised": "norwegian career assessment matrix",
-    "other_tool_form": [
-      "norwegian career assessment matrix",
-      "national nor-cam network",
-      "nor-cam",
-      "nor-cam-network"
-    ],
-    "other_tool_form_flatten": "norwegian career assessment matrix ; national nor-cam network ; nor-cam ; nor-cam-network",
-    "definition": "No definition provided."
-  },
-  "nor-cam-network": {
-    "tool_homogenised": "norwegian career assessment matrix",
-    "other_tool_form": [
-      "norwegian career assessment matrix",
-      "national nor-cam network",
-      "nor-cam",
-      "nor-cam-network"
-    ],
-    "other_tool_form_flatten": "norwegian career assessment matrix ; national nor-cam network ; nor-cam ; nor-cam-network",
-    "definition": "No definition provided."
-  },
-  "hr omega data base": {
-    "tool_homogenised": "hr omega data base",
-    "other_tool_form": [
-      "hr omega data base",
-      " omega"
-    ],
-    "other_tool_form_flatten": "hr omega data base ;  omega",
-    "definition": "No definition provided."
-  },
-  " omega": {
-    "tool_homogenised": "hr omega data base",
-    "other_tool_form": [
-      "hr omega data base",
-      " omega"
-    ],
-    "other_tool_form_flatten": "hr omega data base ;  omega",
-    "definition": "No definition provided."
-  },
-  "online platform rrview": {
-    "tool_homogenised": "online platform rrview",
-    "other_tool_form": [
-      "online platform rrview",
-      "internet forum",
-      "online community platform rrview",
-      "rrview"
-    ],
-    "other_tool_form_flatten": "online platform rrview ; internet forum ; online community platform rrview ; rrview",
-    "definition": "No definition provided."
-  },
-  "internet forum": {
-    "tool_homogenised": "online platform rrview",
-    "other_tool_form": [
-      "online platform rrview",
-      "internet forum",
-      "online community platform rrview",
-      "rrview"
-    ],
-    "other_tool_form_flatten": "online platform rrview ; internet forum ; online community platform rrview ; rrview",
-    "definition": "No definition provided."
-  },
-  "online community platform rrview": {
-    "tool_homogenised": "online platform rrview",
-    "other_tool_form": [
-      "online platform rrview",
-      "internet forum",
-      "online community platform rrview",
-      "rrview"
-    ],
-    "other_tool_form_flatten": "online platform rrview ; internet forum ; online community platform rrview ; rrview",
-    "definition": "No definition provided."
-  },
-  "rrview": {
-    "tool_homogenised": "online platform rrview",
-    "other_tool_form": [
-      "online platform rrview",
-      "internet forum",
-      "online community platform rrview",
-      "rrview"
-    ],
-    "other_tool_form_flatten": "online platform rrview ; internet forum ; online community platform rrview ; rrview",
-    "definition": "No definition provided."
-  },
-  "open science career assessment matrix": {
-    "tool_homogenised": "open science career assessment matrix",
-    "other_tool_form": [
-      "open science career assessment matrix",
-      "os-cam"
-    ],
-    "other_tool_form_flatten": "open science career assessment matrix ; os-cam",
-    "definition": "No definition provided."
-  },
-  "os-cam": {
-    "tool_homogenised": "open science career assessment matrix",
-    "other_tool_form": [
-      "open science career assessment matrix",
-      "os-cam"
-    ],
-    "other_tool_form_flatten": "open science career assessment matrix ; os-cam",
-    "definition": "No definition provided."
-  },
-  "open4ua": {
-    "tool_homogenised": "open4ua",
-    "other_tool_form": [
-      "open4ua"
-    ],
-    "other_tool_form_flatten": "open4ua",
-    "definition": "No definition provided."
-  },
-  "openaire": {
-    "tool_homogenised": "openaire",
-    "other_tool_form": [
-      "openaire",
-      "openaire platforms"
-    ],
-    "other_tool_form_flatten": "openaire ; openaire platforms",
-    "definition": "No definition provided."
-  },
-  "openaire platforms": {
-    "tool_homogenised": "openaire",
-    "other_tool_form": [
-      "openaire",
-      "openaire platforms"
-    ],
-    "other_tool_form_flatten": "openaire ; openaire platforms",
-    "definition": "No definition provided."
-  },
-  "openalex": {
-    "tool_homogenised": "openalex",
-    "other_tool_form": [
-      "openalex"
-    ],
-    "other_tool_form_flatten": "openalex",
-    "definition": "No definition provided."
-  },
-  "operas": {
-    "tool_homogenised": "operas",
-    "other_tool_form": [
-      "operas"
-    ],
-    "other_tool_form_flatten": "operas",
-    "definition": "No definition provided."
-  },
-  "open research data": {
-    "tool_homogenised": "open research data",
-    "other_tool_form": [
-      "open research data",
-      " ord"
-    ],
-    "other_tool_form_flatten": "open research data ;  ord",
-    "definition": "No definition provided."
-  },
-  " ord": {
-    "tool_homogenised": "open research data",
-    "other_tool_form": [
-      "open research data",
-      " ord"
-    ],
-    "other_tool_form_flatten": "open research data ;  ord",
-    "definition": "No definition provided."
-  },
-  "otm-r": {
-    "tool_homogenised": "otm-r",
-    "other_tool_form": [
-      "otm-r",
-      "open transparent and merit-based recruitment",
-      "open transparent merit-based recruitment"
-    ],
-    "other_tool_form_flatten": "otm-r ; open transparent and merit-based recruitment ; open transparent merit-based recruitment",
-    "definition": "No definition provided."
-  },
-  "open transparent and merit-based recruitment": {
-    "tool_homogenised": "otm-r",
-    "other_tool_form": [
-      "otm-r",
-      "open transparent and merit-based recruitment",
-      "open transparent merit-based recruitment"
-    ],
-    "other_tool_form_flatten": "otm-r ; open transparent and merit-based recruitment ; open transparent merit-based recruitment",
-    "definition": "No definition provided."
-  },
-  "open transparent merit-based recruitment": {
-    "tool_homogenised": "otm-r",
-    "other_tool_form": [
-      "otm-r",
-      "open transparent and merit-based recruitment",
-      "open transparent merit-based recruitment"
-    ],
-    "other_tool_form_flatten": "otm-r ; open transparent and merit-based recruitment ; open transparent merit-based recruitment",
-    "definition": "No definition provided."
-  },
-  "plan s": {
-    "tool_homogenised": "plan s",
-    "other_tool_form": [
-      "plan s"
-    ],
-    "other_tool_form_flatten": "plan s",
-    "definition": "No definition provided."
-  },
-  "platforms for knowledge sharing": {
-    "tool_homogenised": "platforms for knowledge sharing",
-    "other_tool_form": [
-      "platforms for knowledge sharing"
-    ],
-    "other_tool_form_flatten": "platforms for knowledge sharing",
-    "definition": "No definition provided."
-  },
-  "program for evaluating teaching staff for recruitment": {
-    "tool_homogenised": "program for evaluating teaching staff for recruitment",
-    "other_tool_form": [
-      "program for evaluating teaching staff for recruitment",
-      "pep"
-    ],
-    "other_tool_form_flatten": "program for evaluating teaching staff for recruitment ; pep",
-    "definition": "No definition provided."
-  },
-  "pep": {
-    "tool_homogenised": "program for evaluating teaching staff for recruitment",
-    "other_tool_form": [
-      "program for evaluating teaching staff for recruitment",
-      "pep"
-    ],
-    "other_tool_form_flatten": "program for evaluating teaching staff for recruitment ; pep",
-    "definition": "No definition provided."
-  },
-  "recommendation for the responsible evaluation of a researcher in finland": {
-    "tool_homogenised": "recommendation for the responsible evaluation of a researcher in finland",
-    "other_tool_form": [
-      "recommendation for the responsible evaluation of a researcher in finland",
-      "recommendation for the responsible evaluation"
-    ],
-    "other_tool_form_flatten": "recommendation for the responsible evaluation of a researcher in finland ; recommendation for the responsible evaluation",
-    "definition": "No definition provided."
-  },
-  "recommendation for the responsible evaluation": {
-    "tool_homogenised": "recommendation for the responsible evaluation of a researcher in finland",
-    "other_tool_form": [
-      "recommendation for the responsible evaluation of a researcher in finland",
-      "recommendation for the responsible evaluation"
-    ],
-    "other_tool_form_flatten": "recommendation for the responsible evaluation of a researcher in finland ; recommendation for the responsible evaluation",
-    "definition": "No definition provided."
-  },
-  "research assessment frameworks": {
-    "tool_homogenised": "research assessment frameworks",
-    "other_tool_form": [
-      "research assessment frameworks",
-      "collaborative framework",
-      "competence framework for researchers",
-      "research evaluation framework",
-      "responsible research assessment framework",
-      "saris",
-      "saris framework"
-    ],
-    "other_tool_form_flatten": "research assessment frameworks ; collaborative framework ; competence framework for researchers ; research evaluation framework ; responsible research assessment framework ; saris ; saris framework",
-    "definition": "No definition provided."
-  },
-  "collaborative framework": {
-    "tool_homogenised": "research assessment frameworks",
-    "other_tool_form": [
-      "research assessment frameworks",
-      "collaborative framework",
-      "competence framework for researchers",
-      "research evaluation framework",
-      "responsible research assessment framework",
-      "saris",
-      "saris framework"
-    ],
-    "other_tool_form_flatten": "research assessment frameworks ; collaborative framework ; competence framework for researchers ; research evaluation framework ; responsible research assessment framework ; saris ; saris framework",
-    "definition": "No definition provided."
-  },
-  "competence framework for researchers": {
-    "tool_homogenised": "research assessment frameworks",
-    "other_tool_form": [
-      "research assessment frameworks",
-      "collaborative framework",
-      "competence framework for researchers",
-      "research evaluation framework",
-      "responsible research assessment framework",
-      "saris",
-      "saris framework"
-    ],
-    "other_tool_form_flatten": "research assessment frameworks ; collaborative framework ; competence framework for researchers ; research evaluation framework ; responsible research assessment framework ; saris ; saris framework",
-    "definition": "No definition provided."
-  },
-  "research evaluation framework": {
-    "tool_homogenised": "research assessment frameworks",
-    "other_tool_form": [
-      "research assessment frameworks",
-      "collaborative framework",
-      "competence framework for researchers",
-      "research evaluation framework",
-      "responsible research assessment framework",
-      "saris",
-      "saris framework"
-    ],
-    "other_tool_form_flatten": "research assessment frameworks ; collaborative framework ; competence framework for researchers ; research evaluation framework ; responsible research assessment framework ; saris ; saris framework",
-    "definition": "No definition provided."
-  },
-  "responsible research assessment framework": {
-    "tool_homogenised": "research assessment frameworks",
-    "other_tool_form": [
-      "research assessment frameworks",
-      "collaborative framework",
-      "competence framework for researchers",
-      "research evaluation framework",
-      "responsible research assessment framework",
-      "saris",
-      "saris framework"
-    ],
-    "other_tool_form_flatten": "research assessment frameworks ; collaborative framework ; competence framework for researchers ; research evaluation framework ; responsible research assessment framework ; saris ; saris framework",
-    "definition": "No definition provided."
-  },
-  "saris": {
-    "tool_homogenised": "research assessment frameworks",
-    "other_tool_form": [
-      "research assessment frameworks",
-      "collaborative framework",
-      "competence framework for researchers",
-      "research evaluation framework",
-      "responsible research assessment framework",
-      "saris",
-      "saris framework"
-    ],
-    "other_tool_form_flatten": "research assessment frameworks ; collaborative framework ; competence framework for researchers ; research evaluation framework ; responsible research assessment framework ; saris ; saris framework",
-    "definition": "No definition provided."
-  },
-  "saris framework": {
-    "tool_homogenised": "research assessment frameworks",
-    "other_tool_form": [
-      "research assessment frameworks",
-      "collaborative framework",
-      "competence framework for researchers",
-      "research evaluation framework",
-      "responsible research assessment framework",
-      "saris",
-      "saris framework"
-    ],
-    "other_tool_form_flatten": "research assessment frameworks ; collaborative framework ; competence framework for researchers ; research evaluation framework ; responsible research assessment framework ; saris ; saris framework",
-    "definition": "No definition provided."
-  },
-  "research council of norway": {
-    "tool_homogenised": "research council of norway",
-    "other_tool_form": [
-      "research council of norway",
-      "rcn"
-    ],
-    "other_tool_form_flatten": "research council of norway ; rcn",
-    "definition": "No definition provided."
-  },
-  "rcn": {
-    "tool_homogenised": "research council of norway",
-    "other_tool_form": [
-      "research council of norway",
-      "rcn"
-    ],
-    "other_tool_form_flatten": "research council of norway ; rcn",
-    "definition": "No definition provided."
-  },
-  "research data alliance": {
-    "tool_homogenised": "research data alliance",
-    "other_tool_form": [
-      "research data alliance",
-      "rda"
-    ],
-    "other_tool_form_flatten": "research data alliance ; rda",
-    "definition": "No definition provided."
-  },
-  "rda": {
-    "tool_homogenised": "research data alliance",
-    "other_tool_form": [
-      "research data alliance",
-      "rda"
-    ],
-    "other_tool_form_flatten": "research data alliance ; rda",
-    "definition": "No definition provided."
-  },
-  "royal academy of sciences": {
-    "tool_homogenised": "royal academy of sciences",
-    "other_tool_form": [
-      "royal academy of sciences",
-      "knaw"
-    ],
-    "other_tool_form_flatten": "royal academy of sciences ; knaw",
-    "definition": "No definition provided."
-  },
-  "knaw": {
-    "tool_homogenised": "royal academy of sciences",
-    "other_tool_form": [
-      "royal academy of sciences",
-      "knaw"
-    ],
-    "other_tool_form_flatten": "royal academy of sciences ; knaw",
-    "definition": "No definition provided."
-  },
-  "science europe": {
-    "tool_homogenised": "science europe",
-    "other_tool_form": [
-      "science europe"
-    ],
-    "other_tool_form_flatten": "science europe",
-    "definition": "No definition provided."
-  },
-  "scope framework": {
-    "tool_homogenised": "scope framework",
-    "other_tool_form": [
-      "scope framework",
-      "framework for research evaluation",
-      "scope model"
-    ],
-    "other_tool_form_flatten": "scope framework ; framework for research evaluation ; scope model",
-    "definition": "No definition provided."
-  },
-  "framework for research evaluation": {
-    "tool_homogenised": "scope framework",
-    "other_tool_form": [
-      "scope framework",
-      "framework for research evaluation",
-      "scope model"
-    ],
-    "other_tool_form_flatten": "scope framework ; framework for research evaluation ; scope model",
-    "definition": "No definition provided."
-  },
-  "scope model": {
-    "tool_homogenised": "scope framework",
-    "other_tool_form": [
-      "scope framework",
-      "framework for research evaluation",
-      "scope model"
-    ],
-    "other_tool_form_flatten": "scope framework ; framework for research evaluation ; scope model",
-    "definition": "No definition provided."
-  },
-  "source normalized impact per paper": {
-    "tool_homogenised": "source normalized impact per paper",
-    "other_tool_form": [
-      "source normalized impact per paper",
-      " snip"
-    ],
-    "other_tool_form_flatten": "source normalized impact per paper ;  snip",
-    "definition": "No definition provided."
-  },
-  " snip": {
-    "tool_homogenised": "source normalized impact per paper",
-    "other_tool_form": [
-      "source normalized impact per paper",
-      " snip"
-    ],
-    "other_tool_form_flatten": "source normalized impact per paper ;  snip",
-    "definition": "No definition provided."
-  },
-  "spanish national open science strategy": {
-    "tool_homogenised": "spanish national open science strategy",
-    "other_tool_form": [
-      "spanish national open science strategy",
-      "enca"
-    ],
-    "other_tool_form_flatten": "spanish national open science strategy ; enca",
-    "definition": "No definition provided."
-  },
-  "enca": {
-    "tool_homogenised": "spanish national open science strategy",
-    "other_tool_form": [
-      "spanish national open science strategy",
-      "enca"
-    ],
-    "other_tool_form_flatten": "spanish national open science strategy ; enca",
-    "definition": "No definition provided."
-  },
-  "spanish national research council": {
-    "tool_homogenised": "spanish national research council",
-    "other_tool_form": [
-      "spanish national research council",
-      "csic"
-    ],
-    "other_tool_form_flatten": "spanish national research council ; csic",
-    "definition": "No definition provided."
-  },
-  "csic": {
-    "tool_homogenised": "spanish national research council",
-    "other_tool_form": [
-      "spanish national research council",
-      "csic"
-    ],
-    "other_tool_form_flatten": "spanish national research council ; csic",
-    "definition": "No definition provided."
-  },
-  "spanish organic law of the university system": {
-    "tool_homogenised": "spanish organic law of the university system",
-    "other_tool_form": [
-      "spanish organic law of the university system",
-      "losu"
-    ],
-    "other_tool_form_flatten": "spanish organic law of the university system ; losu",
-    "definition": "No definition provided."
-  },
-  "losu": {
-    "tool_homogenised": "spanish organic law of the university system",
-    "other_tool_form": [
-      "spanish organic law of the university system",
-      "losu"
-    ],
-    "other_tool_form_flatten": "spanish organic law of the university system ; losu",
-    "definition": "No definition provided."
-  },
-  "spanish qualifications framework for higher education": {
-    "tool_homogenised": "spanish qualifications framework for higher education",
-    "other_tool_form": [
-      "spanish qualifications framework for higher education",
-      "meces"
-    ],
-    "other_tool_form_flatten": "spanish qualifications framework for higher education ; meces",
-    "definition": "No definition provided."
-  },
-  "meces": {
-    "tool_homogenised": "spanish qualifications framework for higher education",
-    "other_tool_form": [
-      "spanish qualifications framework for higher education",
-      "meces"
-    ],
-    "other_tool_form_flatten": "spanish qualifications framework for higher education ; meces",
-    "definition": "No definition provided."
-  },
-  "spanish royal decree": {
-    "tool_homogenised": "spanish royal decree",
-    "other_tool_form": [
-      "spanish royal decree",
-      "royal decree",
-      "royal decree 576 2023",
-      "royal decree 678",
-      "royal decree 678 2023",
-      "spanish royal decree 678 2023"
-    ],
-    "other_tool_form_flatten": "spanish royal decree ; royal decree ; royal decree 576 2023 ; royal decree 678 ; royal decree 678 2023 ; spanish royal decree 678 2023",
-    "definition": "No definition provided."
-  },
-  "royal decree": {
-    "tool_homogenised": "spanish royal decree",
-    "other_tool_form": [
-      "spanish royal decree",
-      "royal decree",
-      "royal decree 576 2023",
-      "royal decree 678",
-      "royal decree 678 2023",
-      "spanish royal decree 678 2023"
-    ],
-    "other_tool_form_flatten": "spanish royal decree ; royal decree ; royal decree 576 2023 ; royal decree 678 ; royal decree 678 2023 ; spanish royal decree 678 2023",
-    "definition": "No definition provided."
-  },
-  "royal decree 576 2023": {
-    "tool_homogenised": "spanish royal decree",
-    "other_tool_form": [
-      "spanish royal decree",
-      "royal decree",
-      "royal decree 576 2023",
-      "royal decree 678",
-      "royal decree 678 2023",
-      "spanish royal decree 678 2023"
-    ],
-    "other_tool_form_flatten": "spanish royal decree ; royal decree ; royal decree 576 2023 ; royal decree 678 ; royal decree 678 2023 ; spanish royal decree 678 2023",
-    "definition": "No definition provided."
-  },
-  "royal decree 678": {
-    "tool_homogenised": "spanish royal decree",
-    "other_tool_form": [
-      "spanish royal decree",
-      "royal decree",
-      "royal decree 576 2023",
-      "royal decree 678",
-      "royal decree 678 2023",
-      "spanish royal decree 678 2023"
-    ],
-    "other_tool_form_flatten": "spanish royal decree ; royal decree ; royal decree 576 2023 ; royal decree 678 ; royal decree 678 2023 ; spanish royal decree 678 2023",
-    "definition": "No definition provided."
-  },
-  "royal decree 678 2023": {
-    "tool_homogenised": "spanish royal decree",
-    "other_tool_form": [
-      "spanish royal decree",
-      "royal decree",
-      "royal decree 576 2023",
-      "royal decree 678",
-      "royal decree 678 2023",
-      "spanish royal decree 678 2023"
-    ],
-    "other_tool_form_flatten": "spanish royal decree ; royal decree ; royal decree 576 2023 ; royal decree 678 ; royal decree 678 2023 ; spanish royal decree 678 2023",
-    "definition": "No definition provided."
-  },
-  "spanish royal decree 678 2023": {
-    "tool_homogenised": "spanish royal decree",
-    "other_tool_form": [
-      "spanish royal decree",
-      "royal decree",
-      "royal decree 576 2023",
-      "royal decree 678",
-      "royal decree 678 2023",
-      "spanish royal decree 678 2023"
-    ],
-    "other_tool_form_flatten": "spanish royal decree ; royal decree ; royal decree 576 2023 ; royal decree 678 ; royal decree 678 2023 ; spanish royal decree 678 2023",
-    "definition": "No definition provided."
-  },
-  "strategy evaluation protocol": {
-    "tool_homogenised": "strategy evaluation protocol",
-    "other_tool_form": [
-      "strategy evaluation protocol",
-      "sep"
-    ],
-    "other_tool_form_flatten": "strategy evaluation protocol ; sep",
-    "definition": "No definition provided."
-  },
-  "sep": {
-    "tool_homogenised": "strategy evaluation protocol",
-    "other_tool_form": [
-      "strategy evaluation protocol",
-      "sep"
-    ],
-    "other_tool_form_flatten": "strategy evaluation protocol ; sep",
-    "definition": "No definition provided."
-  },
-  "swedish career assessment matrix": {
-    "tool_homogenised": "swedish career assessment matrix",
-    "other_tool_form": [
-      "swedish career assessment matrix",
-      "swe-cam"
-    ],
-    "other_tool_form_flatten": "swedish career assessment matrix ; swe-cam",
-    "definition": "No definition provided."
-  },
-  "swe-cam": {
-    "tool_homogenised": "swedish career assessment matrix",
-    "other_tool_form": [
-      "swedish career assessment matrix",
-      "swe-cam"
-    ],
-    "other_tool_form_flatten": "swedish career assessment matrix ; swe-cam",
-    "definition": "No definition provided."
-  },
-  "tenk": {
-    "tool_homogenised": "tenk",
-    "other_tool_form": [
-      "tenk",
-      "ethical principles of research with human participants",
-      "finnish code of conduct for research integrity",
-      "finnish national board on research integrity"
-    ],
-    "other_tool_form_flatten": "tenk ; ethical principles of research with human participants ; finnish code of conduct for research integrity ; finnish national board on research integrity",
-    "definition": "No definition provided."
-  },
-  "ethical principles of research with human participants": {
-    "tool_homogenised": "tenk",
-    "other_tool_form": [
-      "tenk",
-      "ethical principles of research with human participants",
-      "finnish code of conduct for research integrity",
-      "finnish national board on research integrity"
-    ],
-    "other_tool_form_flatten": "tenk ; ethical principles of research with human participants ; finnish code of conduct for research integrity ; finnish national board on research integrity",
-    "definition": "No definition provided."
-  },
-  "finnish code of conduct for research integrity": {
-    "tool_homogenised": "tenk",
-    "other_tool_form": [
-      "tenk",
-      "ethical principles of research with human participants",
-      "finnish code of conduct for research integrity",
-      "finnish national board on research integrity"
-    ],
-    "other_tool_form_flatten": "tenk ; ethical principles of research with human participants ; finnish code of conduct for research integrity ; finnish national board on research integrity",
-    "definition": "No definition provided."
-  },
-  "finnish national board on research integrity": {
-    "tool_homogenised": "tenk",
-    "other_tool_form": [
-      "tenk",
-      "ethical principles of research with human participants",
-      "finnish code of conduct for research integrity",
-      "finnish national board on research integrity"
-    ],
-    "other_tool_form_flatten": "tenk ; ethical principles of research with human participants ; finnish code of conduct for research integrity ; finnish national board on research integrity",
-    "definition": "No definition provided."
-  },
-  "unesco": {
-    "tool_homogenised": "unesco",
-    "other_tool_form": [
-      "unesco",
-      "unesco recommendation"
-    ],
-    "other_tool_form_flatten": "unesco ; unesco recommendation",
-    "definition": "No definition provided."
-  },
-  "unesco recommendation": {
-    "tool_homogenised": "unesco",
-    "other_tool_form": [
-      "unesco",
-      "unesco recommendation"
-    ],
-    "other_tool_form_flatten": "unesco ; unesco recommendation",
-    "definition": "No definition provided."
-  }
+    "a global observatory of responsible research assessment agorra": {
+        "tool_homogenised": "a global observatory of responsible research assessment agorra",
+        "other_tool_form": [
+            "a global observatory of responsible research assessment agorra"
+        ],
+        "other_tool_form_flatten": "a global observatory of responsible research assessment agorra",
+        "definition": "No definition provided."
+    },
+    "agreement on reforming research assessment": {
+        "tool_homogenised": "agreement on reforming research assessment",
+        "other_tool_form": [
+            "agreement on reforming research assessment",
+            "arra"
+        ],
+        "other_tool_form_flatten": "agreement on reforming research assessment ; arra",
+        "definition": "No definition provided."
+    },
+    "arra": {
+        "tool_homogenised": "agreement on reforming research assessment",
+        "other_tool_form": [
+            "agreement on reforming research assessment",
+            "arra"
+        ],
+        "other_tool_form_flatten": "agreement on reforming research assessment ; arra",
+        "definition": "No definition provided."
+    },
+    "barcelona declaration barcelona declaration on open research information": {
+        "tool_homogenised": "barcelona declaration barcelona declaration on open research information",
+        "other_tool_form": [
+            "barcelona declaration barcelona declaration on open research information"
+        ],
+        "other_tool_form_flatten": "barcelona declaration barcelona declaration on open research information",
+        "definition": "No definition provided."
+    },
+    "berlin declaration": {
+        "tool_homogenised": "berlin declaration",
+        "other_tool_form": [
+            "berlin declaration",
+            "berlin declaration on open access to knowledge in the sciences and humanities"
+        ],
+        "other_tool_form_flatten": "berlin declaration ; berlin declaration on open access to knowledge in the sciences and humanities",
+        "definition": "No definition provided."
+    },
+    "berlin declaration on open access to knowledge in the sciences and humanities": {
+        "tool_homogenised": "berlin declaration",
+        "other_tool_form": [
+            "berlin declaration",
+            "berlin declaration on open access to knowledge in the sciences and humanities"
+        ],
+        "other_tool_form_flatten": "berlin declaration ; berlin declaration on open access to knowledge in the sciences and humanities",
+        "definition": "No definition provided."
+    },
+    "career assessment matrix": {
+        "tool_homogenised": "career assessment matrix",
+        "other_tool_form": [
+            "career assessment matrix",
+            "career-assessment matrix assessment matrix competence assessment matrix",
+            "cam"
+        ],
+        "other_tool_form_flatten": "career assessment matrix ; career-assessment matrix assessment matrix competence assessment matrix ; cam",
+        "definition": "No definition provided."
+    },
+    "career-assessment matrix assessment matrix competence assessment matrix": {
+        "tool_homogenised": "career assessment matrix",
+        "other_tool_form": [
+            "career assessment matrix",
+            "career-assessment matrix assessment matrix competence assessment matrix",
+            "cam"
+        ],
+        "other_tool_form_flatten": "career assessment matrix ; career-assessment matrix assessment matrix competence assessment matrix ; cam",
+        "definition": "No definition provided."
+    },
+    "cam": {
+        "tool_homogenised": "career assessment matrix",
+        "other_tool_form": [
+            "career assessment matrix",
+            "career-assessment matrix assessment matrix competence assessment matrix",
+            "cam"
+        ],
+        "other_tool_form_flatten": "career assessment matrix ; career-assessment matrix assessment matrix competence assessment matrix ; cam",
+        "definition": "No definition provided."
+    },
+    "national chapter coara national chapter": {
+        "tool_homogenised": "national chapter coara national chapter",
+        "other_tool_form": [
+            "national chapter coara national chapter"
+        ],
+        "other_tool_form_flatten": "national chapter coara national chapter",
+        "definition": "No definition provided."
+    },
+    "coara principles": {
+        "tool_homogenised": "coara principles",
+        "other_tool_form": [
+            "coara principles"
+        ],
+        "other_tool_form_flatten": "coara principles",
+        "definition": "No definition provided."
+    },
+    "coara working group": {
+        "tool_homogenised": "coara working group",
+        "other_tool_form": [
+            "coara working group",
+            "coara working groups"
+        ],
+        "other_tool_form_flatten": "coara working group ; coara working groups",
+        "definition": "No definition provided."
+    },
+    "coara working groups": {
+        "tool_homogenised": "coara working group",
+        "other_tool_form": [
+            "coara working group",
+            "coara working groups"
+        ],
+        "other_tool_form_flatten": "coara working group ; coara working groups",
+        "definition": "No definition provided."
+    },
+    "commission for the assessment of knowledge transfer activity": {
+        "tool_homogenised": "commission for the assessment of knowledge transfer activity",
+        "other_tool_form": [
+            "commission for the assessment of knowledge transfer activity",
+            "cneat"
+        ],
+        "other_tool_form_flatten": "commission for the assessment of knowledge transfer activity ; cneat",
+        "definition": "No definition provided."
+    },
+    "cneat": {
+        "tool_homogenised": "commission for the assessment of knowledge transfer activity",
+        "other_tool_form": [
+            "commission for the assessment of knowledge transfer activity",
+            "cneat"
+        ],
+        "other_tool_form_flatten": "commission for the assessment of knowledge transfer activity ; cneat",
+        "definition": "No definition provided."
+    },
+    "criteria for reporting and evaluating exposure datasets creed": {
+        "tool_homogenised": "criteria for reporting and evaluating exposure datasets creed",
+        "other_tool_form": [
+            "criteria for reporting and evaluating exposure datasets creed"
+        ],
+        "other_tool_form_flatten": "criteria for reporting and evaluating exposure datasets creed",
+        "definition": "No definition provided."
+    },
+    "declaration of social responsibility": {
+        "tool_homogenised": "declaration of social responsibility",
+        "other_tool_form": [
+            "declaration of social responsibility",
+            "csr"
+        ],
+        "other_tool_form_flatten": "declaration of social responsibility ; csr",
+        "definition": "No definition provided."
+    },
+    "csr": {
+        "tool_homogenised": "declaration of social responsibility",
+        "other_tool_form": [
+            "declaration of social responsibility",
+            "csr"
+        ],
+        "other_tool_form_flatten": "declaration of social responsibility ; csr",
+        "definition": "No definition provided."
+    },
+    "diamas project": {
+        "tool_homogenised": "diamas project",
+        "other_tool_form": [
+            "diamas project",
+            "diamas"
+        ],
+        "other_tool_form_flatten": "diamas project ; diamas",
+        "definition": "No definition provided."
+    },
+    "diamas": {
+        "tool_homogenised": "diamas project",
+        "other_tool_form": [
+            "diamas project",
+            "diamas"
+        ],
+        "other_tool_form_flatten": "diamas project ; diamas",
+        "definition": "No definition provided."
+    },
+    "dora declaration dora": {
+        "tool_homogenised": "dora declaration dora",
+        "other_tool_form": [
+            "dora declaration dora",
+            "declaration on research assessment declaration on research assessments san francisco declaration",
+            "san francisco declaration on research assessment"
+        ],
+        "other_tool_form_flatten": "dora declaration dora ; declaration on research assessment declaration on research assessments san francisco declaration ; san francisco declaration on research assessment",
+        "definition": "No definition provided."
+    },
+    "declaration on research assessment declaration on research assessments san francisco declaration": {
+        "tool_homogenised": "dora declaration dora",
+        "other_tool_form": [
+            "dora declaration dora",
+            "declaration on research assessment declaration on research assessments san francisco declaration",
+            "san francisco declaration on research assessment"
+        ],
+        "other_tool_form_flatten": "dora declaration dora ; declaration on research assessment declaration on research assessments san francisco declaration ; san francisco declaration on research assessment",
+        "definition": "No definition provided."
+    },
+    "san francisco declaration on research assessment": {
+        "tool_homogenised": "dora declaration dora",
+        "other_tool_form": [
+            "dora declaration dora",
+            "declaration on research assessment declaration on research assessments san francisco declaration",
+            "san francisco declaration on research assessment"
+        ],
+        "other_tool_form_flatten": "dora declaration dora ; declaration on research assessment declaration on research assessments san francisco declaration ; san francisco declaration on research assessment",
+        "definition": "No definition provided."
+    },
+    "eu recommendations": {
+        "tool_homogenised": "eu recommendations",
+        "other_tool_form": [
+            "eu recommendations",
+            "recommendations on recognition systems"
+        ],
+        "other_tool_form_flatten": "eu recommendations ; recommendations on recognition systems",
+        "definition": "No definition provided."
+    },
+    "recommendations on recognition systems": {
+        "tool_homogenised": "eu recommendations",
+        "other_tool_form": [
+            "eu recommendations",
+            "recommendations on recognition systems"
+        ],
+        "other_tool_form_flatten": "eu recommendations ; recommendations on recognition systems",
+        "definition": "No definition provided."
+    },
+    "european association for quality assurance in higher education european quality assurance register for higher education enqa": {
+        "tool_homogenised": "european association for quality assurance in higher education european quality assurance register for higher education enqa",
+        "other_tool_form": [
+            "european association for quality assurance in higher education european quality assurance register for higher education enqa",
+            "eqar"
+        ],
+        "other_tool_form_flatten": "european association for quality assurance in higher education european quality assurance register for higher education enqa ; eqar",
+        "definition": "No definition provided."
+    },
+    "eqar": {
+        "tool_homogenised": "european association for quality assurance in higher education european quality assurance register for higher education enqa",
+        "other_tool_form": [
+            "european association for quality assurance in higher education european quality assurance register for higher education enqa",
+            "eqar"
+        ],
+        "other_tool_form_flatten": "european association for quality assurance in higher education european quality assurance register for higher education enqa ; eqar",
+        "definition": "No definition provided."
+    },
+    "european charter": {
+        "tool_homogenised": "european charter",
+        "other_tool_form": [
+            "european charter",
+            "charter for researchers",
+            "european charter for researchers"
+        ],
+        "other_tool_form_flatten": "european charter ; charter for researchers ; european charter for researchers",
+        "definition": "No definition provided."
+    },
+    "charter for researchers": {
+        "tool_homogenised": "european charter",
+        "other_tool_form": [
+            "european charter",
+            "charter for researchers",
+            "european charter for researchers"
+        ],
+        "other_tool_form_flatten": "european charter ; charter for researchers ; european charter for researchers",
+        "definition": "No definition provided."
+    },
+    "european charter for researchers": {
+        "tool_homogenised": "european charter",
+        "other_tool_form": [
+            "european charter",
+            "charter for researchers",
+            "european charter for researchers"
+        ],
+        "other_tool_form_flatten": "european charter ; charter for researchers ; european charter for researchers",
+        "definition": "No definition provided."
+    },
+    "european competence framework competence framework for researchers": {
+        "tool_homogenised": "european competence framework competence framework for researchers",
+        "other_tool_form": [
+            "european competence framework competence framework for researchers",
+            "european competence framework for researchers",
+            "european framework for research careers",
+            "researchcomp"
+        ],
+        "other_tool_form_flatten": "european competence framework competence framework for researchers ; european competence framework for researchers ; european framework for research careers ; researchcomp",
+        "definition": "No definition provided."
+    },
+    "european competence framework for researchers": {
+        "tool_homogenised": "european competence framework competence framework for researchers",
+        "other_tool_form": [
+            "european competence framework competence framework for researchers",
+            "european competence framework for researchers",
+            "european framework for research careers",
+            "researchcomp"
+        ],
+        "other_tool_form_flatten": "european competence framework competence framework for researchers ; european competence framework for researchers ; european framework for research careers ; researchcomp",
+        "definition": "No definition provided."
+    },
+    "european framework for research careers": {
+        "tool_homogenised": "european competence framework competence framework for researchers",
+        "other_tool_form": [
+            "european competence framework competence framework for researchers",
+            "european competence framework for researchers",
+            "european framework for research careers",
+            "researchcomp"
+        ],
+        "other_tool_form_flatten": "european competence framework competence framework for researchers ; european competence framework for researchers ; european framework for research careers ; researchcomp",
+        "definition": "No definition provided."
+    },
+    "researchcomp": {
+        "tool_homogenised": "european competence framework competence framework for researchers",
+        "other_tool_form": [
+            "european competence framework competence framework for researchers",
+            "european competence framework for researchers",
+            "european framework for research careers",
+            "researchcomp"
+        ],
+        "other_tool_form_flatten": "european competence framework competence framework for researchers ; european competence framework for researchers ; european framework for research careers ; researchcomp",
+        "definition": "No definition provided."
+    },
+    "european higher education area": {
+        "tool_homogenised": "european higher education area",
+        "other_tool_form": [
+            "european higher education area",
+            "ehea",
+            "standards and guidelines for quality assurance in the european higher education area"
+        ],
+        "other_tool_form_flatten": "european higher education area ; ehea ; standards and guidelines for quality assurance in the european higher education area",
+        "definition": "No definition provided."
+    },
+    "ehea": {
+        "tool_homogenised": "european higher education area",
+        "other_tool_form": [
+            "european higher education area",
+            "ehea",
+            "standards and guidelines for quality assurance in the european higher education area"
+        ],
+        "other_tool_form_flatten": "european higher education area ; ehea ; standards and guidelines for quality assurance in the european higher education area",
+        "definition": "No definition provided."
+    },
+    "standards and guidelines for quality assurance in the european higher education area": {
+        "tool_homogenised": "european higher education area",
+        "other_tool_form": [
+            "european higher education area",
+            "ehea",
+            "standards and guidelines for quality assurance in the european higher education area"
+        ],
+        "other_tool_form_flatten": "european higher education area ; ehea ; standards and guidelines for quality assurance in the european higher education area",
+        "definition": "No definition provided."
+    },
+    "european open science cloud": {
+        "tool_homogenised": "european open science cloud",
+        "other_tool_form": [
+            "european open science cloud",
+            "eosc"
+        ],
+        "other_tool_form_flatten": "european open science cloud ; eosc",
+        "definition": "No definition provided."
+    },
+    "eosc": {
+        "tool_homogenised": "european open science cloud",
+        "other_tool_form": [
+            "european open science cloud",
+            "eosc"
+        ],
+        "other_tool_form_flatten": "european open science cloud ; eosc",
+        "definition": "No definition provided."
+    },
+    "evaluation framework": {
+        "tool_homogenised": "evaluation framework",
+        "other_tool_form": [
+            "evaluation framework",
+            "evaluation methodology and transparency",
+            "evaluation tools and processes",
+            "framework for research assessment framework for research evaluation",
+            "national evaluation framework national evaluation system",
+            "national framework",
+            "new assessment framework research assessment frameworks research evaluation framework responsible research assessment framework saris framework"
+        ],
+        "other_tool_form_flatten": "evaluation framework ; evaluation methodology and transparency ; evaluation tools and processes ; framework for research assessment framework for research evaluation ; national evaluation framework national evaluation system ; national framework ; new assessment framework research assessment frameworks research evaluation framework responsible research assessment framework saris framework",
+        "definition": "No definition provided."
+    },
+    "evaluation methodology and transparency": {
+        "tool_homogenised": "evaluation framework",
+        "other_tool_form": [
+            "evaluation framework",
+            "evaluation methodology and transparency",
+            "evaluation tools and processes",
+            "framework for research assessment framework for research evaluation",
+            "national evaluation framework national evaluation system",
+            "national framework",
+            "new assessment framework research assessment frameworks research evaluation framework responsible research assessment framework saris framework"
+        ],
+        "other_tool_form_flatten": "evaluation framework ; evaluation methodology and transparency ; evaluation tools and processes ; framework for research assessment framework for research evaluation ; national evaluation framework national evaluation system ; national framework ; new assessment framework research assessment frameworks research evaluation framework responsible research assessment framework saris framework",
+        "definition": "No definition provided."
+    },
+    "evaluation tools and processes": {
+        "tool_homogenised": "evaluation framework",
+        "other_tool_form": [
+            "evaluation framework",
+            "evaluation methodology and transparency",
+            "evaluation tools and processes",
+            "framework for research assessment framework for research evaluation",
+            "national evaluation framework national evaluation system",
+            "national framework",
+            "new assessment framework research assessment frameworks research evaluation framework responsible research assessment framework saris framework"
+        ],
+        "other_tool_form_flatten": "evaluation framework ; evaluation methodology and transparency ; evaluation tools and processes ; framework for research assessment framework for research evaluation ; national evaluation framework national evaluation system ; national framework ; new assessment framework research assessment frameworks research evaluation framework responsible research assessment framework saris framework",
+        "definition": "No definition provided."
+    },
+    "framework for research assessment framework for research evaluation": {
+        "tool_homogenised": "evaluation framework",
+        "other_tool_form": [
+            "evaluation framework",
+            "evaluation methodology and transparency",
+            "evaluation tools and processes",
+            "framework for research assessment framework for research evaluation",
+            "national evaluation framework national evaluation system",
+            "national framework",
+            "new assessment framework research assessment frameworks research evaluation framework responsible research assessment framework saris framework"
+        ],
+        "other_tool_form_flatten": "evaluation framework ; evaluation methodology and transparency ; evaluation tools and processes ; framework for research assessment framework for research evaluation ; national evaluation framework national evaluation system ; national framework ; new assessment framework research assessment frameworks research evaluation framework responsible research assessment framework saris framework",
+        "definition": "No definition provided."
+    },
+    "national evaluation framework national evaluation system": {
+        "tool_homogenised": "evaluation framework",
+        "other_tool_form": [
+            "evaluation framework",
+            "evaluation methodology and transparency",
+            "evaluation tools and processes",
+            "framework for research assessment framework for research evaluation",
+            "national evaluation framework national evaluation system",
+            "national framework",
+            "new assessment framework research assessment frameworks research evaluation framework responsible research assessment framework saris framework"
+        ],
+        "other_tool_form_flatten": "evaluation framework ; evaluation methodology and transparency ; evaluation tools and processes ; framework for research assessment framework for research evaluation ; national evaluation framework national evaluation system ; national framework ; new assessment framework research assessment frameworks research evaluation framework responsible research assessment framework saris framework",
+        "definition": "No definition provided."
+    },
+    "national framework": {
+        "tool_homogenised": "evaluation framework",
+        "other_tool_form": [
+            "evaluation framework",
+            "evaluation methodology and transparency",
+            "evaluation tools and processes",
+            "framework for research assessment framework for research evaluation",
+            "national evaluation framework national evaluation system",
+            "national framework",
+            "new assessment framework research assessment frameworks research evaluation framework responsible research assessment framework saris framework"
+        ],
+        "other_tool_form_flatten": "evaluation framework ; evaluation methodology and transparency ; evaluation tools and processes ; framework for research assessment framework for research evaluation ; national evaluation framework national evaluation system ; national framework ; new assessment framework research assessment frameworks research evaluation framework responsible research assessment framework saris framework",
+        "definition": "No definition provided."
+    },
+    "new assessment framework research assessment frameworks research evaluation framework responsible research assessment framework saris framework": {
+        "tool_homogenised": "evaluation framework",
+        "other_tool_form": [
+            "evaluation framework",
+            "evaluation methodology and transparency",
+            "evaluation tools and processes",
+            "framework for research assessment framework for research evaluation",
+            "national evaluation framework national evaluation system",
+            "national framework",
+            "new assessment framework research assessment frameworks research evaluation framework responsible research assessment framework saris framework"
+        ],
+        "other_tool_form_flatten": "evaluation framework ; evaluation methodology and transparency ; evaluation tools and processes ; framework for research assessment framework for research evaluation ; national evaluation framework national evaluation system ; national framework ; new assessment framework research assessment frameworks research evaluation framework responsible research assessment framework saris framework",
+        "definition": "No definition provided."
+    },
+    "finnish career assessment matrix": {
+        "tool_homogenised": "finnish career assessment matrix",
+        "other_tool_form": [
+            "finnish career assessment matrix",
+            "fcam fin-cam",
+            "finn-cam",
+            "finnish career-assessment matrix",
+            "rdio",
+            "rdio assessment matrix"
+        ],
+        "other_tool_form_flatten": "finnish career assessment matrix ; fcam fin-cam ; finn-cam ; finnish career-assessment matrix ; rdio ; rdio assessment matrix",
+        "definition": "No definition provided."
+    },
+    "fcam fin-cam": {
+        "tool_homogenised": "finnish career assessment matrix",
+        "other_tool_form": [
+            "finnish career assessment matrix",
+            "fcam fin-cam",
+            "finn-cam",
+            "finnish career-assessment matrix",
+            "rdio",
+            "rdio assessment matrix"
+        ],
+        "other_tool_form_flatten": "finnish career assessment matrix ; fcam fin-cam ; finn-cam ; finnish career-assessment matrix ; rdio ; rdio assessment matrix",
+        "definition": "No definition provided."
+    },
+    "finn-cam": {
+        "tool_homogenised": "finnish career assessment matrix",
+        "other_tool_form": [
+            "finnish career assessment matrix",
+            "fcam fin-cam",
+            "finn-cam",
+            "finnish career-assessment matrix",
+            "rdio",
+            "rdio assessment matrix"
+        ],
+        "other_tool_form_flatten": "finnish career assessment matrix ; fcam fin-cam ; finn-cam ; finnish career-assessment matrix ; rdio ; rdio assessment matrix",
+        "definition": "No definition provided."
+    },
+    "finnish career-assessment matrix": {
+        "tool_homogenised": "finnish career assessment matrix",
+        "other_tool_form": [
+            "finnish career assessment matrix",
+            "fcam fin-cam",
+            "finn-cam",
+            "finnish career-assessment matrix",
+            "rdio",
+            "rdio assessment matrix"
+        ],
+        "other_tool_form_flatten": "finnish career assessment matrix ; fcam fin-cam ; finn-cam ; finnish career-assessment matrix ; rdio ; rdio assessment matrix",
+        "definition": "No definition provided."
+    },
+    "rdio": {
+        "tool_homogenised": "finnish career assessment matrix",
+        "other_tool_form": [
+            "finnish career assessment matrix",
+            "fcam fin-cam",
+            "finn-cam",
+            "finnish career-assessment matrix",
+            "rdio",
+            "rdio assessment matrix"
+        ],
+        "other_tool_form_flatten": "finnish career assessment matrix ; fcam fin-cam ; finn-cam ; finnish career-assessment matrix ; rdio ; rdio assessment matrix",
+        "definition": "No definition provided."
+    },
+    "rdio assessment matrix": {
+        "tool_homogenised": "finnish career assessment matrix",
+        "other_tool_form": [
+            "finnish career assessment matrix",
+            "fcam fin-cam",
+            "finn-cam",
+            "finnish career-assessment matrix",
+            "rdio",
+            "rdio assessment matrix"
+        ],
+        "other_tool_form_flatten": "finnish career assessment matrix ; fcam fin-cam ; finn-cam ; finnish career-assessment matrix ; rdio ; rdio assessment matrix",
+        "definition": "No definition provided."
+    },
+    "hong kong manifesto hong kong principles": {
+        "tool_homogenised": "hong kong manifesto hong kong principles",
+        "other_tool_form": [
+            "hong kong manifesto hong kong principles"
+        ],
+        "other_tool_form_flatten": "hong kong manifesto hong kong principles",
+        "definition": "No definition provided."
+    },
+    "horizon europe eu boost project eu horizon program horizon 2020": {
+        "tool_homogenised": "horizon europe eu boost project eu horizon program horizon 2020",
+        "other_tool_form": [
+            "horizon europe eu boost project eu horizon program horizon 2020"
+        ],
+        "other_tool_form_flatten": "horizon europe eu boost project eu horizon program horizon 2020",
+        "definition": "No definition provided."
+    },
+    "horizon europe project he project": {
+        "tool_homogenised": "horizon europe project he project",
+        "other_tool_form": [
+            "horizon europe project he project",
+            "graspos graspos eu project",
+            "pathos",
+            "scilake"
+        ],
+        "other_tool_form_flatten": "horizon europe project he project ; graspos graspos eu project ; pathos ; scilake",
+        "definition": "No definition provided."
+    },
+    "graspos graspos eu project": {
+        "tool_homogenised": "horizon europe project he project",
+        "other_tool_form": [
+            "horizon europe project he project",
+            "graspos graspos eu project",
+            "pathos",
+            "scilake"
+        ],
+        "other_tool_form_flatten": "horizon europe project he project ; graspos graspos eu project ; pathos ; scilake",
+        "definition": "No definition provided."
+    },
+    "pathos": {
+        "tool_homogenised": "horizon europe project he project",
+        "other_tool_form": [
+            "horizon europe project he project",
+            "graspos graspos eu project",
+            "pathos",
+            "scilake"
+        ],
+        "other_tool_form_flatten": "horizon europe project he project ; graspos graspos eu project ; pathos ; scilake",
+        "definition": "No definition provided."
+    },
+    "scilake": {
+        "tool_homogenised": "horizon europe project he project",
+        "other_tool_form": [
+            "horizon europe project he project",
+            "graspos graspos eu project",
+            "pathos",
+            "scilake"
+        ],
+        "other_tool_form_flatten": "horizon europe project he project ; graspos graspos eu project ; pathos ; scilake",
+        "definition": "No definition provided."
+    },
+    "hrs4r hr excellence in research hr excellence in research strategy hr strategy for researchers human research strategy for researchers human resources strategy for researchers human resources excellence in research": {
+        "tool_homogenised": "hrs4r hr excellence in research hr excellence in research strategy hr strategy for researchers human research strategy for researchers human resources strategy for researchers human resources excellence in research",
+        "other_tool_form": [
+            "hrs4r hr excellence in research hr excellence in research strategy hr strategy for researchers human research strategy for researchers human resources strategy for researchers human resources excellence in research"
+        ],
+        "other_tool_form_flatten": "hrs4r hr excellence in research hr excellence in research strategy hr strategy for researchers human research strategy for researchers human resources strategy for researchers human resources excellence in research",
+        "definition": "No definition provided."
+    },
+    "information system for academic staff performance evaluation": {
+        "tool_homogenised": "information system for academic staff performance evaluation",
+        "other_tool_form": [
+            "information system for academic staff performance evaluation",
+            "is hap"
+        ],
+        "other_tool_form_flatten": "information system for academic staff performance evaluation ; is hap",
+        "definition": "No definition provided."
+    },
+    "is hap": {
+        "tool_homogenised": "information system for academic staff performance evaluation",
+        "other_tool_form": [
+            "information system for academic staff performance evaluation",
+            "is hap"
+        ],
+        "other_tool_form_flatten": "information system for academic staff performance evaluation ; is hap",
+        "definition": "No definition provided."
+    },
+    "inorms International Network of Research Management Societies": {
+        "tool_homogenised": "inorms International Network of Research Management Societies",
+        "other_tool_form": [
+            "inorms International Network of Research Management Societies"
+        ],
+        "other_tool_form_flatten": "inorms International Network of Research Management Societies",
+        "definition": "No definition provided."
+    },
+    "internal research and doctoral studies evaluation": {
+        "tool_homogenised": "internal research and doctoral studies evaluation",
+        "other_tool_form": [
+            "internal research and doctoral studies evaluation",
+            "irde"
+        ],
+        "other_tool_form_flatten": "internal research and doctoral studies evaluation ; irde",
+        "definition": "No definition provided."
+    },
+    "irde": {
+        "tool_homogenised": "internal research and doctoral studies evaluation",
+        "other_tool_form": [
+            "internal research and doctoral studies evaluation",
+            "irde"
+        ],
+        "other_tool_form_flatten": "internal research and doctoral studies evaluation ; irde",
+        "definition": "No definition provided."
+    },
+    "international school on research impact assessment": {
+        "tool_homogenised": "international school on research impact assessment",
+        "other_tool_form": [
+            "international school on research impact assessment",
+            "isria"
+        ],
+        "other_tool_form_flatten": "international school on research impact assessment ; isria",
+        "definition": "No definition provided."
+    },
+    "isria": {
+        "tool_homogenised": "international school on research impact assessment",
+        "other_tool_form": [
+            "international school on research impact assessment",
+            "isria"
+        ],
+        "other_tool_form_flatten": "international school on research impact assessment ; isria",
+        "definition": "No definition provided."
+    },
+    "label of quality in academic publishing": {
+        "tool_homogenised": "label of quality in academic publishing",
+        "other_tool_form": [
+            "label of quality in academic publishing",
+            "cea-apq"
+        ],
+        "other_tool_form_flatten": "label of quality in academic publishing ; cea-apq",
+        "definition": "No definition provided."
+    },
+    "cea-apq": {
+        "tool_homogenised": "label of quality in academic publishing",
+        "other_tool_form": [
+            "label of quality in academic publishing",
+            "cea-apq"
+        ],
+        "other_tool_form_flatten": "label of quality in academic publishing ; cea-apq",
+        "definition": "No definition provided."
+    },
+    "legal framework": {
+        "tool_homogenised": "legal framework",
+        "other_tool_form": [
+            "legal framework",
+            "quality assurance framework for research"
+        ],
+        "other_tool_form_flatten": "legal framework ; quality assurance framework for research",
+        "definition": "No definition provided."
+    },
+    "quality assurance framework for research": {
+        "tool_homogenised": "legal framework",
+        "other_tool_form": [
+            "legal framework",
+            "quality assurance framework for research"
+        ],
+        "other_tool_form_flatten": "legal framework ; quality assurance framework for research",
+        "definition": "No definition provided."
+    },
+    "leiden manifesto": {
+        "tool_homogenised": "leiden manifesto",
+        "other_tool_form": [
+            "leiden manifesto",
+            "leiden principles"
+        ],
+        "other_tool_form_flatten": "leiden manifesto ; leiden principles",
+        "definition": "No definition provided."
+    },
+    "leiden principles": {
+        "tool_homogenised": "leiden manifesto",
+        "other_tool_form": [
+            "leiden manifesto",
+            "leiden principles"
+        ],
+        "other_tool_form_flatten": "leiden manifesto ; leiden principles",
+        "definition": "No definition provided."
+    },
+    "more than our rank": {
+        "tool_homogenised": "more than our rank",
+        "other_tool_form": [
+            "more than our rank",
+            "more than our rank initiative",
+            "mtor"
+        ],
+        "other_tool_form_flatten": "more than our rank ; more than our rank initiative ; mtor",
+        "definition": "No definition provided."
+    },
+    "more than our rank initiative": {
+        "tool_homogenised": "more than our rank",
+        "other_tool_form": [
+            "more than our rank",
+            "more than our rank initiative",
+            "mtor"
+        ],
+        "other_tool_form_flatten": "more than our rank ; more than our rank initiative ; mtor",
+        "definition": "No definition provided."
+    },
+    "mtor": {
+        "tool_homogenised": "more than our rank",
+        "other_tool_form": [
+            "more than our rank",
+            "more than our rank initiative",
+            "mtor"
+        ],
+        "other_tool_form_flatten": "more than our rank ; more than our rank initiative ; mtor",
+        "definition": "No definition provided."
+    },
+    "hungarian national science bibliography mtmt": {
+        "tool_homogenised": "hungarian national science bibliography mtmt",
+        "other_tool_form": [
+            "hungarian national science bibliography mtmt"
+        ],
+        "other_tool_form_flatten": "hungarian national science bibliography mtmt",
+        "definition": "No definition provided."
+    },
+    "national open access monitor": {
+        "tool_homogenised": "national open access monitor",
+        "other_tool_form": [
+            "national open access monitor",
+            "noam"
+        ],
+        "other_tool_form_flatten": "national open access monitor ; noam",
+        "definition": "No definition provided."
+    },
+    "noam": {
+        "tool_homogenised": "national open access monitor",
+        "other_tool_form": [
+            "national open access monitor",
+            "noam"
+        ],
+        "other_tool_form_flatten": "national open access monitor ; noam",
+        "definition": "No definition provided."
+    },
+    "national open science strategy": {
+        "tool_homogenised": "national open science strategy",
+        "other_tool_form": [
+            "national open science strategy",
+            "national open science",
+            "national strategy for open science"
+        ],
+        "other_tool_form_flatten": "national open science strategy ; national open science ; national strategy for open science",
+        "definition": "No definition provided."
+    },
+    "national open science": {
+        "tool_homogenised": "national open science strategy",
+        "other_tool_form": [
+            "national open science strategy",
+            "national open science",
+            "national strategy for open science"
+        ],
+        "other_tool_form_flatten": "national open science strategy ; national open science ; national strategy for open science",
+        "definition": "No definition provided."
+    },
+    "national strategy for open science": {
+        "tool_homogenised": "national open science strategy",
+        "other_tool_form": [
+            "national open science strategy",
+            "national open science",
+            "national strategy for open science"
+        ],
+        "other_tool_form_flatten": "national open science strategy ; national open science ; national strategy for open science",
+        "definition": "No definition provided."
+    },
+    "national regulations": {
+        "tool_homogenised": "national regulations",
+        "other_tool_form": [
+            "national regulations"
+        ],
+        "other_tool_form_flatten": "national regulations",
+        "definition": "No definition provided."
+    },
+    "norwegian career assessment matrix": {
+        "tool_homogenised": "norwegian career assessment matrix",
+        "other_tool_form": [
+            "norwegian career assessment matrix",
+            "national nor-cam network",
+            "nor-cam",
+            "nor-cam-network"
+        ],
+        "other_tool_form_flatten": "norwegian career assessment matrix ; national nor-cam network ; nor-cam ; nor-cam-network",
+        "definition": "No definition provided."
+    },
+    "national nor-cam network": {
+        "tool_homogenised": "norwegian career assessment matrix",
+        "other_tool_form": [
+            "norwegian career assessment matrix",
+            "national nor-cam network",
+            "nor-cam",
+            "nor-cam-network"
+        ],
+        "other_tool_form_flatten": "norwegian career assessment matrix ; national nor-cam network ; nor-cam ; nor-cam-network",
+        "definition": "No definition provided."
+    },
+    "nor-cam": {
+        "tool_homogenised": "norwegian career assessment matrix",
+        "other_tool_form": [
+            "norwegian career assessment matrix",
+            "national nor-cam network",
+            "nor-cam",
+            "nor-cam-network"
+        ],
+        "other_tool_form_flatten": "norwegian career assessment matrix ; national nor-cam network ; nor-cam ; nor-cam-network",
+        "definition": "No definition provided."
+    },
+    "nor-cam-network": {
+        "tool_homogenised": "norwegian career assessment matrix",
+        "other_tool_form": [
+            "norwegian career assessment matrix",
+            "national nor-cam network",
+            "nor-cam",
+            "nor-cam-network"
+        ],
+        "other_tool_form_flatten": "norwegian career assessment matrix ; national nor-cam network ; nor-cam ; nor-cam-network",
+        "definition": "No definition provided."
+    },
+    "hr omega data base omega": {
+        "tool_homogenised": "hr omega data base omega",
+        "other_tool_form": [
+            "hr omega data base omega"
+        ],
+        "other_tool_form_flatten": "hr omega data base omega",
+        "definition": "No definition provided."
+    },
+    "online platform rrview": {
+        "tool_homogenised": "online platform rrview",
+        "other_tool_form": [
+            "online platform rrview",
+            "internet forum",
+            "online community platform rrview",
+            "rrview"
+        ],
+        "other_tool_form_flatten": "online platform rrview ; internet forum ; online community platform rrview ; rrview",
+        "definition": "No definition provided."
+    },
+    "internet forum": {
+        "tool_homogenised": "online platform rrview",
+        "other_tool_form": [
+            "online platform rrview",
+            "internet forum",
+            "online community platform rrview",
+            "rrview"
+        ],
+        "other_tool_form_flatten": "online platform rrview ; internet forum ; online community platform rrview ; rrview",
+        "definition": "No definition provided."
+    },
+    "online community platform rrview": {
+        "tool_homogenised": "online platform rrview",
+        "other_tool_form": [
+            "online platform rrview",
+            "internet forum",
+            "online community platform rrview",
+            "rrview"
+        ],
+        "other_tool_form_flatten": "online platform rrview ; internet forum ; online community platform rrview ; rrview",
+        "definition": "No definition provided."
+    },
+    "rrview": {
+        "tool_homogenised": "online platform rrview",
+        "other_tool_form": [
+            "online platform rrview",
+            "internet forum",
+            "online community platform rrview",
+            "rrview"
+        ],
+        "other_tool_form_flatten": "online platform rrview ; internet forum ; online community platform rrview ; rrview",
+        "definition": "No definition provided."
+    },
+    "open science career assessment matrix": {
+        "tool_homogenised": "open science career assessment matrix",
+        "other_tool_form": [
+            "open science career assessment matrix",
+            "os-cam"
+        ],
+        "other_tool_form_flatten": "open science career assessment matrix ; os-cam",
+        "definition": "No definition provided."
+    },
+    "os-cam": {
+        "tool_homogenised": "open science career assessment matrix",
+        "other_tool_form": [
+            "open science career assessment matrix",
+            "os-cam"
+        ],
+        "other_tool_form_flatten": "open science career assessment matrix ; os-cam",
+        "definition": "No definition provided."
+    },
+    "open4ua": {
+        "tool_homogenised": "open4ua",
+        "other_tool_form": [
+            "open4ua"
+        ],
+        "other_tool_form_flatten": "open4ua",
+        "definition": "No definition provided."
+    },
+    "openaire": {
+        "tool_homogenised": "openaire",
+        "other_tool_form": [
+            "openaire",
+            "openaire platforms"
+        ],
+        "other_tool_form_flatten": "openaire ; openaire platforms",
+        "definition": "No definition provided."
+    },
+    "openaire platforms": {
+        "tool_homogenised": "openaire",
+        "other_tool_form": [
+            "openaire",
+            "openaire platforms"
+        ],
+        "other_tool_form_flatten": "openaire ; openaire platforms",
+        "definition": "No definition provided."
+    },
+    "openalex": {
+        "tool_homogenised": "openalex",
+        "other_tool_form": [
+            "openalex"
+        ],
+        "other_tool_form_flatten": "openalex",
+        "definition": "No definition provided."
+    },
+    "open research data ord open research practices research data sharing": {
+        "tool_homogenised": "open research data ord open research practices research data sharing",
+        "other_tool_form": [
+            "open research data ord open research practices research data sharing"
+        ],
+        "other_tool_form_flatten": "open research data ord open research practices research data sharing",
+        "definition": "No definition provided."
+    },
+    "otm-r": {
+        "tool_homogenised": "otm-r",
+        "other_tool_form": [
+            "otm-r",
+            "open transparent and merit-based recruitment",
+            "open transparent merit-based recruitment"
+        ],
+        "other_tool_form_flatten": "otm-r ; open transparent and merit-based recruitment ; open transparent merit-based recruitment",
+        "definition": "No definition provided."
+    },
+    "open transparent and merit-based recruitment": {
+        "tool_homogenised": "otm-r",
+        "other_tool_form": [
+            "otm-r",
+            "open transparent and merit-based recruitment",
+            "open transparent merit-based recruitment"
+        ],
+        "other_tool_form_flatten": "otm-r ; open transparent and merit-based recruitment ; open transparent merit-based recruitment",
+        "definition": "No definition provided."
+    },
+    "open transparent merit-based recruitment": {
+        "tool_homogenised": "otm-r",
+        "other_tool_form": [
+            "otm-r",
+            "open transparent and merit-based recruitment",
+            "open transparent merit-based recruitment"
+        ],
+        "other_tool_form_flatten": "otm-r ; open transparent and merit-based recruitment ; open transparent merit-based recruitment",
+        "definition": "No definition provided."
+    },
+    "plan s": {
+        "tool_homogenised": "plan s",
+        "other_tool_form": [
+            "plan s"
+        ],
+        "other_tool_form_flatten": "plan s",
+        "definition": "No definition provided."
+    },
+    "program for evaluating teaching staff for recruitment": {
+        "tool_homogenised": "program for evaluating teaching staff for recruitment",
+        "other_tool_form": [
+            "program for evaluating teaching staff for recruitment",
+            "pep"
+        ],
+        "other_tool_form_flatten": "program for evaluating teaching staff for recruitment ; pep",
+        "definition": "No definition provided."
+    },
+    "pep": {
+        "tool_homogenised": "program for evaluating teaching staff for recruitment",
+        "other_tool_form": [
+            "program for evaluating teaching staff for recruitment",
+            "pep"
+        ],
+        "other_tool_form_flatten": "program for evaluating teaching staff for recruitment ; pep",
+        "definition": "No definition provided."
+    },
+    "recommendation for the responsible evaluation of a researcher in finland": {
+        "tool_homogenised": "recommendation for the responsible evaluation of a researcher in finland",
+        "other_tool_form": [
+            "recommendation for the responsible evaluation of a researcher in finland",
+            "recommendation for the responsible evaluation"
+        ],
+        "other_tool_form_flatten": "recommendation for the responsible evaluation of a researcher in finland ; recommendation for the responsible evaluation",
+        "definition": "No definition provided."
+    },
+    "recommendation for the responsible evaluation": {
+        "tool_homogenised": "recommendation for the responsible evaluation of a researcher in finland",
+        "other_tool_form": [
+            "recommendation for the responsible evaluation of a researcher in finland",
+            "recommendation for the responsible evaluation"
+        ],
+        "other_tool_form_flatten": "recommendation for the responsible evaluation of a researcher in finland ; recommendation for the responsible evaluation",
+        "definition": "No definition provided."
+    },
+    "research assessment frameworks": {
+        "tool_homogenised": "research assessment frameworks",
+        "other_tool_form": [
+            "research assessment frameworks",
+            "collaborative framework",
+            "competence framework for researchers",
+            "research evaluation framework",
+            "responsible research assessment framework",
+            "saris",
+            "saris framework"
+        ],
+        "other_tool_form_flatten": "research assessment frameworks ; collaborative framework ; competence framework for researchers ; research evaluation framework ; responsible research assessment framework ; saris ; saris framework",
+        "definition": "No definition provided."
+    },
+    "collaborative framework": {
+        "tool_homogenised": "research assessment frameworks",
+        "other_tool_form": [
+            "research assessment frameworks",
+            "collaborative framework",
+            "competence framework for researchers",
+            "research evaluation framework",
+            "responsible research assessment framework",
+            "saris",
+            "saris framework"
+        ],
+        "other_tool_form_flatten": "research assessment frameworks ; collaborative framework ; competence framework for researchers ; research evaluation framework ; responsible research assessment framework ; saris ; saris framework",
+        "definition": "No definition provided."
+    },
+    "competence framework for researchers": {
+        "tool_homogenised": "research assessment frameworks",
+        "other_tool_form": [
+            "research assessment frameworks",
+            "collaborative framework",
+            "competence framework for researchers",
+            "research evaluation framework",
+            "responsible research assessment framework",
+            "saris",
+            "saris framework"
+        ],
+        "other_tool_form_flatten": "research assessment frameworks ; collaborative framework ; competence framework for researchers ; research evaluation framework ; responsible research assessment framework ; saris ; saris framework",
+        "definition": "No definition provided."
+    },
+    "research evaluation framework": {
+        "tool_homogenised": "research assessment frameworks",
+        "other_tool_form": [
+            "research assessment frameworks",
+            "collaborative framework",
+            "competence framework for researchers",
+            "research evaluation framework",
+            "responsible research assessment framework",
+            "saris",
+            "saris framework"
+        ],
+        "other_tool_form_flatten": "research assessment frameworks ; collaborative framework ; competence framework for researchers ; research evaluation framework ; responsible research assessment framework ; saris ; saris framework",
+        "definition": "No definition provided."
+    },
+    "responsible research assessment framework": {
+        "tool_homogenised": "research assessment frameworks",
+        "other_tool_form": [
+            "research assessment frameworks",
+            "collaborative framework",
+            "competence framework for researchers",
+            "research evaluation framework",
+            "responsible research assessment framework",
+            "saris",
+            "saris framework"
+        ],
+        "other_tool_form_flatten": "research assessment frameworks ; collaborative framework ; competence framework for researchers ; research evaluation framework ; responsible research assessment framework ; saris ; saris framework",
+        "definition": "No definition provided."
+    },
+    "saris": {
+        "tool_homogenised": "research assessment frameworks",
+        "other_tool_form": [
+            "research assessment frameworks",
+            "collaborative framework",
+            "competence framework for researchers",
+            "research evaluation framework",
+            "responsible research assessment framework",
+            "saris",
+            "saris framework"
+        ],
+        "other_tool_form_flatten": "research assessment frameworks ; collaborative framework ; competence framework for researchers ; research evaluation framework ; responsible research assessment framework ; saris ; saris framework",
+        "definition": "No definition provided."
+    },
+    "saris framework": {
+        "tool_homogenised": "research assessment frameworks",
+        "other_tool_form": [
+            "research assessment frameworks",
+            "collaborative framework",
+            "competence framework for researchers",
+            "research evaluation framework",
+            "responsible research assessment framework",
+            "saris",
+            "saris framework"
+        ],
+        "other_tool_form_flatten": "research assessment frameworks ; collaborative framework ; competence framework for researchers ; research evaluation framework ; responsible research assessment framework ; saris ; saris framework",
+        "definition": "No definition provided."
+    },
+    "research council of norway": {
+        "tool_homogenised": "research council of norway",
+        "other_tool_form": [
+            "research council of norway",
+            "rcn"
+        ],
+        "other_tool_form_flatten": "research council of norway ; rcn",
+        "definition": "No definition provided."
+    },
+    "rcn": {
+        "tool_homogenised": "research council of norway",
+        "other_tool_form": [
+            "research council of norway",
+            "rcn"
+        ],
+        "other_tool_form_flatten": "research council of norway ; rcn",
+        "definition": "No definition provided."
+    },
+    "scope framework": {
+        "tool_homogenised": "scope framework",
+        "other_tool_form": [
+            "scope framework",
+            "framework for research evaluation",
+            "scope model"
+        ],
+        "other_tool_form_flatten": "scope framework ; framework for research evaluation ; scope model",
+        "definition": "No definition provided."
+    },
+    "framework for research evaluation": {
+        "tool_homogenised": "scope framework",
+        "other_tool_form": [
+            "scope framework",
+            "framework for research evaluation",
+            "scope model"
+        ],
+        "other_tool_form_flatten": "scope framework ; framework for research evaluation ; scope model",
+        "definition": "No definition provided."
+    },
+    "scope model": {
+        "tool_homogenised": "scope framework",
+        "other_tool_form": [
+            "scope framework",
+            "framework for research evaluation",
+            "scope model"
+        ],
+        "other_tool_form_flatten": "scope framework ; framework for research evaluation ; scope model",
+        "definition": "No definition provided."
+    },
+    "source normalized impact per paper snip": {
+        "tool_homogenised": "source normalized impact per paper snip",
+        "other_tool_form": [
+            "source normalized impact per paper snip"
+        ],
+        "other_tool_form_flatten": "source normalized impact per paper snip",
+        "definition": "No definition provided."
+    },
+    "spanish qualifications framework for higher education": {
+        "tool_homogenised": "spanish qualifications framework for higher education",
+        "other_tool_form": [
+            "spanish qualifications framework for higher education",
+            "meces"
+        ],
+        "other_tool_form_flatten": "spanish qualifications framework for higher education ; meces",
+        "definition": "No definition provided."
+    },
+    "meces": {
+        "tool_homogenised": "spanish qualifications framework for higher education",
+        "other_tool_form": [
+            "spanish qualifications framework for higher education",
+            "meces"
+        ],
+        "other_tool_form_flatten": "spanish qualifications framework for higher education ; meces",
+        "definition": "No definition provided."
+    },
+    "spanish royal decree": {
+        "tool_homogenised": "spanish royal decree",
+        "other_tool_form": [
+            "spanish royal decree",
+            "royal decree",
+            "royal decree 576 2023",
+            "royal decree 678",
+            "royal decree 678 2023",
+            "spanish royal decree 678 2023 organic law of the university system",
+            "losu"
+        ],
+        "other_tool_form_flatten": "spanish royal decree ; royal decree ; royal decree 576 2023 ; royal decree 678 ; royal decree 678 2023 ; spanish royal decree 678 2023 organic law of the university system ; losu",
+        "definition": "No definition provided."
+    },
+    "royal decree": {
+        "tool_homogenised": "spanish royal decree",
+        "other_tool_form": [
+            "spanish royal decree",
+            "royal decree",
+            "royal decree 576 2023",
+            "royal decree 678",
+            "royal decree 678 2023",
+            "spanish royal decree 678 2023 organic law of the university system",
+            "losu"
+        ],
+        "other_tool_form_flatten": "spanish royal decree ; royal decree ; royal decree 576 2023 ; royal decree 678 ; royal decree 678 2023 ; spanish royal decree 678 2023 organic law of the university system ; losu",
+        "definition": "No definition provided."
+    },
+    "royal decree 576 2023": {
+        "tool_homogenised": "spanish royal decree",
+        "other_tool_form": [
+            "spanish royal decree",
+            "royal decree",
+            "royal decree 576 2023",
+            "royal decree 678",
+            "royal decree 678 2023",
+            "spanish royal decree 678 2023 organic law of the university system",
+            "losu"
+        ],
+        "other_tool_form_flatten": "spanish royal decree ; royal decree ; royal decree 576 2023 ; royal decree 678 ; royal decree 678 2023 ; spanish royal decree 678 2023 organic law of the university system ; losu",
+        "definition": "No definition provided."
+    },
+    "royal decree 678": {
+        "tool_homogenised": "spanish royal decree",
+        "other_tool_form": [
+            "spanish royal decree",
+            "royal decree",
+            "royal decree 576 2023",
+            "royal decree 678",
+            "royal decree 678 2023",
+            "spanish royal decree 678 2023 organic law of the university system",
+            "losu"
+        ],
+        "other_tool_form_flatten": "spanish royal decree ; royal decree ; royal decree 576 2023 ; royal decree 678 ; royal decree 678 2023 ; spanish royal decree 678 2023 organic law of the university system ; losu",
+        "definition": "No definition provided."
+    },
+    "royal decree 678 2023": {
+        "tool_homogenised": "spanish royal decree",
+        "other_tool_form": [
+            "spanish royal decree",
+            "royal decree",
+            "royal decree 576 2023",
+            "royal decree 678",
+            "royal decree 678 2023",
+            "spanish royal decree 678 2023 organic law of the university system",
+            "losu"
+        ],
+        "other_tool_form_flatten": "spanish royal decree ; royal decree ; royal decree 576 2023 ; royal decree 678 ; royal decree 678 2023 ; spanish royal decree 678 2023 organic law of the university system ; losu",
+        "definition": "No definition provided."
+    },
+    "spanish royal decree 678 2023 organic law of the university system": {
+        "tool_homogenised": "spanish royal decree",
+        "other_tool_form": [
+            "spanish royal decree",
+            "royal decree",
+            "royal decree 576 2023",
+            "royal decree 678",
+            "royal decree 678 2023",
+            "spanish royal decree 678 2023 organic law of the university system",
+            "losu"
+        ],
+        "other_tool_form_flatten": "spanish royal decree ; royal decree ; royal decree 576 2023 ; royal decree 678 ; royal decree 678 2023 ; spanish royal decree 678 2023 organic law of the university system ; losu",
+        "definition": "No definition provided."
+    },
+    "losu": {
+        "tool_homogenised": "spanish royal decree",
+        "other_tool_form": [
+            "spanish royal decree",
+            "royal decree",
+            "royal decree 576 2023",
+            "royal decree 678",
+            "royal decree 678 2023",
+            "spanish royal decree 678 2023 organic law of the university system",
+            "losu"
+        ],
+        "other_tool_form_flatten": "spanish royal decree ; royal decree ; royal decree 576 2023 ; royal decree 678 ; royal decree 678 2023 ; spanish royal decree 678 2023 organic law of the university system ; losu",
+        "definition": "No definition provided."
+    },
+    "strategy evaluation protocol": {
+        "tool_homogenised": "strategy evaluation protocol",
+        "other_tool_form": [
+            "strategy evaluation protocol",
+            "sep"
+        ],
+        "other_tool_form_flatten": "strategy evaluation protocol ; sep",
+        "definition": "No definition provided."
+    },
+    "sep": {
+        "tool_homogenised": "strategy evaluation protocol",
+        "other_tool_form": [
+            "strategy evaluation protocol",
+            "sep"
+        ],
+        "other_tool_form_flatten": "strategy evaluation protocol ; sep",
+        "definition": "No definition provided."
+    },
+    "tenk": {
+        "tool_homogenised": "tenk",
+        "other_tool_form": [
+            "tenk",
+            "ethical principles of research with human participants",
+            "finnish code of conduct for research integrity",
+            "finnish national board on research integrity"
+        ],
+        "other_tool_form_flatten": "tenk ; ethical principles of research with human participants ; finnish code of conduct for research integrity ; finnish national board on research integrity",
+        "definition": "No definition provided."
+    },
+    "ethical principles of research with human participants": {
+        "tool_homogenised": "tenk",
+        "other_tool_form": [
+            "tenk",
+            "ethical principles of research with human participants",
+            "finnish code of conduct for research integrity",
+            "finnish national board on research integrity"
+        ],
+        "other_tool_form_flatten": "tenk ; ethical principles of research with human participants ; finnish code of conduct for research integrity ; finnish national board on research integrity",
+        "definition": "No definition provided."
+    },
+    "finnish code of conduct for research integrity": {
+        "tool_homogenised": "tenk",
+        "other_tool_form": [
+            "tenk",
+            "ethical principles of research with human participants",
+            "finnish code of conduct for research integrity",
+            "finnish national board on research integrity"
+        ],
+        "other_tool_form_flatten": "tenk ; ethical principles of research with human participants ; finnish code of conduct for research integrity ; finnish national board on research integrity",
+        "definition": "No definition provided."
+    },
+    "finnish national board on research integrity": {
+        "tool_homogenised": "tenk",
+        "other_tool_form": [
+            "tenk",
+            "ethical principles of research with human participants",
+            "finnish code of conduct for research integrity",
+            "finnish national board on research integrity"
+        ],
+        "other_tool_form_flatten": "tenk ; ethical principles of research with human participants ; finnish code of conduct for research integrity ; finnish national board on research integrity",
+        "definition": "No definition provided."
+    },
+    "unesco": {
+        "tool_homogenised": "unesco",
+        "other_tool_form": [
+            "unesco",
+            "unesco recommendation"
+        ],
+        "other_tool_form_flatten": "unesco ; unesco recommendation",
+        "definition": "No definition provided."
+    },
+    "unesco recommendation": {
+        "tool_homogenised": "unesco",
+        "other_tool_form": [
+            "unesco",
+            "unesco recommendation"
+        ],
+        "other_tool_form_flatten": "unesco ; unesco recommendation",
+        "definition": "No definition provided."
+    }
 }
