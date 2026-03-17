@@ -3,7 +3,7 @@
     "info": {
         "title": "coara-tools - Services pour l'instance Lodex Coara",
         "description": "Cette instance contient un ensemble de services utiles pour la création de l'instance Lodex Coara.",
-        "version": "1.1.4",
+        "version": "1.1.5",
         "termsOfService": "https://services.istex.fr/",
         "contact": {
             "name": "Inist-CNRS",
