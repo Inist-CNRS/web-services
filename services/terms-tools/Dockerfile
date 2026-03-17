@@ -24,7 +24,7 @@ RUN dvc pull -v
 
 FROM cnrsinist/ezs-python-server:py3.9-no24-1.0.13
 
-ENV TERMS_TOOLS_VERSION=2.1
+ENV TERMS_TOOLS_VERSION=2.2
 ENV GIT=https://github.com/stephane54/terms-tools.git
 ENV DICO_PATH="/app/public/dictionary"
 
