@@ -1,4 +1,4 @@
-# ws-embeddings-computer@0.0.0
+# ws-embeddings-computer@0.1.0
 
 Vectorisation de texte
 

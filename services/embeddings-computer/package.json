@@ -1,7 +1,7 @@
 {
   "private": true,
   "name": "ws-embeddings-computer",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "Vectorisation de texte",
   "repository": {
     "type": "git",

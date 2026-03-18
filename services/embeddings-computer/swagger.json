@@ -3,7 +3,7 @@
     "info": {
         "title": "embeddings-computer - Vectorisation de texte",
         "description": "Des services de génération de vecteurs numériques représentant du texte (plongements lexicaux, ou embeddings en anglais).",
-        "version": "0.0.0",
+        "version": "0.1.0",
         "termsOfService": "https://services.istex.fr/",
         "contact": {
             "name": "Inist-CNRS",
