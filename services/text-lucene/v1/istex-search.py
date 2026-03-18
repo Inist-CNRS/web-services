@@ -56,7 +56,7 @@ def construct_llm_prompt(user_prompt):
     (title:("electric car" "electrics cars" "electric vehicle" "electrics vehicles") OR abstract:("electric car" "electrics cars" "electric vehicle" "electrics vehicles")) AND publicationDate:[2015 TO *]
     ```
 
-    2. Exemple 2 : Si l'utilisateur demande "Trouve tous les articles scientifiques parûts entre 2000 et 2020 sur la mémoire",
+    2. Exemple 2 : Si l'utilisateur demande "Trouve tous les articles scientifiques parus entre 2000 et 2020 sur la mémoire",
     une réponse possible est
     ```
     (title:("memory" "memories" "metamemory" "mémoire" "mémoires" "métamémoire") OR abstract:("memory" "memories" "metamemory" "mémoire" "mémoires" "métamémoire")) AND publicationDate:[2000 TO 2020] AND genre.raw:("research-article")
@@ -99,7 +99,7 @@ def construct_llm_prompt(user_prompt):
     return prompt
 
 
-def generate_lucen(prompt: str, model_name: str) -> str:
+def generate_lucene(prompt: str, model_name: str) -> str:
     base_url = "https://llm.ilaas.fr/v1"
     headers = {
         "Authorization": f"Bearer {api_key}",
@@ -109,7 +109,7 @@ def generate_lucen(prompt: str, model_name: str) -> str:
         "model": model_name,
         "messages": [{"role": "user", "content": f"{prompt}"}],
         "stream": False,
-        "max_tokens": 2000
+        "max_tokens": 4096
     }
     response = requests.post(
         f"{base_url}/chat/completions",
@@ -143,10 +143,10 @@ def main():
 
             for retry in range(retries):
                 try:
-                    response = generate_lucen(prompt, model_name=model)
+                    response = generate_lucene(prompt, model_name=model)
                     response = process_llm_response(response)
                     # If model doesn't generate "```",
-                    # this function returns an IdexError.
+                    # this function returns an IndexError.
                     if len(response) < 10:
                         # We consider the response to short to be a lucene eq.
                         raise NoAnswerError("Empty output")
