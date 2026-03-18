@@ -32,6 +32,7 @@ CROSSREF_API_KEY=$7
 LIBRARIES_IO_API_KEY=$8
 ORCID_CLIENT_ID=$9
 ORCID_SECRET=${10}
+ILAAS_API_KEY=${11}
 
 echo "Building .env for $SERVICE_NAME"
 
@@ -45,4 +46,5 @@ echo "Building .env for $SERVICE_NAME"
     echo "export LIBRARIES_IO_API_KEY=$LIBRARIES_IO_API_KEY"
     echo "export ORCID_CLIENT_ID=$ORCID_CLIENT_ID"
     echo "export ORCID_SECRET=$ORCID_SECRET"
+    echo "export ILAAS_API_KEY=$ILAAS_API_KEY"
 } > "services/$SERVICE_NAME/.env"
