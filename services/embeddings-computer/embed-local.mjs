@@ -13,7 +13,7 @@ import { stdin as input, stdout as output } from "node:process";
 env.allowRemoteModels = false;
 
 // 2) Répertoire racine des modèles pré-téléchargés
-//   => par exemple monté dans le container à /models
+//   => par exemple monté dans le container à /app/public/models/
 env.localModelPath = "models";
 
 // 3) Préchargement (optionnel) au démarrage
@@ -24,8 +24,8 @@ export function initEmbedder() {
     if (!embedderPromise) {
         embedderPromise = pipeline(
             "feature-extraction",
-            // IMPORTANT : chemin *logique* du modèle à l’intérieur de /models
-            // Si tu as /models/Xenova/all-MiniLM-L6-v2, tu mets exactement :
+            // IMPORTANT : chemin *logique* du modèle à l’intérieur de models/
+            // Si tu as models/Xenova/all-MiniLM-L6-v2, tu mets exactement :
             "Xenova/all-MiniLM-L6-v2"
         );
     }
@@ -33,7 +33,7 @@ export function initEmbedder() {
 }
 
 /**
- * @param texts {strings[]}
+ * @param texts {string[]}
  * @return {Promise<number[][]>}
  */
 export async function embedTexts(texts) {
