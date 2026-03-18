@@ -9,25 +9,14 @@ HTTP 200
     "value": [
         {
             "tool": "san francisco declaration on research assessment",
-            "tool_homogenised": "dora",
+            "tool_homogenised": "dora declaration dora",
             "other_tool_form": [
-                "dora",
-                "declaration on research assessment",
+                "dora declaration dora",
+                "declaration on research assessment declaration on research assessments san francisco declaration",
                 "san francisco declaration on research assessment"
             ],
             "definition": "No definition provided.",
-            "other_tool_form_flatten": "dora ; declaration on research assessment ; san francisco declaration on research assessment"
-        },
-        {
-            "tool": "dora",
-            "tool_homogenised": "dora",
-            "other_tool_form": [
-                "dora",
-                "declaration on research assessment",
-                "san francisco declaration on research assessment"
-            ],
-            "definition": "No definition provided.",
-            "other_tool_form_flatten": "dora ; declaration on research assessment ; san francisco declaration on research assessment"
+            "other_tool_form_flatten": "dora declaration dora ; declaration on research assessment declaration on research assessments san francisco declaration ; san francisco declaration on research assessment"
         },
         {
             "tool": "leiden manifesto",
