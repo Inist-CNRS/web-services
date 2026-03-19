@@ -12,14 +12,13 @@
 
 **- CODE_LANGUE** = Deux langues sont disponibles [ fr | en ]  
 
-**- FORMAT** = Trois types de sorties sont proposées  [ json-standoff | json-indoc |  xml-standoff ]  
+**- FORMAT** = Deux types de sorties sont proposées  [ json-standoff | json-indoc ]  
 
 
 |  format | description |
 | :--------------- | :--------------- |
 | json-standoff | liste des termes reconnus, format json |
-| json-indoc| document avec les termes identifiés, format json |
-| xml-standoff | liste des termes reconnus, format xml (format loterre pour le service Annotator widget) |
+| json-indoc | document avec les termes identifiés, format json |
 
 **- CODE_VOC** = voir la [liste des codes vocabulaires](#liste-des-vocabulaires)  
 
@@ -56,97 +55,98 @@ EOF
 
 |nom du champ|contenu|
 |:---:|:---|
+| doc | le texte original avec de repérage des termes (markdown) |
 |idx | position des termes dans le texte|
-|ul | forme du texte qui a matché| 
+|text | fragment de texte qui a matché| 
 |term | le terme du vocabulaire qui a matché|
-|pref | préférentiel dans la langue|
 |id | id du concept|
 ```
 [
-   {
-      "id":"1",
-      "value":[
-         {
-            "idx":{
-               "start":"4",
-               "end":"23"
+  {
+    "id": "18",
+    "value": [
+      {
+        "doc": "The [Mem-Pro-Clinic test](http://data.loterre.fr/ark:/67375/P66-WG17XBG4-V) is a clinical test to assess difficulties in event- and time-based [prospective thoughts](http://data.loterre.fr/ark:/67375/P66-VLJ0CQH4-G) . This result implies that activated [long-term memory](http://data.loterre.fr/ark:/67375/P66-J8FC45M1-6) provides a representational basis for semantic verbal short-term signal.",
+        "matches": [
+          {
+            "idx": {
+              "start": "1",
+              "end": "7"
             },
-            "match":{
-               "id":"http://data.loterre.fr/ark:/67375/p66-wg17xbg4-v",
-               "ul":"mem-pro-clinic test",
-               "term":"mem-pro-clinic test",
-               "pref":"mem-pro-clinic test"
+            "match": {
+              "id": "http://data.loterre.fr/ark:/67375/P66-WG17XBG4-V",
+              "text": "Mem-Pro-Clinic test",
+              "term": "Mem-Pro-Clinic test"
             }
-         },
-         {
-            "idx":{
-               "start":"91",
-               "end":"111"
+          },
+          {
+            "idx": {
+              "start": "20",
+              "end": "22"
             },
-            "match":{
-               "id":"http://data.loterre.fr/ark:/67375/p66-vlj0cqh4-g",
-               "ul":"prospective thoughts",
-               "term":"prospective thought",
-               "pref":"predictive brain"
+            "match": {
+              "id": "http://data.loterre.fr/ark:/67375/P66-VLJ0CQH4-G",
+              "text": "prospective thoughts",
+              "term": "prospective thought"
             }
-         },
-         {
-            "idx":{
-               "start":"118",
-               "end":"124"
+          },
+          {
+            "idx": {
+              "start": "28",
+              "end": "32"
             },
-            "match":{
-               "id":" "
+            "match": {
+              "id": "http://data.loterre.fr/ark:/67375/P66-J8FC45M1-6",
+              "text": "long-term memory",
+              "term": "long-term memory"
             }
-         },
-         {
-            "idx":{
-               "start":"148",
-               "end":"164"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "27",
+    "value": [
+      {
+        "doc": "A new method to implant false autobiographical books: Blind implantation call implantation methods](http://data.loterre.fr/ark:/67375/P66-D6XL3PDR-M) .",
+        "matches": [
+          {
+            "idx": {
+              "start": "12",
+              "end": "15"
             },
-            "match":{
-               "id":"http://data.loterre.fr/ark:/67375/p66-j8fc45m1-6",
-               "ul":"long-term memory",
-               "term":"long-term memory",
-               "pref":"long-term memory"
+            "match": {
+              "id": "http://data.loterre.fr/ark:/67375/P66-D6XL3PDR-M",
+              "text": "blind implantation methods",
+              "term": "blind implantation method"
             }
-         }
-      ]
-   },
-   {
-      "id":"2",
-      "value":[
-         {
-            "idx":{
-               "start":"78",
-               "end":"104"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "35",
+    "value": [
+      {
+        "doc": "A guy with [hypermnesia ( Pathology )](http://data.loterre.fr/ark:/67375/P66-FQXK8KBN-C) is capable of storing idea in an extraordinarily efficient manner.",
+        "matches": [
+          {
+            "idx": {
+              "start": "3",
+              "end": "7"
             },
-            "match":{
-               "id":"http://data.loterre.fr/ark:/67375/p66-d6xl3pdr-m",
-               "ul":"blind implantation methods",
-               "term":"blind implantation method",
-               "pref":"blind implantation method"
+            "match": {
+              "id": "http://data.loterre.fr/ark:/67375/P66-FQXK8KBN-C",
+              "text": "hypermnesia (Pathology)",
+              "term": "hypermnesia (pathology)"
             }
-         }
-      ]
-   },
-   {
-      "id":"3",
-      "value":[
-         {
-            "idx":{
-               "start":"11",
-               "end":"34"
-            },
-            "match":{
-               "id":"http://data.loterre.fr/ark:/67375/p66-fqxk8kbn-c",
-               "ul":"hypermnesia (pathology)",
-               "term":"hypermnesia (pathology)",
-               "pref":"hypermnesia (pathology)"
-            }
-         }
-      ]
-   }
+          }
+        ]
+      }
+    ]
+  }
 ]
 ```
 
@@ -154,37 +154,25 @@ EOF
   FORMAT = json-indoc  
 >https://terms-tools.services.istex.fr/v1/en/terms-matcher/json-indoc/annotate?loterreID=P66  
 
- Le marquage des termes suit la convention markdown pour la représentation des hyperliens : [TERM](ID du concept)   
- **NB** : ATTENTION !! En francais, le texte rendu n'est pas la version initiale mais la version lemmatisée  
+ Le marquage des termes suit la convention markdown pour la représentation des hyperliens : [TERM](ID du concept)  
 
 ```
 [
-   {
-      "id":"18",
-      "value":"the [Mem-Pro-Clinic test](http://data.loterr.fr/ark:/67375/P66-WG17XBG4-V) is a clinical test to assess difficulties in [events](http://data.loterre.fr/ark:/67375/P66-ZVGCX1H2-G)- and time-based [prospective thought](http://data.loterre.fr/ark:/67375/P66-VLJ0CQH4-G). this   implies that activated [long-term memory](http://data.loterre.fr/ark:/67375/P66-J8FC45M1-6) provides a representational basis for semantic verbal short-term signal."
-   },
-   {
-      "id":"27",
-      "value":"a new method to implant false autobiographical books: blind implantation call [blind implantation method](http://data.loterre.fr/ark:/67375/P66-D6XL3PDR-M)."
-   },
-   {
-      "id":"35",
-      "value":"a guy with [hypermnesia](http,://data.loterre.fr/ark:/67375/P66-JX046THS-T) is capable of storing idea in an extraordinarily efficient manner."
-   }
+  {
+    "id": "18",
+    "value": "The [Mem-Pro-Clinic test](http://data.loterre.fr/ark:/67375/P66-WG17XBG4-V) is a clinical test to assess difficulties in event- and time-based [prospective thoughts](http://data.loterre.fr/ark:/67375/P66-VLJ0CQH4-G) . This result implies that activated [long-term memory](http://data.loterre.fr/ark:/67375/P66-J8FC45M1-6) provides a representational basis for semantic verbal short-term signal."
+  },
+  {
+    "id": "27",
+    "value": "A new method to implant false autobiographical books: Blind implantation call [blind implantation methods](http://data.loterre.fr/ark:/67375/P66-D6XL3PDR-M) ."
+  },
+  {
+    "id": "35",
+    "value": "A guy with [hypermnesia ( Pathology )](http://data.loterre.fr/ark:/67375/P66-FQXK8KBN-C) is capable of storing idea in an extraordinarily efficient manner."
+  }
 ]
 ```
-  
-###  Sortie au format xml :
- FORMAT = xml-standoff  
->https://terms-tools.services.istex.fr/v1/en/terms-matcher/xml-standoff/annotate?loterreID=P66  
 
-
-NB : Ne tolère qu'un seul enregistrement (value) par envoi.  
-```
-<?xml version="1.0" encoding="UTF-8"?>
-<result><text><tag idx_start="4" idx_end="23" id="http://data.loterre.fr/ark:/67375/P66-WG17XBG4-V" text="mem-pro-clinic test" termeReconnu="Mem-Pro-Clinic test" pref="Mem-Pro-Clinic test" lang="en"/><tag idx_start="69" idx_end="74" id="http://data.loterre.fr/ark:/67375/P66-ZVGCX1H2-G" text="event" termeReconnu="events" pref="event" lang="en"/><tag idx_start="91" idx_end="111" id="http://data.loterre.fr/ark:/67375/P66-VLJ0CQH4-G" text="prospective thoughts" termeReconnu="prospective thought" pref="predictive brain" lang="en"/><tag idx_start="118" idx_end="124" id=" " lang="en"/><tag idx_start="148" idx_end="164" id="http://data.loterre.fr/ark:/67375/P66-J8FC45M1-6" text="long-term memory" termeReconnu="long-term memory" pref="long-term memory" lang="en"/></text><text><tag idx_start="78" idx_end="104" id="http://data.loterre.fr/ark:/67375/P66-D6XL3PDR-M" text="blind implantation methods" termeReconnu="blind implantation method" pref="blind implantation method" lang="en"/></text><text><tag idx_start="11" idx_end="34" id="http://data.loterre.fr/ark:/67375/P66-FQXK8KBN-C" text="hypermnesia (pathology)" termeReconnu="hypermnesia (pathology)" pref="hypermnesia (pathology)" lang="en"/></text></result>
-```
-  
    
     
 ## Liste des vocabulaires  

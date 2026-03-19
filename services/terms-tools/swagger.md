@@ -57,9 +57,8 @@ EOF
 |nom du champ|contenu|
 |:---:|:---|
 |idx | position des termes dans le texte|
-|ul | forme du texte qui a matché| 
+|text | fragment de texte qui a matché| 
 |term | le terme du vocabulaire qui a matché|
-|pref | préférentiel dans la langue|
 |id | id du concept|
 ```
 [
@@ -73,9 +72,8 @@ EOF
             },
             "match":{
                "id":"http://data.loterre.fr/ark:/67375/p66-wg17xbg4-v",
-               "ul":"mem-pro-clinic test",
+               "text":"mem-pro-clinic test",
                "term":"mem-pro-clinic test",
-               "pref":"mem-pro-clinic test"
             }
          },
          {
@@ -85,9 +83,8 @@ EOF
             },
             "match":{
                "id":"http://data.loterre.fr/ark:/67375/p66-vlj0cqh4-g",
-               "ul":"prospective thoughts",
+               "text":"prospective thoughts",
                "term":"prospective thought",
-               "pref":"predictive brain"
             }
          },
          {
@@ -106,9 +103,8 @@ EOF
             },
             "match":{
                "id":"http://data.loterre.fr/ark:/67375/p66-j8fc45m1-6",
-               "ul":"long-term memory",
+               "text":"long-term memory",
                "term":"long-term memory",
-               "pref":"long-term memory"
             }
          }
       ]
@@ -123,9 +119,8 @@ EOF
             },
             "match":{
                "id":"http://data.loterre.fr/ark:/67375/p66-d6xl3pdr-m",
-               "ul":"blind implantation methods",
+               "text":"blind implantation methods",
                "term":"blind implantation method",
-               "pref":"blind implantation method"
             }
          }
       ]
@@ -140,9 +135,8 @@ EOF
             },
             "match":{
                "id":"http://data.loterre.fr/ark:/67375/p66-fqxk8kbn-c",
-               "ul":"hypermnesia (pathology)",
+               "text":"hypermnesia (pathology)",
                "term":"hypermnesia (pathology)",
-               "pref":"hypermnesia (pathology)"
             }
          }
       ]
@@ -182,7 +176,7 @@ EOF
 NB : Ne tolère qu'un seul enregistrement (value) par envoi.  
 ```
 <?xml version="1.0" encoding="UTF-8"?>
-<result><text><tag idx_start="4" idx_end="23" id="http://data.loterre.fr/ark:/67375/P66-WG17XBG4-V" text="mem-pro-clinic test" termeReconnu="Mem-Pro-Clinic test" pref="Mem-Pro-Clinic test" lang="en"/><tag idx_start="69" idx_end="74" id="http://data.loterre.fr/ark:/67375/P66-ZVGCX1H2-G" text="event" termeReconnu="events" pref="event" lang="en"/><tag idx_start="91" idx_end="111" id="http://data.loterre.fr/ark:/67375/P66-VLJ0CQH4-G" text="prospective thoughts" termeReconnu="prospective thought" pref="predictive brain" lang="en"/><tag idx_start="118" idx_end="124" id=" " lang="en"/><tag idx_start="148" idx_end="164" id="http://data.loterre.fr/ark:/67375/P66-J8FC45M1-6" text="long-term memory" termeReconnu="long-term memory" pref="long-term memory" lang="en"/></text><text><tag idx_start="78" idx_end="104" id="http://data.loterre.fr/ark:/67375/P66-D6XL3PDR-M" text="blind implantation methods" termeReconnu="blind implantation method" pref="blind implantation method" lang="en"/></text><text><tag idx_start="11" idx_end="34" id="http://data.loterre.fr/ark:/67375/P66-FQXK8KBN-C" text="hypermnesia (pathology)" termeReconnu="hypermnesia (pathology)" pref="hypermnesia (pathology)" lang="en"/></text></result>
+<result><text><tag idx_start="4" idx_end="23" id="http://data.loterre.fr/ark:/67375/P66-WG17XBG4-V" text="mem-pro-clinic test" termeReconnu="Mem-Pro-Clinic test"  lang="en"/><tag idx_start="69" idx_end="74" id="http://data.loterre.fr/ark:/67375/P66-ZVGCX1H2-G" text="event" termeReconnu="events"  lang="en"/><tag idx_start="91" idx_end="111" id="http://data.loterre.fr/ark:/67375/P66-VLJ0CQH4-G" text="prospective thoughts" termeReconnu="prospective thought"  lang="en"/><tag idx_start="118" idx_end="124" id=" " lang="en"/><tag idx_start="148" idx_end="164" id="http://data.loterre.fr/ark:/67375/P66-J8FC45M1-6" text="long-term memory" termeReconnu="long-term memory"    lang="en"/></text><text><tag idx_start="78" idx_end="104" id="http://data.loterre.fr/ark:/67375/P66-D6XL3PDR-M" text="blind implantation methods" termeReconnu="blind implantation method"  lang="en"/></text><text><tag idx_start="11" idx_end="34" id="http://data.loterre.fr/ark:/67375/P66-FQXK8KBN-C" text="hypermnesia (pathology)" termeReconnu="hypermnesia (pathology)" lang="en"/></text></result>
 ```
   
    
