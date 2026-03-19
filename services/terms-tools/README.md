@@ -12,7 +12,7 @@
 
 **- CODE_LANGUE** = Deux langues sont disponibles [ fr | en ]  
 
-**- FORMAT** = Trois types de sorties sont proposées  [ json-standoff | json-indoc ]  
+**- FORMAT** = Deux types de sorties sont proposées  [ json-standoff | json-indoc ]  
 
 
 |  format | description |
