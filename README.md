@@ -61,5 +61,6 @@ All contributing instructions are in [CONTRIBUTING](CONTRIBUTING.md).
 - [terms-extraction](./services/terms-extraction) [![Docker Pulls](https://img.shields.io/docker/pulls/cnrsinist/ws-terms-extraction.svg)](https://hub.docker.com/r/cnrsinist/ws-terms-extraction/)
 - [terms-tools](./services/terms-tools) [![Docker Pulls](https://img.shields.io/docker/pulls/cnrsinist/ws-terms-tools.svg)](https://hub.docker.com/r/cnrsinist/ws-terms-tools/)
 - [text-clustering](./services/text-clustering) [![Docker Pulls](https://img.shields.io/docker/pulls/cnrsinist/ws-text-clustering.svg)](https://hub.docker.com/r/cnrsinist/ws-text-clustering/)
+- [text-lucene](./services/text-lucene) [![Docker Pulls](https://img.shields.io/docker/pulls/cnrsinist/ws-text-lucene.svg)](https://hub.docker.com/r/cnrsinist/ws-text-lucene/)
 - [text-summarize](./services/text-summarize) [![Docker Pulls](https://img.shields.io/docker/pulls/cnrsinist/ws-text-summarize.svg)](https://hub.docker.com/r/cnrsinist/ws-text-summarize/)
 - [transli-tal](./services/transli-tal) [![Docker Pulls](https://img.shields.io/docker/pulls/cnrsinist/ws-transli-tal.svg)](https://hub.docker.com/r/cnrsinist/ws-transli-tal/)
