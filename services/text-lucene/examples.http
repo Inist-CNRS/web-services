@@ -13,7 +13,7 @@ Content-Type: application/json
 
 [
 	{
-		"value": "Je veux un corpus d'articles scientifiques publiés post 2020 sur la biodiversité dans la méditerranée nord. Les documents seront en anglais"
+		"value": "Je veux un corpus d'articles scientifiques publiés post 2000 sur la biodiversité dans la méditerranée nord. Les documents seront en anglais"
 	},
 	{
 		"value": "no query"

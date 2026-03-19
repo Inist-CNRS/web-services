@@ -1,4 +1,4 @@
-# ws-text-lucene@1.0.0
+# ws-text-lucene@1.1.0
 
 Assistance à la génération de requête dans Istex Search
 
