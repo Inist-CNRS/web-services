@@ -6,14 +6,10 @@ Détecteur de Texte Invisible dans les PDFs
 Ce script détecte et extrait le texte invisible dans les fichiers PDF.
 Il identifie plusieurs types de texte caché :
   - Texte positionné en dehors des limites de la page
-  - Texte de très petite taille (< 3 points)
+  - Texte de très petite taille (< 2 points)
   - Texte blanc ou transparent
-  - Texte masqué par d'autres éléments
-
-Usage:
-    python detect_invisible_text.py [fichier.pdf]
     
-Si aucun fichier n'est spécifié, le script utilise un fichier par défaut.
+Si aucun fichier n'est spécifié, le script renvoie: `{ "value": "No data to process" }`
 """
 
 import pdfplumber
@@ -89,9 +85,11 @@ class InvisibleTextDetector:
         if char_rgb is None:
             return False, ""
         
+        def is_white(rgb) -> bool:
+            return all(v >= 0.99 for v in rgb)
+
         # On vérifie si la couleur (normalisée) du caractère est blanche ([1, 1, 1])
-        is_white = all(v >= 0.99 for v in char_rgb)
-        if not is_white:
+        if not is_white(char_rgb):
             return False, ""
 
         # Texte blanc de grande taille → probablement visible sur fond coloré/image
@@ -114,7 +112,7 @@ class InvisibleTextDetector:
             # Vérification que le caractère est bien à l'intérieur du rect
             if (shape_x0 <= char_x0 and shape_x1 >= char_x1 and shape_y0 <= char_y0 and shape_y1 >= char_y1):
                 shape_rgb = normalize_color(shape.get('non_stroking_color'))
-                if shape_rgb and shape_rgb != [1, 1, 1]:
+                if shape_rgb and not is_white(shape_rgb):
                     return False, ""
 
         # Texte blanc, hors rect coloré → fond blanc par défaut → invisible
