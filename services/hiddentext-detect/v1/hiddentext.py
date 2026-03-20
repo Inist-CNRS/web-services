@@ -272,8 +272,10 @@ if __name__ == "__main__":
             print(f"Processing file: {filename}", file=sys.stderr)
             detector = InvisibleTextDetector(min_font_size=2.0, color_threshold=0.95)
             results = detector.detect(filename)
-            filtered_result = result_filter(results)
-            data["value"] = filtered_result
+            if results is None:
+                data["value"] = "Error processing file"
+            else:
+                data["value"] = result_filter(results)
         else:
             data["value"] = "No data to process"
         # print(data)
