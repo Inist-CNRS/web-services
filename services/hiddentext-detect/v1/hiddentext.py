@@ -265,12 +265,13 @@ def result_filter(dict) :
 
 # Main program
 if __name__ == "__main__":
+
+    detector = InvisibleTextDetector(min_font_size=2.0, color_threshold=0.95)
     for line in sys.stdin:
         data = json.loads(line)
         if "filename" in data.keys():
             filename = data["filename"]
             print(f"Processing file: {filename}", file=sys.stderr)
-            detector = InvisibleTextDetector(min_font_size=2.0, color_threshold=0.95)
             results = detector.detect(filename)
             if results is None:
                 data["value"] = "Error processing file"
