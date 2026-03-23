@@ -1,5 +1,5 @@
 {
-    "openapi": "0.0.0",
+    "openapi": "3.0.0",
     "info": {
         "title": "hiddentext-detect - Détection de textes cachés",
         "description": "Service de détection de textes cachés dans les documents.",
