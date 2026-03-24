@@ -257,11 +257,16 @@ def result_filter(dict) :
         res[key] = []
         for span in value["suspicious_spans"] :
             res[key].append({
-                "Texte suspect": span["text"],
+                "Page": key,
+                "Texte_suspect": span["text"],
                 "Motif": list(span["reasons"]),
             })
-    return res
-
+    res_list = []
+    for page_items in res.values():
+        for item in page_items:
+            res_list.append(item)
+    
+    return res_list
 
 # Main program
 if __name__ == "__main__":
@@ -274,11 +279,15 @@ if __name__ == "__main__":
             print(f"Processing file: {filename}", file=sys.stderr)
             results = detector.detect(filename)
             if results is None:
-                data["value"] = "Error processing file"
+                data["value"] = "Erreur lors du traitement du PDF"
             else:
-                data["value"] = result_filter(results)
+                filtered_results = result_filter(results)
+                if not filtered_results:
+                    data["value"] = [{"Page": "N/A", "Texte_suspect": "Aucun texte invisible détecté", "Motif": []}]
+                else:
+                    data["value"] = filtered_results
         else:
-            data["value"] = "No data to process"
+            data["value"] = "Aucune donnée à traiter"
         # print(data)
         json.dump(data, sys.stdout,ensure_ascii=False)
         sys.stdout.write("\n")

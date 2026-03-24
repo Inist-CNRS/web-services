@@ -8,11 +8,12 @@ HTTP 200
 Content-Type: application/json
 [Asserts]
 jsonpath "$[0].value" exists
-jsonpath "$[0].value['10']" exists
-jsonpath "$[0].value['10'][0]['Texte suspect']" exists
-jsonpath "$[0].value['10'][0].Motif" exists
-jsonpath "$[0].value['10'][0].Motif[0]" == "Texte hors des limites de la page"
-jsonpath "$[0].value['12']" exists
-jsonpath "$[0].value['12'][0]['Texte suspect']" exists
-jsonpath "$[0].value['12'][0].Motif" exists
-jsonpath "$[0].value['12'][0].Motif[0]" == "Texte hors des limites de la page"
+jsonpath "$[0].value[0]['Page']" exists
+jsonpath "$[0].value[0]['Texte_suspect']" exists
+jsonpath "$[0].value[0].Motif" exists
+jsonpath "$[0].value[0].Motif[0]" == "Texte hors des limites de la page"
+
+jsonpath "$[0].value[1]['Page']" exists
+jsonpath "$[0].value[1]['Texte_suspect']" exists
+jsonpath "$[0].value[1].Motif" exists
+jsonpath "$[0].value[1].Motif[0]" == "Texte hors des limites de la page"
