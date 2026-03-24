@@ -258,7 +258,7 @@ def result_filter(dict) :
         for span in value["suspicious_spans"] :
             res[key].append({
                 "Page": key,
-                "Texte suspect": span["text"],
+                "Texte_suspect": span["text"],
                 "Motif": list(span["reasons"]),
             })
     res_list = []
@@ -283,7 +283,7 @@ if __name__ == "__main__":
             else:
                 filtered_results = result_filter(results)
                 if not filtered_results:
-                    data["value"] = [{"Page": "N/A", "Texte suspect": "Aucun texte invisible détecté", "Motif": []}]
+                    data["value"] = [{"Page": "N/A", "Texte_suspect": "Aucun texte invisible détecté", "Motif": []}]
                 else:
                     data["value"] = filtered_results
         else:

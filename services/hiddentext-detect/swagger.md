@@ -27,12 +27,12 @@ Le script analyse chaque caractère d'un PDF et le signale comme suspect s'il r�
 ```json
 {
   "filename": "chemin/vers/fichier.pdf",
-  "id": 1,
   "value": {
-    "1": [
+    [
       {
-        "text": "texte caché ici",
-        "reasons": ["Texte blanc sur fond blanc (masqué)"]
+        "Page" : 1,
+        "Texte_suspect": "texte caché ici",
+        "Motif": ["Texte blanc sur fond blanc (masqué)"]
       }
     ]
   }
