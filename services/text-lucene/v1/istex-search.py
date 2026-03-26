@@ -19,7 +19,7 @@ def construct_llm_prompt(user_prompt):
     - `subject.value:()` pour rechercher des mots-clés parmis ceux renseignés par les auteurs
     - `publicationDate:[N TO M]` : pour rechercher entre l'année N et M.
     - `publicationDate:[N TO *]` : pour obtenir les documents publiés uniquement après l'année N.
-    - `author.name.raw:()` : pour inclure des noms d'auteurs spécifiquement. Uniquement le **nom de famille**.
+    - `author.name:()` : pour inclure des noms d'auteurs spécifiquement. Uniquement le **nom de famille**.
     - `language.raw:()` : permet de choisir la langues de documents ("fre" pour français, "eng" pour anglais, "deu" pour allemand et "spa" pour espagnol.)
     - `AND genre.raw:"research-article"` permet d'avoir uniquement les articles de recherche si l'utilisateur veut quelque chose de filtré.
     """
@@ -77,7 +77,7 @@ def construct_llm_prompt(user_prompt):
     5. Exemple 5 : Si l'utilisateur demande "Je souhaite récupérer les études de Léon Gaillad ou J. Rebol sur la traduction automatique."
     En ne récupérant que les noms des auteurs, une réponse possible est :
     ```
-    (title:("machine translation" "automatic translation" "automated translation" "traduction automatique") OR abstract:("machine translation" "automatic translation" "automated translation" "traduction automatique")) AND author.name.raw:("Gaillad" "Rebol")
+    (title:("machine translation" "automatic translation" "automated translation" "traduction automatique") OR abstract:("machine translation" "automatic translation" "automated translation" "traduction automatique")) AND author.name:("Gaillad" "Rebol")
     ```
 
     6. Exemple 6 : si l'utilisateur demande "What documents discuss the impact of screen time on the mental health ? Spanish or english documents only."
