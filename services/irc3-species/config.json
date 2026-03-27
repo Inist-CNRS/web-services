@@ -3,11 +3,13 @@
         "EZS_TITLE": "IRC3 dédiée à la recherche des noms scientifiques",
         "EZS_DESCRIPTION": "IRC3sp est une version de l’outil IRC3 dédiée à la recherche des noms scientifiques — ou noms binominaux — d’espèces animales, végétales ou autres dans un corpus de textes en se référant à une liste finie (mais, aussi exhaustive que possible).",
         "EZS_METRICS": true,
-        "EZS_CONCURRENCY": 4,
+        "EZS_CONCURRENCY": 2,
         "EZS_CONTINUE_DELAY": 60,
         "EZS_NSHARDS": 32,
         "EZS_CACHE": true,
         "EZS_VERBOSE": false,
+        "IRC3SP_DEBUG": false,
+        "IRC3SP_LOG": false,
         "NODE_OPTIONS": "--max_old_space_size=1024",
         "NODE_ENV": "production"
     }
