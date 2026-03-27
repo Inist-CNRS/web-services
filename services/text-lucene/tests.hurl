@@ -15,6 +15,7 @@ Content-Type: application/json
 [Asserts]
 jsonpath "$[0].value" contains "title:("
 jsonpath "$[0].value" contains "abstract:("
+jsonpath "$[0].value" contains "subject.value:("
 jsonpath "$[0].value" contains "language.raw:"
 jsonpath "$[0].value" matches /^.{100,1100}$/
 jsonpath "$[1].value" exists

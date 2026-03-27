@@ -3,7 +3,7 @@
     "info": {
         "title": "text-lucene - Assistance à la génération de requête dans Istex Search",
         "description": "Génère une requête en syntaxe Lucene à partir d'une requête en langue naturelle (multilingue)",
-        "version": "1.1.0",
+        "version": "1.1.1",
         "termsOfService": "https://services.istex.fr/",
         "contact": {
             "name": "Inist-CNRS",
