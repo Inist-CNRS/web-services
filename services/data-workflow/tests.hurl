@@ -934,9 +934,6 @@ xpath "//*[name()='teiHeader']" exists
 xpath "//*[name()='titleStmt']/*[name()='title']" exists
 
 
-
-# ABCDEFG
-
 ############################################################################
 # Test v1/entity-tag-pdf
 
