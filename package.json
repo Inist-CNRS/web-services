@@ -63,6 +63,7 @@
     "services/data-wrapper",
     "services/diseases-ner",
     "services/domains-classifier",
+    "services/embeddings-computer",
     "services/funder-ner",
     "services/hal-classifier",
     "services/hiddentext-detect",
