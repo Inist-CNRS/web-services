@@ -1,0 +1,14 @@
+{
+    "environnement": {
+        "EZS_TITLE": "Detect Localisation entity from a text, and align each entity with geonames referential when possible",
+        "EZS_DESCRIPTION": "In a given text, extract LOCATION named entity, and align them with the geonames referential whenever its possible",
+        "EZS_METRICS": true,
+        "EZS_CONCURRENCY": 1,
+        "EZS_CONTINUE_DELAY": 60,
+        "EZS_NSHARDS": 32,
+        "EZS_CACHE": true,
+        "EZS_VERBOSE": true,
+        "NODE_OPTIONS": "--max_old_space_size=1024",
+        "NODE_ENV": "production"
+    }
+}
