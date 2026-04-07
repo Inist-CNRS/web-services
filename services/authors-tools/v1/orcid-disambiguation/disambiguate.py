@@ -176,7 +176,7 @@ class disambiguate:
                 if em == mail:
                     mails.append(em)
         if len(mails) > 0:
-            return True,em
+            return True,mails
         return False,0
 
     def disambiguation(self):
