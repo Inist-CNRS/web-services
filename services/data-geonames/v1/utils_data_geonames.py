@@ -8,7 +8,7 @@ import pandas as pd
 from rapidfuzz import process, fuzz
 import os
 
-debug = True
+debug = False
 
 def print_log(text):
     if debug:
@@ -44,15 +44,14 @@ def call_llm(prompt: str) -> str:
         "model": model_name,
         "messages": [{"role": "user", "content": f"{prompt}"}],
         "stream": False,
-        "max_tokens": 10000,
-        "temperature": 0,
-        "seed": 42
+        "max_tokens": 10000
     }
     try:
         response = requests.post(f"{base_url}/chat/completions", 
                                 headers=headers, json=payload)
         result = response.json()
         print_log("LLM result call : " + result['choices'][0]['message']['content'])
+        print_log(result['choices'][0]['message'].get('reasoning_content', None))
         return result['choices'][0]['message']['content']
     except: 
         print_log("Error while calling LLM")
