@@ -71,10 +71,8 @@ for line in sys.stdin:
     datas.append(data["value"])
     docs_id.append(data["id"])
 
-
-results = resultClass()
-
 for ind_text, text in enumerate(datas):
+    results = resultClass()
     start_time_i = time.time()
     loc_dict, occurrence_dict = get_info_ner(text, ner)
     grouped_dict = create_group(loc_dict, occurrence_dict, PRE_SORT_TEMPLATE)
@@ -167,7 +165,7 @@ for ind_text, text in enumerate(datas):
                 first_entity = False
     print("Time for document " + docs_id[ind_text] + " : " + str(time.time()-start_time_i), file=sys.stderr)
     print_log("Result : " + str(results.to_list()))
-    sys.stdout.write(json.dumps(results.to_list()))
+    sys.stdout.write(json.dumps({"id":docs_id[ind_text], "value":results.to_list()}))
     sys.stdout.write('\n')
 
 print("TOTAL TIME : " + str(time.time()-start_time), file=sys.stderr)
