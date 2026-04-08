@@ -22,11 +22,11 @@ WORKDIR /app
 
 # Install all python dependencies
 RUN pip install --no-cache-dir \
-    unidecode == 1.4.0 \
-    requests == 2.32.5 \
-    pandas == 2.3.3 \
-    rapidfuzz == 3.13.0 \
-    huggingface_hub == 0.34.4
+    unidecode==1.4.0 \
+    requests==2.32.5 \
+    pandas==2.3.3 \
+    rapidfuzz==3.13.0 \
+    huggingface_hub==0.34.4
 
 # ─── Téléchargement du modèle via curl ───────────────────────────────────────
 ENV MODEL_DIR=/app/models/bert-finetuned-ner
