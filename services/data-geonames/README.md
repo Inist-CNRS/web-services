@@ -1,4 +1,4 @@
-# ws-data-geonames@0.0.0
+# ws-data-geonames@1.0.0
 
 Detect Localisation entity from a text, and align each entity with geonames referential when possible
 
