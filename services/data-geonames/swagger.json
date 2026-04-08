@@ -1,7 +1,7 @@
 {
     "openapi": "3.0.0",
     "info": {
-        "title": "data-geonames - Detect Localisation entity from a text, and align each entity with geonames referential when possible",
+        "title": "data-geonames - Location named entity detection and alignement with geonames",
         "description": "In a given text, extract LOCATION named entity, and align them with the geonames referential whenever its possible",
         "version": "0.0.0",
         "termsOfService": "https://services.istex.fr/",
