@@ -30,9 +30,9 @@ delay:60000
 
 HTTP 200
 [Asserts]
-jsonpath "$[0][0].entity" == "Geneva"
-jsonpath "$[0][0].alignment" count > 0
-jsonpath "$[0][0].alignment[0]" contains "geonames.org"
-jsonpath "$[0][2].entity" == "Paris"
-jsonpath "$[0][2].alignment" count > 0
-jsonpath "$[0][2].alignment[0]" contains "geonames.org"
+jsonpath "$[0].value[0].entity" == "Geneva"
+jsonpath "$[0].value[0].alignment" count > 0
+jsonpath "$[0].value[0].alignment[0]" contains "geonames.org"
+jsonpath "$[0].value[2].entity" == "Paris"
+jsonpath "$[0].value[2].alignment" count > 0
+jsonpath "$[0].value[2].alignment[0]" contains "geonames.org"
