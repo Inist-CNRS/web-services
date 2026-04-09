@@ -1,7 +1,7 @@
 {
   "private": true,
   "name": "ws-data-geonames",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Detect Localisation entity from a text, and align each entity with geonames referential when possible",
   "repository": {
     "type": "git",
