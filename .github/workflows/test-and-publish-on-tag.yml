@@ -7,8 +7,11 @@ on:
     tags:
       - "ws-*@*"
 
+env:
+  REGISTRY: docker.io
+
 jobs:
-  test-on-tag:
+  build-test-push:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout from Git
@@ -25,24 +28,65 @@ jobs:
           sudo dpkg -i hurl_5.0.1_amd64.deb
           hurl --version
 
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Parse tag to get service info
+        id: parse
+        run: |
+          TAG=${{ github.ref_name }}
+          SERVICE_INTERMEDIATE=${TAG#ws-}
+          SERVICE_NAME=${SERVICE_INTERMEDIATE%@*}
+          VERSION=${TAG##*@}
+          echo "service_name=$SERVICE_NAME" >> $GITHUB_OUTPUT
+          echo "version=$VERSION" >> $GITHUB_OUTPUT
+          echo "image_name=cnrsinist/ws-$SERVICE_NAME" >> $GITHUB_OUTPUT
+
       - name: Build .env from Github Actions secrets
         shell: bash
         run: |
           bin/create-env.sh ${{ github.ref_name }} ${{ secrets.WEBDAV_LOGIN }} ${{ secrets.WEBDAV_PASSWORD }} ${{ secrets.WEBDAV_URL }} ${{secrets.OPENALEX_API_KEY}} ${{secrets.UNPAYWALL_API_KEY}} ${{secrets.CROSSREF_API_KEY}} ${{secrets.LIBRARIES_IO_API_KEY}} ${{secrets.ORCID_CLIENT_ID}} ${{secrets.ORCID_SECRET}} ${{secrets.ILAAS_API_KEY}}
           ls -l services/*/.env
 
-      - name: Build Docker Image & Test
-        shell: bash
-        run: |
-          bin/test-on-tag.sh ${{ github.ref_name }}
+      - name: Build Docker image
+        uses: docker/build-push-action@v6
+        with:
+          context: services/${{ steps.parse.outputs.service_name }}
+          push: false
+          load: true
+          tags: |
+            ${{ steps.parse.outputs.image_name }}:latest
+            ${{ steps.parse.outputs.image_name }}:${{ steps.parse.outputs.version }}
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
 
-  build-on-tag:
-    needs:
-      - test-on-tag
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout from Git
-        uses: actions/checkout@v4
+      - name: Start container for testing
+        run: |
+          docker run --name test-container --rm --detach -p 31976:31976 ${{ steps.parse.outputs.image_name }}:latest
+
+      - name: Wait for server to be ready
+        run: |
+          echo "Waiting for http://localhost:31976"
+          for i in {1..10}; do
+            if curl -s http://localhost:31976 > /dev/null 2>&1; then
+              echo "Server is ready!"
+              exit 0
+            fi
+            echo "Attempt $i/10 - waiting..."
+            sleep 5
+          done
+          echo "Server did not become ready"
+          exit 1
+
+      - name: Run Hurl tests
+        run: |
+          cd services/${{ steps.parse.outputs.service_name }}
+          hurl --variable host=http://localhost:31976 --variable blocked=true --test --jobs 1 tests.hurl
+
+      - name: Stop test container
+        if: always()
+        run: |
+          docker stop test-container || true
 
       - name: Docker Login
         uses: docker/login-action@v3
@@ -50,19 +94,7 @@ jobs:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
 
-      - name: Setup Node
-        uses: actions/setup-node@v4
-        with:
-          node-version: 24
-
-      - name: Build .env from Github Actions secrets
-        shell: bash
+      - name: Push Docker image
         run: |
-          bin/create-env.sh ${{ github.ref_name }} ${{ secrets.WEBDAV_LOGIN }} ${{ secrets.WEBDAV_PASSWORD }} ${{ secrets.WEBDAV_URL }} ${{secrets.OPENALEX_API_KEY}} ${{secrets.UNPAYWALL_API_KEY}} ${{secrets.CROSSREF_API_KEY}} ${{secrets.LIBRARIES_IO_API_KEY}} ${{secrets.ORCID_CLIENT_ID}} ${{secrets.ORCID_SECRET}} ${{secrets.ILAAS_API_KEY}}
-          ls -l services/*/.env
-
-      - name: Build & Push Docker Image
-        shell: bash
-        run: |
-          echo "Building and pushing image for ${{ github.ref_name }}"
-          bin/build-and-push.sh ${{ github.ref_name }}
+          docker push ${{ steps.parse.outputs.image_name }}:latest
+          docker push ${{ steps.parse.outputs.image_name }}:${{ steps.parse.outputs.version }}
