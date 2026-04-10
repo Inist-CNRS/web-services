@@ -73,7 +73,7 @@ jobs:
               exit 0
             fi
             echo "Attempt $i/10 - waiting..."
-            sleep 5
+            sleep 30
           done
           echo "Server did not become ready"
           exit 1
