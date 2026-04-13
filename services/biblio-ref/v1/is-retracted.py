@@ -19,7 +19,7 @@ for line in sys.stdin:
         else:
             output = {"value":{"is_retracted": False}}
 
-        if doi in retracted_doi:
+        if doi.lower() in retracted_doi:
             output["value"]["is_retracted"] = True
 
         json.dump(output, sys.stdout)
@@ -32,7 +32,7 @@ for line in sys.stdin:
             output = {"value":{"is_retracted": []}}
 
         for elt in doi:
-            if elt in retracted_doi:
+            if elt.lower() in retracted_doi:
                 output["value"]["is_retracted"].append(True)
             else:
                 output["value"]["is_retracted"].append(False)

@@ -176,10 +176,13 @@ content-type: application/json
     "value": "10.1016/s0167-577x(02)01208-9"
     },
   {
+    "value": "10.1016/S0167-577X(02)01208-9"
+    },
+  {
     "value": "if value is not a doi, returns false"
     },
   {
-    "value": ["10.1016/s0167-577x(02)01208-9", "10.1016\/b978-0-323-90638-8.00002-3", "if value is not a doi, returns false"]
+    "value": ["10.1016/s0167-577x(02)01208-9", "10.1016\/b978-0-323-90638-8.00002-3", "if value is not a doi, returns false", "10.1016/s0167-577X(02)01208-9"]
     }
 ]
 
@@ -197,6 +200,11 @@ HTTP 200
 },
 {
     "value": {
+        "is_retracted": true
+    }
+},
+{
+    "value": {
         "is_retracted": false
     }
 },
@@ -205,7 +213,8 @@ HTTP 200
         "is_retracted": [
             true,
             false,
-            false
+            false,
+            true
         ]
     }
 }]
