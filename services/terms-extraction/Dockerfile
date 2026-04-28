@@ -18,9 +18,7 @@ RUN pip install --no-cache-dir \
     CQE==2.0.2 \
     scikit-learn==1.2.2 \
     stemming==1.0.1 \
-    six==1.16.0 \
-    en-core-web-sm@https://github.com/explosion/spacy-models/releases/download/en_core_web_sm-3.0.0/en_core_web_sm-3.0.0-py3-none-any.whl \
-    en_core_web_trf@https://github.com/explosion/spacy-models/releases/download/en_core_web_trf-3.0.0/en_core_web_trf-3.0.0-py3-none-any.whl
+    six==1.16.0
 
 # Install all node dependencies
 RUN npm install --omit=dev \
@@ -31,7 +29,9 @@ RUN npm install --omit=dev \
 # Fix permissions for CQE
 RUN chmod -R 777 /usr/local/lib/python3.9/site-packages/CQE/ && \
     mkdir /usr/sbin/.local && \
-    chown -R daemon:daemon /usr/sbin/.local
+    chown -R daemon:daemon /usr/sbin/.local && \
+    rm -rf /usr/local/lib/python3.9/site-packages/CQE/unit_models && \
+    python -c "from CQE import CQE; CQE.CQE()"
 
 WORKDIR /app/public
 # Declare files to copy in .dockerignore
