@@ -22,8 +22,8 @@ RUN pip install --no-cache-dir \
 
 # Install all node dependencies
 RUN npm install --omit=dev \
-    @ezs/teeft@2.3.3 \
-    @ezs/strings@1.0.5 && \
+    @ezs/teeft@2.3.5 \
+    @ezs/strings@1.0.6 && \
     npm cache clean --force
 
 # Fix permissions for CQE

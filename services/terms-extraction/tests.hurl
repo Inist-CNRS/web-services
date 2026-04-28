@@ -294,7 +294,7 @@ HTTP 200
         "flow control",
         "5 mw wind turbine",
         "energy production",
-        "hydrogen generation cost"
+        "hydrogen generation cost reduction"
     ]
 },
 {
@@ -303,7 +303,7 @@ HTTP 200
         "motion characteristics",
         "10 mw",
         "offshore wind turbine",
-        "2nd order wave"
+        "2nd order wave effect"
     ]
 }]
 
@@ -330,7 +330,8 @@ HTTP 200
 {
     "id": "MPES-ERM_ER2023_001916",
     "value": [
-        "éolienne offshore flottante supraconductrice"
+        "éolienne offshore flottante supraconductrice",
+        "deuxième ordre"
     ]
 }]
 
