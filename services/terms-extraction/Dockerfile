@@ -1,6 +1,6 @@
 FROM cnrsinist/ezs-python-server:py3.9-no24-1.0.13
 
-RUN apt-get update && apt-get install -y --no-install-recommends locales && apt-get clean && rm -rf /var/lib/apt/lists/*
+RUN apt-get update && apt-get install -y --no-install-recommends locales=2.31-13+deb11u13 && apt-get clean && rm -rf /var/lib/apt/lists/*
 
 # Génère la locale en_US.UTF-8
 RUN sed -i '/en_US.UTF-8/s/^# //g' /etc/locale.gen && locale-gen en_US.UTF-8
@@ -18,20 +18,20 @@ RUN pip install --no-cache-dir \
     CQE==2.0.2 \
     scikit-learn==1.2.2 \
     stemming==1.0.1 \
-    six==1.16.0 \
-    en-core-web-sm@https://github.com/explosion/spacy-models/releases/download/en_core_web_sm-3.0.0/en_core_web_sm-3.0.0-py3-none-any.whl \
-    en_core_web_trf@https://github.com/explosion/spacy-models/releases/download/en_core_web_trf-3.0.0/en_core_web_trf-3.0.0-py3-none-any.whl
+    six==1.16.0
 
 # Install all node dependencies
 RUN npm install --omit=dev \
-    @ezs/teeft@2.3.3 \
-    @ezs/strings@1.0.5 && \
+    @ezs/teeft@2.3.5 \
+    @ezs/strings@1.0.6 && \
     npm cache clean --force
 
 # Fix permissions for CQE
 RUN chmod -R 777 /usr/local/lib/python3.9/site-packages/CQE/ && \
     mkdir /usr/sbin/.local && \
-    chown -R daemon:daemon /usr/sbin/.local
+    chown -R daemon:daemon /usr/sbin/.local && \
+    rm -rf /usr/local/lib/python3.9/site-packages/CQE/unit_models && \
+    python -c "from CQE import CQE; CQE.CQE()"
 
 WORKDIR /app/public
 # Declare files to copy in .dockerignore
