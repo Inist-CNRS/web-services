@@ -262,43 +262,96 @@ const createSpeciesExtractor = (table, pref, str, caseSensitive, logger) => {
     }
 
     /**
+     * Check if a matched form looks like a binomial name (contains a space)
+     */
+    const isBinomial = (str) => str.includes(' ');
+
+    /**
      * Find exact match in text
      */
     const findExactMatch = (term, text) => {
         const pattern = buildSearchPattern(term, caseSensitive);
         const match = text.match(pattern);
-        return match && isUppercase(match[0]) ? match[0] : null;
+        if (!match || !isUppercase(match[0])) return null;
+        const found = match[0];
+        return isBinomial(found) ? found : null;
+    };
+
+    /**
+     * Get the canonical 2-word key (genus + species) from a table entry
+     */
+    const getTwoWordKey = (entry) => {
+        const words = entry.split(/\s+/);
+        return words.slice(0, 2).join(' ');
     };
 
     /**
      * Find partial matches for abbreviated genus
+     * Searches both forward and backward from startIndex
      */
     const findPartialMatches = (text, searchTable, startIndex) => {
         const matches = [];
+        if (!searchTable[startIndex]) return matches;
         const genusStart = splitOnWordBoundaries(searchTable[startIndex]).split(' ')[0];
 
+        // Search backward from startIndex
+        const endIndex = Math.min(searchTable.length - 1, startIndex);
+        for (let i = endIndex; i >= 0; i--) {
+            const currentTerm = searchTable[i];
+            const currentGenus = splitOnWordBoundaries(currentTerm).split(' ')[0];
+            if (currentGenus !== genusStart) break;
+
+            const testPatterns = [];
+            const twoWord = getTwoWordKey(currentTerm);
+            if (twoWord) testPatterns.push(twoWord);
+            testPatterns.push(currentTerm);
+
+            for (const test of testPatterns) {
+                const escaped = escapeForRegex(test).replace(/\\ /g, '\\s*');
+                const escapedPattern = escaped.replace(REGEX.NON_ASCII_CHARS, '.');
+                const regex = new RegExp(`^${escapedPattern}\\b`, caseSensitive ? '' : 'i');
+                const match = text.match(regex);
+                if (match && isUppercase(match[0])) {
+                    const found = match[0];
+                    if (!isBinomial(found)) continue;
+                    let result = `${str[currentTerm]}\t${found}`;
+                    if (pref[currentTerm]) {
+                        result += `\t${str[pref[currentTerm]]}`;
+                    }
+                    matches.push(result);
+                    logger.debug(`  -> Found: ${found}\n`);
+                    return matches;
+                }
+            }
+        }
+
+        // Search forward from startIndex
         for (let i = startIndex; i < searchTable.length; i++) {
             const currentTerm = searchTable[i];
             const currentGenus = splitOnWordBoundaries(currentTerm).split(' ')[0];
-
             if (currentGenus !== genusStart) break;
 
-            const escaped = escapeForRegex(currentTerm).replace(/\\ /g, '\\s*');
-            const escapedPattern = escaped.replace(REGEX.NON_ASCII_CHARS, '.');
-            const regex = new RegExp(`^${escapedPattern}\\b`, caseSensitive ? '' : 'i');
-            const match = text.match(regex);
+            const testPatterns = [];
+            const twoWord = getTwoWordKey(currentTerm);
+            if (twoWord) testPatterns.push(twoWord);
+            testPatterns.push(currentTerm);
 
-            if (match && isUppercase(match[0])) {
-                const found = match[0];
-                let result = `${str[currentTerm]}\t${found}`;
-
-                if (pref[currentTerm]) {
-                    result += `\t${str[pref[currentTerm]]}`;
+            for (const test of testPatterns) {
+                const escaped = escapeForRegex(test).replace(/\\ /g, '\\s*');
+                const escapedPattern = escaped.replace(REGEX.NON_ASCII_CHARS, '.');
+                const regex = new RegExp(`^${escapedPattern}\\b`, caseSensitive ? '' : 'i');
+                const match = text.match(regex);
+                if (match && isUppercase(match[0])) {
+                    const found = match[0];
+                    if (!isBinomial(found)) continue;
+                    let result = `${str[currentTerm]}\t${found}`;
+                    if (pref[currentTerm]) {
+                        result += `\t${str[pref[currentTerm]]}`;
+                    }
+                    matches.push(result);
+                    logger.debug(`  -> Found: ${found}\n`);
+                    return matches;
                 }
-
-                matches.push(result);
-                logger.debug(`  -> Found: ${found}\n`);
-                break;
             }
         }
 
@@ -316,20 +369,23 @@ const createSpeciesExtractor = (table, pref, str, caseSensitive, logger) => {
         const matches = [];
 
         while (rec.length > 0) {
-            const index = findIndexInSortedArray(rec, searchTable);
+            const normalizedRec = rec.trim();
+            if (!normalizedRec) break;
+
+            const recWords = normalizedRec.split(/\s+/);
+            const searchKey = recWords.slice(0, Math.min(2, recWords.length)).join(' ');
+
+            const index = findIndexInSortedArray(searchKey, searchTable);
 
             if (index > -1) {
                 const term = searchTable[index];
-                logger.debug(`\r`);
                 const found = findExactMatch(term, text);
 
                 if (found) {
                     let matchResult = `${str[term]}\t${found}`;
-
                     if (pref[term]) {
                         matchResult += `\t${str[pref[term]]}`;
                     }
-
                     matches.push(matchResult);
                 }
             } else {
@@ -492,7 +548,8 @@ const processDocument = (doc, extractor) => {
             return canonical;
         })
         .filter(Boolean)
-        .filter((species, index, arr) => arr.indexOf(species) === index)
+        .filter(name => name.includes(' '))
+        .filter((name, index, arr) => arr.indexOf(name) === index)
         .sort();
 
     return { id: String(id), value: species };
