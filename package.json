@@ -71,6 +71,7 @@
     "services/loterre-resolvers",
     "services/ner-tagger",
     "services/nlp-tools2",
+    "services/openalex-classification",
     "services/openalex-doctype",
     "services/pdf-text",
     "services/person-ner",
