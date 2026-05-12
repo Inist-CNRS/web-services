@@ -1,5 +1,5 @@
 {
-    "openapi": "0.0.0",
+    "openapi": "3.0.0",
     "info": {
         "title": "openalex-classification - Classification hiérarchique (domains et fields) Openalex",
         "description": "Le web service classe automatiquement des documents scientifiques en anglais dans le premier et deuxième niveau de la classification Openalex à partir de leur résumé.",
