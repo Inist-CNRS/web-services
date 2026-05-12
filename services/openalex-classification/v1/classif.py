@@ -31,8 +31,8 @@ for line in sys.stdin:
     field_name = field.replace("__label__", "")
 
     data["value"] = {
-        "domain": domain_name,
-        "field":  field_name,
+        "domain": domain_name.replace("_", " "),
+        "field":  field_name.replace("_", " ")
     }
 
     sys.stdout.write(json.dumps(data))
