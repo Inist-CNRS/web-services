@@ -53,7 +53,7 @@ HTTP 200
         "doi": "10.1056/nejmoa1200303",
         "status": "retracted",
         "reference": "RETRACTED > Estruch R., Primary Prevention of Cardiovascular Disease with a Mediterranean Diet, 10.1056/nejmoa1200303",
-        "reference_found": "FROM CROSSREF > Estruch et al. (2013). Primary Prevention of Cardiovascular Disease with a Mediterranean Diet. New England Journal of Medicine. 10.1056/nejmoa1200303."
+        "reference_found": "FROM CROSSREF > Estruch et al. (2013). RETRACTED: Primary Prevention of Cardiovascular Disease with a Mediterranean Diet. New England Journal of Medicine. 10.1056/nejmoa1200303."
     }
 },
 {
@@ -101,10 +101,10 @@ HTTP 200
             "url_pdf": "https://cnrs.hal.science/hal-04461354/file/anki-gaillard-revol.pdf"
         },
         {
-            "doi": "10.63317/375ba8vd9q2v",
-            "status": "found",
+            "doi": "",
+            "status": "not_found",
             "reference": "In COLING 2018, 27th International Conference on Computational Linguistics, pp. 1638-1649.",
-            "reference_found": "FROM CROSSREF >  (2024). Proceedings of the 2024 Joint International Conference on Computational Linguistics, Language Resources and Evaluation (LREC-COLING 2024). Joint International Conference on Computational Linguistics, Language Resources and Evaluation. 10.63317/375ba8vd9q2v.",
+            "reference_found": "",
             "url_pdf": "https://cnrs.hal.science/hal-04461354/file/anki-gaillard-revol.pdf"
         },
         {
@@ -218,3 +218,23 @@ HTTP 200
         ]
     }
 }]
+
+
+POST {{host}}/v1/compare-ref?indent=true
+content-type: application/json
+[
+  {
+    "value": {"doi": "10.1016/j.jelechem.2022.116956", "reference": "L.K. Bieniasz, Theory and highly accurate computation of non- limiting chronoamperometric currents for the ErevCirr reaction mechanism at cylindrical wire electrodes. J. Electroanal. Chem. 895, 115410 (2021)"}
+  },
+  {
+    "value": {"reference": "L.K. Bieniasz, Theory and highly accurate computation of non- limiting chronoamperometric currents for the ErevCirr reaction mechanism at cylindrical wire electrodes. J. Electroanal. Chem. 895, 115410 (2021)"}
+  }
+]
+
+
+HTTP 200
+[Asserts]
+jsonpath "$" count == 2
+jsonpath "$[*].value.from_crossref" exists
+jsonpath "$[*].value.raw_ref" exists
+jsonpath "$[*].value.matches_scores" exists
