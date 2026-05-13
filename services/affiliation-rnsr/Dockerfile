@@ -16,6 +16,8 @@ COPY ./v3/affiliation/models.dvc /dvc
 RUN mkdir -p .dvc/cache
 RUN dvc doctor
 RUN dvc status -v
+# Check secret presence
+RUN --mount=type=secret,id=webdav_login cat /run/secrets/webdav_login || true
 RUN dvc pull -v
 
 FROM cnrsinist/ezs-python-server:py3.9-no24-1.0.13
