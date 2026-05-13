@@ -10,7 +10,8 @@ RUN --mount=type=secret,id=webdav_login \
     dvc init && \
     dvc remote add -d webdav-remote "$(cat /run/secrets/webdav_url)" && \
     dvc remote modify --local webdav-remote user "$(cat /run/secrets/webdav_login)" && \
-    dvc remote modify --local webdav-remote password "$(cat /run/secrets/webdav_password)"
+    dvc remote modify --local webdav-remote password "$(cat /run/secrets/webdav_password)" && \
+    dvc remote modify webdav-remote timeout 300
 COPY ./v3/affiliation/models.dvc /dvc
 RUN dvc pull -j 1 -v
 
