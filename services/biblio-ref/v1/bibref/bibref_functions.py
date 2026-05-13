@@ -261,6 +261,11 @@ def clean_crossref_title(text):
     return text.strip()
 
 
+def compute_partial_ratio(biliographic_item, raw_ref):
+    # L'ordre importe ! la chaîne la plus longue à droite
+    return fuzz.partial_ratio(uniformize(biliographic_item), uniformize(raw_ref))/100
+
+
 # Functions that compare informations between the Crossref metadata and
 # the bibliographic reference given.
 def compare_pubinfo_refbiblio(item, ref_biblio):
@@ -286,7 +291,7 @@ def compare_pubinfo_refbiblio(item, ref_biblio):
     """
     items_score = 0
     # Title
-    title_score = fuzz.partial_ratio(uniformize(clean_crossref_title(item["title"])), ref_biblio)/100
+    title_score = compute_partial_ratio(clean_crossref_title(item["title"]), ref_biblio)
 
     if title_score > 0.8:
         items_score += 1
@@ -301,7 +306,7 @@ def compare_pubinfo_refbiblio(item, ref_biblio):
         items_score += 1
 
     # Source
-    if fuzz.partial_ratio(uniformize(item["source"]["source-short"]), ref_biblio)/100 > 0.8 or fuzz.partial_ratio(uniformize(item["source"]["source-long"]), ref_biblio)/100 > 0.8 :
+    if compute_partial_ratio(item["source"]["source-short"], ref_biblio) > 0.8 or compute_partial_ratio(item["source"]["source-long"], ref_biblio) > 0.8 :
         items_score += 1
 
     try:
