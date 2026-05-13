@@ -1,3 +1,17 @@
+# To test locally, use:
+# hurl --test --variable host=http://localhost:31976 --jobs 1 services/affiliation-rnsr/tests.hurl
+# npm run test:local affiliation-rnsr
+#
+# To test remotely, use:
+# hurl --test --variable host=https://affiliation-rnsr.services.istex.fr --jobs 1 services/affiliation-rnsr/tests.hurl
+# npm run test:remote affiliation-rnsr
+#
+# The service should be launched as a local server. URL: http://localhost:31976
+# Just launch:
+# npm -w services/affiliation-rnsr run start:dev
+# npm run generate:example-tests services/affiliation-rnsr
+# npm -w services/affiliation-rnsr run stop:dev
+
 POST {{host}}/v3/affiliation/rnsr?indent=true
 content-type: application/json
 [
