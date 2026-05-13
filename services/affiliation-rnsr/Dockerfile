@@ -13,7 +13,7 @@ RUN --mount=type=secret,id=webdav_login \
     dvc remote modify --local webdav-remote password "$(cat /run/secrets/webdav_password)"
 
 COPY ./v3/affiliation/models.dvc /dvc
-RUN dvc pull -v
+RUN dvc pull --allow-missing --jobs 1 --verbose
 
 FROM cnrsinist/ezs-python-server:py3.9-no24-1.0.13
 
