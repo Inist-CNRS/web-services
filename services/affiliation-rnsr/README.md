@@ -17,7 +17,8 @@ Nécessite les variables d'environnement:
 
 `npm run build:dev` et `npm start:dev` importent le fichier `.env` quand il existe.
 
-> 📗 Suggestion: déclarez les variables dans le fichier `.env` de cette manière:
+> [!TIP]  
+> Déclarez les variables dans le fichier `.env` de cette manière:
 >
 > ```bash
 > export WEBDAV_URL=webdavs://your.webdav.com/dvc
