@@ -2,8 +2,8 @@
 FROM python:3.9-slim-bullseye AS dvc-files
 WORKDIR /dvc
 RUN apt-get update && apt-get -y --no-install-recommends install git=1:2.30.2-1+deb11u5 && apt-get clean && rm -rf /var/lib/apt/lists/*
-RUN pip install dvc[webdav]==3.67.1
-RUN --mount=type=secret,id=webdav_login \
+RUN pip install --no-cache-dir dvc[webdav]==3.67.1 && \
+    --mount=type=secret,id=webdav_login \
     --mount=type=secret,id=webdav_password \
     --mount=type=secret,id=webdav_url \
     git init && \
@@ -11,9 +11,8 @@ RUN --mount=type=secret,id=webdav_login \
     dvc remote add -d webdav-remote "$(cat /run/secrets/webdav_url)" && \
     dvc remote modify --local webdav-remote user "$(cat /run/secrets/webdav_login)" && \
     dvc remote modify --local webdav-remote password "$(cat /run/secrets/webdav_password)" && \
-    dvc remote modify webdav-remote timeout 300
-COPY ./v3/affiliation/models.dvc /dvc
-RUN dvc pull -j 1 -v
+    cp ./v3/affiliation/models.dvc /dvc && \
+    dvc pull -v
 
 FROM cnrsinist/ezs-python-server:py3.9-no24-1.0.13
 
