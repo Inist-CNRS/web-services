@@ -2,7 +2,7 @@
 FROM python:3.9-slim-bullseye AS dvc-files
 WORKDIR /dvc
 RUN apt-get update && apt-get -y --no-install-recommends install git=1:2.30.2-1+deb11u5 && apt-get clean && rm -rf /var/lib/apt/lists/*
-RUN pip install --no-cache-dir dvc[webdav]==3.42.0 pathspec==0.11.2
+RUN pip install "dvc[webdav]==3.48.4"
 RUN --mount=type=secret,id=webdav_login \
     --mount=type=secret,id=webdav_password \
     --mount=type=secret,id=webdav_url \
@@ -12,7 +12,7 @@ RUN --mount=type=secret,id=webdav_login \
     dvc remote modify --local webdav-remote user "$(cat /run/secrets/webdav_login)" && \
     dvc remote modify --local webdav-remote password "$(cat /run/secrets/webdav_password)"
 COPY ./v3/affiliation/models.dvc /dvc
-RUN dvc pull -v
+RUN dvc pull -j 1 -v
 
 FROM cnrsinist/ezs-python-server:py3.9-no24-1.0.13
 
