@@ -222,6 +222,8 @@ HTTP 200
 
 POST {{host}}/v1/compare-ref?indent=true
 content-type: application/json
+[Options]
+skip: {{blocked}}
 [
   {
     "value": {"doi": "10.1016/j.jelechem.2022.116956", "reference": "L.K. Bieniasz, Theory and highly accurate computation of non- limiting chronoamperometric currents for the ErevCirr reaction mechanism at cylindrical wire electrodes. J. Electroanal. Chem. 895, 115410 (2021)"}
