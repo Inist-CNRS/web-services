@@ -3,7 +3,7 @@
     "info": {
         "title": "openalex-classification - Classification hiérarchique (domains et fields) Openalex",
         "description": "Le web service classe automatiquement des documents scientifiques en anglais dans le premier et deuxième niveau de la classification Openalex à partir de leur résumé.",
-        "version": "0.0.0",
+        "version": "1.0.0",
         "termsOfService": "https://services.istex.fr/",
         "contact": {
             "name": "Inist-CNRS",
