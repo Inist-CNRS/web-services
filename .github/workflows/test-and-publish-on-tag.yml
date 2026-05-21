@@ -57,6 +57,10 @@ jobs:
           tags: |
             ${{ steps.parse.outputs.image_name }}:latest
             ${{ steps.parse.outputs.image_name }}:${{ steps.parse.outputs.version }}
+          secret-envs: |
+            WEBDAV_LOGIN=${{ secrets.WEBDAV_LOGIN }}
+            WEBDAV_PASSWORD=${{ secrets.WEBDAV_PASSWORD }}
+            WEBDAV_URL=${{ secrets.WEBDAV_URL }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
 
