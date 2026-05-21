@@ -45,8 +45,10 @@ for line in sys.stdin:
 
         else:
             data["value"] = ""
-    except Exception:
-            data["value"] = ""
+    except Exception as e:
+        sys.stderr.write(f"Error using cld3.get_language : {str(e)}")
+        sys.stderr.write("\n")
+        data["value"] = ""
 
         
 
