@@ -1,7 +1,7 @@
 {
   "private": true,
   "name": "ws-openalex-classification",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Classification hiérarchique (domains et fields) Openalex",
   "repository": {
     "type": "git",
