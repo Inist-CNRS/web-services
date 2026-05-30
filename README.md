@@ -46,6 +46,7 @@ All contributing instructions are in [CONTRIBUTING](CONTRIBUTING.md).
 - [data-wrapper](./services/data-wrapper) [![Docker Pulls](https://img.shields.io/docker/pulls/cnrsinist/ws-data-wrapper.svg)](https://hub.docker.com/r/cnrsinist/ws-data-wrapper/)
 - [diseases-ner](./services/diseases-ner) [![Docker Pulls](https://img.shields.io/docker/pulls/cnrsinist/ws-diseases-ner.svg)](https://hub.docker.com/r/cnrsinist/ws-diseases-ner/)
 - [domains-classifier](./services/domains-classifier) [![Docker Pulls](https://img.shields.io/docker/pulls/cnrsinist/ws-domains-classifier.svg)](https://hub.docker.com/r/cnrsinist/ws-domains-classifier/)
+- [embeddings-computer](./services/embeddings-computer) [![Docker Pulls](https://img.shields.io/docker/pulls/cnrsinist/ws-embeddings-computer.svg)](https://hub.docker.com/r/cnrsinist/ws-embeddings-computer/)
 - [funder-ner](./services/funder-ner) [![Docker Pulls](https://img.shields.io/docker/pulls/cnrsinist/ws-funder-ner.svg)](https://hub.docker.com/r/cnrsinist/ws-funder-ner/)
 - [hal-classifier](./services/hal-classifier) [![Docker Pulls](https://img.shields.io/docker/pulls/cnrsinist/ws-hal-classifier.svg)](https://hub.docker.com/r/cnrsinist/ws-hal-classifier/)
 - [hiddentext-detect](./services/hiddentext-detect) [![Docker Pulls](https://img.shields.io/docker/pulls/cnrsinist/ws-hiddentext-detect.svg)](https://hub.docker.com/r/cnrsinist/ws-hiddentext-detect/)
