@@ -8,7 +8,7 @@ import os
 import time
 
 api_key = os.getenv("ILAAS_API_KEY")
-model = "gpt-oss-120b"
+model = "gemma-4-31b"
 
 
 def construct_llm_prompt(user_prompt):
