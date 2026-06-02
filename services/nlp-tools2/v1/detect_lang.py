@@ -37,14 +37,20 @@ for line in sys.stdin:
     data = json.loads(line)
 
     text = data["value"]
-    if cld3.get_language(text).probability > 0.85:
+    try:
+        search_language = cld3.get_language(text)
+        if search_language.probability > 0.85:
 
-        data["value"] = cld3.get_language(
-            text
-        ).language  # ,round(cld3.get_language(text).probability,2)
+            data["value"] = search_language.language  # ,round(cld3.get_language(text).probability,2)
 
-    else:
+        else:
+            data["value"] = ""
+    except Exception as e:
+        sys.stderr.write(f"Error using cld3.get_language : {str(e)}")
+        sys.stderr.write("\n")
         data["value"] = ""
+
+        
 
     sys.stdout.write(json.dumps(data))
     sys.stdout.write("\n")
