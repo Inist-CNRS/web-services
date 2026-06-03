@@ -8,7 +8,7 @@ import os
 import time
 
 api_key = os.getenv("ILAAS_API_KEY")
-model = "gpt-oss-120b"
+model = "gemma-4-31b"
 
 
 def construct_llm_prompt(user_prompt):
@@ -20,7 +20,7 @@ def construct_llm_prompt(user_prompt):
     - `publicationDate:[N TO M]` : pour rechercher entre l'année N et M.
     - `publicationDate:[N TO *]` : pour obtenir les documents publiés uniquement après l'année N.
     - `author.name:()` : pour inclure des noms d'auteurs spécifiquement. Uniquement le **nom de famille**.
-    - `language.raw:()` : permet de choisir la langues de documents ("fre" pour français, "eng" pour anglais, "deu" pour allemand et "spa" pour espagnol.)
+    - `language.raw:()` : permet de choisir la langue de documents ("fre" pour français, "eng" pour anglais, "deu" pour allemand, "spa" pour espagnol et "ita" pour italien.)
     - `AND genre.raw:"research-article"` permet d'avoir uniquement les articles de recherche si l'utilisateur veut quelque chose de filtré.
     """
 
