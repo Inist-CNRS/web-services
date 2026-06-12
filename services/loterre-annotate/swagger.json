@@ -163,7 +163,77 @@
                                     "items": {
                                         "$ref": "#/components/schemas/AnnotatedDocument"
                                     }
-                                }
+                                },
+                                "example": [
+                                    {
+                                        "id": "1",
+                                        "annotated": "The **Mem-Pro-Clinic test**〔[Mem-Pro-Clinic test](http://data.loterre.fr/ark:/67375/P66-WG17XBG4-V)〕 is a clinical test to assess difficulties in event- and time-based **prospective thoughts**〔[predictive brain](http://data.loterre.fr/ark:/67375/P66-VLJ0CQH4-G)〕. This result implies that activated **long-term memory**〔[long-term memory](http://data.loterre.fr/ark:/67375/P66-J8FC45M1-6)〕 provides a representational basis for semantic verbal short-term signal.",
+                                        "value": [
+                                            {
+                                                "start": 4,
+                                                "end": 23,
+                                                "found": "Mem-Pro-Clinic test",
+                                                "pref": "Mem-Pro-Clinic test",
+                                                "uri": "http://data.loterre.fr/ark:/67375/P66-WG17XBG4-V",
+                                                "label": "Mem-Pro-Clinic test",
+                                                "rule": "surface_upper_exact",
+                                                "score": 0.9
+                                            },
+                                            {
+                                                "start": 91,
+                                                "end": 111,
+                                                "found": "prospective thoughts",
+                                                "pref": "predictive brain",
+                                                "uri": "http://data.loterre.fr/ark:/67375/P66-VLJ0CQH4-G",
+                                                "label": "predictive brain",
+                                                "rule": "surface_structural",
+                                                "score": 0.82
+                                            },
+                                            {
+                                                "start": 148,
+                                                "end": 164,
+                                                "found": "long-term memory",
+                                                "pref": "long-term memory",
+                                                "uri": "http://data.loterre.fr/ark:/67375/P66-J8FC45M1-6",
+                                                "label": "long-term memory",
+                                                "rule": "surface_upper_exact",
+                                                "score": 0.9
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "id": "2",
+                                        "annotated": "A new method to implant false autobiographical books: Blind implantation call **blind implantation methods**〔[blind implantation method](http://data.loterre.fr/ark:/67375/P66-D6XL3PDR-M)〕.",
+                                        "value": [
+                                            {
+                                                "start": 78,
+                                                "end": 104,
+                                                "found": "blind implantation methods",
+                                                "pref": "blind implantation method",
+                                                "uri": "http://data.loterre.fr/ark:/67375/P66-D6XL3PDR-M",
+                                                "label": "blind implantation method",
+                                                "rule": "lemma_pattern_seq",
+                                                "score": 0.85
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "id": "3",
+                                        "annotated": "A guy with **hypermnesia (Pathology)**〔[hypermnesia (Pathology)](http://data.loterre.fr/ark:/67375/P66-FQXK8KBN-C)〕 is capable of storing idea in an extraordinarily efficient manner.",
+                                        "value": [
+                                            {
+                                                "start": 11,
+                                                "end": 34,
+                                                "found": "hypermnesia (Pathology)",
+                                                "pref": "hypermnesia (Pathology)",
+                                                "uri": "http://data.loterre.fr/ark:/67375/P66-FQXK8KBN-C",
+                                                "label": "hypermnesia (Pathology)",
+                                                "rule": "surface_upper_exact",
+                                                "score": 0.9
+                                            }
+                                        ]
+                                    }
+                                ]
                             }
                         }
                     }

@@ -7,17 +7,16 @@
 # pas les valeurs exactes — ce qui le rend stable même si le vocabulaire évolue.
 #
 # [Asserts] hurl :
-#   jsonpath "$[0].id" == "1"                    → le champ id est renvoyé inchangé
-#   jsonpath "$[0].value" isCollection           → value est un tableau (au moins un match)
-#   jsonpath "$[0].value[0].idx.start" isInteger → offset de début du terme (entier)
-#   jsonpath "$[0].value[0].idx.end"   isInteger → offset de fin du terme (entier)
-#   jsonpath "$[0].value[0].match.id"  isString  → URI du concept Loterre (chaîne)
-#   jsonpath "$[0].value[0].match.ul"  isString  → forme préférentielle du concept (chaîne)
-#   jsonpath "$[0].value[0].match.term" isString → texte exact trouvé dans le document (chaîne)
-#   jsonpath "$" count == N                      → le service retourne exactement N documents
-#
-# NOTE: format de sortie actuel du service Docker (ancien format nested idx/match).
-# Après "make build-local", migrer vers le format plat : start/end/uri/pref/found/score.
+#   jsonpath "$[0].id" == "1"               → le champ id est renvoyé inchangé
+#   jsonpath "$[0].annotated" isString      → texte balisé markdown (champ toujours présent)
+#   jsonpath "$[0].value" isCollection      → value est un tableau (au moins un match)
+#   jsonpath "$[0].value[0].start" isInteger  → offset de début du terme (entier)
+#   jsonpath "$[0].value[0].end"   isInteger  → offset de fin du terme (entier)
+#   jsonpath "$[0].value[0].uri"   isString   → URI du concept Loterre (chaîne)
+#   jsonpath "$[0].value[0].pref"  isString   → forme préférentielle du concept (chaîne)
+#   jsonpath "$[0].value[0].found" isString   → texte exact trouvé dans le document (chaîne)
+#   jsonpath "$[0].value[0].score" isNumber    → score de confiance [0.0–1.0]
+#   jsonpath "$" count == N                 → le service retourne exactement N documents
 
 # ── 9SD EN ────────────────────────────────────────────────────────────────────
 POST {{host}}/v1/en/loterre-annotate/annotate?loterreID=9SD
@@ -28,12 +27,14 @@ content-type: application/json
 HTTP 200
 [Asserts]
 jsonpath "$[0].id" == "1"
+jsonpath "$[0].annotated" isString
 jsonpath "$[0].value" isCollection
-jsonpath "$[0].value[0].idx.start" isInteger
-jsonpath "$[0].value[0].idx.end" isInteger
-jsonpath "$[0].value[0].match.id" isString
-jsonpath "$[0].value[0].match.ul" isString
-jsonpath "$[0].value[0].match.term" isString
+jsonpath "$[0].value[0].start" isInteger
+jsonpath "$[0].value[0].end" isInteger
+jsonpath "$[0].value[0].uri" isString
+jsonpath "$[0].value[0].pref" isString
+jsonpath "$[0].value[0].found" isString
+jsonpath "$[0].value[0].score" isNumber
 
 # ── P66 FR ────────────────────────────────────────────────────────────────────
 POST {{host}}/v1/fr/loterre-annotate/annotate?loterreID=P66
@@ -44,10 +45,11 @@ content-type: application/json
 HTTP 200
 [Asserts]
 jsonpath "$[0].id" == "1"
+jsonpath "$[0].annotated" isString
 jsonpath "$[0].value" isCollection
-jsonpath "$[0].value[0].idx.start" isInteger
-jsonpath "$[0].value[0].match.id" isString
-jsonpath "$[0].value[0].match.ul" isString
+jsonpath "$[0].value[0].start" isInteger
+jsonpath "$[0].value[0].uri" isString
+jsonpath "$[0].value[0].pref" isString
 
 # ── P66 EN — plusieurs documents ──────────────────────────────────────────────
 POST {{host}}/v1/en/loterre-annotate/annotate?loterreID=P66
@@ -87,12 +89,13 @@ content-type: application/json
 HTTP 200
 [Asserts]
 jsonpath "$[0].id" == "1"
+jsonpath "$[0].annotated" isString
 jsonpath "$[0].value" isCollection
-jsonpath "$[0].value[0].idx.start" isInteger
-jsonpath "$[0].value[0].idx.end" isInteger
-jsonpath "$[0].value[0].match.id" isString
-jsonpath "$[0].value[0].match.ul" isString
-jsonpath "$[0].value[0].match.term" isString
+jsonpath "$[0].value[0].start" isInteger
+jsonpath "$[0].value[0].end" isInteger
+jsonpath "$[0].value[0].uri" isString
+jsonpath "$[0].value[0].pref" isString
+jsonpath "$[0].value[0].found" isString
 
 # ── BVM FR ────────────────────────────────────────────────────────────────────
 POST {{host}}/v1/fr/loterre-annotate/annotate?loterreID=BVM
@@ -104,7 +107,7 @@ HTTP 200
 [Asserts]
 jsonpath "$[0].id" == "1"
 jsonpath "$[0].value" isCollection
-jsonpath "$[0].value[0].match.id" isString
+jsonpath "$[0].value[0].uri" isString
 
 # ── QX8 FR ────────────────────────────────────────────────────────────────────
 POST {{host}}/v1/fr/loterre-annotate/annotate?loterreID=QX8
@@ -116,7 +119,7 @@ HTTP 200
 [Asserts]
 jsonpath "$[0].id" == "1"
 jsonpath "$[0].value" isCollection
-jsonpath "$[0].value[0].match.id" isString
+jsonpath "$[0].value[0].uri" isString
 
 # ── P66 FR — plusieurs documents ──────────────────────────────────────────────
 POST {{host}}/v1/fr/loterre-annotate/annotate?loterreID=P66
