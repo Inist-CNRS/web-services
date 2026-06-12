@@ -16,7 +16,7 @@ Avec  **CODE_LANGUE** = la langue du texte;  2 langues disponibles `fr` | `en`
 
 ## Format d'entrée
 
-Tableau JSON, un objet par document :
+Un tableau JSON, un objet par document :
 
 ```json
 [
