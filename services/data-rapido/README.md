@@ -1,4 +1,4 @@
-# ws-data-rapido@1.2.0
+# ws-data-rapido@1.3.0
 
 ## v1/rapido-algorithme
 
