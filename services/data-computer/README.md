@@ -1,4 +1,4 @@
-# ws-data-computer@2.19.3
+# ws-data-computer@2.19.4
 
 Le service `data-computer` offre plusieurs services **asynchrones** pour des calculs et de transformations de données simples.
 
