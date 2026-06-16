@@ -11,13 +11,10 @@
         }
     },
     "servers": [
-        {
-            "url": "http://localhost:31976",
-            "description": "Service local (Docker)"
-        },
-        {
-            "url": "https://loterre-annotate.services.istex.fr",
-            "description": "Service de production"
+       {
+            "url": "http://vptermsuite.intra.inist.fr:49157/",
+            "description": "Latest version for production",
+            "x-profil": "Standard"
         }
     ],
     "tags": [
