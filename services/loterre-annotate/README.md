@@ -27,7 +27,7 @@ Un tableau JSON avec un objet par document :
 
 ## Format de sortie
 
-Un rableau JSON de même taille. Pour chaque document :
+Un tableau JSON de même taille. Pour chaque document :
 
 | Champ | Description |
 |:---|:---|
