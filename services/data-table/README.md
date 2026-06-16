@@ -1,4 +1,4 @@
-# ws-data-table@1.4.0
+# ws-data-table@1.4.1
 
 Extract tables from pdf files
 
