@@ -8,16 +8,22 @@ from ratelimit import limits, RateLimitException
 from backoff import on_exception, expo
 
 # Filtrage par mot clé pour ne garder que l'essentiel
-def filter(affiliation) :
-    affiliation_lower = affiliation.lower()
-    adress = affiliation_lower.replace(",", "")
-    words = adress.split(" ")
-    private = ["sas", "sarl", "sa", "private", "edf", "orange"]
-    public = ["univ", "hop", "hôp", "hosp", "uar", "umr", "cea", "cnrs", "(cnrs)","(cea)","(univ"]
-    for word in words:
-        if any(word.startswith(p) for p in private):
+private = {"sas", "sarl", "sa", "private", "edf", "orange"}
+public = (
+    "univ",       # univ, université, university, universidad...
+    "hop", "hôp", # hopital, hôpital
+    "hosp",       # hospital
+    "uar", "umr", "cea", "cnrs",
+    )
+
+def filter_affiliation(affiliation):
+    words = affiliation.lower().replace(",", "").split()
+    cleaned = [w.strip("().") for w in words]
+
+    for word in cleaned:
+        if word in private:
             return "private"
-        elif any(word.startswith(p) for p in public):
+        if word.startswith(public):
             return "public"
     return None
 
@@ -84,7 +90,7 @@ def is_private_public(information):
         
 # return est_service_public_list
 def public_or_private(affiliation,my_dict):
-    privatePublicOrAffiliation = filter(affiliation)
+    privatePublicOrAffiliation = filter_affiliation(affiliation)
     if privatePublicOrAffiliation in ["private", "public"]:
         enterprise = name_enterprise(affiliation)
         return {"organisme": enterprise, "statut": privatePublicOrAffiliation}
