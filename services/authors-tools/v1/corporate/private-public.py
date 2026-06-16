@@ -13,11 +13,11 @@ def filter(affiliation) :
     adress = affiliation_lower.replace(",", "")
     words = adress.split(" ")
     private = ["sas", "sarl", "sa", "private", "edf", "orange"]
-    public = ["univ", "hop", "uar", "umr", "cea", "cnrs", "(cnrs)","(cea)","(univ"]
-    for word in words :
-        if word in private :
+    public = ["univ", "hop", "hôp", "hosp", "uar", "umr", "cea", "cnrs", "(cnrs)","(cea)","(univ"]
+    for word in words:
+        if any(word.startswith(p) for p in private):
             return "private"
-        elif word in public :
+        elif any(word.startswith(p) for p in public):
             return "public"
     return None
 
