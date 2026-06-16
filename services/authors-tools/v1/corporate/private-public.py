@@ -71,14 +71,14 @@ def request(name, dept) :
 def is_private_public(information):
     if len(information)==0 or 'results' not in information or not information['results']:
         return None
-    # Parcourir chaque objet "results" extraire la valeur de "est_service_public"
-    est_service_public_list = []
+    # Parcourir chaque objet "results" extraire la valeur de "est_administration"
+    est_administration_list = []
     for result in information['results']:
         complements = result.get('complements')
-        est_service_public = complements.get('est_service_public', None)
-        if est_service_public is not None:
-            est_service_public_list.append(est_service_public)
-            if True in est_service_public_list :
+        est_administration = complements.get('est_administration', None)
+        if est_administration is not None:
+            est_administration_list.append(est_administration)
+            if True in est_administration_list :
                 return "public"
             return "private"
         
