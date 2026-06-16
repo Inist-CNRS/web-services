@@ -30,7 +30,7 @@ ENV LOTERRE_RESOURCES_DIR=/app/public/resources
 ENV LOTERRE_REGISTRY=/app/public/configs/registry.yaml
 
 RUN apt-get update && \
-    apt-get -y --no-install-recommends install git && \
+    apt-get -y --no-install-recommends install git=1:2.30.2-1+deb11u5 && \
     apt-get clean && rm -rf /var/lib/apt/lists/*
 
 # Installe les modules Python loterre-annotate depuis GitHub
