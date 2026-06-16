@@ -1,10 +1,10 @@
-# ws-data-rapido@1.2.0
+# ws-data-rapido@1.3.0
 
-### v1/rapido-algorithme
+## v1/rapido-algorithme
 
-Web service à destination du projet rapido. Ce web service prend en entrée un tar.gz comportant un dossier data incluant tout les documents xml à traiter. Il renvoit un json comportant les alignements que l'algorithme a pu faire entre le texte et le référentiel idRef.
+Web service à destination du projet rapido. Ce web service prend en entrée un tar.gz comportant un dossier data incluant tout les documents xml à traiter. Il renvoie un json comportant les alignements que l'algorithme a pu faire entre le texte et le référentiel idRef.
 
-Applique un algorithme de recherche d'entitées et d'alignement avec idRef. Prévu dans le cadre de la phase 1 du projet Rapido.
+Applique un algorithme de recherche d’entités et d'alignement avec idRef. Prévu dans le cadre de la phase 1 du projet Rapido.
 
 
 Par exemple, en utilisant example-xml-rapido.tar.gz,
@@ -46,19 +46,19 @@ On obtiendra :
 }
 ```
 
-#### Paramètre(s) URL
+### Paramètre(s) URL
 
 | nom                 | description                                 |
 | ------------------- | ------------------------------------------- |
 | indent (true/false) | Indenter le résultat renvoyer immédiatement |
 
-#### Entête(s) HTTP
+### Entête(s) HTTP
 
 | nom    | description                                                  |
 | ------ | ------------------------------------------------------------ |
 | X-Hook | URL à appeler quand le résultat sera disponible (facultatif) |
 
-#### Exemple en ligne de commande
+### Exemple en ligne de commande
 
 ```bash
 # Send data for batch processing
@@ -68,13 +68,11 @@ cat input.tar.gz |curl --data-binary @-  -H "X-Hook: https://webhook.site/dce2fe
 cat output.json |curl --data-binary @- "http://localhost:31976/v1/retrieve" > output.tar.gz
 ```
 
-### v1/rapido-apprentissage
+## v1/rapido-apprentissage
 
-Web service à destination du projet rapido. Ce web service prend en entrée un tar.gz comportant un dossier data incluant tout les documents xml à traiter. Il renvoit un json comportant les alignements que l'algorithme a pu faire entre le texte et le référentiel idRef.
+Web service à destination du projet rapido. Ce web service prend en entrée un tar.gz comportant un dossier data incluant tout les documents xml à traiter. Il renvoie un json comportant les alignements que l'algorithme a pu faire entre le texte et le référentiel idRef.
 
-Détecte des entitées via un modèle d'IA puis applique un algorithme d'alignement avec idRef. Prévu dans le cadre de la phase 2 du projet Rapido.
-
-
+Détecte des entités via un modèle d'IA puis applique un algorithme d'alignement avec idRef. Prévu dans le cadre de la phase 2 du projet Rapido.
 
 Par exemple, en utilisant example-xml-rapido.tar.gz,
 On obtiendra :
@@ -145,19 +143,19 @@ On obtiendra :
 }
 ```
 
-#### Paramètre(s) URL
+### Paramètre(s) URL
 
 | nom                 | description                                 |
 | ------------------- | ------------------------------------------- |
 | indent (true/false) | Indenter le résultat renvoyer immédiatement |
 
-#### Entête(s) HTTP
+### Entête(s) HTTP
 
 | nom    | description                                                  |
 | ------ | ------------------------------------------------------------ |
 | X-Hook | URL à appeler quand le résultat sera disponible (facultatif) |
 
-#### Exemple en ligne de commande
+### Exemple en ligne de commande
 
 ```bash
 # Send data for batch processing

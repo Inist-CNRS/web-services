@@ -5,7 +5,7 @@ WORKDIR /app
 
 RUN apt-get update && \
     apt-get install -y --no-install-recommends \
-    ffmpeg=7:4.3.9-0+deb11u1 \
+    ffmpeg=7:4.3.9-0+deb11u2 \
     libsm6=2:1.2.3-1 \
     libxext6=2:1.3.3-1.1 \
     tesseract-ocr=4.1.1-2.1 \
