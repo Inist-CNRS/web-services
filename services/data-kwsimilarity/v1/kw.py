@@ -205,8 +205,7 @@ seuil_ponderation = 0.05
 alpha = 0.8
 beta = 0.2
 
-result = {}
-
+result = []
 for kw in cleaned_kw:
     if kw in model.get_words():
         print(f"Keyword found in model: {kw}", file=sys.stderr)
@@ -225,20 +224,28 @@ for kw in cleaned_kw:
 
         filtered_neighbors.sort(reverse=True)
 
-        result[kw] = []
         for ponderation, sim, tfidf_score, word in filtered_neighbors[:1000]:
             if ponderation >= 0.5:
-                result[kw].append({
-                    "word": word,
-                    "sim": sim,
-                    "tfidf": tfidf_score,
-                    "ponderation": ponderation
+                result.append({
+                    "value" : {
+                        "keyword": kw,
+                        "word": word,
+                        "sim": ponderation
+                    }
                 })
     else :
         print(f"Keyword NOT found in model: {kw}", file=sys.stderr)
-        result[kw] = [{"word": f"Mot-clé '{kw}' absent du modèle, occurence < 5 dans le corpus."}]
+        result.append({
+            "value" : {
+                "keyword": kw,
+                "word": "word_not_found",
+                "sim": "n/a"
+                }
+            })
         pass
 
-sys.stdout.write(json.dumps(result))
-sys.stdout.write("\n")
+for item in result:
+    sys.stdout.write(json.dumps(item))
+    sys.stdout.write("\n")
+
 print(f"Temp files: {temporary_corpus}, {temporary_model}", file=sys.stderr)
