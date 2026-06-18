@@ -1,0 +1,33 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "data-corpussummarize - Résumé automatique de corpus de textes en anglais",
+        "description": "À partir d'un corpus de textes en anglais, ce web service génère automatiquement un résumé. La route à utiliser doit être adaptée en fonction de la nature des textes en entrée.",
+        "version": "0.0.0",
+        "termsOfService": "https://services.istex.fr/",
+        "contact": {
+            "name": "Inist-CNRS",
+            "url": "https://www.inist.fr/nous-contacter/"
+        }
+    },
+    "servers": [
+        {
+            "x-comment": "Will be automatically completed by the ezs server."
+        },
+        {
+            "url": "http://vptdmservices.intra.inist.fr:49225/",
+            "description": "Latest version for production",
+            "#DISABLED#x-profil": "Standard"
+        }
+    ],
+    "tags": [
+        {
+            "name": "data-corpussummarize",
+            "description": "Résumé automatique de corpus de textes en anglais",
+            "externalDocs": {
+                "description": "Plus de documentation",
+                "url": "https://github.com/inist-cnrs/web-services/tree/main/services/data-corpussummarize"
+            }
+        }
+    ]
+}

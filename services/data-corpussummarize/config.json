@@ -1,0 +1,15 @@
+{
+    "environnement": {
+        "EZS_TITLE": "Résumé automatique de corpus de textes en anglais",
+        "EZS_DESCRIPTION": "À partir d'un corpus de textes en anglais, ce web service génère automatiquement un résumé. La route à utiliser doit être adaptée en fonction de la nature des textes en entrée.",
+        "EZS_METRICS": true,
+        "EZS_CONCURRENCY": 2,
+        "EZS_CONTINUE_DELAY": 60,
+        "EZS_NSHARDS": 32,
+        "EZS_CACHE": true,
+        "EZS_VERBOSE": false,
+        "NODE_OPTIONS": "--max_old_space_size=1024",
+        "NODE_ENV": "production",
+        "ILAAS_API_KEY": "real_api_key"
+    }
+}
