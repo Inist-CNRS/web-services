@@ -226,9 +226,11 @@ for kw in cleaned_kw:
 
         for ponderation, sim, tfidf_score, word in filtered_neighbors[:1000]:
             if ponderation >= 0.5:
+                cleaned_kw = kw.replace("_", " ")
+                clean_word = word.replace("_", " ")
                 result.append({
-                        "Terme initiale": kw,
-                        "Mot similaire": word,
+                        "Terme initiale": cleaned_kw,
+                        "Mot similaire": clean_word,
                         "Similarité": ponderation
                 })
     else :
