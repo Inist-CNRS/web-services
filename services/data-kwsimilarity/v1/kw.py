@@ -227,20 +227,16 @@ for kw in cleaned_kw:
         for ponderation, sim, tfidf_score, word in filtered_neighbors[:1000]:
             if ponderation >= 0.5:
                 result.append({
-                    "value" : {
-                        "keyword": kw,
-                        "word": word,
-                        "sim": ponderation
-                    }
+                        "Terme initiale": kw,
+                        "Mot similaire": word,
+                        "Similarité": ponderation
                 })
     else :
         print(f"Keyword NOT found in model: {kw}", file=sys.stderr)
         result.append({
-            "value" : {
-                "keyword": kw,
-                "word": "word_not_found",
-                "sim": "n/a"
-                }
+                "Terme initiale": kw,
+                "Mot similaire": "Non trouvé dans le modèle",
+                "Similarité": "n/a"
             })
         pass
 
