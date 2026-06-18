@@ -7,7 +7,7 @@ RUN apt-get update && apt-get -y --no-install-recommends install \
     git=1:2.30.2-1+deb11u5 \
     && apt-get clean && rm -rf /var/lib/apt/lists/*
 RUN pip install --no-cache-dir \
-    dvc[webdav]==3.39.0 \
+    dvc[webdav]==3.67.1 \
     pathspec==0.12.1
 COPY ./dictionary.dvc /dvc
 RUN --mount=type=secret,id=webdav_login \
