@@ -33,9 +33,9 @@ HTTP 200
 Content-Type: application/json
 [Asserts]
 jsonpath "$" exists
-jsonpath "$[0].keyword" exists
-jsonpath "$[0].word" exists
-jsonpath "$[0].sim" exists
+jsonpath "$[0].Terme initiale" exists
+jsonpath "$[0].Mot similaire" exists
+jsonpath "$[0].Similarité" exists
 
 
 ##################################################################
@@ -68,10 +68,9 @@ HTTP 200
 Content-Type: application/json
 [Asserts]
 jsonpath "$" exists
-jsonpath "$[0].keyword" exists
-jsonpath "$[0].word" exists
-jsonpath "$[0].sim" exists
-
+jsonpath "$[0].Terme initiale" exists
+jsonpath "$[0].Mot similaire" exists
+jsonpath "$[0].Similarité" exists
 ##################################################################
 # v1/kw
 POST {{host}}/v1/kw
@@ -102,6 +101,6 @@ HTTP 200
 Content-Type: application/json
 [Asserts]
 jsonpath "$" exists
-jsonpath "$[0].keyword" exists
-jsonpath "$[0].word" exists
-jsonpath "$[0].sim" exists
+jsonpath "$[0].Terme initiale" exists
+jsonpath "$[0].Mot similaire" exists
+jsonpath "$[0].Similarité" exists
