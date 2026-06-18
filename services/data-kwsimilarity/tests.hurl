@@ -32,8 +32,8 @@ delay: 40000
 HTTP 200
 Content-Type: application/json
 [Asserts]
-jsonpath "$[0]['Terme initiale']" exists
-jsonpath "$[0]['Mot similaire']" exists
+jsonpath "$[0]['Terme(s) de la requête initiale']" exists
+jsonpath "$[0]['Mots similaires']" exists
 jsonpath "$[0]['Similarité']" exists
 
 
@@ -66,8 +66,8 @@ delay: 40000
 HTTP 200
 Content-Type: application/json
 [Asserts]
-jsonpath "$[0]['Terme initiale']" exists
-jsonpath "$[0]['Mot similaire']" exists
+jsonpath "$[0]['Terme(s) de la requête initiale']" exists
+jsonpath "$[0]['Mots similaires']" exists
 jsonpath "$[0]['Similarité']" exists
 ##################################################################
 # v1/kw
@@ -98,6 +98,6 @@ delay: 40000
 HTTP 200
 Content-Type: application/json
 [Asserts]
-jsonpath "$[0]['Terme initiale']" exists
-jsonpath "$[0]['Mot similaire']" exists
+jsonpath "$[0]['Terme(s) de la requête initiale']" exists
+jsonpath "$[0]['Mots similaires']" exists
 jsonpath "$[0]['Similarité']" exists

@@ -229,15 +229,15 @@ for kw in cleaned_kw:
                 cleaned_kw = kw.replace("_", " ")
                 clean_word = word.replace("_", " ")
                 result.append({
-                        "Terme initiale": cleaned_kw,
-                        "Mot similaire": clean_word,
+                        "Terme(s) de la requête initiale": cleaned_kw,
+                        "Mots similaires": clean_word,
                         "Similarité": ponderation
                 })
     else :
         print(f"Keyword NOT found in model: {kw}", file=sys.stderr)
         result.append({
-                "Terme initiale": kw,
-                "Mot similaire": "Non trouvé dans le modèle",
+                "Terme(s) de la requête initiale": kw,
+                "Mots similaires": "Non trouvé dans le modèle",
                 "Similarité": "n/a"
             })
         pass
