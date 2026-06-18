@@ -17,11 +17,7 @@ def main(nameDepth = 20, worksDepth = 20):
         res = []
         for info in data['value'].copy():
             db = disambiguate(info,nameDepth=nameDepth, worksDepth=worksDepth )
-            result = db.disambiguation()
-            if len(result)>0:
-                res.append(result[0][0])
-            else:
-                res.append("None")
+            res.append(db.disambiguation())
         data["value"] = res
         sys.stdout.write(json.dumps(data))
         sys.stdout.write('\n')

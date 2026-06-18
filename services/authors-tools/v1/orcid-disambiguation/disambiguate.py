@@ -8,8 +8,12 @@ import sys
 from requests.auth import HTTPBasicAuth
 import os
 
+
 def getPoints(liste):
     return liste[2]
+
+def getSecondaryPoints(liste):
+    return liste[3]
 
 
 class disambiguate:
@@ -166,9 +170,13 @@ class disambiguate:
         return choice
         
     def checkEmail(self,email):
+        mails = []
         for em in self.infoDic["email"]:
-            if em == email:
-                return True,em
+            for mail in email.split(","):
+                if em == mail:
+                    mails.append(em)
+        if len(mails) > 0:
+            return True,mails
         return False,0
 
     def disambiguation(self):
@@ -183,7 +191,7 @@ class disambiguate:
             if "email" in self.infoDic: #check email
                 end,em = self.checkEmail(personInfos["email"])
                 if end:
-                    return [[orcid,["Email "+em],100]]
+                    return [[orcid,["Email "+em],100]][0][0]
 
             works = self.getWorksFromOrcid(orcid)
             time.sleep(self.timeBetweenrequest)
@@ -194,7 +202,7 @@ class disambiguate:
                     for tit in [title.lower() for title in worksInfo["title"]]:
                         ratio = SequenceMatcher(None, title.lower(), tit).ratio() #check similarity between title
                         if ratio > 0.7:
-                            return [[orcid,["title "+tit],100]]            
+                            return [[orcid,["title "+tit],100]][0][0]           
 
             if "coAuthors" in self.infoDic: #check coAuthors
                 authorsPutcode = []
@@ -206,7 +214,7 @@ class disambiguate:
                     choices = self.splitFirstName(author)
                     for choice in choices:
                         if choice in [auth.lower() for auth in authors]:
-                            return [[orcid,["Co-authors "+choice],100]]
+                            return [[orcid,["Co-authors "+choice],100]][0][0]
 
             if "affiliations" in self.infoDic: #check affiliations
                 for affiliation in self.infoDic["affiliations"]:
@@ -226,6 +234,7 @@ class disambiguate:
                     points += 5
                     matchArg.append("Match LastName ")                    
 
+            personInfos["secondaryScore"] = len(worksInfo["title"])
             personInfos["points"] = points
             personInfos["matchArg"] = matchArg    
 
@@ -233,7 +242,17 @@ class disambiguate:
         finalReturn = []
         for personInfos in personsInfos:
             if personInfos["points"] != 0:
-                finalReturn.append([personInfos["orcid"],personInfos["matchArg"],personInfos["points"]])
-
+                finalReturn.append([personInfos["orcid"],personInfos["matchArg"],
+                                    personInfos["points"], personInfos["secondaryScore"]])
+        #Better score first
         finalReturn.sort(key=getPoints,reverse=True)
-        return finalReturn
+        #if multiples sort based on secondary score
+        if len(finalReturn) == 0:
+            return "None"
+        max_score = finalReturn[0][2]
+        finalReturn = [t for t in finalReturn if t[2] == max_score]
+        if len(finalReturn) == 1:
+            return finalReturn[0][0]
+        else:
+            finalReturn.sort(key=getSecondaryPoints, reverse=True)
+            return [t[0] for t in finalReturn]
