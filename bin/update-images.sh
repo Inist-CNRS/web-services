@@ -53,7 +53,7 @@ function updateBase() {
     BASE_IMAGE_TAG="$BASE_IMAGE_TAG_BEGINNING-$BASE_IMAGE_VERSION"
     printf "Tag of the image: %s\n\n" "$BASE_IMAGE_TAG"
 
-    DOCKERFILES=$(ls bases/*/Dockerfile template/Dockerfile services/*/Dockerfile)
+    DOCKERFILES=$(ls bases/*/Dockerfile template*/Dockerfile services/*/Dockerfile)
 
 
     printf "Directly depending images:\n"
@@ -73,9 +73,9 @@ function updateBase() {
         run "sed -i -e \"s/cnrsinist\/$CHANGING_BASE:.*$/cnrsinist\/$CHANGING_BASE:$BASE_IMAGE_TAG/g\" \"$DOCKERFILE\""
         IMAGE_DIR=$(dirname "$DOCKERFILE")
         TYPE=$(dirname "$IMAGE_DIR")
-        if [ "$IMAGE_DIR" = "template" ]; then
-            run git add template
-            run "git commit -m \"Update template to $CHANGING_BASE:$BASE_IMAGE_TAG\""
+        if [ "$IMAGE_DIR" = "template" ] || [ "$IMAGE_DIR" = "template-async" ]; then
+            run git add "$IMAGE_DIR"
+            run "git commit -m \"Update $IMAGE_DIR to $CHANGING_BASE:$BASE_IMAGE_TAG\""
             run git push
         else
             run "npm -w \"$IMAGE_DIR\" version patch"
