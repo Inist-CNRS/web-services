@@ -293,7 +293,7 @@ def compare_pubinfo_refbiblio(item, ref_biblio):
     # Title
     title_score = compute_partial_ratio(clean_crossref_title(item["title"]), ref_biblio)
 
-    if title_score > 0.8:
+    if title_score > 0.85:
         items_score += 1
 
     # Check first author
@@ -306,7 +306,7 @@ def compare_pubinfo_refbiblio(item, ref_biblio):
         items_score += 1
 
     # Source
-    if compute_partial_ratio(item["source"]["source-short"], ref_biblio) > 0.8 or compute_partial_ratio(item["source"]["source-long"], ref_biblio) > 0.8 :
+    if compute_partial_ratio(item["source"]["source-short"], ref_biblio) > 0.85 or compute_partial_ratio(item["source"]["source-long"], ref_biblio) > 0.85 :
         items_score += 1
 
     try:
