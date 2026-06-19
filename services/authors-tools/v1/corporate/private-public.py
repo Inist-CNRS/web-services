@@ -8,16 +8,22 @@ from ratelimit import limits, RateLimitException
 from backoff import on_exception, expo
 
 # Filtrage par mot clé pour ne garder que l'essentiel
-def filter(affiliation) :
-    affiliation_lower = affiliation.lower()
-    adress = affiliation_lower.replace(",", "")
-    words = adress.split(" ")
-    private = ["sas", "sarl", "sa", "private", "edf", "orange"]
-    public = ["univ", "hop", "uar", "umr", "cea", "cnrs", "(cnrs)","(cea)","(univ"]
-    for word in words :
-        if word in private :
+private = {"sas", "sarl", "sa", "private", "edf", "orange"}
+public = (
+    "univ",       # univ, université, university, universidad...
+    "hop", "hôp", # hopital, hôpital
+    "hosp",       # hospital
+    "uar", "umr", "cea", "cnrs",
+    )
+
+def filter_affiliation(affiliation):
+    words = affiliation.lower().replace(",", "").split()
+    cleaned = [w.strip("().") for w in words]
+
+    for word in cleaned:
+        if word in private:
             return "private"
-        elif word in public :
+        if word.startswith(public):
             return "public"
     return None
 
@@ -71,20 +77,20 @@ def request(name, dept) :
 def is_private_public(information):
     if len(information)==0 or 'results' not in information or not information['results']:
         return None
-    # Parcourir chaque objet "results" extraire la valeur de "est_service_public"
-    est_service_public_list = []
+    # Parcourir chaque objet "results" extraire la valeur de "est_administration"
+    est_administration_list = []
     for result in information['results']:
         complements = result.get('complements')
-        est_service_public = complements.get('est_service_public', None)
-        if est_service_public is not None:
-            est_service_public_list.append(est_service_public)
-            if True in est_service_public_list :
+        est_administration = complements.get('est_administration', None)
+        if est_administration is not None:
+            est_administration_list.append(est_administration)
+            if True in est_administration_list :
                 return "public"
             return "private"
         
 # return est_service_public_list
 def public_or_private(affiliation,my_dict):
-    privatePublicOrAffiliation = filter(affiliation)
+    privatePublicOrAffiliation = filter_affiliation(affiliation)
     if privatePublicOrAffiliation in ["private", "public"]:
         enterprise = name_enterprise(affiliation)
         return {"organisme": enterprise, "statut": privatePublicOrAffiliation}
