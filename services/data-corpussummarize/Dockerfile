@@ -24,8 +24,6 @@ ENV NUMBA_CACHE_DIR=/tmp/numba_cache
 
 # Install all python dependencies
 RUN pip install --no-cache-dir --no-build-isolation \
-    --index-url https://download.pytorch.org/whl/cpu \
-    --extra-index-url https://pypi.org/simple \
     sentence-transformers==2.2.2 \
     huggingface_hub==0.23.2 \
     scikit-learn==1.4.1.post1 \

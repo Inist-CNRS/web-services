@@ -4,6 +4,7 @@
         "EZS_DESCRIPTION": "À partir d'un corpus de textes en anglais, ce web service génère automatiquement un résumé. La route à utiliser doit être adaptée en fonction de la nature des textes en entrée.",
         "EZS_METRICS": true,
         "EZS_CONCURRENCY": 2,
+        "EZS_PIPELINE_DELAY": 10800,
         "EZS_CONTINUE_DELAY": 60,
         "EZS_NSHARDS": 32,
         "EZS_CACHE": true,
