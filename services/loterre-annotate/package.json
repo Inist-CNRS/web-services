@@ -1,7 +1,7 @@
 {
   "private": true,
-  "name": "loterre-annotate",
-  "version": "2.0.2",
+  "name": "ws-loterre-annotate",
+  "version": "2.0.3",
   "description": "Annotation terminologique de textes par les vocabulaires Loterre (moteur v1)",
   "repository": {
     "type": "git",
