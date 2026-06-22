@@ -3,7 +3,7 @@
     "info": {
         "title": "data-kwsimilarity - Extrait les termes sémantiquement proches d'un ou plusieurs mots-clés.",
         "description": "Dans un corpus constitué à partir d’un ou plusieurs mots-clés, extrait les termes qui leur sont sémantiquement proches.",
-        "version": "3.1.0",
+        "version": "4.0.0",
         "termsOfService": "https://services.istex.fr/",
         "contact": {
             "name": "Inist-CNRS",
@@ -15,7 +15,7 @@
             "x-comment": "Will be automatically completed by the ezs server."
         },
         {
-            "url": "http://vptdmjobs.intra.inist.fr:49267/",
+            "url": "http://vptdmjobs.intra.inist.fr:49272/",
             "description": "Latest version for production",
             "x-profil": "Standard"
         }

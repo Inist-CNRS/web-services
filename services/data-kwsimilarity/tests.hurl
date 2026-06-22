@@ -32,11 +32,9 @@ delay: 40000
 HTTP 200
 Content-Type: application/json
 [Asserts]
-jsonpath "$[0].autism" exists
-jsonpath "$[0].autism.[0].word" exists
-jsonpath "$[0].autism.[0].sim" exists
-jsonpath "$[0].autism.[0].tfidf" exists
-jsonpath "$[0].autism.[0].ponderation" exists
+jsonpath "$[0]['Termes_requete_initiale']" exists
+jsonpath "$[0]['Mots_similaires']" exists
+jsonpath "$[0]['Score']" exists
 
 
 ##################################################################
@@ -68,24 +66,9 @@ delay: 40000
 HTTP 200
 Content-Type: application/json
 [Asserts]
-jsonpath "$[0].dog" exists
-jsonpath "$[0].dog.[0].word" exists
-jsonpath "$[0].dog.[0].sim" exists
-jsonpath "$[0].dog.[0].tfidf" exists
-jsonpath "$[0].dog.[0].ponderation" exists
-
-
-jsonpath "$[0].cat" exists
-jsonpath "$[0].cat.[0].word" exists
-jsonpath "$[0].cat.[0].sim" exists
-jsonpath "$[0].cat.[0].tfidf" exists
-jsonpath "$[0].cat.[0].ponderation" exists
-
-
-jsonpath "$[0].chicken" exists
-jsonpath "$[0].chicken.[0].word" exists
-
-
+jsonpath "$[0]['Termes_requete_initiale']" exists
+jsonpath "$[0]['Mots_similaires']" exists
+jsonpath "$[0]['Score']" exists
 ##################################################################
 # v1/kw
 POST {{host}}/v1/kw
@@ -115,8 +98,6 @@ delay: 40000
 HTTP 200
 Content-Type: application/json
 [Asserts]
-jsonpath "$[0].sign_language" exists
-jsonpath "$[0].sign_language.[0].word" exists
-jsonpath "$[0].sign_language.[0].sim" exists
-jsonpath "$[0].sign_language.[0].tfidf" exists
-jsonpath "$[0].sign_language.[0].ponderation" exists
+jsonpath "$[0]['Termes_requete_initiale']" exists
+jsonpath "$[0]['Mots_similaires']" exists
+jsonpath "$[0]['Score']" exists
