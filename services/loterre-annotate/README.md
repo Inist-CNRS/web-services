@@ -6,7 +6,7 @@
 
 #### URL du service
 
-> https://loterre-annotate.services.istex.fr/v1/CODE_LANGUE/loterre-annotate/annotate?loterreID=CODE_VOC
+> https://loterre-annotate.2.0.1/v1/CODE_LANGUE/loterre-annotate/2.0.1?loterreID=CODE_VOC
 
 Avec  **CODE_LANGUE** = la langue du texte;  2 langues disponibles `fr` | `en`
 
@@ -47,7 +47,7 @@ Un tableau JSON de même taille. Pour chaque document :
 ### Requête
 
 ```bash
-curl -X POST 'https://loterre-annotate.services.istex.fr/v1/en/loterre-annotate/annotate?loterreID=P66' \
+curl -X POST 'https://loterre-annotate.2.0.1/v1/en/loterre-annotate/2.0.1?loterreID=P66' \
   -H 'Content-Type: application/json' \
   --data '[
     {"id": "1", "value": "The Mem-Pro-Clinic test is a clinical test to assess difficulties in event- and time-based prospective thoughts. This result implies that activated long-term memory provides a representational basis for semantic verbal short-term signal."},
