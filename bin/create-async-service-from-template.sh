@@ -1,26 +1,27 @@
 #!/usr/bin/env bash
 
-# Usage: bin/create-service-from-template.sh <service-name>
+# Usage: bin/create-service-from-template.sh <servicename>
 set -euo pipefail
 
-if [ ! -d "template" ]; then
-    echo "Could not find directory template"
+if [ ! -d "template-async" ]; then
+    echo "Could not find directory template-async"
     exit 1
 fi
 
-SERVICE_NAME=$1
+SECOND_PART=$1
+SERVICE_NAME=data-$SECOND_PART
 
 if [ -d "services/$SERVICE_NAME" ]; then
     echo "Service $SERVICE_NAME already exists"
     exit 2
 fi
 
-if ! [[ $SERVICE_NAME =~ ^[a-z][a-z0-9]*-[a-z][a-z0-9]*$ ]]; then
-    echo "Error: Service name must comply with the pattern (two alphanumeric parts separated by a dash)."
+if ! [[ $SERVICE_NAME =~ ^data-[a-z][a-z0-9]*$ ]]; then
+    echo "Error: Service name must comply with the pattern (first part: \"data-\", followed with an alphanumeric part, don't include \"data-\" part)."
     exit 3
 fi
 
-printf "Creating service ""%s"" from template\n\n" "$SERVICE_NAME"
+printf "Creating service ""%s"" from template-async\n\n" "$SERVICE_NAME"
 
 printf "Short description: "
 read -r SHORT_DESCRIPTION
@@ -34,11 +35,11 @@ read -r AUTHOR_NAME
 printf "Author email: "
 read -r AUTHOR_EMAIL
 
-echo -ne "Copying template...    \r"
+echo -ne "Copying template-async...    \r"
 
-cp -r template "services/$SERVICE_NAME"
+cp -r template-async "services/$SERVICE_NAME"
 
-echo -ne "Customizing service... \r"
+echo -ne "Customizing service...       \r"
 
 for FILE in services/"$SERVICE_NAME"/* services/"$SERVICE_NAME"/.env; do
     if [ -f "$FILE" ]; then
@@ -51,7 +52,7 @@ for FILE in services/"$SERVICE_NAME"/* services/"$SERVICE_NAME"/.env; do
 done
 
 # Add service to workspaces in package.json
-echo -ne "Adding workspace...    \r"
+echo -ne "Adding workspace...          \r"
 
 node <<EOF
 const packageJson = require('./package.json');
@@ -65,7 +66,7 @@ packageJson.workspaces = (packageJson.workspaces ?? [])
 
 require('fs').writeFileSync(
     './package.json',
-    JSON.stringify(packageJson, null, 2)
+     JSON.stringify(packageJson, null, 2)
 )
 EOF
 
@@ -92,4 +93,4 @@ mv README.md README.back
 mv README.tmp README.md
 rm README.back
 
-echo -e "\rDone                    "
+echo -e "\rDone                        "

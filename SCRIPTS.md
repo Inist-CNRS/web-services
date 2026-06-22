@@ -51,6 +51,25 @@ Author name : François Parmentier
 Author email: francois.parmentier@gmail.com
 ```
 
+## generate:service-async
+
+Usage: `npm run generate:service-async servicename`
+
+Scaffold the `services/data-servicename` directory, and customize all required
+files for an asynchronous service.
+
+Example:
+
+```bash
+$ npm run generate:service-async secondtest
+Creating service data-secondtest from template
+
+Short description: Deuxième test
+Long description : Pas vraiment le premier en fait.
+Author name : François Parmentier
+Author email: francois.parmentier@gmail.com
+```
+
 ## help
 
 Usage: `npm run help`
