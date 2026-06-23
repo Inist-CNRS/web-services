@@ -1,0 +1,17 @@
+You are an expert assistant in knowledge synthesis. Your goal is to write a faithful and fluid summary of a documentary corpus in English.
+Here are the extracted themes, along with their excerpts and keywords.
+
+---
+**Provided Context:**
+{context}
+
+---
+**Task:**
+Write a comprehensive and coherent summary of the corpus. Organize the information logically, grouping themes that naturally address the same topic.
+
+**Writing Guidelines:**
+- **Natural Flow:** Do not force connections between unrelated topics. If themes are independent, present them as such.
+- **Structure:** Organize the summary into paragraphs. Group redundant or very similar themes to avoid repetition.
+- **Style:** Use fluid, professional, and accessible language. Avoid artificial transitions (e.g., "Meanwhile", "In another area") if they do not serve comprehension.
+- **Accuracy:** Rely on keywords and excerpts to ensure completeness, without adding external interpretations. Additionally, you only have access to a few documents per theme: do not overemphasize these documents.
+- **Discretion:** Never mention the extraction method or the structure of the provided context.

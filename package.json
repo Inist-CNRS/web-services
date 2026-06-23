@@ -52,6 +52,7 @@
     "services/chem-ner",
     "services/coara-tools",
     "services/data-computer",
+    "services/data-corpussummarize",
     "services/data-geonames",
     "services/data-graph",
     "services/data-homogenise",
