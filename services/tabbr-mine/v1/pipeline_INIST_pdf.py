@@ -2,10 +2,10 @@
 # -*- coding: utf-8 -*-
 
 # Pipeline to extract tortured abbreviations from suspect scientific articles.
-# Developped using the following (unziped) dataset: ../Datasets/PPS/dec_2022_dataset/formatted_data.zip.
-# @uthors: Alexandre Clausse, Guillaume Cabanac, Pascal Cuxac, and Cyril Labbé
+# Developed using the following (unzipped) dataset: ../Datasets/PPS/dec_2022_dataset/formatted_data.zip.
+# @authors: Alexandre Clausse, Guillaume Cabanac, Pascal Cuxac, and Cyril Labbé
 # @since: 2023
-# @version: 5-NOV-2025 -- Pipeline for INIST web service
+# @version: 17-JUN-2026 -- Filtering out mathematic formulas, ignoring abbreviations formatted as citations/ORCID
 
 # Requirements: pip3 install transformers==4.51.3 pandas==1.5.0 torch==2.7.1 accelerate==1.8.1 requests==2.32.3 beautifulsoup4==4.12.3 lxml==5.2.2
 # Model download: hf download allenai/scibert_scivocab_uncased --local-dir scibert_model
@@ -18,7 +18,12 @@ import pandas as pd
 import torch
 import requests
 
-import os, io, re, json, gc, sys
+import os
+import io
+import re
+import json
+import gc
+import sys
 
 
 # Class to standardize text data
@@ -29,14 +34,19 @@ class ContentProcessor:
         pass
 
     # Method to extract text from PDF
-    def extract_text(self, pdf_fn: str) -> str:
+    def extract_text(self, pdf_fn: str, tag: str = "p") -> str:
         with io.open(pdf_fn, "rb") as fd:
             files = {"input": (pdf_fn, fd, "application/pdf")}
             try:
                 response = requests.post(os.getenv("GROBID_API_URL"), files=files)
                 if response.status_code == 200:
                     tei_xml = BeautifulSoup(response.text, "xml")
-                    return "\n".join([e.text for e in tei_xml.findAll("p")])
+                    content = list()
+                    for e in tei_xml.findAll(tag):
+                        for ee in e.findAll("formula"):
+                            ee.extract()
+                        content.append(e.text)
+                    return "\n".join(content)
                 else:
                     print(
                         "Grobid API error %s" % str(response.status_code),
@@ -100,6 +110,8 @@ class ContentProcessor:
         if "_" in abbreviation[1:-1]:
             return None
         if len(abbreviation[1:-1]) == 1:
+            return None
+        if len(re.findall(r"\([\d-]+\)", abbreviation)) > 1:
             return None
         return abbreviation
 

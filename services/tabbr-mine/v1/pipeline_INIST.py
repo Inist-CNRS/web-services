@@ -5,7 +5,7 @@
 # Developped using the following (unziped) dataset: ../Datasets/PPS/dec_2022_dataset/formatted_data.zip.
 # @uthors: Alexandre Clausse, Guillaume Cabanac, Pascal Cuxac, and Cyril Labbé
 # @since: 2023
-# @version: 4-NOV-2025 -- Pipeline for INIST web service
+# @version: 17-JUN-2026 -- Ignoring abbreviations formatted as citations/ORCID
 
 # Requirements: pip3 install transformers==4.51.3 pandas==1.5.0 torch==2.7.1 accelerate==1.8.1
 # Model download: hf download allenai/scibert_scivocab_uncased --local-dir scibert_model
@@ -16,7 +16,10 @@ from transformers.utils.logging import disable_progress_bar
 import pandas as pd
 import torch
 
-import os, io, re, json, gc, sys
+import re
+import json
+import gc
+import sys
 
 
 # Class to standardize text data
@@ -80,6 +83,8 @@ class ContentProcessor:
         if "_" in abbreviation[1:-1]:
             return None
         if len(abbreviation[1:-1]) == 1:
+            return None
+        if len(re.findall(r"\([\d-]+\)", abbreviation)) > 1:
             return None
         return abbreviation
 
