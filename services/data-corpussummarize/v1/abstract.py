@@ -62,7 +62,9 @@ def find_optimal_k(features, max_k):
     sil_scores_norm = (silhouette_scores - np.min(silhouette_scores)) / (np.max(silhouette_scores) - np.min(silhouette_scores))
     db_scores_norm = (davies_scores - np.min(davies_scores)) / (np.max(davies_scores) - np.min(davies_scores))
 
-    # Compute a combined metric (0.5 and 0.5 to test and adjust after )
+    # db_scores_norm : 0 is the best score and 1 the worst
+    # for sil_scores_norm, 1 is the best score and 0 the worst
+
     combined_scores = 0.5 * sil_scores_norm - 0.5 * db_scores_norm
 
     optimal_index = np.argmax(combined_scores)
