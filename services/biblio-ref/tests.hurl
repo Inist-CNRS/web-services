@@ -87,10 +87,10 @@ HTTP 200
 [{
     "value": [
         {
-            "doi": "10.3115/1614164",
-            "status": "found",
+            "doi": "",
+            "status": "not_found",
             "reference": "Akbik, A., T. Bergmann, D. Blythe, K. Rasul, S. Schweter, et R. Vollgraf (2019). FLAIR : An easy-to-use framework for state-of-the-art NLP. In NAACL 2019, 2019 Annual Conference of the North American Chapter of the Association for Computational Linguistics (Demons- trations), pp. 54-59.",
-            "reference_found": "FROM CROSSREF >  (2007). Proceedings of Human Language Technologies: The Annual Conference of the North American Chapter of the Association for Computational Linguistics: Demonstrations on XX - NAACL '07. Human Language Technologies: The Annual Conference of the North American Chapter of the Association for Computational Linguistics: Demonstrations. 10.3115/1614164.",
+            "reference_found": "",
             "url_pdf": "https://cnrs.hal.science/hal-04461354/file/anki-gaillard-revol.pdf"
         },
         {
