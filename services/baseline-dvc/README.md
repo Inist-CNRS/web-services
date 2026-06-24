@@ -1,4 +1,4 @@
-# ws-baseline-dvc@1.0.0
+# ws-baseline-dvc@1.0.1
 
 Test avec utilisation de DVC
 
