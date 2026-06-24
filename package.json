@@ -47,6 +47,7 @@
     "services/authors-tools",
     "services/base-line",
     "services/base-line-python",
+    "services/baseline-dvc",
     "services/biblio-ref",
     "services/biblio-tools",
     "services/chem-ner",
