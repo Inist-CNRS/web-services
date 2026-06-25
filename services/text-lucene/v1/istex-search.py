@@ -6,6 +6,7 @@ import json
 import sys
 import os
 import time
+import datetime
 
 api_key = os.getenv("ILAAS_API_KEY")
 model = "gemma-4-31b"
@@ -84,7 +85,8 @@ def main():
             user_prompt["value"] = output
 
         except Exception as e:
-            sys.stderr.write(f"Unexpected error: {str(e)}")
+            date_error = datetime.datetime.fromtimestamp(time.time()).strftime('%Y-%m-%d %H:%M:%S')
+            sys.stderr.write(f"{date_error} - Unexpected error: {str(e)}")
             sys.stderr.write("\n")
             user_prompt["value"] = ""
         sys.stdout.write(json.dumps(user_prompt))
