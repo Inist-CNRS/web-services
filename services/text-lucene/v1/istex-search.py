@@ -28,7 +28,7 @@ def generate_lucene(prompt: str, model_name: str) -> str:
         "model": model_name,
         "messages": [{"role": "user", "content": f"{prompt}"}],
         "stream": False,
-        "max_tokens": 4096
+        "max_completion_tokens": 12288
     }
     response = requests.post(
         f"{base_url}/chat/completions",
