@@ -173,7 +173,7 @@ def call_llm_prompt(message: str, model_name: str = "gemma-4-31b", timeout: int 
         "model": model_name,
         "messages": messages,
         "stream": False,
-        "max_tokens": 10000
+        "max_completion_tokens": 12288
     }
     for attempt in range(retries):
         try:
