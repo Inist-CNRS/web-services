@@ -17,7 +17,8 @@
         },
         {
             "url": "http://vptermsuite.intra.inist.fr:49184/",
-            "description": "Service de production"
+            "description": "Service de production",
+            "x-profil": "Standard"
         }
     ],
     "tags": [
