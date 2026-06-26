@@ -1,0 +1,28 @@
+# Fichiers de développement — exclus du contexte Docker de production
+Dockerfile*
+.dockerignore*
+*.md
+*.http
+*.hurl
+*.sh
+package.json
+package-lock.json
+node_modules/
+data.dvc
+.env
+test/
+
+# Sources locales (installées depuis GitHub dans le Dockerfile)
+src/
+resources/
+configs/
+requirements.txt
+
+# Dictionnaire local (provient du remote DVC dans le Dockerfile)
+dictionary/
+
+# Artefacts de build Python
+dist/
+build/
+*.egg-info/
+__pycache__/

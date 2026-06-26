@@ -70,6 +70,7 @@
     "services/hal-classifier",
     "services/hiddentext-detect",
     "services/irc3-species",
+    "services/loterre-annotate",
     "services/loterre-resolvers",
     "services/ner-tagger",
     "services/nlp-tools2",

@@ -1,0 +1,6 @@
+outs:
+- md5: 67af25612dc87b1e874b75d44e0279ac.dir
+  size: 242798517
+  nfiles: 126
+  hash: md5
+  path: dictionary
