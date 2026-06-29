@@ -56,9 +56,18 @@ def uniformize(text):
     text = remove_accents(text)  # if text is not a string, it's return ""
 
     # remove punctuation
-    text = "".join(char if char.isalpha() else " " for char in text)
+    text = "".join(char if char.isalnum() else " " for char in text)
 
     return " ".join(text.lower().split())
+
+
+def extract_year_from_ref(ref_biblio):
+    """
+    Extrait la date d'une référence bibliographique par regex
+    """
+    year_match = re.search(r"(19|20)\d{2}", ref_biblio)
+    
+    return year_match.group(0) if year_match else None
 
 
 # DOI funtions
@@ -143,7 +152,7 @@ def get_title_authors_doi_source_date(message):
             if field in message and "date-parts" in message[field]:
                 date_parts = message[field]["date-parts"]
                 if date_parts and isinstance(date_parts[0], list) and date_parts[0]:
-                    date = str(date_parts[0][0])  # Année uniquement
+                    date = str(date_parts[0][0]).replace(" ","")  # Année uniquement
                     break
     except Exception:
         date = ""
@@ -292,24 +301,39 @@ def compare_pubinfo_refbiblio(item, ref_biblio):
         string
     """
     items_score = 0
+    potential_different_content = {}
+    
     # Title
     title_score = compute_partial_ratio(clean_crossref_title(item["title"]), ref_biblio)
 
     if title_score > title_match_threshold:
         items_score += 1
+    else:
+        potential_different_content["title"] = item["title"]
 
     # Check first author
     first_author = uniformize(item["first_author_name"])
     if first_author and first_author in ref_biblio:
         items_score += 1
-
+    else:
+        potential_different_content["first_author_name"] = item["first_author_name"]
+        
     # Date
-    if item["date"] and item["date"] in ref_biblio:
-        items_score += 1
+    ref_year = extract_year_from_ref(ref_biblio)
 
+    if item["date"] and item["date"] == ref_year:
+        items_score += 1
+    else:
+        potential_different_content["date"] = item["date"]
+        
     # Source
     if compute_partial_ratio(item["source"]["source-short"], ref_biblio) > source_match_threshold or compute_partial_ratio(item["source"]["source-long"], ref_biblio) > source_match_threshold :
         items_score += 1
+    else:
+        if len(item["source"]["source-long"]) > 0:
+            potential_different_content["source"]=item["source"]["source-long"]
+        elif len(item["source"]["source-short"]) > 0:
+            potential_different_content["source"]=item["source"]["source-short"]
 
     try:
         doi = item["doi"].lower()
@@ -317,7 +341,7 @@ def compare_pubinfo_refbiblio(item, ref_biblio):
         sys.stderr.write("cant lower doi")
         doi = ""
 
-    return items_score, title_score, doi
+    return items_score, title_score, doi, potential_different_content
 
 
 # This is the function to update if you want stronger or weaker criteria
@@ -348,11 +372,11 @@ def verify_biblio_without_doi(ref_biblio, headers=crossref_headers, wrong_doi=Fa
             item_info = get_title_authors_doi_source_date(item)
 
             # compare pub_info with ref_biblio
-            match_items_score, title_score, doi = compare_pubinfo_refbiblio(item_info, ref_biblio)
+            match_items_score, title_score, doi, potential_different_content = compare_pubinfo_refbiblio(item_info, ref_biblio)
 
             # Matches criteria when there is no doi in the reference
             if match_items_score >= 3:
-                return "found", doi, item_info
+                return "found", doi, item_info, potential_different_content
 
             # if doi is wrong
             if wrong_doi:
@@ -367,24 +391,24 @@ def verify_biblio_without_doi(ref_biblio, headers=crossref_headers, wrong_doi=Fa
                 continue
 
             if match_items_score == 2 and title_score > 0.98:
-                return "found", doi, item_info
+                return "found", doi, item_info, potential_different_content
 
             # Here match_items_score =/= title that's why it's 2 either
             if match_items_score == 2 and 0.6 < title_score < 0.9:
-                return "found", doi, item_info
+                return "found", doi, item_info, potential_different_content
 
         if wrong_doi:
-            return "to_be_verified", "", {"raw_ref": ""}
+            return "to_be_verified", "", {"raw_ref": ""}, {}
 
         if hallucinated:
-            return "to_be_verified", "", most_similar_publicsation_items_info
+            return "to_be_verified", "", most_similar_publicsation_items_info, {}
 
         else:
-            return "not_found", "", {"raw_ref": ""}
+            return "not_found", "", {"raw_ref": ""}, {}
 
     except Exception as e:
         sys.stderr.write("Error in verify_biblio function : "+str(e)+"\n")
-        return "error_service", "", {"raw_ref": ""}
+        return "error_service", "", {"raw_ref": ""}, {}
 
 
 def process_crossref_doi(doi, raw_ref):
@@ -541,7 +565,7 @@ def process_metadore_doi(doi, raw_ref):
         raw_ref (str): the raw reference
     """
     doi = doi.strip(".")
-    metadore_status_code, others_biblio_info = verify_doi_metadore(doi)  # Verify doi using crossref api
+    metadore_status_code, others_biblio_info = verify_doi_metadore(doi)  # Verify doi using metadore api
 
     # # If doi isn't found, try to delete \n
     if metadore_status_code == 404:
@@ -574,7 +598,7 @@ def biblio_ref(ref_biblio, retracted_doi=retracted_doi):
     reference_found = ""
     # check types
     if not isinstance(ref_biblio, str):
-        return {"doi": "", "status": "error_data", "reference_found": reference_found}
+        return {"doi": "", "status": "error_data", "reference_found": reference_found, "mismatches_detected": {}}
 
     doi = find_doi(ref_biblio)
     save_ref_biblio = ref_biblio
@@ -589,24 +613,25 @@ def biblio_ref(ref_biblio, retracted_doi=retracted_doi):
 
         # # If DOI exists
         if crossref_status_code==200:
+            potential_different_content = {}
             status = "found"
             reference_found = others_biblio_info["raw_ref"]
 
-            # # # Can be retracted
-            if doi in retracted_doi:
-                return {"doi": doi, "status": "retracted", "reference_found": reference_found}
-
             # # # can be hallucinated
             if len(doi)*1.5 < len(ref_biblio): 
-                match_items_score, title_score, doi = compare_pubinfo_refbiblio(others_biblio_info, ref_biblio)
+                match_items_score, title_score, doi, potential_different_content = compare_pubinfo_refbiblio(others_biblio_info, ref_biblio)
 
                 if match_items_score < 3:
                     if title_score < 0.7:
                         # We return "REFERENCE ASSOCIATED WITH THE DOI FROM CROSSREF >" when we suspect an hallucination
                         reference_found = "REFERENCE ASSOCIATED WITH THE DOI " + reference_found
-                        return {"doi": "", "status": "to_be_verified", "reference_found": reference_found}
+                        return {"doi": "", "status": "to_be_verified", "reference_found": reference_found, "mismatches_detected": {}}
 
-            return {"doi": doi, "status": status, "reference_found": reference_found}
+            ### Can be retracted
+            if doi in retracted_doi:
+                return {"doi": doi, "status": "retracted", "reference_found": reference_found, "mismatches_detected": potential_different_content}
+
+            return {"doi": doi, "status": status, "reference_found": reference_found, "mismatches_detected": potential_different_content}
 
         # # If DOI doesn't exist
         elif crossref_status_code == 404:
@@ -616,48 +641,51 @@ def biblio_ref(ref_biblio, retracted_doi=retracted_doi):
             if metadore_status_code == 200:
                 status = "found"
                 reference_found = others_biblio_info["raw_ref"]
+                potential_different_content = {}
 
-                # # # Can be retracted
-                if doi in retracted_doi:
-                    return {"doi": doi, "status": "retracted", "reference_found": reference_found}
 
                 # # # can be hallucinated
                 if len(doi)*1.5 < len(ref_biblio): 
-                    match_items_score, title_score, doi = compare_pubinfo_refbiblio(others_biblio_info, ref_biblio)
+                    match_items_score, title_score, doi, potential_different_content = compare_pubinfo_refbiblio(others_biblio_info, ref_biblio)
 
                     if match_items_score < 3:
                         if title_score < 0.7:
                             # We return "REFERENCE ASSOCIATED WITH THE DOI FROM DATACITE >" when we suspect an hallucination
                             reference_found = "REFERENCE ASSOCIATED WITH THE DOI " + reference_found
-                            return {"doi": "", "status": "to_be_verified", "reference_found": reference_found}
+                            return {"doi": "", "status": "to_be_verified", "reference_found": reference_found, "mismatches_detected": potential_different_content}
 
-                return {"doi": doi, "status": status, "reference_found": reference_found}
+                ### Can be retracted
+                if doi in retracted_doi:
+                    return {"doi": doi, "status": "retracted", "reference_found": reference_found, "mismatches_detected": potential_different_content}
 
-            status, doi, others_biblio_info = verify_biblio_without_doi(ref_biblio, wrong_doi=True)
+                return {"doi": doi, "status": status, "reference_found": reference_found, "mismatches_detected": {}}
+
+            status, doi, others_biblio_info, potential_different_content = verify_biblio_without_doi(ref_biblio, wrong_doi=True)
             reference_found = others_biblio_info["raw_ref"]
 
             # # # Can be retracted
             if doi in retracted_doi:
-
-                return {"doi": doi, "status": "retracted", "reference_found": reference_found}
+                return {"doi": doi, "status": "retracted", "reference_found": reference_found, "mismatches_detected": potential_different_content}
 
             # # # can't be not found : there is a doi. Should be on Crossref or DataCite.
             if status == "not_found":
-                return {"doi": "", "status": "to_be_verified", "reference_found": ""}
+                return {"doi": "", "status": "to_be_verified", "reference_found": "", "mismatches_detected":{}}
 
-            return {"doi": doi, "status": status, "reference_found": reference_found}
+            return {"doi": doi, "status": status, "reference_found": reference_found, "mismatches_detected":potential_different_content}
 
         # # # for others errors
         else:
             sys.stderr.write("DOI requests failed. Crossref status code :" + str(crossref_status_code) + "\n")
-            return {"doi": "", "status": "error_service", "reference_found": ""}
+            return {"doi": "", "status": "error_service", "reference_found": "", "mismatches_detected": {}}
 
     # second case : no doi is found
     else:
-        status, doi, others_biblio_info = verify_biblio_without_doi(ref_biblio)
+        status, doi, others_biblio_info, potential_different_content = verify_biblio_without_doi(ref_biblio)
         reference_found = others_biblio_info["raw_ref"]
         # # # Can be retracted
         if doi in retracted_doi:
-            return {"doi": doi, "status": "retracted", "reference_found": reference_found}
+            return {"doi": doi, "status": "retracted", "reference_found": reference_found, "mismatches_detected": potential_different_content}
 
-        return {"doi": doi, "status": status, "reference_found": reference_found}
+        if status != "found":
+            potential_different_content = {}
+        return {"doi": doi, "status": status, "reference_found": reference_found, "mismatches_detected": potential_different_content}
