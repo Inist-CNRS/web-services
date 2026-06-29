@@ -7,6 +7,8 @@ import sys
 import pandas as pd
 from rapidfuzz import process, fuzz
 import os
+import time
+
 
 debug = False
 
@@ -17,8 +19,11 @@ def print_log(text):
 if debug:
     print_log("-------------DEBUG LOG---------------")
 
-api_key = os.getenv("ILAAS_API_KEY")
-model_name = "gpt-oss-120b"
+API_KEY= os.getenv("ILAAS_API_KEY")
+MODEL_NAME = "gemma-4-31b"
+MAX_RETRIES = 4
+RETRY_DELAY = 2
+
 
 def normalize_name(name):
     # Supprimer les espaces début/fin
@@ -35,27 +40,30 @@ def normalize_name(name):
 def call_llm(prompt: str) -> str:
     base_url = "https://llm.ilaas.fr/v1"
     headers = {
-        "Authorization": f"Bearer {api_key}",
+        "Authorization": f"Bearer {API_KEY}",
         "Content-Type": "application/json"
     }
-    response = requests.get(f"{base_url}/models", 
-                            headers=headers)
+
     payload = {
-        "model": model_name,
+        "model": MODEL_NAME,
         "messages": [{"role": "user", "content": f"{prompt}"}],
         "stream": False,
         "max_tokens": 10000
     }
-    try:
-        response = requests.post(f"{base_url}/chat/completions", 
-                                headers=headers, json=payload)
-        result = response.json()
-        print_log("LLM result call : " + result['choices'][0]['message']['content'])
-        print_log(result['choices'][0]['message'].get('reasoning_content', None))
-        return result['choices'][0]['message']['content']
-    except: 
-        print_log("Error while calling LLM")
-        return "Error"
+    for attempt in range(1, MAX_RETRIES + 1):
+        try:
+            response = requests.post(f"{base_url}/chat/completions",
+                                     headers=headers, json=payload)
+            result = response.json()
+            print_log("LLM result call : " + result['choices'][0]['message']['content'])
+            print_log(result['choices'][0]['message'].get('reasoning_content', None))
+            return result['choices'][0]['message']['content']
+        except:
+            print_log(f"Error while calling LLM (attempt {attempt}/{MAX_RETRIES})")
+            if attempt == MAX_RETRIES:
+                return "Error"
+            time.sleep(RETRY_DELAY*attempt)
+            print_log("Sleeping " + str(RETRY_DELAY*attempt))
 
 def charger_prompts(chemin: str) -> dict:
     with open(chemin, "r", encoding="utf-8") as f:
@@ -211,6 +219,7 @@ def remove_hallucinate(list_ans, df_filtered):
         if str(id_ans) not in df_filtered["geonameid"].tolist():
             #Hallucination
             list_ans_final.remove(id_ans)
+            print_log("ID:", str(id_ans)," was removed because hallucinated and not from the propositions")
     return ["https://www.geonames.org/"+str(x) for x in list_ans_final]
 
 
