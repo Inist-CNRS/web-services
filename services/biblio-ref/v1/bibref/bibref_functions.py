@@ -6,7 +6,10 @@ import pickle
 import os
 import sys
 import urllib.parse
-
+import datetime
+import time
+            
+            
 CROSSREF_TOKEN = os.getenv("CROSSREF_API_KEY")
 METADORE_TOKEN = os.getenv("METADORE_API_KEY")
 METADORE_URL = os.getenv("METADORE_URL")
@@ -26,6 +29,11 @@ source_match_threshold = 0.84
 # get a list of retracted DOIs
 with open("v1/annulled.pickle", "rb") as file:
     retracted_doi = pickle.load(file)
+
+
+def write_in_logs(message):
+    date_error = datetime.datetime.fromtimestamp(time.time()).strftime('%Y-%m-%d %H:%M:%S')
+    sys.stderr.write(f"{date_error}: {message}\n")
 
 
 def remove_accents(text):
@@ -233,7 +241,7 @@ def verify_doi_crossref(doi, headers=crossref_headers):
         response = session_crossref.get(url, headers=headers)
         status_code = response.status_code
     except Exception as e:
-        sys.stderr.write("Error while checking DOI : " + str(e) + "\n")
+        write_in_logs("Error while checking DOI : " + str(e))
         return (503, None)  # if there is an unexpected error from crossref
 
     if status_code != 200:
@@ -245,7 +253,7 @@ def verify_doi_crossref(doi, headers=crossref_headers):
         return (response.status_code, others_biblio_info)
 
     except Exception as e:
-        sys.stderr.write("Error while processing crossref response : " + str(e) + "\n")
+        write_in_logs("Error while processing crossref response : " + str(e))
         return (503, None)  # if there is an unexpected error from crossref
 
 
@@ -338,7 +346,7 @@ def compare_pubinfo_refbiblio(item, ref_biblio):
     try:
         doi = item["doi"].lower()
     except Exception:
-        sys.stderr.write("cant lower doi")
+        write_in_logs("Can't lower doi")
         doi = ""
 
     return items_score, title_score, doi, potential_different_content
@@ -407,7 +415,7 @@ def verify_biblio_without_doi(ref_biblio, headers=crossref_headers, wrong_doi=Fa
             return "not_found", "", {"raw_ref": ""}, {}
 
     except Exception as e:
-        sys.stderr.write("Error in verify_biblio function : "+str(e)+"\n")
+        write_in_logs("Error in verify_biblio function : " + str(e))
         return "error_service", "", {"raw_ref": ""}, {}
 
 
@@ -423,7 +431,7 @@ def process_crossref_doi(doi, raw_ref):
 
     # # If doi isn't found, try to delete \n
     if crossref_status_code == 404:
-        doi = find_doi(raw_ref, delete_line_break=False)
+        doi = find_doi(raw_ref, delete_line_break=False, process_deleted_underscore=False)
         if not doi:
             crossref_status_code = 404
         else:
@@ -432,7 +440,7 @@ def process_crossref_doi(doi, raw_ref):
 
     # # If doi isn't found, try to process supressed "_"
     if crossref_status_code == 404:
-        doi = find_doi(raw_ref, process_deleted_underscore=True)
+        doi = find_doi(raw_ref, delete_line_break=False, process_deleted_underscore=True)
         if not doi:
             crossref_status_code = 404
         else:
@@ -539,7 +547,7 @@ def verify_doi_metadore(doi, headers=metadore_headers):
         response = session_metadore.get(url, headers=headers)
         status_code = response.status_code
     except Exception as e:
-        sys.stderr.write("Error while checking DOI on metadore : "+str(e)+ "\n")
+        write_in_logs("Error while checking DOI on metadore : " + str(e))
         return (503, None)  # if there is an unexpected error from metadore
 
     if status_code != 200:
@@ -553,7 +561,7 @@ def verify_doi_metadore(doi, headers=metadore_headers):
         return (response.status_code, others_biblio_info)
 
     except Exception as e:
-        sys.stderr.write("Error while processing metadore response : "+str(e)+ "\n")
+        write_in_logs("Error while processing metadore response : "+str(e))
         return (503, None)  # if there is an unexpected error from metadore
 
 
@@ -675,7 +683,7 @@ def biblio_ref(ref_biblio, retracted_doi=retracted_doi):
 
         # # # for others errors
         else:
-            sys.stderr.write("DOI requests failed. Crossref status code :" + str(crossref_status_code) + "\n")
+            write_in_logs("DOI requests failed. Crossref status code :" + str(crossref_status_code))
             return {"doi": "", "status": "error_service", "reference_found": "", "mismatches_detected": {}}
 
     # second case : no doi is found
