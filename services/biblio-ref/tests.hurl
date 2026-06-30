@@ -1,7 +1,5 @@
 POST {{host}}/v1/validate?indent=true
 content-type: application/json
-[Options]
-skip: {{blocked}}
 [
   {
     "value":"Y. B. LINHART. L. CHAOUNI-BENABDALLAH, J.-M. PARRY & J. D. THOMPSON - Selective herbivory of thyme chemotypes by a mollusk and a grasshopper"
@@ -10,16 +8,19 @@ skip: {{blocked}}
     "value": "https://doi.org/10.1016\/b978-0-323-90638-8.00002-3"
   },
   {
-    "value": "OCR problem > https://doi.org/10.1016\/b978-0-323-90638- 8.00002-3"
+    "value": "OCR problem > 10.1016/b978-0-323-90638- 8.00002-3"
+  },
+  {
+    "value": "10.48433/cr_he6 42"
+  },
+  {
+    "value": "_ problem in DOI > Jurgens et al. (2018). Measuring the Evolution of a Scientific Field through Citation Frames. Transactions of the Association for Computational Linguistics. 10.1162/tacl a 00028"
   },
   {
     "value": "RETRACTED > Estruch R., Primary Prevention of Cardiovascular Disease with a Mediterranean Diet, 10.1056/nejmoa1200303"
   },
   {
     "value": "HALUCINATED > Zohuri, B. (2019). Selective herbivory of thyme chemotypes by a mollusk and a grasshopper (pp. 81-98). Woodhead Publishing."
-  },
-  {
-    "value": "DataCite DOI > 10.48433/cr_he6 42"
   }
 ]
 
@@ -47,11 +48,29 @@ HTTP 200
 },
 {
     "value": {
-        "doi": "",
-        "status": "to_be_verified",
+        "doi": "10.1016/b978-0-323-90638-8.00002-3",
+        "status": "found",
         "mismatches_detected": {},
-        "reference": "OCR problem > https://doi.org/10.1016/b978-0-323-90638- 8.00002-3",
-        "reference_found": "REFERENCE ASSOCIATED WITH THE DOI FROM CROSSREF > Bahman Zohuri. (2021). Integral Molten Salt Reactor. Molten Salt Reactors and Integrated Molten Salt Reactors. 10.1016/b978-0-323-90638-8.00002-3."
+        "reference": "OCR problem > 10.1016/b978-0-323-90638- 8.00002-3",
+        "reference_found": "FROM CROSSREF > Bahman Zohuri. (2021). Integral Molten Salt Reactor. Molten Salt Reactors and Integrated Molten Salt Reactors. 10.1016/b978-0-323-90638-8.00002-3."
+    }
+},
+{
+    "value": {
+        "doi": "10.48433/cr_he642",
+        "status": "found",
+        "mismatches_detected": {},
+        "reference": "10.48433/cr_he6 42",
+        "reference_found": "FROM DATACITE > Rohde et al. (2024). MGF North Sea II: Effects of the exclusion of bottom-contact fishing on benthic habitats in the Natura 2000 sites 'Sylt Outer Reef' and 'Borkum Reef Ground', Cruise No. HE642, 30.05.2024 - 14.06.2024, Bremerhaven (Germany) - Bremerhaven (Germany). Begutachtungspanel Forschungsschiffe. 10.48433/cr_he642"
+    }
+},
+{
+    "value": {
+        "doi": "10.1162/tacl_a_00028",
+        "status": "found",
+        "mismatches_detected": {},
+        "reference": "_ problem in DOI > Jurgens et al. (2018). Measuring the Evolution of a Scientific Field through Citation Frames. Transactions of the Association for Computational Linguistics. 10.1162/tacl a 00028",
+        "reference_found": "FROM CROSSREF > Jurgens et al. (2018). Measuring the Evolution of a Scientific Field through Citation Frames. Transactions of the Association for Computational Linguistics. 10.1162/tacl_a_00028."
     }
 },
 {
@@ -73,20 +92,6 @@ HTTP 200
         "mismatches_detected": {},
         "reference": "HALUCINATED > Zohuri, B. (2019). Selective herbivory of thyme chemotypes by a mollusk and a grasshopper (pp. 81-98). Woodhead Publishing.",
         "reference_found": "FROM CROSSREF > Linhart et al. (1999). Selective herbivory of thyme chemotypes by a mollusk and a grasshopper. Ecologia mediterranea. 10.3406/ecmed.1999.1879."
-    }
-},
-{
-    "value": {
-        "doi": "",
-        "status": "to_be_verified",
-        "mismatches_detected": {
-            "title": "MGF North Sea II: Effects of the exclusion of bottom-contact fishing on benthic habitats in the Natura 2000 sites 'Sylt Outer Reef' and 'Borkum Reef Ground', Cruise No. HE642, 30.05.2024 - 14.06.2024, Bremerhaven (Germany) - Bremerhaven (Germany)",
-            "first_author_name": "Rohde",
-            "date": "2024",
-            "source": "Begutachtungspanel Forschungsschiffe"
-        },
-        "reference": "DataCite DOI > 10.48433/cr_he6 42",
-        "reference_found": "REFERENCE ASSOCIATED WITH THE DOI FROM DATACITE > Rohde et al. (2024). MGF North Sea II: Effects of the exclusion of bottom-contact fishing on benthic habitats in the Natura 2000 sites 'Sylt Outer Reef' and 'Borkum Reef Ground', Cruise No. HE642, 30.05.2024 - 14.06.2024, Bremerhaven (Germany) - Bremerhaven (Germany). Begutachtungspanel Forschungsschiffe. 10.48433/cr_he642"
     }
 }]
 
