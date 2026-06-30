@@ -1,5 +1,7 @@
 POST {{host}}/v1/validate?indent=true
 content-type: application/json
+[Options]
+skip: {{blocked}}
 [
   {
     "value":"Y. B. LINHART. L. CHAOUNI-BENABDALLAH, J.-M. PARRY & J. D. THOMPSON - Selective herbivory of thyme chemotypes by a mollusk and a grasshopper"
