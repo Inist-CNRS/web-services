@@ -78,6 +78,16 @@ def extract_year_from_ref(ref_biblio):
     return year_match.group(0) if year_match else None
 
 
+def process_mismatches(mismatches_json):
+    """
+    Here is a function, to update easily mismatches output.
+    """
+    if mismatches_json == {}:
+        return ""
+    else:
+        return " ; ".join([x for x in mismatches_json.keys()])
+    
+    
 # DOI funtions
 def find_doi(text, delete_line_break=True, process_deleted_underscore=False):
     """
@@ -606,7 +616,7 @@ def biblio_ref(ref_biblio, retracted_doi=retracted_doi):
     reference_found = ""
     # check types
     if not isinstance(ref_biblio, str):
-        return {"doi": "", "status": "error_data", "reference_found": reference_found, "mismatches_detected": {}}
+        return {"doi": "", "status": "error_data", "reference_found": reference_found, "mismatches_detected": process_mismatches({})}
 
     doi = find_doi(ref_biblio)
     save_ref_biblio = ref_biblio
@@ -633,13 +643,13 @@ def biblio_ref(ref_biblio, retracted_doi=retracted_doi):
                     if title_score < 0.7:
                         # We return "REFERENCE ASSOCIATED WITH THE DOI FROM CROSSREF >" when we suspect an hallucination
                         reference_found = "REFERENCE ASSOCIATED WITH THE DOI " + reference_found
-                        return {"doi": "", "status": "to_be_verified", "reference_found": reference_found, "mismatches_detected": {}}
+                        return {"doi": "", "status": "to_be_verified", "reference_found": reference_found, "mismatches_detected": process_mismatches({})}
 
             ### Can be retracted
             if doi in retracted_doi:
-                return {"doi": doi, "status": "retracted", "reference_found": reference_found, "mismatches_detected": potential_different_content}
+                return {"doi": doi, "status": "retracted", "reference_found": reference_found, "mismatches_detected": process_mismatches(potential_different_content)}
 
-            return {"doi": doi, "status": status, "reference_found": reference_found, "mismatches_detected": potential_different_content}
+            return {"doi": doi, "status": status, "reference_found": reference_found, "mismatches_detected": process_mismatches(potential_different_content)}
 
         # # If DOI doesn't exist
         elif crossref_status_code == 404:
@@ -660,31 +670,31 @@ def biblio_ref(ref_biblio, retracted_doi=retracted_doi):
                         if title_score < 0.7:
                             # We return "REFERENCE ASSOCIATED WITH THE DOI FROM DATACITE >" when we suspect an hallucination
                             reference_found = "REFERENCE ASSOCIATED WITH THE DOI " + reference_found
-                            return {"doi": "", "status": "to_be_verified", "reference_found": reference_found, "mismatches_detected": potential_different_content}
+                            return {"doi": "", "status": "to_be_verified", "reference_found": reference_found, "mismatches_detected": process_mismatches(potential_different_content)}
 
                 ### Can be retracted
                 if doi in retracted_doi:
-                    return {"doi": doi, "status": "retracted", "reference_found": reference_found, "mismatches_detected": potential_different_content}
+                    return {"doi": doi, "status": "retracted", "reference_found": reference_found, "mismatches_detected": process_mismatches(potential_different_content)}
 
-                return {"doi": doi, "status": status, "reference_found": reference_found, "mismatches_detected": {}}
+                return {"doi": doi, "status": status, "reference_found": reference_found, "mismatches_detected": process_mismatches({})}
 
             status, doi, others_biblio_info, potential_different_content = verify_biblio_without_doi(ref_biblio, wrong_doi=True)
             reference_found = others_biblio_info["raw_ref"]
 
             # # # Can be retracted
             if doi in retracted_doi:
-                return {"doi": doi, "status": "retracted", "reference_found": reference_found, "mismatches_detected": potential_different_content}
+                return {"doi": doi, "status": "retracted", "reference_found": reference_found, "mismatches_detected": process_mismatches(potential_different_content)}
 
             # # # can't be not found : there is a doi. Should be on Crossref or DataCite.
             if status == "not_found":
-                return {"doi": "", "status": "to_be_verified", "reference_found": "", "mismatches_detected":{}}
+                return {"doi": "", "status": "to_be_verified", "reference_found": "", "mismatches_detected":process_mismatches({})}
 
-            return {"doi": doi, "status": status, "reference_found": reference_found, "mismatches_detected":potential_different_content}
+            return {"doi": doi, "status": status, "reference_found": reference_found, "mismatches_detected":process_mismatches(potential_different_content)}
 
         # # # for others errors
         else:
             write_in_logs("DOI requests failed. Crossref status code :" + str(crossref_status_code))
-            return {"doi": "", "status": "error_service", "reference_found": "", "mismatches_detected": {}}
+            return {"doi": "", "status": "error_service", "reference_found": "", "mismatches_detected": process_mismatches({})}
 
     # second case : no doi is found
     else:
@@ -692,8 +702,8 @@ def biblio_ref(ref_biblio, retracted_doi=retracted_doi):
         reference_found = others_biblio_info["raw_ref"]
         # # # Can be retracted
         if doi in retracted_doi:
-            return {"doi": doi, "status": "retracted", "reference_found": reference_found, "mismatches_detected": potential_different_content}
+            return {"doi": doi, "status": "retracted", "reference_found": reference_found, "mismatches_detected": process_mismatches(potential_different_content)}
 
         if status != "found":
             potential_different_content = {}
-        return {"doi": doi, "status": status, "reference_found": reference_found, "mismatches_detected": potential_different_content}
+        return {"doi": doi, "status": status, "reference_found": reference_found, "mismatches_detected": process_mismatches(potential_different_content)}
