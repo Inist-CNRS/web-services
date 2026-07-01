@@ -1,7 +1,7 @@
 {
   "private": true,
   "name": "ws-baseline-dvc",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Extraction d'entités nommées de noms de personnes",
   "repository": {
     "type": "git",
