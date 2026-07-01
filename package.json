@@ -83,6 +83,7 @@
     "services/tabbr-mine",
     "services/terms-extraction",
     "services/terms-tools",
+    "services/test-k3s1",
     "services/text-clustering",
     "services/text-lucene",
     "services/text-summarize",
