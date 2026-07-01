@@ -60,7 +60,7 @@ HTTP 200
         "status": "found",
         "mismatches_detected": "",
         "reference": "10.48433/cr_he6 42",
-        "reference_found": "FROM DATACITE > Rohde et al. (2024). MGF North Sea II: Effects of the exclusion of bottom-contact fishing on benthic habitats in the Natura 2000 sites 'SyltOuter Reef' and 'Borkum Reef Ground', Cruise No. HE642, 30.05.2024 - 14.06.2024, Bremerhaven (Germany) - Bremerhaven (Germany). Begutachtungspanel Forschungsschiffe. 10.48433/cr_he642"
+        "reference_found": "FROM DATACITE > Rohde et al. (2024). MGF North Sea II: Effects of the exclusion of bottom-contact fishing on benthic habitats in the Natura 2000 sites 'Sylt Outer Reef' and 'Borkum Reef Ground', Cruise No. HE642, 30.05.2024 - 14.06.2024, Bremerhaven (Germany) - Bremerhaven (Germany). Begutachtungspanel Forschungsschiffe. 10.48433/cr_he642"
     }
 },
 {
@@ -68,7 +68,7 @@ HTTP 200
         "doi": "10.1162/tacl_a_00028",
         "status": "found",
         "mismatches_detected": "",
-        "reference": "_ problem in DOI > Jurgens et al. (2018). Measuring the Evolution of a Scientific Field through Citation Frames. Transactions of the Association for ComputationalLinguistics. 10.1162/tacl a 00028",
+        "reference": "_ problem in DOI > Jurgens et al. (2018). Measuring the Evolution of a Scientific Field through Citation Frames. Transactions of the Association for Computational Linguistics. 10.1162/tacl a 00028",
         "reference_found": "FROM CROSSREF > Jurgens et al. (2018). Measuring the Evolution of a Scientific Field through Citation Frames. Transactions of the Association for Computational Linguistics. 10.1162/tacl_a_00028."
     }
 },
@@ -173,7 +173,7 @@ HTTP 200
             "status": "found",
             "mismatches_detected": "source",
             "reference": "Vychegzhanin, S. et E. Kotelnikov (2019). Comparison of named entity recognition tools applied to news articles. pp. 72-77.",
-            "reference_found": "FROM CROSSREF > Vychegzhanin et al. (2019). Comparison of Named Entity Recognition Tools Applied to News Articles. 2019 Ivannikov Ispras Open Conference(ISPRAS). 10.1109/ispras47671.2019.00017.",
+            "reference_found": "FROM CROSSREF > Vychegzhanin et al. (2019). Comparison of Named Entity Recognition Tools Applied to News Articles. 2019 Ivannikov Ispras Open Conference (ISPRAS). 10.1109/ispras47671.2019.00017.",
             "url_pdf": "https://cnrs.hal.science/hal-04461354/file/anki-gaillard-revol.pdf"
         }
     ]
