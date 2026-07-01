@@ -35,7 +35,7 @@ for line in sys.stdin:
             pass
 
     except Exception as e:
-        sys.stderr.write(str(e))
+        bf.write_in_logs("Can't process PDF -" + str(e))
         references = []
 
     all_res = []
