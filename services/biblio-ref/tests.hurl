@@ -23,6 +23,9 @@ skip: {{blocked}}
   },
   {
     "value": "HALUCINATED > Zohuri, B. (2019). Selective herbivory of thyme chemotypes by a mollusk and a grasshopper (pp. 81-98). Woodhead Publishing."
+  },
+  {
+    "value": "Federated Learning for Privacy Preserving Intelligent Health- care Application to Breast Cancer Detection. ACM. https://doi.org/10. 1145/3700838.3703679"
   }
 ]
 
@@ -60,7 +63,7 @@ HTTP 200
         "status": "found",
         "mismatches_detected": "",
         "reference": "10.48433/cr_he6 42",
-        "reference_found": "FROM DATACITE > Rohde et al. (2024). MGF North Sea II: Effects of the exclusion of bottom-contact fishing on benthic habitats in the Natura 2000 sites 'SyltOuter Reef' and 'Borkum Reef Ground', Cruise No. HE642, 30.05.2024 - 14.06.2024, Bremerhaven (Germany) - Bremerhaven (Germany). Begutachtungspanel Forschungsschiffe. 10.48433/cr_he642"
+        "reference_found": "FROM DATACITE > Rohde et al. (2024). MGF North Sea II: Effects of the exclusion of bottom-contact fishing on benthic habitats in the Natura 2000 sites 'Sylt Outer Reef' and 'Borkum Reef Ground', Cruise No. HE642, 30.05.2024 - 14.06.2024, Bremerhaven (Germany) - Bremerhaven (Germany). Begutachtungspanel Forschungsschiffe. 10.48433/cr_he642"
     }
 },
 {
@@ -68,7 +71,7 @@ HTTP 200
         "doi": "10.1162/tacl_a_00028",
         "status": "found",
         "mismatches_detected": "",
-        "reference": "_ problem in DOI > Jurgens et al. (2018). Measuring the Evolution of a Scientific Field through Citation Frames. Transactions of the Association for ComputationalLinguistics. 10.1162/tacl a 00028",
+        "reference": "_ problem in DOI > Jurgens et al. (2018). Measuring the Evolution of a Scientific Field through Citation Frames. Transactions of the Association for Computational Linguistics. 10.1162/tacl a 00028",
         "reference_found": "FROM CROSSREF > Jurgens et al. (2018). Measuring the Evolution of a Scientific Field through Citation Frames. Transactions of the Association for Computational Linguistics. 10.1162/tacl_a_00028."
     }
 },
@@ -96,7 +99,7 @@ HTTP 200
         "status": "to_be_verified",
         "mismatches_detected": "",
         "reference": "Federated Learning for Privacy Preserving Intelligent Health- care Application to Breast Cancer Detection. ACM. https://doi.org/10. 1145/3700838.3703679",
-        "reference_found": "REFERENCE ASSOCIATED WITH THE DOI FROM CROSSREF > Amritanjali et al. (2025). Federated Learning for Privacy Preserving Intelligent Healthcare Application toBreast Cancer Detection. Proceedings of the 26th International Conference on Distributed Computing and Networking. 10.1145/3700838.3703679."
+        "reference_found": "REFERENCE ASSOCIATED WITH THE DOI FROM CROSSREF > Amritanjali et al. (2025). Federated Learning for Privacy Preserving Intelligent Healthcare Application to Breast Cancer Detection. Proceedings of the 26th International Conference on Distributed Computing and Networking. 10.1145/3700838.3703679."
     }
 }]
 
