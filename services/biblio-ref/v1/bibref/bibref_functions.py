@@ -632,24 +632,21 @@ def biblio_ref(ref_biblio, retracted_doi=retracted_doi):
         # # If DOI exists
         if crossref_status_code==200:
             potential_different_content = {}
-            status = "found"
             reference_found = others_biblio_info["raw_ref"]
 
             # # # can be hallucinated
             if len(doi)*1.5 < len(ref_biblio): 
                 match_items_score, title_score, doi, potential_different_content = compare_pubinfo_refbiblio(others_biblio_info, ref_biblio)
-
-                if match_items_score < 3:
-                    if title_score < 0.7:
-                        # We return "REFERENCE ASSOCIATED WITH THE DOI FROM CROSSREF >" when we suspect an hallucination
-                        reference_found = "REFERENCE ASSOCIATED WITH THE DOI " + reference_found
-                        return {"doi": "", "status": "to_be_verified", "reference_found": reference_found, "mismatches_detected": process_mismatches({})}
+                if match_items_score < 2:
+                    # We return "REFERENCE ASSOCIATED WITH THE DOI FROM CROSSREF >" when we suspect an hallucination
+                    reference_found = "REFERENCE ASSOCIATED WITH THE DOI " + reference_found
+                    return {"doi": "", "status": "to_be_verified", "reference_found": reference_found, "mismatches_detected": process_mismatches({})}
 
             ### Can be retracted
             if doi in retracted_doi:
                 return {"doi": doi, "status": "retracted", "reference_found": reference_found, "mismatches_detected": process_mismatches(potential_different_content)}
 
-            return {"doi": doi, "status": status, "reference_found": reference_found, "mismatches_detected": process_mismatches(potential_different_content)}
+            return {"doi": doi, "status": "found", "reference_found": reference_found, "mismatches_detected": process_mismatches(potential_different_content)}
 
         # # If DOI doesn't exist
         elif crossref_status_code == 404:
@@ -657,7 +654,6 @@ def biblio_ref(ref_biblio, retracted_doi=retracted_doi):
             # # Check if it is a DataCite DOI using MetaDoRe
             metadore_status_code, doi, others_biblio_info = process_metadore_doi(doi, save_ref_biblio)
             if metadore_status_code == 200:
-                status = "found"
                 reference_found = others_biblio_info["raw_ref"]
                 potential_different_content = {}
 
@@ -667,16 +663,15 @@ def biblio_ref(ref_biblio, retracted_doi=retracted_doi):
                     match_items_score, title_score, doi, potential_different_content = compare_pubinfo_refbiblio(others_biblio_info, ref_biblio)
 
                     if match_items_score < 3:
-                        if title_score < 0.7:
-                            # We return "REFERENCE ASSOCIATED WITH THE DOI FROM DATACITE >" when we suspect an hallucination
-                            reference_found = "REFERENCE ASSOCIATED WITH THE DOI " + reference_found
-                            return {"doi": "", "status": "to_be_verified", "reference_found": reference_found, "mismatches_detected": process_mismatches(potential_different_content)}
+                        # We return "REFERENCE ASSOCIATED WITH THE DOI FROM DATACITE >" when we suspect an hallucination
+                        reference_found = "REFERENCE ASSOCIATED WITH THE DOI " + reference_found
+                        return {"doi": "", "status": "to_be_verified", "reference_found": reference_found, "mismatches_detected": process_mismatches(potential_different_content)}
 
                 ### Can be retracted
                 if doi in retracted_doi:
                     return {"doi": doi, "status": "retracted", "reference_found": reference_found, "mismatches_detected": process_mismatches(potential_different_content)}
 
-                return {"doi": doi, "status": status, "reference_found": reference_found, "mismatches_detected": process_mismatches({})}
+                return {"doi": doi, "status": "found", "reference_found": reference_found, "mismatches_detected": process_mismatches({})}
 
             status, doi, others_biblio_info, potential_different_content = verify_biblio_without_doi(ref_biblio, wrong_doi=True)
             reference_found = others_biblio_info["raw_ref"]
