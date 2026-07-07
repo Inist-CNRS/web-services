@@ -484,19 +484,20 @@ jsonpath "$[2].value.authors" count >= 21
 jsonpath "$[3].value" == "n/a"
 
 
-# Uncomment to test
-# Takes more than 40s
-# POST {{host}}/v1/inspirehep/works/expand?indent=true
-# content-type: application/json
-# [
-#   { "id":1,  "value": "10.1103/PhysRevLett.19.1264"},
-#   { "id":8,  "value": "unknown"}
-# ]
+POST {{host}}/v2/inspirehep/works/expand?indent=true
+content-type: application/json
+[
+  { "id":1,  "value": "10.1103/PhysRevLett.19.1264"}
+]
 
-# HTTP 200
-# [Asserts]
+# This one take 40s more
+# Add it to the JSON array above (don't forget the ,)
+# { "id":8,  "value": "unknown"}
+
+HTTP 200
+[Asserts]
 # jsonpath "$" count == 2
-# jsonpath "$[0].value.revision_id" >= 96
+jsonpath "$[0].value.revision_id" >= 96
 # jsonpath "$[1].value" == "n/a"
 
 POST {{host}}/v2/bso/works/expand?indent=true
