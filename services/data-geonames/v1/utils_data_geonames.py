@@ -219,7 +219,7 @@ def remove_hallucinate(list_ans, df_filtered):
         if str(id_ans) not in df_filtered["geonameid"].tolist():
             #Hallucination
             list_ans_final.remove(id_ans)
-            print_log("ID:", str(id_ans)," was removed because hallucinated and not from the propositions")
+            print_log("ID:" + str(id_ans) + " was removed because hallucinated and not from the propositions")
     return ["https://www.geonames.org/"+str(x) for x in list_ans_final]
 
 
