@@ -46,6 +46,7 @@
     "services/astro-ner",
     "services/authors-tools",
     "services/base-line",
+    "services/baseline-dvc",
     "services/base-line-python",
     "services/biblio-ref",
     "services/biblio-tools",
