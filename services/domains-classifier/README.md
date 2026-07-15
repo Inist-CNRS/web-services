@@ -1,4 +1,4 @@
-# ws-domains-classifier@1.5.4
+# ws-domains-classifier@1.5.5
 
 Classification en domaines scientifiques
 
