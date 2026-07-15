@@ -1,4 +1,4 @@
-FROM cnrsinist/python-node:py3.9-no24-1.1.0
+FROM cnrsinist/python-node:py3.9-no24-1.2.0
 
 RUN apt-get update && apt-get install -y --no-install-recommends tini=0.19.0-1 && \
     apt-get clean && rm -rf /var/lib/apt/lists/* && \
