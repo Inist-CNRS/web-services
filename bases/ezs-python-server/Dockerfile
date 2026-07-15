@@ -11,11 +11,11 @@ RUN apt-get update && \
     }' > /etc/ezmaster.json
 
 WORKDIR /app
-RUN npm install --omit=dev dotenv-cli@10.0.0 && \
-    npm install --omit=dev @ezs/core@4.0.2 && \
-    npm install --omit=dev @ezs/analytics@2.3.5 && \
-    npm install --omit=dev @ezs/basics@2.9.2 && \
-    npm install --omit=dev @ezs/spawn@1.4.9 && \
+RUN npm install --omit=dev dotenv-cli@11.0.0 && \
+    npm install --omit=dev @ezs/core@4.2.4 && \
+    npm install --omit=dev @ezs/analytics@2.3.8 && \
+    npm install --omit=dev @ezs/basics@2.13.0 && \
+    npm install --omit=dev @ezs/spawn@1.4.10 && \
     npm cache clean --force && \
     chmod a+w /app
 
