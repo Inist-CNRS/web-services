@@ -9,7 +9,7 @@
         "EZS_CACHE": true,
         "EZS_PIPELINE_DELAY":10800,
         "EZS_VERBOSE": true,
-        "ILAAS_API_KEY": "your-real-ilaas-api-key"
+        "ILAAS_API_KEY": "your-real-ilaas-api-key",
         "NODE_OPTIONS": "--max_old_space_size=1024",
         "NODE_ENV": "production"
     }

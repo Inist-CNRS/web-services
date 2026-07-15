@@ -6,6 +6,9 @@ import torch
 import pickle
 from entitytag.entitytag_functions import *
 
+# Limit threads number
+torch.set_num_threads(1)
+torch.set_num_interop_threads(1)
 
 # Load vocabulary and model
 with open("./v1/entity-tag-model/en/word2idx.pkl", "rb") as f:
