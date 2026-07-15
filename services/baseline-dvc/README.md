@@ -1,5 +1,5 @@
-# ws-person-ner@1.2.3
+# ws-baseline-dvc@1.0.2
 
-Extraction d'entités nommées de noms de personnes
+Test avec utilisation de DVC
 
-Permet d'extraire les entités nommées correspondant à des noms de personnes dans du texte
+Pour tester le webhook Gitlab

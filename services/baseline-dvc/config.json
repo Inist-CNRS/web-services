@@ -1,7 +1,7 @@
 {
     "environnement": {
-        "EZS_TITLE": "Extraction d'entités nommées de noms de personnes",
-        "EZS_DESCRIPTION": "Permet d'extraire les entités nommées correspondant à des noms de personnes dans du texte",
+        "EZS_TITLE": "Test avec utilisation de DVC",
+        "EZS_DESCRIPTION": "Pour tester le webhook Gitlab",
         "EZS_METRICS": true,
         "EZS_CONCURRENCY": 2,
         "EZS_CONTINUE_DELAY": 60,
