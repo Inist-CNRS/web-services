@@ -28,7 +28,6 @@ All contributing instructions are in [CONTRIBUTING](CONTRIBUTING.md).
 - [authors-tools](./services/authors-tools) [![Docker Pulls](https://img.shields.io/docker/pulls/cnrsinist/ws-authors-tools.svg)](https://hub.docker.com/r/cnrsinist/ws-authors-tools/)
 - [base-line](./services/base-line) [![Docker Pulls](https://img.shields.io/docker/pulls/cnrsinist/ws-base-line.svg)](https://hub.docker.com/r/cnrsinist/ws-base-line/)
 - [base-line-python](./services/base-line-python) [![Docker Pulls](https://img.shields.io/docker/pulls/cnrsinist/ws-base-line-python.svg)](https://hub.docker.com/r/cnrsinist/ws-base-line-python/)
-- [baseline-dvc](./services/baseline-dvc) [![Docker Pulls](https://img.shields.io/docker/pulls/cnrsinist/ws-baseline-dvc.svg)](https://hub.docker.com/r/cnrsinist/ws-baseline-dvc/)
 - [biblio-ref](./services/biblio-ref) [![Docker Pulls](https://img.shields.io/docker/pulls/cnrsinist/ws-biblio-ref.svg)](https://hub.docker.com/r/cnrsinist/ws-biblio-ref/)
 - [biblio-tools](./services/biblio-tools) [![Docker Pulls](https://img.shields.io/docker/pulls/cnrsinist/ws-biblio-tools.svg)](https://hub.docker.com/r/cnrsinist/ws-biblio-tools/)
 - [chem-ner](./services/chem-ner) [![Docker Pulls](https://img.shields.io/docker/pulls/cnrsinist/ws-chem-ner.svg)](https://hub.docker.com/r/cnrsinist/ws-chem-ner/)
