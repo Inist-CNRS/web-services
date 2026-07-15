@@ -1,4 +1,4 @@
-# ws-affiliation-rnsr@3.0.2
+# ws-affiliation-rnsr@3.0.3
 
 Trouve un RNSR à partir d'une affiliation.
 
