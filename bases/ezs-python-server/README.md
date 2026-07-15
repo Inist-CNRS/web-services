@@ -10,4 +10,4 @@ C'est l'image de base des web services.
 
 | python | node    |
 | ------ | ------- |
-| 3.9.18 | 16.20.2 |
+| 3.9.18 | 24.18.0 |
