@@ -1,0 +1,4 @@
+export WEBDAV_URL=webdavs://webdav.services.istex.fr/dvc
+export WEBDAV_LOGIN=parmentf
+export WEBDAV_PASSWORD=5JAEU8YJhVau2iM
+

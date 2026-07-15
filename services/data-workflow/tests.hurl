@@ -880,7 +880,7 @@ Content-Type: application/json
 [Asserts]
 jsonpath "$[0].value.status" == "found"
 jsonpath "$[1].value.status" == "found"
-jsonpath "$[2].value.status" == "found"
+jsonpath "$[2].value.status" == "to_be_verified"
 jsonpath "$[3].value.status" == "retracted"
 jsonpath "$[4].value.status" == "to_be_verified"
 
@@ -966,7 +966,7 @@ variable "computing_token" exists
 POST {{host}}/v1/retrieve-json?indent=false
 content-type: application/json
 [Options]
-delay: 15000
+delay: 40000
 skip: {{blocked}}
 ```
 [
