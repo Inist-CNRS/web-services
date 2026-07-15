@@ -579,7 +579,7 @@ De même, il faut mettre à jour tous les web services qui utilisent ces images 
 base! Pour lister les services concernés par une image de base:
 
 ```bash
-grep ezs-python-server services/*/Dockerfile template/Dockerfile bases/*/Dockerfile
+grep ezs-python-server services/*/Dockerfile template*/Dockerfile bases/*/Dockerfile
 ```
 
 Il faut changer le `FROM` de tous les `Dockerfile` trouvés par la commande, et
@@ -688,4 +688,4 @@ machine du *reverse proxy*.
 > fusionné la *Pull Request*.  
 > La nouvelle manière de faire implique que la PR soit fusionnée dans la branche
 > principale, afin de ne pas configurer le *reverse proxy* avec des
-> `swagger.json` obsolètes.  
+> `swagger.json` obsolètes.
