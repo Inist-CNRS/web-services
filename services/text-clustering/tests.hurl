@@ -37,6 +37,7 @@ Content-Type: application/json
 [Asserts]
 jsonpath "$" count == 49
 jsonpath "$[*].value.cluster" exists
+jsonpath "$[*].value.cluster_name" exists
 
 
 ##################################################################

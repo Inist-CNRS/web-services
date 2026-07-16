@@ -11,6 +11,7 @@ import random
 import umap
 import os
 import numpy as np
+from clust import name_cluster_functions as ncf
 
 
 os.environ["TOKENIZERS_PARALLELISM"] = "false"
@@ -218,7 +219,7 @@ else:
         )
         reduced_embeddings = umap_model.fit_transform(texts)
     except Exception as e:
-        sys.stderr.write(f"Error in textClustering while UMAP processing : {e}")
+        ncf.write_in_logs("Error in textClustering while UMAP processing", e)
         reduced_embeddings = center_reduce(texts)
 
 if reduced_embeddings.shape[0] < nb_cluster:
@@ -232,7 +233,7 @@ try:
     clusterer.fit(reduced_embeddings)
     clustering_done = True
 except Exception as e:
-    sys.stderr.write(f"Error in textClustering while KMEANS processing : {e}")
+    ncf.write_in_logs("Error in textClustering while KMEANS processing", e)
     clustering_done = False
 
 
@@ -255,12 +256,16 @@ if clustering_done:
             indice_in_cluster += 1
 
     # Execute teeft
+    empty_keywords = True
     n_clusters = len(keywords)
     for i in range(n_clusters):
         if i+1 in keywords:
             keywords[i+1] = truncate_text_for_teeft(keywords[i+1])
             data = {"id": i + 1, "value": keywords[i + 1]}
-            keywords[i + 1] = teeft(data, n_keywords)
+            teef_res = teeft(data, n_keywords)
+            if len(teef_res) > 0:
+                empty_keywords = False
+            keywords[i + 1] = teef_res
         else:
             continue
 
@@ -269,6 +274,11 @@ if clustering_done:
         keywords = filter_keywords(keywords, threshold=0.5)
     except Exception:
         pass
+    
+    # Name clusters (only if there is keywords)
+    if not empty_keywords:
+        clusters_names = ncf.name_cluster_with_kw(keywords)
+             
     # Add res for noise cluster
     keywords[0] = []
 else:
@@ -278,10 +288,10 @@ else:
 indice_in_cluster = 0
 for i in range(len_data):
     if i in indice_out_cluster:
-        all_data[i]["value"] = {"cluster": 0, "keywords": []}
+        all_data[i]["value"] = {"cluster": 0, "cluster_name":"Unknown", "keywords": []}
     else:
         label = int(clusterer.labels_[indice_in_cluster] + 1)
-        all_data[i]["value"] = {"cluster": label, "keywords": keywords[label]}
+        all_data[i]["value"] = {"cluster": label, "cluster_name":clusters_names[label], "keywords": keywords[label]}
         # increment on cluster indices only bc noise isn't in "clusterer model"
         indice_in_cluster += 1
 
