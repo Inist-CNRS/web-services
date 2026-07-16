@@ -619,6 +619,11 @@ Il y a plusieurs images de base:
 > merge main` devrait faire l'affaire), sous peine d'avoir des tags de version
 > existant déjà, et interrompant la mise à jour du/des service/s en question.
 
+> [!WARNING] 
+> Il faut absolument prévenir les développeurs des services que pendant cette
+> opération, il ne faut pas créer de nouvelles versions. Cela peut entraîner des
+> conflits avec les tags existants.
+
 ## Création d'une version
 
 Pour créer une version, on peut se servir de npm et du *workspace* associé au service en question.  
