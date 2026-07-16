@@ -16,7 +16,7 @@ RUN --mount=type=secret,id=webdav_login \
     dvc remote modify --local webdav-remote user "$(cat /run/secrets/webdav_login)" && \
     dvc remote modify --local webdav-remote password "$(cat /run/secrets/webdav_password)"
 COPY ./v1/v1.dvc /dvc
-RUN dvc pull -v
+RUN dvc pull -vv
 RUN cat /dvc/v1/en/HALen_matrixKDT.npy.* > /dvc/v1/en/HALen_matrixKDT.npy && \
     rm /dvc/v1/en/HALen_matrixKDT.npy.*
 
