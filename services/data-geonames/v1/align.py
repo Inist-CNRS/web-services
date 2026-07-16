@@ -2,7 +2,6 @@
 import pickle
 import json
 from transformers import AutoTokenizer, pipeline
-import ast
 import time
 from utils_data_geonames import *
 import sys
@@ -112,7 +111,7 @@ for ind_text, text in enumerate(datas):
 
             # Conversion de la réponse en objet (Passer sur json load ?)
             try:
-                list_ans = ast.literal_eval(ans)
+                list_ans = parse_llm_list(ans)
             except:
                 # Erreur, on renvoit aucun alignement
                 results.add_result(entity["word"], [], entity["context"], docs_id[ind_text])
@@ -143,7 +142,7 @@ for ind_text, text in enumerate(datas):
                         ans = round(2, ent_name, ent_context, text, cols, df_filtered, ROUND2_TEMPLATE, lookup_term)
                         # Conversion de la réponse en objet (Passer sur json load ?)
                         try:
-                            list_ans = ast.literal_eval(ans)
+                            list_ans = parse_llm_list(ans)
                         except:
                             # Erreur, on renvoit aucun alignement
                             results.add_result(entity["word"], [], entity["context"], docs_id[ind_text])

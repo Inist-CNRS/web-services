@@ -8,7 +8,7 @@ import pandas as pd
 from rapidfuzz import process, fuzz
 import os
 import time
-
+import ast
 
 debug = False
 
@@ -24,6 +24,20 @@ MODEL_NAME = "gemma-4-31b"
 MAX_RETRIES = 4
 RETRY_DELAY = 2
 
+def parse_llm_list(ans: str):
+    ans = ans.strip()
+
+    # Si la réponse est dans un bloc Markdown
+    if ans.startswith("```json"):
+        ans = ans[len("```json"):].strip()
+
+    if ans.startswith("```"):
+        ans = ans[len("```"):].strip()
+
+    if ans.endswith("```"):
+        ans = ans[:-3].strip()
+
+    return ast.literal_eval(ans)
 
 def normalize_name(name):
     # Supprimer les espaces début/fin
