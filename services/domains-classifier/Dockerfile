@@ -16,7 +16,7 @@ RUN --mount=type=secret,id=webdav_login \
     dvc remote modify --local webdav-remote user "$(cat /run/secrets/webdav_login)" && \
     dvc remote modify --local webdav-remote password "$(cat /run/secrets/webdav_password)"
 COPY ./models/models.dvc /dvc
-RUN dvc pull -v
+RUN dvc pull -vv
 
 ####
 # Build and install web services dependencies files
