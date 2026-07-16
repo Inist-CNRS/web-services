@@ -17,7 +17,7 @@
 #     dvc remote modify --local webdav-remote password "$(cat /run/secrets/webdav_password)"
 # COPY ./v1/data.dvc /dvc
 ## The cat part is useful for files larger than 500Mio.
-# RUN dvc pull -v && \
+# RUN dvc pull -vv && \
 #     cat data/x* > data/resources.txt && \
 #     rm data/x*
 
