@@ -30,7 +30,7 @@ RUN pip install --no-cache-dir \
 
 # Install all node dependencies
 RUN npm install --omit=dev \
-    @ezs/storage@3.2.5 && \
+    @ezs/storage@3.2.8 && \
     npm cache clean --force
 
 WORKDIR /app/public

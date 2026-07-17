@@ -27,8 +27,8 @@ WORKDIR /app/public
 
 # Install all node dependencies
 RUN npm install --omit=dev \
-    @ezs/storage@3.2.6 \
-    @ezs/xslt@1.3.32 && \
+    @ezs/storage@3.2.8 \
+    @ezs/xslt@1.3.33 && \
     npm cache clean --force
 
 # Declare files to copy in .dockerignore

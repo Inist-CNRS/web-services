@@ -19,7 +19,7 @@ FROM cnrsinist/ezs-python-pytorch-server:py3.9-no24-1.1.9
 WORKDIR /app
 
 RUN pip install --no-cache-dir Unidecode==1.4.0 && \
-    npm install --omit=dev @ezs/storage@3.2.5 && \
+    npm install --omit=dev @ezs/storage@3.2.8 && \
     npm cache clean --force
 
 WORKDIR /app/public

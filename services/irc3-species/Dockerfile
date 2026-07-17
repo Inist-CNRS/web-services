@@ -6,7 +6,7 @@ WORKDIR /app/public
 # Install all node dependencies
 RUN npm install --omit=dev \
     commander@11.1.0 \
-    @ezs/strings@1.0.5 && \
+    @ezs/strings@1.0.6 && \
     npm cache clean --force
 
 # Declare files to copy in .dockerignore
