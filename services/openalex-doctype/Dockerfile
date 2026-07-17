@@ -17,7 +17,7 @@ COPY ./v1/model-splitted.dvc /dvc
 RUN dvc pull -v && \
     cat model-splitted/* > model.pkl
 
-FROM cnrsinist/ezs-python-server:py3.9-no24-1.0.13
+FROM cnrsinist/ezs-python-server:py3.9-no24-1.0.14
 
 WORKDIR /app
 # Install all python dependencies

@@ -17,11 +17,11 @@
 #     dvc remote modify --local webdav-remote password "$(cat /run/secrets/webdav_password)"
 # COPY ./v1/data.dvc /dvc
 ## The cat part is useful for files larger than 500Mio.
-# RUN dvc pull -v && \
+# RUN dvc pull -vv && \
 #     cat data/x* > data/resources.txt && \
 #     rm data/x*
 
-FROM cnrsinist/ezs-python-server:py3.9-no24-1.0.13
+FROM cnrsinist/ezs-python-server:py3.9-no24-1.0.14
 
 WORKDIR /app
 # Install all python dependencies

@@ -1,13 +1,13 @@
 # syntax=docker/dockerfile:1.2
-FROM cnrsinist/ezs-python-saxon-server:py3.9-no24-1.0.8
+FROM cnrsinist/ezs-python-saxon-server:py3.9-no24-1.0.9
 
 WORKDIR /app
 
 # Install all node dependencies
 RUN npm install --omit=dev \
-    @ezs/conditor@2.13.4 \
-    @ezs/istex@1.5.11 \
-    @ezs/xslt@1.3.32 && \
+    @ezs/conditor@2.14.1 \
+    @ezs/istex@1.5.12 \
+    @ezs/xslt@1.3.33 && \
     npm cache clean --force
 
 WORKDIR /app/public
