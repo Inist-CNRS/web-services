@@ -226,7 +226,7 @@ def gravity(r_nodes,nodes_xy):
     return back_xy
 
 
-def get_weights(autors_list,seuil_edge):
+def get_weights(autors_list,seuil_edge, data_type):
     edge_weight = {}
     for autors in autors_list:
         autors = sorted(autors)
@@ -245,7 +245,10 @@ def get_weights(autors_list,seuil_edge):
     all_autors = []
     for i in autors_list:
         all_autors += i
-    node_weight = {x:1.5*all_autors.count(x) for x in all_autors}
+    if data_type == "keywords":
+        node_weight = {x:1.5*all_autors.count(x) for x in all_autors}
+    else:
+        node_weight = {x:1.5*np.sqrt(all_autors.count(x)) for x in all_autors}
     return node_weight,edge_weight,ignore_edge
 
 

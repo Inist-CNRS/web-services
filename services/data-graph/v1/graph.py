@@ -42,8 +42,12 @@ if thresh_node == "auto":
         thresh_node = 1
     else:
         diff_words = 0
-        threshold = 0.175
-        threshold_step = 0.025
+        if data_type == "keywords":
+            threshold = 0.175
+            threshold_step = 0.025
+        else:
+            threshold = 0.075
+            threshold_step = 0.001
         while diff_words < 50 and threshold < 0.6:
             diff_words = 0
             threshold += threshold_step
@@ -76,19 +80,22 @@ for liste in L:
 
 # Seuil edge
 if thresh_edge == "auto":
-    if thresh_node == 1:
-        thresh_edge = 0
+    if data_type == "keywords":
+        if thresh_node == 1:
+            thresh_edge = 0
+        else:
+            thresh_edge = thresh_node / 6
+            if thresh_edge < 1:
+                thresh_edge = 1
     else:
-        thresh_edge = thresh_node / 6
-        if thresh_edge < 1:
-            thresh_edge = 1
+        thresh_edge = 0
 else:
     thresh_edge = int(thresh_edge)
 
 
 print(thresh_node, thresh_edge, file=sys.stderr)
 # print(keyword, file=sys.stderr)
-node_weight, edge_weight, ignore_edge = get_weights(keyword, thresh_edge)
+node_weight, edge_weight, ignore_edge = get_weights(keyword, thresh_edge, data_type)
 # print(node_weight, file=sys.stderr)
 G = build_graph(node_weight, edge_weight)
 partition, communities = build_partition(G)
