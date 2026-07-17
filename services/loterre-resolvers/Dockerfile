@@ -20,7 +20,7 @@ RUN mv databases/*.tgz . && \
     for tgz in *.tgz; do tar -xf "$tgz"; done
 
 ##################################################################
-FROM cnrsinist/ezs-python-saxon-server:py3.9-no24-1.0.8
+FROM cnrsinist/ezs-python-saxon-server:py3.9-no24-1.0.9
 
 WORKDIR /app/public/v1
 WORKDIR /app/public
