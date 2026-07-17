@@ -1,4 +1,4 @@
-# ws-data-corpussummarize@1.0.1
+# ws-data-corpussummarize@1.0.2
 
 Résumé automatique de corpus de textes en anglais
 
