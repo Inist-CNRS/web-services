@@ -1,4 +1,4 @@
-# ws-data-kwsimilarity@4.0.0
+# ws-data-kwsimilarity@4.0.1
 
 Extrait les termes sémantiquement proches à un ou plusieurs mots-clés.
 

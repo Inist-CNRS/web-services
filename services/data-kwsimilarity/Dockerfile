@@ -1,5 +1,5 @@
 # syntax=docker/dockerfile:1.2
-FROM cnrsinist/ezs-python-pytorch-server:py3.9-no24-1.1.8
+FROM cnrsinist/ezs-python-pytorch-server:py3.9-no24-1.1.9
 
 ENV HF_HOME=/app/.cache/huggingface
 ENV NUMBA_CACHE_DIR=/tmp/numba_cache
