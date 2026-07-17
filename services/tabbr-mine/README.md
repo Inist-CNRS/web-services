@@ -1,4 +1,4 @@
-# ws-tabbr-mine@2.1.0
+# ws-tabbr-mine@2.1.1
 
 ## Variables d'environnement
 

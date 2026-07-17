@@ -1,7 +1,7 @@
 {
   "private": true,
   "name": "ws-data-geonames",
-  "version": "1.1.0",
+  "version": "1.2.1",
   "description": "Detect Localisation entity from a text, and align each entity with geonames referential when possible",
   "repository": {
     "type": "git",
@@ -22,7 +22,7 @@
     "version:insert": "npm run version:insert:readme && npm run version:insert:swagger",
     "version:commit": "git commit -a -m \"release ${npm_package_name}@${npm_package_version}\"",
     "version:tag": "git tag \"${npm_package_name}@${npm_package_version}\" -m \"${npm_package_name}@${npm_package_version}\"",
-    "version:push": "git push && git push --tags",
+    "version:push": "git push && git push origin \"${npm_package_name}@${npm_package_version}\"",
     "version": "npm run version:insert && npm run version:commit && npm run version:tag",
     "postversion": "npm run version:push",
     "build:check": "DOCKER_BUILDKIT=1 docker build --check -t cnrsinist/${npm_package_name}:latest . && docker run --rm -i hadolint/hadolint hadolint - < Dockerfile ",

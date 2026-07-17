@@ -578,7 +578,7 @@ HTTP 200
     "value": {
         "status": "Found",
         "id_ror": "https://ror.org/0323bey33",
-        "score": 0.79,
+        "score": 1,
         "name": "Institut Lumière Matière",
         "type": [
             "facility"

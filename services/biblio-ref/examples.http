@@ -19,7 +19,13 @@ Content-Type: application/json
     "value": "https://doi.org/10.1016\/b978-0-323-90638-8.00002-3"
   },
   {
-    "value": "OCR problem > https://doi.org/10.1016\/b978-0-323-90638- 8.00002-3"
+    "value": "OCR problem > 10.1016/b978-0-323-90638- 8.00002-3"
+  },
+  {
+    "value": "10.48433/cr_he6 42"
+  },
+  {
+    "value": "_ problem in DOI > Jurgens et al. (2018). Measuring the Evolution of a Scientific Field through Citation Frames. Transactions of the Association for Computational Linguistics. 10.1162/tacl a 00028"
   },
   {
     "value": "RETRACTED > Estruch R., Primary Prevention of Cardiovascular Disease with a Mediterranean Diet, 10.1056/nejmoa1200303"
@@ -28,7 +34,7 @@ Content-Type: application/json
     "value": "HALUCINATED > Zohuri, B. (2019). Selective herbivory of thyme chemotypes by a mollusk and a grasshopper (pp. 81-98). Woodhead Publishing."
   },
   {
-    "value": "DataCite DOI > 10.48433/cr_he6 42"
+    "value": "Federated Learning for Privacy Preserving Intelligent Health- care Application to Breast Cancer Detection. ACM. https://doi.org/10. 1145/3700838.3703679"
   }
 ]
 
@@ -55,7 +61,7 @@ Content-Type: application/pdf
 
 ###
 # @name v1IsRetracted
-# Valide la référence bibliographique d'un PDF
+# Check si une référence est rétractée
 POST {{host}}/v1/is-retracted?indent=true
 Content-Type: application/json
 
@@ -71,5 +77,20 @@ Content-Type: application/json
   },
   {
     "value": ["10.1016/s0167-577x(02)01208-9", "10.1016\/b978-0-323-90638-8.00002-3", "if value is not a doi, returns false"]
+  }
+]
+
+###
+# @name v1CompareRef
+# Vérification de référence depuis Crossref
+POST {{host}}/v1/compare-ref?indent=true
+Content-Type: application/json
+
+[
+  {
+    "value": {"doi": "10.1016/j.jelechem.2022.116956", "reference": "L.K. Bieniasz, Theory and highly accurate computation of non- limiting chronoamperometric currents for the ErevCirr reaction mechanism at cylindrical wire electrodes. J. Electroanal. Chem. 895, 115410 (2021)"}
+  },
+  {
+    "value": {"reference": "L.K. Bieniasz, Theory and highly accurate computation of non- limiting chronoamperometric currents for the ErevCirr reaction mechanism at cylindrical wire electrodes. J. Electroanal. Chem. 895, 115410 (2021)"}
   }
 ]

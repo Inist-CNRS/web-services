@@ -40,7 +40,7 @@ cp -r template "services/$SERVICE_NAME"
 
 echo -ne "Customizing service... \r"
 
-for FILE in "services/$SERVICE_NAME"/*; do
+for FILE in services/"$SERVICE_NAME"/* services/"$SERVICE_NAME"/.env; do
     if [ -f "$FILE" ]; then
         sed -i "s/{service}/$SERVICE_NAME/g" "$FILE"
         sed -i "s/{short_description}/$SHORT_DESCRIPTION/g" "$FILE"

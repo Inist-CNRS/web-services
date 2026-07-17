@@ -10,7 +10,13 @@ skip: {{blocked}}
     "value": "https://doi.org/10.1016\/b978-0-323-90638-8.00002-3"
   },
   {
-    "value": "OCR problem > https://doi.org/10.1016\/b978-0-323-90638- 8.00002-3"
+    "value": "OCR problem > 10.1016/b978-0-323-90638- 8.00002-3"
+  },
+  {
+    "value": "10.48433/cr_he6 42"
+  },
+  {
+    "value": "_ problem in DOI > Jurgens et al. (2018). Measuring the Evolution of a Scientific Field through Citation Frames. Transactions of the Association for Computational Linguistics. 10.1162/tacl a 00028"
   },
   {
     "value": "RETRACTED > Estruch R., Primary Prevention of Cardiovascular Disease with a Mediterranean Diet, 10.1056/nejmoa1200303"
@@ -19,7 +25,7 @@ skip: {{blocked}}
     "value": "HALUCINATED > Zohuri, B. (2019). Selective herbivory of thyme chemotypes by a mollusk and a grasshopper (pp. 81-98). Woodhead Publishing."
   },
   {
-    "value": "DataCite DOI > 10.48433/cr_he6 42"
+    "value": "Federated Learning for Privacy Preserving Intelligent Health- care Application to Breast Cancer Detection. ACM. https://doi.org/10. 1145/3700838.3703679"
   }
 ]
 
@@ -28,6 +34,7 @@ HTTP 200
     "value": {
         "doi": "10.3406/ecmed.1999.1879",
         "status": "found",
+        "mismatches_detected": "date ; source",
         "reference": "Y. B. LINHART. L. CHAOUNI-BENABDALLAH, J.-M. PARRY & J. D. THOMPSON - Selective herbivory of thyme chemotypes by a mollusk and a grasshopper",
         "reference_found": "FROM CROSSREF > Linhart et al. (1999). Selective herbivory of thyme chemotypes by a mollusk and a grasshopper. Ecologia mediterranea. 10.3406/ecmed.1999.1879."
     }
@@ -36,6 +43,7 @@ HTTP 200
     "value": {
         "doi": "10.1016/b978-0-323-90638-8.00002-3",
         "status": "found",
+        "mismatches_detected": "",
         "reference": "https://doi.org/10.1016/b978-0-323-90638-8.00002-3",
         "reference_found": "FROM CROSSREF > Bahman Zohuri. (2021). Integral Molten Salt Reactor. Molten Salt Reactors and Integrated Molten Salt Reactors. 10.1016/b978-0-323-90638-8.00002-3."
     }
@@ -44,32 +52,54 @@ HTTP 200
     "value": {
         "doi": "10.1016/b978-0-323-90638-8.00002-3",
         "status": "found",
-        "reference": "OCR problem > https://doi.org/10.1016/b978-0-323-90638- 8.00002-3",
+        "mismatches_detected": "",
+        "reference": "OCR problem > 10.1016/b978-0-323-90638- 8.00002-3",
         "reference_found": "FROM CROSSREF > Bahman Zohuri. (2021). Integral Molten Salt Reactor. Molten Salt Reactors and Integrated Molten Salt Reactors. 10.1016/b978-0-323-90638-8.00002-3."
-    }
-},
-{
-    "value": {
-        "doi": "10.1056/nejmoa1200303",
-        "status": "retracted",
-        "reference": "RETRACTED > Estruch R., Primary Prevention of Cardiovascular Disease with a Mediterranean Diet, 10.1056/nejmoa1200303",
-        "reference_found": "FROM CROSSREF > Estruch et al. (2013). Primary Prevention of Cardiovascular Disease with a Mediterranean Diet. New England Journal of Medicine. 10.1056/nejmoa1200303."
-    }
-},
-{
-    "value": {
-        "doi": "",
-        "status": "to_be_verified",
-        "reference": "HALUCINATED > Zohuri, B. (2019). Selective herbivory of thyme chemotypes by a mollusk and a grasshopper (pp. 81-98). Woodhead Publishing.",
-        "reference_found": "FROM CROSSREF > Linhart et al. (1999). Selective herbivory of thyme chemotypes by a mollusk and a grasshopper. Ecologia mediterranea. 10.3406/ecmed.1999.1879."
     }
 },
 {
     "value": {
         "doi": "10.48433/cr_he642",
         "status": "found",
-        "reference": "DataCite DOI > 10.48433/cr_he6 42",
+        "mismatches_detected": "",
+        "reference": "10.48433/cr_he6 42",
         "reference_found": "FROM DATACITE > Rohde et al. (2024). MGF North Sea II: Effects of the exclusion of bottom-contact fishing on benthic habitats in the Natura 2000 sites 'Sylt Outer Reef' and 'Borkum Reef Ground', Cruise No. HE642, 30.05.2024 - 14.06.2024, Bremerhaven (Germany) - Bremerhaven (Germany). Begutachtungspanel Forschungsschiffe. 10.48433/cr_he642"
+    }
+},
+{
+    "value": {
+        "doi": "10.1162/tacl_a_00028",
+        "status": "found",
+        "mismatches_detected": "",
+        "reference": "_ problem in DOI > Jurgens et al. (2018). Measuring the Evolution of a Scientific Field through Citation Frames. Transactions of the Association for Computational Linguistics. 10.1162/tacl a 00028",
+        "reference_found": "FROM CROSSREF > Jurgens et al. (2018). Measuring the Evolution of a Scientific Field through Citation Frames. Transactions of the Association for Computational Linguistics. 10.1162/tacl_a_00028."
+    }
+},
+{
+    "value": {
+        "doi": "10.1056/nejmoa1200303",
+        "status": "retracted",
+        "mismatches_detected": "date ; source",
+        "reference": "RETRACTED > Estruch R., Primary Prevention of Cardiovascular Disease with a Mediterranean Diet, 10.1056/nejmoa1200303",
+        "reference_found": "FROM CROSSREF > Estruch et al. (2013). RETRACTED: Primary Prevention of Cardiovascular Disease with a Mediterranean Diet. New England Journal of Medicine. 10.1056/nejmoa1200303."
+    }
+},
+{
+    "value": {
+        "doi": "",
+        "status": "to_be_verified",
+        "mismatches_detected": "",
+        "reference": "HALUCINATED > Zohuri, B. (2019). Selective herbivory of thyme chemotypes by a mollusk and a grasshopper (pp. 81-98). Woodhead Publishing.",
+        "reference_found": "FROM CROSSREF > Linhart et al. (1999). Selective herbivory of thyme chemotypes by a mollusk and a grasshopper. Ecologia mediterranea. 10.3406/ecmed.1999.1879."
+    }
+},
+{
+    "value": {
+        "doi": "",
+        "status": "to_be_verified",
+        "mismatches_detected": "",
+        "reference": "Federated Learning for Privacy Preserving Intelligent Health- care Application to Breast Cancer Detection. ACM. https://doi.org/10. 1145/3700838.3703679",
+        "reference_found": "REFERENCE ASSOCIATED WITH THE DOI FROM CROSSREF > Amritanjali et al. (2025). Federated Learning for Privacy Preserving Intelligent Healthcare Application to Breast Cancer Detection. Proceedings of the 26th International Conference on Distributed Computing and Networking. 10.1145/3700838.3703679."
     }
 }]
 
@@ -87,29 +117,33 @@ HTTP 200
 [{
     "value": [
         {
-            "doi": "10.3115/1614164",
-            "status": "found",
+            "doi": "",
+            "status": "not_found",
+            "mismatches_detected": "",
             "reference": "Akbik, A., T. Bergmann, D. Blythe, K. Rasul, S. Schweter, et R. Vollgraf (2019). FLAIR : An easy-to-use framework for state-of-the-art NLP. In NAACL 2019, 2019 Annual Conference of the North American Chapter of the Association for Computational Linguistics (Demons- trations), pp. 54-59.",
-            "reference_found": "FROM CROSSREF >  (2007). Proceedings of Human Language Technologies: The Annual Conference of the North American Chapter of the Association for Computational Linguistics: Demonstrations on XX - NAACL '07. Human Language Technologies: The Annual Conference of the North American Chapter of the Association for Computational Linguistics: Demonstrations. 10.3115/1614164.",
+            "reference_found": "",
             "url_pdf": "https://cnrs.hal.science/hal-04461354/file/anki-gaillard-revol.pdf"
         },
         {
             "doi": "",
             "status": "not_found",
+            "mismatches_detected": "",
             "reference": "Akbik, A., D. Blythe, et R. Vollgraf (2018). Contextual string embeddings for sequence labe- ling.",
             "reference_found": "",
             "url_pdf": "https://cnrs.hal.science/hal-04461354/file/anki-gaillard-revol.pdf"
         },
         {
-            "doi": "10.63317/375ba8vd9q2v",
-            "status": "found",
+            "doi": "",
+            "status": "not_found",
+            "mismatches_detected": "",
             "reference": "In COLING 2018, 27th International Conference on Computational Linguistics, pp. 1638-1649.",
-            "reference_found": "FROM CROSSREF >  (2024). Proceedings of the 2024 Joint International Conference on Computational Linguistics, Language Resources and Evaluation (LREC-COLING 2024). Joint International Conference on Computational Linguistics, Language Resources and Evaluation. 10.63317/375ba8vd9q2v.",
+            "reference_found": "",
             "url_pdf": "https://cnrs.hal.science/hal-04461354/file/anki-gaillard-revol.pdf"
         },
         {
             "doi": "10.48550/arxiv.1607.04606",
             "status": "found",
+            "mismatches_detected": "",
             "reference": "Bojanowski, P., E. Grave, A. Joulin, et T. Mikolov (2016). Enriching word vectors with sub- word information. arXiv preprint arXiv :1607.04606.",
             "reference_found": "FROM DATACITE > Bojanowski et al. (2016). Enriching Word Vectors with Subword Information. arXiv. 10.48550/arxiv.1607.04606",
             "url_pdf": "https://cnrs.hal.science/hal-04461354/file/anki-gaillard-revol.pdf"
@@ -117,6 +151,7 @@ HTTP 200
         {
             "doi": "",
             "status": "not_found",
+            "mismatches_detected": "",
             "reference": "Brunner, A., N. D. T. Tu, L. Weimer, et F. Jannidis (2020). To bert or not to bert -comparing contextual embeddings in a deep learning architecture for the automatic recognition of four types of speech, thought and writing representation. In SwissText/KONVENS.",
             "reference_found": "",
             "url_pdf": "https://cnrs.hal.science/hal-04461354/file/anki-gaillard-revol.pdf"
@@ -124,6 +159,7 @@ HTTP 200
         {
             "doi": "",
             "status": "not_found",
+            "mismatches_detected": "",
             "reference": "Guille, A. (2023). Défi textmine 2024.",
             "reference_found": "",
             "url_pdf": "https://cnrs.hal.science/hal-04461354/file/anki-gaillard-revol.pdf"
@@ -131,6 +167,7 @@ HTTP 200
         {
             "doi": "10.1007/s11192-023-04806-2",
             "status": "found",
+            "mismatches_detected": "",
             "reference": "Smirnova, N. et P. Mayr (2023). Embedding models for supervised automatic extraction and classification of named entities in scientific acknowledgements. Scientometrics, 1-25.",
             "reference_found": "FROM CROSSREF > Smirnova et al. (2023). Embedding models for supervised automatic extraction and classification of named entities in scientific acknowledgements. Scientometrics. 10.1007/s11192-023-04806-2.",
             "url_pdf": "https://cnrs.hal.science/hal-04461354/file/anki-gaillard-revol.pdf"
@@ -138,6 +175,7 @@ HTTP 200
         {
             "doi": "",
             "status": "not_found",
+            "mismatches_detected": "",
             "reference": "Suignard, P., L. Hassani, et M. Bothua (EasyChair, 2023). Participation d'edf rd au défi text- mine 2023 : Reconnaissance d'entités d'intérêts dans les signatures d'e-mails. EasyChair Preprint no. 10098.",
             "reference_found": "",
             "url_pdf": "https://cnrs.hal.science/hal-04461354/file/anki-gaillard-revol.pdf"
@@ -145,12 +183,14 @@ HTTP 200
         {
             "doi": "10.1109/ispras47671.2019.00017",
             "status": "found",
+            "mismatches_detected": "source",
             "reference": "Vychegzhanin, S. et E. Kotelnikov (2019). Comparison of named entity recognition tools applied to news articles. pp. 72-77.",
             "reference_found": "FROM CROSSREF > Vychegzhanin et al. (2019). Comparison of Named Entity Recognition Tools Applied to News Articles. 2019 Ivannikov Ispras Open Conference (ISPRAS). 10.1109/ispras47671.2019.00017.",
             "url_pdf": "https://cnrs.hal.science/hal-04461354/file/anki-gaillard-revol.pdf"
         }
     ]
 }]
+
 
 POST {{host}}/v1/validate-pdf?indent=true
 Content-Type: application/pdf
@@ -218,3 +258,25 @@ HTTP 200
         ]
     }
 }]
+
+
+POST {{host}}/v1/compare-ref?indent=true
+content-type: application/json
+[Options]
+skip: {{blocked}}
+[
+  {
+    "value": {"doi": "10.1016/j.jelechem.2022.116956", "reference": "L.K. Bieniasz, Theory and highly accurate computation of non- limiting chronoamperometric currents for the ErevCirr reaction mechanism at cylindrical wire electrodes. J. Electroanal. Chem. 895, 115410 (2021)"}
+  },
+  {
+    "value": {"reference": "L.K. Bieniasz, Theory and highly accurate computation of non- limiting chronoamperometric currents for the ErevCirr reaction mechanism at cylindrical wire electrodes. J. Electroanal. Chem. 895, 115410 (2021)"}
+  }
+]
+
+
+HTTP 200
+[Asserts]
+jsonpath "$" count == 2
+jsonpath "$[*].value.from_crossref" exists
+jsonpath "$[*].value.raw_ref" exists
+jsonpath "$[*].value.matches_scores" exists

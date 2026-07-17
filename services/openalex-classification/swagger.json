@@ -1,0 +1,33 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "openalex-classification - Classification hiérarchique (domains et fields) Openalex",
+        "description": "Le web service classe automatiquement des documents scientifiques en anglais dans le premier et deuxième niveau de la classification Openalex à partir de leur résumé.",
+        "version": "1.0.3",
+        "termsOfService": "https://services.istex.fr/",
+        "contact": {
+            "name": "Inist-CNRS",
+            "url": "https://www.inist.fr/nous-contacter/"
+        }
+    },
+    "servers": [
+        {
+            "x-comment": "Will be automatically completed by the ezs server."
+        },
+        {
+            "url": "http://vptdmservices.intra.inist.fr:49386/",
+            "description": "Latest version for production",
+            "x-profil": "Standard"
+        }
+    ],
+    "tags": [
+        {
+            "name": "openalex-classification",
+            "description": "Classification hiérarchique (domains et fields) Openalex",
+            "externalDocs": {
+                "description": "Plus de documentation",
+                "url": "https://github.com/inist-cnrs/web-services/tree/main/services/openalex-classification"
+            }
+        }
+    ]
+}

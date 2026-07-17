@@ -28,8 +28,8 @@ RUN apt-get update && \
     # Install all node dependencies
     cd /app && \
     npm install --omit=dev \
-    @ezs/libpostal@0.3.1 \
-    @ezs/conditor@2.13.4 && \
+    @ezs/libpostal@0.3.3 \
+    @ezs/conditor@2.14.0 && \
     npm cache clean --force && \
     # Clean-up
     apt-get remove -y autoconf automake unzip build-essential curl git libtool pkg-config && \
