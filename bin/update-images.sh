@@ -79,7 +79,7 @@ function updateBase() {
             run git push
         else
             run "npm -w \"$IMAGE_DIR\" version patch"
-            run "sleep 1m"
+            run "sleep 5m"
         fi
         if [ "$TYPE" = "bases" ]; then
             printf "\n***** Don't forget to run \"%s\" *******\n" "npm run update:images -- --dry-run $IMAGE_DIR"
