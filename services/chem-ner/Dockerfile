@@ -2,7 +2,7 @@
 FROM python:3.9-slim-bullseye AS build1
 WORKDIR /dvc
 RUN apt-get update && apt-get -y --no-install-recommends install git=1:2.30.2-1+deb11u5 && apt-get clean && rm -rf /var/lib/apt/lists/*
-RUN pip install --no-cache-dir dvc[webdav]==3.66.1
+RUN pip install --no-cache-dir dvc[webdav]==3.67.1
 RUN --mount=type=secret,id=webdav_login \
     --mount=type=secret,id=webdav_password \
     --mount=type=secret,id=webdav_url \
@@ -14,7 +14,7 @@ RUN --mount=type=secret,id=webdav_login \
 COPY ./v1/chem/models.dvc /dvc
 RUN dvc pull -v
 
-FROM cnrsinist/ezs-python-pytorch-server:py3.9-no24-1.1.8
+FROM cnrsinist/ezs-python-pytorch-server:py3.9-no24-1.1.9
 
 WORKDIR /app/public
 # Declare files to copy in .dockerignore

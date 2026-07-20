@@ -1,12 +1,12 @@
 # syntax=docker/dockerfile:1.2
-FROM cnrsinist/ezs-python-server:py3.9-no24-1.0.13
+FROM cnrsinist/ezs-python-server:py3.9-no24-1.0.14
 
 WORKDIR /app/public
 
 # Install all node dependencies
 RUN npm install --omit=dev \
     commander@11.1.0 \
-    @ezs/strings@1.0.5 && \
+    @ezs/strings@1.0.6 && \
     npm cache clean --force
 
 # Declare files to copy in .dockerignore

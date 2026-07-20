@@ -16,7 +16,7 @@ COPY ./v1/all-MiniLM-L6-v2.dvc /dvc
 RUN dvc pull -v
 
 
-FROM cnrsinist/ezs-python-pytorch-server:py3.9-no24-1.1.8
+FROM cnrsinist/ezs-python-pytorch-server:py3.9-no24-1.1.9
 
 ENV HF_HOME=/app/.cache/huggingface
 ENV NUMBA_CACHE_DIR=/tmp/numba_cache
@@ -28,10 +28,6 @@ RUN pip install --no-cache-dir --no-build-isolation \
     --extra-index-url https://pypi.org/simple \
     sentence-transformers==3.3.1 \
     huggingface_hub==0.23.2
-
-# Temporary install of the latest ezs-core (until yearly update of base images)
-RUN npm install --omit=dev @ezs/core@4.1.2 && \
-    npm cache clean --force
 
 # Declare files to copy in .dockerignore
 COPY --chown=daemon:daemon . /app/public
