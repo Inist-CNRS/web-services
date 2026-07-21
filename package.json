@@ -46,7 +46,6 @@
     "services/astro-ner",
     "services/authors-tools",
     "services/base-line",
-    "services/baseline-dvc",
     "services/base-line-python",
     "services/baseline-dvc",
     "services/biblio-ref",
@@ -91,14 +90,14 @@
     "services/transli-tal"
   ],
   "dependencies": {
-    "@ezs/analytics": "2.3.5",
-    "@ezs/basics": "2.9.2",
-    "@ezs/core": "4.0.2",
-    "@ezs/spawn": "1.4.9",
+    "@ezs/analytics": "2.3.8",
+    "@ezs/basics": "2.13.0",
+    "@ezs/core": "4.2.4",
+    "@ezs/spawn": "1.4.10",
     "@orangeopensource/hurl": "5.0.1",
     "rest-cli": "1.8.13"
   },
   "devDependencies": {
-    "@types/node": "24.3.1"
+    "@types/node": "24.13.3"
   }
 }

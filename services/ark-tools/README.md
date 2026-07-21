@@ -1,4 +1,4 @@
-# ws-ark-tools@1.28.6
+# ws-ark-tools@1.28.7
 
 Apposer sur chaque objet un nouvel identifiant unique ARK
 

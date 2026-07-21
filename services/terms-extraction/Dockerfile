@@ -1,6 +1,9 @@
-FROM cnrsinist/ezs-python-server:py3.9-no24-1.0.13
+FROM cnrsinist/ezs-python-server:py3.9-no24-1.0.14
 
-RUN apt-get update && apt-get install -y --no-install-recommends locales=2.31-13+deb11u13 && apt-get clean && rm -rf /var/lib/apt/lists/*
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends locales=2.31-13+deb11u14 && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
 
 # Génère la locale en_US.UTF-8
 RUN sed -i '/en_US.UTF-8/s/^# //g' /etc/locale.gen && locale-gen en_US.UTF-8

@@ -18,7 +18,7 @@ COPY ./v1/model_split.dvc /dvc
 RUN dvc pull -v
 RUN cat model_split/* > rapido-model.pt
 
-FROM cnrsinist/ezs-python-pytorch-server:py3.9-no24-1.1.8
+FROM cnrsinist/ezs-python-pytorch-server:py3.9-no24-1.1.9
 
 WORKDIR /app
 # Install all python dependencies

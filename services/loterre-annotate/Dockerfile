@@ -22,7 +22,7 @@ RUN --mount=type=secret,id=webdav_login \
     dvc pull -v
 
 # ── Stage 2 : image principale ────────────────────────────────────────────────
-FROM cnrsinist/ezs-python-server:py3.9-no24-1.0.13
+FROM cnrsinist/ezs-python-server:py3.9-no24-1.0.14
 
 ENV LOTERRE_ANNOTATE_VERSION=1.0.0
 ENV GIT_REPO=https://github.com/stephane54/loterre-annotate.git
