@@ -1,22 +1,23 @@
 import requests
 import json
-import sys
 import os
 import time
-import datetime
+import logging
+
+logging.basicConfig(level=logging.WARNING, format='%(asctime)s | %(levelname)s | %(message)s', datefmt='%Y-%m-%d %H:%M:%S')
 
 api_key = os.getenv("ILAAS_API_KEY")
 
+PROMPT_PATH = os.path.join(os.path.dirname(__file__), "prompt.txt")
 
 def write_in_logs(message, error=None):
-    date_error = datetime.datetime.fromtimestamp(time.time()).strftime('%Y-%m-%d %H:%M:%S')
-    if error is None:
-        sys.stderr.write(f"{date_error} | Message : {message} |\n")
+    if error:
+        logging.error(f"Message: {message} | Python_error: {error}")
     else:
-        sys.stderr.write(f"{date_error} | Message : {message} | Error : {str(error)}\n")
+        logging.warning(f"Message: {message}")
 
 
-def clean_dict_keys(d):
+def clean_dict_keys(d: dict) -> dict: 
     return {int(k) if isinstance(k, str) else k: v for k, v in d.items()}
 
 def construct_llm_prompt(keywords):
@@ -27,12 +28,12 @@ def construct_llm_prompt(keywords):
     Args:
         keywords (dict): id to kw dict
     """
-    with open("./v1/clust/prompt.txt", "r", encoding="utf-8") as f:
+    with open(PROMPT_PATH, "r", encoding="utf-8") as f:
         template = f.read()
     return template.format(user_prompt=keywords)
 
 
-def parse_llm_output(answer, len_clusters):
+def parse_llm_output(answer: str, len_clusters: int) -> dict:
     try:
         parsed_answer = json.loads(answer.split("```json")[1].split("```")[0].strip())
         if len_clusters != len(parsed_answer):
@@ -43,7 +44,7 @@ def parse_llm_output(answer, len_clusters):
         return None
 
 
-def call_llm_prompt(message: str, len_clusters, model_name: str = "gemma-4-31b", timeout: int = 30, retries: int = 3) -> str:
+def call_llm_prompt(message: str, len_clusters, model_name: str = "gemma-4-31b", timeout: int = 30, retries: int = 3) -> dict:
     messages = [{"role": "user", "content":message}]
     base_url = "https://llm.ilaas.fr/v1"
     headers = {
@@ -71,7 +72,7 @@ def call_llm_prompt(message: str, len_clusters, model_name: str = "gemma-4-31b",
                     if output :
                         return output
                     else:
-                        raise ValueError(f"Impossible de parser la réponse d LLM : {response_json}")
+                        raise ValueError(f"Impossible de parser la réponse du LLM : {response_json}")
                 else:
                     raise ValueError(f"Réponse inattendue de l'API : {response_json}")
             else:
@@ -82,13 +83,13 @@ def call_llm_prompt(message: str, len_clusters, model_name: str = "gemma-4-31b",
             write_in_logs(f"Attempt {attempt + 1}: Exception", e)
             if attempt < retries - 1:
                 time.sleep(2*(attempt+1))
-    return {i+1: "Unkown" for i in range(len_clusters)}
+    return {i+1: "Unknown" for i in range(len_clusters)}
 
 
 
 def name_cluster_with_kw(keywords):
     """From a dictionary of cluster_id / keywords, generate
-    a dictonary cluster_id / cluster_name.
+    a dictionary cluster_id / cluster_name.
     Ex : input {"1":["kw1","kw2"]}
     output {"1": "title1"}
 

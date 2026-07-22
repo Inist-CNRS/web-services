@@ -15,7 +15,9 @@ from clust import name_cluster_functions as ncf
 
 
 os.environ["TOKENIZERS_PARALLELISM"] = "false"
-model = SentenceTransformer("./v1/all-MiniLM-L6-v2")
+MODEL_PATH = os.path.join(os.path.dirname(__file__), "all-MiniLM-L6-v2")
+
+model = SentenceTransformer(MODEL_PATH)
 
 n_keywords = 20
 nb_cluster = int(sys.argv[sys.argv.index("-p") + 1] if "-p" in sys.argv else 0)
@@ -278,6 +280,8 @@ if clustering_done:
     # Name clusters (only if there is keywords)
     if not empty_keywords:
         clusters_names = ncf.name_cluster_with_kw(keywords)
+    else:
+        clusters_names = {i+1: "Unknown" for i in range(n_clusters)}
              
     # Add res for noise cluster
     keywords[0] = []
