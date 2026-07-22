@@ -1,4 +1,4 @@
-FROM cnrsinist/ezs-python-server:py3.9-no24-1.0.13
+FROM cnrsinist/ezs-python-server:py3.9-no24-1.0.14
 
 WORKDIR /app
 

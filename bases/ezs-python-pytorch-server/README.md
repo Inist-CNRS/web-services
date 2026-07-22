@@ -1,11 +1,11 @@
-# ezs-python-pytorch-server@1.1.8
+# ezs-python-pytorch-server@1.1.9
 
 Ce répertoire contient de quoi construire une image Docker lançant un serveur
 [ezs](https://github.com/Inist-CNRS/ezs) ayant la possibilité de lancer des
 scripts python et d'utiliser pytorch.
 
 C'est une image de base des web services.  
-Son nom est: `cnrsinist/ezs-python-pytorch-server:py3.9-no24-1.1.8`
+Son nom est: `cnrsinist/ezs-python-pytorch-server:1.1.9-no24-1.1.8`
 
 ## Versions utilisées
 

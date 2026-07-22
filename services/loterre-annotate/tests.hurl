@@ -21,6 +21,9 @@
 # ── 9SD EN ────────────────────────────────────────────────────────────────────
 POST {{host}}/v1/en/loterre-annotate/annotate?loterreID=9SD
 content-type: application/json
+[Options]
+retry: 5
+retry-interval: 30s
 [
 {"id":"1","value":"The United States of America (USA), also known as the United States (U.S.) or America, is a country primarily located in North America. It is a federal republic of 50 states and Washington, D.C. as its federal capital district."}
 ]
