@@ -16,8 +16,9 @@ RUN --mount=type=secret,id=webdav_login \
     dvc remote modify --local webdav-remote user "$(cat /run/secrets/webdav_login)" && \
     dvc remote modify --local webdav-remote password "$(cat /run/secrets/webdav_password)"
 RUN dvc doctor
+RUN --mount=type=secret,id=webdav_url cat /run/secrets/webdav_url
 COPY ./prompt.txt.dvc /dvc
-RUN dvc pull -v
+RUN dvc pull -vv
 
 FROM cnrsinist/ezs-python-server:py3.9-no24-1.0.14
 
