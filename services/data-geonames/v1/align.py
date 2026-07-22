@@ -112,7 +112,7 @@ for ind_text, text in enumerate(datas):
             # Conversion de la réponse en objet (Passer sur json load ?)
             try:
                 list_ans = parse_llm_list(ans)
-            except:
+            except Exception:
                 # Erreur, on renvoit aucun alignement
                 results.add_result(entity["word"], [], entity["context"], docs_id[ind_text])
                 continue   
@@ -143,7 +143,7 @@ for ind_text, text in enumerate(datas):
                         # Conversion de la réponse en objet (Passer sur json load ?)
                         try:
                             list_ans = parse_llm_list(ans)
-                        except:
+                        except Exception:
                             # Erreur, on renvoit aucun alignement
                             results.add_result(entity["word"], [], entity["context"], docs_id[ind_text])
                             continue

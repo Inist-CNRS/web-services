@@ -72,7 +72,7 @@ def call_llm(prompt: str) -> str:
             print_log("LLM result call : " + result['choices'][0]['message']['content'])
             print_log(result['choices'][0]['message'].get('reasoning_content', None))
             return result['choices'][0]['message']['content']
-        except:
+        except Exception:
             print_log(f"Error while calling LLM (attempt {attempt}/{MAX_RETRIES})")
             if attempt == MAX_RETRIES:
                 return "Error"
