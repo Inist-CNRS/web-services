@@ -166,6 +166,8 @@ for line in sys.stdin:
     data = json.loads(line)
     all_data.append(data)
 
+ncf.write_in_logs("Données reçues")
+
 len_data = len(all_data)
 
 texts = []
@@ -205,6 +207,7 @@ for i in range(len_data):
 
 
 texts = np.array(texts)
+ncf.write_in_logs("Embeddings calculés")
 
 if len(texts) == 0:
     indice_out_cluster = list(range(len_data))
@@ -223,6 +226,8 @@ else:
     except Exception as e:
         ncf.write_in_logs("Error in textClustering while UMAP processing", e)
         reduced_embeddings = center_reduce(texts)
+
+ncf.write_in_logs("Dimension réduite")
 
 if reduced_embeddings.shape[0] < nb_cluster:
     nb_cluster = max(1, reduced_embeddings.shape[0] - 1)
@@ -247,6 +252,7 @@ keywords = (
 )  # keywords is a dictionary, the key is the cluster and value texts from clus
 
 if clustering_done:
+    ncf.write_in_logs("Clustering exécuté")
     for i in range(len_data):
         if i not in indice_out_cluster:
             label = str(int(clusterer.labels_[indice_in_cluster] + 1))
@@ -271,6 +277,7 @@ if clustering_done:
             keywords[label] = teef_res
         else:
             continue
+    ncf.write_in_logs("Appels à Teeft terminés")
 
     # Filter dict : delete every keywords who has a to big frequency
     try:
@@ -281,9 +288,11 @@ if clustering_done:
     # Name clusters (only if there is keywords)
     if not empty_keywords:
         clusters_names = ncf.name_cluster_with_kw(keywords)
+        ncf.write_in_logs("Clusters nommés")
+
     else:
         clusters_names = {str(i+1): "Unknown" for i in range(n_clusters)}
-             
+
     # Add res for noise cluster
     keywords["0"] = []
 else:
@@ -305,3 +314,5 @@ for i in range(len_data):
 for line in all_data:
     sys.stdout.write(json.dumps(line))
     sys.stdout.write("\n")
+    
+ncf.write_in_logs("Job terminé")

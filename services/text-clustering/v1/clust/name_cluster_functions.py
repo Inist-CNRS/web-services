@@ -4,12 +4,13 @@ import json
 import os
 import time
 import logging
+import sys
 
 logging.basicConfig(level=logging.WARNING, format='%(asctime)s | %(levelname)s | %(message)s', datefmt='%Y-%m-%d %H:%M:%S')
 
 api_key = os.getenv("ILAAS_API_KEY")
 try:
-    IDENTIFIER = os.getenv("identifier")
+    IDENTIFIER = str(sys.argv[sys.argv.index("-identifier") + 1] if "-identifier" in sys.argv else "")
 except Exception:
     IDENTIFIER = ""
 
