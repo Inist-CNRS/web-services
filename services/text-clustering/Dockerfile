@@ -14,6 +14,7 @@ RUN --mount=type=secret,id=webdav_login \
     dvc remote modify --local webdav-remote password "$(cat /run/secrets/webdav_password)"
 RUN dvc doctor
 COPY ./v1/all-MiniLM-L6-v2.dvc /dvc
+COPY ./v1/clust/prompt.txt.dvc /dvc
 RUN dvc pull -v
 
 
@@ -37,3 +38,4 @@ COPY --chown=daemon:daemon . /app/public/
 COPY --chown=daemon:daemon ./config.json /app/config.json
 
 COPY --chown=daemon:daemon --from=dvc-files /dvc/all-MiniLM-L6-v2 /app/public/v1/all-MiniLM-L6-v2
+COPY --chown=daemon:daemon --from=dvc-files /dvc/prompt.txt /app/public/v1/clust/prompt.txt

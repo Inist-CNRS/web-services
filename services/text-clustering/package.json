@@ -1,7 +1,7 @@
 {
   "private": true,
   "name": "ws-text-clustering",
-  "version": "2.2.2",
+  "version": "2.3.1",
   "description": "Créer différents `clusters` à partir d'un ensemble de textes courts ou d'un ensemble de listes de mots-clés.",
   "repository": {
     "type": "git",
@@ -27,7 +27,7 @@
     "postversion": "npm run version:push",
     "build:check": "docker build --check -t cnrsinist/${npm_package_name}:latest . && docker run --rm -i hadolint/hadolint hadolint - < Dockerfile ",
     "build:dev": ". ./.env 2> /dev/null; DOCKER_BUILDKIT=1 docker build -t cnrsinist/${npm_package_name}:latest --secret id=webdav_login,env=WEBDAV_LOGIN --secret id=webdav_password,env=WEBDAV_PASSWORD --secret id=webdav_url,env=WEBDAV_URL .",
-    "start:dev": "npm run build:dev && docker run --name dev --rm --detach -p 31976:31976 cnrsinist/${npm_package_name}:latest",
+    "start:dev": ". ./.env 2> /dev/null; npm run build:dev && docker run -e ILAAS_API_KEY --name dev --rm --detach -p 31976:31976 cnrsinist/${npm_package_name}:latest",
     "stop:dev": "docker stop dev",
     "build": ". ./.env 2> /dev/null; DOCKER_BUILDKIT=1 docker build -t cnrsinist/${npm_package_name}:${npm_package_version} --secret id=webdav_login,env=WEBDAV_LOGIN --secret id=webdav_password,env=WEBDAV_PASSWORD --secret id=webdav_url,env=WEBDAV_URL .",
     "start": "docker run --rm -p 31976:31976 cnrsinist/${npm_package_name}:${npm_package_version}",

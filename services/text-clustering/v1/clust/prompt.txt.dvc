@@ -1,0 +1,5 @@
+outs:
+- md5: f6e5b173b316a7c47192921b7bc0bbbc
+  size: 2904
+  hash: md5
+  path: prompt.txt
