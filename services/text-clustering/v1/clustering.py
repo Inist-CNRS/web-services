@@ -249,7 +249,7 @@ keywords = (
 if clustering_done:
     for i in range(len_data):
         if i not in indice_out_cluster:
-            label = int(clusterer.labels_[indice_in_cluster] + 1)
+            label = str(int(clusterer.labels_[indice_in_cluster] + 1))
             if label != 0:
                 if label in keywords:
                     keywords[label] += "\n\n" + str(all_data[i]["value"])
@@ -261,13 +261,14 @@ if clustering_done:
     empty_keywords = True
     n_clusters = len(keywords)
     for i in range(n_clusters):
-        if i+1 in keywords:
-            keywords[i+1] = truncate_text_for_teeft(keywords[i+1])
-            data = {"id": i + 1, "value": keywords[i + 1]}
+        label = str(i+1)
+        if label in keywords:
+            keywords[label] = truncate_text_for_teeft(keywords[label])
+            data = {"id": label, "value": keywords[label]}
             teef_res = teeft(data, n_keywords)
             if len(teef_res) > 0:
                 empty_keywords = False
-            keywords[i + 1] = teef_res
+            keywords[label] = teef_res
         else:
             continue
 
@@ -281,10 +282,10 @@ if clustering_done:
     if not empty_keywords:
         clusters_names = ncf.name_cluster_with_kw(keywords)
     else:
-        clusters_names = {i+1: "Unknown" for i in range(n_clusters)}
+        clusters_names = {str(i+1): "Unknown" for i in range(n_clusters)}
              
     # Add res for noise cluster
-    keywords[0] = []
+    keywords["0"] = []
 else:
     indice_out_cluster = [i for i in range(len_data)]
 
@@ -292,9 +293,9 @@ else:
 indice_in_cluster = 0
 for i in range(len_data):
     if i in indice_out_cluster:
-        all_data[i]["value"] = {"cluster": 0, "cluster_name":"Unknown", "keywords": []}
+        all_data[i]["value"] = {"cluster": "0", "cluster_name":"Unknown", "keywords": []}
     else:
-        label = int(clusterer.labels_[indice_in_cluster] + 1)
+        label = str(int(clusterer.labels_[indice_in_cluster] + 1))
         all_data[i]["value"] = {"cluster": label, "cluster_name":clusters_names[label], "keywords": keywords[label]}
         # increment on cluster indices only bc noise isn't in "clusterer model"
         indice_in_cluster += 1
