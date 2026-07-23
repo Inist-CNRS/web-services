@@ -8,6 +8,7 @@ import time
 thresh_edge = sys.argv[sys.argv.index("-p") + 1] if "-p" in sys.argv else "auto"
 thresh_node = sys.argv[sys.argv.index("-q") + 1] if "-q" in sys.argv else "auto"
 data_type = sys.argv[sys.argv.index("-r") + 1] if "-r" in sys.argv else "keywords"
+data_type = "keywords" if data_type != "authors" else data_type
 
 print(thresh_edge, thresh_node, data_type, file=sys.stderr)
 
