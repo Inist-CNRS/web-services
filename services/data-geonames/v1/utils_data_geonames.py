@@ -8,7 +8,7 @@ import pandas as pd
 from rapidfuzz import process, fuzz
 import os
 import time
-
+import ast
 
 debug = False
 
@@ -24,6 +24,20 @@ MODEL_NAME = "gemma-4-31b"
 MAX_RETRIES = 4
 RETRY_DELAY = 2
 
+def parse_llm_list(ans: str):
+    ans = ans.strip()
+
+    # Si la réponse est dans un bloc Markdown
+    if ans.startswith("```json"):
+        ans = ans[len("```json"):].strip()
+
+    if ans.startswith("```"):
+        ans = ans[len("```"):].strip()
+
+    if ans.endswith("```"):
+        ans = ans[:-3].strip()
+
+    return ast.literal_eval(ans)
 
 def normalize_name(name):
     # Supprimer les espaces début/fin
@@ -58,7 +72,7 @@ def call_llm(prompt: str) -> str:
             print_log("LLM result call : " + result['choices'][0]['message']['content'])
             print_log(result['choices'][0]['message'].get('reasoning_content', None))
             return result['choices'][0]['message']['content']
-        except:
+        except Exception:
             print_log(f"Error while calling LLM (attempt {attempt}/{MAX_RETRIES})")
             if attempt == MAX_RETRIES:
                 return "Error"
@@ -219,7 +233,7 @@ def remove_hallucinate(list_ans, df_filtered):
         if str(id_ans) not in df_filtered["geonameid"].tolist():
             #Hallucination
             list_ans_final.remove(id_ans)
-            print_log("ID:", str(id_ans)," was removed because hallucinated and not from the propositions")
+            print_log("ID:" + str(id_ans) + " was removed because hallucinated and not from the propositions")
     return ["https://www.geonames.org/"+str(x) for x in list_ans_final]
 
 
