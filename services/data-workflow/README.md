@@ -1,4 +1,4 @@
-# ws-data-workflow@1.18.0
+# ws-data-workflow@1.18.1
 
 Enchaînement asynchrone de traitements
 

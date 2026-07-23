@@ -3,7 +3,7 @@
     "info": {
         "title": "data-corpussummarize - Résumé automatique de corpus de textes en anglais",
         "description": "À partir d'un corpus de textes en anglais, ce web service génère automatiquement un résumé. La route à utiliser doit être adaptée en fonction de la nature des textes en entrée.",
-        "version": "1.0.0",
+        "version": "1.0.2",
         "termsOfService": "https://services.istex.fr/",
         "contact": {
             "name": "Inist-CNRS",

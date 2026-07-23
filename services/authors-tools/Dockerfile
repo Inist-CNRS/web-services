@@ -14,9 +14,9 @@ RUN --mount=type=secret,id=webdav_login \
     dvc remote modify --local webdav-remote password "$(cat /run/secrets/webdav_password)"
 COPY ./v1/first-name/name_gender.pickle.dvc /dvc
 COPY ./v1/corporate/abbreviations.json.dvc /dvc
-RUN dvc pull -v
+RUN dvc pull -vv
 
-FROM cnrsinist/ezs-python-server:py3.9-no24-1.0.13
+FROM cnrsinist/ezs-python-server:py3.9-no24-1.0.14
 
 WORKDIR /app
 # Install all python dependencies
@@ -30,7 +30,7 @@ RUN pip install --no-cache-dir \
 
 # Install all node dependencies
 RUN npm install --omit=dev \
-    @ezs/storage@3.2.5 && \
+    @ezs/storage@3.2.8 && \
     npm cache clean --force
 
 WORKDIR /app/public

@@ -579,7 +579,7 @@ De même, il faut mettre à jour tous les web services qui utilisent ces images 
 base! Pour lister les services concernés par une image de base:
 
 ```bash
-grep ezs-python-server services/*/Dockerfile template/Dockerfile bases/*/Dockerfile
+grep ezs-python-server services/*/Dockerfile template*/Dockerfile bases/*/Dockerfile
 ```
 
 Il faut changer le `FROM` de tous les `Dockerfile` trouvés par la commande, et
@@ -618,6 +618,11 @@ Il y a plusieurs images de base:
 > soient intégrées dans la branche de travail de la *pull request* (un `git
 > merge main` devrait faire l'affaire), sous peine d'avoir des tags de version
 > existant déjà, et interrompant la mise à jour du/des service/s en question.
+
+> [!WARNING] 
+> Il faut absolument prévenir les développeurs des services que pendant cette
+> opération, il ne faut pas créer de nouvelles versions. Cela peut entraîner des
+> conflits avec les tags existants.
 
 ## Création d'une version
 
@@ -688,4 +693,4 @@ machine du *reverse proxy*.
 > fusionné la *Pull Request*.  
 > La nouvelle manière de faire implique que la PR soit fusionnée dans la branche
 > principale, afin de ne pas configurer le *reverse proxy* avec des
-> `swagger.json` obsolètes.  
+> `swagger.json` obsolètes.

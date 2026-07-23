@@ -1,4 +1,4 @@
-# ws-person-ner@1.2.5
+# ws-person-ner@1.2.7
 
 Extraction d'entités nommées de noms de personnes
 
