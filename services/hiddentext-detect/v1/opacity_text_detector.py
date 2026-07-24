@@ -157,15 +157,15 @@ class OpacityTextDetector:
                      # 2. Détection de texte noir caché sous une image opaque
                     if bbox:  # On vérifie que bbox existe
                         if self._is_covered_by_opaque_image(bbox, color, opaque_images):
-                                if not text.isspace():
-                                    page_info['hidden_text'] += text
-                                page_info['suspicious_spans'].append({
-                                    'text': text,
-                                    'reasons': {"Texte noir caché sous une image opaque"},
-                                    'size': span.get('size', 0),
-                                    'color': color,
-                                    'bbox': bbox,
-                                })
+                            if not text.isspace():
+                                page_info['hidden_text'] += text
+                            page_info['suspicious_spans'].append({
+                                'text': text,
+                                'reasons': {"Texte noir caché sous une image opaque"},
+                                'size': span.get('size', 0),
+                                'color': color,
+                                'bbox': bbox,
+                            })
 
         return page_info
 
