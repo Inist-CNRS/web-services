@@ -149,7 +149,7 @@ class OpacityTextDetector:
                             page_info['hidden_text'] += text
                         page_info['suspicious_spans'].append({
                             'text': text,
-                            'reasons': {f"Opacité trop faible ({alpha})"},
+                            'reasons': {f"Texte noir avec une opacité trop faible"}, # possibilité d'ajouter ({alpha}) pour plus de détails
                             'size': span.get('size', 0),
                             'color': color,
                             'bbox': bbox,

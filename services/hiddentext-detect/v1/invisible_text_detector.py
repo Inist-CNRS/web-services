@@ -113,7 +113,7 @@ class InvisibleTextDetector:
                     return False, ""
 
         # Texte blanc, hors rect coloré → fond blanc par défaut → invisible
-        return True, "Texte blanc sur fond blanc (masqué)"
+        return True, "Texte blanc sur fond blanc"
 
     def analyze_character(self, char: dict, page_width: float, page_height: float, page) -> Tuple[bool, List[str]]:
         """
