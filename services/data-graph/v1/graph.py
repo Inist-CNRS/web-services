@@ -22,7 +22,6 @@ for line in sys.stdin:
     if len(isPid) > 0:
         pid = data[isPid[0]][5:]
         safe_pid = os.path.basename(pid)
-        print("PID ", pid, file=sys.stderr)
     lines.append(data["value"])
 
 if pid == "":
@@ -30,6 +29,7 @@ if pid == "":
 elif not re.fullmatch(r"[A-Za-z0-9_-]+", pid): 
     sys.exit("Erreur : PID invalide.")
 
+print("PID ", pid, file=sys.stderr)
 print(time.strftime("%A %d %B %Y %H:%M:%S"), file=sys.stderr)
 keyword = []
 L = []
@@ -46,8 +46,14 @@ freq = {k: v for k, v in sorted(freq.items(), key=lambda item: item[1], reverse=
 # print(freq, file=sys.stderr)
 
 PARAMS = {
-    "keywords": {"threshold": 0.175, "threshold_step": 0.025, "thresh_edge_default": None, "node_weight_fn": lambda c: 1.5 * c},
-    "authors":  {"threshold": 0.075, "threshold_step": 0.001, "thresh_edge_default": 0,    "node_weight_fn": lambda c: 1.5 * np.sqrt(c)},
+    "keywords": {"threshold": 0.175, 
+                 "threshold_step": 0.025, 
+                 "thresh_edge_default":  lambda thresh_node: 0 if thresh_node == 1 else max(thresh_node / 6, 1), 
+                 "node_weight_fn": lambda c: 1.5 * c},
+    "authors":  {"threshold": 0.075, 
+                 "threshold_step": 0.001, 
+                 "thresh_edge_default": 0,    
+                 "node_weight_fn": lambda c: 1.5 * np.sqrt(c)},
 }
 
 # Seuil node
@@ -90,15 +96,7 @@ for liste in L:
 
 # Seuil edge
 if thresh_edge == "auto":
-    if data_type == "keywords":
-        if thresh_node == 1:
-            thresh_edge = 0
-        else:
-            thresh_edge = thresh_node / 6
-            if thresh_edge < 1:
-                thresh_edge = 1
-    else:
-        thresh_edge = 0
+    thresh_edge = PARAMS[data_type]["thresh_edge_default"](thresh_node)
 else:
     thresh_edge = int(thresh_edge)
 
