@@ -49,7 +49,8 @@ class OpacityTextDetector:
                     alpha = info.get("alpha", 255)  # Par défaut opaque si alpha non défini
                     if alpha == 255:  # Image opaque
                         opaque_images.append({"bbox": bbox, "alpha": alpha})
-        except Exception:
+        except Exception as e:
+            print(f"Erreur dans _get_opaque_images: {e}", file=sys.stderr)
             pass
         return opaque_images
 
