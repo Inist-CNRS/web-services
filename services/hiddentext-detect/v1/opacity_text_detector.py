@@ -14,10 +14,10 @@ from typing import Dict, List, Optional
 
 
 class OpacityTextDetector:
-    def __init__(self, alpha_threshold: float = 25.0):
+    def __init__(self, alpha_threshold: int = 25):
         """
         alpha_threshold: Seuil en dessous duquel un span est considéré comme invisible.
-        Valeur entre 0 (transparent) et 255 (opaque). Défaut : 25.0 (~10% d'opacité).
+        Valeur entre 0 (transparent) et 255 (opaque). Défaut : 25 (~10% d'opacité).
         """
         self.alpha_threshold = alpha_threshold
 
