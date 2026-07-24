@@ -93,7 +93,7 @@ class InvisibleTextDetector:
         if char.get('size', 0) > 20:
             return False, ""
 
-         # Coordonnées du caractère pour vérifier sa position dans les rects
+        # Coordonnées du caractère pour vérifier sa position dans les rects
         char_x0, char_y0, char_x1, char_y1 = char.get('x0'), char.get('y0'), char.get('x1'), char.get('y1')
 
          # Récupération de toutes les shapes de la page
