@@ -99,5 +99,10 @@
   },
   "devDependencies": {
     "@types/node": "24.13.3"
+  },
+  "allowScripts": {
+    "@orangeopensource/hurl@5.0.1": true,
+    "better-sqlite3@12.8.0": true,
+    "leveldown@6.1.1": true
   }
 }
