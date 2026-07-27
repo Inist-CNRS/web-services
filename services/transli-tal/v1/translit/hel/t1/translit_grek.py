@@ -2,7 +2,6 @@
 # -*- coding: utf-8 -*-
 
 import json
-import string
 import re
 import sys
 
