@@ -3,7 +3,8 @@ FROM cnrsinist/ezs-python-server:py3.9-no24-1.0.14
 
 
 RUN pip --no-cache-dir install \
-    pdfplumber==0.11.8
+    pdfplumber==0.11.8 \
+    pymupdf==1.26.5
 
 WORKDIR /app/public
 # Declare files to copy in .dockerignore
