@@ -635,7 +635,7 @@ def biblio_ref(ref_biblio, retracted_doi=retracted_doi):
             reference_found = others_biblio_info["raw_ref"]
 
             # # # can be hallucinated
-            if len(doi)*1.5 < len(ref_biblio): 
+            if len(doi)*2 < len(ref_biblio): 
                 match_items_score, title_score, doi, potential_different_content = compare_pubinfo_refbiblio(others_biblio_info, ref_biblio)
                 if match_items_score < 2:
                     # We return "REFERENCE ASSOCIATED WITH THE DOI FROM CROSSREF >" when we suspect an hallucination
@@ -659,7 +659,7 @@ def biblio_ref(ref_biblio, retracted_doi=retracted_doi):
 
 
                 # # # can be hallucinated
-                if len(doi)*1.5 < len(ref_biblio): 
+                if len(doi)*2 < len(ref_biblio): 
                     match_items_score, title_score, doi, potential_different_content = compare_pubinfo_refbiblio(others_biblio_info, ref_biblio)
 
                     if match_items_score < 3:
