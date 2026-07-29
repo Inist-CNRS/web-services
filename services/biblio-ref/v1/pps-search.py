@@ -9,8 +9,7 @@ with open("v1/all-pps-classes.pickle", "rb") as file:
 
 
 def get_classes_for_doi(doi):
-    doi_lower = doi.lower()
-    return [classe for classe, dois in all_classes.items() if doi_lower in dois]
+    return all_classes.get(doi, [])
 
 
 for line in sys.stdin:

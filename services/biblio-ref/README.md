@@ -13,15 +13,21 @@ Si vous ne disposez pas de token, vous pouvez supprimer les  headers des requêt
 
 Pour les tests en local, il peut être contraignant de télécharger le contenu du PPS à chaque build. Nous pouvons donc supprimer temporairement le [téléchargement du dockerfile](https://github.com/Inist-CNRS/web-services/blob/b68b9b50f9fe17caeb8182c86b15fa624108397d/services/biblio-ref/Dockerfile#L20) et exploiter le résultat directement en local. Pour l'obtenir une fois "pour toute" en local, voici la commande (cas où le dépôt git `web-services` est clôné dans `~/workspace`):
 
+On le téléchage une seule fois :
+
 ```sh
-curl -go /tmp/pps.csv 'https://dbrech.irit.fr/pls/apex/f?p=9999:300::IR[allproblematicpapers]_CSV' && \
-awk -F '","' 'index($1,"annulled") {print $2}' /tmp/pps.csv > ~/workspace/web-services/services/biblio-ref/v1/annulled.csv  && \
-python3 ~/workspace/web-services/services/biblio-ref/v1/csv2pickle.py ~/workspace/web-services/services/biblio-ref/v1/annulled.csv && \
-rm ~/workspace/web-services/services/biblio-ref/v1/annulled.csv && \
-cp /tmp/pps.csv ~/workspace/web-services/services/biblio-ref/v1/pps.csv && \
-python3 ~/workspace/web-services/services/biblio-ref/v1/csv2pickle-all.py ~/workspace/web-services/services/biblio-ref/v1/pps.csv && \
-rm /tmp/pps.csv && \
-rm ~/workspace/web-services/services/biblio-ref/v1/pps.csv
+curl -go ~/workspace/web-services/services/biblio-ref/v1/pps.csv 'https://dbrech.irit.fr/pls/apex/f?p=9999:300::IR[allproblematicpapers]_CSV' 
+```
+
+Puis on modifie la ligne là du dockerfile :
+
+```sh
+COPY v1/pps.csv /tmp/pps.csv
+RUN awk -F '","' 'index($1,"annulled") {print $2}' /tmp/pps.csv > /app/public/v1/annulled.csv && \
+    python v1/csv2pickle.py /app/public/v1/annulled.csv && \
+    rm /app/public/v1/annulled.csv && \
+    python v1/csv2pickle-all.py /tmp/pps.csv && \
+    rm /tmp/pps.csv
 ```
 
 Ne pas push ce fichier en l'état sur GIT, le fichier peut ainsi se mettre à jour à chaque version.

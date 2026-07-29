@@ -145,3 +145,5 @@ __pycache__/
 # Local files
 services/data-termsuite/NOTES.md
 services/loterre-resolvers/D63.hurl
+services/biblio-ref/v1/pps.csv
+

@@ -319,8 +319,8 @@ HTTP 200
 {
     "value": {
         "classes": [
-            "clayfeet",
             "annulled",
+            "clayfeet",
             "suspect",
             "tortured"
         ]
