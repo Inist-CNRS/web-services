@@ -280,3 +280,71 @@ jsonpath "$" count == 2
 jsonpath "$[*].value.from_crossref" exists
 jsonpath "$[*].value.raw_ref" exists
 jsonpath "$[*].value.matches_scores" exists
+
+
+# PSS route
+POST {{host}}/v1/pps-search?indent=true
+content-type: application/json
+[
+  {
+    "value": "10.11591/ijeecs.v23.i3.pp1748-1760"
+  },
+  {
+    "value": "10.1111/coin.12508"
+  },
+  {
+    "value": "10.17762/msea.v70i2.13"
+  },
+  {
+    "value": "10.1189/87641.92158"
+  },
+  {
+    "value": [
+      "10.1056/nejm200106073442303",
+      "10.1016/b978-0-323-90638-8.00002-3"
+    ]
+  }
+]
+
+
+HTTP 200
+[{
+    "value": {
+        "classes": [
+            "suspect",
+            "tortured"
+        ]
+    }
+},
+{
+    "value": {
+        "classes": [
+            "clayfeet",
+            "annulled",
+            "suspect",
+            "tortured"
+        ]
+    }
+},
+{
+    "value": {
+        "classes": [
+            "mathgen"
+        ]
+    }
+},
+{
+    "value": {
+        "classes": []
+    }
+},
+{
+    "value": {
+        "classes": [
+            [
+                "expression-of-concern"
+            ],
+            []
+        ]
+    }
+}]

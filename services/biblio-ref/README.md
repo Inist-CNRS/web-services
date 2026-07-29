@@ -15,10 +15,13 @@ Pour les tests en local, il peut être contraignant de télécharger le contenu 
 
 ```sh
 curl -go /tmp/pps.csv 'https://dbrech.irit.fr/pls/apex/f?p=9999:300::IR[allproblematicpapers]_CSV' && \
-awk -F '","' 'index($1,"annulled") {print $2}' /tmp/pps.csv > ~/workspace/web-services/services/biblio-ref/v1/annulled.csv && \
+awk -F '","' 'index($1,"annulled") {print $2}' /tmp/pps.csv > ~/workspace/web-services/services/biblio-ref/v1/annulled.csv  && \
+python3 ~/workspace/web-services/services/biblio-ref/v1/csv2pickle.py ~/workspace/web-services/services/biblio-ref/v1/annulled.csv && \
+rm ~/workspace/web-services/services/biblio-ref/v1/annulled.csv && \
+cp /tmp/pps.csv ~/workspace/web-services/services/biblio-ref/v1/pps.csv && \
+python3 ~/workspace/web-services/services/biblio-ref/v1/csv2pickle-all.py ~/workspace/web-services/services/biblio-ref/v1/pps.csv && \
 rm /tmp/pps.csv && \
-python ~/workspace/web-services/services/biblio-ref/v1/csv2pickle.py ~/workspace/web-services/services/biblio-ref/v1/annulled.csv && \
-rm ~/workspace/web-services/services/biblio-ref/v1/annulled.csv
+rm ~/workspace/web-services/services/biblio-ref/v1/pps.csv
 ```
 
 Ne pas push ce fichier en l'état sur GIT, le fichier peut ainsi se mettre à jour à chaque version.
