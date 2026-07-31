@@ -214,36 +214,6 @@ content-type: application/json
 
 HTTP 200
 [{
-    "id": "https://en.wikipedia.org/wiki/Perseverance_(rover)",
-    "value": [
-        {
-            "term": "perseverance",
-            "frequency": 6,
-            "specificity": 1
-        },
-        {
-            "term": "martian surface",
-            "frequency": 2,
-            "specificity": 0.7063
-        },
-        {
-            "term": "martian atmosphere",
-            "frequency": 2,
-            "specificity": 0.7063
-        },
-        {
-            "term": "crater jezero",
-            "frequency": 1,
-            "specificity": 0.3532
-        },
-        {
-            "term": "jet propulsion laboratory",
-            "frequency": 1,
-            "specificity": 0.3532
-        }
-    ]
-},
-{
     "id": "https://en.wikipedia.org/wiki/Text_mining",
     "value": [
         {
@@ -270,6 +240,36 @@ HTTP 200
             "term": "text data",
             "frequency": 1,
             "specificity": 0.25
+        }
+    ]
+},
+{
+    "id": "https://en.wikipedia.org/wiki/Perseverance_(rover)",
+    "value": [
+        {
+            "term": "perseverance",
+            "frequency": 6,
+            "specificity": 1
+        },
+        {
+            "term": "martian surface",
+            "frequency": 2,
+            "specificity": 0.7063
+        },
+        {
+            "term": "martian atmosphere",
+            "frequency": 2,
+            "specificity": 0.7063
+        },
+        {
+            "term": "crater jezero",
+            "frequency": 1,
+            "specificity": 0.3532
+        },
+        {
+            "term": "jet propulsion laboratory",
+            "frequency": 1,
+            "specificity": 0.3532
         }
     ]
 }]
@@ -739,4 +739,3 @@ HTTP 200
         "Donec luctus magna vitae mi malesuada, eget tristique turpis mattis."
     ]
 }]
-
