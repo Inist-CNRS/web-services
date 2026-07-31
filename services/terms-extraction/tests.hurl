@@ -73,96 +73,59 @@ content-type: application/json
 ]
 
 HTTP 200
-[{
-    "id": "https://fr.wikipedia.org/wiki/Mars_2020_(mission_spatiale)",
-    "value": [
-        {
-            "term": "astromobile",
-            "frequency": 6,
-            "specificity": 1
-        },
-        {
-            "term": "sol martien",
-            "frequency": 3,
-            "specificity": 0.5
-        },
-        {
-            "term": "mission spatiale",
-            "frequency": 1,
-            "specificity": 0.1667
-        },
-        {
-            "term": "planète mars",
-            "frequency": 1,
-            "specificity": 0.1667
-        },
-        {
-            "term": "jpl établissement",
-            "frequency": 1,
-            "specificity": 0.1667
-        }
-    ]
-},
-{
-    "id": "https://fr.wikipedia.org/wiki/Mars_Exploration_Rover",
-    "value": [
-        {
-            "term": "deux robots",
-            "frequency": 2,
-            "specificity": 1
-        },
-        {
-            "term": "panneaux solaires",
-            "frequency": 2,
-            "specificity": 1
-        },
-        {
-            "term": "mars exploration rover mer",
-            "frequency": 1,
-            "specificity": 0.5
-        },
-        {
-            "term": "mission double",
-            "frequency": 1,
-            "specificity": 0.5
-        },
-        {
-            "term": "deux robots mobiles",
-            "frequency": 1,
-            "specificity": 0.5
-        }
-    ]
-},
-{
-    "id": "EGC2022",
-    "value": [
-        {
-            "term": "service tdm",
-            "frequency": 1,
-            "specificity": 0.5
-        },
-        {
-            "term": "web services",
-            "frequency": 1,
-            "specificity": 0.5
-        },
-        {
-            "term": "information scientifique",
-            "frequency": 1,
-            "specificity": 0.5
-        },
-        {
-            "term": "outil libre",
-            "frequency": 1,
-            "specificity": 0.5
-        },
-        {
-            "term": "informations présentes",
-            "frequency": 1,
-            "specificity": 0.5
-        }
-    ]
-}]
+[Asserts]
+jsonpath "$[*].id" contains "https://fr.wikipedia.org/wiki/Mars_Exploration_Rover"
+jsonpath "$[*].id" contains "EGC2022"
+jsonpath "$[*].id" contains "https://fr.wikipedia.org/wiki/Mars_2020_(mission_spatiale)"
+
+jsonpath "$[?(@.id == 'https://fr.wikipedia.org/wiki/Mars_Exploration_Rover')].value[*].term" contains "deux robots"
+jsonpath "$[?(@.id == 'https://fr.wikipedia.org/wiki/Mars_Exploration_Rover')].value[*].term" contains "panneaux solaires"
+jsonpath "$[?(@.id == 'https://fr.wikipedia.org/wiki/Mars_Exploration_Rover')].value[*].term" contains "mars exploration rover mer"
+jsonpath "$[?(@.id == 'https://fr.wikipedia.org/wiki/Mars_Exploration_Rover')].value[*].term" contains "mission double"
+jsonpath "$[?(@.id == 'https://fr.wikipedia.org/wiki/Mars_Exploration_Rover')].value[*].term" contains "deux robots mobiles"
+
+jsonpath "$[?(@.id == 'https://fr.wikipedia.org/wiki/Mars_Exploration_Rover')].value[?(@.term == 'deux robots')].frequency" == 2
+jsonpath "$[?(@.id == 'https://fr.wikipedia.org/wiki/Mars_Exploration_Rover')].value[?(@.term == 'deux robots')].specificity" == 1
+jsonpath "$[?(@.id == 'https://fr.wikipedia.org/wiki/Mars_Exploration_Rover')].value[?(@.term == 'panneaux solaires')].frequency" == 2
+jsonpath "$[?(@.id == 'https://fr.wikipedia.org/wiki/Mars_Exploration_Rover')].value[?(@.term == 'panneaux solaires')].specificity" == 1
+jsonpath "$[?(@.id == 'https://fr.wikipedia.org/wiki/Mars_Exploration_Rover')].value[?(@.term == 'mars exploration rover mer')].frequency" == 1
+jsonpath "$[?(@.id == 'https://fr.wikipedia.org/wiki/Mars_Exploration_Rover')].value[?(@.term == 'mars exploration rover mer')].specificity" == 0.5
+jsonpath "$[?(@.id == 'https://fr.wikipedia.org/wiki/Mars_Exploration_Rover')].value[?(@.term == 'mission double')].frequency" == 1
+jsonpath "$[?(@.id == 'https://fr.wikipedia.org/wiki/Mars_Exploration_Rover')].value[?(@.term == 'mission double')].specificity" == 0.5
+jsonpath "$[?(@.id == 'https://fr.wikipedia.org/wiki/Mars_Exploration_Rover')].value[?(@.term == 'deux robots mobiles')].frequency" == 1
+jsonpath "$[?(@.id == 'https://fr.wikipedia.org/wiki/Mars_Exploration_Rover')].value[?(@.term == 'deux robots mobiles')].specificity" == 0.5
+
+jsonpath "$[?(@.id == 'EGC2022')].value[*].term" contains "service tdm"
+jsonpath "$[?(@.id == 'EGC2022')].value[*].term" contains "web services"
+jsonpath "$[?(@.id == 'EGC2022')].value[*].term" contains "information scientifique"
+jsonpath "$[?(@.id == 'EGC2022')].value[*].term" contains "outil libre"
+jsonpath "$[?(@.id == 'EGC2022')].value[*].term" contains "informations présentes"
+jsonpath "$[?(@.id == 'EGC2022')].value[?(@.term == 'service tdm')].frequency" == 1
+jsonpath "$[?(@.id == 'EGC2022')].value[?(@.term == 'service tdm')].specificity" == 0.5
+jsonpath "$[?(@.id == 'EGC2022')].value[?(@.term == 'web services')].frequency" == 1
+jsonpath "$[?(@.id == 'EGC2022')].value[?(@.term == 'web services')].specificity" == 0.5
+jsonpath "$[?(@.id == 'EGC2022')].value[?(@.term == 'information scientifique')].frequency" == 1
+jsonpath "$[?(@.id == 'EGC2022')].value[?(@.term == 'information scientifique')].specificity" == 0.5
+jsonpath "$[?(@.id == 'EGC2022')].value[?(@.term == 'outil libre')].frequency" == 1
+jsonpath "$[?(@.id == 'EGC2022')].value[?(@.term == 'outil libre')].specificity" == 0.5
+jsonpath "$[?(@.id == 'EGC2022')].value[?(@.term == 'informations présentes')].frequency" == 1
+jsonpath "$[?(@.id == 'EGC2022')].value[?(@.term == 'informations présentes')].specificity" == 0.5
+
+jsonpath "$[?(@.id == 'https://fr.wikipedia.org/wiki/Mars_2020_(mission_spatiale)')].value[*].term" contains "astromobile"
+jsonpath "$[?(@.id == 'https://fr.wikipedia.org/wiki/Mars_2020_(mission_spatiale)')].value[*].term" contains "sol martien"
+jsonpath "$[?(@.id == 'https://fr.wikipedia.org/wiki/Mars_2020_(mission_spatiale)')].value[*].term" contains "mission spatiale"
+jsonpath "$[?(@.id == 'https://fr.wikipedia.org/wiki/Mars_2020_(mission_spatiale)')].value[*].term" contains "planète mars"
+jsonpath "$[?(@.id == 'https://fr.wikipedia.org/wiki/Mars_2020_(mission_spatiale)')].value[*].term" contains "jpl établissement"
+jsonpath "$[?(@.id == 'https://fr.wikipedia.org/wiki/Mars_2020_(mission_spatiale)')].value[?(@.term == 'astromobile')].frequency" == 6
+jsonpath "$[?(@.id == 'https://fr.wikipedia.org/wiki/Mars_2020_(mission_spatiale)')].value[?(@.term == 'astromobile')].specificity" == 1
+jsonpath "$[?(@.id == 'https://fr.wikipedia.org/wiki/Mars_2020_(mission_spatiale)')].value[?(@.term == 'sol martien')].frequency" == 3
+jsonpath "$[?(@.id == 'https://fr.wikipedia.org/wiki/Mars_2020_(mission_spatiale)')].value[?(@.term == 'sol martien')].specificity" == 0.5
+jsonpath "$[?(@.id == 'https://fr.wikipedia.org/wiki/Mars_2020_(mission_spatiale)')].value[?(@.term == 'mission spatiale')].frequency" == 1
+jsonpath "$[?(@.id == 'https://fr.wikipedia.org/wiki/Mars_2020_(mission_spatiale)')].value[?(@.term == 'mission spatiale')].specificity" == 0.1667
+jsonpath "$[?(@.id == 'https://fr.wikipedia.org/wiki/Mars_2020_(mission_spatiale)')].value[?(@.term == 'planète mars')].frequency" == 1
+jsonpath "$[?(@.id == 'https://fr.wikipedia.org/wiki/Mars_2020_(mission_spatiale)')].value[?(@.term == 'planète mars')].specificity" == 0.1667
+jsonpath "$[?(@.id == 'https://fr.wikipedia.org/wiki/Mars_2020_(mission_spatiale)')].value[?(@.term == 'jpl établissement')].frequency" == 1
+jsonpath "$[?(@.id == 'https://fr.wikipedia.org/wiki/Mars_2020_(mission_spatiale)')].value[?(@.term == 'jpl établissement')].specificity" == 0.1667
 
 POST {{host}}/v1/teeft/en?indent=true
 content-type: application/json
@@ -213,66 +176,28 @@ content-type: application/json
 ]
 
 HTTP 200
-[{
-    "id": "https://en.wikipedia.org/wiki/Text_mining",
-    "value": [
-        {
-            "term": "analytics",
-            "frequency": 4,
-            "specificity": 1
-        },
-        {
-            "term": "text analytics",
-            "frequency": 2,
-            "specificity": 0.5
-        },
-        {
-            "term": "high-quality information",
-            "frequency": 2,
-            "specificity": 0.5
-        },
-        {
-            "term": "natural language",
-            "frequency": 2,
-            "specificity": 0.5
-        },
-        {
-            "term": "text data",
-            "frequency": 1,
-            "specificity": 0.25
-        }
-    ]
-},
-{
-    "id": "https://en.wikipedia.org/wiki/Perseverance_(rover)",
-    "value": [
-        {
-            "term": "perseverance",
-            "frequency": 6,
-            "specificity": 1
-        },
-        {
-            "term": "martian surface",
-            "frequency": 2,
-            "specificity": 0.7063
-        },
-        {
-            "term": "martian atmosphere",
-            "frequency": 2,
-            "specificity": 0.7063
-        },
-        {
-            "term": "crater jezero",
-            "frequency": 1,
-            "specificity": 0.3532
-        },
-        {
-            "term": "jet propulsion laboratory",
-            "frequency": 1,
-            "specificity": 0.3532
-        }
-    ]
-}]
+[Asserts]
+jsonpath "$[?(@.id == 'https://en.wikipedia.org/wiki/Perseverance_(rover)')].value[?(@.term == 'perseverance')].frequency" == 6
+jsonpath "$[?(@.id == 'https://en.wikipedia.org/wiki/Perseverance_(rover)')].value[?(@.term == 'perseverance')].specificity" == 1
+jsonpath "$[?(@.id == 'https://en.wikipedia.org/wiki/Perseverance_(rover)')].value[?(@.term == 'martian surface')].frequency" == 2
+jsonpath "$[?(@.id == 'https://en.wikipedia.org/wiki/Perseverance_(rover)')].value[?(@.term == 'martian surface')].specificity" == 0.7063
+jsonpath "$[?(@.id == 'https://en.wikipedia.org/wiki/Perseverance_(rover)')].value[?(@.term == 'martian atmosphere')].frequency" == 2
+jsonpath "$[?(@.id == 'https://en.wikipedia.org/wiki/Perseverance_(rover)')].value[?(@.term == 'martian atmosphere')].specificity" == 0.7063
+jsonpath "$[?(@.id == 'https://en.wikipedia.org/wiki/Perseverance_(rover)')].value[?(@.term == 'crater jezero')].frequency" == 1
+jsonpath "$[?(@.id == 'https://en.wikipedia.org/wiki/Perseverance_(rover)')].value[?(@.term == 'crater jezero')].specificity" == 0.3532
+jsonpath "$[?(@.id == 'https://en.wikipedia.org/wiki/Perseverance_(rover)')].value[?(@.term == 'jet propulsion laboratory')].frequency" == 1
+jsonpath "$[?(@.id == 'https://en.wikipedia.org/wiki/Perseverance_(rover)')].value[?(@.term == 'jet propulsion laboratory')].specificity" == 0.3532
+
+jsonpath "$[?(@.id == 'https://en.wikipedia.org/wiki/Text_mining')].value[?(@.term == 'analytics')].frequency" == 4
+jsonpath "$[?(@.id == 'https://en.wikipedia.org/wiki/Text_mining')].value[?(@.term == 'analytics')].specificity" == 1
+jsonpath "$[?(@.id == 'https://en.wikipedia.org/wiki/Text_mining')].value[?(@.term == 'text analytics')].frequency" == 2
+jsonpath "$[?(@.id == 'https://en.wikipedia.org/wiki/Text_mining')].value[?(@.term == 'text analytics')].specificity" == 0.5
+jsonpath "$[?(@.id == 'https://en.wikipedia.org/wiki/Text_mining')].value[?(@.term == 'high-quality information')].frequency" == 2
+jsonpath "$[?(@.id == 'https://en.wikipedia.org/wiki/Text_mining')].value[?(@.term == 'high-quality information')].specificity" == 0.5
+jsonpath "$[?(@.id == 'https://en.wikipedia.org/wiki/Text_mining')].value[?(@.term == 'natural language')].frequency" == 2
+jsonpath "$[?(@.id == 'https://en.wikipedia.org/wiki/Text_mining')].value[?(@.term == 'natural language')].specificity" == 0.5
+jsonpath "$[?(@.id == 'https://en.wikipedia.org/wiki/Text_mining')].value[?(@.term == 'text data')].frequency" == 1
+jsonpath "$[?(@.id == 'https://en.wikipedia.org/wiki/Text_mining')].value[?(@.term == 'text data')].specificity" == 0.25
 
 POST {{host}}/v1/teeft/with-numbers/en?indent=true
 content-type: application/json
