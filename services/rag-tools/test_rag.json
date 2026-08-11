@@ -1,0 +1,13 @@
+[
+  {
+    "id": "rag_test_001",
+    "value": {
+      "question": "Quelle est la plus grande planète du système solaire et quelles sont ses principales caractéristiques ?",
+      "documents": [
+        "Jupiter est la plus grande planète du système solaire. C'est une planète gazeuse composée principalement d'hydrogène et d'hélium. Elle possède une grande tache rouge qui correspond à une immense tempête observée depuis plusieurs siècles.",
+        "Saturne est une planète gazeuse connue pour ses magnifiques anneaux composés principalement de glace et de roches. Elle est la sixième planète du système solaire en distance au Soleil.",
+        "La Terre est la troisième planète du système solaire en partant du Soleil. Elle possède une atmosphère riche en azote et en oxygène. C'est la seule planète connue où la vie existe actuellement."
+      ]
+    }
+  }
+]
