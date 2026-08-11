@@ -9,6 +9,7 @@
         "EZS_CACHE": true,
         "EZS_VERBOSE": false,
         "NODE_OPTIONS": "--max_old_space_size=1024",
-        "NODE_ENV": "production"
+        "NODE_ENV": "production",
+        "ILAAS_API_KEY": "real_api_key"
     }
 }
