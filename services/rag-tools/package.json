@@ -1,7 +1,7 @@
 {
   "private": true,
   "name": "ws-rag-tools",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "Ws to generate embeddings and use those for rag",
   "repository": {
     "type": "git",
