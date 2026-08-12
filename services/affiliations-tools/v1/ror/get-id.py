@@ -15,7 +15,7 @@ def normalize_city(city):
 
 # Fonction de WS de découpage d'adresse
 def ws_affiliation(affiliation):
-    url = "https://affiliations-tools.services.istex.fr/v1/addresses/parse"
+    url = "http://localhost:31976/v1/addresses/parse"
     headers = {"accept": "application/json", "Content-Type": "application/json"}
     data = [{"id": affiliation, "value": affiliation}]
     response = requests.post(url, headers=headers, json=data)
