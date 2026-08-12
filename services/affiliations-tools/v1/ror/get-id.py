@@ -6,17 +6,16 @@ from requests.exceptions import HTTPError, Timeout, RequestException
 from ratelimit import limits, RateLimitException
 from backoff import on_exception, expo
 
-
-# Fonction de modification de la première virgule de l'affiliation
-# !!! essentiel car le WS adresse/parse normalise les virgules !!!
-def change_part(affiliation):
-    aff_change = affiliation.replace(",", "!", 2)
-    return aff_change
-
+# Normalisation ville (supprime " City" de la ville)
+def normalize_city(city):
+    if isinstance(city, str):
+        normalized = city.replace(" city", "").strip()
+        return normalized
+    return city
 
 # Fonction de WS de découpage d'adresse
 def ws_affiliation(affiliation):
-    url = "http://localhost:31976/v1/addresses/parse"
+    url = "https://affiliations-tools.services.istex.fr/v1/addresses/parse"
     headers = {"accept": "application/json", "Content-Type": "application/json"}
     data = [{"id": affiliation, "value": affiliation}]
     response = requests.post(url, headers=headers, json=data)
@@ -33,25 +32,7 @@ def extract_house(affiliation_data):
         if not houses:
             return "n/a"
 
-        house_list = houses.split("!")
-        if house_list:
-            first_house = house_list[0].lower().strip()
-            keywords = ["department", "departament"]
-            found_house = None
-
-            for keyword in keywords:
-                if keyword in first_house:
-                    if len(house_list) > 1:
-                        found_house = house_list[1].strip()
-                        break
-
-            if found_house:
-                return found_house
-
-            return first_house
-
-        return "n/a"
-    return "n/a"
+    return houses
 
 
 # Extraction de la valeur "city" de sortie du WS
@@ -96,8 +77,7 @@ def request(name):
 
 # Fonction d'appel de toutes les fonctions précédentes
 def api_ror(affiliation):
-    new_aff = change_part(affiliation)
-    aff_ws = ws_affiliation(new_aff)
+    aff_ws = ws_affiliation(affiliation)
     name = extract_house(aff_ws)
     city = extract_city(aff_ws)
     result = request(name)
@@ -106,13 +86,13 @@ def api_ror(affiliation):
 
 # Filtre la sortie de l'API ROR pour ne récupérer que ce qui intéresse
 def filter_api(json, city=None, short=False):
-
     if json == "Error":
         return {"status": "Unexpected data"}
 
     if json and "items" in json:
         for item in json["items"]:
             try :
+                matching_string = item["substring"]
                 id_ror = item["organization"]["id"]
                 score_similarity = item["score"]
 
@@ -128,25 +108,47 @@ def filter_api(json, city=None, short=False):
                         continue
                     break
 
+                all_relations = item.get("organization", {}).get("relationships", [])
+
+                parent_relations = []
+                for relation in all_relations:
+                    if relation.get("type", "").lower() == "parent":
+                        parent_relations.append(relation.get("label", "Unknown"))
+
+                ror_relations = []
+                for relation in all_relations:
+                    if relation.get("type", "").lower() == "parent":
+                        ror_relations.append(relation.get("id", "Unknown"))
+
                 type = item["organization"]["types"]
                 name_geonames = item["organization"]["locations"][0]["geonames_details"]["name"]
                 id_geonames = item["organization"]["locations"][0]["geonames_id"]
+
+                # Normalisation de la ville
+                normalized_geonames_city = normalize_city(name_geonames)
+
                 json_dict = {
                     "status": "Found",
-                    "id_ror": id_ror,
-                    "score": score_similarity,
-                    "name": name_display,
-                    "type": type,
-                    "name_geonames": name_geonames,
-                    "id_geonames": id_geonames,
+                    "matching_string": matching_string,
+                    "information_ror": {
+                        "id_ror": id_ror,
+                        "score": score_similarity,
+                        "name": name_display,
+                        "parent_organization": parent_relations,
+                        "parent_ror" : ror_relations,
+                        "type": type,
+                        "city": normalized_geonames_city,
+                        "id_geonames": id_geonames,
+                    },
                 }
             except :
                 json_dict = {"status": "Incomplete data"}
                 return json_dict
 
             if city:
-                try :
-                    if item["organization"]["locations"][0]["geonames_details"]["name"].lower() == city.lower():
+                try:
+                    # Comparaison avec la ville normalisée
+                    if normalized_geonames_city.lower() == normalize_city(city).lower():
                         return json_dict
                     elif short:
                         return json_dict
@@ -156,29 +158,25 @@ def filter_api(json, city=None, short=False):
 
             elif short == True:
                 return json_dict
-
             else:
-                json_dict = {"status": "No city found"}
+                json_dict = {"status": "No city found", "matching_string": matching_string, "information_ror" : {}}
                 return json_dict
 
         if city:
-            json_dict = {"status": "No match found"}
+            json_dict = {"status": "No match found","matching_string": matching_string,"information_ror" : {}}
             return json_dict
 
         return None
-
     else:
         json_dict = {"status": "Unexpected data"}
         return json_dict
-
 
 def main():
     for line in sys.stdin:
         data = json.loads(line)
         affiliation = data["value"]
 
-        # Boucle pour les affiliations longues (utilisation du WS + house +
-        # city)
+        # Boucle pour les affiliations longues (utilisation du WS + house + city)
         if len(affiliation.split(",")) > 2:
             extracted_info, city = api_ror(affiliation)
             # Si l'API a donné une réponse

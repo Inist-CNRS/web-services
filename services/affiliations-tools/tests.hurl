@@ -577,33 +577,61 @@ HTTP 200
     "id": 1,
     "value": {
         "status": "Found",
-        "id_ror": "https://ror.org/0323bey33",
-        "score": 1,
-        "name": "Institut Lumière Matière",
-        "type": [
-            "facility"
-        ],
-        "name_geonames": "Villeurbanne",
-        "id_geonames": 2968254
+        "matching_string": "Institut Lumière Matière [Villeurbanne]",
+        "information_ror": {
+            "id_ror": "https://ror.org/0323bey33",
+            "score": 1,
+            "name": "Institut Lumière Matière",
+            "parent_organization": [
+                "Lyon 1 Université",
+                "Institut de Physique",
+                "Centre National de la Recherche Scientifique",
+                "Fédération de recherche André-Marie Ampère"
+            ],
+            "parent_ror": [
+                "https://ror.org/029brtt94",
+                "https://ror.org/00z54nq84",
+                "https://ror.org/02feahw73",
+                "https://ror.org/00ffthz36"
+            ],
+            "type": [
+                "facility"
+            ],
+            "city": "Villeurbanne",
+            "id_geonames": 2968254
+        }
     }
 },
 {
     "id": 2,
     "value": {
         "status": "Found",
-        "id_ror": "https://ror.org/03zmsge54",
-        "score": 1,
-        "name": "NSF NOIRLab",
-        "type": [
-            "facility"
-        ],
-        "name_geonames": "Tucson",
-        "id_geonames": 5318313
+        "matching_string": "nsf's national optical-infrared astronomy research laboratory",
+        "information_ror": {
+            "id_ror": "https://ror.org/03zmsge54",
+            "score": 1,
+            "name": "NSF NOIRLab",
+            "parent_organization": [
+                "U.S. National Science Foundation",
+                "Association of Universities for Research in Astronomy"
+            ],
+            "parent_ror": [
+                "https://ror.org/021nxhr62",
+                "https://ror.org/02y5f7c97"
+            ],
+            "type": [
+                "facility"
+            ],
+            "city": "Tucson",
+            "id_geonames": 5318313
+        }
     }
 },
 {
     "id": 3,
     "value": {
-        "status": "No match found"
+        "status": "No match found",
+        "matching_string": "sphere energy sas",
+        "information_ror": {}
     }
 }]
