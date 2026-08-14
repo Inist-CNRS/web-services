@@ -17,10 +17,10 @@ MAX_RETRIES = 4
 RETRY_DELAY = 2
 BATCH_SIZE = 32
 
-PROMPT_PATH = "v1/prompt_rerank.json"
+PROMPT_PATH = "v1/prompt.json"
 PROMPT_ID = "rerank_template"
 
-DEFAULT_TOP_N = 4
+DEFAULT_TOP_N = 6
 
 
 # ==============================
@@ -114,18 +114,73 @@ def call_llm(prompt: str) -> str:
 
 
 # ==============================
+# Sérialisation des métadonnées
+# ==============================
+
+def format_metadata_block(metadata: dict) -> str:
+    """
+    Construit un bloc texte lisible à partir des métadonnées d'un document.
+    Les champs absents sont simplement ignorés (pas de ligne vide/"None").
+    """
+    if not metadata:
+        return ""
+
+    lines = []
+
+    if metadata.get("titre"):
+        lines.append(f"Titre : {metadata['titre']}")
+
+    auteurs = metadata.get("auteurs")
+    if auteurs:
+        lines.append(f"Auteurs : {', '.join(auteurs)}")
+
+    if metadata.get("date_publication"):
+        lines.append(f"Date de publication : {metadata['date_publication']}")
+
+    if metadata.get("journal"):
+        journal_line = f"Journal : {metadata['journal']}"
+        details = []
+        if metadata.get("volume"):
+            details.append(f"volume {metadata['volume']}")
+        if metadata.get("numero"):
+            details.append(f"numéro {metadata['numero']}")
+        if metadata.get("pages"):
+            details.append(f"pages {metadata['pages']}")
+        if details:
+            journal_line += " (" + ", ".join(details) + ")"
+        lines.append(journal_line)
+
+    if metadata.get("doi"):
+        lines.append(f"DOI : {metadata['doi']}")
+
+    mots_cles = metadata.get("mots_cles")
+    if mots_cles:
+        lines.append(f"Mots-clés : {', '.join(mots_cles)}")
+
+    if metadata.get("resume"):
+        lines.append(f"Résumé de l'article : {metadata['resume']}")
+
+    return "\n".join(lines)
+
+
+# ==============================
 # Construction du prompt de reranking
 # ==============================
 
-def build_documents_text(documents):
+def build_documents_text(documents: list[dict]) -> str:
     documents_text = ""
 
     for i, doc in enumerate(documents, start=1):
-        documents_text += (
-            f"--- Document {i} ---\n"
-            f"{doc}\n"
-            f"--- Fin du document {i} ---\n\n"
-        )
+        metadata_block = format_metadata_block(doc.get("metadata"))
+        text = doc.get("text", "")
+
+        block = f"--- Document {i} ---\n"
+        if metadata_block:
+            block += metadata_block + "\n"
+        block += f"Contenu :\n{text}\n"
+        block += f"--- Fin du document {i} ---\n\n"
+
+        documents_text += block
 
     return documents_text
 
@@ -147,8 +202,9 @@ def build_prompt(question, documents, top_n):
 def parse_ranking(raw_response, documents, top_n):
     """
     Attendu : une chaîne du type "3,1,5".
-    Renvoie la liste des documents originaux, réordonnée et tronquée
-    à top_n, dans l'ordre de pertinence donné par le LLM.
+    Renvoie la liste des documents originaux (dict {text, metadata}),
+    réordonnée et tronquée à top_n, dans l'ordre de pertinence donné
+    par le LLM.
 
     En cas de réponse invalide ou d'erreur LLM, on retombe sur les
     top_n premiers documents dans leur ordre d'origine (fallback
@@ -177,12 +233,12 @@ def parse_ranking(raw_response, documents, top_n):
         return documents[:top_n]
 
     reranked = []
+    seen_indices = set()
 
     for idx in indices:
-        if 1 <= idx <= len(documents):
-            doc = documents[idx - 1]
-            if doc not in reranked:
-                reranked.append(doc)
+        if 1 <= idx <= len(documents) and idx not in seen_indices:
+            reranked.append(documents[idx - 1])
+            seen_indices.add(idx)
 
         if len(reranked) >= top_n:
             break
@@ -204,7 +260,7 @@ def process_batch(batch):
     for item in batch:
         question = item["value"]["question"]
         documents = item["value"]["documents"]
-        top_n = item["value"].get("top_n", DEFAULT_TOP_N) # A modifier 
+        top_n = item["value"].get("top_n", DEFAULT_TOP_N)
 
         if not documents:
             output = {

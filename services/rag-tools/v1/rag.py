@@ -146,6 +146,56 @@ def build_history_text(historique):
 
 
 # ==============================
+# Sérialisation des métadonnées
+# ==============================
+
+def format_metadata_block(metadata: dict) -> str:
+    """
+    Construit un bloc texte lisible à partir des métadonnées d'un document.
+    Les champs absents sont simplement ignorés (pas de ligne vide/"None").
+    """
+    if not metadata:
+        return ""
+
+    lines = []
+
+    if metadata.get("titre"):
+        lines.append(f"Titre : {metadata['titre']}")
+
+    auteurs = metadata.get("auteurs")
+    if auteurs:
+        lines.append(f"Auteurs : {', '.join(auteurs)}")
+
+    if metadata.get("date_publication"):
+        lines.append(f"Date de publication : {metadata['date_publication']}")
+
+    if metadata.get("journal"):
+        journal_line = f"Journal : {metadata['journal']}"
+        details = []
+        if metadata.get("volume"):
+            details.append(f"volume {metadata['volume']}")
+        if metadata.get("numero"):
+            details.append(f"numéro {metadata['numero']}")
+        if metadata.get("pages"):
+            details.append(f"pages {metadata['pages']}")
+        if details:
+            journal_line += " (" + ", ".join(details) + ")"
+        lines.append(journal_line)
+
+    if metadata.get("doi"):
+        lines.append(f"DOI : {metadata['doi']}")
+
+    mots_cles = metadata.get("mots_cles")
+    if mots_cles:
+        lines.append(f"Mots-clés : {', '.join(mots_cles)}")
+
+    if metadata.get("resume"):
+        lines.append(f"Résumé de l'article : {metadata['resume']}")
+
+    return "\n".join(lines)
+
+
+# ==============================
 # Construction du prompt RAG
 # ==============================
 
@@ -153,11 +203,22 @@ def build_prompt(question, documents, historique):
     documents_text = ""
 
     for i, doc in enumerate(documents, start=1):
-        documents_text += (
-            f"--- Document {i} ---\n"
-            f"{doc}\n"
-            f"--- Fin du document {i} ---\n\n"
-        )
+        # L'identifiant du chunk (ex: "doi:10.xxxx/xxx#chunk1") sert de
+        # label de citation dans la réponse finale du LLM, plutôt qu'un
+        # simple numéro de position. Fallback sur "Document i" si l'id
+        # est absent (ne devrait pas arriver en usage normal).
+        doc_label = doc.get("id") or f"Document {i}"
+
+        metadata_block = format_metadata_block(doc.get("metadata"))
+        text = doc.get("text", "")
+
+        block = f"--- {doc_label} ---\n"
+        if metadata_block:
+            block += metadata_block + "\n"
+        block += f"Contenu :\n{text}\n"
+        block += f"--- Fin du document {doc_label} ---\n\n"
+
+        documents_text += block
 
     historique_text = build_history_text(historique)
 

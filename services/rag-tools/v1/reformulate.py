@@ -17,7 +17,7 @@ MAX_RETRIES = 4
 RETRY_DELAY = 2
 BATCH_SIZE = 32
 
-PROMPT_PATH = "v1/prompt_reformulate.json"
+PROMPT_PATH = "v1/prompt.json"
 PROMPT_ID = "reformulation_template"
 
 NO_HISTORY_TEXT = "Aucun historique de conversation disponible."
