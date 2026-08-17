@@ -1,4 +1,4 @@
-# ws-rag-tools@0.1.0
+# ws-rag-tools@0.2.0
 
 Ws to generate embeddings and use those for rag
 
