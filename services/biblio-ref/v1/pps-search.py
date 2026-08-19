@@ -19,22 +19,22 @@ for line in sys.stdin:
     if isinstance(doi, str):
         classes = get_classes_for_doi(doi)
         if "id" in data:
-            output = {"id": data["id"], "value": {"classes": classes}}
+            output = {"id": data["id"], "value": {"tags": classes}}
         else:
-            output = {"value": {"classes": classes}}
+            output = {"value": {"tags": classes}}
 
     elif isinstance(doi, list):
         classes_list = [get_classes_for_doi(elt) for elt in doi]
         if "id" in data:
-            output = {"id": data["id"], "value": {"classes": classes_list}}
+            output = {"id": data["id"], "value": {"tags": classes_list}}
         else:
-            output = {"value": {"classes": classes_list}}
+            output = {"value": {"tags": classes_list}}
 
     else:
         if "id" in data:
-            output = {"id": data["id"], "value": {"classes": []}}
+            output = {"id": data["id"], "value": {"tags": []}}
         else:
-            output = {"value": {"classes": []}}
+            output = {"value": {"tags": []}}
 
     json.dump(output, sys.stdout)
     sys.stdout.write("\n")
