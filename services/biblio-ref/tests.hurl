@@ -334,7 +334,7 @@ content-type: application/json
 HTTP 200
 [{
     "value": {
-        "classes": [
+        "tags": [
             "suspect",
             "tortured"
         ]
@@ -342,7 +342,7 @@ HTTP 200
 },
 {
     "value": {
-        "classes": [
+        "tags": [
             "annulled",
             "clayfeet",
             "suspect",
@@ -352,19 +352,19 @@ HTTP 200
 },
 {
     "value": {
-        "classes": [
+        "tags": [
             "mathgen"
         ]
     }
 },
 {
     "value": {
-        "classes": []
+        "tags": []
     }
 },
 {
     "value": {
-        "classes": [
+        "tags": [
             [
                 "expression-of-concern"
             ],
