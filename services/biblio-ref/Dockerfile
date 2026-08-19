@@ -17,8 +17,5 @@ COPY --chown=daemon:daemon ./config.json /app/config.json
 
 # Download the list of annulled papers from PPS + process it
 RUN curl -go /tmp/pps.csv 'https://dbrech.irit.fr/pls/apex/f?p=9999:300::IR[allproblematicpapers]_CSV' && \
-    awk -F '","' 'index($1,"annulled") {print $2}' /tmp/pps.csv > /app/public/v1/annulled.csv && \
-    python v1/csv2pickle.py /app/public/v1/annulled.csv && \
-    rm /app/public/v1/annulled.csv && \
     python v1/csv2pickle-all.py /tmp/pps.csv && \
     rm /tmp/pps.csv
