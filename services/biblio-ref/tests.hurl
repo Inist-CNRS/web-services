@@ -76,99 +76,6 @@ HTTP 200
         "status": "found",
         "mismatches_detected": "",
         "reference": "_ problem in DOI > Jurgens et al. (2018). Measuring the Evolution of a Scientific Field through Citation Frames. Transactions of the Association for Computational Linguistics. 10.1162/tacl a 00028",
-        "reference_found": "FROM CROSSREF > Jurgens et al. (2018). Measuring the Evolution of a Scientific Field through Citation Frames. Transactions of the Associationfor Computational Linguistics. 10.1162/tacl_a_00028."
-    }
-},
-{
-    "value": {
-        "doi": "10.1056/nejmoa1200303",
-        "status": "retracted",
-        "mismatches_detected": "date ; source",
-        "reference": "RETRACTED > Estruch R., Primary Prevention of Cardiovascular Disease with a Mediterranean Diet, 10.1056/nejmoa1200303",
-        "reference_found": "FROM CROSSREF > Estruch et al. (2013). RETRACTED: Primary Prevention of Cardiovascular Disease with a Mediterranean Diet. New England Journalof Medicine. 10.1056/nejmoa1200303."
-    }
-},
-{
-    "value": {
-        "doi": "",
-        "status": "to_be_verified",
-        "mismatches_detected": "",
-        "reference": "HALUCINATED > Zohuri, B. (2019). Selective herbivory of thyme chemotypes by a mollusk and a grasshopper (pp. 81-98). Woodhead Publishing.",
-        "reference_found": "FROM CROSSREF > Linhart et al. (1999). Selective herbivory of thyme chemotypes by a mollusk and a grasshopper. Ecologia mediterranea. 10.3406/ecmed.1999.1879."
-    }
-},
-{
-    "value": {
-        "doi": "",
-        "status": "to_be_verified",
-        "mismatches_detected": "",
-        "reference": "Federated Learning for Privacy Preserving Intelligent Health- care Application to Breast Cancer Detection. ACM. https://doi.org/10. 1145/3700838.3703679",
-        "reference_found": "REFERENCE ASSOCIATED WITH THE DOI FROM CROSSREF > Amritanjali et al. (2025). Federated Learning for Privacy Preserving Intelligent HealthcareApplication to Breast Cancer Detection. Proceedings of the 26th International Conference on Distributed Computing and Networking. 10.1145/3700838.3703679."
-    }
-},
-{
-    "value": {
-        "doi": "10.1007/978-3-030-89554-9_1",
-        "status": "feet_of_clay",
-        "mismatches_detected": "",
-        "reference": "10.1007/978-3-030-89554-9_1",
-        "reference_found": "FROM CROSSREF > Singh et al. (2022). Role of Machine Learning and Deep Learning in Internet of Things enabled Smart Cities. Internet of Things. 10.1007/978-3-030-89554-9_1."
-    }
-},
-{
-    "value": {
-        "doi": "10.1007/978-3-030-89554-9_1",
-        "status": "feet_of_clay",
-        "mismatches_detected": "",
-        "reference": "Singh et al. (2022). Role of Machine Learning and Deep Learning in Internet of Things enabled Smart Cities. Internet of Things.",
-        "reference_found": "FROM CROSSREF > Singh et al. (2022). Role of Machine Learning and Deep Learning in Internet of Things enabled Smart Cities. Internet of Things. 10.1007/978-3-030-89554-9_1."
-    }
-}]
-
-
-HTTP 200
-[{
-    "value": {
-        "doi": "10.3406/ecmed.1999.1879",
-        "status": "found",
-        "mismatches_detected": "date ; source",
-        "reference": "Y. B. LINHART. L. CHAOUNI-BENABDALLAH, J.-M. PARRY & J. D. THOMPSON - Selective herbivory of thyme chemotypes by a mollusk and a grasshopper",
-        "reference_found": "FROM CROSSREF > Linhart et al. (1999). Selective herbivory of thyme chemotypes by a mollusk and a grasshopper. Ecologia mediterranea. 10.3406/ecmed.1999.1879."
-    }
-},
-{
-    "value": {
-        "doi": "10.1016/b978-0-323-90638-8.00002-3",
-        "status": "found",
-        "mismatches_detected": "",
-        "reference": "https://doi.org/10.1016/b978-0-323-90638-8.00002-3",
-        "reference_found": "FROM CROSSREF > Bahman Zohuri. (2021). Integral Molten Salt Reactor. Molten Salt Reactors and Integrated Molten Salt Reactors. 10.1016/b978-0-323-90638-8.00002-3."
-    }
-},
-{
-    "value": {
-        "doi": "10.1016/b978-0-323-90638-8.00002-3",
-        "status": "found",
-        "mismatches_detected": "",
-        "reference": "OCR problem > 10.1016/b978-0-323-90638- 8.00002-3",
-        "reference_found": "FROM CROSSREF > Bahman Zohuri. (2021). Integral Molten Salt Reactor. Molten Salt Reactors and Integrated Molten Salt Reactors. 10.1016/b978-0-323-90638-8.00002-3."
-    }
-},
-{
-    "value": {
-        "doi": "10.48433/cr_he642",
-        "status": "found",
-        "mismatches_detected": "",
-        "reference": "10.48433/cr_he6 42",
-        "reference_found": "FROM DATACITE > Rohde et al. (2024). MGF North Sea II: Effects of the exclusion of bottom-contact fishing on benthic habitats in the Natura 2000 sites 'Sylt Outer Reef' and 'Borkum Reef Ground', Cruise No. HE642, 30.05.2024 - 14.06.2024, Bremerhaven (Germany) - Bremerhaven (Germany). Begutachtungspanel Forschungsschiffe. 10.48433/cr_he642"
-    }
-},
-{
-    "value": {
-        "doi": "10.1162/tacl_a_00028",
-        "status": "found",
-        "mismatches_detected": "",
-        "reference": "_ problem in DOI > Jurgens et al. (2018). Measuring the Evolution of a Scientific Field through Citation Frames. Transactions of the Association for Computational Linguistics. 10.1162/tacl a 00028",
         "reference_found": "FROM CROSSREF > Jurgens et al. (2018). Measuring the Evolution of a Scientific Field through Citation Frames. Transactions of the Association for Computational Linguistics. 10.1162/tacl_a_00028."
     }
 },
@@ -201,20 +108,20 @@ HTTP 200
 },
 {
     "value": {
-      "doi": "10.1007/978-3-030-89554-9_1",
-      "status": "feet_of_clay",
-      "mismatches_detected": "",
-      "reference": "10.1007/978-3-030-89554-9_1",
-      "reference_found": "FROM CROSSREF > Singh et al. (2022). Role of Machine Learning and Deep Learning in Internet of Things enabled Smart Cities. Internet of Things. 10.1007/978-3-030-89554-9_1."
+        "doi": "10.1007/978-3-030-89554-9_1",
+        "status": "feet_of_clay",
+        "mismatches_detected": "",
+        "reference": "10.1007/978-3-030-89554-9_1",
+        "reference_found": "FROM CROSSREF > Singh et al. (2022). Role of Machine Learning and Deep Learning in Internet of Things enabled Smart Cities. Internet of Things. 10.1007/978-3-030-89554-9_1."
     }
 },
 {
     "value": {
-      "doi": "10.1007/978-3-030-89554-9_1",
-      "status": "feet_of_clay",
-      "mismatches_detected": "",
-      "reference": "Singh et al. (2022). Role of Machine Learning and Deep Learning in Internet of Things enabled Smart Cities. Internet of Things. ",
-      "reference_found": "FROM CROSSREF > Singh et al. (2022). Role of Machine Learning and Deep Learning in Internet of Things enabled Smart Cities. Internet of Things. 10.1007/978-3-030-89554-9_1."
+        "doi": "10.1007/978-3-030-89554-9_1",
+        "status": "feet_of_clay",
+        "mismatches_detected": "",
+        "reference": "Singh et al. (2022). Role of Machine Learning and Deep Learning in Internet of Things enabled Smart Cities. Internet of Things.",
+        "reference_found": "FROM CROSSREF > Singh et al. (2022). Role of Machine Learning and Deep Learning in Internet of Things enabled Smart Cities. Internet of Things. 10.1007/978-3-030-89554-9_1."
     }
 }]
 
