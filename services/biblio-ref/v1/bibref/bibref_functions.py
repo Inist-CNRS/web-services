@@ -30,6 +30,9 @@ source_match_threshold = 0.84
 with open("v1/annulled.pickle", "rb") as file:
     retracted_doi = pickle.load(file)
 
+# get a list of clayfeet DOIs
+with open("v1/clayfeet.pickle", "rb") as file:
+    clayfeet_doi = pickle.load(file)
 
 def write_in_logs(message):
     date_error = datetime.datetime.fromtimestamp(time.time()).strftime('%Y-%m-%d %H:%M:%S')
@@ -606,12 +609,13 @@ def process_metadore_doi(doi, raw_ref):
     return metadore_status_code, doi, others_biblio_info
 
 
-def biblio_ref(ref_biblio, retracted_doi=retracted_doi):
+def biblio_ref(ref_biblio, retracted_doi=retracted_doi, clayfeet_doi=clayfeet_doi):
     """
     The main function of this service : use all previous function to validate a biblio ref.
     Args:
-        ref_biblio (_type_): _description_
-        retracted_doi (_type_): _description_
+        ref_biblio (str): raw ref
+        retracted_doi (set): retracted references - from pps
+        clayfeet_doi(set): feet of clay references - from pps
     """
     reference_found = ""
     # check types
@@ -642,9 +646,11 @@ def biblio_ref(ref_biblio, retracted_doi=retracted_doi):
                     reference_found = "REFERENCE ASSOCIATED WITH THE DOI " + reference_found
                     return {"doi": "", "status": "to_be_verified", "reference_found": reference_found, "mismatches_detected": process_mismatches({})}
 
-            ### Can be retracted
+            ### Can be retracted or clayfeet
             if doi in retracted_doi:
                 return {"doi": doi, "status": "retracted", "reference_found": reference_found, "mismatches_detected": process_mismatches(potential_different_content)}
+            if doi in clayfeet_doi:
+                return {"doi": doi, "status": "feet_of_clay", "reference_found": reference_found, "mismatches_detected": process_mismatches(potential_different_content)}
 
             return {"doi": doi, "status": "found", "reference_found": reference_found, "mismatches_detected": process_mismatches(potential_different_content)}
 
@@ -667,26 +673,30 @@ def biblio_ref(ref_biblio, retracted_doi=retracted_doi):
                         reference_found = "REFERENCE ASSOCIATED WITH THE DOI " + reference_found
                         return {"doi": "", "status": "to_be_verified", "reference_found": reference_found, "mismatches_detected": process_mismatches(potential_different_content)}
 
-                ### Can be retracted
+                ### Can be retracted or clayfeet
                 if doi in retracted_doi:
                     return {"doi": doi, "status": "retracted", "reference_found": reference_found, "mismatches_detected": process_mismatches(potential_different_content)}
+                if doi in clayfeet_doi:
+                    return {"doi": doi, "status": "feet_of_clay", "reference_found": reference_found, "mismatches_detected": process_mismatches(potential_different_content)}
 
                 return {"doi": doi, "status": "found", "reference_found": reference_found, "mismatches_detected": process_mismatches({})}
 
             status, doi, others_biblio_info, potential_different_content = verify_biblio_without_doi(ref_biblio, wrong_doi=True)
             reference_found = others_biblio_info["raw_ref"]
 
-            # # # Can be retracted
+            ### Can be retracted or clayfeet
             if doi in retracted_doi:
                 return {"doi": doi, "status": "retracted", "reference_found": reference_found, "mismatches_detected": process_mismatches(potential_different_content)}
+            if doi in clayfeet_doi:
+                return {"doi": doi, "status": "feet_of_clay", "reference_found": reference_found, "mismatches_detected": process_mismatches(potential_different_content)}
 
-            # # # can't be not found : there is a doi. Should be on Crossref or DataCite.
+            ### can't be not found : there is a doi. Should be on Crossref or DataCite.
             if status == "not_found":
                 return {"doi": "", "status": "to_be_verified", "reference_found": "", "mismatches_detected":process_mismatches({})}
 
             return {"doi": doi, "status": status, "reference_found": reference_found, "mismatches_detected":process_mismatches(potential_different_content)}
 
-        # # # for others errors
+        ### for others errors
         else:
             write_in_logs("DOI requests failed. Crossref status code :" + str(crossref_status_code))
             return {"doi": "", "status": "error_service", "reference_found": "", "mismatches_detected": process_mismatches({})}
@@ -695,9 +705,11 @@ def biblio_ref(ref_biblio, retracted_doi=retracted_doi):
     else:
         status, doi, others_biblio_info, potential_different_content = verify_biblio_without_doi(ref_biblio)
         reference_found = others_biblio_info["raw_ref"]
-        # # # Can be retracted
+        ### Can be retracted or clayfeet
         if doi in retracted_doi:
             return {"doi": doi, "status": "retracted", "reference_found": reference_found, "mismatches_detected": process_mismatches(potential_different_content)}
+        if doi in clayfeet_doi:
+            return {"doi": doi, "status": "feet_of_clay", "reference_found": reference_found, "mismatches_detected": process_mismatches(potential_different_content)}
 
         if status != "found":
             potential_different_content = {}

@@ -22,12 +22,7 @@ curl -go ~/workspace/web-services/services/biblio-ref/v1/pps.csv 'https://dbrech
 Puis on modifie la ligne là du dockerfile :
 
 ```sh
-COPY v1/pps.csv /tmp/pps.csv
-RUN awk -F '","' 'index($1,"annulled") {print $2}' /tmp/pps.csv > /app/public/v1/annulled.csv && \
-    python v1/csv2pickle.py /app/public/v1/annulled.csv && \
-    rm /app/public/v1/annulled.csv && \
-    python v1/csv2pickle-all.py /tmp/pps.csv && \
-    rm /tmp/pps.csv
+RUN python v1/csv2pickle.py v1/pps.csv
 ```
 
-Ne pas push ce fichier en l'état sur GIT, le fichier peut ainsi se mettre à jour à chaque version.
+Ne pas push ce fichier en l'état sur GIT, le fichier peut ainsi se mettre à jour à chaque version. Il est ignoré par défaut.
