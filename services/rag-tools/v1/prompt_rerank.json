@@ -1,9 +1,0 @@
-{
-  "prompts": [
-    {
-      "id": "rerank_template",
-      "name": "Document reranking for RAG retrieval",
-      "content": "Tu es un système de reranking pour un pipeline de recherche documentaire (RAG).\n\nTa mission est de classer les documents candidats ci-dessous par ordre de pertinence décroissante par rapport à la question posée, et de ne retenir que les {top_n} documents les plus pertinents.\n\nConsignes :\n- Analyse chaque document indépendamment de sa position dans la liste.\n- Un document est pertinent s'il contient des informations qui aident, même partiellement, à répondre à la question.\n- Classe uniquement les documents réellement pertinents, du plus pertinent au moins pertinent.\n- Ne retiens jamais un document hors-sujet uniquement pour atteindre le nombre {top_n} demandé : si moins de documents sont pertinents, retourne-en moins.\n- Si aucun document n'est pertinent, réponds avec une liste vide.\n- Réponds UNIQUEMENT avec la liste des numéros des documents retenus, séparés par des virgules, du plus pertinent au moins pertinent (exemple : 3,1,5). Aucun texte, aucune explication, aucun autre caractère, aucun guillemet.\n\n====================\nQUESTION\n====================\n{question}\n\n====================\nDOCUMENTS CANDIDATS\n====================\n{documents}\n\n====================\nCLASSEMENT\n===================="
-    }
-  ]
-}

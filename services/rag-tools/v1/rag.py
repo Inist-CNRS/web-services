@@ -18,27 +18,11 @@ RETRY_DELAY = 2
 BATCH_SIZE = 32
 
 PROMPT_PATH = "v1/prompt.json"
-PROMPT_ID = "round1_template"
+PROMPT_ID_RAG = "rag_template"
+PROMPT_ID_DEFINITION = "definition_extraction_template"
 
 NO_HISTORY_TEXT = "Aucun historique de conversation disponible."
 
-
-# ==============================
-# Chargement du prompt
-# ==============================
-
-def load_prompt():
-    with open(PROMPT_PATH, "r", encoding="utf-8") as f:
-        data = json.load(f)
-
-    for prompt in data["prompts"]:
-        if prompt["id"] == PROMPT_ID:
-            return prompt["content"]
-
-    raise ValueError(f"Prompt {PROMPT_ID} not found")
-
-
-PROMPT_TEMPLATE = load_prompt()
 
 
 # ==============================
@@ -48,6 +32,35 @@ PROMPT_TEMPLATE = load_prompt()
 def print_log(message):
     print(message, file=sys.stderr)
 
+
+# ==============================
+# Arguments optionnels
+# ==============================
+
+rag_type = sys.argv[sys.argv.index("-p") + 1] if "-p" in sys.argv else "rag"
+rag_type = "rag" if rag_type not in ["definition"] else rag_type
+print_log("Rag type : " + rag_type)
+
+prompt_id = PROMPT_ID_RAG
+if rag_type == "definition":
+    prompt_id = PROMPT_ID_DEFINITION
+print_log("Prompt ID : " + prompt_id)
+# ==============================
+# Chargement du prompt
+# ==============================
+
+def load_prompt(prompt_id):
+    with open(PROMPT_PATH, "r", encoding="utf-8") as f:
+        data = json.load(f)
+
+    for prompt in data["prompts"]:
+        if prompt["id"] == prompt_id:
+            return prompt["content"]
+
+    raise ValueError(f"Prompt {prompt_id} not found")
+
+
+PROMPT_TEMPLATE = load_prompt(prompt_id)
 
 # ==============================
 # Appel LLM

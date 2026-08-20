@@ -18,10 +18,36 @@ RETRY_DELAY = 2
 BATCH_SIZE = 32
 
 PROMPT_PATH = "v1/prompt.json"
-PROMPT_ID_RAG = "reformulation_template"
-PROMPT_ID_DEFINITION = "definition_reformulation_template"
+PROMPT_ID = "classification_template"
 
 NO_HISTORY_TEXT = "Aucun historique de conversation disponible."
+
+# Types de requête reconnus. DEFAULT_TYPE est utilisé en repli si la
+# réponse du LLM ne correspond à aucun type valide (réponse mal formée,
+# hors-liste, erreur d'appel...). Pour ajouter un nouveau type à l'avenir :
+# 1. l'ajouter à VALID_TYPES, 2. mettre à jour le prompt classification_template
+# pour lui décrire ce nouveau type.
+VALID_TYPES = {"rag", "definition"}
+DEFAULT_TYPE = "rag"
+
+
+# ==============================
+# Chargement du prompt
+# ==============================
+
+def load_prompt():
+    with open(PROMPT_PATH, "r", encoding="utf-8") as f:
+        data = json.load(f)
+
+    for prompt in data["prompts"]:
+        if prompt["id"] == PROMPT_ID:
+            return prompt["content"]
+
+    raise ValueError(f"Prompt {PROMPT_ID} not found")
+
+
+PROMPT_TEMPLATE = load_prompt()
+
 
 # ==============================
 # Logs
@@ -30,33 +56,6 @@ NO_HISTORY_TEXT = "Aucun historique de conversation disponible."
 def print_log(message):
     print(message, file=sys.stderr)
 
-# ==============================
-# Arguments optionnels
-# ==============================
-
-rag_type = sys.argv[sys.argv.index("-p") + 1] if "-p" in sys.argv else "rag"
-rag_type = "rag" if rag_type not in ["definition"] else rag_type
-print_log("Rag type : " + rag_type)
-prompt_id = PROMPT_ID_RAG
-if rag_type == "definition":
-    prompt_id == PROMPT_ID_DEFINITION
-
-# ==============================
-# Chargement du prompt
-# ==============================
-
-def load_prompt(prompt_id):
-    with open(PROMPT_PATH, "r", encoding="utf-8") as f:
-        data = json.load(f)
-
-    for prompt in data["prompts"]:
-        if prompt["id"] == prompt_id:
-            return prompt["content"]
-
-    raise ValueError(f"Prompt {prompt_id} not found")
-
-
-PROMPT_TEMPLATE = load_prompt(prompt_id)
 
 # ==============================
 # Appel LLM
@@ -79,7 +78,7 @@ def call_llm(prompt: str) -> str:
             }
         ],
         "stream": False,
-        "max_tokens": 2000
+        "max_tokens": 20
     }
 
     for attempt in range(1, MAX_RETRIES + 1):
@@ -134,8 +133,7 @@ def build_history_text(historique):
     chaque tour étant un dict avec les clés "role" et "content".
 
     Si aucun historique n'est fourni (absent, None ou liste vide),
-    un texte par défaut est renvoyé, et on considère qu'il n'y a
-    pas besoin de reformuler.
+    un texte par défaut est renvoyé.
     """
     if not historique:
         return NO_HISTORY_TEXT
@@ -151,7 +149,7 @@ def build_history_text(historique):
 
 
 # ==============================
-# Construction du prompt de reformulation
+# Construction du prompt de classification
 # ==============================
 
 def build_prompt(question, historique):
@@ -161,6 +159,33 @@ def build_prompt(question, historique):
         question=question,
         historique=historique_text
     )
+
+
+# ==============================
+# Parsing de la réponse du LLM
+# ==============================
+
+def parse_classification(raw_response: str) -> str:
+    """
+    Normalise et valide la réponse du LLM. Renvoie DEFAULT_TYPE si la
+    réponse est vide, mal formée, ou ne correspond à aucun type reconnu
+    (plutôt que de bloquer le pipeline sur un type invalide).
+    """
+    if raw_response == "Error" or not raw_response:
+        print_log("Classification invalide, fallback sur le type par défaut")
+        return DEFAULT_TYPE
+
+    cleaned = raw_response.strip().lower()
+    # Tolère une éventuelle ponctuation ou guillemets résiduels
+    cleaned = cleaned.strip(" .\"'`")
+
+    if cleaned not in VALID_TYPES:
+        print_log(
+            f"Type '{raw_response}' non reconnu, fallback sur '{DEFAULT_TYPE}'"
+        )
+        return DEFAULT_TYPE
+
+    return cleaned
 
 
 # ==============================
@@ -175,30 +200,17 @@ def process_batch(batch):
         question = item["value"]["question"]
         historique = item["value"].get("historique", [])
 
-        # Pas d'historique -> pas besoin d'appeler le LLM,
-        # la question reste inchangée.
-        if not historique:
-            reformulated_question = question
-        else:
-            prompt = build_prompt(
-                question,
-                historique
-            )
+        prompt = build_prompt(
+            question,
+            historique
+        )
 
-            reformulated_question = call_llm(prompt)
-
-            if reformulated_question == "Error":
-                # En cas d'échec, on retombe sur la question d'origine
-                # plutôt que de bloquer le pipeline.
-                print_log(
-                    "Reformulation failed, "
-                    "falling back to original question"
-                )
-                reformulated_question = question
+        raw_response = call_llm(prompt)
+        rag_type = parse_classification(raw_response)
 
         output = {
             "id": item["id"],
-            "value": reformulated_question
+            "value": rag_type
         }
 
         sys.stdout.write(

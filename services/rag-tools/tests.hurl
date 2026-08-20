@@ -19,6 +19,26 @@ jsonpath "$[0].value.vector" count > 0
 
 
 # ==============================
+# Embedding API
+# ==============================
+
+POST {{host}}/v1/embedding_api
+content-type: application/json
+[
+	{
+		"id": "embed_001",
+		"value": "Quelles sont les principales caractéristiques de Jupiter ?"
+	}
+]
+
+HTTP 200
+Content-Type: application/json
+[Asserts]
+jsonpath "$[0].id" == "embed_001"
+jsonpath "$[0].value.vector" count > 0
+
+
+# ==============================
 # Reformulate
 # ==============================
 
