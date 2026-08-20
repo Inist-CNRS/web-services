@@ -325,7 +325,6 @@ if clustering_done:
     if not empty_keywords:
         for idx in top_p_doc_per_cluster.keys():
             top_p_doc_per_cluster[idx]["keywords"]= keywords[idx]
-        ncf.write_in_logs(json.dumps(top_p_doc_per_cluster))
 
         clusters_names = ncf.name_and_resume_cluster(top_p_doc_per_cluster)
         ncf.write_in_logs("Clusters nommés")
@@ -342,10 +341,10 @@ else:
 indice_in_cluster = 0
 for i in range(len_data):
     if i in indice_out_cluster:
-        all_data[i]["value"] = {"cluster": "0", "cluster_name":"Unknown", "keywords": []}
+        all_data[i]["value"] = {"cluster": "0", "cluster_name":"Unknown", "cluster_abstract": "Unknown", "keywords": []}
     else:
         label = str(int(clusterer.labels_[indice_in_cluster] + 1))
-        all_data[i]["value"] = {"cluster": label, "cluster_name":clusters_names[label], "keywords": keywords[label]}
+        all_data[i]["value"] = {"cluster": label, "cluster_name":clusters_names[label]["title"], "cluster_abstract": clusters_names[label]["abstract"], "keywords": keywords[label]}
         # increment on cluster indices only bc noise isn't in "clusterer model"
         indice_in_cluster += 1
 
