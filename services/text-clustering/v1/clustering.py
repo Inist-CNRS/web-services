@@ -7,6 +7,7 @@ from sentence_transformers import SentenceTransformer
 from sklearn.preprocessing import StandardScaler
 from sklearn.cluster import KMeans
 from sklearn.metrics import silhouette_score
+from sklearn.metrics.pairwise import cosine_distances
 import random
 import umap
 import os
@@ -159,6 +160,35 @@ def truncate_text_for_teeft(text):
     return shuffled_text
 
 
+def extract_best_documents(raw_texts, embedding_texts, clusterer, nb_cluster):
+    # Extract p best documents
+    top_p_documents_per_cluster = {}
+    # Nb de document par cluster à récupérer (8 pour 2 et décroît jusqu'à 2 pour 8)
+    p = 16//nb_cluster
+    for cluster_id in range(nb_cluster):
+        top_p_documents_per_cluster[str(cluster_id+1)] = {"best_abstracts": []}
+        indices_in_cluster = np.where(clusterer.labels_ == cluster_id)[0]
+        texts_in_cluster = [
+            texts[id_in_cluster] for id_in_cluster in indices_in_cluster
+            ]
+        
+        barycenter = np.mean(texts_in_cluster, axis=0)
+        distances_to_barycenter = cosine_distances(
+            texts_in_cluster,
+            barycenter.reshape(1, -1)
+            )
+        
+        sorted_indices = list(indices_in_cluster[
+            np.argsort(distances_to_barycenter.flatten())
+            ])
+        sorted_indices.reverse()
+        p = min(p, len(sorted_indices))
+        for idx in sorted_indices[:p]:
+            top_p_documents_per_cluster[str(cluster_id+1)]["best_abstracts"].append(
+                raw_texts[idx].replace("<AI-generated>", " ").strip()[:2000]
+                )
+    return top_p_documents_per_cluster
+
 # # WS
 # Embedding
 all_data = []
@@ -170,6 +200,7 @@ ncf.write_in_logs("Données reçues")
 
 len_data = len(all_data)
 
+raw_texts = []
 texts = []
 indice_out_cluster = []
 for i in range(len_data):
@@ -189,12 +220,14 @@ for i in range(len_data):
                     indice_out_cluster.append(i)
                     continue
                 texts.append(model.encode(to_embedded))
+                raw_texts.append(str(" ; ".join(value)))
                 
             elif isinstance(value, str):
                 if len(value) < 4:
                     indice_out_cluster.append(i)
                     continue
                 texts.append(model.encode(value))
+                raw_texts.append(value)
                 
             else:
                 indice_out_cluster.append(i)
@@ -285,13 +318,20 @@ if clustering_done:
     except Exception:
         pass
     
+    # Add top docs to dictonary
+    top_p_doc_per_cluster = extract_best_documents(raw_texts, texts, clusterer, nb_cluster)
+
     # Name clusters (only if there is keywords)
     if not empty_keywords:
-        clusters_names = ncf.name_cluster_with_kw(keywords)
+        for idx in top_p_doc_per_cluster.keys():
+            top_p_doc_per_cluster[idx]["keywords"]= keywords[idx]
+        ncf.write_in_logs(json.dumps(top_p_doc_per_cluster))
+
+        clusters_names = ncf.name_and_resume_cluster(top_p_doc_per_cluster)
         ncf.write_in_logs("Clusters nommés")
 
     else:
-        clusters_names = {str(i+1): "Unknown" for i in range(n_clusters)}
+        clusters_names = {str(i+1): {"title": "Unknown", "abstract": "Unknown"} for i in range(n_clusters)}
 
     # Add res for noise cluster
     keywords["0"] = []
