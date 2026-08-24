@@ -24,8 +24,8 @@ Les tests destinés à être joués sur GitHub sont dans `tests.hurl`, mais ils 
 limités à la route `v1/base-line`, qui est la seule à ne pas faire appel à un
 service web.
 
-Pour réellement tester les autres routes, utilisez la variable `HURL_blocked`, et mettez-la à `false`, pour signaler que vous lancez les tests depuis une adresse IP autorisée à accéder aux services ISTEX:
+Pour réellement tester les autres routes, utilisez la variable `HURL_VARIABLE_blocked`, et mettez-la à `false`, pour signaler que vous lancez les tests depuis une adresse IP autorisée à accéder aux services ISTEX:
 
 ```bash
-HURL_blocked=false npm run test:local data-workflow
+HURL_VARIABLE_blocked=false npm run test:local data-workflow
 ```
