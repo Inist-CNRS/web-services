@@ -18,7 +18,7 @@ HTTP 200
 # Capture the computing token
 [Captures]
 computing_token: jsonpath "$[0].value"
-retrieve_route: jsonpath "$[0].retrieve-json"
+retrieve_route: jsonpath "$[0]['retrieve-json']"
 [Asserts]
 variable "computing_token" exists
 variable "retrieve_route" exists
@@ -111,7 +111,7 @@ HTTP 200
 # Capture the computing token
 [Captures]
 fr_computing_token: jsonpath "$[0].value"
-retrieve_route: jsonpath "$[0].retrieve-json"
+retrieve_route: jsonpath "$[0]['retrieve-json']"
 [Asserts]
 variable "fr_computing_token" exists
 variable "retrieve_route" exists
@@ -183,7 +183,7 @@ HTTP 200
 # Capture the computing token
 [Captures]
 fr_computing_token: jsonpath "$[0].value"
-retrieve_route: jsonpath "$[0].retrieve-json"
+retrieve_route: jsonpath "$[0]['retrieve-json']"
 [Asserts]
 variable "fr_computing_token" exists
 variable "retrieve_route" exists
