@@ -26,6 +26,12 @@ skip: {{blocked}}
   },
   {
     "value": "Federated Learning for Privacy Preserving Intelligent Health- care Application to Breast Cancer Detection. ACM. https://doi.org/10. 1145/3700838.3703679"
+  },
+  {
+    "value": "10.1007/978-3-030-89554-9_1"
+  },
+  {
+    "value": "Singh et al. (2022). Role of Machine Learning and Deep Learning in Internet of Things enabled Smart Cities. Internet of Things."
   }
 ]
 
@@ -100,6 +106,24 @@ HTTP 200
         "mismatches_detected": "",
         "reference": "Federated Learning for Privacy Preserving Intelligent Health- care Application to Breast Cancer Detection. ACM. https://doi.org/10. 1145/3700838.3703679",
         "reference_found": "REFERENCE ASSOCIATED WITH THE DOI FROM CROSSREF > Amritanjali et al. (2025). Federated Learning for Privacy Preserving Intelligent Healthcare Application to Breast Cancer Detection. Proceedings of the 26th International Conference on Distributed Computing and Networking. 10.1145/3700838.3703679."
+    }
+},
+{
+    "value": {
+        "doi": "10.1007/978-3-030-89554-9_1",
+        "status": "feet_of_clay",
+        "mismatches_detected": "",
+        "reference": "10.1007/978-3-030-89554-9_1",
+        "reference_found": "FROM CROSSREF > Singh et al. (2022). Role of Machine Learning and Deep Learning in Internet of Things enabled Smart Cities. Internet of Things. 10.1007/978-3-030-89554-9_1."
+    }
+},
+{
+    "value": {
+        "doi": "10.1007/978-3-030-89554-9_1",
+        "status": "feet_of_clay",
+        "mismatches_detected": "",
+        "reference": "Singh et al. (2022). Role of Machine Learning and Deep Learning in Internet of Things enabled Smart Cities. Internet of Things.",
+        "reference_found": "FROM CROSSREF > Singh et al. (2022). Role of Machine Learning and Deep Learning in Internet of Things enabled Smart Cities. Internet of Things. 10.1007/978-3-030-89554-9_1."
     }
 }]
 
@@ -280,3 +304,71 @@ jsonpath "$" count == 2
 jsonpath "$[*].value.from_crossref" exists
 jsonpath "$[*].value.raw_ref" exists
 jsonpath "$[*].value.matches_scores" exists
+
+
+# PSS route
+POST {{host}}/v1/pps-search?indent=true
+content-type: application/json
+[
+  {
+    "value": "10.11591/ijeecs.v23.i3.pp1748-1760"
+  },
+  {
+    "value": "10.1111/coin.12508"
+  },
+  {
+    "value": "10.17762/msea.v70i2.13"
+  },
+  {
+    "value": "10.1189/87641.92158"
+  },
+  {
+    "value": [
+      "10.1056/nejm200106073442303",
+      "10.1016/b978-0-323-90638-8.00002-3"
+    ]
+  }
+]
+
+
+HTTP 200
+[{
+    "value": {
+        "tags": [
+            "suspect",
+            "tortured"
+        ]
+    }
+},
+{
+    "value": {
+        "tags": [
+            "annulled",
+            "clayfeet",
+            "suspect",
+            "tortured"
+        ]
+    }
+},
+{
+    "value": {
+        "tags": [
+            "mathgen"
+        ]
+    }
+},
+{
+    "value": {
+        "tags": []
+    }
+},
+{
+    "value": {
+        "tags": [
+            [
+                "expression-of-concern"
+            ],
+            []
+        ]
+    }
+}]
