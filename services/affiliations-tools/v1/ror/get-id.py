@@ -91,7 +91,7 @@ def filter_api(json, city=None, short=False):
 
     if json and "items" in json:
         for item in json["items"]:
-            try :
+            try:
                 matching_string = item["substring"]
                 id_ror = item["organization"]["id"]
                 score_similarity = item["score"]
@@ -107,13 +107,10 @@ def filter_api(json, city=None, short=False):
                 all_relations = item.get("organization", {}).get("relationships", [])
 
                 parent_relations = []
-                for relation in all_relations:
-                    if relation.get("type", "").lower() == "parent":
-                        parent_relations.append(relation.get("label", "Unknown"))
-
                 ror_relations = []
                 for relation in all_relations:
                     if relation.get("type", "").lower() == "parent":
+                        parent_relations.append(relation.get("label", "Unknown"))
                         ror_relations.append(relation.get("id", "Unknown"))
 
                 type = item["organization"]["types"]
@@ -131,7 +128,7 @@ def filter_api(json, city=None, short=False):
                         "score": score_similarity,
                         "name": name_display,
                         "parent_organization": parent_relations,
-                        "parent_ror" : ror_relations,
+                        "parent_ror": ror_relations,
                         "type": type,
                         "city": normalized_geonames_city,
                         "id_geonames": id_geonames,
