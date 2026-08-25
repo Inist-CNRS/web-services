@@ -100,13 +100,9 @@ def filter_api(json, city=None, short=False):
                 name_display = all_names[0]["value"]
 
                 for name in all_names:
-                    for type_name in name["types"]:
-                        if type_name in ("label", "ror_display"):
-                            name_display = name["value"]
-                            break
-                    else:
-                        continue
-                    break
+                    if "label" in name.get("types", []) or "ror_display" in name.get("types", []):
+                        name_display = name["value"]
+                        break
 
                 all_relations = item.get("organization", {}).get("relationships", [])
 
@@ -146,15 +142,12 @@ def filter_api(json, city=None, short=False):
                 return json_dict
 
             if city:
-                try:
-                    # Comparaison avec la ville normalisée
-                    if normalized_geonames_city.lower() == normalize_city(city).lower():
-                        return json_dict
-                    elif short:
-                        return json_dict
-                except :
-                    json_dict = {"status": "Incomplete data"}
+                if normalized_geonames_city.lower() == normalize_city(city).lower():
                     return json_dict
+                elif short:
+                    return json_dict
+                json_dict = {"status": "Incomplete data"}
+                return json_dict
 
             elif short:
                 return json_dict
