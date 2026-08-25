@@ -487,27 +487,27 @@ Cela donne accès aux informations de débogage interne de `ezs`.
 Pour tester un service lancé localement, utiliser:
 
 ```bash
-HURL_blocked=false npm run test:local service-name
+HURL_VARIABLE_blocked=false npm run test:local service-name
 ```
 
 Pour tester un service en production, taper:
 
 ```bash
-HURL_blocked=false npm run test:remote service-name
+HURL_VARIABLE_blocked=false npm run test:remote service-name
 ```
 
 Pour tester tous les services en production qui ont un fichier
 `tests.hurl`:
 
 ```bash
-HURL_blocked=false npm run test:remotes services/*
+HURL_VARIABLE_blocked=false npm run test:remotes services/*
 ```
 
 Pour tester uniquement certains services en production (à condition qu'ils aient
 un fichier `tests.hurl`):
 
 ```bash
-HURL_blocked=false npm run test:remotes service-name service2-name
+HURL_VARIABLE_blocked=false npm run test:remotes service-name service2-name
 ```
 
 > [!TIP]  
@@ -528,7 +528,7 @@ publié (sans URL externe), en se basant sur l'URL présente dans `swagger.json`
 ```
 
 > [!IMPORTANT]  
-> La partie `HURL_blocked=false` permet de préciser qu'on veut lancer *tous* les
+> La partie `HURL_VARIABLE_blocked=false` permet de préciser qu'on veut lancer *tous* les
 > tests du fichier `tests.hurl` concerné.  
 > Cette variable d'environnement est là pour permettre de lancer les tests d'un
 > fichier `tests.hurl` tout en ignorant ceux qui nécessitent un accès aux
@@ -538,10 +538,10 @@ publié (sans URL externe), en se basant sur l'URL présente dans `swagger.json`
 > production.  
 > Dans ce cas, ou quand l'ordinateur depuis lequel on veut lancer les tests n'a
 > pas d'IP autorisée (par exemple chez soi, sans le VPN), on doit positionner la
-> variable `HURL_blocked` à `true`.  
+> variable `HURL_VARIABLE_blocked` à `true`.  
 
 > [!TIP]  
-> Pour ne pas avoir à taper systématiquement `HURL_blocked=false` avant toute
+> Pour ne pas avoir à taper systématiquement `HURL_VARIABLE_blocked=false` avant toute
 > commande de lancement de tests, on peut exporter cette variable depuis son
 > `~/.bashrc` (si vous utilisez bash):  
 >
@@ -549,7 +549,7 @@ publié (sans URL externe), en se basant sur l'URL présente dans `swagger.json`
 > # hurl variable to skip tests accessing protected (blocked) API
 > # true: You are not able to access *.services.istex.fr
 > # false: You are able to access *.services.istex.fr
-> export HURL_blocked=false
+> export HURL_VARIABLE_blocked=false
 > ```
 
 ## Ajout dans la liste du README

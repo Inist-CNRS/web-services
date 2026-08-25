@@ -1,9 +1,9 @@
 # WARNING: This file was not generated, but manually written.
 # DON'T OVERWRITE IT
 # Use it to test:
-# 	HURL_blocked=false npx hurl --test --variable host="http://localhost:31976" tests.hurl
+# 	HURL_VARIABLE_blocked=false npx hurl --test --variable host="http://localhost:31976" tests.hurl
 # or (from root of the repo)
-#   HURL_blocked=false npm run test:local data-workflow
+#   HURL_VARIABLE_blocked=false npm run test:local data-workflow
 
 # WARNING: The webhook URLs don't last forever.
 #          Without activity, they expire after one week!
@@ -11,7 +11,7 @@
 #          Thus, there are commented here.
 
 ############################################################################
-# Test v1/hiddentext-detect : Texte blanc sur fond blanc et taille du texte minuscule 
+# Test v1/hiddentext-detect : Texte blanc sur fond blanc et taille du texte minuscule
 POST {{host}}/v1/hiddentext-detect
 content-type: application/x-gzip
 # X-Webhook-Success: https://webhook.site/684dd427-5484-404a-b5a0-80e5b6726a1c

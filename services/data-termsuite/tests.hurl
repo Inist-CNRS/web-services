@@ -18,7 +18,7 @@ HTTP 200
 # Capture the computing token
 [Captures]
 computing_token: jsonpath "$[0].value"
-retrieve_route: jsonpath "$[0].retrieve-json"
+retrieve_route: jsonpath "$[0]['retrieve-json']"
 [Asserts]
 variable "computing_token" exists
 variable "retrieve_route" exists
@@ -111,7 +111,7 @@ HTTP 200
 # Capture the computing token
 [Captures]
 fr_computing_token: jsonpath "$[0].value"
-retrieve_route: jsonpath "$[0].retrieve-json"
+retrieve_route: jsonpath "$[0]['retrieve-json']"
 [Asserts]
 variable "fr_computing_token" exists
 variable "retrieve_route" exists
@@ -143,11 +143,11 @@ HTTP 200
 Content-Type: application/json
 [Asserts]
 jsonpath "$" count == 5
-jsonpath "$[*].key" includes "a: thermique"
-jsonpath "$[*].key" includes "n: fission"
-jsonpath "$[*].key" includes "n: biomasse"
-jsonpath "$[*].key" includes "na: énergie éolien"
-jsonpath "$[*].key" includes "a: électrique"
+jsonpath "$[*].key" contains "a: thermique"
+jsonpath "$[*].key" contains "n: fission"
+jsonpath "$[*].key" contains "n: biomasse"
+jsonpath "$[*].key" contains "na: énergie éolien"
+jsonpath "$[*].key" contains "a: électrique"
 
 # Order is not guaranteed
 #[{
@@ -183,7 +183,7 @@ HTTP 200
 # Capture the computing token
 [Captures]
 fr_computing_token: jsonpath "$[0].value"
-retrieve_route: jsonpath "$[0].retrieve-json"
+retrieve_route: jsonpath "$[0]['retrieve-json']"
 [Asserts]
 variable "fr_computing_token" exists
 variable "retrieve_route" exists
@@ -215,8 +215,8 @@ HTTP 200
 Content-Type: application/json
 [Asserts]
 jsonpath "$" count == 5
-jsonpath "$[*].id" includes "a: thermique"
-jsonpath "$[*].id" includes "n: fission"
-jsonpath "$[*].id" includes "n: biomasse"
-jsonpath "$[*].id" includes "na: énergie éolien"
-jsonpath "$[*].id" includes "a: électrique"
+jsonpath "$[*].id" contains "a: thermique"
+jsonpath "$[*].id" contains "n: fission"
+jsonpath "$[*].id" contains "n: biomasse"
+jsonpath "$[*].id" contains "na: énergie éolien"
+jsonpath "$[*].id" contains "a: électrique"
