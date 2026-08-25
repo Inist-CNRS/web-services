@@ -141,7 +141,7 @@ def filter_api(json, city=None, short=False):
                         "id_geonames": id_geonames,
                     },
                 }
-            except :
+            except Exception:
                 json_dict = {"status": "Incomplete data"}
                 return json_dict
 
