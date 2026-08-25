@@ -156,7 +156,7 @@ def filter_api(json, city=None, short=False):
                     json_dict = {"status": "Incomplete data"}
                     return json_dict
 
-            elif short == True:
+            elif short:
                 return json_dict
             else:
                 json_dict = {"status": "No city found", "matching_string": matching_string, "information_ror" : {}}
