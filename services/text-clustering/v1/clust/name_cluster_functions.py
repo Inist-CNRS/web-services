@@ -59,13 +59,6 @@ def parse_llm_output(answer: str, expected_keys: set) -> dict | None:
     try:
         parsed_answer = json.loads(answer)
 
-        # Vérifie que toutes les clés attendues sont présentes
-        if set(parsed_answer.keys()) != expected_keys:
-            write_in_logs(
-                f"Clés reçues différentes des clés attendues : {sorted(parsed_answer.keys())} vs {sorted(expected_keys)}"
-            )
-            return None
-
         # Vérifie que chaque valeur est un dict avec "title" et "abstract"
         for key, value in parsed_answer.items():
             if not isinstance(value, dict):
@@ -152,8 +145,8 @@ def call_llm_prompt(
 def name_and_resume_cluster(keywords: dict) -> dict:
     """From a dictionary of cluster_id / keywords+relevant abstract, generate
     a dictionary cluster_id / cluster_name.
-    Ex : input {"1":["kw1","kw2"]}
-    output {"1": "title1"}
+    Ex : input {"1": {"keywords": ["kw1","kw2"], "best_abstracts": ["...",...]}, ...}
+    output {"1": {"title": "title1", "abstract": "abstract1", ...}
 
     Args:
         keywords (dict): id to kw dict
