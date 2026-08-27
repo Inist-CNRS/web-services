@@ -14,6 +14,9 @@ import os
 import numpy as np
 from collections import Counter
 import time
+import logging
+
+logging.basicConfig(level=logging.WARNING, format='%(asctime)s | %(levelname)s | %(message)s', datefmt='%Y-%m-%d %H:%M:%S')
 
 # Paramètres globaux
 os.environ["TOKENIZERS_PARALLELISM"] = "false"
@@ -21,9 +24,21 @@ api_key = os.getenv("ILAAS_API_KEY")
 model = SentenceTransformer("./v1/all-MiniLM-L6-v2")
 n_keywords = 20
 # Langue du résultat (par défaut anglais)
+
 lang_output = str(sys.argv[sys.argv.index("-p") + 1] if "-p" in sys.argv else "en")
 if lang_output not in ["fr", "en"]:
     lang_output="en"
+try:
+    IDENTIFIER = str(sys.argv[sys.argv.index("-identifier") + 1] if "-identifier" in sys.argv else "")
+except Exception:
+    IDENTIFIER = ""
+
+
+def write_in_logs(message, error=None):
+    if error:
+        logging.error(f"id: {IDENTIFIER} | Message: {message} | Python_error: {str(error)}")
+    else:
+        logging.warning(f"id: {IDENTIFIER} | Message: {message}")
 
 
 def center_reduce(matrix):
@@ -87,38 +102,6 @@ def teeft(data, n_keywords, language="en"):
         return []
 
 
-def filter_keywords(data, threshold):
-    """function who filter teeft results
-
-    Args:
-        keywords_dict (dict): dict to filter
-        threshold (float): threshold
-
-    Returns:
-        dict: dict filtered
-    """
-    word_count = {}
-
-    for key, keywords in data.items():
-        for keyword in keywords:
-            if keyword in word_count:
-                word_count[keyword] += 1
-            else:
-                word_count[keyword] = 1
-
-    filtered_data = {}
-
-    for key, keywords in data.items():
-        filtered_keywords = [
-            keyword
-            for keyword in keywords
-            if word_count[keyword] / len(data) <= threshold
-        ]
-        filtered_data[key] = filtered_keywords
-
-    return filtered_data
-
-
 def truncate_text_for_teeft(text, max_char = 200000):
     """
     Truncate text for teeft if it is too large.
@@ -162,6 +145,38 @@ def generate_summary_prompt(clusters, language=lang_output):
     return prompt.strip()
 
 
+def extract_best_documents(raw_texts, embedding_texts, clusterer, nb_cluster):
+    # Extract p best documents
+    top_p_documents_per_cluster = {}
+    if nb_cluster == 0:
+        return {}
+    # Nb de document par cluster à récupérer (8 pour 2 et décroît jusqu'à 2 pour 8)
+    p = 16//nb_cluster
+    for cluster_id in range(nb_cluster):
+        top_p_documents_per_cluster[str(cluster_id+1)] = {"best_abstracts": []}
+        indices_in_cluster = np.where(clusterer.labels_ == cluster_id)[0]
+        texts_in_cluster = [
+            embedding_texts[id_in_cluster] for id_in_cluster in indices_in_cluster
+            ]
+        
+        barycenter = np.mean(texts_in_cluster, axis=0)
+        distances_to_barycenter = cosine_distances(
+            texts_in_cluster,
+            barycenter.reshape(1, -1)
+            )
+        
+        sorted_indices = list(indices_in_cluster[
+            np.argsort(distances_to_barycenter.flatten())
+            ])
+        sorted_indices.reverse()
+        p_loc = min(p, len(sorted_indices))
+        for idx in sorted_indices[:p_loc]:
+            top_p_documents_per_cluster[str(cluster_id+1)]["best_abstracts"].append(
+                raw_texts[idx].replace("<AI-generated>", " ").strip()[:2000]
+                )
+    return top_p_documents_per_cluster
+
+
 def call_llm_prompt(message: str, model_name: str = "gemma-4-31b", timeout: int = 60, retries: int = 3) -> str:
     messages = [{"role": "user", "content":message}]
     base_url = "https://llm.ilaas.fr/v1"
@@ -190,11 +205,11 @@ def call_llm_prompt(message: str, model_name: str = "gemma-4-31b", timeout: int 
                 else:
                     raise ValueError(f"Réponse inattendue de l'API : {response_json}")
             else:
-                sys.stderr.write(f"Attempt {attempt + 1}: API returned {response.status_code} - {response.text}\n")
+                write_in_logs(f"Attempt {attempt + 1}: API returned {response.status_code} - {response.text}\n")
                 if attempt < retries - 1:
                     time.sleep(2*(attempt+1))
         except Exception as e:
-            sys.stderr.write(f"Attempt {attempt + 1}: Exception - {str(e)}\n")
+            write_in_logs(f"Attempt {attempt + 1}: Exception - {str(e)}\n")
             if attempt < retries - 1:
                 time.sleep(2*(attempt+1))
     return ""
@@ -234,86 +249,88 @@ def main():
             indice_out_cluster.append(i)
 
 
-    # Dimension reduction
-    umap_model = umap.UMAP(
-        n_neighbors=max(10, min(30, int(len_data / 20))),
-        n_components=10,
-        metric="cosine",
-        min_dist=0.0,
-    )
-    reduced_embeddings = umap_model.fit_transform(texts)
+    texts = np.array(texts)
+    write_in_logs("Embeddings calculés")
+
+    if len(texts) == 0:
+        indice_out_cluster = list(range(len_data))
+        reduced_embeddings = np.empty((0, 10))
+    else:
+        try:
+            umap_model = umap.UMAP(
+                n_neighbors=max(10, min(30, int(len(texts)/20))),
+                n_components=10,
+                metric="cosine",
+                random_state=42,
+                min_dist=0.0,
+                n_jobs=1
+            )
+            reduced_embeddings = umap_model.fit_transform(texts)
+        except Exception as e:
+            write_in_logs("Error in textClustering while UMAP processing", e)
+            reduced_embeddings = center_reduce(texts)
+
+        write_in_logs("Dimension réduite")
 
     try:
         nb_cluster = find_optimal_k(reduced_embeddings, max_k=8)
     except Exception as e:
-        sys.stderr.write(f"Error in find_optimal_k : return 2 clusters. Error : {str(e)}")
+        write_in_logs(f"Error in find_optimal_k : return 2 clusters. Error : {str(e)}")
         nb_cluster=2
     # Clustering
-    clusterer = KMeans(n_clusters=nb_cluster, random_state=42)
-    clusterer.fit(reduced_embeddings)
-
-
-    # Extract p best documents
-    top_p_documents_per_cluster = {}
-    # Nb de document par cluster à récupérer (8 pour 2 et décroît jusqu'à 2 pour 8)
-    p = 16//nb_cluster
-    for cluster_id in range(nb_cluster):
-        top_p_documents_per_cluster[cluster_id] = {"best_abstracts": []}
-        indices_in_cluster = np.where(clusterer.labels_ == cluster_id)[0]
-        texts_in_cluster = [
-            texts[id_in_cluster] for id_in_cluster in indices_in_cluster
-            ]
+    try:
+        clusterer = KMeans(n_clusters=nb_cluster, random_state=42)
+        clusterer.fit(reduced_embeddings)
+    except Exception as e:
+        write_in_logs(f"Error in find_optimal_k : return 2 clusters. Error : {str(e)}")
+        sys.stdout.write(json.dumps({"value": "Can not generate a corpus abstract."}))
+        sys.stdout.write("\n")
+        exit(0)
         
-        barycenter = np.mean(texts_in_cluster, axis=0)
-        distances_to_barycenter = cosine_distances(
-            texts_in_cluster,
-            barycenter.reshape(1, -1)
-            )
-        
-        sorted_indices = list(indices_in_cluster[
-            np.argsort(distances_to_barycenter.flatten())
-            ])
-        sorted_indices.reverse()
-        p = min(p, len(sorted_indices))
-        for idx in sorted_indices[:p]:
-            top_p_documents_per_cluster[cluster_id]["best_abstracts"].append(
-                raw_texts[idx].replace("<AI-generated>", "").strip()[:2000]
-                )
+    write_in_logs("Clustering exécuté")
 
+    top_p_doc_per_cluster = extract_best_documents(raw_texts, texts, clusterer, nb_cluster)
 
     # Create datas for teeft
+    indice_in_cluster = 0
     keywords = (
         {}
     )  # keywords is a dictionary, the key is the cluster and value the input / output of teeft
 
-    for i in range(len(raw_texts)):
-        label = int(clusterer.labels_[i])
-        if label >= 0:
-            if label in keywords:
-                keywords[label] += "\n" + str(all_data[i]["value"])
-            else:
-                keywords[label] = str(all_data[i]["value"])
+    for i in range(len_data):
+        if i not in indice_out_cluster:
+            label = str(int(clusterer.labels_[indice_in_cluster] + 1))
+            if label != 0:
+                if label in keywords:
+                    keywords[label] += "\n\n" + str(all_data[i]["value"])
+                else:
+                    keywords[label] = str(all_data[i]["value"])
+            indice_in_cluster += 1
 
     # Execute teeft
-    for i in range(nb_cluster):
-        data = {"id": i, "value": truncate_text_for_teeft(keywords[i])}
-        keywords[i] = teeft(data, n_keywords)
-
-    # Filter dict : delete every keywords who has a to big frequency
-    try:
-        keywords = filter_keywords(keywords, threshold=0.5)
-    except:
-        pass
+    n_clusters = len(keywords)
+    for i in range(n_clusters):
+        label = str(i+1)
+        if label in keywords:
+            keywords[label] = truncate_text_for_teeft(keywords[label])
+            data = {"id": label, "value": keywords[label]}
+            teeft_res = teeft(data, n_keywords)
+            keywords[label] = teeft_res
+        else:
+            continue
+    write_in_logs("Appels à Teeft terminés")
 
     for cluster_id in range(nb_cluster):
-        top_p_documents_per_cluster[cluster_id]["keywords"] = keywords[cluster_id]
+        top_p_doc_per_cluster[str(cluster_id+1)]["keywords"] = keywords[str(cluster_id+1)]
     cluster_counts = Counter(clusterer.labels_)
     for cluster_id, count in cluster_counts.items():
-        top_p_documents_per_cluster[cluster_id]["size_cluster"] = count/len(raw_texts)
-        
-
-    prompt = generate_summary_prompt(top_p_documents_per_cluster)
+        top_p_doc_per_cluster[str(cluster_id+1)]["size_cluster"] = count/len(raw_texts)
+    
+    prompt = generate_summary_prompt(top_p_doc_per_cluster)
     corpus_abstract = call_llm_prompt(prompt)
+    
+    write_in_logs("Résumé généré")
+
 
     sys.stdout.write(json.dumps({"value": corpus_abstract}))
     sys.stdout.write("\n")
