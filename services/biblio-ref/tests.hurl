@@ -25,7 +25,7 @@ skip: {{blocked}}
     "value": "HALUCINATED > Zohuri, B. (2019). Selective herbivory of thyme chemotypes by a mollusk and a grasshopper (pp. 81-98). Woodhead Publishing."
   },
   {
-    "value": "Federated Learning for Privacy Preserving Intelligent Health- care Application to Breast Cancer Detection. ACM. https://doi.org/10. 1145/3700838.3703679"
+    "value": "Federated Learning for Privacy Preserving Intelligent Health- care Application to Breast Cancer Detection. ACM. https://doi.org/10.1145/3700838.3703 679"
   },
   {
     "value": "10.1007/978-3-030-89554-9_1"
@@ -104,7 +104,7 @@ HTTP 200
         "doi": "",
         "status": "to_be_verified",
         "mismatches_detected": "",
-        "reference": "Federated Learning for Privacy Preserving Intelligent Health- care Application to Breast Cancer Detection. ACM. https://doi.org/10. 1145/3700838.3703679",
+        "reference": "Federated Learning for Privacy Preserving Intelligent Health- care Application to Breast Cancer Detection. ACM. https://doi.org/10.1145/3700838.3703 679",
         "reference_found": "REFERENCE ASSOCIATED WITH THE DOI FROM CROSSREF > Amritanjali et al. (2025). Federated Learning for Privacy Preserving Intelligent Healthcare Application to Breast Cancer Detection. Proceedings of the 26th International Conference on Distributed Computing and Networking. 10.1145/3700838.3703679."
     }
 },

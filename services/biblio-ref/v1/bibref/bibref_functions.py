@@ -24,7 +24,7 @@ metadore_headers = {
 session_crossref = LimiterSession(per_second=10)
 session_metadore = LimiterSession(per_second=10)
 title_match_threshold = 0.84
-source_match_threshold = 0.84
+source_match_threshold = 0.8
 
 # get a list of retracted DOIs
 with open("v1/annulled.pickle", "rb") as file:
@@ -90,48 +90,51 @@ def process_mismatches(mismatches_json):
     else:
         return " ; ".join([x for x in mismatches_json.keys()])
     
-    
-# DOI funtions
-def find_doi(text, delete_line_break=True, process_deleted_underscore=False):
+
+def find_doi(text, delete_line_break=False, process_deleted_underscore=False):
     """
-    Function to find a DOI (Digital Object Identifier) in the given text.
+    Cherche un DOI dans le texte donné.
+
+    Le DOI est supposé se terminer par l'un des marqueurs suivants,
+    typiques d'une référence bibliographique :
+      - une virgule ","
+      - un point suivi d'un espace ". " (fin de phrase)
+      - la fin du texte
+
     Args:
-        text (str): the input text in which to search for the DOI
-        delete_line_break (bool): Set to True when doi characters separated by a line break must be processed.
-        process_deleted_underscore (bool): Set to True when doi characters separated by an underscore must be processed.
-    Returns
-        str: the found DOI, or an empty string if not found
+        text (str): le texte dans lequel chercher le DOI.
+        delete_line_break (bool): si True, les espaces/retours à la ligne
+            trouvés à l'intérieur du DOI (coupure due à un saut de ligne)
+            sont supprimés.
+        process_deleted_underscore (bool): si True, les espaces trouvés à
+            l'intérieur du DOI sont remplacés par des "_" (underscore perdu
+            à l'OCR). Prioritaire sur delete_line_break si les deux sont True.
+    Returns:
+        str: le DOI trouvé (en minuscules), ou une chaîne vide si non trouvé.
     """
-    
-    doi_regex = r"10\.\d{4,}\/[^\s\,]+"
-    if delete_line_break:
-        text = text.replace(" ", "")
-        
+    doi_regex = r"(10\.\d{4,}/)(.+?)(?:,|\.(?=\s|$)|$)"
+    match = re.search(doi_regex, text, flags=re.DOTALL)
+
+    if match is None:
+        return _find_arxiv_id(text)
+
+    prefix, suffix = match.group(1), match.group(2)
+
     if process_deleted_underscore:
-        doi_regex = r"10\.\d{4,}\/[^\,]+"
+        suffix = re.sub(r"\s+", "_", suffix)
+    elif delete_line_break:
+        suffix = re.sub(r"\s+", "", suffix)
 
-    doi = re.search(doi_regex, text)
-    if doi is None:
-        if "arxiv" in text.lower():
-            # Try to find an arXiv ID
-            arxiv_regex = r".*(\d{4}\.\d{4,5}(?:v\d+)?).*"
-            arxiv_id = re.search(arxiv_regex, text)
-            if arxiv_id is None:
-                return ""
-            else:
-                arxiv_id = arxiv_id.group(1)
-                doi = "10.48550/arXiv." + arxiv_id
-                return doi
-        else:
-            return ""
+    return (prefix + suffix).lower().strip().rstrip(".")
 
-    try:
-        doiStr = doi.group()
-        if process_deleted_underscore:
-            return doiStr.lower().replace(" ", "_")
-        return doiStr.lower().replace(" ", "")
-    except Exception:
+
+def _find_arxiv_id(text):
+    if "arxiv" not in text.lower():
         return ""
+    arxiv_id = re.search(r"(\d{4}\.\d{4,5}(?:v\d+)?)", text)
+    if arxiv_id is None:
+        return ""
+    return "10.48550/arxiv." + arxiv_id.group(1).lower()
 
 
 # specially designed functions for crossref API
@@ -227,7 +230,7 @@ def get_title_authors_doi_source_date(message):
         "title": title,
         "first_author_given": first_author_given,
         "first_author_name": first_author_name,
-        "doi": doi,
+        "doi": doi.rstrip("."),
         "date": str(date),
         "source": source,
         "raw_ref": raw_ref.replace("  ", " ")
@@ -433,25 +436,20 @@ def verify_biblio_without_doi(ref_biblio, headers=crossref_headers, wrong_doi=Fa
 
 
 def process_crossref_doi(doi, raw_ref):
-    """Check DOI. Process if this one is cut or if _ has been replace by spaces.
-
-    Args:
-        doi (str): the doi to check
-        raw_ref (str): the raw reference
-    """
+    """Check DOI. Process if this one is cut (line break) or if "_" was replaced by spaces (OCR)."""
     doi = doi.strip(".")
-    crossref_status_code, others_biblio_info = verify_doi_crossref(doi)  # Verify doi using crossref api
+    crossref_status_code, others_biblio_info = verify_doi_crossref(doi)
 
-    # # If doi isn't found, try to delete \n
+    # Si le doi n'est pas trouvé, on essaie en supprimant les espaces liés à un saut de ligne
     if crossref_status_code == 404:
-        doi = find_doi(raw_ref, delete_line_break=False, process_deleted_underscore=False)
+        doi = find_doi(raw_ref, delete_line_break=True, process_deleted_underscore=False)
         if not doi:
             crossref_status_code = 404
         else:
             doi = doi.strip(".")
             crossref_status_code, others_biblio_info = verify_doi_crossref(doi)
 
-    # # If doi isn't found, try to process supressed "_"
+    # Si toujours pas trouvé, on essaie en remplaçant les espaces par "_" (underscore perdu à l'OCR)
     if crossref_status_code == 404:
         doi = find_doi(raw_ref, delete_line_break=False, process_deleted_underscore=True)
         if not doi:
@@ -579,27 +577,22 @@ def verify_doi_metadore(doi, headers=metadore_headers):
 
 
 def process_metadore_doi(doi, raw_ref):
-    """Check DOI. Process if this one is cut or if _ has been replace by spaces.
-
-    Args:
-        doi (str): the doi to check
-        raw_ref (str): the raw reference
-    """
+    """Check DOI. Process if this one is cut (line break) or if "_" was replaced by spaces (OCR)."""
     doi = doi.strip(".")
-    metadore_status_code, others_biblio_info = verify_doi_metadore(doi)  # Verify doi using metadore api
+    metadore_status_code, others_biblio_info = verify_doi_metadore(doi)
 
-    # # If doi isn't found, try to delete \n
+    # Si le doi n'est pas trouvé, on essaie en supprimant les espaces liés à un saut de ligne
     if metadore_status_code == 404:
-        doi = find_doi(raw_ref, delete_line_break=False)
+        doi = find_doi(raw_ref, delete_line_break=True, process_deleted_underscore=False)
         if not doi:
             metadore_status_code = 404
         else:
             doi = doi.strip(".")
             metadore_status_code, others_biblio_info = verify_doi_metadore(doi)
 
-    # # If doi isn't found, try to process supressed "_"
+    # Si toujours pas trouvé, on essaie en remplaçant les espaces par "_" (underscore perdu à l'OCR)
     if metadore_status_code == 404:
-        doi = find_doi(raw_ref, process_deleted_underscore=True)
+        doi = find_doi(raw_ref, delete_line_break=False, process_deleted_underscore=True)
         if not doi:
             metadore_status_code = 404
         else:
@@ -638,21 +631,27 @@ def biblio_ref(ref_biblio, retracted_doi=retracted_doi, clayfeet_doi=clayfeet_do
             potential_different_content = {}
             reference_found = others_biblio_info["raw_ref"]
 
-            # # # can be hallucinated
-            if len(doi)*2 < len(ref_biblio): 
+            if len(doi)*2 > len(ref_biblio): 
+                ### Can be retracted or clayfeet
+                if doi in retracted_doi:
+                    return {"doi": doi, "status": "retracted", "reference_found": reference_found, "mismatches_detected": process_mismatches(potential_different_content)}
+                if doi in clayfeet_doi:
+                    return {"doi": doi, "status": "feet_of_clay", "reference_found": reference_found, "mismatches_detected": process_mismatches(potential_different_content)}
+                return {"doi": doi, "status": "found", "reference_found": reference_found, "mismatches_detected": process_mismatches(potential_different_content)}
+            
+            else:
                 match_items_score, title_score, doi, potential_different_content = compare_pubinfo_refbiblio(others_biblio_info, ref_biblio)
+                if doi in retracted_doi:
+                    return {"doi": doi, "status": "retracted", "reference_found": reference_found, "mismatches_detected": process_mismatches(potential_different_content)}
+                if doi in clayfeet_doi:
+                    return {"doi": doi, "status": "feet_of_clay", "reference_found": reference_found, "mismatches_detected": process_mismatches(potential_different_content)}
+                ### can be hallucinated
                 if match_items_score < 2:
                     # We return "REFERENCE ASSOCIATED WITH THE DOI FROM CROSSREF >" when we suspect an hallucination
                     reference_found = "REFERENCE ASSOCIATED WITH THE DOI " + reference_found
                     return {"doi": "", "status": "to_be_verified", "reference_found": reference_found, "mismatches_detected": process_mismatches({})}
+                return {"doi": doi, "status": "found", "reference_found": reference_found, "mismatches_detected": process_mismatches(potential_different_content)}
 
-            ### Can be retracted or clayfeet
-            if doi in retracted_doi:
-                return {"doi": doi, "status": "retracted", "reference_found": reference_found, "mismatches_detected": process_mismatches(potential_different_content)}
-            if doi in clayfeet_doi:
-                return {"doi": doi, "status": "feet_of_clay", "reference_found": reference_found, "mismatches_detected": process_mismatches(potential_different_content)}
-
-            return {"doi": doi, "status": "found", "reference_found": reference_found, "mismatches_detected": process_mismatches(potential_different_content)}
 
         # # If DOI doesn't exist
         elif crossref_status_code == 404:
@@ -662,37 +661,43 @@ def biblio_ref(ref_biblio, retracted_doi=retracted_doi, clayfeet_doi=clayfeet_do
             if metadore_status_code == 200:
                 reference_found = others_biblio_info["raw_ref"]
                 potential_different_content = {}
+                
+                if len(doi)*2 > len(ref_biblio): 
+                    ### Can be retracted or clayfeet
+                    if doi in retracted_doi:
+                        return {"doi": doi, "status": "retracted", "reference_found": reference_found, "mismatches_detected": process_mismatches(potential_different_content)}
+                    if doi in clayfeet_doi:
+                        return {"doi": doi, "status": "feet_of_clay", "reference_found": reference_found, "mismatches_detected": process_mismatches(potential_different_content)}
+                    return {"doi": doi, "status": "found", "reference_found": reference_found, "mismatches_detected": process_mismatches({})}
 
-
-                # # # can be hallucinated
-                if len(doi)*2 < len(ref_biblio): 
+                else:
                     match_items_score, title_score, doi, potential_different_content = compare_pubinfo_refbiblio(others_biblio_info, ref_biblio)
+                    ### Can be retracted or clayfeet
+                    if doi in retracted_doi:
+                        return {"doi": doi, "status": "retracted", "reference_found": reference_found, "mismatches_detected": process_mismatches(potential_different_content)}
+                    if doi in clayfeet_doi:
+                        return {"doi": doi, "status": "feet_of_clay", "reference_found": reference_found, "mismatches_detected": process_mismatches(potential_different_content)}
 
+                    ### can be hallucinated
                     if match_items_score < 3:
                         # We return "REFERENCE ASSOCIATED WITH THE DOI FROM DATACITE >" when we suspect an hallucination
                         reference_found = "REFERENCE ASSOCIATED WITH THE DOI " + reference_found
                         return {"doi": "", "status": "to_be_verified", "reference_found": reference_found, "mismatches_detected": process_mismatches(potential_different_content)}
 
-                ### Can be retracted or clayfeet
-                if doi in retracted_doi:
-                    return {"doi": doi, "status": "retracted", "reference_found": reference_found, "mismatches_detected": process_mismatches(potential_different_content)}
-                if doi in clayfeet_doi:
-                    return {"doi": doi, "status": "feet_of_clay", "reference_found": reference_found, "mismatches_detected": process_mismatches(potential_different_content)}
-
-                return {"doi": doi, "status": "found", "reference_found": reference_found, "mismatches_detected": process_mismatches({})}
+                    return {"doi": doi, "status": "found", "reference_found": reference_found, "mismatches_detected": process_mismatches({})}
 
             status, doi, others_biblio_info, potential_different_content = verify_biblio_without_doi(ref_biblio, wrong_doi=True)
             reference_found = others_biblio_info["raw_ref"]
+
+            ### can't be not found : there is a doi. Should be on Crossref or DataCite.
+            if status == "not_found":
+                return {"doi": "", "status": "to_be_verified", "reference_found": "", "mismatches_detected":process_mismatches({})}
 
             ### Can be retracted or clayfeet
             if doi in retracted_doi:
                 return {"doi": doi, "status": "retracted", "reference_found": reference_found, "mismatches_detected": process_mismatches(potential_different_content)}
             if doi in clayfeet_doi:
                 return {"doi": doi, "status": "feet_of_clay", "reference_found": reference_found, "mismatches_detected": process_mismatches(potential_different_content)}
-
-            ### can't be not found : there is a doi. Should be on Crossref or DataCite.
-            if status == "not_found":
-                return {"doi": "", "status": "to_be_verified", "reference_found": "", "mismatches_detected":process_mismatches({})}
 
             return {"doi": doi, "status": status, "reference_found": reference_found, "mismatches_detected":process_mismatches(potential_different_content)}
 
@@ -705,11 +710,13 @@ def biblio_ref(ref_biblio, retracted_doi=retracted_doi, clayfeet_doi=clayfeet_do
     else:
         status, doi, others_biblio_info, potential_different_content = verify_biblio_without_doi(ref_biblio)
         reference_found = others_biblio_info["raw_ref"]
-        ### Can be retracted or clayfeet
-        if doi in retracted_doi:
-            return {"doi": doi, "status": "retracted", "reference_found": reference_found, "mismatches_detected": process_mismatches(potential_different_content)}
-        if doi in clayfeet_doi:
-            return {"doi": doi, "status": "feet_of_clay", "reference_found": reference_found, "mismatches_detected": process_mismatches(potential_different_content)}
+        
+        if status != "not_found":
+            ### Can be retracted or clayfeet
+            if doi in retracted_doi:
+                return {"doi": doi, "status": "retracted", "reference_found": reference_found, "mismatches_detected": process_mismatches(potential_different_content)}
+            if doi in clayfeet_doi:
+                return {"doi": doi, "status": "feet_of_clay", "reference_found": reference_found, "mismatches_detected": process_mismatches(potential_different_content)}
 
         if status != "found":
             potential_different_content = {}
