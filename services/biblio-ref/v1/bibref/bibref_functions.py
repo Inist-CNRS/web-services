@@ -646,7 +646,7 @@ def biblio_ref(ref_biblio, retracted_doi=retracted_doi, clayfeet_doi=clayfeet_do
                 if doi in clayfeet_doi:
                     return {"doi": doi, "status": "feet_of_clay", "reference_found": reference_found, "mismatches_detected": process_mismatches(potential_different_content)}
                 ### can be hallucinated
-                if match_items_score < 2:
+                if match_items_score < 3:
                     # We return "REFERENCE ASSOCIATED WITH THE DOI FROM CROSSREF >" when we suspect an hallucination
                     reference_found = "REFERENCE ASSOCIATED WITH THE DOI " + reference_found
                     return {"doi": "", "status": "to_be_verified", "reference_found": reference_found, "mismatches_detected": process_mismatches({})}
