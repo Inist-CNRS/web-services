@@ -11,7 +11,7 @@ import os
 # ==============================
 
 
-API_KEY= os.getenv("ILAAS_API_KEY")
+API_KEY = os.getenv("ILAAS_API_KEY")
 MODEL_NAME = "gemma-4-31b"
 MAX_RETRIES = 4
 RETRY_DELAY = 2
