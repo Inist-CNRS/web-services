@@ -39,7 +39,7 @@ rag_type = "rag" if rag_type not in ["definition"] else rag_type
 print_log("Rag type : " + rag_type)
 prompt_id = PROMPT_ID_RAG
 if rag_type == "definition":
-    prompt_id == PROMPT_ID_DEFINITION
+    prompt_id = PROMPT_ID_DEFINITION
 
 # ==============================
 # Chargement du prompt
