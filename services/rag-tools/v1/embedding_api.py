@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Équivalent de vectorize.py, mais appelle l'API d'embedding iLaaS au lieu
+Équivalent de embedding.py, mais appelle l'API d'embedding iLaaS au lieu
 de charger le modèle localement.
 
 Entrée/sortie strictement identiques à vectorize.py (même format NDJSON
