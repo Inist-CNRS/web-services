@@ -141,11 +141,11 @@ HTTP 200
 [{
     "value": [
         {
-            "doi": "",
-            "status": "not_found",
+            "doi": "10.18653/v1/n19-4010",
+            "status": "found",
             "mismatches_detected": "",
             "reference": "Akbik, A., T. Bergmann, D. Blythe, K. Rasul, S. Schweter, et R. Vollgraf (2019). FLAIR : An easy-to-use framework for state-of-the-art NLP. In NAACL 2019, 2019 Annual Conference of the North American Chapter of the Association for Computational Linguistics (Demons- trations), pp. 54-59.",
-            "reference_found": "",
+            "reference_found": "FROM CROSSREF > Akbik et al. (2019). FLAIR: An Easy-to-Use Framework for State-of-the-Art NLP. Proceedings of the 2019 Conference of the North American Chapter of the Association for Computational Linguistics (Demonstrations). 10.18653/v1/n19-4010.",
             "url_pdf": "https://cnrs.hal.science/hal-04461354/file/anki-gaillard-revol.pdf"
         },
         {
