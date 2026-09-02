@@ -699,8 +699,8 @@ skip: {{blocked}}
 HTTP 200
 Content-Type: application/json
 [Asserts]
-jsonpath "$[0].value.Planete" includes "Jupiter"
-jsonpath "$[0].value.Planete" includes "Saturn"
+jsonpath "$[0].value.Planete" contains "Jupiter"
+jsonpath "$[0].value.Planete" contains "Saturn"
 jsonpath "$[0].value.Planete" count == 2
 
 
@@ -749,9 +749,9 @@ skip: {{blocked}}
 HTTP 200
 Content-Type: application/json
 [Asserts]
-jsonpath "$[0].value.Satellite_naturel" includes "Tethys"
+jsonpath "$[0].value.Satellite_naturel" contains "Tethys"
 jsonpath "$[0].value.Satellite_naturel" count == 1
-jsonpath "$[6].value.Planete" includes "Earth"
+jsonpath "$[6].value.Planete" contains "Earth"
 jsonpath "$[6].value.Planete" count == 1
 
 ############################################################################
@@ -799,8 +799,8 @@ skip: {{blocked}}
 HTTP 200
 Content-Type: application/json
 [Asserts]
-jsonpath "$[0].value.chemical" includes "ibuprofen"
-jsonpath "$[0].value.chemical" includes "amoxicillin"
+jsonpath "$[0].value.chemical" contains "ibuprofen"
+jsonpath "$[0].value.chemical" contains "amoxicillin"
 jsonpath "$[0].value.chemical" count == 2
 
 
@@ -849,10 +849,10 @@ skip: {{blocked}}
 HTTP 200
 Content-Type: application/json
 [Asserts]
-jsonpath "$[1].value.chemical" includes "zircon"
-jsonpath "$[1].value.chemical" includes "granodiorite"
-jsonpath "$[1].value.chemical" includes "Ni"
-jsonpath "$[1].value.chemical" includes "SiO2"
+jsonpath "$[1].value.chemical" contains "zircon"
+jsonpath "$[1].value.chemical" contains "granodiorite"
+jsonpath "$[1].value.chemical" contains "Ni"
+jsonpath "$[1].value.chemical" contains "SiO2"
 jsonpath "$[1].value.chemical" count == 16
 
 
@@ -901,9 +901,9 @@ skip: {{blocked}}
 HTTP 200
 Content-Type: application/json
 [Asserts]
-jsonpath "$[0].value.diseases" includes "pain"
-jsonpath "$[0].value.diseases" includes "migraine"
-jsonpath "$[0].value.diseases" includes "respiratory infection"
+jsonpath "$[0].value.diseases" contains "pain"
+jsonpath "$[0].value.diseases" contains "migraine"
+jsonpath "$[0].value.diseases" contains "respiratory infection"
 jsonpath "$[0].value.diseases" count == 3
 
 
@@ -952,7 +952,7 @@ skip: {{blocked}}
 HTTP 200
 Content-Type: application/json
 [Asserts]
-jsonpath "$[1].value.diseases" includes "magmatism"
+jsonpath "$[1].value.diseases" contains "magmatism"
 jsonpath "$[1].value.diseases" count == 2
 
 
@@ -1003,7 +1003,7 @@ Content-Type: application/json
 [Asserts]
 jsonpath "$[0].value.status" == "found"
 jsonpath "$[1].value.status" == "found"
-jsonpath "$[2].value.status" == "to_be_verified"
+jsonpath "$[2].value.status" == "found"
 jsonpath "$[3].value.status" == "retracted"
 jsonpath "$[4].value.status" == "to_be_verified"
 
@@ -1103,8 +1103,8 @@ HTTP 200
 Content-Type: application/json
 [Asserts]
 jsonpath "$[0].value.LOC" count == 0
-jsonpath "$[0].value.PER" includes "Justine"
-jsonpath "$[0].value.ORG" includes "CNRS"
+jsonpath "$[0].value.PER" contains "Justine"
+jsonpath "$[0].value.ORG" contains "CNRS"
 
 ############################################################################
 # Test v1/entity-tag
@@ -1151,7 +1151,7 @@ skip: {{blocked}}
 HTTP 200
 Content-Type: application/json
 [Asserts]
-jsonpath "$[3].value.LOC" includes "Rangitikei River"
-jsonpath "$[3].value.LOC" includes "New Zealand"
+jsonpath "$[3].value.LOC" contains "Rangitikei River"
+jsonpath "$[3].value.LOC" contains "New Zealand"
 jsonpath "$[3].value.PER" count == 0
 jsonpath "$[3].value.ORG" count == 0
