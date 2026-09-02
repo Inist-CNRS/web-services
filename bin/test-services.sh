@@ -16,7 +16,9 @@ for SERVICE in "${SERVICES[@]}"; do
         continue
     fi
 
-    npx hurl --test --jobs 1 --continue-on-error --variable host="https://$SERVICE.services.istex.fr" "services/$SERVICE/tests.hurl"
+    # --http1.1: workaround for hurl 8.0.1 panic (client.rs:220) when libcurl 8.5.0
+    # reuses an HTTP/2 connection (empty header-out buffer). Remove once hurl >= 8.1.0 is available.
+    npx hurl --test --jobs 1 --continue-on-error --http1.1 --variable host="https://$SERVICE.services.istex.fr" "services/$SERVICE/tests.hurl"
 done
 
 exit 0
