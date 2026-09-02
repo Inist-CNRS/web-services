@@ -78,7 +78,8 @@ def call_llm(prompt: str) -> str:
             response = requests.post(
                 f"{base_url}/chat/completions",
                 headers=headers,
-                json=payload
+                json=payload,
+                timeout=60
             )
 
             result = response.json()

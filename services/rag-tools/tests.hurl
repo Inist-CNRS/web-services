@@ -22,7 +22,7 @@ jsonpath "$[0].value.vector" count > 0
 # Embedding API
 # ==============================
 
-#POST {{host}}/v1/embedding_api
+#POST {{host}}/v1/embedding-api
 #content-type: application/json
 #[
 #	{

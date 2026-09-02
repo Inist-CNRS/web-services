@@ -69,6 +69,7 @@ def call_llm(prompt: str) -> str:
         "Content-Type": "application/json"
     }
 
+    # si gemma-4-31b émet du reasoning_content, les 20 tokens peuvent être consommés avant la réponse → fallback permanent sur rag. À vérifier
     payload = {
         "model": MODEL_NAME,
         "messages": [
@@ -86,7 +87,8 @@ def call_llm(prompt: str) -> str:
             response = requests.post(
                 f"{base_url}/chat/completions",
                 headers=headers,
-                json=payload
+                json=payload,
+                timeout=60
             )
 
             result = response.json()

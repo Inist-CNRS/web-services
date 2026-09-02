@@ -18,7 +18,7 @@ RETRY_DELAY = 2
 BATCH_SIZE = 32
 
 PROMPT_PATH = "v1/prompt.json"
-PROMPT_ID_RAG = "reformulation_template"
+PROMPT_ID_REFORMULATE = "reformulation_template"
 PROMPT_ID_DEFINITION = "definition_reformulation_template"
 
 NO_HISTORY_TEXT = "Aucun historique de conversation disponible."
@@ -37,7 +37,7 @@ def print_log(message):
 rag_type = sys.argv[sys.argv.index("-p") + 1] if "-p" in sys.argv else "rag"
 rag_type = "rag" if rag_type not in ["definition"] else rag_type
 print_log("Rag type : " + rag_type)
-prompt_id = PROMPT_ID_RAG
+prompt_id = PROMPT_ID_REFORMULATE
 if rag_type == "definition":
     prompt_id = PROMPT_ID_DEFINITION
 
@@ -87,7 +87,8 @@ def call_llm(prompt: str) -> str:
             response = requests.post(
                 f"{base_url}/chat/completions",
                 headers=headers,
-                json=payload
+                json=payload,
+                timeout=60
             )
 
             result = response.json()
