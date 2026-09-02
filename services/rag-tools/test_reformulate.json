@@ -1,0 +1,18 @@
+[
+  {
+    "id": "reformulation_test_001",
+    "value": {
+      "question": "Et pour Saturne, c'est pareil ?",
+      "historique": [
+        {
+          "role": "user",
+          "content": "Quelle est la plus grande planète du système solaire et quelles sont ses principales caractéristiques ?"
+        },
+        {
+          "role": "assistant",
+          "content": "Jupiter est la plus grande planète du système solaire. C'est une planète gazeuse composée principalement d'hydrogène et d'hélium, et elle possède une grande tache rouge correspondant à une immense tempête observée depuis plusieurs siècles [Document 1]."
+        }
+      ]
+    }
+  }
+]
