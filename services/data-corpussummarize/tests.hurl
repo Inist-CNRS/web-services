@@ -23,7 +23,7 @@ POST {{host}}/v1/retrieve-json
 content-type: application/json
 [Options]
 delay: 140s
-retry: 3
+retry: 6
 retry-interval: 30s
 skip: {{blocked}}
 ```

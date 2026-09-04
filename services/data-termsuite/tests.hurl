@@ -37,7 +37,9 @@ variable "retrieve_route" == "/v1/retrieve-json"
 POST {{host}}/v1/retrieve-json?indent=true
 content-type: application/json
 [Options]
-delay: 20000
+delay: 20s
+retry: 3
+retry-interval: 30s
 ```
 [
 	{
