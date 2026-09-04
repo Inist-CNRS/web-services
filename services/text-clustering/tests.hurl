@@ -40,6 +40,7 @@ Content-Type: application/json
 jsonpath "$" count == 49
 jsonpath "$[*].value.cluster" exists
 jsonpath "$[*].value.cluster_name" exists
+jsonpath "$[*].value.cluster_abstract" exists
 
 
 ##################################################################

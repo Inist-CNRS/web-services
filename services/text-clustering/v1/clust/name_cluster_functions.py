@@ -24,16 +24,9 @@ def write_in_logs(message, error=None):
 
 
 def construct_llm_prompt(keywords):
-    """From a dictionary of cluster_id / keywords, generate
-    a prompt for a llm.
-    Ex : input {"1":["kw1","kw2"]}
-
-    Args:
-        keywords (dict): id to kw dict
-    """
     with open(PROMPT_PATH, "r", encoding="utf-8") as f:
         template = f.read()
-    return template.format(user_prompt=json.dumps(keywords, ensure_ascii=False, indent=2))
+    return template.replace("{user_prompt}", json.dumps(keywords, ensure_ascii=False, indent=2))
 
 
 def build_cluster_schema(cluster_ids: list) -> dict:
@@ -45,7 +38,18 @@ def build_cluster_schema(cluster_ids: list) -> dict:
     """
     return {
         "type": "object",
-        "properties": {k: {"type": "string"} for k in cluster_ids},
+        "properties": {
+            k: {
+                "type": "object",
+                "properties": {
+                    "title": {"type": "string"},
+                    "abstract": {"type": "string"}
+                },
+                "required": ["title", "abstract"],
+                "additionalProperties": False,
+            }
+            for k in cluster_ids
+        },
         "required": cluster_ids,
         "additionalProperties": False,
     }
@@ -55,10 +59,14 @@ def parse_llm_output(answer: str, expected_keys: set) -> dict | None:
     try:
         parsed_answer = json.loads(answer)
 
-        if set(parsed_answer.keys()) != expected_keys:
-            write_in_logs(f"Clés reçues différentes des clés attendues : {sorted(parsed_answer.keys())} vs {sorted(expected_keys)}"
-            )
-            return None
+        # Vérifie que chaque valeur est un dict avec "title" et "abstract"
+        for key, value in parsed_answer.items():
+            if not isinstance(value, dict):
+                write_in_logs(f"La valeur {value} pour la clé {key} n'est pas un dictionnaire.")
+                return None
+            if "title" not in value or "abstract" not in value:
+                write_in_logs(f"La valeur {value} pour la clé {key} ne contient pas 'title' ou 'abstract'.")
+                return None
 
         return parsed_answer
     except Exception as e:
@@ -86,7 +94,7 @@ def call_llm_prompt(
         "model": model_name,
         "messages": messages,
         "stream": False,
-        "max_completion_tokens": 2000,
+        "max_completion_tokens": 12000,
         "response_format": {
             "type": "json_schema",
             "json_schema": {
@@ -134,11 +142,11 @@ def call_llm_prompt(
     return {cid: "Unknown" for cid in cluster_ids}
 
 
-def name_cluster_with_kw(keywords: dict) -> dict:
-    """From a dictionary of cluster_id / keywords, generate
+def name_and_resume_cluster(keywords: dict) -> dict:
+    """From a dictionary of cluster_id / keywords+relevant abstract, generate
     a dictionary cluster_id / cluster_name.
-    Ex : input {"1":["kw1","kw2"]}
-    output {"1": "title1"}
+    Ex : input {"1": {"keywords": ["kw1","kw2"], "best_abstracts": ["...",...]}, ...}
+    output {"1": {"title": "title1", "abstract": "abstract1", ...}
 
     Args:
         keywords (dict): id to kw dict

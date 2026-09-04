@@ -8,6 +8,7 @@ from sklearn.preprocessing import StandardScaler
 from sklearn.cluster import HDBSCAN
 import umap
 import os
+import numpy as np
 
 os.environ["TOKENIZERS_PARALLELISM"] = "false"
 model = SentenceTransformer('./v1/all-MiniLM-L6-v2')
@@ -76,36 +77,41 @@ for i in range(len_data):
     except Exception:
         indice_out_cluster.append(i)
 
-# Dimension reduction
-umap_model = umap.UMAP(
-    n_neighbors=max(10, min(30, int(len_data/20))),
-    n_components=2,
-    metric='cosine',
-    min_dist=0.0,
-    random_state=42,
-    n_jobs=1)
-
-try:
-    reduced_embeddings = umap_model.fit_transform(texts)
-except Exception as e:
-    sys.stderr.write(f"Error in noiseDetect while UMAP processing : {e}")
-    reduced_embeddings = center_reduce(texts)
-
-# HDBSCAN with scikit-learn
-clusterer = HDBSCAN(
-    algorithm='auto',
-    metric='euclidean',
-    min_cluster_size=2,
-    cluster_selection_epsilon=0,
-    min_samples=2,
-    cluster_selection_method="eom",
-    n_jobs=-1) 
-
-try:
-    clusterer.fit(reduced_embeddings)
-except Exception as e:
-    sys.stderr.write(f"Error in noiseDetect while HDBSCAN processing : {e}")
+if len(texts) < 2:
     indice_out_cluster = [i for i in range(len_data)]
+else:
+    texts = np.array(texts)
+
+    # Dimension reduction
+    umap_model = umap.UMAP(
+        n_neighbors=max(10, min(30, int(len_data/20))),
+        n_components=2,
+        metric='cosine',
+        min_dist=0.0,
+        random_state=42,
+        n_jobs=1)
+
+    try:
+        reduced_embeddings = umap_model.fit_transform(texts)
+    except Exception as e:
+        sys.stderr.write(f"Error in noiseDetect while UMAP processing : {e}")
+        reduced_embeddings = center_reduce(texts)
+
+    # HDBSCAN with scikit-learn
+    clusterer = HDBSCAN(
+        algorithm='auto',
+        metric='euclidean',
+        min_cluster_size=2,
+        cluster_selection_epsilon=0,
+        min_samples=2,
+        cluster_selection_method="eom",
+        n_jobs=-1) 
+
+    try:
+        clusterer.fit(reduced_embeddings)
+    except Exception as e:
+        sys.stderr.write(f"Error in noiseDetect while HDBSCAN processing : {e}")
+        indice_out_cluster = [i for i in range(len_data)]
 
 
 # extract infos
