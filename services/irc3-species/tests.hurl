@@ -52,6 +52,14 @@ content-type: application/json
   {
     "id": 13,
     "value": "Samples of Mus musculus were collected in the industrial area to evaluate its use as a bioindicator."
+  },
+  {
+    "id": 14,
+    "value": "Plants of the genus Tillandsia were studied, and specimens of T. recurvata L. and T. tricholepis Baker were collected."
+  },
+  {
+    "id": 15,
+    "value": "The specimens of T. recurvata L. were collected near the factory."
   }
 ]
 
@@ -131,5 +139,16 @@ HTTP 200
 },
 {
     "id": 13,
+    "value": []
+},
+{
+    "id": 14,
+    "value": [
+        "Tillandsia recurvata",
+        "Tillandsia tricholepis"
+    ]
+},
+{
+    "id": 15,
     "value": []
 }]

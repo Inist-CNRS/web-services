@@ -295,19 +295,15 @@ const createSpeciesExtractor = (table, pref, str, caseSensitive, logger) => {
     };
 
     /**
-     * Check if a matched form looks like a binomial name (contains a space)
-     */
-    const isBinomial = (str) => str.includes(' ');
-
-    /**
-     * Find exact match in text
+     * Find exact match in text. Genus-only matches are kept: like in Perl,
+     * they are filtered out of the output, but they open the genus table for
+     * the second pass (abbreviation resolution).
      */
     const findExactMatch = (term, text) => {
         const pattern = buildSearchPattern(term, caseSensitive);
         const match = text.match(pattern);
         if (!match || !isUppercase(match[0])) return null;
-        const found = match[0];
-        return isBinomial(found) ? found : null;
+        return match[0];
     };
 
     /**
@@ -330,7 +326,6 @@ const createSpeciesExtractor = (table, pref, str, caseSensitive, logger) => {
             const match = text.match(regex);
             if (match && isUppercase(match[0])) {
                 const found = match[0];
-                if (!isBinomial(found)) continue;
                 matches.push(buildMatchRow(currentTerm, found, maps));
                 logger.debug(`  -> Found: ${found}\n`);
                 return matches;
