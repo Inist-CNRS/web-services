@@ -6,6 +6,9 @@ import matplotlib.colors
 from itertools import combinations
 import numpy as np
 import math
+import sys
+import os
+from collections import Counter
 
 
 def hex_to_rgb(value):
@@ -218,7 +221,7 @@ def gravity(r_nodes,nodes_xy):
         new_pos.append(np.array([x,y]))
         xy_sort[i] = np.array([x,y])
         if y > 1000 :
-            exit()
+            sys.exit("Erreur : Coincé dans la boucle de gravité") # Arrêt si boucle infini, mais ne devrait jamais se produire
 
         i+= 1
 
@@ -226,12 +229,12 @@ def gravity(r_nodes,nodes_xy):
     return back_xy
 
 
-def get_weights(autors_list,seuil_edge):
+def get_weights(authors_list,seuil_edge, node_weight_fn):
     edge_weight = {}
-    for autors in autors_list:
-        autors = sorted(autors)
-        if len(autors) > 1:
-            res = list(combinations(autors,2))
+    for authors in authors_list:
+        authors = sorted(authors)
+        if len(authors) > 1:
+            res = list(combinations(authors,2))
             for edge in res:
                 if edge not in edge_weight:
                     edge_weight[edge] = 1
@@ -242,10 +245,11 @@ def get_weights(autors_list,seuil_edge):
         if edge_weight[edge] < seuil_edge:
             ignore_edge.append(edge)
 
-    all_autors = []
-    for i in autors_list:
-        all_autors += i
-    node_weight = {x:1.5*all_autors.count(x) for x in all_autors}
+    all_authors = []
+    for i in authors_list:
+        all_authors += i
+    counts = Counter(all_authors)
+    node_weight = {x: node_weight_fn(c) for x, c in counts.items()}
     return node_weight,edge_weight,ignore_edge
 
 
@@ -295,7 +299,7 @@ def export_to_gexf_full(
         G.edges[u, v]["zorder"] = 1
         G.edges[u, v]["linewidth"] = safe_float(edge_width[i])
 
-    nx.write_gexf(G, "/tmp/"+pid+".gexf")
+    nx.write_gexf(G, os.path.join("/tmp", f"{pid}.gexf"))
     return nx.generate_gexf(G)
 
 
@@ -406,7 +410,7 @@ def plot_2D(G,partition,ignore_edge, pid):
 
     #_format_axes(ax)
     fig.tight_layout()
-    plt.savefig("/tmp/"+pid+'.png', dpi=dpi)
+    plt.savefig(os.path.join("/tmp", f"{pid}.png"), dpi=dpi)
     #plt.show()
 
     return export_to_gexf_full(G, node_xyz, r_all, node_color,
