@@ -160,7 +160,6 @@ def extract_best_documents(raw_texts, embedding_texts, clusterer, nb_cluster):
         sorted_indices = list(indices_in_cluster[
             np.argsort(distances_to_barycenter.flatten())
             ])
-        sorted_indices.reverse()
         p_loc = min(p, len(sorted_indices))
         for idx in sorted_indices[:p_loc]:
             top_p_documents_per_cluster[str(cluster_id+1)]["best_abstracts"].append(
