@@ -5,10 +5,10 @@ Ce répertoire contient de quoi construire une image Docker lançant un serveur
 scripts python et d'utiliser des feuilles XSL via Saxon.
 
 C'est une image de base des web services.  
-Son nom est: `cnrsinist/ezs-python-saxon-server:2.0.0-no24-1.0.8`
+Son nom est: `cnrsinist/ezs-python-saxon-server:py3.10-no24-2.0.0`
 
 ## Versions utilisées
 
-| python | node   | saxon |
-| ------ | ------ | ----- |
-| 3.9.18 | 24.7.0 | 10.9  |
+| python  | node    | saxon |
+| ------- | ------- | ----- |
+| 3.10.21 | 24.21.0 | 10.9  |
