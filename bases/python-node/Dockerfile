@@ -1,5 +1,5 @@
 # Dockerfile
-FROM ghcr.io/astral-sh/uv:0.12.12-python3.9-trixie-slim
+FROM ghcr.io/astral-sh/uv:0.12.12-python3.10-trixie-slim
 
 ENV NODE_VERSION=24.21.0
 
