@@ -21,17 +21,20 @@ MODEL_PATH = os.path.join(os.path.dirname(__file__), "all-MiniLM-L6-v2")
 model = SentenceTransformer(MODEL_PATH)
 
 n_keywords = 20
-nb_cluster = sys.argv[sys.argv.index("-p") + 1] if "-p" in sys.argv else "auto"
-if nb_cluster != "auto":
+raw = sys.argv[sys.argv.index("-p") + 1] if "-p" in sys.argv else "auto"
+if raw != "auto":
     try:
-        nb_cluster = int(nb_cluster)
+        nb_cluster = int(raw)
     except Exception:
+        ncf.write_in_logs(f"Paramètre nb_cluster invalide reçu : {raw}")
         nb_cluster = "auto"
-        ncf.write_in_logs(f"Paramètre nb_cluster invalide reçu : {nb_cluster}")
-    if nb_cluster > 30:
-        nb_cluster = 30
-    if nb_cluster <= 1:
-        nb_cluster = "auto"
+    if isinstance(nb_cluster, int):
+        if nb_cluster > 30:
+            nb_cluster = 30
+        if nb_cluster <= 1:
+            nb_cluster = "auto"
+else:
+    nb_cluster = "auto"
 
 
 def center_reduce(matrix):
@@ -140,7 +143,7 @@ def extract_best_documents(raw_texts, embedding_texts, clusterer, nb_cluster):
     if nb_cluster == 0:
         return {}
     # Nb de document par cluster à récupérer (8 pour 2 et décroît jusqu'à 2 pour 8)
-    p = 16//nb_cluster
+    p = max(2, 16//nb_cluster)
     for cluster_id in range(nb_cluster):
         top_p_documents_per_cluster[str(cluster_id+1)] = {"best_abstracts": []}
         indices_in_cluster = np.where(clusterer.labels_ == cluster_id)[0]
