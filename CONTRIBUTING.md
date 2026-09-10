@@ -626,8 +626,8 @@ Il y a plusieurs images de base:
 
 > [!NOTE] 
 > Lors de la mise à jour du système, il peut être utile de connaître un moyen
-  simple de récupérer les dernières versions des paquets apt:
-> Utiliser <https://packages.debian.org/{code_os}/{package_name}>, exemple:
+  simple de récupérer les dernières versions des paquets apt.  
+> Utiliser <https://packages.debian.org/{os_name}/{package_name}>, exemple:
 > <https://packages.debian.org/trixie/curl>
 
 ## Création d'une version
