@@ -1,4 +1,4 @@
-FROM cnrsinist/ezs-python-server:py3.9-no24-1.0.14
+FROM cnrsinist/ezs-python-server:py3.10-no24-2.0.0
 
 # Set all required version
 ARG torch_ver=2.3.0
@@ -15,7 +15,9 @@ WORKDIR /app
 ### monolayer installation below.
 #####
 ## Install build dependencies
-#RUN apt update && apt install -y build-essential make gcc
+# git, cmake and pkg-config are needed to compile sentencepiece==0.1.95
+# (pinned by flair 0.10) from source: no prebuilt wheel for Python 3.10
+#RUN apt update && apt install -y build-essential make gcc cmake git pkg-config
 #
 ## Install pytorch, scipy, transformers and flair
 ## For the pip installation we use the default repository
@@ -33,11 +35,13 @@ WORKDIR /app
 #    flair==${flair_ver}
 #
 ## Clean-up
-#RUN apt remove -y --purge build-essential make gcc && \
+#RUN apt remove -y --purge build-essential make gcc cmake git pkg-config && \
 #    apt autoremove -y
 
 # Install dependencies, for documentation see commented code above
-RUN apt-get update && apt-get install -y --no-install-recommends build-essential=12.9 make=4.3-4.1 gcc=4:10.2.1-1 && \
+# git, cmake and pkg-config are needed to compile sentencepiece==0.1.95
+# (pinned by flair 0.10) from source: no prebuilt wheel for Python 3.10
+RUN apt-get update && apt-get install -y --no-install-recommends build-essential=12.12 make=4.4.1-2 gcc=4:14.2.0-1 cmake=3.31.6-2 git=1:2.47.3-0+deb13u1 pkg-config=1.8.1-4 && \
     apt-get clean && rm -rf /var/lib/apt/lists/* && \
     pip install --no-cache-dir --no-build-isolation \
     --index-url https://download.pytorch.org/whl/cpu \
@@ -48,7 +52,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends build-essential
     scipy==${scipy_ver} \
     transformers==${transformers_ver} \
     flair==${flair_ver} && \
-    apt-get remove -y --purge build-essential make gcc && \
+    apt-get remove -y --purge build-essential make gcc cmake git pkg-config && \
     apt-get autoremove -y
 
 # Make sure that .flair folder is readable by the daemon user

@@ -624,6 +624,12 @@ Il y a plusieurs images de base:
 > opération, il ne faut pas créer de nouvelles versions. Cela peut entraîner des
 > conflits avec les tags existants.
 
+> [!NOTE] 
+> Lors de la mise à jour du système, il peut être utile de connaître un moyen
+  simple de récupérer les dernières versions des paquets apt.  
+> Utiliser <https://packages.debian.org/{os_name}/{package_name}>, exemple:
+> <https://packages.debian.org/trixie/curl>
+
 ## Création d'une version
 
 Pour créer une version, on peut se servir de npm et du *workspace* associé au service en question.  
