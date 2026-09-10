@@ -1,11 +1,11 @@
-FROM cnrsinist/ezs-python-server:py3.9-no24-1.0.14
+FROM cnrsinist/ezs-python-server:py3.10-no24-2.0.0
 
 ARG saxon_ver=10.9
 ENV SAXON_HOME=/usr/share/java/saxon
 
-RUN apt-get update && apt-get install -y --no-install-recommends default-jre=2:1.11-72 \
-    poppler-utils=20.09.0-3.1+deb11u2 \
-    unzip=6.0-26+deb11u1 && \
+RUN apt-get update && apt-get install -y --no-install-recommends default-jre=2:1.21-76 \
+    poppler-utils=25.03.0-5+deb13u4 \
+    unzip=6.0-29+deb13u1 && \
     apt-get clean && rm -rf /var/lib/apt/lists/*
 
 ADD \
