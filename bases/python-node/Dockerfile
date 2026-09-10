@@ -1,16 +1,14 @@
 # Dockerfile
-FROM python:3.9.18-slim-bullseye
+FROM ghcr.io/astral-sh/uv:0.12.12-python3.9-trixie-slim
 
-ENV NODE_VERSION=24.18.0
+ENV NODE_VERSION=24.21.0
 
 RUN apt-get update && \
-    apt-get install -y --no-install-recommends curl=7.74.0-1.3+deb11u16 && \
+    apt-get install -y --no-install-recommends curl=8.14.1-2+deb13u4 && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
-# https://github.com/hadolint/hadolint/wiki/DL4006
-# Set the SHELL option -o pipefail before RUN with a pipe in
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
-RUN curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.3/install.sh | bash
+RUN curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.7/install.sh | bash
 
 ENV NVM_DIR=/root/.nvm
 RUN . "$NVM_DIR/nvm.sh" && \
