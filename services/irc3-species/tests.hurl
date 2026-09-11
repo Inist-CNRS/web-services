@@ -24,6 +24,42 @@ content-type: application/json
   {
     "id": 6,
     "value": "Atmospheric Dioxin and Furan Deposition in Relation to Land-Use and Other Pollutants: A Survey with Lichens>Abstract: Polychlorodibenzeno-dioxins and polychlorodibenzeno-furans (PCDD/Fs) are considered among the most toxic compounds on earth. The aim of the present study was to evaluate atmospheric PCDD/F deposition and identify the areas with greater deposition of these compounds in an important industrialized and urbanized region of Portugal, using lichens as biomonitors. For this purpose, samples of the lichen Xanthoria parietina were collected at 60 sampling sites, covering urban, industrial, forestry and agriculture areas, and analyzed for PCDD/Fs, sulfur, nitrogen, zinc, iron, chromium, lead, cobalt, nickel, copper, calcium, manganese, magnesium and potassium. The concentrations of PCDD/Fs in lichens were compared with the other elements and related to land-use and population density. The results obtained through the geostatistical interpolations and after principal component analysis have shown that PCDD/F deposition estimated by lichens is greater near industrial and highly populated urban areas. We found that lichens are suitable biomonitors of PCDD/F atmospheric deposition and can contribute to a better knowledge of air quality in a region, enabling identification of critical pollutant deposition areas."
+  },
+  {
+    "id": 7,
+    "value": "Comparison of the air pollution biomonitoring ability of three Tillandsia species and the lichen Ramalina celastri in Argentina>Abstract: Bioaccumulation ability and response to air pollution sources were evaluated for Tillandsia capillaris Ruíz and Pav. f. capillaris, T. recurvata L., T. tricholepis Baker and the lichen Ramalina celastri (Spreng.) Krog. and Swinsc."
+  },
+  {
+    "id": 8,
+    "value": "Plants as bioindicators of air pollution at the serra do mar near the industrial complex of Cubatão, Brazil>Abstract: As a result of air pollutant emissions from the industrial complex of Cubatão, Brazil, the Atlantic Forest vegetation of the Serra do Mar shows severe and widespread damage. In order to obtain information on the type, intensity and causes of the vegetation damage, bioindicator plants were exposed at different distances from the emission sources. Air-pollution-induced effects were evaluated by estimation of visible injury symptoms and chemical analyses of leaves. The results prove the occurrence of phytotoxic levels of photochemical oxidants in wide parts of the research area. Intense fluoride-induced damage and high leaf fluoride concentrations were found in a valley downwind of fertiliser industries. The study showed that some of the traditional standardised bioindication methods from temperate climates may be successfully employed in biomonitoring programmes in tropical and subtropical regions."
+  },
+  {
+    "id": 9,
+    "value": "Morphometric differences of Microgramma squamulosa (Kaulf.) de la Sota (Polypodiaceae) leaves in environments with distinct atmospheric air quality>Plants growing in environments with different atmospheric conditions may present changes in the morphometric parameters of their leaves.Microgramma squamulosa (Kaulf.)de la Sota is a neotropical epiphytic fern found in impacted environments.The aims of this study were to quantitatively compare structural characteristics of leaves in areas with different air quality conditions, and to identify morphometric parameters that are potential indicators of the effects of pollution on these plants.Fertile and sterile leaves growing on isolated trees were collected from an urban (Estância Velha) and a rural (Novo Hamburgo) environment, in Rio Grande do Sul, Brazil.For each leaf type, macroscopic and microscopic analyses were performed on 192 samples collected in each environment.The sterile and fertile leaves showed significantly greater thickness of the midrib and greater vascular bundle and leaf blade areas in the rural environment, which is characterized by less air pollution.The thickness of the hypodermis and the stomatal density of the fertile leaves were greater in the urban area, which is characterized by more air pollution.Based on the fact that significant changes were found in the parameters of both types of leaves, which could possibly be related to air pollutants, M. squamulosa may be a potential bioindicator."
+  },
+  {
+    "id": 10,
+    "value": "A Preliminary Assessment of the Montréal Process Indicators of Air Pollution for the United States>Abstract: Air pollutants pose a risk to forest health and vitality in the UnitedStates. Here we present the major findings from a national scale air pollution assessment that is part of the United States' 2003 Report on Sustainable Forests. We examine trends and the percent forest subjected to specific levels of ozone and wet deposition of sulfate, nitrate, and ammonium. Results are reported by Resource Planning Act (RPA) reporting region and integrated by forest type using multivariate clustering. Estimates of sulfate deposition for forested areas had decreasing trends (1994–2000) across RPA regions that were statistically significant for North and South RPA regions. Nitrate deposition rates were relatively constant for the 1994 to 2000 period, but the South RPA region had a statistically decreasing trend. The North and South RPA regions experienced the highest ammonium deposition rates and showed slightly decreasing trends. Ozone concentrations were highest in portions of the Pacific Coast RPA region and relatively high across much of the South RPA region. Both the South and Rocky Mountain RPA regions had an increasing trend in ozone exposure. Ozone-induced foliar injury to sensitive species was recorded in all regions except for the Rocky Mountain region. The multivariate analysis showed that the oak-hickory and loblolly-shortleaf pine forest types were generally exposed to more air pollution than other forest types, and the redwood, western white pine, and larch forest types were generally exposed to less. These findings offer a new approach to national air pollution assessments and are intended to help focus research and planning initiatives related to air pollution and forest health."
+  },
+  {
+    "id": 11,
+    "value": "The lichen Usnea hirta is a bioindicator of air pollution, especially of sulphur dioxide."
+  },
+  {
+    "id": 12,
+    "value": "In this study, the essential oil of Citrus aurantium L. peel was analysed by gas chromatography."
+  },
+  {
+    "id": 13,
+    "value": "Samples of Mus musculus were collected in the industrial area to evaluate its use as a bioindicator."
+  },
+  {
+    "id": 14,
+    "value": "Plants of the genus Tillandsia were studied, and specimens of T. recurvata L. and T. tricholepis Baker were collected."
+  },
+  {
+    "id": 15,
+    "value": "The specimens of T. recurvata L. were collected near the factory."
   }
 ]
 
@@ -67,4 +103,52 @@ HTTP 200
     "value": [
         "Xanthoria parietina"
     ]
+},
+{
+    "id": 7,
+    "value": [
+        "Ramalina celastri",
+        "Tillandsia capillaris",
+        "Tillandsia recurvata",
+        "Tillandsia tricholepis"
+    ]
+},
+{
+    "id": 8,
+    "value": []
+},
+{
+    "id": 9,
+    "value": [
+        "Microgramma squamulosa"
+    ]
+},
+{
+    "id": 10,
+    "value": []
+},
+{
+    "id": 11,
+    "value": [
+        "Usnea hirta"
+    ]
+},
+{
+    "id": 12,
+    "value": []
+},
+{
+    "id": 13,
+    "value": []
+},
+{
+    "id": 14,
+    "value": [
+        "Tillandsia recurvata",
+        "Tillandsia tricholepis"
+    ]
+},
+{
+    "id": 15,
+    "value": []
 }]
