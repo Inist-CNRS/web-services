@@ -19,7 +19,9 @@ variable "computing_token" exists
 POST {{host}}/v1/retrieve-json?indent=true
 content-type: application/json
 [Options]
-delay:160000
+delay:160s
+retry: 3
+retry-interval: 30s
 ```
 [
 	{
