@@ -94,15 +94,15 @@
     "@ezs/basics": "2.13.0",
     "@ezs/core": "4.2.4",
     "@ezs/spawn": "1.4.10",
-    "@orangeopensource/hurl": "5.0.1",
+    "@orangeopensource/hurl": "8.0.4",
     "rest-cli": "1.8.13"
   },
   "devDependencies": {
     "@types/node": "24.13.3"
   },
   "allowScripts": {
-    "@orangeopensource/hurl@5.0.1": true,
     "better-sqlite3@12.8.0": true,
-    "leveldown@6.1.1": true
+    "leveldown@6.1.1": true,
+    "@orangeopensource/hurl@8.0.4": true
   }
 }

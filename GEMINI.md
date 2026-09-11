@@ -44,7 +44,7 @@ This will start the service in a Docker container.
 To test a service, run the following command from the root of the project:
 
 ```bash
-HURL_blocked=false npm run test:local <service-name>
+HURL_VARIABLE_blocked=false npm run test:local <service-name>
 ```
 
 ## Development Conventions

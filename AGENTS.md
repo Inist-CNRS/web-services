@@ -31,21 +31,21 @@ npm -w services/<name> run build:check
 npm run generate:example-tests services/<name>
 
 # Run tests (service must be running locally)
-HURL_blocked=false npm run test:local <name>
+HURL_VARIABLE_blocked=false npm run test:local <name>
 
 # Run tests against production
-HURL_blocked=false npm run test:remote <name>
+HURL_VARIABLE_blocked=false npm run test:remote <name>
 
 # Run tests for multiple services in production
-HURL_blocked=false npm run test:remotes services/*
+HURL_VARIABLE_blocked=false npm run test:remotes services/*
 
 # Single test with hurl directly
-HURL_blocked=false hurl --test --variable host=http://localhost:31976 --jobs 1 services/<name>/tests.hurl
+HURL_VARIABLE_blocked=false hurl --test --variable host=http://localhost:31976 --jobs 1 services/<name>/tests.hurl
 ```
 
-> **Note**: `HURL_blocked=false` is required for tests accessing protected APIs (e.g., ISTEX services). Export it in `~/.bashrc` to avoid repeating it:
+> **Note**: `HURL_VARIABLE_blocked=false` is required for tests accessing protected APIs (e.g., ISTEX services). Export it in `~/.bashrc` to avoid repeating it:
 > ```sh
-> export HURL_blocked=false
+> export HURL_VARIABLE_blocked=false
 > ```
 
 ## Code Style

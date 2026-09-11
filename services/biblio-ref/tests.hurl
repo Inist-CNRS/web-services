@@ -25,7 +25,13 @@ skip: {{blocked}}
     "value": "HALUCINATED > Zohuri, B. (2019). Selective herbivory of thyme chemotypes by a mollusk and a grasshopper (pp. 81-98). Woodhead Publishing."
   },
   {
-    "value": "Federated Learning for Privacy Preserving Intelligent Health- care Application to Breast Cancer Detection. ACM. https://doi.org/10. 1145/3700838.3703679"
+    "value": "Federated Learning for Privacy Preserving Intelligent Health- care Application to Breast Cancer Detection. ACM. https://doi.org/10.1145/3700838.3703 679"
+  },
+  {
+    "value": "10.1007/978-3-030-89554-9_1"
+  },
+  {
+    "value": "Singh et al. (2022). Role of Machine Learning and Deep Learning in Internet of Things enabled Smart Cities. Internet of Things."
   }
 ]
 
@@ -98,8 +104,26 @@ HTTP 200
         "doi": "",
         "status": "to_be_verified",
         "mismatches_detected": "",
-        "reference": "Federated Learning for Privacy Preserving Intelligent Health- care Application to Breast Cancer Detection. ACM. https://doi.org/10. 1145/3700838.3703679",
+        "reference": "Federated Learning for Privacy Preserving Intelligent Health- care Application to Breast Cancer Detection. ACM. https://doi.org/10.1145/3700838.3703 679",
         "reference_found": "REFERENCE ASSOCIATED WITH THE DOI FROM CROSSREF > Amritanjali et al. (2025). Federated Learning for Privacy Preserving Intelligent Healthcare Application to Breast Cancer Detection. Proceedings of the 26th International Conference on Distributed Computing and Networking. 10.1145/3700838.3703679."
+    }
+},
+{
+    "value": {
+        "doi": "10.1007/978-3-030-89554-9_1",
+        "status": "feet_of_clay",
+        "mismatches_detected": "",
+        "reference": "10.1007/978-3-030-89554-9_1",
+        "reference_found": "FROM CROSSREF > Singh et al. (2022). Role of Machine Learning and Deep Learning in Internet of Things enabled Smart Cities. Internet of Things. 10.1007/978-3-030-89554-9_1."
+    }
+},
+{
+    "value": {
+        "doi": "10.1007/978-3-030-89554-9_1",
+        "status": "feet_of_clay",
+        "mismatches_detected": "",
+        "reference": "Singh et al. (2022). Role of Machine Learning and Deep Learning in Internet of Things enabled Smart Cities. Internet of Things.",
+        "reference_found": "FROM CROSSREF > Singh et al. (2022). Role of Machine Learning and Deep Learning in Internet of Things enabled Smart Cities. Internet of Things. 10.1007/978-3-030-89554-9_1."
     }
 }]
 
@@ -117,11 +141,11 @@ HTTP 200
 [{
     "value": [
         {
-            "doi": "",
-            "status": "not_found",
+            "doi": "10.18653/v1/n19-4010",
+            "status": "found",
             "mismatches_detected": "",
             "reference": "Akbik, A., T. Bergmann, D. Blythe, K. Rasul, S. Schweter, et R. Vollgraf (2019). FLAIR : An easy-to-use framework for state-of-the-art NLP. In NAACL 2019, 2019 Annual Conference of the North American Chapter of the Association for Computational Linguistics (Demons- trations), pp. 54-59.",
-            "reference_found": "",
+            "reference_found": "FROM CROSSREF > Akbik et al. (2019). FLAIR: An Easy-to-Use Framework for State-of-the-Art NLP. Proceedings of the 2019 Conference of the North American Chapter of the Association for Computational Linguistics (Demonstrations). 10.18653/v1/n19-4010.",
             "url_pdf": "https://cnrs.hal.science/hal-04461354/file/anki-gaillard-revol.pdf"
         },
         {
@@ -280,3 +304,71 @@ jsonpath "$" count == 2
 jsonpath "$[*].value.from_crossref" exists
 jsonpath "$[*].value.raw_ref" exists
 jsonpath "$[*].value.matches_scores" exists
+
+
+# PSS route
+POST {{host}}/v1/pps-search?indent=true
+content-type: application/json
+[
+  {
+    "value": "10.11591/ijeecs.v23.i3.pp1748-1760"
+  },
+  {
+    "value": "10.1111/coin.12508"
+  },
+  {
+    "value": "10.17762/msea.v70i2.13"
+  },
+  {
+    "value": "10.1189/87641.92158"
+  },
+  {
+    "value": [
+      "10.1056/nejm200106073442303",
+      "10.1016/b978-0-323-90638-8.00002-3"
+    ]
+  }
+]
+
+
+HTTP 200
+[{
+    "value": {
+        "tags": [
+            "suspect",
+            "tortured"
+        ]
+    }
+},
+{
+    "value": {
+        "tags": [
+            "annulled",
+            "clayfeet",
+            "suspect",
+            "tortured"
+        ]
+    }
+},
+{
+    "value": {
+        "tags": [
+            "mathgen"
+        ]
+    }
+},
+{
+    "value": {
+        "tags": []
+    }
+},
+{
+    "value": {
+        "tags": [
+            [
+                "expression-of-concern"
+            ],
+            []
+        ]
+    }
+}]
