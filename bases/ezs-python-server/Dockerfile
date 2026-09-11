@@ -1,4 +1,4 @@
-FROM cnrsinist/python-node:py3.10-no24-2.0.0
+FROM cnrsinist/python-node:py3.10-no24-2.1.0
 
 RUN apt-get update && \
     apt-get upgrade -y && \

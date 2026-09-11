@@ -21,11 +21,11 @@
 #     cat data/x* > data/resources.txt && \
 #     rm data/x*
 
-FROM cnrsinist/ezs-python-server:py3.10-no24-2.0.0
+FROM cnrsinist/ezs-python-server:py3.10-no24-2.0.1
 
 WORKDIR /app
 # Install all python dependencies
-# RUN uv pip install --system --no-cache-dir \
+# RUN uv pip install --system --no-cache \
 #     unidecode==1.4.0
 
 # Install all node dependencies
