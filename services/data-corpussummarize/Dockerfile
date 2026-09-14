@@ -3,7 +3,7 @@
 FROM cnrsinist/python-node:py3.10-no24-2.0.0 AS dvc-files
 WORKDIR /dvc
 RUN apt-get update && apt-get -y --no-install-recommends install git=1:2.47.3-0+deb13u1 && apt-get clean && rm -rf /var/lib/apt/lists/*
-RUN uv pip install --system --no-cache-dir "dvc[webdav]==3.67.1"
+RUN uv pip install --system --no-cache "dvc[webdav]==3.67.1"
 RUN --mount=type=secret,id=webdav_login \
     --mount=type=secret,id=webdav_password \
     --mount=type=secret,id=webdav_url \
@@ -23,7 +23,7 @@ ENV HF_HOME=/app/.cache/huggingface
 ENV NUMBA_CACHE_DIR=/tmp/numba_cache
 
 # Install all python dependencies
-RUN uv pip install --system --no-cache-dir --no-build-isolation \
+RUN uv pip install --system --no-cache --no-build-isolation \
     sentence-transformers==2.2.2 \
     huggingface_hub==0.23.2 \
     scikit-learn==1.4.1.post1 \
