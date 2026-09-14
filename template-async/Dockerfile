@@ -6,7 +6,7 @@
 #     apt-get install -y --no-install-recommends git=1:2.47.3-0+deb13u1 && \
 #     apt-get clean && \
 #     rm -rf /var/lib/apt/lists/*
-# RUN uv pip install --system --no-cache-dir dvc[webdav]==3.67.1
+# RUN uv pip install --system --no-cache dvc[webdav]==3.67.1
 # RUN --mount=type=secret,id=webdav_login \
 #     --mount=type=secret,id=webdav_password \
 #     --mount=type=secret,id=webdav_url \
