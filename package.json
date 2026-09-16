@@ -84,6 +84,7 @@
     "services/tabbr-mine",
     "services/terms-extraction",
     "services/terms-tools",
+    "services/text-anonymize",
     "services/text-clustering",
     "services/text-lucene",
     "services/text-summarize",
