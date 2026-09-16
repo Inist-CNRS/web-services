@@ -79,6 +79,7 @@
     "services/openalex-doctype",
     "services/pdf-text",
     "services/person-ner",
+    "services/rag-tools",
     "services/sciencemetrix-classification",
     "services/software-extract",
     "services/tabbr-mine",
