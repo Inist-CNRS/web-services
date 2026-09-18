@@ -100,7 +100,12 @@ const parseDocument = (line) => {
 // BINARY SEARCH
 // ============================================================================
 
-const findIndexInSortedArray = (key, arr, compareFn = (a, b) => a.localeCompare(b)) => {
+// Binary search: Perl's `cmp` orders strings by code point, which is what
+// JS string comparison operators do (locale collation would reorder accented
+// keys and break the search).
+const compareStrings = (a, b) => (a < b ? -1 : a > b ? 1 : 0);
+
+const findIndexInSortedArray = (key, arr, compareFn = compareStrings) => {
     let binf = -1;
     let bsup = arr.length;
 
@@ -262,96 +267,68 @@ const createSpeciesExtractor = (table, pref, str, caseSensitive, logger) => {
     }
 
     /**
-     * Check if a matched form looks like a binomial name (contains a space)
+     * Canonical (table) form of a matched term. In the second pass, entries
+     * may be abbreviated forms, whose canonical and full forms come from the
+     * pass-specific maps instead of the resource table ones.
      */
-    const isBinomial = (str) => str.includes(' ');
+    const canonicalOf = (term, maps) => (maps ? (maps.canonical[term] ?? str[term]) : str[term]);
 
     /**
-     * Find exact match in text
+     * Preferred form of a matched term. In the second pass, only abbreviated
+     * entries have one (their full form), like Perl's tmpPref hash.
+     */
+    const prefOf = (term, maps) => {
+        if (maps) return maps.abbreviation[term];
+        return pref[term] ? str[pref[term]] : undefined;
+    };
+
+    /**
+     * Build a result row: canonical form, found form, preferred form
+     */
+    const buildMatchRow = (term, found, maps) => {
+        let row = `${canonicalOf(term, maps)}\t${found}`;
+        const preferred = prefOf(term, maps);
+        if (preferred) {
+            row += `\t${preferred}`;
+        }
+        return row;
+    };
+
+    /**
+     * Find exact match in text. Genus-only matches are kept: like in Perl,
+     * they are filtered out of the output, but they open the genus table for
+     * the second pass (abbreviation resolution).
      */
     const findExactMatch = (term, text) => {
         const pattern = buildSearchPattern(term, caseSensitive);
         const match = text.match(pattern);
         if (!match || !isUppercase(match[0])) return null;
-        const found = match[0];
-        return isBinomial(found) ? found : null;
+        return match[0];
     };
 
     /**
-     * Get the canonical 2-word key (genus + species) from a table entry
+     * Find the entry whose full normalized form prefixes the remaining text,
+     * walking the table backwards from the insertion point (Perl behaviour).
+     * Only whole terms are tested: matching a shorter form (e.g. the first two
+     * words of an infraspecific or virus name) must not yield the longer name.
      */
-    const getTwoWordKey = (entry) => {
-        const words = entry.split(/\s+/);
-        return words.slice(0, 2).join(' ');
-    };
-
-    /**
-     * Find partial matches for abbreviated genus
-     * Searches both forward and backward from startIndex
-     */
-    const findPartialMatches = (text, searchTable, startIndex) => {
+    const findPartialMatches = (text, searchTable, startIndex, maps) => {
         const matches = [];
         if (!searchTable[startIndex]) return matches;
         const genusStart = splitOnWordBoundaries(searchTable[startIndex]).split(' ')[0];
 
-        // Search backward from startIndex
-        const endIndex = Math.min(searchTable.length - 1, startIndex);
-        for (let i = endIndex; i >= 0; i--) {
+        for (let i = startIndex; i >= 0; i--) {
             const currentTerm = searchTable[i];
             const currentGenus = splitOnWordBoundaries(currentTerm).split(' ')[0];
             if (currentGenus !== genusStart) break;
 
-            const testPatterns = [];
-            const twoWord = getTwoWordKey(currentTerm);
-            if (twoWord) testPatterns.push(twoWord);
-            testPatterns.push(currentTerm);
-
-            for (const test of testPatterns) {
-                const escaped = escapeForRegex(test).replace(/\\ /g, '\\s*');
-                const escapedPattern = escaped.replace(REGEX.NON_ASCII_CHARS, '.');
-                const regex = new RegExp(`^${escapedPattern}\\b`, caseSensitive ? '' : 'i');
-                const match = text.match(regex);
-                if (match && isUppercase(match[0])) {
-                    const found = match[0];
-                    if (!isBinomial(found)) continue;
-                    let result = `${str[currentTerm]}\t${found}`;
-                    if (pref[currentTerm]) {
-                        result += `\t${str[pref[currentTerm]]}`;
-                    }
-                    matches.push(result);
-                    logger.debug(`  -> Found: ${found}\n`);
-                    return matches;
-                }
-            }
-        }
-
-        // Search forward from startIndex
-        for (let i = startIndex; i < searchTable.length; i++) {
-            const currentTerm = searchTable[i];
-            const currentGenus = splitOnWordBoundaries(currentTerm).split(' ')[0];
-            if (currentGenus !== genusStart) break;
-
-            const testPatterns = [];
-            const twoWord = getTwoWordKey(currentTerm);
-            if (twoWord) testPatterns.push(twoWord);
-            testPatterns.push(currentTerm);
-
-            for (const test of testPatterns) {
-                const escaped = escapeForRegex(test).replace(/\\ /g, '\\s*');
-                const escapedPattern = escaped.replace(REGEX.NON_ASCII_CHARS, '.');
-                const regex = new RegExp(`^${escapedPattern}\\b`, caseSensitive ? '' : 'i');
-                const match = text.match(regex);
-                if (match && isUppercase(match[0])) {
-                    const found = match[0];
-                    if (!isBinomial(found)) continue;
-                    let result = `${str[currentTerm]}\t${found}`;
-                    if (pref[currentTerm]) {
-                        result += `\t${str[pref[currentTerm]]}`;
-                    }
-                    matches.push(result);
-                    logger.debug(`  -> Found: ${found}\n`);
-                    return matches;
-                }
+            const regex = buildSearchPattern(currentTerm, caseSensitive);
+            const match = text.match(regex);
+            if (match && isUppercase(match[0])) {
+                const found = match[0];
+                matches.push(buildMatchRow(currentTerm, found, maps));
+                logger.debug(`  -> Found: ${found}\n`);
+                return matches;
             }
         }
 
@@ -360,8 +337,10 @@ const createSpeciesExtractor = (table, pref, str, caseSensitive, logger) => {
 
     /**
      * Find scientific names in text
+     * `searchTable` and `maps` allow a second pass on a reduced table with
+     * pass-specific canonical and preferred forms (abbreviation resolution).
      */
-    const findScientificNames = (textToSearch, searchTable = table) => {
+    const findScientificNames = (textToSearch, searchTable = table, maps = null) => {
         let text = textToSearch.trim();
         let rec = normalizeForLookup(text, caseSensitive);
 
@@ -372,26 +351,19 @@ const createSpeciesExtractor = (table, pref, str, caseSensitive, logger) => {
             const normalizedRec = rec.trim();
             if (!normalizedRec) break;
 
-            const recWords = normalizedRec.split(/\s+/);
-            const searchKey = recWords.slice(0, Math.min(2, recWords.length)).join(' ');
-
-            const index = findIndexInSortedArray(searchKey, searchTable);
+            const index = findIndexInSortedArray(normalizedRec, searchTable);
 
             if (index > -1) {
                 const term = searchTable[index];
                 const found = findExactMatch(term, text);
 
                 if (found) {
-                    let matchResult = `${str[term]}\t${found}`;
-                    if (pref[term]) {
-                        matchResult += `\t${str[pref[term]]}`;
-                    }
-                    matches.push(matchResult);
+                    matches.push(buildMatchRow(term, found, maps));
                 }
             } else {
                 const insertPos = -2 - index;
                 if (insertPos >= 0 && insertPos < searchTable.length && searchTable[insertPos]) {
-                    const partialMatches = findPartialMatches(text, searchTable, insertPos);
+                    const partialMatches = findPartialMatches(text, searchTable, insertPos, maps);
                     matches.push(...partialMatches);
                 }
             }
@@ -439,37 +411,49 @@ const createSpeciesExtractor = (table, pref, str, caseSensitive, logger) => {
             }
         }
 
-        const finalSearchTable = uniqueAndSort(expandedTerms);
-
-        /** @type {Record<string, string>} */
-        const abbreviationMap = {};
+        // Second-pass table: every candidate term plus its abbreviated form,
+        // so that abbreviated occurrences (e.g. “T. recurvata”) can be found,
+        // with pass-specific canonical and full forms (Perl's tmpStr/tmpPref).
+        const finalSearchTerms = [];
         /** @type {Record<string, string>} */
         const canonicalMap = {};
+        /** @type {Record<string, string>} */
+        const abbreviationMap = {};
 
-        for (const term of finalSearchTable) {
+        for (const term of uniqueAndSort(expandedTerms)) {
             if (!term || !str[term]) continue;
 
+            finalSearchTerms.push(term);
             canonicalMap[normalizeForLookup(term, caseSensitive)] = str[term];
 
             const abbrev = buildAbbreviation(term);
             if (abbrev) {
                 const abbrevKey = normalizeForLookup(abbrev, caseSensitive);
-                const abbrevNormalized = caseSensitive ? abbrev : abbrev.toLowerCase();
-
                 const canonicalForm = caseSensitive
                     ? abbrev
                     : abbrev.charAt(0).toUpperCase() + abbrev.slice(1);
 
-                abbreviationMap[abbrevKey] = str[term];
+                finalSearchTerms.push(abbrevKey);
                 canonicalMap[abbrevKey] = canonicalForm;
+
+                if (abbreviationMap[abbrevKey]) {
+                    abbreviationMap[abbrevKey] += ` ; ${str[term]}`;
+                } else {
+                    abbreviationMap[abbrevKey] = str[term];
+                }
             }
         }
+
+        const finalSearchTable = uniqueAndSort(finalSearchTerms);
 
         /** @type {string[]} */
         const resolvedMatches = [];
 
         for (const para of refPara) {
-            const found = findScientificNames(para, finalSearchTable);
+            const found = findScientificNames(para, finalSearchTable, {
+                canonical: canonicalMap,
+                abbreviation: abbreviationMap,
+            });
 
             for (const match of found) {
                 if (!match) continue;
@@ -505,14 +489,14 @@ const createSpeciesExtractor = (table, pref, str, caseSensitive, logger) => {
             if (seen[canonical]) continue;
             seen[canonical] = true;
 
-            const [, foundForm, prefForm] = result.split('\t');
-            const formatted = `${foundForm}\t${canonical}\t${pref[canonical] || ''}`;
+            const [, foundForm, fullForm] = result.split('\t');
+            const formatted = `${foundForm ?? ''}\t${canonical}\t${fullForm ?? ''}`;
 
             logger.debug(`\r`);
 
             output.push(formatted);
 
-            if (prefForm && prefForm.match(/^\?.+\?$/) && logger) {
+            if (fullForm && fullForm.match(/^\?.+\?$/) && logger) {
                 const msg = `WARNING! ${id}: ambiguity on non-abbreviated form of "${canonical}"!\n`;
                 logger.error(msg);
                 logger.writeLog(msg);
@@ -548,6 +532,8 @@ const processDocument = (doc, extractor) => {
             return canonical;
         })
         .filter(Boolean)
+        // Ambiguous abbreviated forms must not yield a species (Perl's passe1)
+        .filter(name => !/^\?.+\?$/.test(name))
         .filter(name => name.includes(' '))
         .filter((name, index, arr) => arr.indexOf(name) === index)
         .sort();
@@ -588,9 +574,30 @@ const processJsonlStream = async (extractor) => {
 // MAIN
 // ============================================================================
 
+/**
+ * Command line options, mirroring the Perl script ones: -t table, -c casse.
+ * Other options (-w, -j, -f, ...) are accepted for compatibility but unused:
+ * the script always reads JSON lines from stdin.
+ */
+const parseArgs = (argv) => {
+    const options = { casse: false, table: undefined };
+
+    for (let i = 0; i < argv.length; i++) {
+        const arg = argv[i];
+        if (arg === '-t' || arg === '--table') {
+            options.table = argv[++i];
+        } else if (arg === '-c' || arg === '--casse') {
+            options.casse = true;
+        }
+    }
+
+    return options;
+};
+
 const main = async () => {
-    const tablePath = process.env.IRC3SP_TABLE || DEFAULT_TABLE_PATH;
-    const caseSensitive = process.env.IRC3SP_CASE_SENSITIVE === 'true';
+    const options = parseArgs(process.argv.slice(2));
+    const tablePath = options.table ?? process.env.IRC3SP_TABLE ?? DEFAULT_TABLE_PATH;
+    const caseSensitive = options.casse || process.env.IRC3SP_CASE_SENSITIVE === 'true';
     const logger = createLogger(process.env);
 
     if (!tablePath) {
