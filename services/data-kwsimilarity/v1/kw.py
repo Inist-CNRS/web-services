@@ -55,7 +55,7 @@ def get_keywords(query: str):
         return m3
 
     # Aucun pattern trouvé
-    return None, []
+    return None
 
 
 def cleaned_keywords(list_keywords):
@@ -147,6 +147,8 @@ def clean_file():
         os.remove(temporary_model)
 atexit.register(clean_file)
 
+syntax_error = False
+
 with open(temporary_corpus, "a", encoding="utf-8") as out:
     for line in sys.stdin:
         data = json.loads(line)
@@ -154,7 +156,14 @@ with open(temporary_corpus, "a", encoding="utf-8") as out:
             query = data["query"]
             print(f"Processing query: {query}", file=sys.stderr)
             keywords = get_keywords(query)
-            cleaned_kw = cleaned_keywords(keywords)
+            if keywords is None:
+                print(f"No keywords found in query: {query}", file=sys.stderr)
+                syntax_error = True
+                for _ in sys.stdin:  # vide le reste du flux sans le traiter
+                    pass
+                break
+            else :
+                cleaned_kw = cleaned_keywords(keywords)
 
         elif "value" in data :
             text = data["value"]
@@ -162,6 +171,18 @@ with open(temporary_corpus, "a", encoding="utf-8") as out:
             text_pos_cleaned = clean_tokens(text_pos)
             # print(text_pos_cleaned, file=sys.stderr)
             out.write(" ".join(text_pos_cleaned) + "\n")
+
+# Sortie immédiate si erreur de syntaxe : pas d'entraînement, pas de TF-IDF
+if syntax_error:
+    result = [{
+        "Termes_requete_initiale": "Syntaxe non conforme - Erreur de syntaxe dans la requête",
+        "Mots_similaires": "n/a",
+        "Score": "n/a"
+    }]
+    for item in result:
+        sys.stdout.write(json.dumps(item))
+        sys.stdout.write("\n")
+    sys.exit(0)
 
 # Entraînement du modèle FastText sur le corpus temporaire
 model = fasttext.train_unsupervised(
