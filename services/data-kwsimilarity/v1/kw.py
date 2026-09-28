@@ -10,7 +10,6 @@ import fasttext
 import numpy as np
 from sklearn.feature_extraction.text import TfidfVectorizer
 
-import tempfile
 import atexit
 
 import nltk
@@ -55,7 +54,7 @@ def get_keywords(query: str):
         return m3
 
     # Aucun pattern trouvé
-    return None, []
+    return None
 
 
 def cleaned_keywords(list_keywords):
@@ -136,6 +135,20 @@ def clean_tokens(tokens):
             cleaned.append(tok)
     return cleaned
 
+
+def handle_syntax_error(query, stream):
+    print(f"No keywords found in query: {query}", file=sys.stderr)
+    for _ in stream:  # vide le reste du flux sans le traiter
+        pass
+    result = {
+        "Termes_requete_initiale": "Syntaxe de la requête invalide : mots-clés non trouvés",
+        "Mots_similaires": "n/a",
+        "Score": "n/a"
+    }
+    sys.stdout.write(json.dumps(result))
+    sys.stdout.write("\n")
+
+
 id = f"{int(time.time())}_{os.getpid()}"
 temporary_corpus = f"/tmp/corpus_{id}.txt"
 temporary_model = f"/tmp/fasttext_model_{id}.bin"
@@ -152,9 +165,13 @@ with open(temporary_corpus, "a", encoding="utf-8") as out:
         data = json.loads(line)
         if "query" in data :
             query = data["query"]
-            print(f"Processing query: {query}", file=sys.stderr)
             keywords = get_keywords(query)
-            cleaned_kw = cleaned_keywords(keywords)
+            if keywords is None:
+                handle_syntax_error(query, sys.stdin)
+                sys.exit(0)
+            else:
+                print(f"Processing query: {query}", file=sys.stderr)
+                cleaned_kw = cleaned_keywords(keywords)
 
         elif "value" in data :
             text = data["value"]
