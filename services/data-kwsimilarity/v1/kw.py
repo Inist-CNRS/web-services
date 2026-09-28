@@ -141,14 +141,13 @@ def handle_syntax_error(query, stream):
     print(f"No keywords found in query: {query}", file=sys.stderr)
     for _ in stream:  # vide le reste du flux sans le traiter
         pass
-    result = [{
+    result = {
         "Termes_requete_initiale": "Syntaxe de la requête invalide : mots-clés non trouvés",
         "Mots_similaires": "n/a",
         "Score": "n/a"
-    }]
-    for item in result:
-        sys.stdout.write(json.dumps(item))
-        sys.stdout.write("\n")
+    }
+    sys.stdout.write(json.dumps(result))
+    sys.stdout.write("\n")
 
 
 id = f"{int(time.time())}_{os.getpid()}"
