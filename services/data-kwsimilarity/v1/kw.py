@@ -171,7 +171,7 @@ with open(temporary_corpus, "a", encoding="utf-8") as out:
             if keywords is None:
                 handle_syntax_error(query, sys.stdin)
                 sys.exit(0)
-            else :
+            else:
                 print(f"Processing query: {query}", file=sys.stderr)
                 cleaned_kw = cleaned_keywords(keywords)
 
