@@ -10,7 +10,6 @@ import fasttext
 import numpy as np
 from sklearn.feature_extraction.text import TfidfVectorizer
 
-import tempfile
 import atexit
 
 import nltk
