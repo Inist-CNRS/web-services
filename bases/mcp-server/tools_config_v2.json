@@ -1,0 +1,206 @@
+{
+  "tools": [
+    {
+      "name": "rnsr_info",
+      "description": "Trouve les informations du RNSR (Répertoire national des structures de recherche) correspondant à une adresse d'affiliation et une année de publication. Entrée : un objet {year, address}. Sortie : un objet décrivant la ou les structures trouvées (format non documenté précisément).",
+      "url": "https://address-kit.services.istex.fr/v1/rnsr/info",
+      "method": "POST",
+      "timeout": 60,
+      "headers": {},
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "value": {
+            "type": "object",
+            "description": "Adresse d'affiliation et année de publication.",
+            "properties": {
+              "year": {"type": "string", "description": "Année de publication, ex. \"2021\"."},
+              "address": {"type": "string", "description": "Adresse d'affiliation, ex. \"CNRS UMR AMAP MONTPELLIER FRA\"."}
+            },
+            "required": ["address"]
+          }
+        },
+        "required": ["value"]
+      }
+    },
+    {
+      "name": "orcid_disambiguation",
+      "description": "Retrouve l'identifiant ORCID d'un auteur à partir de son nom et d'informations facultatives (emails, titres de publications, co-auteurs, affiliations). Alphabet latin uniquement. Plus il y a d'informations facultatives, meilleur est le résultat. Le web service attend value comme un TABLEAU d'un seul objet (même convention que list). Paramètres d'URL optionnels : nameDepth (défaut 20) et worksDepth (défaut 20). Sortie : un identifiant ORCID (chaîne).",
+      "url": "https://authors-tools.services.istex.fr/v1/orcid-disambiguation/orcidDisambiguation",
+      "method": "POST",
+      "timeout": 120,
+      "headers": {},
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "value": {
+            "type": "array",
+            "description": "Le web service attend un TABLEAU contenant un seul objet décrivant l'auteur recherché (même pour une seule personne).",
+            "minItems": 1,
+            "maxItems": 1,
+            "items": {
+              "type": "object",
+              "properties": {
+                "firstName": {
+                  "type": "string",
+                  "description": "Prénom."
+                },
+                "lastName": {
+                  "type": "string",
+                  "description": "Nom."
+                },
+                "email": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  },
+                  "description": "Emails connus de la personne."
+                },
+                "titles": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  },
+                  "description": "Titres de publications de la personne."
+                },
+                "coAuthors": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  },
+                  "description": "Co-auteurs connus."
+                },
+                "affiliations": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  },
+                  "description": "Affiliations actuelles ou passées."
+                }
+              },
+              "required": [
+                "firstName",
+                "lastName"
+              ]
+            }
+          }
+        },
+        "required": [
+          "value"
+        ]
+      }
+    },
+    {
+      "name": "addresses_parse",
+      "description": "Découpe une adresse postale en texte libre en champs structurés (rue, numéro, ville, code postal, pays...). Entrée : une adresse (chaîne). Sortie : un objet avec les composants de l'adresse.",
+      "url": "https://affiliations-tools.services.istex.fr/v1/addresses/parse",
+      "method": "POST",
+      "timeout": 60,
+      "headers": {},
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "value": {
+            "type": "string",
+            "description": "Adresse en texte libre, ex. \"Inist-CNRS 2, rue Jean Zay CS 10310 F-54519 Vandoeuvre-les-Nancy France\"."
+          }
+        },
+        "required": ["value"]
+      }
+    },
+    {
+      "name": "biblio_ref_validate",
+      "description": "Vérifie qu'une référence bibliographique existe dans Crossref ou DataCite et que l'article n'est pas rétracté (bibCheck). Entrée : une référence bibliographique complète, ou un DOI seul. Sortie : un objet contenant notamment un champ status.",
+      "url": "https://biblio-ref.services.istex.fr/v1/validate",
+      "method": "POST",
+      "timeout": 60,
+      "headers": {},
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "value": {
+            "type": "string",
+            "description": "Référence bibliographique (avec ou sans DOI) ou DOI seul, ex. \"10.1038/nature12373\"."
+          }
+        },
+        "required": ["value"]
+      }
+    },
+    {
+      "name": "text_clustering",
+      "description": "Regroupe en clusters thématiques un CORPUS de textes ANGLAIS courts (titres ou résumés), ou de listes de mots-clés. Le résultat de chaque document dépend des autres : il faut un lot de documents (au moins une cinquantaine pour un résultat pertinent). Le nombre de clusters est automatique, ou imposé en ajoutant ?nbCluster=N à l'URL configurée. FONCTIONNEMENT EN DEUX TEMPS, géré automatiquement par cet outil : (1) le corpus est empaqueté dans un fichier .tar.gz (un fichier JSON par document, format {id, value}) et soumis au web service, qui renvoie immédiatement un jeton (token) sans attendre la fin du traitement ; (2) cet outil attend au maximum poll_timeout_seconds (une vingtaine de secondes) en interrogeant le web service avec ce jeton. Si le résultat est prêt dans ce délai, il est renvoyé directement. SINON, cet appel renvoie une erreur contenant le jeton SANS attendre plus longtemps (pour ne pas bloquer la connexion sur un gros corpus) : dans ce cas, rappelez l'outil text_clustering_retrieve avec ce même jeton, en espaçant les tentatives de quelques secondes à quelques dizaines de secondes selon la taille du corpus, jusqu'à obtenir le résultat. Entrée : un tableau d'items {id, value}. Sortie : un tableau d'items {id, value: {cluster, weight, cluster_name, keywords}} ; le cluster 0 regroupe les documents considérés comme du bruit.",
+      "url": "https://text-clustering.services.istex.fr/v1/clustering",
+      "retrieve_url": "https://text-clustering.services.istex.fr/v1/retrieve-json",
+      "method": "POST",
+      "mode": "tarball_batch",
+      "archive_folder": "data",
+      "timeout": 60,
+      "poll_interval_seconds": 3,
+      "poll_interval_max_seconds": 6,
+      "poll_timeout_seconds": 18,
+      "headers": {},
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "items": {
+            "type": "array",
+            "description": "Le corpus à clusteriser : un item par document.",
+            "minItems": 1,
+            "items": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": [
+                    "string",
+                    "integer"
+                  ],
+                  "description": "Identifiant du document (facultatif, sinon son rang)."
+                },
+                "value": {
+                  "description": "Un texte court en anglais, ou un tableau de mots-clés en anglais.",
+                  "anyOf": [
+                    {
+                      "type": "string"
+                    },
+                    {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    }
+                  ]
+                }
+              },
+              "required": [
+                "value"
+              ]
+            }
+          }
+        },
+        "required": [
+          "items"
+        ]
+      }
+    },
+    {
+      "name": "text_clustering_retrieve",
+      "description": "Récupère le résultat d'un traitement text_clustering déjà soumis, à partir du jeton (token) obtenu lors de l'appel initial. Utile quand text_clustering a échoué par timeout d'attente sur un gros corpus : évite de resoumettre tout le corpus, il suffit de rappeler cet outil avec le même jeton, éventuellement plusieurs fois à quelques instants d'intervalle, jusqu'à ce que le résultat soit prêt. Sortie : un tableau d'items {id, value: {cluster, weight, cluster_name, keywords}}, ou une erreur si le traitement n'est pas encore terminé (réessayer alors un peu plus tard).",
+      "retrieve_url": "https://text-clustering.services.istex.fr/v1/retrieve-json",
+      "mode": "retrieve",
+      "timeout": 60,
+      "headers": {},
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "token": {
+            "type": "string",
+            "description": "Le jeton renvoyé par l'appel initial à text_clustering."
+          }
+        },
+        "required": [
+          "token"
+        ]
+      }
+    }
+  ]
+}

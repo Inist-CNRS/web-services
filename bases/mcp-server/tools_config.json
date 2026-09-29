@@ -1,0 +1,58 @@
+{
+  "tools": [
+    {
+      "name": "ner_tagger_geo",
+      "description": "Détecte les entités nommées géographiques (lieux, pays, villes...) dans un texte ANGLAIS. Service lent par conception. Entrée : un texte en anglais. Sortie : les entités géographiques détectées.",
+      "url": "https://ner-tagger.services.istex.fr/v1/geoTagger/geoTagger",
+      "method": "POST",
+      "timeout": 120,
+      "headers": {},
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "value": {
+            "type": "string",
+            "description": "Texte en anglais à analyser."
+          }
+        },
+        "required": ["value"]
+      }
+    },
+    {
+      "name": "text_summarize",
+      "description": "Résume automatiquement un texte scientifique écrit en ANGLAIS (modèle Bart-large-CNN, résumé généré à partir des 1000 premiers tokens). Le résumé produit se termine par la mention <AI-generated>. Entrée : le texte intégral en anglais. Sortie : le résumé.",
+      "url": "https://text-summarize.services.istex.fr/v1/en",
+      "method": "POST",
+      "timeout": 120,
+      "headers": {},
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "value": {
+            "type": "string",
+            "description": "Texte scientifique en anglais à résumer."
+          }
+        },
+        "required": ["value"]
+      }
+    },
+    {
+      "name": "teeft_extraction_termes",
+      "description": "Extrait les termes les plus spécifiques d'un texte avec l'algorithme Teeft. Le web service existe en anglais (.../v1/teeft/en) et en français (.../v1/teeft/fr) : l'URL configurée détermine la langue. Paramètres d'URL optionnels : nb (nombre maximal de termes, ex. ?nb=10) et indent (true/false). Entrée : un texte. Sortie : une liste de termes.",
+      "url": "https://terms-extraction.services.istex.fr/v2/teeft/en",
+      "method": "POST",
+      "timeout": 60,
+      "headers": {},
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "value": {
+            "type": "string",
+            "description": "Texte dont il faut extraire les termes (dans la langue du web service configuré)."
+          }
+        },
+        "required": ["value"]
+      }
+    }
+  ]
+}
