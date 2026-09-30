@@ -14,7 +14,7 @@ RUN apt-get update && \
      apt-get install -y --no-install-recommends git=1:2.47.3-0+deb13u1 && \ 
      apt-get clean && \ 
      rm -rf /var/lib/apt/lists/*
-RUN pip install --no-cache-dir \
+RUN uv pip install --system --no-cache \
     dvc[webdav]==3.67.1 \
     pathspec==0.12.1
 COPY ./dictionary.dvc /dvc
