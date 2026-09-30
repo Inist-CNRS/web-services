@@ -18,7 +18,7 @@ HTTP 200
 {
     "value": {
         "isResearchDoc": true,
-        "score": 0.98
+        "score": 1
     }
 },
 {
