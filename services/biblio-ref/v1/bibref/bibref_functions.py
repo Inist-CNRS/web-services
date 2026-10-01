@@ -330,7 +330,7 @@ def compare_pubinfo_refbiblio(item, ref_biblio):
     # Title
     title_score = compute_partial_ratio(clean_crossref_title(item["title"]), ref_biblio)
 
-    if title_score > title_match_threshold:
+    if title_score >= title_match_threshold:
         items_score += 1
     else:
         potential_different_content["title"] = item["title"]
@@ -418,7 +418,7 @@ def verify_biblio_without_doi(ref_biblio, headers=crossref_headers, wrong_doi=Fa
                 return "found", doi, item_info, potential_different_content
 
             # Here match_items_score =/= title that's why it's 2 either
-            if match_items_score == 2 and 0.6 < title_score < 0.9:
+            if match_items_score == 2 and 0.6 < title_score < title_match_threshold:
                 return "found", doi, item_info, potential_different_content
 
         if wrong_doi:
