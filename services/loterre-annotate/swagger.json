@@ -16,7 +16,7 @@
             "description": "Service local (Docker)"
         },
         {
-            "url": "https://loterre-annotate.services.istex.fr",
+            "url": "http://vptermsuite.intra.inist.fr:49186",
             "description": "Service de production",
             "x-profil": "Standard"
         }
