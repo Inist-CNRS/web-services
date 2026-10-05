@@ -1,6 +1,6 @@
 # syntax=docker/dockerfile:1.2
 
-FROM cnrsinist/ezs-python-server:py3.10-no24-2.0.1 AS dvc-files
+FROM ghcr.io/astral-sh/uv:0.12.12-python3.10-trixie-slim AS dvc-files
 WORKDIR /dvc
 RUN apt-get update && apt-get -y --no-install-recommends install git=1:2.47.3-0+deb13u1 && apt-get clean && rm -rf /var/lib/apt/lists/*
 RUN uv pip install --system --no-cache "dvc[webdav]==3.67.1"
