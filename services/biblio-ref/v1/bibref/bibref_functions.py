@@ -23,6 +23,7 @@ metadore_headers = {
 
 session_crossref = LimiterSession(per_second=10)
 session_metadore = LimiterSession(per_second=10)
+title_min_threshold = 0.7
 title_match_threshold = 0.84
 source_match_threshold = 0.8
 
@@ -330,7 +331,7 @@ def compare_pubinfo_refbiblio(item, ref_biblio):
     # Title
     title_score = compute_partial_ratio(clean_crossref_title(item["title"]), ref_biblio)
 
-    if title_score > title_match_threshold:
+    if title_score >= title_match_threshold:
         items_score += 1
     else:
         potential_different_content["title"] = item["title"]
@@ -399,26 +400,23 @@ def verify_biblio_without_doi(ref_biblio, headers=crossref_headers, wrong_doi=Fa
             match_items_score, title_score, doi, potential_different_content = compare_pubinfo_refbiblio(item_info, ref_biblio)
 
             # Matches criteria when there is no doi in the reference
-            if match_items_score >= 3:
+            if match_items_score >= 3 and title_score >= title_min_threshold:
                 return "found", doi, item_info, potential_different_content
 
             # if doi is wrong
             if wrong_doi:
                 continue
 
-            if title_score < 0.6:
+            if title_score < title_min_threshold:
                 continue
 
-            if title_score > 0.9 and match_items_score < 2:
+            if title_score > 0.98 and match_items_score <= 2:
                 hallucinated = True
                 most_similar_publicsation_items_info = item_info
                 continue
 
-            if match_items_score == 2 and title_score > 0.98:
-                return "found", doi, item_info, potential_different_content
-
             # Here match_items_score =/= title that's why it's 2 either
-            if match_items_score == 2 and 0.6 < title_score < 0.9:
+            if match_items_score == 2 and title_score >= title_match_threshold:
                 return "found", doi, item_info, potential_different_content
 
         if wrong_doi:
@@ -616,6 +614,7 @@ def biblio_ref(ref_biblio, retracted_doi=retracted_doi, clayfeet_doi=clayfeet_do
         return {"doi": "", "status": "error_data", "reference_found": reference_found, "mismatches_detected": process_mismatches({})}
 
     doi = find_doi(ref_biblio)
+    doi_save = doi
     save_ref_biblio = ref_biblio
     ref_biblio = uniformize(ref_biblio)  # Warining : in the rest of code, the biblio ref is uniformize (remove some informations)
     # First case : doi is found
@@ -646,7 +645,7 @@ def biblio_ref(ref_biblio, retracted_doi=retracted_doi, clayfeet_doi=clayfeet_do
                 if doi in clayfeet_doi:
                     return {"doi": doi, "status": "feet_of_clay", "reference_found": reference_found, "mismatches_detected": process_mismatches(potential_different_content)}
                 ### can be hallucinated
-                if match_items_score < 3:
+                if title_score < title_min_threshold or match_items_score < 3:
                     # We return "REFERENCE ASSOCIATED WITH THE DOI FROM CROSSREF >" when we suspect an hallucination
                     reference_found = "REFERENCE ASSOCIATED WITH THE DOI " + reference_found
                     return {"doi": "", "status": "to_be_verified", "reference_found": reference_found, "mismatches_detected": process_mismatches({})}
@@ -657,7 +656,7 @@ def biblio_ref(ref_biblio, retracted_doi=retracted_doi, clayfeet_doi=clayfeet_do
         elif crossref_status_code == 404:
 
             # # Check if it is a DataCite DOI using MetaDoRe
-            metadore_status_code, doi, others_biblio_info = process_metadore_doi(doi, save_ref_biblio)
+            metadore_status_code, doi, others_biblio_info = process_metadore_doi(doi_save, save_ref_biblio)
             if metadore_status_code == 200:
                 reference_found = others_biblio_info["raw_ref"]
                 potential_different_content = {}
@@ -679,7 +678,7 @@ def biblio_ref(ref_biblio, retracted_doi=retracted_doi, clayfeet_doi=clayfeet_do
                         return {"doi": doi, "status": "feet_of_clay", "reference_found": reference_found, "mismatches_detected": process_mismatches(potential_different_content)}
 
                     ### can be hallucinated
-                    if match_items_score < 3:
+                    if title_score < title_min_threshold or match_items_score < 3:
                         # We return "REFERENCE ASSOCIATED WITH THE DOI FROM DATACITE >" when we suspect an hallucination
                         reference_found = "REFERENCE ASSOCIATED WITH THE DOI " + reference_found
                         return {"doi": "", "status": "to_be_verified", "reference_found": reference_found, "mismatches_detected": process_mismatches(potential_different_content)}
