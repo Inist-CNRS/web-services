@@ -9,8 +9,7 @@ import time
 from utils import anonymiser, precharger_modeles
 
 
-data_type = sys.argv[sys.argv.index("-p") + 1] if "-p" in sys.argv else "en"
-data_type = "en" if data_type != "fr" else data_type
+data_type = "fr" if sys.argv[sys.argv.index("-p")+1] == "fr" else "en"
 
 # Charge les modèles spaCy une bonne fois pour toutes avant de traiter les
 # lignes (sinon le premier appel à anonymiser() paierait le coût du
