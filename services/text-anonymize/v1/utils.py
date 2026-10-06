@@ -150,6 +150,38 @@ PREFIXE_EXTRA_PAR_LANGUE = {
 }
 
 
+@lru_cache(maxsize=None)
+def _alternance_mots_cles(langue: str):
+    """Construit une alternance de TOUS les mots-clés de libellés connus
+    pour la langue donnée. Utilisée uniquement pour repérer, en amont, les
+    séparateurs " - " qui introduisent un AUTRE champ reconnu sur la même
+    ligne (voir _virtualiser_separateurs ci-dessous)."""
+    return "|".join(f"(?:{mc})" for mc, _ in LIBELLES_PAR_LANGUE[langue])
+
+
+def _virtualiser_separateurs(texte: str, langue: str) -> str:
+    """Quand plusieurs champs sont mis bout à bout sur UNE SEULE ligne
+    (ex: "Sexe: F - Email: x@y.com - Ville: Paris"), le séparateur " - "
+    entre deux champs est transformé en retour à la ligne RÉEL, pour que
+    la détection des libellés (qui raisonne par ligne) traite chaque champ
+    séparément — exactement comme s'ils étaient déjà sur des lignes
+    distinctes. Seul le caractère "-" est remplacé par "\\n" (la longueur
+    du texte ne change donc pas), ce qui permet de réutiliser tel quel le
+    texte original pour toutes les autres étapes (regex, NER, substitution
+    finale) : cette fonction ne sert QU'À calculer les positions des
+    libellés, jamais à produire le texte renvoyé à l'utilisateur.
+    On exige que ce qui suit le "-" ressemble à un VRAI libellé connu
+    (mot-clé + ':'), pour ne jamais toucher un "-" présent ailleurs dans
+    une valeur ou une phrase normale."""
+    prefixe_extra = PREFIXE_EXTRA_PAR_LANGUE.get(langue, "")
+    mots_cles_connus = _alternance_mots_cles(langue)
+    motif = re.compile(
+        rf"(?<=\s)-(?=\s{prefixe_extra}(?:{mots_cles_connus})[^\n:]{{0,40}}?:)",
+        re.IGNORECASE,
+    )
+    return motif.sub("\n", texte)
+
+
 def _compiler_libelles(langue: str):
     """Compile les patterns de libellés pour la langue donnée.
     Chaque pattern reconnaît : début de ligne/puce -> libellé -> texte libre
@@ -227,8 +259,14 @@ def _spans_libelles_avec_zones_protegees(texte: str, langue: str):
     def chevauche(a_start, a_end):
         return any(a_start < b_end and b_start < a_end for b_start, b_end in zones_protegees)
 
+    # Texte utilisé UNIQUEMENT pour repérer les libellés (voir
+    # _virtualiser_separateurs) : même longueur que l'original, donc les
+    # positions calculées restent valides pour le texte original.
+    texte_pour_detection = _virtualiser_separateurs(texte, langue)
+    assert len(texte_pour_detection) == len(texte)
+
     for pattern, tag in _libelles_compiles(langue):
-        for m in pattern.finditer(texte):
+        for m in pattern.finditer(texte_pour_detection):
             g_start, g_end = m.start(1), m.end(1)
             g_start, g_end = _nettoyer_valeur(m.group(1), g_start)
             if g_end > g_start and not chevauche(g_start, g_end):
@@ -237,15 +275,6 @@ def _spans_libelles_avec_zones_protegees(texte: str, langue: str):
                 # la valeur, pour empêcher le NER de retagger le libellé
                 zones_protegees.append((m.start(), g_end))
     return spans, zones_protegees
-
-
-def _spans_libelles(texte: str, langue: str):
-    """Retourne les (start, end, tag) détectés via les libellés de champs.
-    (Conservé pour compatibilité ; voir _spans_libelles_avec_zones_protegees
-    pour la version utilisée par anonymiser(), qui protège aussi le libellé
-    lui-même contre le NER.)"""
-    spans, _ = _spans_libelles_avec_zones_protegees(texte, langue)
-    return spans
 
 
 # ----------------------------------------------------------------------

@@ -7,17 +7,11 @@ WORKDIR /app
 # Install all python dependencies
 RUN uv pip install --system --no-cache \
     spacy==3.8.11 \
-    click==8.3.1 #spicy core_news model dependency
+    click==8.3.1 #spaCy core_news model dependency
 
 # Download spaCy models
 RUN python3 -m spacy download fr_core_news_sm && \
     python3 -m spacy download en_core_web_sm
-
-# Install all node dependencies
-# RUN npm install --omit=dev \
-#         @ezs/teeft@2.3.5 \
-#         @ezs/strings@1.0.6 && \
-#     npm cache clean --force
 
 WORKDIR /app/public
 # Declare files to copy in .dockerignore

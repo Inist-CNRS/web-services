@@ -6,12 +6,13 @@
 # @host=https://text-anonymize.services.istex.fr
 
 ###
-# @name v1routeInCamelCase
-# Description de la route
-POST {{host}}/v1/route/in/camel/case?indent=true HTTP/1.1
+# @name v1anonymize
+# Anonymise les données personnelles d'un texte
+POST {{host}}/v1/anonymize?indent=true HTTP/1.1
 Content-Type: application/json
-
 [
-	{ "value": "une valeur typique" },
-	{ "value": "en json" }
+  {
+    "id": 1,
+    "value": "Sex: M - Email: john.smith@example.com - Phone: (212) 555-0198 - City: Bristol, SW1A 1AA\nHello, my name is John Smith and I live in Bristol."
+  }
 ]

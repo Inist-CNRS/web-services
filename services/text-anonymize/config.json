@@ -1,7 +1,7 @@
 {
     "environnement": {
         "EZS_TITLE": "Anonymize a given text",
-        "EZS_DESCRIPTION": "Anonyme named entity, adress, phone and other personal data from a given text",
+        "EZS_DESCRIPTION": "Anonymize named entity, adress, phone and other personal data from a given text",
         "EZS_METRICS": true,
         "EZS_CONCURRENCY": 2,
         "EZS_CONTINUE_DELAY": 60,
