@@ -1,4 +1,4 @@
-# ws-text-anonymize@1.0.0
+# ws-text-anonymize@1.0.1
 
 Anonymize a given text
 
