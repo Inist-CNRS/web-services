@@ -1,0 +1,18 @@
+# These examples can be used directly in VSCode, using HTTPYac extension (anweber.vscode-httpyac)
+# They are important, because used to generate the tests.hurl file.
+
+# Décommenter/commenter les lignes voulues pour tester localement
+@host=http://localhost:31976
+# @host=https://text-anonymize.services.istex.fr
+
+###
+# @name v1anonymize
+# Anonymise les données personnelles d'un texte
+POST {{host}}/v1/anonymize?indent=true HTTP/1.1
+Content-Type: application/json
+[
+  {
+    "id": 1,
+    "value": "Sex: M - Email: john.smith@example.com - Phone: (212) 555-0198 - City: Bristol, SW1A 1AA\nHello, my name is John Smith and I live in Bristol."
+  }
+]
