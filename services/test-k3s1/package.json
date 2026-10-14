@@ -1,7 +1,7 @@
 {
   "private": true,
   "name": "ws-test-k3s1",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Test du webhook de Github vers Gitlab",
   "repository": {
     "type": "git",
