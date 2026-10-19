@@ -3,7 +3,7 @@
     "info": {
         "title": "data-image - Detection of duplicated pattern in images",
         "description": "Detection of duplicated pattern in images",
-        "version": "0.0.0",
+        "version": "0.1.0",
         "termsOfService": "https://services.istex.fr/",
         "contact": {
             "name": "Inist-CNRS",

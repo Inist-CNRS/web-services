@@ -1,4 +1,4 @@
-# ws-data-image@0.0.0
+# ws-data-image@0.1.0
 
 Detection of duplicated pattern in images
 
