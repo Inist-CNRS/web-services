@@ -57,6 +57,7 @@
     "services/data-geonames",
     "services/data-graph",
     "services/data-homogenise",
+    "services/data-image",
     "services/data-kwsimilarity",
     "services/data-rapido",
     "services/data-table",
