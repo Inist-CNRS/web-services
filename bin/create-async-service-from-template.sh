@@ -41,7 +41,7 @@ cp -r template-async "services/$SERVICE_NAME"
 
 echo -ne "Customizing service...       \r"
 
-for FILE in services/"$SERVICE_NAME"/* services/"$SERVICE_NAME"/.env; do
+for FILE in services/"$SERVICE_NAME"/* services/"$SERVICE_NAME"/.env services/"$SERVICE_NAME"/v1/*.ini; do
     if [ -f "$FILE" ]; then
         sed -i "s/{service}/$SERVICE_NAME/g" "$FILE"
         sed -i "s/{short_description}/$SHORT_DESCRIPTION/g" "$FILE"
