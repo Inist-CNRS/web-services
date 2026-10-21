@@ -1,0 +1,15 @@
+{
+    "environnement": {
+        "EZS_TITLE": "Exploite GROBID sur un lot d'URL de PDF",
+        "EZS_DESCRIPTION": "À partir d'une liste d'URL vers des fichiers PDF, applique un traitement GROBID pour renvoyer des fichiers TEI ou texte.",
+        "EZS_METRICS": true,
+        "EZS_CONCURRENCY": 2,
+        "EZS_PIPELINE_DELAY": 10800,
+        "EZS_CONTINUE_DELAY": 60,
+        "EZS_NSHARDS": 32,
+        "EZS_CACHE": true,
+        "EZS_VERBOSE": false,
+        "NODE_OPTIONS": "--max_old_space_size=1024",
+        "NODE_ENV": "production"
+    }
+}
