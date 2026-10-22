@@ -24,3 +24,17 @@ corpus
 ├── 09.txt
 └── 10.txt
 ```
+
+## Traitement GROBID
+
+Le script `v1/full-text.sh` télécharge les PDF dans `/tmp/uploads`, appelle
+l'API GROBID en parallèle (`xargs -P`) et stocke les fichiers TEI dans
+`/tmp/teis`. Chaque item renvoyé est complété du champ `tei` pointant vers le
+fichier généré (les items en échec sont renvoyés tels quels).
+
+| Variable | Défaut | Description |
+|----------|--------|-------------|
+| `GROBID_API` | `http://vp-istex-grobid.intra.inist.fr:45070/api` | Racine de l'API GROBID |
+| `TREATMENT` | `processFulltextDocument` | Endpoint de traitement |
+| `PROCESSES` | `4` | Nombre de traitements parallèles |
+| `GROBID_TIMEOUT` | `600` | Timeout curl (secondes) par document |
