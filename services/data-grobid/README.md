@@ -27,10 +27,12 @@ corpus
 
 ## Traitement GROBID
 
-Le script `v1/full-text.sh` télécharge les PDF dans `/tmp/uploads`, appelle
+Le script `v1/full-text.sh` télécharge les PDF dans `/tmp/upload`, appelle
 l'API GROBID en parallèle (`xargs -P`) et stocke les fichiers TEI dans
-`/tmp/teis`. Chaque item renvoyé est complété du champ `tei` pointant vers le
-fichier généré (les items en échec sont renvoyés tels quels).
+`/tmp/retrieve/teis` (sous `/tmp/retrieve/` pour que le cronjob de nettoyage
+à 4 jours les récupère comme le reste). Chaque item renvoyé est complété du
+champ `tei` pointant vers le fichier généré (les items en échec sont renvoyés
+tels quels).
 
 | Variable | Défaut | Description |
 |----------|--------|-------------|
