@@ -40,3 +40,10 @@ tels quels).
 | `TREATMENT` | `processFulltextDocument` | Endpoint de traitement |
 | `PROCESSES` | `4` | Nombre de traitements parallèles |
 | `GROBID_TIMEOUT` | `600` | Timeout curl (secondes) par document |
+
+> **Réseau** : le conteneur doit pouvoir résoudre l'hôte GROBID
+> (`vp-istex-grobid.intra.inist.fr`). `start:dev` utilise donc `--network host`
+> afin d'hériter de la résolution DNS de la machine : le DNS par défaut de
+> Docker ne résout pas les zones `intra.inist.fr` hors du LAN INIST (ex. via
+> VPN). Sans accès GROBID, tous les items sont renvoyés tels quels, sans champ
+> `tei` (voir `docker logs dev` : `curl: (6) Could not resolve host`).
