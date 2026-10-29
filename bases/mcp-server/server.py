@@ -3,30 +3,40 @@
 """
 Serveur MCP classique (SDK officiel `mcp`), transport Streamable HTTP.
 
-Chaque outil de tools_config.json correspond à un web service distant.
+Chaque outil de tools_config*.json correspond à un web service distant.
 Les web services Inist-CNRS attendent un TABLEAU d'objets {"id", "value"}
-et renvoient un tableau de même forme. Deux modes :
+et renvoient un tableau de même forme. Modes disponibles :
 
 - mode "single" (défaut) : un appel d'outil = un document. L'outil prend
   {"value": <ce que CE web service attend>} ; le serveur envoie un tableau
   à un élément et renvoie le "value" de la réponse.
 
 - mode "batch" : pour les services qui traitent un CORPUS (le résultat de
-  chaque document dépend des autres, ex. text-clustering). L'outil prend
+  chaque document dépend des autres). L'outil prend
   {"items": [{"id": ..., "value": ...}, ...]} ; le serveur envoie le
   tableau tel quel et renvoie le tableau complet de la réponse.
 
+- mode "tarball_batch" / "retrieve" : corpus envoyé en .tar.gz, résultat
+  récupéré avec un jeton (ex. text-clustering).
+
+- mode "rest" : API REST classique en GET (ex. API ISTEX), qui n'utilise PAS
+  le format {id, value}. Les arguments de l'outil sont injectés dans l'URL
+  (variables de chemin) et dans la query string. Voir call_webservice_rest.
+
 Le champ "value" n'est jamais interprété : texte, objet, liste... il est
-transmis tel quel. Son schéma est décrit dans tools_config.json.
+transmis tel quel. Son schéma est décrit dans le fichier de config.
 """
 
 import asyncio
+import codecs
 import io
 import json
 import os
+import re
 import sys
 import tarfile
 import time
+import urllib.parse
 import uuid
 from pathlib import Path
 from typing import Any
@@ -70,6 +80,14 @@ mcp = FastMCP("webservices-mcp", host=HOST, port=PORT)
 _http_client = httpx.AsyncClient(timeout=DEFAULT_TIMEOUT)
 
 
+def _check_status(resp: httpx.Response) -> None:
+    """Comme raise_for_status, mais l'erreur contient le corps de la réponse du service distant."""
+    if resp.status_code >= 400:
+        raise RuntimeError(
+            f"HTTP {resp.status_code} depuis {resp.request.url} : {_short(resp.text)}"
+        )
+
+
 async def _post(spec: dict, payload: list) -> list:
     """Envoie `payload` (tableau d'objets id/value) et renvoie le tableau de réponse."""
     url = spec["url"]
@@ -80,7 +98,7 @@ async def _post(spec: dict, payload: list) -> list:
         timeout=spec.get("timeout", DEFAULT_TIMEOUT),
         headers=spec.get("headers", {}),
     )
-    resp.raise_for_status()
+    _check_status(resp)
     data = resp.json()
 
     if not isinstance(data, list):
@@ -175,7 +193,7 @@ async def call_webservice_tarball_batch(spec: dict, items: Any) -> list:
         headers=submit_headers,
         timeout=spec.get("timeout", DEFAULT_TIMEOUT),
     )
-    submit_resp.raise_for_status()
+    _check_status(submit_resp)
     submit_data = submit_resp.json()
 
     if not isinstance(submit_data, list) or not submit_data or "value" not in submit_data[0]:
@@ -221,7 +239,7 @@ async def call_webservice_tarball_batch(spec: dict, items: Any) -> list:
             continue
 
         # Toute autre erreur (400 avec un autre message, 4xx/5xx...) : on la remonte
-        retrieve_resp.raise_for_status()
+        _check_status(retrieve_resp)
         raise RuntimeError(f"Erreur inattendue de '{retrieve_url}': {body!r}")
 
 
@@ -255,8 +273,177 @@ async def call_webservice_retrieve(spec: dict, token: str) -> list:
             "quelques secondes à quelques dizaines de secondes, en répétant si besoin."
         )
 
-    resp.raise_for_status()
+    _check_status(resp)
     raise RuntimeError(f"Erreur inattendue de '{spec['retrieve_url']}': {body!r}")
+
+
+# --------------------------------------------------------------------------- #
+# Mode "rest" : API REST classique en GET (ex. API ISTEX)
+#
+# Champs de configuration d'un outil en mode "rest" :
+#   url            Gabarit d'URL. {nom} = variable de chemin obligatoire ;
+#                  {/nom} = segment facultatif (devient "/valeur", ou rien).
+#   method         GET par défaut.
+#   query_params   Arguments de l'outil envoyés en query string. Liste de noms
+#                  (même nom côté API) ou dict {argument: "nom_api"} ou
+#                  {argument: {"name": "nom_api", "prefix": "info:doi/"}}.
+#   fixed_query    Paramètres constants {nom: valeur}.
+#   fixed_flags    Drapeaux constants sans valeur (ex. ["noredirect"]).
+#   flag_params    {argument: "drapeau"} : ajoute "?drapeau" si l'argument vaut true.
+#   json_drop_keys Clés de premier niveau à retirer des réponses JSON.
+#   max_response_chars  Taille max d'une réponse JSON (défaut 50000).
+#   default_max_chars   Taille d'une page de texte (défaut 20000), modifiable
+#                  par les arguments "offset" / "max_chars" de l'outil.
+# Les valeurs "default" du input_schema sont appliquées aux arguments absents.
+# --------------------------------------------------------------------------- #
+
+_PATH_VAR = re.compile(r"\{(/?)([A-Za-z_][A-Za-z0-9_]*)\}")
+
+
+def _apply_schema_defaults(spec: dict, arguments: dict | None) -> dict:
+    """Le SDK valide les arguments mais ne remplit pas les valeurs par défaut."""
+    properties = (spec.get("input_schema") or {}).get("properties", {})
+    args = dict(arguments or {})
+    for name, prop in properties.items():
+        if args.get(name) is None and "default" in prop:
+            args[name] = prop["default"]
+    return args
+
+
+def _expand_path(template: str, args: dict) -> str:
+    def replace(match: re.Match) -> str:
+        optional, name = match.group(1) == "/", match.group(2)
+        value = args.get(name)
+        if value is None or value == "":
+            if optional:
+                return ""
+            raise ValueError(f"Paramètre obligatoire manquant : {name}")
+        return ("/" if optional else "") + urllib.parse.quote(str(value), safe="")
+
+    return _PATH_VAR.sub(replace, template)
+
+
+def _build_query(spec: dict, args: dict) -> str:
+    pairs: list[tuple[str, str]] = []
+
+    params = spec.get("query_params", [])
+    if isinstance(params, list):
+        params = {name: name for name in params}
+    for arg_name, target in params.items():
+        value = args.get(arg_name)
+        if value is None or value == "":
+            continue
+        if isinstance(target, str):
+            target = {"name": target}
+        if isinstance(value, bool):
+            value = "true" if value else "false"
+        pairs.append((target["name"], f"{target.get('prefix', '')}{value}"))
+
+    for key, value in spec.get("fixed_query", {}).items():
+        pairs.append((key, str(value)))
+
+    query = urllib.parse.urlencode(pairs, quote_via=urllib.parse.quote, safe="")
+
+    flags = list(spec.get("fixed_flags", []))
+    for arg_name, flag in spec.get("flag_params", {}).items():
+        if args.get(arg_name) is True:
+            flags.append(flag)
+
+    return "&".join(part for part in (query, "&".join(flags)) if part)
+
+
+def _looks_textual(content: bytes) -> bool:
+    """Heuristique : pas d'octet nul et UTF-8 valide (une coupure de caractère en fin d'échantillon est tolérée)."""
+    sample = content[:2000]
+    if b"\x00" in sample:
+        return False
+    try:
+        codecs.getincrementaldecoder("utf-8")().decode(sample, final=False)
+        return True
+    except UnicodeDecodeError:
+        return False
+
+
+def _short(text: str, limit: int = 500) -> str:
+    text = text.strip()
+    return text if len(text) <= limit else text[:limit] + "…"
+
+
+async def call_webservice_rest(spec: dict, arguments: dict | None) -> str:
+    """
+    Appelle une API REST en GET et renvoie du texte :
+      - JSON  -> renvoyé tel quel (compact), erreur explicite s'il est trop gros ;
+      - texte / XML -> découpé en pages (arguments offset / max_chars) avec un
+        pied de page indiquant le total et le décalage de la suite ;
+      - binaire -> erreur explicite (inutilisable par un LLM).
+    Les erreurs HTTP remontent avec le corps de la réponse, pour être
+    compréhensibles (ex. 501 = champ "output" inexistant côté ISTEX).
+    """
+    args = _apply_schema_defaults(spec, arguments)
+
+    url = _expand_path(spec["url"], args)
+    query = _build_query(spec, args)
+    if query:
+        url = f"{url}{'&' if '?' in url else '?'}{query}"
+
+    resp = await _http_client.request(
+        spec.get("method", "GET").upper(),
+        url,
+        headers=spec.get("headers", {}),
+        timeout=spec.get("timeout", DEFAULT_TIMEOUT),
+    )
+    status = resp.status_code
+
+    if status == 300:
+        return (
+            "[HTTP 300 : plusieurs documents correspondent, précisez la recherche "
+            f"(DOI, ISSN + volume + page...)] {_short(resp.text, 2000)}"
+        )
+    if 300 < status < 400:
+        return f"[Redirection HTTP {status} vers {resp.headers.get('location', '?')}]"
+    if status >= 400:
+        raise RuntimeError(f"HTTP {status} depuis {url} : {_short(resp.text)}")
+
+    content_type = resp.headers.get("content-type", "").lower()
+
+    if "json" in content_type:
+        try:
+            data = resp.json()
+        except ValueError:
+            data = None
+        if data is not None:
+            if isinstance(data, dict):
+                for key in spec.get("json_drop_keys", []):
+                    data.pop(key, None)
+            text = json.dumps(data, ensure_ascii=False)
+            limit = spec.get("max_response_chars", 50000)
+            if len(text) > limit:
+                raise ValueError(
+                    f"La réponse JSON fait {len(text)} caractères (limite {limit}) : "
+                    "réduisez 'size' ou limitez les champs demandés."
+                )
+            return text
+
+    is_text = content_type.startswith("text/") or "xml" in content_type or _looks_textual(resp.content)
+    if not is_text:
+        raise ValueError(
+            f"Format binaire non supporté (content-type '{content_type or 'inconnu'}') : "
+            "cet outil ne renvoie que du texte ou du JSON."
+        )
+
+    text = resp.text
+    total = len(text)
+    offset = max(int(args.get("offset") or 0), 0)
+    max_chars = int(args.get("max_chars") or spec.get("default_max_chars", 20000))
+
+    if total and offset >= total:
+        raise ValueError(f"offset={offset} dépasse la taille du texte ({total} caractères).")
+
+    chunk = text[offset : offset + max_chars]
+    end = offset + len(chunk)
+    footer = f"\n\n[Caractères {offset}-{end} sur {total}."
+    footer += f" Suite : offset={end}.]" if end < total else " Fin du texte.]"
+    return chunk + footer
 
 
 def _tools_list() -> list[Tool]:
@@ -286,7 +473,9 @@ async def call_tool(name: str, arguments: dict) -> list[TextContent]:
     spec = TOOLS_CONFIG[name]
     mode = spec.get("mode")
 
-    if mode == "tarball_batch":
+    if mode == "rest":
+        result = await call_webservice_rest(spec, arguments)
+    elif mode == "tarball_batch":
         result = await call_webservice_tarball_batch(spec, arguments.get("items"))
     elif mode == "retrieve":
         result = await call_webservice_retrieve(spec, arguments.get("token"))

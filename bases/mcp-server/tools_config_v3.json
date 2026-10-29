@@ -1,0 +1,234 @@
+{
+  "tools": [
+    {
+      "name": "istex_search",
+      "description": "Recherche des documents scientifiques dans ISTEX (articles, chapitres, livres sous licences nationales). Accès libre. Renvoie {total, hits:[{id, score, ...champs demandés dans output}]}. Syntaxe de q (Lucene) : plusieurs mots = OR par défaut (mettre AND pour tous les exiger) ; expression exacte entre guillemets \"...\" ; champ ciblé champ:valeur, par exemple host.title:\"Astronomische Nachrichten\", corpusName:elsevier, title:climate ; intervalle publicationDate:[1900 TO 1905] ; opérateurs AND / OR / NOT, jokers * et ?, flou mot~, proximité \"mot1 mot2\"~10, pondération mot^2 ; q=* désigne tous les documents. Les champs texte sont découpés en mots : corpusName:brill-journals cherche brill OU journals, utiliser \"brill-journals\" ou corpusName.raw:brill-journals pour une valeur exacte. Pagination : size (1 à 50) et from (décalage) ; pour la page suivante, augmenter from de size (from + size ne peut pas dépasser 10000). Tri : sortBy (champ ou champ[desc], plusieurs champs séparés par des virgules) ; sans sortBy, classement par pertinence ; rankBy permet un classement pondéré par la qualité ou aléatoire. Pour compter ou répartir les résultats (par année, corpus, langue...), préférer istex_facets.",
+      "url": "https://api.istex.fr/document/",
+      "method": "GET",
+      "mode": "rest",
+      "timeout": 60,
+      "max_response_chars": 50000,
+      "query_params": ["q", "size", "from", "output", "sortBy", "rankBy", "randomSeed"],
+      "json_drop_keys": ["firstPageURI", "lastPageURI", "nextPageURI", "prevPageURI"],
+      "headers": {},
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "q": {
+            "type": "string",
+            "description": "Requête Lucene, par exemple: title:(climate AND change) AND publicationDate:[2015 TO 2020]"
+          },
+          "size": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 50,
+            "default": 10,
+            "description": "Nombre de résultats par page (1 à 50)."
+          },
+          "from": {
+            "type": "integer",
+            "minimum": 0,
+            "description": "Décalage du premier résultat (pagination)."
+          },
+          "output": {
+            "type": "string",
+            "default": "title,doi,publicationDate,host.title,genre,language,corpusName",
+            "description": "Champs à renvoyer, séparés par des virgules (id et score sont toujours renvoyés). Ajouter abstract pour avoir les résumés. Un champ inexistant provoque une erreur HTTP 501. Éviter * (réponse énorme)."
+          },
+          "sortBy": {
+            "type": "string",
+            "description": "Tri : champ ou champ[desc] (ascendant par défaut), plusieurs champs séparés par des virgules. Exemple : publicationDate[desc]."
+          },
+          "rankBy": {
+            "type": "string",
+            "enum": ["qualityOverRelevance", "random"],
+            "description": "Type de classement : pertinence pondérée par la qualité du document, ou aléatoire."
+          },
+          "randomSeed": {
+            "type": "string",
+            "description": "Code unique renvoyé par un classement rankBy=random, pour retrouver le même ordre aléatoire."
+          }
+        },
+        "required": ["q"]
+      }
+    },
+    {
+      "name": "istex_facets",
+      "description": "Compte et répartit les documents ISTEX qui répondent à une requête, sans renvoyer les documents eux-mêmes (par corpus, par année, par langue...). Accès libre. Renvoie {total, aggregations:{champ:{buckets:[{key, docCount}]}}}. Syntaxe de facet : champ (les 10 valeurs les plus fréquentes), champ[N] (les N plus fréquentes), champ[*] (toutes, 1000 maximum). Champs de type date : champ[perYear] (par année), champ[1900-2000] (plage), champ[1400-1500:10] (plage découpée par pas de 10 ans). Facettes imbriquées : champ1>champ2, par exemple language[*]>publicationDate[perYear]. Plusieurs facettes se séparent par des virgules. Exemples de champs : corpusName, language, publicationDate, host.title, genre. Impossible de faire une facette sur doi, title ou abstract. Pour une valeur exacte en filtre, utiliser corpusName.raw ou des guillemets dans q.",
+      "url": "https://api.istex.fr/document/",
+      "method": "GET",
+      "mode": "rest",
+      "timeout": 60,
+      "max_response_chars": 50000,
+      "query_params": ["q", "facet"],
+      "fixed_query": {"size": 0},
+      "json_drop_keys": ["firstPageURI", "lastPageURI", "nextPageURI", "prevPageURI"],
+      "headers": {},
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "q": {
+            "type": "string",
+            "default": "*",
+            "description": "Requête Lucene (même syntaxe que istex_search). * = tous les documents."
+          },
+          "facet": {
+            "type": "string",
+            "description": "Facette(s) demandée(s). Exemples : corpusName[20] ; publicationDate[perYear] ; language[*]>publicationDate[perYear]."
+          }
+        },
+        "required": ["facet"]
+      }
+    },
+    {
+      "name": "istex_get_document",
+      "description": "Récupère la notice d'un document ISTEX à partir de son identifiant (champ id des résultats de istex_search) : métadonnées, ainsi que la liste des fichiers disponibles pour ce document (fulltext, annexes, couvertures, enrichissements) avec leurs formats et leurs liens. Accès libre. Utile avant istex_get_fulltext ou istex_get_enrichments pour savoir quels formats existent pour ce document. Erreur 404 si l'identifiant est inconnu.",
+      "url": "https://api.istex.fr/document/{id}",
+      "method": "GET",
+      "mode": "rest",
+      "timeout": 60,
+      "max_response_chars": 50000,
+      "headers": {},
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 1,
+            "description": "Identifiant ISTEX du document (40 caractères hexadécimaux, par exemple 55420CDEEA0F6538E215A511C72E2E5E57570138)."
+          }
+        },
+        "required": ["id"]
+      }
+    },
+    {
+      "name": "istex_resolve_reference",
+      "description": "Retrouve un document ISTEX à partir d'une référence bibliographique (résolveur OpenURL), sans passer par une recherche en texte libre. Accès libre. Fournir de préférence UN identifiant (doi, pii ou pmid) ; à défaut, plusieurs métadonnées combinées (issn + volume + issue + start_page + author_last_name, ou article_title + journal_title...). Le DOI d'une revue ou d'un livre ne fonctionne pas, seulement celui d'un article ou d'un chapitre. La réponse est un JSON qui indique si un document a été identifié, avec le lien vers la ressource ; si plusieurs documents correspondent la réponse porte la mention HTTP 300 (préciser alors la référence) ; erreur 404 si aucun document ne correspond.",
+      "url": "https://api.istex.fr/document/openurl",
+      "method": "GET",
+      "mode": "rest",
+      "timeout": 60,
+      "max_response_chars": 50000,
+      "query_params": {
+        "doi": {"name": "rft_id", "prefix": "info:doi/"},
+        "pii": {"name": "rft_id", "prefix": "info:pii/"},
+        "pmid": {"name": "rft_id", "prefix": "info:pmid/"},
+        "article_title": "rft.atitle",
+        "journal_title": "rft.jtitle",
+        "issn": "rft.issn",
+        "isbn": "rft.isbn",
+        "volume": "rft.volume",
+        "issue": "rft.issue",
+        "start_page": "rft.spage",
+        "author_last_name": "rft.aulast",
+        "author": "rft.au"
+      },
+      "fixed_flags": ["noredirect"],
+      "headers": {},
+      "input_schema": {
+        "type": "object",
+        "minProperties": 1,
+        "properties": {
+          "doi": {"type": "string", "description": "DOI de l'article ou du chapitre, par exemple 10.1136/acupmed-2012-010183 (sans préfixe)."},
+          "pii": {"type": "string", "description": "PII (identifiant utilisé notamment chez Elsevier et IOP), par exemple S0143-0807(98)90774-7."},
+          "pmid": {"type": "string", "description": "Identifiant PubMed (PMID), utilisé notamment chez BMJ et OUP."},
+          "article_title": {"type": "string", "description": "Titre de l'article."},
+          "journal_title": {"type": "string", "description": "Titre du journal."},
+          "issn": {"type": "string", "description": "ISSN du journal, par exemple 0964-5284."},
+          "isbn": {"type": "string", "description": "ISBN du livre."},
+          "volume": {"type": ["string", "integer"], "description": "Numéro de volume."},
+          "issue": {"type": ["string", "integer"], "description": "Numéro de fascicule."},
+          "start_page": {"type": ["string", "integer"], "description": "Première page de l'article."},
+          "author_last_name": {"type": "string", "description": "Nom de famille du premier auteur."},
+          "author": {"type": "string", "description": "Nom complet de l'auteur, par exemple Richard James Clark."}
+        }
+      }
+    },
+    {
+      "name": "istex_get_fulltext",
+      "description": "Lit le texte intégral d'un document ISTEX, découpé en pages de texte. ACCÈS CONTRÔLÉ : le serveur MCP doit avoir une adresse IP autorisée par ISTEX, sinon l'erreur sera de type 401 ou 403 (à tester : certains formats peuvent être plus ouverts que d'autres). Formats : txt (texte brut), cleaned (texte brut nettoyé), tei (XML TEI structuré, beaucoup plus volumineux). Tous les formats n'existent pas pour tous les documents (voir istex_get_document) ; erreur 404 si le format est absent. Le texte est renvoyé par pages de max_chars caractères (20000 par défaut) avec un pied de page indiquant le total et le décalage de la suite : pour lire la suite, rappeler l'outil avec offset=<valeur indiquée>. Les formats binaires (pdf, tiff, zip) ne sont pas proposés.",
+      "url": "https://api.istex.fr/document/{id}/fulltext/{format}",
+      "method": "GET",
+      "mode": "rest",
+      "timeout": 120,
+      "default_max_chars": 20000,
+      "headers": {},
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 1,
+            "description": "Identifiant ISTEX du document."
+          },
+          "format": {
+            "type": "string",
+            "enum": ["txt", "cleaned", "tei"],
+            "default": "txt",
+            "description": "Format du texte intégral."
+          },
+          "offset": {
+            "type": "integer",
+            "minimum": 0,
+            "default": 0,
+            "description": "Position (en caractères) où commencer la lecture, pour parcourir un long texte page par page."
+          },
+          "max_chars": {
+            "type": "integer",
+            "minimum": 100,
+            "maximum": 100000,
+            "default": 20000,
+            "description": "Taille de la page de texte, en caractères."
+          }
+        },
+        "required": ["id"]
+      }
+    },
+    {
+      "name": "istex_get_enrichments",
+      "description": "Accède aux enrichissements calculés par ISTEX sur un document. ACCÈS CONTRÔLÉ pour le contenu des enrichissements (TEI) : le serveur MCP doit avoir une adresse IP autorisée par ISTEX, sinon l'erreur sera de type 401 ou 403. Sans type, renvoie la liste JSON des enrichissements disponibles pour ce document (accès libre). Avec un type, renvoie l'enrichissement en XML TEI, découpé en pages de texte : teeft (termes d'indexation extraits du texte anglais, avec fréquence et spécificité), multicat et nb (catégorisation thématique, par exemple catégories WOS et Science-Metrix pour multicat), refBibs (références bibliographiques), unitex (entités nommées), grobidFulltext (texte intégral structuré), abesAuthors et abesSubjects (enrichissements ABES). Un seul type par appel. Pour lire la suite d'un texte long, rappeler l'outil avec offset=<valeur indiquée dans le pied de page>. L'option consolidate fusionne l'enrichissement dans le TEI du texte intégral (très volumineux).",
+      "url": "https://api.istex.fr/document/{id}/enrichments{/type}",
+      "method": "GET",
+      "mode": "rest",
+      "timeout": 120,
+      "max_response_chars": 50000,
+      "default_max_chars": 20000,
+      "flag_params": {"consolidate": "consolidate"},
+      "headers": {},
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 1,
+            "description": "Identifiant ISTEX du document."
+          },
+          "type": {
+            "type": "string",
+            "enum": ["teeft", "multicat", "nb", "refBibs", "unitex", "grobidFulltext", "abesAuthors", "abesSubjects"],
+            "description": "Type d'enrichissement. Omis : liste des enrichissements disponibles pour le document."
+          },
+          "consolidate": {
+            "type": "boolean",
+            "default": false,
+            "description": "Fusionner l'enrichissement avec le TEI du texte intégral."
+          },
+          "offset": {
+            "type": "integer",
+            "minimum": 0,
+            "default": 0,
+            "description": "Position (en caractères) où commencer la lecture d'un enrichissement long."
+          },
+          "max_chars": {
+            "type": "integer",
+            "minimum": 100,
+            "maximum": 100000,
+            "default": 20000,
+            "description": "Taille de la page de texte, en caractères."
+          }
+        },
+        "required": ["id"]
+      }
+    }
+  ]
+}

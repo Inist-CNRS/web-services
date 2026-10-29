@@ -23,7 +23,7 @@ COPY . /app/
 
 ENV MCP_HOST=0.0.0.0 \
     MCP_PORT=8000 \
-    MCP_TOOLS_CONFIG=/app/tools_config.json,/app/tools_config_v2.json \
+    MCP_TOOLS_CONFIG=/app/tools_config.json,/app/tools_config_v2.json,/app/tools_config_v3.json \
     PYTHONUNBUFFERED=1
 
 ENTRYPOINT [ "/usr/bin/tini", "-g", "--" ]
