@@ -9,4 +9,4 @@ C'est l'image de base de [`ezs-python-server`](../ezs-python-server/README.md).
 
 | python  | node    | système d'exploitation |
 | ------- | ------- | ---------------------- |
-| 3.10.21 | 24.21.0 | Debian trixie (13)     |
+| 3.10.21 | 24.22.2 | Debian trixie (13)     |
