@@ -9,7 +9,7 @@ on:
 
 jobs:
   test-build-and-push-on-tag:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     steps:
       - name: Checkout from Git
         uses: actions/checkout@v6
