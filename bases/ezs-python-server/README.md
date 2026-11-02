@@ -1,11 +1,11 @@
-# ezs-python-server@2.0.2
+# ezs-python-server@2.0.3
 
 Ce répertoire contient de quoi construire une image Docker lançant un serveur
 [ezs](https://github.com/Inist-CNRS/ezs) ayant la possibilité de lancer des
 scripts python.
 
 C'est l'image de base des web services.
-Son nom est : `cnrsinist/ezs-python-server:2.0.2-no24-2.0.1`.
+Son nom est : `cnrsinist/ezs-python-server:2.0.3-no24-2.0.1`.
 
 ## Versions utilisées
 
