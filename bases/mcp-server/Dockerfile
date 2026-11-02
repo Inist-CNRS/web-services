@@ -8,8 +8,14 @@ FROM cnrsinist/python-node:py3.10-no24-2.1.0
 RUN apt-get update && \
     apt-get upgrade -y && \
     apt-get install -y --no-install-recommends tini && \
-    apt-get clean && rm -rf /var/lib/apt/lists/*
+    apt-get clean && rm -rf /var/lib/apt/lists/* \
+    echo '{ \
+    "httpPort": 8000, \
+    "configPath": "/app/config.json", \
+    "dataPath": "/app/public" \
+    }' > /etc/ezmaster.json
 
+WORKDIR /app/public
 WORKDIR /app
 
 # Dépendances Python du serveur MCP (SDK officiel, branche 1.x/FastMCP)
