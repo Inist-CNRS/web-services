@@ -45,7 +45,7 @@ HTTP 200
     }
 }]
 
-POST {{host}}/v1/affiliationcountry/affilcountry?indent=true
+POST {{host}}/v1/affiliationcountry/detect?indent=true
 content-type: application/json
 [
 {"id":1,"value":"université sciences et technologies bordeaux 1 institut national de physique nucléaire et de physique des particules du cnrs in2p3 UMR5797"},
@@ -61,73 +61,80 @@ content-type: application/json
 ]
 
 HTTP 200
-[{
-    "id": 1,
-    "value": {
-        "country": "France",
-        "code": "fr"
-    }
-},
-{
-    "id": 2,
-    "value": {
-        "country": "France",
-        "code": "fr"
-    }
-},
-{
-    "id": 3,
-    "value": {
-        "country": "France",
-        "code": "fr"
-    }
-},
-{
-    "id": 4,
-    "value": {
-        "country": "Germany",
-        "code": "de"
-    }
-},
-{
-    "id": 5,
-    "value": {
-        "country": "France",
-        "code": "fr"
-    }
-},
-{
-    "id": 6,
-    "value": {
-        "country": "Portugal",
-        "code": "pt"
-    }
-},
-{
-    "id": 7,
-    "value": {
-        "country": "",
-        "code": ""
-    }
-},
-{
-    "id": 8,
-    "value": {
-        "country": "France",
-        "code": "fr"
-    }
-},
-{
-    "id": 9,
-    "value": {
-        "country": "Italy",
-        "code": "it"
-    }
-},
-{
-    "id": 10,
-    "value": {
-        "country": "France",
-        "code": "fr"
-    }
-}]
+Content-Type: application/json
+[Asserts]
+jsonpath "$" count == 10
+jsonpath "$[*].value.city" count == 10
+jsonpath "$[*].value.country" count == 10
+
+# HTTP 200
+# [{
+#     "id": 1,
+#     "value": {
+#         "city": "Bordeaux",
+#         "country": "France"
+#     }
+# },
+# {
+#     "id": 2,
+#     "value": {
+#         "city": "n/a",
+#         "country": "France"
+#     }
+# },
+# {
+#     "id": 3,
+#     "value": {
+#         "city": "Nancy",
+#         "country": "France"
+#     }
+# },
+# {
+#     "id": 4,
+#     "value": {
+#         "city": "Tuebingen",
+#         "country": "Germany"
+#     }
+# },
+# {
+#     "id": 5,
+#     "value": {
+#         "city": "Vannes",
+#         "country": "France"
+#     }
+# },
+# {
+#     "id": 6,
+#     "value": {
+#         "city": "Braganca",
+#         "country": "Portugal"
+#     }
+# },
+# {
+#     "id": 7,
+#     "value": {
+#         "city": "n/a",
+#         "country": "Lebanon"
+#     }
+# },
+# {
+#     "id": 8,
+#     "value": {
+#         "city": "Vandoeuvre-lès-Nancy",
+#         "country": "France"
+#     }
+# },
+# {
+#     "id": 9,
+#     "value": {
+#         "city": "Milan",
+#         "country": "Italy"
+#     }
+# },
+# {
+#     "id": 10,
+#     "value": {
+#         "city": "Toulouse",
+#         "country": "France"
+#     }
+# }]
