@@ -14,7 +14,7 @@ RUN pip install --no-cache-dir \
     python-docx==1.1.2
 
 # Install pdftohtml
-RUN apt-get update && apt-get install -y --no-install-recommends poppler-utils=20.09.0-3.1+deb11u2 && apt-get clean && rm -rf /var/lib/apt/lists/*
+RUN apt-get update && apt-get install -y --no-install-recommends poppler-utils=25.03.0-5+deb13u4 && apt-get clean && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /app/public
 
