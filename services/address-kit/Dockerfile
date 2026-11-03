@@ -1,13 +1,14 @@
 # syntax=docker/dockerfile:1.2
-FROM cnrsinist/ezs-python-server:py3.9-no24-1.0.14
+FROM cnrsinist/ezs-python-server:py3.10-no24-2.0.5
 
 WORKDIR /app
 # Install all python dependencies
-RUN pip install --no-cache-dir \
+RUN uv pip install --system --no-cache \
   pickleshare==0.7.5 \
   geopy==1.20.0 \
   iso3166==2.1.1 \
-  unidecode==1.3.6
+  unidecode==1.3.6 \
+  requests
 
 WORKDIR /app/public
 # Declare files to copy in .dockerignore
