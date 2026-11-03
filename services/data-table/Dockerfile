@@ -5,11 +5,11 @@ WORKDIR /app
 
 RUN apt-get update && \
     apt-get install -y --no-install-recommends \
-    ffmpeg=7:4.3.9-0+deb11u2 \
-    libsm6=2:1.2.3-1 \
-    libxext6=2:1.3.3-1.1 \
-    tesseract-ocr=4.1.1-2.1 \
-    tesseract-ocr-fra=1:4.00~git30-7274cfa-1.1 && \
+    ffmpeg=7:7.1.5-0+deb13u1 \
+    libsm6=2:1.2.6-1 \
+    libxext6=2:1.3.4-1 \
+    tesseract-ocr=5.5.0-1 \
+    tesseract-ocr-fra=1:4.1.0-2 && \
     apt-get clean && rm -rf /var/lib/apt/lists/*
 
 # Install all python dependencies
