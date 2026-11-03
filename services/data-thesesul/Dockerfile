@@ -17,7 +17,7 @@ COPY ./v1/xsl-files.tar.gz.dvc /dvc
 RUN dvc pull -v
 
 
-FROM cnrsinist/ezs-python-server:py3.9-no24-1.0.14
+FROM cnrsinist/ezs-python-server:py3.10-no24-2.0.5
 WORKDIR /app
 RUN apt-get update && apt-get install -y --no-install-recommends xsltproc=1.1.35-1.2+deb13u3 libxml2-utils=2.12.7+dfsg+really2.9.14-2.1+deb13u3 && apt-get clean && rm -rf /var/lib/apt/lists/*
 # Install all python dependencies
