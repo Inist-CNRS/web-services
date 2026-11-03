@@ -1,4 +1,4 @@
-# ws-openalex-doctype@1.0.1
+# ws-openalex-doctype@1.0.2
 
 Vérifie si un document OpenAlex est un document de recherche ou non
 
