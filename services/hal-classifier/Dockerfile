@@ -23,7 +23,7 @@ RUN cat /dvc/v1/en/HALen_matrixKDT.npy.* > /dvc/v1/en/HALen_matrixKDT.npy && \
 ####
 # Build and install web services dependencies en files
 ####
-FROM cnrsinist/ezs-python-server:py3.9-no24-1.0.14
+FROM cnrsinist/ezs-python-server:py3.10-no24-2.0.5
 
 WORKDIR /app
 
