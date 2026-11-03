@@ -1,7 +1,7 @@
 FROM cnrsinist/ezs-python-server:py3.9-no24-1.0.14
 
 RUN apt-get update && \
-    apt-get install -y --no-install-recommends locales=2.31-13+deb11u14 && \
+    apt-get install -y --no-install-recommends locales=2.41-12+deb13u4 && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
