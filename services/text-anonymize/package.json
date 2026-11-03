@@ -1,7 +1,7 @@
 {
   "private": true,
   "name": "ws-text-anonymize",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Anonymize a given text",
   "repository": {
     "type": "git",
