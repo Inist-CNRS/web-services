@@ -24,7 +24,7 @@ RUN sh /opt/treetagger/install-tagger.sh \
     && rm -rf ./*.gz ./*.tgz cmd/ doc/
 
 # Already present: curl
-RUN apt-get update && apt-get install -y --no-install-recommends unzip=6.0-26+deb11u1 zip=3.0-12 && apt-get clean && rm -rf /var/lib/apt/lists/*
+RUN apt-get update && apt-get install -y --no-install-recommends unzip=6.0-29+deb13u1 zip=3.0-15+deb13u1 && apt-get clean && rm -rf /var/lib/apt/lists/*
 
 # Install TermSuite
 RUN curl -L https://search.maven.org/remotecontent?filepath=fr/univ-nantes/termsuite/termsuite-core/${TERMSUITE_VERSION}/termsuite-core-${TERMSUITE_VERSION}.jar -o /opt/termsuite-core-${TERMSUITE_VERSION}.jar && \
