@@ -6,7 +6,7 @@ ENV LIBPOSTAL_HOME=/usr/share/libpostal
 WORKDIR ${LIBPOSTAL_HOME}
 # Install required dependencies to build libpostal
 RUN apt-get update && \
-    apt-get install -y --no-install-recommends autoconf=2.69-14 automake=1:1.16.3-2 build-essential=12.9 git=1:2.30.2-1+deb11u5 libtool=2.4.6-15 pkg-config=0.29.2-1 unzip=6.0-26+deb11u1 && \
+    apt-get install -y --no-install-recommends autoconf=2.72-3.1 automake=1:1.17-4 build-essential=12.12 git=1:2.47.3-0+deb13u1 libtool=2.5.4-4 pkg-config=1.8.1-4 unzip=6.0-29+deb13u1 && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/* && \
     # Download libpostal \
