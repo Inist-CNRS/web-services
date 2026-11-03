@@ -3,9 +3,9 @@
 ####
 # Get all web services dvc files
 ####
-FROM python:3.9-slim-bullseye AS dvc-files
+FROM ghcr.io/astral-sh/uv:0.12.12-python3.10-trixie-slim AS dvc-files
 WORKDIR /dvc
-RUN apt-get update && apt-get -y --no-install-recommends install git=1:2.30.2-1+deb11u5 && apt-get clean && rm -rf /var/lib/apt/lists/*
+RUN apt-get update && apt-get -y --no-install-recommends install git=1:2.47.3-0+deb13u1 && apt-get clean && rm -rf /var/lib/apt/lists/*
 RUN pip install --no-cache-dir dvc[webdav]==3.67.1
 RUN --mount=type=secret,id=webdav_login \
     --mount=type=secret,id=webdav_password \
@@ -29,7 +29,7 @@ WORKDIR /app
 
 # Install Cython requirement
 RUN apt-get update && \
-    apt-get install -y --no-install-recommends build-essential=12.9 make=4.3-4.1 gcc=4:10.2.1-1 && \
+    apt-get install -y --no-install-recommends build-essential=12.12 make=4.4.1-2 gcc=4:14.2.0-1 && \
     apt-get clean && rm -rf /var/lib/apt/lists/* && \
     pip install --no-cache-dir Cython==0.29.37 && \
     # Install all python dependencies
