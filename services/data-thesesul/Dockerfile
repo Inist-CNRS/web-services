@@ -1,8 +1,8 @@
 # syntax=docker/dockerfile:1.2
 
-FROM python:3.9-slim-bullseye AS dvc-files
+FROM ghcr.io/astral-sh/uv:0.12.12-python3.10-trixie-slim AS dvc-files
 WORKDIR /dvc
-RUN apt-get update && apt-get -y --no-install-recommends install git=1:2.30.2-1+deb11u5 && apt-get clean && rm -rf /var/lib/apt/lists/*
+RUN apt-get update && apt-get -y --no-install-recommends install git=1:2.47.3-0+deb13u1 && apt-get clean && rm -rf /var/lib/apt/lists/*
 RUN pip install --no-cache-dir dvc[webdav]==3.66.1
 RUN --mount=type=secret,id=webdav_login \
     --mount=type=secret,id=webdav_password \
@@ -19,7 +19,7 @@ RUN dvc pull -v
 
 FROM cnrsinist/ezs-python-server:py3.9-no24-1.0.14
 WORKDIR /app
-RUN apt-get update && apt-get install -y --no-install-recommends xsltproc=1.1.34-4+deb11u3 libxml2-utils=2.9.10+dfsg-6.7+deb11u10 && apt-get clean && rm -rf /var/lib/apt/lists/*
+RUN apt-get update && apt-get install -y --no-install-recommends xsltproc=1.1.35-1.2+deb13u3 libxml2-utils=2.12.7+dfsg+really2.9.14-2.1+deb13u3 && apt-get clean && rm -rf /var/lib/apt/lists/*
 # Install all python dependencies
 RUN pip install --no-cache-dir \
     requests==2.31.0
