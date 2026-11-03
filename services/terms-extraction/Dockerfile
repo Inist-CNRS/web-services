@@ -14,7 +14,7 @@ ENV LANGUAGE=en_US:en
 ENV LC_ALL=en_US.UTF-8
 
 # Install all python dependencies
-RUN pip install --no-cache-dir \
+RUN uv pip install --system --no-cache \
     --index-url https://download.pytorch.org/whl/cpu \
     --extra-index-url https://pypi.org/simple \
     numpy==1.26.3 \
