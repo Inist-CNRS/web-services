@@ -65,5 +65,5 @@ HTTP 200
 },
 {
     "id": 3,
-    "value": "as of 2 April 2021 , more than 129 million case have be confirm , with more than 2.82 million death attribute to COVID-19 , make -PRON- one of the deadly pandemic in history ."
+    "value": "as of 2 April 2021 , more than 129 million case have be confirm , with more than 2.82 million death attribute to COVID-19 , make it one of the deadly pandemic in history ."
 }]
