@@ -1,4 +1,4 @@
-# ws-biblio-tools@5.0.7
+# ws-biblio-tools@5.0.8
 
 Outils pour références bibliographiques
 
