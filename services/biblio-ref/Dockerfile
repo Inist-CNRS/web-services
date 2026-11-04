@@ -1,6 +1,11 @@
 # syntax=docker/dockerfile:1.2
 FROM cnrsinist/ezs-python-server:py3.10-no24-2.0.5
 
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends curl=8.14.1-2+deb13u7 && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
+
 WORKDIR /app
 # Install all python dependencies
 RUN pip3 install --no-cache-dir \
