@@ -3,7 +3,7 @@
 FROM cnrsinist/ezs-python-server:py3.10-no24-2.0.5
 
 # Install all python dependencies
-RUN pip install --no-cache-dir \
+RUN uv pip install --system --no-cache \
     spacy==2.3.5 \
     numpy==1.26.3 \
     requests==2.31.0 \
