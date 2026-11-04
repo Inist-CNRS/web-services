@@ -7,8 +7,8 @@ RUN apt-get update && \
     apt-get install -y --no-install-recommends \
     ffmpeg=7:7.1.5-0+deb13u1 \
     libsm6=2:1.2.6-1 \
-    libxext6=2:1.3.4-1 \
-    tesseract-ocr=5.5.0-1 \
+    libxext6=2:1.3.4-1+b3 \
+    tesseract-ocr=5.5.0-1+b1 \
     tesseract-ocr-fra=1:4.1.0-2 && \
     apt-get clean && rm -rf /var/lib/apt/lists/*
 
@@ -21,7 +21,8 @@ RUN pip install --no-cache-dir \
 
 WORKDIR /app/public
 # Modification in image2table library to delete the printing in the stdout
-RUN sed -i -e 's/cmd_tess = subprocess.run("tesseract --version", env=self.env, shell=True, check=False)/cmd_tess = subprocess.run("tesseract --version", env=self.env, shell=True, check=False, stdout=subprocess.PIPE)/g' /usr/local/lib/python3.9/site-packages/img2table/ocr/tesseract.py
+RUN IMG2TABLE_DIR=$(python -c "import img2table, os; print(os.path.dirname(img2table.__file__))") && \
+    sed -i -e 's/cmd_tess = subprocess.run("tesseract --version", env=self.env, shell=True, check=False)/cmd_tess = subprocess.run("tesseract --version", env=self.env, shell=True, check=False, stdout=subprocess.PIPE)/g' "$IMG2TABLE_DIR/ocr/tesseract.py"
 ENV NUMBA_CACHE_DIR=/tmp/numba_cache
 # Declare files to copy in .dockerignore
 COPY --chown=daemon:daemon . /app/public/
