@@ -4,7 +4,8 @@ FROM cnrsinist/ezs-python-server:py3.10-no24-2.0.5
 ENV \
     TT_VERSION=3.2.5 \
     TT_URL=http://www.cis.uni-muenchen.de/~schmid/tools/TreeTagger/data \
-    TERMSUITE_VERSION=3.0.10
+    TERMSUITE_VERSION=3.0.10 \
+    SDKMAN_DIR=/opt/sdkman
 
 # Install TreeTagger
 WORKDIR /opt/treetagger
@@ -20,7 +21,7 @@ ADD ${TT_URL}/tree-tagger-linux-${TT_VERSION}.tar.gz \
     /opt/treetagger/
 RUN sh /opt/treetagger/install-tagger.sh \
     && mv lib models \
-    && chmod a+x /opt/treetagger/models \
+    && chmod -R a+rX /opt/treetagger \
     && rm -rf ./*.gz ./*.tgz cmd/ doc/
 
 RUN apt-get update && apt-get install -y --no-install-recommends curl=8.14.1-2+deb13u7 unzip=6.0-29+deb13u1 zip=3.0-15+deb13u1 && apt-get clean && rm -rf /var/lib/apt/lists/*
@@ -33,7 +34,8 @@ RUN curl -L https://search.maven.org/remotecontent?filepath=fr/univ-nantes/terms
 # Use OpenJDK 8: https://github.com/termsuite/termsuite-core/issues/108
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 RUN curl -s "https://get.sdkman.io" | bash
-RUN source "$HOME/.sdkman/bin/sdkman-init.sh" && sdk install java 8.0.402-zulu
+RUN source "$SDKMAN_DIR/bin/sdkman-init.sh" && sdk install java 8.0.402-zulu \
+    && chmod -R a+rX "$SDKMAN_DIR"
 
 WORKDIR /app/public
 # Declare files to copy in .dockerignore
