@@ -32,7 +32,9 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     plac==1.4.3 \
     scipy==1.13.1 \
     numpy==1.26.3 \
-    fasttext==0.9.2 && \
+    # fasttext-wheel provides prebuilt wheels: fasttext 0.9.2 sources do not
+    # compile with gcc 14 (missing <cstdint> include in src/args.cc)
+    fasttext-wheel==0.9.2 && \
     apt-get remove -y --purge build-essential make gcc && \
     apt-get autoremove -y
 
