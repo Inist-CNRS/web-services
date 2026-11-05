@@ -17,7 +17,7 @@ COPY ./v1/entity-tag-model.dvc /dvc
 RUN dvc pull -v
 
 
-FROM cnrsinist/ezs-python-pytorch-server:py3.9-no24-1.1.9
+FROM cnrsinist/ezs-python-pytorch-server:py3.10-no24-2.0.2
 
 # Install all python dependencies
 RUN pip install --no-cache-dir --no-build-isolation \
