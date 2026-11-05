@@ -33,7 +33,10 @@ RUN apt-get update && \
     apt-get -y --no-install-recommends install -y unzip autoconf automake libtool pkg-config build-essential git && \
     apt-get clean && rm -rf /var/lib/apt/lists/*
 RUN pip install --upgrade pip
-RUN pip install --no-cache-dir git+$GIT@$TERMS_TOOLS_VERSION#egg=terms_tools
+# spacy 3.8.7 imports click in spacy.cli, but typer>=0.27 no longer depends on it
+RUN pip install --no-cache-dir \
+    click==8.1.7 \
+    git+$GIT@$TERMS_TOOLS_VERSION#egg=terms_tools
 
 # download spacy models
 RUN pip install  --no-cache-dir \
