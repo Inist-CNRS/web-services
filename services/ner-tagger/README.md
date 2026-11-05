@@ -1,4 +1,4 @@
-# ws-ner-tagger@1.0.15
+# ws-ner-tagger@1.0.16
 
 Détection d'entitées nommées:
 
