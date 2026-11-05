@@ -24,19 +24,14 @@ RUN dvc pull -vv
 FROM cnrsinist/ezs-python-server:py3.10-no24-2.0.5
 
 WORKDIR /app
-# Install all python dependencies
-RUN apt-get update && apt-get install -y --no-install-recommends \
-    build-essential=12.12 make=4.4.1-2 gcc=4:14.2.0-1 && \
-    apt-get clean && rm -rf /var/lib/apt/lists/* && \
-    pip install --no-cache-dir --no-build-isolation \
+# Install all python dependencies (all available as prebuilt wheels).
+# fasttext-wheel is used instead of the fasttext sdist, whose sources no
+# longer compile with gcc 14 (missing <cstdint> include in src/args.cc).
+RUN uv pip install --system --no-cache \
     plac==1.4.3 \
     scipy==1.13.1 \
     numpy==1.26.3 \
-    # fasttext-wheel provides prebuilt wheels: fasttext 0.9.2 sources do not
-    # compile with gcc 14 (missing <cstdint> include in src/args.cc)
-    fasttext-wheel==0.9.2 && \
-    apt-get remove -y --purge build-essential make gcc && \
-    apt-get autoremove -y
+    fasttext-wheel==0.9.2
 
 WORKDIR /app/public
 # Declare files to copy in .dockerignore
