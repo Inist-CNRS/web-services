@@ -13,7 +13,7 @@ RUN --mount=type=secret,id=webdav_login \
 COPY ./v1/aiAbstract-model.pt.dvc /dvc
 RUN dvc pull -v
 
-FROM cnrsinist/ezs-python-pytorch-server:py3.9-no24-1.1.9
+FROM cnrsinist/ezs-python-pytorch-server:py3.10-no24-2.0.2
 
 # Uninstall transformers due to a bug with latest version and flair
 RUN pip install --no-cache-dir \
