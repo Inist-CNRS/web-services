@@ -1,8 +1,8 @@
 # syntax=docker/dockerfile:1.2
 FROM ghcr.io/astral-sh/uv:0.12.12-python3.10-trixie-slim AS dvc-files
 WORKDIR /dvc
-RUN apt-get update && apt-get install -y --no-install-recommends git=1:2.47.3-0+deb13u1 curl=8.14.1-2+deb13u7 && apt-get clean && rm -rf /var/lib/apt/lists/*
-RUN pip install --no-cache-dir dvc[webdav]==3.67.1
+RUN apt-get update && apt-get install -y --no-install-recommends git=1:2.47.3-0+deb13u1 && apt-get clean && rm -rf /var/lib/apt/lists/*
+RUN uv pip install --system --no-cache dvc[webdav]==3.67.1
 RUN --mount=type=secret,id=webdav_login \
     --mount=type=secret,id=webdav_password \
     --mount=type=secret,id=webdav_url \
@@ -20,8 +20,10 @@ RUN dvc pull -v && \
 FROM cnrsinist/ezs-python-pytorch-server:py3.10-no24-2.0.2
 WORKDIR /app
 
+RUN apt-get update && apt-get install -y --no-install-recommends curl=8.14.1-2+deb13u7 && apt-get clean && rm -rf /var/lib/apt/lists/*
+
 # Install all python dependencies
-RUN pip install --no-cache-dir \
+RUN uv pip install --system --no-cache \
     unidecode==1.4.0 \
     requests==2.32.5 \
     pandas==2.3.3 \
