@@ -27,24 +27,15 @@ FROM cnrsinist/ezs-python-server:py3.10-no24-2.0.5
 
 WORKDIR /app
 
-# Install Cython requirement
-RUN apt-get update && \
-    apt-get install -y --no-install-recommends build-essential=12.12 make=4.4.1-2 gcc=4:14.2.0-1 && \
-    apt-get clean && rm -rf /var/lib/apt/lists/* && \
-    pip install --no-cache-dir Cython==0.29.37 && \
-    # Install all python dependencies
-    # Using build isolation to fix compile error
-    # https://github.com/numpy/numpy/issues/24377#issuecomment-1671859253
-    pip install --no-cache-dir --no-build-isolation \
+# Install all python dependencies (all available as prebuilt wheels).
+# fasttext-wheel is used instead of the fasttext sdist, whose sources no
+# longer compile with gcc 14 (missing <cstdint> include in src/args.cc).
+RUN pip install --no-cache-dir \
     more-itertools==10.2.0 \
     numpy==1.26.3 \
     scipy==1.10.1 \
-    fasttext==0.9.2 \
-    faiss-cpu==1.7.2 && \
-    # Clean-up
-    apt-get remove -y --purge build-essential make gcc && \
-    apt-get autoremove -y && \
-    pip uninstall -y Cython
+    fasttext-wheel==0.9.2 \
+    faiss-cpu==1.7.2
 
 WORKDIR /app/public
 # Declare files to copy in .dockerignore
