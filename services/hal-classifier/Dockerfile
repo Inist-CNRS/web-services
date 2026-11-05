@@ -30,7 +30,7 @@ WORKDIR /app
 # Install all python dependencies (all available as prebuilt wheels).
 # fasttext-wheel is used instead of the fasttext sdist, whose sources no
 # longer compile with gcc 14 (missing <cstdint> include in src/args.cc).
-RUN pip install --no-cache-dir \
+RUN uv pip install --system --no-cache \
     more-itertools==10.2.0 \
     numpy==1.26.3 \
     scipy==1.10.1 \
