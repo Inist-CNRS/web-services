@@ -608,15 +608,25 @@ Il y a plusieurs images de base:
   serveur ezs vide, acceptant les scripts ezs et python, embarquant saxon, sous
   la forme de la commande `xslt`.
 
-> [!NOTE]  
+> [!NOTE] 
 > Il existe maintenant un script qui se charge de la mise à jour des
-> images qui dépendent directement d'une image de base: [`npm run update:images
-> <image-name>`](./SCRIPTS.md#updateimages).  
+> images qui dépendent directement d'une image de base: [`npm run update:images <image-name>`](./SCRIPTS.md#updateimages). 
+> 
 > Assurez-vous que l'image a été créée (version, build, push) avant de lancer le
-> script.  
+> script. 
+>
+> ```bash
+> npm -w bases/python-node run build:check
+> npm -w bases/python-node run build:dev
+> npm -w bases/python-node version patch
+> npm -w bases/python-node run build
+> npm -w bases/python-node run publish
+> npm run update:images -- --dry-run python-node
+> ```
+>
 > De même, faites en sorte que les dernières modifications de la branche `main`
-> soient intégrées dans la branche de travail de la *pull request* (un `git
-> merge main` devrait faire l'affaire), sous peine d'avoir des tags de version
+> soient intégrées dans la branche de travail de la *pull request* (un `git merge main`
+> devrait faire l'affaire), sous peine d'avoir des tags de version
 > existant déjà, et interrompant la mise à jour du/des service/s en question.
 
 > [!WARNING] 

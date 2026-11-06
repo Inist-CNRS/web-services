@@ -1,7 +1,7 @@
 # syntax=docker/dockerfile:1.2
-FROM python:3.9-slim-bullseye AS dvc-files
+FROM ghcr.io/astral-sh/uv:0.12.12-python3.10-trixie-slim AS dvc-files
 WORKDIR /dvc
-RUN apt-get update && apt-get install -y --no-install-recommends git=1:2.30.2-1+deb11u5 curl=7.74.0-1.3+deb11u16 && apt-get clean && rm -rf /var/lib/apt/lists/*
+RUN apt-get update && apt-get install -y --no-install-recommends git=1:2.47.3-0+deb13u1 && apt-get clean && rm -rf /var/lib/apt/lists/*
 RUN pip install --no-cache-dir dvc[webdav]==3.67.1
 RUN --mount=type=secret,id=webdav_login \
     --mount=type=secret,id=webdav_password \
@@ -17,7 +17,7 @@ RUN dvc pull -v && \
     tar -xzvf model-splitted.tar.gz
 
 
-FROM cnrsinist/ezs-python-pytorch-server:py3.9-no24-1.1.9
+FROM cnrsinist/ezs-python-pytorch-server:py3.10-no24-2.0.2
 
 WORKDIR /app
 # Install all python dependencies

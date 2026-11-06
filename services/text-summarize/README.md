@@ -1,4 +1,4 @@
-# ws-text-summarize@1.1.5
+# ws-text-summarize@1.1.6
 
 Génère un résumé d'un article scientifique.
 

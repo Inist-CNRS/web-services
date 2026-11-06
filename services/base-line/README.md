@@ -1,4 +1,4 @@
-# ws-base-line@1.0.35
+# ws-base-line@1.0.36
 
 Services dédiés aux tests.
 
