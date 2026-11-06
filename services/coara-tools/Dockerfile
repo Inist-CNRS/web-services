@@ -1,7 +1,7 @@
-FROM python:3.9-slim-bullseye AS dvc-files
+FROM ghcr.io/astral-sh/uv:0.12.12-python3.10-trixie-slim AS dvc-files
 WORKDIR /dvc
-RUN apt-get update && apt-get -y --no-install-recommends install git=1:2.30.2-1+deb11u5 && apt-get clean && rm -rf /var/lib/apt/lists/*
-RUN pip install --no-cache-dir dvc[webdav]==3.67.1
+RUN apt-get update && apt-get -y --no-install-recommends install git=1:2.47.3-0+deb13u1 && apt-get clean && rm -rf /var/lib/apt/lists/*
+RUN uv pip install --system --no-cache dvc[webdav]==3.67.1
 RUN --mount=type=secret,id=webdav_login \
     --mount=type=secret,id=webdav_password \
     --mount=type=secret,id=webdav_url \
@@ -15,12 +15,12 @@ COPY ./v1/fasttext_model.bin.dvc /dvc
 RUN dvc pull -v
 
 
-FROM cnrsinist/ezs-python-pytorch-server:py3.9-no24-1.1.9
+FROM cnrsinist/ezs-python-pytorch-server:py3.10-no24-2.0.2
 
 WORKDIR /app
 # Install all python dependencies
 # Download punkt only once
-RUN pip install --no-cache-dir fasttext-wheel==0.9.2 \
+RUN uv pip install --system --no-cache fasttext-wheel==0.9.2 \
     nltk==3.9.1 \
     prometheus-client==0.19.0 && \
     python3 -c "import nltk; nltk.download('punkt_tab', download_dir='/usr/local/nltk_data')"

@@ -1,18 +1,18 @@
 # syntax=docker/dockerfile:1.2
 
-FROM python:3.9-slim-bullseye AS dvc-files
+FROM ghcr.io/astral-sh/uv:0.12.12-python3.10-trixie-slim AS dvc-files
 WORKDIR /dvc
-RUN apt-get update && apt-get -y --no-install-recommends install git=1:2.30.2-1+deb11u5 && apt-get clean && rm -rf /var/lib/apt/lists/* && \
+RUN apt-get update && apt-get -y --no-install-recommends install git=1:2.47.3-0+deb13u1 && apt-get clean && rm -rf /var/lib/apt/lists/* && \
     apt-get clean && rm -rf /var/lib/apt/lists/*
-RUN pip install --no-cache-dir \
-    dvc[webdav]==3.39.0 \
+RUN uv pip install --system --no-cache \
+    dvc[webdav]==3.67.1 \
     pathspec==0.12.1
 
 RUN --mount=type=secret,id=webdav_login \
     --mount=type=secret,id=webdav_password \
     --mount=type=secret,id=webdav_url \
     git config --global init.defaultBranch master  && \
-    git init && \ 
+    git init && \
     dvc init  && \
     dvc remote add -d webdav-remote "$(cat /run/secrets/webdav_url)" && \
     dvc remote modify --local webdav-remote user "$(cat /run/secrets/webdav_login)" && \
@@ -22,7 +22,7 @@ COPY ./dictionary.dvc /dvc
 COPY ./data.dvc /dvc
 RUN dvc pull -v
 
-FROM cnrsinist/ezs-python-server:py3.9-no24-1.0.14
+FROM cnrsinist/ezs-python-server:py3.10-no24-2.0.5
 # version de terls_tool sur github
 ENV TERMS_TOOLS_VERSION=2.3
 ENV GIT=https://github.com/stephane54/terms-tools.git
@@ -33,7 +33,10 @@ RUN apt-get update && \
     apt-get -y --no-install-recommends install -y unzip autoconf automake libtool pkg-config build-essential git && \
     apt-get clean && rm -rf /var/lib/apt/lists/*
 RUN pip install --upgrade pip
-RUN pip install --no-cache-dir git+$GIT@$TERMS_TOOLS_VERSION#egg=terms_tools
+# spacy 3.8.7 imports click in spacy.cli, but typer>=0.27 no longer depends on it
+RUN pip install --no-cache-dir \
+    click==8.1.7 \
+    git+$GIT@$TERMS_TOOLS_VERSION#egg=terms_tools
 
 # download spacy models
 RUN pip install  --no-cache-dir \

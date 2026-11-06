@@ -1,4 +1,4 @@
-FROM cnrsinist/ezs-python-server:py3.9-no24-1.0.14
+FROM cnrsinist/ezs-python-server:py3.10-no24-2.0.5
 
 WORKDIR /app
 RUN pip install --no-cache-dir unidecode==1.3.7
