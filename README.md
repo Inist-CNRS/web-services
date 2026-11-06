@@ -60,6 +60,7 @@ All contributing instructions are in [CONTRIBUTING](CONTRIBUTING.md).
 - [openalex-doctype](./services/openalex-doctype) [![Docker Pulls](https://img.shields.io/docker/pulls/cnrsinist/ws-openalex-doctype.svg)](https://hub.docker.com/r/cnrsinist/ws-openalex-doctype/)
 - [pdf-text](./services/pdf-text) [![Docker Pulls](https://img.shields.io/docker/pulls/cnrsinist/ws-pdf-text.svg)](https://hub.docker.com/r/cnrsinist/ws-pdf-text/)
 - [person-ner](./services/person-ner) [![Docker Pulls](https://img.shields.io/docker/pulls/cnrsinist/ws-person-ner.svg)](https://hub.docker.com/r/cnrsinist/ws-person-ner/)
+- [rag-tools](./services/rag-tools) [![Docker Pulls](https://img.shields.io/docker/pulls/cnrsinist/ws-rag-tools.svg)](https://hub.docker.com/r/cnrsinist/ws-rag-tools/)
 - [sciencemetrix-classification](./services/sciencemetrix-classification) [![Docker Pulls](https://img.shields.io/docker/pulls/cnrsinist/ws-sciencemetrix-classification.svg)](https://hub.docker.com/r/cnrsinist/ws-sciencemetrix-classification/)
 - [software-extract](./services/software-extract) [![Docker Pulls](https://img.shields.io/docker/pulls/cnrsinist/ws-software-extract.svg)](https://hub.docker.com/r/cnrsinist/ws-software-extract/)
 - [tabbr-mine](./services/tabbr-mine) [![Docker Pulls](https://img.shields.io/docker/pulls/cnrsinist/ws-tabbr-mine.svg)](https://hub.docker.com/r/cnrsinist/ws-tabbr-mine/)
