@@ -18,6 +18,11 @@ EMPTY = {"city": None, "country": None}
 # Configuration
 # ----------------------------------------------------------------------
 API_KEY = os.getenv("ILAAS_API_KEY")
+
+if not API_KEY:
+    log("ILAAS_API_KEY is not set")
+    sys.exit(1)
+
 BASE_URL = "https://llm.ilaas.fr/v1"
 
 MODEL_NAME = os.getenv("MODEL_NAME", "gemma-4-31b")
