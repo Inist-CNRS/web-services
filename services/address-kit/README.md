@@ -8,7 +8,10 @@ ces services prennent en entrée les affiliations des auteurs sous forme d'adres
 ## Utilisation affiliationCountry (ILAAS)
 ### .env
 
-Pour pouvoir démarrer l'image, il faut un fichier `.env` contenant la clé d'API ILAAS:
+Pour pouvoir démarrer l'image, il faut un fichier `.env` contenant la clé d'API ILAAS, l'identifiant et le mot de passe:
+
 ```env
 export ILAAS_API_KEY=real-api-key
+export WEBDAV_LOGIN= XXXXX
+export WEBDAV_PASSWORD=XXXXX 
 ```

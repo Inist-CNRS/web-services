@@ -22,10 +22,7 @@ WORKDIR /app
 # Install all python dependencies
 RUN uv pip install --system --no-cache \
   pickleshare==0.7.5 \
-  geopy==1.20.0 \
-  iso3166==2.1.1 \
-  unidecode==1.3.6 \
-  requests==2.31.0
+  requests==2.34.2
 
 WORKDIR /app/public
 # Declare files to copy in .dockerignore

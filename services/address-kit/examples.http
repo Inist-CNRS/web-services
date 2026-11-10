@@ -21,7 +21,7 @@ Content-Type: application/json
 
 ###
 # @name v1Affiliationcountry
-# @description détection d'un pays
+# @description détection d'un pays et d'une ville
 POST {{host}}/v1/affiliationcountry/detect?indent=true HTTP/1.1
 Content-Type: application/json
 

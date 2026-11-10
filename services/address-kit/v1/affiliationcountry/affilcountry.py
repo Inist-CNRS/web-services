@@ -6,6 +6,7 @@ import os
 import re
 import sys
 from concurrent.futures import ThreadPoolExecutor, as_completed
+import logging
 
 import requests
 from requests.adapters import HTTPAdapter
@@ -19,13 +20,15 @@ EMPTY = {"city": None, "country": None}
 # ----------------------------------------------------------------------
 API_KEY = os.getenv("ILAAS_API_KEY")
 
+def log(msg):
+    print(msg, file=sys.stderr)
 if not API_KEY:
     log("ILAAS_API_KEY is not set")
     sys.exit(1)
 
 BASE_URL = "https://llm.ilaas.fr/v1"
 
-MODEL_NAME = os.getenv("MODEL_NAME", "gemma-4-31b")
+MODEL_NAME = os.getenv("MODEL_NAME", "gemma-4-31b") # à tester qwen-3.8-27b
 MAX_WORKERS = int(os.getenv("MAX_WORKERS", "12"))   # Requêtes en parallèle
 BATCH_SIZE = int(os.getenv("BATCH_SIZE", "10"))     # Affiliations par requête
 
@@ -62,7 +65,7 @@ session.mount("http://", adapter)
 
 
 # ----------------------------------------------------------------------
-# Utilitaires
+# Utilitaires (revoir fonction)
 # ----------------------------------------------------------------------
 def clean_value(v):
     """Transforme les 'null' / 'none' / chaînes vides renvoyés par le modèle en None."""

@@ -45,7 +45,7 @@ HTTP 200
     }
 }]
 
-POST {{host}}/v1/affiliationcountry/detect?indent=true
+POST {{host}}/v1/affiliationcountry/affilcountry?indent=true
 content-type: application/json
 [
 {"id":1,"value":"université sciences et technologies bordeaux 1 institut national de physique nucléaire et de physique des particules du cnrs in2p3 UMR5797"},
