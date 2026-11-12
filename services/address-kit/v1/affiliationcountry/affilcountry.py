@@ -11,6 +11,9 @@ from requests.adapters import HTTPAdapter
 from urllib3.util.retry import Retry
 from pathlib import Path
 
+import pycountry
+from functools import lru_cache
+
 EMPTY = {"city": None, "country": None}
 
 # ----------------------------------------------------------------------
@@ -160,6 +163,12 @@ def extract_locations(affiliations):
 # ----------------------------------------------------------------------
 # stdin / stdout
 # ----------------------------------------------------------------------
+def country_code(country):
+    try:
+        return pycountry.countries.lookup(country).alpha_2
+    except LookupError:
+        return None
+
 def main():
     affiliations = []
     for line in sys.stdin:
@@ -176,6 +185,7 @@ def main():
         result = {
             "city": loc.get("city") or "n/a",
             "country": loc.get("country") or "n/a",
+            "country_code": country_code(loc.get("country")) or "n/a",
         }
         sys.stdout.write(json.dumps({"id": id, "value": result}))
         sys.stdout.write("\n")

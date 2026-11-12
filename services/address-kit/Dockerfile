@@ -22,7 +22,8 @@ WORKDIR /app
 # Install all python dependencies
 RUN uv pip install --system --no-cache \
   pickleshare==0.7.5 \
-  requests==2.34.2
+  requests==2.34.2 \
+  pycountry==26.2.16
 
 WORKDIR /app/public
 # Declare files to copy in .dockerignore
