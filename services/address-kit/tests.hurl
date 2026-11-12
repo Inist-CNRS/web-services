@@ -66,75 +66,87 @@ Content-Type: application/json
 jsonpath "$" count == 10
 jsonpath "$[*].value.city" count == 10
 jsonpath "$[*].value.country" count == 10
+jsonpath "$[*].value.country_code" count == 10
 
-# HTTP 200
-# [{
+# [
+#   {
 #     "id": 1,
 #     "value": {
-#         "city": "Bordeaux",
-#         "country": "France"
+#       "city": "Salzburg",
+#       "country": "Austria",
+#       "country_code": "AT"
 #     }
-# },
-# {
+#   },
+#   {
 #     "id": 2,
 #     "value": {
-#         "city": "n/a",
-#         "country": "France"
+#       "city": "Norwich",
+#       "country": "United Kingdom",
+#       "country_code": "GB"
 #     }
-# },
-# {
+#   },
+#   {
 #     "id": 3,
 #     "value": {
-#         "city": "Nancy",
-#         "country": "France"
+#       "city": "Cagliari",
+#       "country": "Italy",
+#       "country_code": "IT"
 #     }
-# },
-# {
+#   },
+#   {
 #     "id": 4,
 #     "value": {
-#         "city": "Tuebingen",
-#         "country": "Germany"
+#       "city": "Gettysburg",
+#       "country": "United States",
+#       "country_code": "US"
 #     }
-# },
-# {
+#   },
+#   {
 #     "id": 5,
 #     "value": {
-#         "city": "Vannes",
-#         "country": "France"
+#       "city": "Gif-sur-Yvette",
+#       "country": "France",
+#       "country_code": "FR"
 #     }
-# },
-# {
+#   },
+#   {
 #     "id": 6,
 #     "value": {
-#         "city": "Braganca",
-#         "country": "Portugal"
+#       "city": "n/a",
+#       "country": "France",
+#       "country_code": "FR"
 #     }
-# },
-# {
+#   },
+#   {
 #     "id": 7,
 #     "value": {
-#         "city": "n/a",
-#         "country": "Lebanon"
+#       "city": "Nancy",
+#       "country": "France",
+#       "country_code": "FR"
 #     }
-# },
-# {
+#   },
+#   {
 #     "id": 8,
 #     "value": {
-#         "city": "Vandoeuvre-lès-Nancy",
-#         "country": "France"
+#       "city": "Toulouse",
+#       "country": "France",
+#       "country_code": "FR"
 #     }
-# },
-# {
+#   },
+#   {
 #     "id": 9,
 #     "value": {
-#         "city": "Milan",
-#         "country": "Italy"
+#       "city": "Milan",
+#       "country": "Italy",
+#       "country_code": "IT"
 #     }
-# },
-# {
+#   },
+#   {
 #     "id": 10,
 #     "value": {
-#         "city": "Toulouse",
-#         "country": "France"
+#       "city": "Vannes",
+#       "country": "France",
+#       "country_code": "FR"
 #     }
-# }]
+#   }
+# ]
