@@ -3,10 +3,8 @@
 
 import json
 import os
-import re
 import sys
 from concurrent.futures import ThreadPoolExecutor, as_completed
-import logging
 
 import requests
 from requests.adapters import HTTPAdapter
@@ -21,7 +19,8 @@ EMPTY = {"city": None, "country": None}
 API_KEY = os.getenv("ILAAS_API_KEY")
 
 def log(msg):
-    print(msg, file=sys.stderr)
+    """Les logs vont sur stderr pour ne pas polluer stdout."""
+    print(msg, file=sys.stderr, flush=True)
 if not API_KEY:
     log("ILAAS_API_KEY is not set")
     sys.exit(1)
@@ -31,11 +30,6 @@ BASE_URL = "https://llm.ilaas.fr/v1"
 MODEL_NAME = os.getenv("MODEL_NAME", "gemma-4-31b") # à tester qwen-3.8-27b
 MAX_WORKERS = int(os.getenv("MAX_WORKERS", "12"))   # Requêtes en parallèle
 BATCH_SIZE = int(os.getenv("BATCH_SIZE", "10"))     # Affiliations par requête
-
-
-def log(msg):
-    """Les logs vont sur stderr pour ne pas polluer stdout."""
-    print(msg, file=sys.stderr, flush=True)
 
 # ----------------------------------------------------------------------
 # Prompt
@@ -54,10 +48,16 @@ session.headers.update({
 
 retry = Retry(
     total=3,
+    connect=3,          # timeout de connexion / connexion refusée
+    read=3,             # timeout de lecture (le modèle met trop de temps à répondre)
+    status=3,
+    status_forcelist=[429, 502, 503, 504],  # Too Many Requests, Bad Gateway, Service Unavailable, Gateway Timeout
+    other=0,
+    redirect=0,
     backoff_factor=2,
-    status_forcelist=[429, 500, 502, 503, 504],
     allowed_methods=["POST"],
     raise_on_status=False,
+    respect_retry_after_header=True,   # attend le délai demandé par le serveur
 )
 adapter = HTTPAdapter(max_retries=retry, pool_connections=MAX_WORKERS, pool_maxsize=MAX_WORKERS)
 session.mount("https://", adapter)
@@ -65,7 +65,7 @@ session.mount("http://", adapter)
 
 
 # ----------------------------------------------------------------------
-# Utilitaires (revoir fonction)
+# Utilitaires
 # ----------------------------------------------------------------------
 def clean_value(v):
     """Transforme les 'null' / 'none' / chaînes vides renvoyés par le modèle en None."""
@@ -78,30 +78,46 @@ def clean_value(v):
 # ----------------------------------------------------------------------
 # Extraction d'un lot
 # ----------------------------------------------------------------------
+json_schema = {
+    "type": "array",
+    "items": {
+        "type": "object",
+        "properties": {
+            "id": {"type": "integer"},
+            "country": {"type": ["string", "null"]},
+            "city": {"type": ["string", "null"]},
+        },
+        "required": ["id", "country", "city"],
+        "additionalProperties": False,
+    },
+}
 def extract_batch(batch):
     """batch : liste d'affiliations -> dict {affiliation: résultat}"""
     user = "\n".join(f"{i}: {a.replace(chr(10), ' ')}" for i, a in enumerate(batch))
     payload = {
-        "model": MODEL_NAME,
-        "messages": [
-            {"role": "system", "content": SYSTEM_PROMPT},
-            {"role": "user", "content": user},
-        ],
-        "stream": False,
-        "max_tokens": 60 * len(batch) + 100,
-        "temperature": 0,
-    }
+    "model": MODEL_NAME,
+    "messages": [
+        {"role": "system", "content": SYSTEM_PROMPT},
+        {"role": "user", "content": user},
+    ],
+    "stream": False,
+    "max_completion_tokens": 60 * len(batch) + 100,
+    "response_format": {
+        "type": "json_schema",
+        "json_schema": {
+            "name": "affiliation_locations",
+            "strict": True,
+            "schema": json_schema,
+        },
+    },
+}
     try:
         response = session.post(f"{BASE_URL}/chat/completions", json=payload, timeout=120)
         if not response.ok:
             raise RuntimeError(f"HTTP {response.status_code} : {response.text[:200]}")
 
         content = response.json()["choices"][0]["message"].get("content") or ""
-        match = re.search(r"\[.*\]", content, re.DOTALL)
-        if not match:
-            raise ValueError(f"Pas de JSON dans la réponse : {content[:200]!r}")
-
-        by_id = {int(d["id"]): d for d in json.loads(match.group(0))}
+        by_id = {d["id"]: d for d in json.loads(content)}
         out = {}
         for i, aff in enumerate(batch):
             d = by_id[i]  # KeyError si le modèle a oublié une ligne -> lot redécoupé
