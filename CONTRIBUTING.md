@@ -100,6 +100,9 @@ Pour créer un nouveau service, utilisez le script npm [`generate:service`](SCRI
 npm run generate:service service-name
 ```
 
+> [!NOTE]  
+> Si c'est un service asynchrone, utiliser `npm run generate:service-async name` (without `data-`).
+
 Le nom du service doit être en minuscules, en au moins deux parties séparées
 par un tiret (ex: `base-line`, `astro-ner`).
 
