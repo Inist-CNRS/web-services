@@ -8,7 +8,7 @@ RUN uv pip install --system --no-cache \
     requests==2.34.2 \
     pandas==2.3.3 \
     pyahocorasick==2.3.0 \
-    rapidfuzz>=3.14.5
+    rapidfuzz==3.14.5
 
 WORKDIR /app/public
 # Declare files to copy in .dockerignore
