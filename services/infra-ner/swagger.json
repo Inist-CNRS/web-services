@@ -1,0 +1,33 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "infra-ner - Ws détectant les infrastructures de recherches dans un texte.",
+        "description": "Web service détectant les infrastructures de recherches françaises et européennes danstir d'une liste, avec une notion de gestion de casse.",
+        "version": "0.0.0",
+        "termsOfService": "https://services.istex.fr/",
+        "contact": {
+            "name": "Inist-CNRS",
+            "url": "https://www.inist.fr/nous-contacter/"
+        }
+    },
+    "servers": [
+        {
+            "x-comment": "Will be automatically completed by the ezs server."
+        },
+        {
+            "url": "http://vptdmservices.intra.inist.fr:49225/",
+            "description": "Latest version for production",
+            "#DISABLED#x-profil": "Standard"
+        }
+    ],
+    "tags": [
+        {
+            "name": "infra-ner",
+            "description": "Ws détectant les infrastructures de recherches dans un texte.",
+            "externalDocs": {
+                "description": "Plus de documentation",
+                "url": "https://github.com/inist-cnrs/web-services/tree/main/services/infra-ner"
+            }
+        }
+    ]
+}

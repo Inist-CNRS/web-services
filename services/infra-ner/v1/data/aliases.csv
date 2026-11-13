@@ -1,0 +1,384 @@
+﻿infrastructure_id;alias;alias_normalise;type_alias;niveau_confiance;source
+8e50d79f2ba0;A distributed infrastructure for life-science data;a distributed infrastructure for life science data;nom;élevée;ESFRI
+b48c5ee73e18;ACTRIS;actris;acronyme;élevée;ESFRI
+7095531242f0;ACTRIS-France;actris france;acronyme;élevée;MESRE
+145e3b642240;Advance GAmma Tracking Array;advance gamma tracking array;nom;élevée;MESRE
+7095531242f0;Aerosol, Cloud and Trace Gases Research Infrastructure – France;aerosol cloud and trace gases research infrastructure france;nom;élevée;MESRE
+b48c5ee73e18;Aerosol, Clouds and Trace Gases Research Infrastructure;aerosol clouds and trace gases research infrastructure;nom;élevée;ESFRI
+145e3b642240;AGATA;agata;acronyme;élevée;MESRE
+d35fb230161c;AnaEE-ERIC;anaee eric;acronyme;élevée;ESFRI
+5ef7df71c3ab;AnaEE France;anaee france;acronyme;élevée;MESRE
+87919d3f75a9;ANAEE-France ECOTRONS;anaee france ecotrons;acronyme;élevée;MESRE
+fa9be12b2371;ANAEE-France Natura;anaee france natura;acronyme;élevée;MESRE
+5ef7df71c3ab;Analyse et Expérimentation sur les Ecosystèmes - France;analyse et experimentation sur les ecosystemes france;nom;élevée;MESRE
+87919d3f75a9;Analyses et Expérimentations sur les Écosystèmes – France ECOTRONS;analyses et experimentations sur les ecosystemes france ecotrons;nom;élevée;MESRE
+fa9be12b2371;Analyses et Expérimentations sur les Ecosystèmes – France Natura;analyses et experimentations sur les ecosystemes france natura;nom;élevée;MESRE
+d35fb230161c;Analysis and Experimentation on Ecosystems - European Research Infrastructure Consortium;analysis and experimentation on ecosystems european research infrastructure consortium;nom;élevée;ESFRI
+2346bd49f348;Apollon;apollon;acronyme;élevée;MESRE
+9e6695d09946;Archive ouverte de prochaine génération;archive ouverte de prochaine generation;nom;élevée;MESRE
+2bd1be4609b7;Atacama Large Millimeter/Submillimiter Array;atacama large millimeter submillimiter array;nom;élevée;MESRE
+ee7fc351624c;BBMRI-ERIC;bbmri eric;acronyme;élevée;ESFRI
+ee7fc351624c;Biobanking and BioMolecular Resources Research Infrastructure;biobanking and biomolecular resources research infrastructure;nom;élevée;ESFRI
+462c18d5b890;CAD;cad;acronyme;moyenne;MESRE
+db1306e29df8;CALIS;calis;acronyme;élevée;MESRE
+1ad394eb03c0;Canada-France-Hawaii Telescope;canada france hawaii telescope;nom;élevée;MESRE
+f13dad7983f5;Catégorie:IR;categorie ir;nom;élevée;OPIDoR
+f13dad7983f5;Catégorie:IR | Catégorie:IR*;categorie ir categorie ir;nom;élevée;OPIDoR
+c630505fc2bb;Catégorie:OSI;categorie osi;nom;élevée;OPIDoR
+7d5adc599647;Catégorie:Projet;categorie projet;nom;élevée;OPIDoR
+ba2109a02469;CC-IN2P3;cc in2p3;acronyme;élevée;MESRE
+990d4710b154;CDS;cds;acronyme;moyenne;MESRE
+fb4d8b3bf4fd;Celphedia;celphedia;acronyme;élevée;MESRE
+ba2109a02469;Centre de Calcul de l’IN2P3/CNRS;centre de calcul de l in2p3 cnrs;nom;élevée;MESRE
+990d4710b154;Centre de Données astronomiques de Strasbourg;centre de donnees astronomiques de strasbourg;nom;élevée;MESRE
+8bb1a69d8db4;Centre Européen pour les Prévisions Météorologiques à Moyen Terme;centre europeen pour les previsions meteorologiques a moyen terme;nom;élevée;MESRE
+1e27e278fdd2;Centre informatique national de l'enseignement supérieur;centre informatique national de l enseignement superieur;nom;élevée;MESRE
+eccfc5dc14de;Centre National de Ressources Biologiques Marines;centre national de ressources biologiques marines;nom;élevée;MESRE
+8bb1a69d8db4;CEPMMT;cepmmt;acronyme;élevée;MESRE
+01d0e0ffd3e6;CERN;cern;acronyme;élevée;MESRE
+6fa522912fec;CESSDA ERIC;cessda eric;acronyme;élevée;ESFRI
+1ad394eb03c0;CFHT;cfht;acronyme;élevée;MESRE
+cd918397cb2c;ChemBioFrance;chembiofrance;acronyme;élevée;MESRE
+9613c87ef22f;Cherenkov Telescope Array;cherenkov telescope array;nom;élevée;MESRE
+58cf5a7924fd;Cherenkov Telescope Array Observatory;cherenkov telescope array observatory;nom;élevée;ESFRI
+1e27e278fdd2;CINES;cines;acronyme;élevée;MESRE
+6a70d22eb693;CLARIN ERIC;clarin eric;acronyme;élevée;ESFRI
+25aea9c2f4dd;CLIMERI-France;climeri france;acronyme;élevée;MESRE
+66e926b53d7a;Cohorte des consultants des Centres d’examens de santé;cohorte des consultants des centres d examens de sante;nom;élevée;MESRE
+462c18d5b890;Collecteur Analyseur de Données;collecteur analyseur de donnees;nom;élevée;MESRE
+d09f9dd1a4aa;Collections d’excellence pour la Recherche – Persée;collections d excellence pour la recherche persee;nom;élevée;MESRE
+d09f9dd1a4aa;CollEx-Persée;collex persee;acronyme;élevée;MESRE
+6a70d22eb693;Common Language Resources and Technology Infrastructure;common language resources and technology infrastructure;nom;élevée;ESFRI
+652c884a2fae;Communication scientifique ouverte en sciences humaines et sociales;communication scientifique ouverte en sciences humaines et sociales;nom;élevée;MESRE
+cef8eb58eb8d;CONCORDIA;concordia;acronyme;élevée;MESRE
+6fa522912fec;Consortium of European Social Science Data Archives;consortium of european social science data archives;nom;élevée;ESFRI
+3cac8a3378dd;Consortium Préindustriel des vecteurs de Thérapie Génique;consortium preindustriel des vecteurs de therapie genique;nom;élevée;MESRE
+66e926b53d7a;CONSTANCES;constances;acronyme;élevée;MESRE
+549ab1b6295d;Continuité Collaborative du Numérique vers l'Humain;continuite collaborative du numerique vers l humain;nom;élevée;MESRE
+549ab1b6295d;CONTINUUM;continuum;acronyme;élevée;MESRE
+9613c87ef22f;CTA;cta;acronyme;moyenne;MESRE
+58cf5a7924fd;CTAO;ctao;acronyme;élevée;ESFRI
+92b1199bf992;DANUBIUS-RI;danubius ri;acronyme;élevée;ESFRI
+d0b59080ffde;DARIAH ERIC;dariah eric;acronyme;élevée;ESFRI
+b6341b5e53f5;DATA TERRA;data terra;acronyme;élevée;MESRE
+9dc0593cda2f;Deep Underground Neutrino Experiment at the Long- Baseline Neutrino Facility;deep underground neutrino experiment at the long baseline neutrino facility;nom;élevée;MESRE
+d0b59080ffde;Digital Research Infrastructure for the Arts and Humanities;digital research infrastructure for the arts and humanities;nom;élevée;ESFRI
+43dcf83abf74;DiSSCo;dissco;acronyme;élevée;ESFRI
+43dcf83abf74;Distributed System of Scientific Collections;distributed system of scientific collections;nom;élevée;ESFRI
+9dc0593cda2f;DUNE;dune;acronyme;élevée;MESRE
+65e39121ec13;DUNE/PIP-II;dune pip ii;nom;élevée;OPIDoR
+27827fa02804;e-Infrastructure for Biodiversity and Ecosystem Research;e infrastructure for biodiversity and ecosystem research;nom;élevée;ESFRI
+21ee184a4d84;E-RIHS;e rihs;acronyme;élevée;ESFRI
+74003672e451;E-RIHS France;e rihs france;acronyme;élevée;MESRE
+b997453e03d7;E-XFEL;e xfel;acronyme;élevée;MESRE
+b0d027c9eaed;EATRIS ERIC;eatris eric;acronyme;élevée;ESFRI
+87f28a069782;EBRAINS;ebrains;acronyme;élevée;ESFRI
+df1bf3c6521d;EBRAINS-FR;ebrains fr;acronyme;élevée;MESRE
+d8403406c0c9;ECCSEL ERIC;eccsel eric;acronyme;élevée;ESFRI
+b90ddd2595dc;ECCSEL-FR;eccsel fr;acronyme;élevée;MESRE
+0acf19678703;ECELLFrance;ecellfrance;acronyme;élevée;MESRE
+28d6dfaa4d24;ECORD/IODP;ecord iodp;acronyme;élevée;MESRE
+c4af1358df06;ECRIN ERIC;ecrin eric;acronyme;élevée;ESFRI
+7430030cb713;EGO-VIRGO;ego virgo;acronyme;élevée;MESRE
+79a3653da4e7;EHRI;ehri;acronyme;élevée;ESFRI
+a5bc1d9b2ae7;Einstein Telescope;einstein telescope;nom;élevée;ESFRI
+d96f0259f97e;EIRENE RI;eirene ri;acronyme;élevée;ESFRI
+efd16c859bdc;EISCAT_3D;eiscat 3d;acronyme;élevée;ESFRI
+29438a08d683;ELI ERIC;eli eric;acronyme;élevée;ESFRI
+8e50d79f2ba0;ELIXIR;elixir;acronyme;élevée;ESFRI
+3fa503572db7;ELT;elt;acronyme;moyenne;ESFRI
+77515d732aa4;eLTER-France  OZCAR;elter france ozcar;acronyme;élevée;MESRE
+a93541a24744;eLTER-France RZA;elter france rza;acronyme;élevée;MESRE
+d0562ea32c65;eLTER RI;elter ri;acronyme;élevée;ESFRI
+42b1bc778c88;EMBL;embl;acronyme;élevée;MESRE
+d6ff966e6996;EMBRC ERIC;embrc eric;acronyme;élevée;ESFRI
+eccfc5dc14de;EMBRC France;embrc france;acronyme;élevée;MESRE
+311216675882;EMERG'IN;emerg in;acronyme;élevée;MESRE
+e9ba45718f1f;EMFL;emfl;acronyme;élevée;ESFRI
+3462ffb3c8f1;EMIR;emir;acronyme;élevée;MESRE
+f28f6153597c;EMIR&A;emir a;acronyme;élevée;MESRE
+ace107435ed1;EMPHASIS;emphasis;acronyme;élevée;ESFRI
+a49157630c65;EMPHASIS France;emphasis france;acronyme;élevée;MESRE
+d68812a9e0a2;EMSO ERIC;emso eric;acronyme;élevée;ESFRI
+9ee470e30086;EMSO-France;emso france;acronyme;élevée;MESRE
+1164ef57a48e;EPOS ERIC;epos eric;acronyme;élevée;ESFRI
+573e3602d8e8;Epos-France;epos france;acronyme;élevée;MESRE
+acd057cd1742;ERINHA;erinha;acronyme;élevée;ESFRI
+bba68ea88de6;ESO;eso;acronyme;moyenne;MESRE
+2bd1be4609b7;ESO/ALMA;eso alma;acronyme;élevée;MESRE
+4ba685ebfb39;ESRF;esrf;acronyme;élevée;MESRE
+1e9805f163be;ESRF EBS;esrf ebs;acronyme;élevée;ESFRI
+524f25feb711;ESS;ess;acronyme;moyenne;MESRE | ESFRI
+a99dca9611a0;ESS ERIC;ess eric;acronyme;élevée;ESFRI
+665de1f2775c;EST;est;acronyme;moyenne;ESFRI
+a5bc1d9b2ae7;ET;et;acronyme;moyenne;ESFRI
+25b07ac3d221;EU-OPENSCREEN ERIC;eu openscreen eric;acronyme;élevée;ESFRI
+9cd00b0953b8;EU-SOLARIS;eu solaris;acronyme;élevée;ESFRI
+a15228f23dc4;EuPRAXIA;eupraxia;acronyme;élevée;ESFRI
+44e53b5fd5e0;EURO-ARGO;euro argo;acronyme;élevée;MESRE
+3542cec42e53;EURO-ARGO ERIC;euro argo eric;acronyme;élevée;ESFRI
+84c9b60efbe2;EURO-ARGO-France;euro argo france;nom;élevée;OPIDoR
+db3a5f8b3bcd;Euro-BioImaging ERIC;euro bioimaging eric;acronyme;élevée;ESFRI
+87f28a069782;European Brain ReseArch INfrastructureS;european brain research infrastructures;nom;élevée;ESFRI
+df1bf3c6521d;European Brain ReseArch INfrastructureS-France;european brain research infrastructures france;nom;élevée;MESRE
+d8403406c0c9;European Carbon Dioxide Capture and Storage Laboratory Infrastructure;european carbon dioxide capture and storage laboratory infrastructure;nom;élevée;ESFRI
+8bb1a69d8db4;European Centre for Medium-Range Weather Forecasts;european centre for medium range weather forecasts;nom_en;élevée;MESRE
+c4af1358df06;European Clinical Research Infrastructure Network;european clinical research infrastructure network;nom;élevée;ESFRI
+28d6dfaa4d24;European Consortium for Ocean Drilling Research/International Ocean Discovery Program;european consortium for ocean drilling research international ocean discovery program;nom_en;élevée;MESRE
+44e53b5fd5e0;European contribution to Argo program;european contribution to argo program;nom_en;élevée;MESRE
+3542cec42e53;European contribution to the international Argo Programme;european contribution to the international argo programme;nom;élevée;ESFRI
+7430030cb713;European Gravitational Observatory – VIRGO;european gravitational observatory virgo;nom_en;élevée;MESRE
+79a3653da4e7;European Holocaust Research Infrastructure;european holocaust research infrastructure;nom;élevée;ESFRI
+ace107435ed1;European Infrastructure for Multi-scale Plant Phenomics and Simulation;european infrastructure for multi scale plant phenomics and simulation;nom;élevée;ESFRI
+a49157630c65;European Infrastructure for multi-scale Plant Phenomics and Simulation for food security in a changing climate (France);european infrastructure for multi scale plant phenomics and simulation for food security in a changing climate france;nom;élevée;MESRE
+b0d027c9eaed;European Infrastructure for Translational Medicine;european infrastructure for translational medicine;nom;élevée;ESFRI
+25b07ac3d221;European Infrastructure of Open Screening Platforms for Chemical Biology;european infrastructure of open screening platforms for chemical biology;nom;élevée;ESFRI
+e9ba45718f1f;European Magnetic Field Laboratory;european magnetic field laboratory;nom;élevée;ESFRI
+d6ff966e6996;European Marine Biological Resource Centre;european marine biological resource centre;nom;élevée;ESFRI
+42b1bc778c88;European Molecular Biology Laboratory;european molecular biology laboratory;nom_en;élevée;MESRE
+d68812a9e0a2;European Multidisciplinary Seafloor and water-column Observatory;european multidisciplinary seafloor and water column observatory;nom;élevée;ESFRI
+9ee470e30086;European Multidisciplinary Seafloor and water column Observatory – France;european multidisciplinary seafloor and water column observatory france;nom;élevée;MESRE
+01d0e0ffd3e6;European Organization for Nuclear Research;european organization for nuclear research;nom_en;élevée;MESRE
+a15228f23dc4;European Plasma Research Accelerator with Excellence in Applications;european plasma research accelerator with excellence in applications;nom;élevée;ESFRI
+47ad26127963;European Plate Observing System;european plate observing system;nom_en;élevée;MESRE
+1164ef57a48e;European Plate Observing System European Research Infrastructure Consortium;european plate observing system european research infrastructure consortium;nom;élevée;ESFRI
+573e3602d8e8;European Plate Observing System France;european plate observing system france;nom_en;élevée;MESRE
+21ee184a4d84;European Research Infrastructure for Heritage Science;european research infrastructure for heritage science;nom;élevée;ESFRI
+74003672e451;European Research Infrastructure for Heritage Science – France;european research infrastructure for heritage science france;nom;élevée;MESRE
+db3a5f8b3bcd;European Research Infrastructure for Imaging Technologies in Biological and Biomedical Sciences;european research infrastructure for imaging technologies in biological and biomedical sciences;nom;élevée;ESFRI
+80dbeaff5e1f;European Research Infrastructure for Modelling Human Diseases;european research infrastructure for modelling human diseases;nom;élevée;ESFRI
+acd057cd1742;European Research Infrastructure on Highly Pathogenic Agents;european research infrastructure on highly pathogenic agents;nom;élevée;ESFRI
+a99dca9611a0;European Social Survey;european social survey;nom;élevée;ESFRI
+9cd00b0953b8;European Solar Research Infrastructure for Concentrated Solar Power;european solar research infrastructure for concentrated solar power;nom;élevée;ESFRI
+665de1f2775c;European Solar Telescope;european solar telescope;nom;élevée;ESFRI
+bba68ea88de6;European Southern Observatory;european southern observatory;nom_en;élevée;MESRE
+524f25feb711;European Spallation Source;european spallation source;nom_fr;élevée;MESRE | ESFRI
+524f25feb711;European Spallation Source ERIC;european spallation source eric;nom_en;élevée;MESRE | ESFRI
+524f25feb711;European Spallation Source | European Spallation Source ERIC;european spallation source european spallation source eric;nom;élevée;MESRE | ESFRI
+4ba685ebfb39;European Synchrotron Radiation Facility;european synchrotron radiation facility;nom_en;élevée;MESRE
+1e9805f163be;European Synchrotron Radiation Facility Extremely Brilliant Source;european synchrotron radiation facility extremely brilliant source;nom;élevée;ESFRI
+b997453e03d7;European X-ray Free Electron Laser;european x ray free electron laser;nom;élevée;MESRE
+6e77f270f4b3;European X-Ray Free-Electron Laser Facility;european x ray free electron laser facility;nom;élevée;ESFRI
+6e77f270f4b3;European XFEL;european xfel;acronyme;élevée;ESFRI
+3fa503572db7;Extremely Large Telescope;extremely large telescope;nom;élevée;ESFRI
+d3b9ca801869;F-CRIN;f crin;acronyme;élevée;MESRE
+187770cf5af2;Facility for Antiproton and Ion Research;facility for antiproton and ion research;nom;élevée;MESRE | ESFRI
+187770cf5af2;FAIR;fair;acronyme;élevée;MESRE | ESFRI
+af4bf8f683bb;FBI;fbi;acronyme;moyenne;MESRE
+f28f6153597c;Fédération des accélérateurs pour l'IRradiation et l'Analyse des molécules et Matériaux;federation des accelerateurs pour l irradiation et l analyse des molecules et materiaux;nom;élevée;MESRE
+3462ffb3c8f1;Fédération des Accélérateurs pour les Études des Matériaux sous Irradiation;federation des accelerateurs pour les etudes des materiaux sous irradiation;nom;élevée;MESRE
+aa40bb05b639;Fédération nationale des équipements analytiques à très haut champ magnétique;federation nationale des equipements analytiques a tres haut champ magnetique;nom;élevée;MESRE
+4951dbef1159;FLI;fli;acronyme;moyenne;MESRE
+8aad5ab3c29e;Flotte Océanographique Française;flotte oceanographique francaise;nom;élevée;MESRE
+8aad5ab3c29e;FOF;fof;acronyme;moyenne;MESRE
+a66d2cffb5e5;FR-EXPOSOME;fr exposome;acronyme;élevée;MESRE
+a8fd05f4693f;FR Solaris;fr solaris;acronyme;élevée;MESRE
+af4bf8f683bb;France-BioImaging;france bioimaging;nom;élevée;MESRE
+9679132c6f61;France Cohortes;france cohortes;acronyme;élevée;MESRE
+a66d2cffb5e5;France exposome;france exposome;nom;élevée;MESRE
+1c3abbf05da9;France Génomique;france genomique;acronyme;élevée;MESRE
+f7e371c9299d;France Grilles;france grilles;acronyme;élevée;MESRE
+4951dbef1159;France Life Imaging;france life imaging;nom;élevée;MESRE
+55bcb0ea01e1;FRISBI;frisbi;acronyme;élevée;MESRE
+796f32c6f830;FT-ICR;ft icr;acronyme;élevée;MESRE
+251fb00e89d1;GANIL-SPIRAL2;ganil spiral2;acronyme;élevée;MESRE
+0485e901d94f;GENCI;genci;acronyme;élevée;MESRE
+c6b14f691c88;GGP;ggp;acronyme;moyenne;ESFRI
+251fb00e89d1;Grand Accélérateur National d’Ions Lourds - Système de production d’Ions Radioactifs en Ligne de 2e génération;grand accelerateur national d ions lourds systeme de production d ions radioactifs en ligne de 2e generation;nom;élevée;MESRE
+78b40b944ef0;Grand Collisionneur de Hadrons;grand collisionneur de hadrons;nom;élevée;MESRE
+0485e901d94f;Grand Équipement National de Calcul Intensif;grand equipement national de calcul intensif;nom;élevée;MESRE
+20d60a8171bb;Groupement d’intérêt public pour le réseau national de communications électroniques pourla technologie, l’enseignement et la recherche;groupement d interet public pour le reseau national de communications electroniques pourla technologie l enseignement et la recherche;nom;élevée;MESRE
+4956faddb70f;Growing Up In Digital Europe (GUIDE);growing up in digital europe guide;nom;élevée;ESFRI
+4956faddb70f;GUIDE;guide;acronyme;élevée;ESFRI
+9e6695d09946;HAL+;hal;acronyme;moyenne;MESRE
+a9dc1f59aa33;HESS;hess;acronyme;élevée;MESRE
+a9dc1f59aa33;High Energy Stereoscopic System;high energy stereoscopic system;nom;élevée;MESRE
+0ae1473f9df1;High-Luminosity Large Hadron Collider;high luminosity large hadron collider;nom;élevée;ESFRI
+0ae1473f9df1;HL-LHC;hl lhc;acronyme;élevée;ESFRI
+d1de98c8b202;HUMA-NUM;huma num;acronyme;élevée;MESRE
+6b685a6c8928;IAGOS;iagos;acronyme;élevée;ESFRI
+1841eac93be2;IAGOS-France;iagos france;acronyme;élevée;MESRE
+cba17a8bccfa;IBISBA;ibisba;acronyme;élevée;ESFRI
+41f28634cca4;IBISBA France;ibisba france;acronyme;élevée;MESRE
+ab789424d79d;ICOS ERIC;icos eric;acronyme;élevée;ESFRI
+f3e0c0dcb596;ICOS-France;icos france;acronyme;élevée;MESRE
+0605def1be6e;IDMIT;idmit;acronyme;élevée;MESRE
+dc4737d406af;IFB;ifb;acronyme;moyenne;MESRE
+bb7b9238bb45;IFMIF-DONES;ifmif dones;acronyme;élevée;ESFRI
+37f39abfd703;ILICO;ilico;acronyme;élevée;MESRE
+e233f084399e;ILL;ill;acronyme;moyenne;MESRE | ESFRI
+9d1fc4b65a06;IN AIR;in air;acronyme;élevée;MESRE
+6b685a6c8928;In-service Aircraft for a Global Observing System;in service aircraft for a global observing system;nom;élevée;ESFRI
+1841eac93be2;In-service Aircraft for Global Observing System;in service aircraft for global observing system;nom_en;élevée;MESRE
+9aa1c2084056;In-Sylva France;in sylva france;acronyme;élevée;MESRE
+9aa1c2084056;In-Sylva France Infrastructure Nationale de recherche pour la gestion adaptative des forêts;in sylva france infrastructure nationale de recherche pour la gestion adaptative des forets;nom;élevée;MESRE
+41f28634cca4;Industrial Biotechnology Innovation and Synthetic Biology Acceleration;industrial biotechnology innovation and synthetic biology acceleration;nom;élevée;MESRE
+cba17a8bccfa;Industrial Biotechnology Innovator and Synthetic Biology Accelerator;industrial biotechnology innovator and synthetic biology accelerator;nom;élevée;ESFRI
+87a94a0de46c;Information scientifique et technique d'excellence;information scientifique et technique d excellence;nom;élevée;MESRE
+80dbeaff5e1f;INFRAFRONTIER;infrafrontier;acronyme;élevée;ESFRI
+aa40bb05b639;Infranalytics;infranalytics;acronyme;élevée;MESRE
+2346bd49f348;Infrastructure de Recherche Apollon;infrastructure de recherche apollon;nom;élevée;MESRE
+2a78aa55cf15;Infrastructure de recherche dédiée aux maladies hautement infectieuses – Laboratoire P4 Jean Mérieux Inserm;infrastructure de recherche dediee aux maladies hautement infectieuses laboratoire p4 jean merieux inserm;nom;élevée;MESRE
+a8fd05f4693f;Infrastructure de Recherche française sur le solaire thermique concentré;infrastructure de recherche francaise sur le solaire thermique concentre;nom;élevée;MESRE
+37f39abfd703;Infrastructure de Recherche LIttorale et COtière;infrastructure de recherche littorale et cotiere;nom;élevée;MESRE
+25aea9c2f4dd;Infrastructure de recherche nationale de modélisation du système climatique de la Terre;infrastructure de recherche nationale de modelisation du systeme climatique de la terre;nom;élevée;MESRE
+b90ddd2595dc;Infrastructure de Recherche sur le Captage, Stockage et Valorisation du CO2 (CSCV) et  le Stockage Souterrain d'Energie;infrastructure de recherche sur le captage stockage et valorisation du co2 cscv et le stockage souterrain d energie;nom;élevée;MESRE
+a45860056e14;Infrastructure de recherche sur le cerveau exploitant des grands instruments d’imagerie;infrastructure de recherche sur le cerveau exploitant des grands instruments d imagerie;nom;élevée;MESRE
+841b1caf8849;Infrastructure de Recherche Translationnelle pour les Biothérapies en Neurosciences;infrastructure de recherche translationnelle pour les biotherapies en neurosciences;nom;élevée;MESRE
+fff17f3fc066;Infrastructure for Large-Scale Experimental Computer Science;infrastructure for large scale experimental computer science;nom;élevée;MESRE
+f1628c582545;Infrastructure for Promoting Metrology in Food and Nutrition;infrastructure for promoting metrology in food and nutrition;nom;élevée;ESFRI
+f309785abc47;Infrastructure  Francaise de Phenomique Végétale;infrastructure francaise de phenomique vegetale;nom;élevée;MESRE
+0dc007326581;Infrastructure Française de Protéomique;infrastructure francaise de proteomique;nom;élevée;MESRE
+0b93e99842f9;Infrastructure française distribuée pour la métabolomique et la fluxomique dédiée à l’innovation, à la formation et au transfert de technologie;infrastructure francaise distribuee pour la metabolomique et la fluxomique dediee a l innovation a la formation et au transfert de technologie;nom;élevée;MESRE
+55bcb0ea01e1;Infrastructure Française pour la Biologie Structurale Integrée;infrastructure francaise pour la biologie structurale integree;nom;élevée;MESRE
+1c3abbf05da9;Infrastructure nationale de génomique et bioinformatique associée;infrastructure nationale de genomique et bioinformatique associee;nom;élevée;MESRE
+db1306e29df8;Infrastructure Nationale de Recherche Consommateur-ALIment-Santé;infrastructure nationale de recherche consommateur aliment sante;nom;élevée;MESRE
+311216675882;Infrastructure Nationale de Recherche pour la lutte contre les maladies infectieuses animales émergentes ou zoonotiques par l’exploration in vivo;infrastructure nationale de recherche pour la lutte contre les maladies infectieuses animales emergentes ou zoonotiques par l exploration in vivo;nom;élevée;MESRE
+9d1fc4b65a06;Infrastructure Nationale des Aéronefs Instrumentés pour la Recherche;infrastructure nationale des aeronefs instrumentes pour la recherche;nom;élevée;MESRE
+b256049e2482;Infrastructure nationale des cellules souches pluripotentes et ingénierie tissulaire;infrastructure nationale des cellules souches pluripotentes et ingenierie tissulaire;nom;élevée;MESRE
+fb4d8b3bf4fd;Infrastructure Nationale pour la création, l’élevage, le phénotypage, la distribution et l’archivage d’organismes modèles;infrastructure nationale pour la creation l elevage le phenotypage la distribution et l archivage d organismes modeles;nom;élevée;MESRE
+0605def1be6e;Infrastructure nationale pour la modélisation des maladies infectieuses humaines et les thérapies innovantes;infrastructure nationale pour la modelisation des maladies infectieuses humaines et les therapies innovantes;nom;élevée;MESRE
+b256049e2482;INGESTEM;ingestem;acronyme;élevée;MESRE
+f56ddb780b15;Institut de RadioAstronomie Millimétrique;institut de radioastronomie millimetrique;nom;élevée;MESRE
+dc4737d406af;Institut Français de Bioinformatique;institut francais de bioinformatique;nom;élevée;MESRE
+e233f084399e;Institut Max von Laue – Paul Langevin;institut max von laue paul langevin;nom_fr;élevée;MESRE | ESFRI
+e233f084399e;Institut Max von Laue – Paul Langevin | Institut Max von Laue - Paul Langevin;institut max von laue paul langevin institut max von laue paul langevin;nom;élevée;MESRE | ESFRI
+ee19eac8f0e1;Instruct-ERIC;instruct eric;acronyme;élevée;ESFRI
+80fb153a5e0e;Instrum-ESO;instrum eso;acronyme;élevée;MESRE
+80fb153a5e0e;Instrumentation pour les grands télescopes de l’ESO;instrumentation pour les grands telescopes de l eso;nom;élevée;MESRE
+1841eac93be2;Instruments de mesure embarqués sur avions pour l’observation globale;instruments de mesure embarques sur avions pour l observation globale;nom;élevée;MESRE
+ab789424d79d;Integrated Carbon Observation System;integrated carbon observation system;nom;élevée;ESFRI
+f3e0c0dcb596;Integrated Carbon Observation System;integrated carbon observation system;nom_en;élevée;MESRE
+d0562ea32c65;Integrated European Long-Term Ecosystem, critical zone and socio-ecological Research Infrastructure;integrated european long term ecosystem critical zone and socio ecological research infrastructure;nom;élevée;ESFRI
+ee19eac8f0e1;Integrated Structural Biology Infrastructure;integrated structural biology infrastructure;nom;élevée;ESFRI
+92b1199bf992;International Centre for Advanced Studies on River-Sea Systems;international centre for advanced studies on river sea systems;nom;élevée;ESFRI
+bb7b9238bb45;International Fusion Materials Irradiation Facility – DEMO Oriented NEutron Source;international fusion materials irradiation facility demo oriented neutron source;nom;élevée;ESFRI
+de48a213230a;International Low Frequency Radio Array Telescope – LOFAR FR;international low frequency radio array telescope lofar fr;nom;élevée;MESRE
+f56ddb780b15;IRAM;iram;acronyme;élevée;MESRE
+87a94a0de46c;ISTEX;istex;acronyme;élevée;MESRE
+b9ca3354fd9d;JHR;jhr;acronyme;moyenne;ESFRI
+00b9ff9c2aa6;Jiangmen Underground Neutrino Observatory;jiangmen underground neutrino observatory;nom;élevée;MESRE
+b9ca3354fd9d;Jules Horowitz Reactor;jules horowitz reactor;nom;élevée;ESFRI
+00b9ff9c2aa6;JUNO;juno;acronyme;élevée;MESRE
+fd00b130c921;Kilometre Cube Neutrino Telescope;kilometre cube neutrino telescope;nom;élevée;MESRE
+f9967dd08493;KM3 Neutrino Telescope 2.0;km3 neutrino telescope 2 0;nom;élevée;ESFRI
+fd00b130c921;KM3NeT;km3net;acronyme;élevée;MESRE
+f9967dd08493;KM3NeT 2.0;km3net 2 0;acronyme;élevée;ESFRI
+67cf0ed85f14;L’infrastructure coordonnée des plateformes de Robotique en France;l infrastructure coordonnee des plateformes de robotique en france;nom;élevée;MESRE
+d1de98c8b202;La Très Grande Infrastructure de Recherche des Humanités Numériques;la tres grande infrastructure de recherche des humanites numeriques;nom;élevée;MESRE
+42b1bc778c88;Laboratoire Européen de Biologie Moléculaire;laboratoire europeen de biologie moleculaire;nom;élevée;MESRE
+a152744739f8;Laboratoire National des Champs Magnétiques Intenses;laboratoire national des champs magnetiques intenses;nom;élevée;MESRE
+2a78aa55cf15;Laboratoire P4 Jean Mérieux;laboratoire p4 jean merieux;acronyme;élevée;MESRE
+1619a1693462;Laboratoire souterrain de Modane;laboratoire souterrain de modane;nom;élevée;MESRE
+78b40b944ef0;Large Hadron Collider;large hadron collider;nom_en;élevée;MESRE
+2257e2bb0b81;Laser Mégajoule - PETawatt Aquitaine Laser;laser megajoule petawatt aquitaine laser;nom;élevée;MESRE
+b5c41a9f95ed;Legacy Survey of Space and Time;legacy survey of space and time;nom;élevée;MESRE
+6bb70b5db6a9;LHC;lhc;nom;faible;OPIDoR
+78b40b944ef0;LHC / HL-LHC;lhc hl lhc;acronyme;élevée;MESRE
+27827fa02804;LifeWatch ERIC;lifewatch eric;acronyme;élevée;ESFRI
+9e9296c1ef40;LiPh@SAS;liph sas;acronyme;élevée;MESRE
+9e9296c1ef40;Livestock Phenotyping for Sustainable Agricultural Systems;livestock phenotyping for sustainable agricultural systems;nom;élevée;MESRE
+2257e2bb0b81;LMJ-PETAL;lmj petal;acronyme;élevée;MESRE
+6468d6057397;LNCMI;lncmi;nom;élevée;OPIDoR
+a152744739f8;LNCMI - EMFL;lncmi emfl;acronyme;élevée;MESRE
+de48a213230a;LOFAR FR/NenuFAR;lofar fr nenufar;acronyme;élevée;MESRE
+1095cd131323;LOFAR/NenuFAR;lofar nenufar;nom;élevée;OPIDoR
+1619a1693462;LSM;lsm;acronyme;moyenne;MESRE
+b5c41a9f95ed;LSST;lsst;acronyme;élevée;MESRE
+bf39a0abfc45;Marine Renewable Energy Research Infrastructure;marine renewable energy research infrastructure;nom;élevée;ESFRI
+bf39a0abfc45;MARINERG-i;marinerg i;acronyme;élevée;ESFRI
+0b93e99842f9;MetaboHUB;metabohub;acronyme;élevée;MESRE
+b65c7d8fc54f;Méthodes et outils pour l’édition structurée;methodes et outils pour l edition structuree;nom;élevée;MESRE
+b65c7d8fc54f;Métopes;metopes;acronyme;élevée;MESRE
+f1628c582545;METROFOOD-RI;metrofood ri;acronyme;élevée;ESFRI
+0d2aa3373f91;METSA;metsa;acronyme;élevée;MESRE
+c42aacb99f88;Microbial Resource Research Infrastructure - European Research Infrastructure Consortium;microbial resource research infrastructure european research infrastructure consortium;nom;élevée;ESFRI
+0d2aa3373f91;Microscopie Électronique en Transmission et Sonde Atomique;microscopie electronique en transmission et sonde atomique;nom;élevée;MESRE
+c42aacb99f88;MIRRI-ERIC;mirri eric;acronyme;élevée;ESFRI
+841b1caf8849;NeurATRIS;neuratris;acronyme;élevée;MESRE
+a45860056e14;NEUROSPIN;neurospin;acronyme;élevée;MESRE
+efd16c859bdc;Next generation European Incoherent Scatter radar system;next generation european incoherent scatter radar system;nom;élevée;ESFRI
+bba68ea88de6;Observatoire européen austral;observatoire europeen austral;nom;élevée;MESRE
+7430030cb713;Observatoire Européen Gravitationnel – VIRGO;observatoire europeen gravitationnel virgo;nom;élevée;MESRE
+2be002d5e706;Observatoire Pierre Auger;observatoire pierre auger;nom;élevée;MESRE
+77515d732aa4;Observatoires de la Zone Critique, Applications et Recherche;observatoires de la zone critique applications et recherche;nom;élevée;MESRE
+2121c6e85582;Open Scholarly Communication in the European Research Area for Social sciences and humanities;open scholarly communication in the european research area for social sciences and humanities;nom;élevée;ESFRI
+652c884a2fae;OpenEdition;openedition;acronyme;élevée;MESRE
+2121c6e85582;OPERAS;operas;acronyme;élevée;ESFRI
+01d0e0ffd3e6;Organisation Européenne pour la Recherche Nucléaire;organisation europeenne pour la recherche nucleaire;nom;élevée;MESRE
+870197df77a4;ORPHEE/Laboratoire Léon Brillouin;orphee laboratoire leon brillouin;nom;élevée;MESRE
+870197df77a4;Orphée/LLB;orphee llb;acronyme;élevée;MESRE
+2be002d5e706;PAO;pao;acronyme;moyenne;MESRE
+ee87e62281ee;PARADISE;paradise;acronyme;élevée;MESRE
+84002fe84359;Partnership for Advanced Computing in Europe;partnership for advanced computing in europe;nom;élevée;ESFRI
+3cac8a3378dd;PGT;pgt;acronyme;moyenne;MESRE
+f309785abc47;Phenome-Emphasis France;phenome emphasis france;acronyme;élevée;MESRE
+2be002d5e706;Pierre Auger Observatory;pierre auger observatory;nom_en;élevée;MESRE
+cd918397cb2c;Plateforme de découverte de molécules bioactives pour comprendre et soigner le vivant;plateforme de decouverte de molecules bioactives pour comprendre et soigner le vivant;nom;élevée;MESRE
+d3b9ca801869;Plateforme Nationale d’Infrastructures de recherche Clinique;plateforme nationale d infrastructures de recherche clinique;nom;élevée;MESRE
+0acf19678703;Plateforme nationale pour la médecine régénératrice basée sur les cellules souches mesenchymateuses adultes;plateforme nationale pour la medecine regeneratrice basee sur les cellules souches mesenchymateuses adultes;nom;élevée;MESRE
+ee87e62281ee;Plateforme pour les Activités de Recherche Appliquée et de Développement en Instrumentation au Sol et Embarquée;plateforme pour les activites de recherche appliquee et de developpement en instrumentation au sol et embarquee;nom;élevée;MESRE
+9f18fbaf6a21;PNDB;pndb;acronyme;élevée;MESRE
+9f18fbaf6a21;Pôle National de Données de Biodiversité;pole national de donnees de biodiversite;nom;élevée;MESRE
+b6341b5e53f5;Pôles de données et services pour le système Terre;poles de donnees et services pour le systeme terre;nom;élevée;MESRE
+84002fe84359;PRACE;prace;acronyme;élevée;ESFRI
+e8d35262e6e1;PROduction et GEstion de Données;production et gestion de donnees;nom;élevée;MESRE
+0dc007326581;ProFI;profi;acronyme;élevée;MESRE
+e8d35262e6e1;PROGEDO;progedo;acronyme;élevée;MESRE
+28d6dfaa4d24;Programme international de forage profond en mer;programme international de forage profond en mer;nom;élevée;MESRE
+d5e62fc1fc3b;RARe;rare;acronyme;élevée;MESRE
+bc5e1718e1b7;RECOLNAT;recolnat;acronyme;élevée;MESRE
+3aad2d6cddac;REFIMEVE;refimeve;acronyme;élevée;MESRE
+34ed7e93699a;RéGEF;regef;acronyme;élevée;MESRE
+d5e7b9069fe0;Religious Studies Infrastructure: Tools, Innovation, Experts, Connections and Centers;religious studies infrastructure tools innovation experts connections and centers;nom;élevée;ESFRI
+9cc140dd8133;RENARD;renard;acronyme;élevée;MESRE
+71a9bb35a7a0;RENATECH+;renatech;acronyme;élevée;MESRE
+20d60a8171bb;RENATER;renater;acronyme;élevée;MESRE
+d96f0259f97e;Research Infrastructure for EnvIRonmental Exposure assessmeNt in Europe;research infrastructure for environmental exposure assessment in europe;nom;élevée;ESFRI
+9ea7e0683bc9;Réseau de Moyens d’Essais en Hydrodynamique pour les Énergies Marines Renouvelables;reseau de moyens d essais en hydrodynamique pour les energies marines renouvelables;nom;élevée;MESRE
+a93541a24744;Réseau des Zones Ateliers – Infrastructure des Socio-écosystèmes;reseau des zones ateliers infrastructure des socio ecosystemes;nom;élevée;MESRE
+3aad2d6cddac;Réseau fibre métrologique à vocation européenne;reseau fibre metrologique a vocation europeenne;nom;élevée;MESRE
+34ed7e93699a;Réseau Géochimique et Expérimental Français;reseau geochimique et experimental francais;nom;élevée;MESRE
+44e53b5fd5e0;Réseau in-situ global d’observation des océans;reseau in situ global d observation des oceans;nom;élevée;MESRE
+9cc140dd8133;REseau NAtional de Rpe interDisciplinaire;reseau national de rpe interdisciplinaire;nom;élevée;MESRE
+796f32c6f830;Réseau national de spectrométrie de masse FT-ICR à très haut champ;reseau national de spectrometrie de masse ft icr a tres haut champ;nom;élevée;MESRE
+bc5e1718e1b7;Réseau national des collections naturalistes;reseau national des collections naturalistes;nom;élevée;MESRE
+71a9bb35a7a0;Réseau NAtional des grandes centrales de TECHnologies de nanofabrication;reseau national des grandes centrales de technologies de nanofabrication;nom;élevée;MESRE
+2a323e04e384;Réseau national des Maisons des Sciences de l’Homme;reseau national des maisons des sciences de l homme;nom;élevée;MESRE
+47ad26127963;Réseau sismologique et géodésique français;reseau sismologique et geodesique francais;nom;élevée;MESRE
+47ad26127963;Résif-Epos;resif epos;acronyme;élevée;MESRE
+d5e7b9069fe0;RESILIENCE;resilience;acronyme;élevée;ESFRI
+3d6e75beb81f;Résonance Magnétique Nucléaire à Très Hauts Champs;resonance magnetique nucleaire a tres hauts champs;nom;élevée;MESRE
+d5e62fc1fc3b;Ressources Agronomiques pour la Recherche;ressources agronomiques pour la recherche;nom;élevée;MESRE
+3d6e75beb81f;RMN-THC;rmn thc;acronyme;élevée;MESRE
+2a323e04e384;RnMSH;rnmsh;acronyme;élevée;MESRE
+67cf0ed85f14;ROBOTEX 2.0;robotex 2 0;acronyme;élevée;MESRE
+c5844ed02f2e;SAFIRE;safire;acronyme;élevée;MESRE
+c5844ed02f2e;Service des Avions Français Instrumentés pour la Recherche en Environnement;service des avions francais instrumentes pour la recherche en environnement;nom;élevée;MESRE
+2dc795188ec3;SHARE ERIC;share eric;acronyme;élevée;ESFRI
+fff17f3fc066;SILECS;silecs;acronyme;élevée;MESRE
+e71e6f410e14;SKA Observatory;ska observatory;nom_fr;élevée;MESRE | ESFRI
+e71e6f410e14;SKA Observatory | Square Kilometre Array Observatory;ska observatory square kilometre array observatory;nom;élevée;MESRE | ESFRI
+e71e6f410e14;SKAO;skao;acronyme;élevée;MESRE | ESFRI
+fd7c91fb0e09;SLICES;slices;acronyme;élevée;ESFRI
+fd7c91fb0e09;SLICES Scientific Large-scale Infrastructure for Computing/Communication Experimental Studies;slices scientific large scale infrastructure for computing communication experimental studies;nom;élevée;ESFRI
+1abf4d466b1d;SoBigData RI;sobigdata ri;acronyme;élevée;ESFRI
+1abf4d466b1d;SoBigData RI: European Integrated Infrastructure for Social Mining and Big Data Analytics;sobigdata ri european integrated infrastructure for social mining and big data analytics;nom;élevée;ESFRI
+d832488e6a9e;Software Heritage;software heritage;acronyme;élevée;MESRE
+45c8586a626d;SOLEIL;soleil;acronyme;élevée;MESRE
+4ba685ebfb39;Source Européenne de Rayonnement Synchrotron;source europeenne de rayonnement synchrotron;nom;élevée;MESRE
+3dc47a55317f;SPIRAL2;spiral2;acronyme;élevée;ESFRI
+e71e6f410e14;Square Kilometre Array Observatory;square kilometre array observatory;nom_en;élevée;MESRE | ESFRI
+cef8eb58eb8d;Station de recherche antarctique franco-italienne;station de recherche antarctique franco italienne;nom;élevée;MESRE
+2dc795188ec3;Survey of Health, Ageing and Retirement in Europe;survey of health ageing and retirement in europe;nom;élevée;ESFRI
+45c8586a626d;Synchrotron SOLEIL;synchrotron soleil;nom;élevée;MESRE
+3dc47a55317f;Système de Production d’Ions Radioactifs en Ligne de 2e génération;systeme de production d ions radioactifs en ligne de 2e generation;nom;élevée;ESFRI
+573e3602d8e8;Système Européen d'observation des plaques tectoniques - France;systeme europeen d observation des plaques tectoniques france;nom;élevée;MESRE
+f3e0c0dcb596;Système Intégré d’Observation du Carbone;systeme integre d observation du carbone;nom;élevée;MESRE
+29438a08d683;The Extreme Light Infrastructure European Research Infrastructure Consortium;the extreme light infrastructure european research infrastructure consortium;nom;élevée;ESFRI
+c6b14f691c88;The Generations and Gender Programme;the generations and gender programme;nom;élevée;ESFRI
+9ea7e0683bc9;THEOREM;theorem;acronyme;élevée;MESRE
+7196b5875f71;TIMES;times;acronyme;élevée;MESRE
+7196b5875f71;Transfert et Interfaces : Mathématiques, Entreprises et Société;transfert et interfaces mathematiques entreprises et societe;nom;élevée;MESRE
+d63eba28afc0;W(Tungsten) Environment for Steady-state Tokamaks;w tungsten environment for steady state tokamaks;nom;élevée;MESRE
+d63eba28afc0;WEST;west;acronyme;élevée;MESRE
