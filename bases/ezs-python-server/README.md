@@ -5,7 +5,7 @@ Ce répertoire contient de quoi construire une image Docker lançant un serveur
 scripts python.
 
 C'est l'image de base des web services.
-Son nom est : `cnrsinist/ezs-python-server:2.0.5-no24-2.0.1`.
+Son nom est : `cnrsinist/ezs-python-server:py3.10-no24-2.0.5`.
 
 ## Versions utilisées
 
