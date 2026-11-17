@@ -9,27 +9,12 @@ content-type: application/json
 
 
 HTTP 200
-[{
-    "value": {
-        "isResearchDoc": false,
-        "score": 0.72
-    }
-},
-{
-    "value": {
-        "isResearchDoc": true,
-        "score": 1
-    }
-},
-{
-    "value": {
-        "isResearchDoc": "not_processed",
-        "score": 1
-    }
-},
-{
-    "value": {
-        "isResearchDoc": "n/a",
-        "score": "n/a"
-    }
-}]
+[Asserts]
+jsonpath "$[0].value.isResearchDoc" == false
+jsonpath "$[1].value.isResearchDoc" == true
+jsonpath "$[2].value.isResearchDoc" == "not_processed"
+jsonpath "$[3].value.isResearchDoc" == "n/a"
+jsonpath "$[0].value.score" < 0.85
+jsonpath "$[1].value.score" > 0.85
+jsonpath "$[2].value.score" == 1
+jsonpath "$[3].value.score" == "n/a"

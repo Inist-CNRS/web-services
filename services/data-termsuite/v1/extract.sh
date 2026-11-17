@@ -2,9 +2,15 @@
 set +x
 
 # Initialize SDKMAN / Java
-export SDKMAN_DIR="/root/.sdkman"
+export SDKMAN_DIR="${SDKMAN_DIR:-/opt/sdkman}"
 # shellcheck disable=SC1091
-[[ -s "/root/.sdkman/bin/sdkman-init.sh" ]] && source "/root/.sdkman/bin/sdkman-init.sh"
+if [ -s "$SDKMAN_DIR/bin/sdkman-init.sh" ] ; then
+    source "$SDKMAN_DIR/bin/sdkman-init.sh"
+else
+    echo "ERROR: SDKMAN not found in $SDKMAN_DIR" 1>&2
+    exit 4
+fi
+command -v java > /dev/null || { echo "ERROR: java not found in PATH" 1>&2; exit 5; }
 JAR=/opt/termsuite-core-3.0.10.jar
 language=${1:-en}
 TOPN=${2:-500}
@@ -52,7 +58,7 @@ result_path="/tmp/retrieve/$corpus-result.tsv"
 java -Xms1g -Xmx6g -cp "$JAR" fr.univnantes.termsuite.tools.TerminologyExtractorCLI  \
     -c  "$corpus_path" \
     --tsv "$result_path" \
-    --tsv-properties "key,spec,freq" \
+    --tsv-properties "key,pattern,pilot,freq,spec,dFreq,tfIdf" \
     -l "$language" -t /opt/treetagger \
     --post-filter-top-n="$TOPN" --post-filter-property=spec
 

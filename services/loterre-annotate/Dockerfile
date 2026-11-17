@@ -47,7 +47,7 @@ FROM $DICT_SOURCE AS dict-picked
 
 # ── Stage 2 : image principale ────────────────────────────────────────────────
 # Debian trixie, Python 3.10, uv (voir bases/ezs-python-server/Dockerfile).
-FROM cnrsinist/ezs-python-server:py3.10-no24-2.0.1
+FROM cnrsinist/ezs-python-server:py3.10-no24-2.0.5
 
 # LOTERRE_ANNOTATE_VERSION pilote quel tag git est installé ci-dessous — passé
 # par ws_deploy_docker_local.sh (--build-arg, lu depuis VERSION à la racine).

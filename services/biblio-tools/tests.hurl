@@ -303,7 +303,7 @@ jsonpath "$" count == 3
 jsonpath "$[0].value.id" == "https://openalex.org/W2070151728"
 jsonpath "$[0].value.title" == "A Model of Leptons"
 jsonpath "$[0].value.locations" count == 1
-jsonpath "$[1].value.created_date" == "2025-10-10T00:00:00"
+jsonpath "$[1].value.created_date" == "2018-08-03T00:00:00"
 jsonpath "$[2].id" == 8
 jsonpath "$[2].value" == "n/a"
 
@@ -520,5 +520,3 @@ jsonpath "$[0].value.lang" == "en"
 jsonpath "$[1].value.year" == "2021"
 jsonpath "$[2].value.genre" == "journal-article"
 jsonpath "$[3].value" == "n/a"
-
-

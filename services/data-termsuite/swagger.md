@@ -111,15 +111,15 @@ curl -X 'POST' \
 qui donnera ce résultat
 
 ```csv
-"key","spec","freq"
-"n: sediment","4.61","10"
-"nn: proto-paratethys sea","4.56","9"
-"a: glacial","4.46","7"
-"n: mmes","4.46","7"
-"a: tropical","4.46","7"
-"n: precipitation","4.46","7"
-"n: genus","4.46","7"
-"n: obliquiloculata","4.46","7"
-"n: telescopus","4.39","6"
-"nn: clay mineral","4.39","6"
+"key","pattern","pilot","freq","spec","dFreq","tfIdf"
+"n: sediment","N","sediments","10","4.61","5","2"
+"nn: proto-paratethys sea","N N","proto-Paratethys Sea","9","4.56","1","9"
+"a: glacial","A","glacial","7","4.46","5","1.4"
+"n: mmes","N","MMEs","7","4.46","1","7"
+"a: tropical","A","tropical","7","4.46","2","3.5"
+"n: precipitation","N","precipitation","7","4.46","3","2.33"
+"n: genus","N","genus","7","4.46","2","3.5"
+"n: obliquiloculata","N","obliquiloculata","7","4.46","1","7"
+"n: telescopus","N","Telescopus","6","4.39","1","6"
+"nn: clay mineral","N N","clay minerals","6","4.39","1","6"
 ```

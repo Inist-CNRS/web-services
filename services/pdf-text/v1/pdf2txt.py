@@ -69,9 +69,11 @@ def is_organization(chaine):
     chaine=chaine.replace(',','')
     chaine=chaine.replace('-',' ')
     doc = nlp_fr(chaine)
+    # Recent spaCy models sometimes tag a single short word as ORG:
+    # only keep entities covering at least half of the line.
     for entite in doc.ents:
 
-        if entite.label_ == "ORG":
+        if entite.label_ == "ORG" and len(entite.text) >= len(chaine) / 2:
             return True
     return False
 

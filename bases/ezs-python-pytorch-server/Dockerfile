@@ -1,4 +1,4 @@
-FROM cnrsinist/ezs-python-server:py3.10-no24-2.0.1
+FROM cnrsinist/ezs-python-server:py3.10-no24-2.0.5
 
 # Set all required version
 ARG torch_ver=2.3.0

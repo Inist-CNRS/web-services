@@ -70,7 +70,7 @@ function updateBase() {
     for DOCKERFILE in $DEPENDING_DOCKERFILES
     do
         printf " - %s\n" "$DOCKERFILE"
-        run "sed -i -e \"s/cnrsinist\/$CHANGING_BASE:.*$/cnrsinist\/$CHANGING_BASE:$BASE_IMAGE_TAG/g\" \"$DOCKERFILE\""
+        run "sed -i -e \"s/cnrsinist\/$CHANGING_BASE:[^ ]*/cnrsinist\/$CHANGING_BASE:$BASE_IMAGE_TAG/g\" \"$DOCKERFILE\""
         IMAGE_DIR=$(dirname "$DOCKERFILE")
         TYPE=$(dirname "$IMAGE_DIR")
         if [ "$IMAGE_DIR" = "template" ] || [ "$IMAGE_DIR" = "template-async" ]; then

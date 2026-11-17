@@ -3,7 +3,7 @@
     "info": {
         "title": "ark-tools - Génération des identifiants ARK",
         "summary": "Permet la génération d'identifiants ARK uniques et pérennes",
-        "version": "1.28.7",
+        "version": "1.28.8",
         "termsOfService": "https://services.istex.fr/",
         "contact": {
             "name": "Inist-CNRS",
@@ -15,7 +15,7 @@
             "x-comment": "Will be automatically completed by the ezs server."
         },
         {
-            "url": "http://vptdmservices.intra.inist.fr:49269/",
+            "url": "http://vptdmservices.intra.inist.fr:49433/",
             "description": "Latest version for production",
             "x-profil": "Standard"
         }

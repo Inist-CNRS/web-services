@@ -1,8 +1,8 @@
-FROM cnrsinist/python-node:py3.10-no24-2.1.0
+FROM cnrsinist/python-node:py3.10-no24-2.1.1
 
 RUN apt-get update && \
     apt-get upgrade -y && \
-    apt-get install -y --no-install-recommends tini=0.19.0-3+b7 && \
+    apt-get install -y --no-install-recommends tini=0.19.0-3+b8 && \
     apt-get clean && rm -rf /var/lib/apt/lists/* && \
     echo '{ \
     "httpPort": 31976, \

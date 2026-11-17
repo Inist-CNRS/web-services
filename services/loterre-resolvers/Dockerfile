@@ -1,9 +1,9 @@
 # syntax=docker/dockerfile:1.2
 
-FROM python:3.9-slim-bullseye AS dvcfiles
+FROM ghcr.io/astral-sh/uv:0.12.12-python3.10-trixie-slim AS dvcfiles
 WORKDIR /dvc/data
 WORKDIR /dvc
-RUN apt-get update && apt-get -y install --no-install-recommends git=1:2.30.2-1+deb11u5 && apt-get clean && rm -rf /var/lib/apt/lists/*
+RUN apt-get update && apt-get -y install --no-install-recommends git=1:2.47.3-0+deb13u1 && apt-get clean && rm -rf /var/lib/apt/lists/*
 RUN pip install --no-cache-dir dvc[webdav]==3.67.1
 RUN --mount=type=secret,id=webdav_login \
     --mount=type=secret,id=webdav_password \
@@ -20,7 +20,7 @@ RUN mv databases/*.tgz . && \
     for tgz in *.tgz; do tar -xf "$tgz"; done
 
 ##################################################################
-FROM cnrsinist/ezs-python-saxon-server:py3.9-no24-1.0.9
+FROM cnrsinist/ezs-python-saxon-server:py3.10-no24-2.1.1
 
 WORKDIR /app/public/v1
 WORKDIR /app/public

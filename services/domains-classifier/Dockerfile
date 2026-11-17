@@ -3,9 +3,9 @@
 ####
 # Get all web service's dvc files
 ####
-FROM python:3.9-slim-bullseye AS dvc-files
+FROM ghcr.io/astral-sh/uv:0.12.12-python3.10-trixie-slim AS dvc-files
 WORKDIR /dvc
-RUN apt-get update && apt-get -y --no-install-recommends install git=1:2.30.2-1+deb11u5 && apt-get clean && rm -rf /var/lib/apt/lists/*
+RUN apt-get update && apt-get -y --no-install-recommends install git=1:2.47.3-0+deb13u1 && apt-get clean && rm -rf /var/lib/apt/lists/*
 RUN pip install --no-cache-dir dvc[webdav]==3.67.1
 RUN --mount=type=secret,id=webdav_login \
     --mount=type=secret,id=webdav_password \
@@ -21,20 +21,17 @@ RUN dvc pull -vv
 ####
 # Build and install web services dependencies files
 ####
-FROM cnrsinist/ezs-python-server:py3.9-no24-1.0.14
+FROM cnrsinist/ezs-python-server:py3.10-no24-2.0.5
 
 WORKDIR /app
-# Install all python dependencies
-RUN apt-get update && apt-get install -y --no-install-recommends \
-    build-essential=12.9 make=4.3-4.1 gcc=4:10.2.1-1 && \
-    apt-get clean && rm -rf /var/lib/apt/lists/* && \
-    pip install --no-cache-dir --no-build-isolation \
+# Install all python dependencies (all available as prebuilt wheels).
+# fasttext-wheel is used instead of the fasttext sdist, whose sources no
+# longer compile with gcc 14 (missing <cstdint> include in src/args.cc).
+RUN uv pip install --system --no-cache \
     plac==1.4.3 \
     scipy==1.13.1 \
     numpy==1.26.3 \
-    fasttext==0.9.2 && \
-    apt-get remove -y --purge build-essential make gcc && \
-    apt-get autoremove -y
+    fasttext-wheel==0.9.2
 
 WORKDIR /app/public
 # Declare files to copy in .dockerignore

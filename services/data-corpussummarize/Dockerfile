@@ -1,6 +1,6 @@
 # syntax=docker/dockerfile:1.2
 
-FROM cnrsinist/python-node:py3.10-no24-2.0.0 AS dvc-files
+FROM ghcr.io/astral-sh/uv:0.12.12-python3.10-trixie-slim AS dvc-files
 WORKDIR /dvc
 RUN apt-get update && apt-get -y --no-install-recommends install git=1:2.47.3-0+deb13u1 && apt-get clean && rm -rf /var/lib/apt/lists/*
 RUN uv pip install --system --no-cache "dvc[webdav]==3.67.1"
@@ -17,7 +17,7 @@ COPY ./v1/all-MiniLM-L6-v2.dvc /dvc
 RUN dvc pull -v
 
 
-FROM cnrsinist/ezs-python-pytorch-server:py3.10-no24-2.0.0
+FROM cnrsinist/ezs-python-pytorch-server:py3.10-no24-2.0.2
 
 ENV HF_HOME=/app/.cache/huggingface
 ENV NUMBA_CACHE_DIR=/tmp/numba_cache

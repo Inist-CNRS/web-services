@@ -1,7 +1,7 @@
 {
   "private": true,
   "name": "ws-tabbr-mine",
-  "version": "2.1.2",
+  "version": "2.1.3",
   "description": "Détection d'abréviations torturées",
   "repository": {
     "type": "git",

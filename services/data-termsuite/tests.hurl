@@ -52,53 +52,93 @@ HTTP 200
 Content-Type: application/json
 [{
     "key": "n: sediment",
+    "pattern": "N",
+    "pilot": "sediments",
+    "freq": 10,
     "spec": 4.61,
-    "freq": 10
+    "dFreq": 5,
+    "tfIdf": 2
 },
 {
     "key": "nn: proto-paratethys sea",
+    "pattern": "N N",
+    "pilot": "proto-Paratethys Sea",
+    "freq": 9,
     "spec": 4.56,
-    "freq": 9
+    "dFreq": 1,
+    "tfIdf": 9
 },
 {
     "key": "a: glacial",
+    "pattern": "A",
+    "pilot": "glacial",
+    "freq": 7,
     "spec": 4.46,
-    "freq": 7
+    "dFreq": 5,
+    "tfIdf": 1.4
 },
 {
     "key": "n: mmes",
+    "pattern": "N",
+    "pilot": "MMEs",
+    "freq": 7,
     "spec": 4.46,
-    "freq": 7
+    "dFreq": 1,
+    "tfIdf": 7
 },
 {
     "key": "a: tropical",
+    "pattern": "A",
+    "pilot": "tropical",
+    "freq": 7,
     "spec": 4.46,
-    "freq": 7
+    "dFreq": 2,
+    "tfIdf": 3.5
 },
 {
     "key": "n: precipitation",
+    "pattern": "N",
+    "pilot": "precipitation",
+    "freq": 7,
     "spec": 4.46,
-    "freq": 7
+    "dFreq": 3,
+    "tfIdf": 2.33
 },
 {
     "key": "n: genus",
+    "pattern": "N",
+    "pilot": "genus",
+    "freq": 7,
     "spec": 4.46,
-    "freq": 7
+    "dFreq": 2,
+    "tfIdf": 3.5
 },
 {
     "key": "n: obliquiloculata",
+    "pattern": "N",
+    "pilot": "obliquiloculata",
+    "freq": 7,
     "spec": 4.46,
-    "freq": 7
+    "dFreq": 1,
+    "tfIdf": 7
 },
 {
     "key": "n: telescopus",
+    "pattern": "N",
+    "pilot": "Telescopus",
+    "freq": 6,
     "spec": 4.39,
-    "freq": 6
+    "dFreq": 1,
+    "tfIdf": 6
 },
 {
     "key": "nn: clay mineral",
+    "pattern": "N N",
+    "pilot": "clay minerals",
+    "freq": 6,
     "spec": 4.39,
-    "freq": 6
+    "dFreq": 1,
+    "tfIdf": 6
 }]
 
 ############################################################################
