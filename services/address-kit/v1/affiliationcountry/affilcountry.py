@@ -86,11 +86,12 @@ json_schema = {
     "items": {
         "type": "object",
         "properties": {
-            "id": {"type": "integer"},
+            "id": {"type": ["string","integer"]},
             "country": {"type": ["string", "null"]},
             "city": {"type": ["string", "null"]},
+            "country_code": {"type": ["string", "null"]},
         },
-        "required": ["id", "country", "city"],
+        "required": ["id", "country", "city","country_code"],
         "additionalProperties": False,
     },
 }
