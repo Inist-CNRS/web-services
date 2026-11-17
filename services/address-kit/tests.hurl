@@ -61,73 +61,94 @@ content-type: application/json
 ]
 
 HTTP 200
-[{
-    "id": 1,
-    "value": {
-        "country": "France",
-        "code": "fr"
-    }
-},
-{
-    "id": 2,
-    "value": {
-        "country": "France",
-        "code": "fr"
-    }
-},
-{
-    "id": 3,
-    "value": {
-        "country": "France",
-        "code": "fr"
-    }
-},
-{
-    "id": 4,
-    "value": {
-        "country": "Germany",
-        "code": "de"
-    }
-},
-{
-    "id": 5,
-    "value": {
-        "country": "France",
-        "code": "fr"
-    }
-},
-{
-    "id": 6,
-    "value": {
-        "country": "Portugal",
-        "code": "pt"
-    }
-},
-{
-    "id": 7,
-    "value": {
-        "country": "",
-        "code": ""
-    }
-},
-{
-    "id": 8,
-    "value": {
-        "country": "France",
-        "code": "fr"
-    }
-},
-{
-    "id": 9,
-    "value": {
-        "country": "Italy",
-        "code": "it"
-    }
-},
-{
-    "id": 10,
-    "value": {
-        "country": "France",
-        "code": "fr"
-    }
-}]
+Content-Type: application/json
+[Asserts]
+jsonpath "$" count == 10
+jsonpath "$[*].value.city" count == 10
+jsonpath "$[*].value.country" count == 10
+jsonpath "$[*].value.country_code" count == 10
+
+jsonpath "$[1].value.country_code" matches "^[A-Z]{2}$"
+
+# [
+#   {
+#     "id": 1,
+#     "value": {
+#       "city": "Salzburg",
+#       "country": "Austria",
+#       "country_code": "AT"
+#     }
+#   },
+#   {
+#     "id": 2,
+#     "value": {
+#       "city": "Norwich",
+#       "country": "United Kingdom",
+#       "country_code": "GB"
+#     }
+#   },
+#   {
+#     "id": 3,
+#     "value": {
+#       "city": "Cagliari",
+#       "country": "Italy",
+#       "country_code": "IT"
+#     }
+#   },
+#   {
+#     "id": 4,
+#     "value": {
+#       "city": "Gettysburg",
+#       "country": "United States",
+#       "country_code": "US"
+#     }
+#   },
+#   {
+#     "id": 5,
+#     "value": {
+#       "city": "Gif-sur-Yvette",
+#       "country": "France",
+#       "country_code": "FR"
+#     }
+#   },
+#   {
+#     "id": 6,
+#     "value": {
+#       "city": "n/a",
+#       "country": "France",
+#       "country_code": "FR"
+#     }
+#   },
+#   {
+#     "id": 7,
+#     "value": {
+#       "city": "Nancy",
+#       "country": "France",
+#       "country_code": "FR"
+#     }
+#   },
+#   {
+#     "id": 8,
+#     "value": {
+#       "city": "Toulouse",
+#       "country": "France",
+#       "country_code": "FR"
+#     }
+#   },
+#   {
+#     "id": 9,
+#     "value": {
+#       "city": "Milan",
+#       "country": "Italy",
+#       "country_code": "IT"
+#     }
+#   },
+#   {
+#     "id": 10,
+#     "value": {
+#       "city": "Vannes",
+#       "country": "France",
+#       "country_code": "FR"
+#     }
+#   }
+# ]

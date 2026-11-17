@@ -9,6 +9,10 @@
         "EZS_CACHE": true,
         "EZS_VERBOSE": false,
         "NODE_OPTIONS": "--max_old_space_size=1024",
-        "NODE_ENV": "production"
+        "NODE_ENV": "production",
+        "ILAAS_API_KEY": "real_api_key",
+        "MODEL_NAME": "gemma-4-31b",
+        "MAX_WORKERS": 12,
+        "BATCH_SIZE": 10
     }
 }
