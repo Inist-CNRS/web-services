@@ -31,8 +31,8 @@ if not API_KEY:
 BASE_URL = "https://llm.ilaas.fr/v1"
 
 MODEL_NAME = os.getenv("MODEL_NAME", "gemma-4-31b") # à tester qwen-3.8-27b
-MAX_WORKERS = int(os.getenv("MAX_WORKERS", "12"))   # Requêtes en parallèle
-BATCH_SIZE = int(os.getenv("BATCH_SIZE", "10"))     # Affiliations par requête
+MAX_WORKERS = int(os.getenv("MAX_WORKERS", "12"))   # Requêtes en parallèle, possibilité de changer sur la configuration du service (par défaut 12)
+BATCH_SIZE = int(os.getenv("BATCH_SIZE", "10"))     # Affiliations par requête, possibilité de changer sur la configuration du service (par défaut 10)
 
 # ----------------------------------------------------------------------
 # Prompt
