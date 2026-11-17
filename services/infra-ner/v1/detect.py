@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-
 import json
 import sys
 
@@ -11,10 +10,15 @@ referential = load_referential()
 for line in sys.stdin:
     if not line.strip():
         continue
-    data = json.loads(line)
+    data = {}
     try:
+        data = json.loads(line)
         data["value"] = detect_infrastructures(data["value"], referential)
     except Exception as error:
-        data["value"] = {"error": f"{type(error).__name__}: {error}"}
+        message = f"{type(error).__name__}: {error}"
+        print(message, file=sys.stderr, flush=True)
+        data = data if isinstance(data, dict) else {}
+        data["value"] = []
+        data["error"] = message
     sys.stdout.write(json.dumps(data, ensure_ascii=False) + "\n")
     sys.stdout.flush()

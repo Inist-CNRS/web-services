@@ -1,15 +1,3 @@
-"""Fonctions utilitaires du web service de détection d'infrastructures.
-
-Principe général :
-1. On charge le référentiel (infrastructures.csv + aliases.csv) une seule fois.
-2. On normalise le texte (minuscules, sans accents, sans ponctuation).
-3. On cherche les alias exacts (Aho-Corasick), puis les variantes approximatives (rapidfuzz).
-4. On résout les chevauchements (la correspondance la plus sûre et la plus longue gagne).
-5. On renvoie une liste à plat : un élément par mention détectée.
-
-Réglages orientés PRÉCISION : mieux vaut rater une mention que produire un faux positif.
-"""
-
 import csv
 import re
 import unicodedata
@@ -47,9 +35,19 @@ ANCHOR_COUNT = 3       # nombre de mots-ancres (les plus rares du texte) utilis�
 
 CONTEXT_SIZE = 100     # nombre de caractères gardés avant/après chaque mention
 
-# Champs de infrastructures.csv recopiés dans chaque résultat
-INFRASTRUCTURE_FIELDS = ("acronyme", "nom_fr", "nom_en", "domaine_scientifique", "sources")
+# Champs de infrastructures.csv recopiés dans chaque résultat (en plus de l'id)
+INFRASTRUCTURE_FIELDS = ("acronyme", "nom", "nom_fr", "nom_en", "domaine_scientifique", "sources")
 
+# Pages de catégories du wiki OPIDoR ("Catégorie:IR"...) : ce ne sont pas des infrastructures
+NON_INFRASTRUCTURE_PREFIX = "Catégorie:"
+
+# Fiches OPIDoR de redirection, dont la description est "Rediriger vers : <cible>"
+REDIRECT_PATTERN = re.compile(r"^\s*Rediriger vers\s*:\s*(.+)", re.IGNORECASE)
+
+
+# --------------------------------------------------------------------------
+# Chargement du référentiel
+# --------------------------------------------------------------------------
 
 @dataclass
 class Referential:
@@ -93,8 +91,21 @@ def normalize(text):
 
 
 def letters(text):
-    """Ne garde que les lettres et chiffres, casse conservée ("E-RIHS" -> "ERIHS")."""
-    return "".join(char for char in text if char.isalnum())
+    """Ne garde que les lettres et chiffres, sans accents, casse conservée ("E-RIHS" -> "ERIHS")."""
+    return "".join(char for char in unicodedata.normalize("NFKD", text) if char.isalnum())
+
+
+def case_matches(written, alias):
+    """Indique si le texte écrit respecte la casse de l'alias (utilisé pour les acronymes).
+
+    Sont acceptées la casse exacte ("KM3NeT") et l'écriture toute en majuscules ("KM3NET",
+    "REGEF" pour "RéGEF"). Exception : un alias à une seule majuscule ("Apollon") n'accepte
+    pas "APOLLON", trop souvent un simple titre en capitales.
+    """
+    expected = letters(alias)
+    if written == expected:
+        return True
+    return written.isupper() and sum(char.isupper() for char in expected) >= 2
 
 
 def build_alias_patterns(alias):
@@ -111,9 +122,74 @@ def build_alias_patterns(alias):
     return {normalized}
 
 
+def merge_rows(rows):
+    """Fusionne les lignes d'un même id en une seule fiche.
+
+    Les CSV concatènent plusieurs exports : un id peut avoir une ligne OPIDoR (peu détaillée)
+    et une ligne MESRE ou ESFRI. Les lignes OPIDoR passent en dernier et ne servent qu'à
+    remplir les champs restés vides. Le champ "sources" cumule les sources de toutes les lignes.
+    """
+    rows = sorted(rows, key=lambda row: row["sources"] == "OPIDoR")  # OPIDoR en dernier
+    record = {"id": rows[0]["id"]}
+    for field in INFRASTRUCTURE_FIELDS:
+        record[field] = next((row[field] for row in rows if row.get(field, "").strip()), "")
+
+    sources = []
+    for row in rows:
+        for source in row["sources"].split(" | "):
+            if source and source not in sources:
+                sources.append(source)
+    record["sources"] = " | ".join(sources)
+    return record
+
+
+def load_infrastructures():
+    """Charge les fiches d'infrastructures, prêtes à l'emploi.
+
+    - une seule fiche par id (fusion des lignes en double) ;
+    - les pages de catégories OPIDoR (non-infrastructures) sont écartées ;
+    - les fiches de redirection sont remplacées par leur cible ("Rediriger vers : Epos-France").
+
+    Retourne (fiches, redirections) : fiches = {id: fiche}, redirections = {id d'une
+    fiche de redirection: id de la fiche cible}.
+    """
+    rows_by_id = {}
+    for row in load_csv(INFRASTRUCTURES_CSV):
+        rows_by_id.setdefault(row["id"], []).append(row)
+
+    records, redirect_targets = {}, {}
+    for infrastructure_id, rows in rows_by_id.items():
+        if any(row["nom"].startswith(NON_INFRASTRUCTURE_PREFIX) for row in rows):
+            continue
+        target = next(
+            (match.group(1) for row in rows if (match := REDIRECT_PATTERN.match(row.get("description", "")))),
+            None,
+        )
+        if target:
+            redirect_targets[infrastructure_id] = target.strip()
+        else:
+            records[infrastructure_id] = merge_rows(rows)
+
+    # La cible d'une redirection est la fiche dont l'acronyme ou le nom correspond
+    ids_by_name = {}
+    for record in records.values():
+        for field in ("acronyme", "nom"):
+            name = normalize(record[field])[0]
+            if name:
+                ids_by_name.setdefault(name, record["id"])
+
+    redirects = {}
+    for infrastructure_id, target in redirect_targets.items():
+        target = re.sub(r"\s+IR\*?$", "", target)  # "SPIRAL2 IR*" -> "SPIRAL2"
+        target_id = ids_by_name.get(normalize(target)[0])
+        if target_id:  # redirection sans cible connue : la fiche est simplement écartée
+            redirects[infrastructure_id] = target_id
+    return records, redirects
+
+
 def load_referential():
     """Charge les CSV et construit les index de recherche (à appeler une seule fois)."""
-    infrastructures = {row["id"]: row for row in load_csv(INFRASTRUCTURES_CSV)}
+    infrastructures, redirects = load_infrastructures()
 
     # alias normalisé -> infos de chaque alias du référentiel ayant cette forme
     alias_lookup = {}
@@ -122,6 +198,12 @@ def load_referential():
         infrastructure_id = row.get("infrastructure_id", "").strip()
         confidence = row.get("niveau_confiance") or "élevée"
         if not alias or not infrastructure_id or confidence not in CONFIDENCE_LEVELS:
+            continue
+
+        # Un alias d'une fiche de redirection désigne la fiche cible ; un alias d'une fiche
+        # écartée (catégorie, redirection sans cible) est ignoré
+        infrastructure_id = redirects.get(infrastructure_id, infrastructure_id)
+        if infrastructure_id not in infrastructures:
             continue
         normalized_alias = normalize(alias)[0]
         if normalized_alias in IGNORED_ALIASES:
@@ -188,7 +270,7 @@ def find_exact_matches(text, normalized, offsets, referential):
         infos = [
             info
             for info in referential.alias_lookup[pattern]
-            if not info["case_sensitive"] or written == letters(info["alias_original"])
+            if not info["case_sensitive"] or case_matches(written, info["alias_original"])
         ]
         if infos:
             matches.append({"start": start, "end": end, "method": "exact", "score": 100.0, "infos": infos})
@@ -266,8 +348,8 @@ def make_result(text, offsets, match, record):
     Les positions et le contexte sont ceux du texte ORIGINAL.
     """
     start, end = original_span(offsets, match["start"], match["end"])
-    result = {"alias_detecte": text[start:end]}
-    result.update({field: record.get(field, "") for field in INFRASTRUCTURE_FIELDS})
+    result = {"alias_detecte": text[start:end], "infrastructure_id": record["id"]}
+    result.update({field: record[field] for field in INFRASTRUCTURE_FIELDS})
     result.update(
         {
             "score_similarite": round(match["score"], 1),
@@ -297,7 +379,8 @@ def detect_infrastructures(text, referential):
 
     results = []
     for match in matches:
-        for info in match["infos"]:
-            record = referential.infrastructures.get(info["infrastructure_id"], {})
+        # dict.fromkeys : une seule fois chaque infrastructure, même si deux alias la désignent
+        for infrastructure_id in dict.fromkeys(info["infrastructure_id"] for info in match["infos"]):
+            record = referential.infrastructures[infrastructure_id]
             results.append(make_result(text, offsets, match, record))
     return sorted(results, key=lambda result: result["debut"])
