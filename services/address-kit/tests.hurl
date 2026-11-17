@@ -68,6 +68,8 @@ jsonpath "$[*].value.city" count == 10
 jsonpath "$[*].value.country" count == 10
 jsonpath "$[*].value.country_code" count == 10
 
+jsonpath "$[1].value.country_code" matches "^[A-Z]{2}$"
+
 # [
 #   {
 #     "id": 1,
