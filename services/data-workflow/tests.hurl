@@ -740,7 +740,7 @@ content-type: application/json
 [Options]
 delay: 70s
 retry: 5
-retry-interval: 20s
+retry-interval: 30s
 skip: {{blocked}}
 ```
 [
