@@ -51,6 +51,7 @@ All contributing instructions are in [CONTRIBUTING](CONTRIBUTING.md).
 - [funder-ner](./services/funder-ner) [![Docker Pulls](https://img.shields.io/docker/pulls/cnrsinist/ws-funder-ner.svg)](https://hub.docker.com/r/cnrsinist/ws-funder-ner/)
 - [hal-classifier](./services/hal-classifier) [![Docker Pulls](https://img.shields.io/docker/pulls/cnrsinist/ws-hal-classifier.svg)](https://hub.docker.com/r/cnrsinist/ws-hal-classifier/)
 - [hiddentext-detect](./services/hiddentext-detect) [![Docker Pulls](https://img.shields.io/docker/pulls/cnrsinist/ws-hiddentext-detect.svg)](https://hub.docker.com/r/cnrsinist/ws-hiddentext-detect/)
+- [infra-ner](./services/infra-ner) [![Docker Pulls](https://img.shields.io/docker/pulls/cnrsinist/ws-infra-ner.svg)](https://hub.docker.com/r/cnrsinist/ws-infra-ner/)
 - [irc3-species](./services/irc3-species) [![Docker Pulls](https://img.shields.io/docker/pulls/cnrsinist/ws-irc3-species.svg)](https://hub.docker.com/r/cnrsinist/ws-irc3-species/)
 - [loterre-annotate](./services/loterre-annotate) [![Docker Pulls](https://img.shields.io/docker/pulls/cnrsinist/ws-loterre-annotate.svg)](https://hub.docker.com/r/cnrsinist/ws-loterre-annotate/)
 - [loterre-resolvers](./services/loterre-resolvers) [![Docker Pulls](https://img.shields.io/docker/pulls/cnrsinist/ws-loterre-resolvers.svg)](https://hub.docker.com/r/cnrsinist/ws-loterre-resolvers/)

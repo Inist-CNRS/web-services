@@ -1,0 +1,19 @@
+# These examples can be used directly in VSCode, using HTTPYac extension (anweber.vscode-httpyac)
+# They are important, because used to generate the tests.hurl file.
+
+# Décommenter/commenter les lignes voulues pour tester localement
+@host=http://localhost:31976
+# @host=https://infra-ner.services.istex.fr
+
+###
+# @name v1detect
+# Extraction des infrastructures de recherches
+POST {{host}}/v1/detect?indent=true HTTP/1.1
+Content-Type: application/json
+
+[
+  {
+	"id": "1",
+    "value": "The European Southern Observatory (ESO) operates several major astronomical facilities in Chile.\nESO collaborates with the Vera C. Rubin Observatory on large-scale sky surveys.\nThe vera c. rubin observatory will provide unprecedented data about transient astronomical events.\nResearchers also rely on the Atacama Large Millimeter/submillimeter Array (ALMA) for radio astronomy.\nThe ALMA infrastructure is particularly useful for studying star formation.\nIn Europe, the European Centre for Medium-Range Weather Forecasts (ECMWF) provides essential climate and weather data.\nECMWF datasets are widely used by research institutions across France.\nThe European Plate Observing System (EPOS) supports multidisciplinary research on solid Earth sciences."
+  }
+]
