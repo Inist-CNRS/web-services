@@ -53,6 +53,7 @@ All contributing instructions are in [CONTRIBUTING](CONTRIBUTING.md).
 - [hiddentext-detect](./services/hiddentext-detect) [![Docker Pulls](https://img.shields.io/docker/pulls/cnrsinist/ws-hiddentext-detect.svg)](https://hub.docker.com/r/cnrsinist/ws-hiddentext-detect/)
 - [infra-ner](./services/infra-ner) [![Docker Pulls](https://img.shields.io/docker/pulls/cnrsinist/ws-infra-ner.svg)](https://hub.docker.com/r/cnrsinist/ws-infra-ner/)
 - [irc3-species](./services/irc3-species) [![Docker Pulls](https://img.shields.io/docker/pulls/cnrsinist/ws-irc3-species.svg)](https://hub.docker.com/r/cnrsinist/ws-irc3-species/)
+- [loterre-align](./services/loterre-align) [![Docker Pulls](https://img.shields.io/docker/pulls/cnrsinist/ws-loterre-align.svg)](https://hub.docker.com/r/cnrsinist/ws-loterre-align/)
 - [loterre-annotate](./services/loterre-annotate) [![Docker Pulls](https://img.shields.io/docker/pulls/cnrsinist/ws-loterre-annotate.svg)](https://hub.docker.com/r/cnrsinist/ws-loterre-annotate/)
 - [loterre-resolvers](./services/loterre-resolvers) [![Docker Pulls](https://img.shields.io/docker/pulls/cnrsinist/ws-loterre-resolvers.svg)](https://hub.docker.com/r/cnrsinist/ws-loterre-resolvers/)
 - [ner-tagger](./services/ner-tagger) [![Docker Pulls](https://img.shields.io/docker/pulls/cnrsinist/ws-ner-tagger.svg)](https://hub.docker.com/r/cnrsinist/ws-ner-tagger/)
