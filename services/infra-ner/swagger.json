@@ -3,7 +3,7 @@
     "info": {
         "title": "infra-ner - Ws détectant les infrastructures de recherche dans un texte.",
         "description": "Web service détectant les infrastructures de recherche françaises et européennes dans un texte en anglais ou français, à partir d'une liste prédéfinie, avec une notion de gestion de casse.",
-        "version": "0.0.0",
+        "version": "1.0.0",
         "termsOfService": "https://services.istex.fr/",
         "contact": {
             "name": "Inist-CNRS",
