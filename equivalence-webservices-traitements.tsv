@@ -75,9 +75,6 @@ loterre-annotate-/v1/fr/loterre-annotate/annotate	LoterreEnrich_annotate	Indexat
 loterre-resolvers-/v1/annotate	LoterreEnrich_annotate	Indexation
 loterre-resolvers-/v1/P66/annotate	LoterreEnrich_annotate	Indexation
 loterre-resolvers-/v1/QX8/annotate	LoterreEnrich_annotate	Indexation
-terms-tools-/v1/en/terms-matcher/json-indoc/annotate	LoterreEnrich_annotate	Indexation
-terms-tools-/v1/en/terms-matcher/json-standoff/annotate	LoterreEnrich_annotate	Indexation
-terms-tools-/v1/fr/terms-matcher/json-standoff/annotate	LoterreEnrich_annotate	Indexation
 loterre-resolvers-/v1/2XK/expand	LoterreEnrich_expand	Indexation
 loterre-resolvers-/v1/9SD/expand	LoterreEnrich_expand	Indexation
 loterre-resolvers-/v1/D63/expand	LoterreEnrich_expand	Indexation
@@ -153,4 +150,3 @@ data-topcitation-/v1/topcitation	topRefExtract	Validation
 transli-tal-/v1/translit/cyr	TransliTAL	TAL
 transli-tal-/v1/translit/hel/t1	TransliTAL	TAL
 transli-tal-/v1/translit/hel/t2	TransliTAL	TAL
-

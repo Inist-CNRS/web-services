@@ -64,7 +64,6 @@ All contributing instructions are in [CONTRIBUTING](CONTRIBUTING.md).
 - [software-extract](./services/software-extract) [![Docker Pulls](https://img.shields.io/docker/pulls/cnrsinist/ws-software-extract.svg)](https://hub.docker.com/r/cnrsinist/ws-software-extract/)
 - [tabbr-mine](./services/tabbr-mine) [![Docker Pulls](https://img.shields.io/docker/pulls/cnrsinist/ws-tabbr-mine.svg)](https://hub.docker.com/r/cnrsinist/ws-tabbr-mine/)
 - [terms-extraction](./services/terms-extraction) [![Docker Pulls](https://img.shields.io/docker/pulls/cnrsinist/ws-terms-extraction.svg)](https://hub.docker.com/r/cnrsinist/ws-terms-extraction/)
-- [terms-tools](./services/terms-tools) [![Docker Pulls](https://img.shields.io/docker/pulls/cnrsinist/ws-terms-tools.svg)](https://hub.docker.com/r/cnrsinist/ws-terms-tools/)
 - [text-anonymize](./services/text-anonymize) [![Docker Pulls](https://img.shields.io/docker/pulls/cnrsinist/ws-text-anonymize.svg)](https://hub.docker.com/r/cnrsinist/ws-text-anonymize/)
 - [text-clustering](./services/text-clustering) [![Docker Pulls](https://img.shields.io/docker/pulls/cnrsinist/ws-text-clustering.svg)](https://hub.docker.com/r/cnrsinist/ws-text-clustering/)
 - [text-lucene](./services/text-lucene) [![Docker Pulls](https://img.shields.io/docker/pulls/cnrsinist/ws-text-lucene.svg)](https://hub.docker.com/r/cnrsinist/ws-text-lucene/)
