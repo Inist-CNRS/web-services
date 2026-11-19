@@ -32,10 +32,8 @@ RUN uv pip install --system --no-cache \
     defusedxml==0.7.1 \
     unidecode==1.3.8 \
     tqdm==4.66.5 \
-    llama-cpp-python==0.2.90
-
-# Pre-download SBERT model into the base image HF cache; forbid HF network at runtime
-RUN python -c "from sentence_transformers import SentenceTransformer; SentenceTransformer('paraphrase-multilingual-MiniLM-L12-v2')"
+    llama-cpp-python==0.2.90 && \
+    python -c "from sentence_transformers import SentenceTransformer; SentenceTransformer('paraphrase-multilingual-MiniLM-L12-v2')"
 ENV HF_HUB_OFFLINE=1
 
 WORKDIR /app/public
