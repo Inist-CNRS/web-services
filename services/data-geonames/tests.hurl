@@ -20,7 +20,7 @@ POST {{host}}/v1/retrieve-json?indent=true
 content-type: application/json
 [Options]
 delay:160s
-retry: 3
+retry: 4
 retry-interval: 30s
 ```
 [
