@@ -5,9 +5,13 @@ import gc
 import json
 import os
 import re
+import signal
 import sys
 import time
 from xml.sax.saxutils import escape
+
+import defusedxml.ElementTree as DefusedET
+Q = chr(34)  # double quote, for XML attribute escaping
 
 import numpy as np
 from llama_cpp import Llama
@@ -31,10 +35,26 @@ parser.add_argument("--threads", type=int, default=min(8, os.cpu_count() or 4), 
 parser.add_argument("--checkpoint", default="checkpoint.jsonl", help="Fichier de reprise (classifications uniquement)")
 parser.add_argument("--llm-retries", type=int, default=3, help="Nombre de tentatives par appel LLM")
 parser.add_argument("--llm-max-error-rate", type=float, default=0.05, help="Taux d'erreurs LLM max avant abandon (0.05 = 5%)")
+parser.add_argument("--max-minutes", type=float, default=0, help="Duree max (minutes), exit 124 si depassee")
 args = parser.parse_args()
 
 preferred_languages = args.lang.split(",")
 start_time = time.time()
+deadline = start_time + args.max_minutes * 60 if args.max_minutes > 0 else None
+
+def check_deadline():
+    if deadline is not None and time.time() > deadline:
+        print("ERREUR: delai max atteint (--max-minutes). Abandon (exit 124).")
+        clean_exit(124)
+
+def on_sigterm(signum, frame):
+    print("SIGTERM recu. Abandon (exit 130).")
+    clean_exit(130)
+
+signal.signal(signal.SIGTERM, on_sigterm)
+
+def progress(event, **kw):
+    print(json.dumps({"event": event, "elapsed_s": round(time.time() - start_time, 1), **kw}, ensure_ascii=False), flush=True)
 
 checkpoint = {}
 if os.path.exists(args.checkpoint):
@@ -45,6 +65,20 @@ if os.path.exists(args.checkpoint):
                 e = json.loads(line)
                 checkpoint[(e["kind"], e["text1"], e["text2"])] = e["classification"]
 ckpt_file = open(args.checkpoint, "a", encoding="utf-8")
+
+def clean_exit(code, msg=""):
+    if msg:
+        print(msg)
+    try:
+        out_f.write("</rdf:RDF>\n")
+        out_f.close()
+    except Exception:
+        pass
+    try:
+        ckpt_file.close()
+    except Exception:
+        pass
+    sys.exit(code)
 
 def save_ckpt(kind, t1, t2, score, cls):
     ckpt_file.write(json.dumps({"kind": kind, "text1": t1, "text2": t2, "score": score, "classification": cls}, ensure_ascii=False) + "\n")
@@ -72,8 +106,17 @@ def is_word_order_permutation(text1, text2):
     words2 = text2.split()
     return sorted(words1) == sorted(words2) and words1 != words2
 
+MAX_SKO_SIZE = 200 * 1024 * 1024  # 200 Mio max par fichier SKOS
+
+def safe_parse_skos(file_path):
+    size = os.path.getsize(file_path)
+    if size > MAX_SKO_SIZE:
+        raise ValueError(f"{file_path} trop volumineux ({size} octets > {MAX_SKO_SIZE})")
+    DefusedET.parse(file_path)  # rejette XML dangereux (XXE, entites, billion laughs)
+    return Graph().parse(file_path, format="xml")
+
 def extract_skos_concepts(file_path):
-    g = Graph().parse(file_path, format="xml")
+    g = safe_parse_skos(file_path)
     concepts_set = set(g.subjects(RDF.type, SKOS.Concept))
     print(f"{file_path}: {len(g)} triplets, {len(concepts_set)} concepts")
     concepts = []
@@ -116,10 +159,14 @@ def extract_skos_concepts(file_path):
     return concepts
 
 print("\n=== Chargement SKOS ===")
-source_ontology = extract_skos_concepts(args.source)
-target_ontology = extract_skos_concepts(args.target)
+try:
+    source_ontology = extract_skos_concepts(args.source)
+    target_ontology = extract_skos_concepts(args.target)
+except Exception as e:
+    print(f"ERREUR: lecture SKOS impossible ({e}). Abandon (exit 2).")
+    sys.exit(2)
 
-out_f = open(args.output, "w", encoding="utf-8")
+out_f = open(args.output + ".tmp", "w", encoding="utf-8")
 out_f.write('<?xml version="1.0" encoding="UTF-8"?>\n')
 out_f.write(f'<rdf:RDF xmlns:rdf="{RDF}" xmlns:skos="{SKOS}" xmlns:owl="{OWL}">\n')
 
@@ -145,8 +192,8 @@ def write_pair(source_iri, target_iri, relation):
         return
     written.add(key)
     local = relation.split(":")[1]
-    out_f.write(f'  <rdf:Description rdf:about="{escape(source_iri)}">\n')
-    out_f.write(f'    <skos:{local} rdf:resource="{escape(target_iri)}" />\n')
+    out_f.write(f'  <rdf:Description rdf:about="{escape(source_iri, {Q: "&quot;"})}">\n')
+    out_f.write(f'    <skos:{local} rdf:resource="{escape(target_iri, {Q: "&quot;"})}" />\n')
     out_f.write('  </rdf:Description>\n')
     out_f.flush()
     relation_counts[relation] = relation_counts.get(relation, 0) + 1
@@ -183,12 +230,14 @@ target_texts = [c["all_text"] for c in target_ontology]
 source_emb = sbert.encode(source_texts, batch_size=64, show_progress_bar=True, convert_to_numpy=True).astype(np.float32)
 target_emb = sbert.encode(target_texts, batch_size=64, show_progress_bar=True, convert_to_numpy=True).astype(np.float32)
 del sbert
+check_deadline()
 gc.collect()
 
 print("\n=== Paires candidates ===")
 candidate_pairs = []
 block = 2048
 for start in tqdm(range(0, len(source_emb), block), desc="Candidats"):
+    check_deadline()
     sims = cosine_similarity(source_emb[start:start + block], target_emb)
     k = min(args.top_k, sims.shape[1])
     for i in range(sims.shape[0]):
@@ -213,6 +262,7 @@ gc.collect()
 del source_emb, target_emb, source_ontology, target_ontology, source_texts, target_texts
 gc.collect()
 print(f"{len(candidate_pairs)} paires candidates.")
+progress("candidates", count=len(candidate_pairs))
 
 # --- Point 1 : LLM obligatoire et robuste ---
 llm = None
@@ -295,6 +345,9 @@ related_pairs = []
 if llm and candidate_pairs:
     print("\n=== Classification LLM (equivalence) ===")
     for pair in tqdm(candidate_pairs, desc="Equivalence"):
+        check_deadline()
+        if llm_stats["calls"] % 50 == 0:
+            progress("classifying", llm_calls=llm_stats["calls"], total=len(candidate_pairs))
         t1, t2 = pair["source_text"], pair["target_text"]
         variant = is_singular_plural(t1, t2) or is_word_order_permutation(t1, t2)
         hint = "les deux libelles ne different que par une flexion (singulier/pluriel) ou une permutation de mots" if variant else None
@@ -317,6 +370,7 @@ if llm and candidate_pairs:
 if llm and related_pairs and not args.no_hierarchy:
     print(f"\n=== Raffinage hierarchique ({len(related_pairs)} paires) ===")
     for pair in tqdm(related_pairs, desc="Hierarchie"):
+        check_deadline()
         t1, t2 = pair["source_text"], pair["target_text"]
         key = ("hierarchy", t1, t2)
         if key in checkpoint:
@@ -337,6 +391,7 @@ elif related_pairs:
 out_f.write("</rdf:RDF>\n")
 out_f.close()
 ckpt_file.close()
+os.replace(args.output + ".tmp", args.output)
 
 total = sum(relation_counts.values())
 elapsed = time.time() - start_time
@@ -354,4 +409,20 @@ if llm is not None:
     del llm
 del candidate_pairs, related_pairs
 gc.collect()
+
+progress("done", total_alignments=total, counts=relation_counts)
+report = {
+    "generator": "loterre-align",
+    "source": args.source,
+    "target": args.target,
+    "params": {"lang": args.lang, "min_score": args.min_score, "top_k": args.top_k, "no_hierarchy": args.no_hierarchy, "max_minutes": args.max_minutes},
+    "counts": relation_counts,
+    "total_alignments": total,
+    "llm": dict(llm_stats),
+    "elapsed_seconds": round(elapsed, 1),
+}
+report_path = os.path.join(os.path.dirname(os.path.abspath(args.output)), "report.json")
+with open(report_path + ".tmp", "w", encoding="utf-8") as rf:
+    json.dump(report, rf, ensure_ascii=False, indent=2)
+os.replace(report_path + ".tmp", report_path)
 print("OK")
