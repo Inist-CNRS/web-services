@@ -15,7 +15,7 @@ RUN --mount=type=secret,id=webdav_login \
     dvc remote modify --local webdav-remote password "$(cat /run/secrets/webdav_password)"
 COPY ./data/*.skos.dvc /dvc/data/
 COPY ./v1/model_split.dvc /dvc/v1/
-RUN dvc pull -v && \
+RUN for i in 1 2 3 4 5; do dvc pull -v -j 2 && break; echo dvc pull attempt failed, retrying; sleep 10; done && \
     cat v1/model_split/* > v1/loterre-align.gguf && \
     rm -rf v1/model_split
 
@@ -25,6 +25,8 @@ FROM cnrsinist/ezs-python-pytorch-server:py3.10-no24-2.0.2
 
 WORKDIR /app
 RUN uv pip install --system --no-cache \
+    --extra-index-url https://abetlen.github.io/llama-cpp-python/whl/cpu \
+    --index-strategy unsafe-best-match \
     numpy==1.26.4 \
     sentence-transformers==3.0.1 \
     scikit-learn==1.5.2 \
