@@ -5,7 +5,7 @@
 # Developed using the following (unzipped) dataset: ../Datasets/PPS/dec_2022_dataset/formatted_data.zip.
 # @authors: Alexandre Clausse, Guillaume Cabanac, Pascal Cuxac, and Cyril Labbé
 # @since: 2023
-# @version: 17-JUN-2026 -- Filtering out mathematic formulas, ignoring abbreviations formatted as citations/ORCID
+# @version: 19-NOV-2026 -- Also extracting figure captions (figDesc), where Grobid may store footnote text
 
 # Requirements: pip3 install transformers==4.51.3 pandas==1.5.0 torch==2.7.1 accelerate==1.8.1 requests==2.32.3 beautifulsoup4==4.12.3 lxml==5.2.2
 # Model download: hf download allenai/scibert_scivocab_uncased --local-dir scibert_model
@@ -34,7 +34,7 @@ class ContentProcessor:
         pass
 
     # Method to extract text from PDF
-    def extract_text(self, pdf_fn: str, tag: str = "p") -> str:
+    def extract_text(self, pdf_fn: str, tags: tuple = ("p", "figDesc")) -> str:
         with io.open(pdf_fn, "rb") as fd:
             files = {"input": (pdf_fn, fd, "application/pdf")}
             try:
@@ -42,10 +42,11 @@ class ContentProcessor:
                 if response.status_code == 200:
                     tei_xml = BeautifulSoup(response.text, "xml")
                     content = list()
-                    for e in tei_xml.findAll(tag):
-                        for ee in e.findAll("formula"):
-                            ee.extract()
-                        content.append(e.text)
+                    for tag in tags:
+                        for e in tei_xml.findAll(tag):
+                            for ee in e.findAll("formula"):
+                                ee.extract()
+                            content.append(e.text)
                     return "\n".join(content)
                 else:
                     print(
