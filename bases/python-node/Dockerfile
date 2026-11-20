@@ -5,9 +5,11 @@ ENV NODE_VERSION=26.13.1
 ENV NODE_ARCH=x64
 
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
+# The official Node.js binary is linked against libatomic.so.1
 RUN apt-get update && \
     apt-get install -y --no-install-recommends \
         curl=8.14.1-2+deb13u7 \
+        libatomic1=14.2.0-19 \
         xz-utils=5.8.1-1+deb13u2 && \
     curl -fsSL https://nodejs.org/dist/v${NODE_VERSION}/node-v${NODE_VERSION}-linux-${NODE_ARCH}.tar.xz \
         | tar -xJf - -C /usr/local --strip-components=1 && \
