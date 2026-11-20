@@ -1,7 +1,7 @@
 # Dockerfile
 FROM ghcr.io/astral-sh/uv:0.12.12-python3.10-trixie-slim
 
-ENV NODE_VERSION=24.22.2
+ENV NODE_VERSION=26.13.1
 ENV NODE_ARCH=x64
 
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
