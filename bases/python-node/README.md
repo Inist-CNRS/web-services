@@ -1,4 +1,4 @@
-# python-node@2.1.1
+# python-node@2.2.0
 
 Ce répertoire contient de quoi construire une image Docker avec python et node
 sous Debian.
