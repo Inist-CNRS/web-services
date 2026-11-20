@@ -135,12 +135,6 @@ def get_information(item):
 
 # Filtre la sortie de l'API ROR pour ne récupérer que ce qui intéresse
 def find_first(json, city=None, short=False):
-
-    # Si l'option short est activée, on retourne directement le dictionnaire JSON
-    if short:
-        json_dict = get_information(json["items"][0])
-        return json_dict
-
     if json == "Error":
         return {"status": "Error from ROR API"}
 
@@ -149,6 +143,11 @@ def find_first(json, city=None, short=False):
 
     if "items" not in json or len(json["items"]) == 0:
         return {"status": "No items found or empty list"}
+
+    # Si l'option short est activée, on retourne directement le dictionnaire JSON
+    if short:
+        json_dict = get_information(json["items"][0])
+        return json_dict
 
     if not city:
         return {"status": "No city found"}
