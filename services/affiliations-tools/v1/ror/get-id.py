@@ -45,34 +45,38 @@ def extract_city(affiliation_data):
     return result
 
 
-# Requêtage de l'API pour les données filtrées
 @on_exception(expo, RateLimitException, max_time=60)
 @limits(calls=5, period=1)
 def request(name):
     if not name.strip():
+        print(f"[DEBUG] request: nom vide -> 'Error'", file=sys.stderr)
         return "Error"
 
     url = f"https://api.ror.org/organizations?affiliation={name.replace(' ', '%20')}"
     if url == "https://api.ror.org/organizations?affiliation=n/a":
+        print(f"[DEBUG] request: nom 'n/a' -> 'Error'", file=sys.stderr)
         return "Error"
 
     try:
         response = requests.get(url, headers={"Accept": "application/json"})
         response.raise_for_status()
     except HTTPError as http_err:
-        print(
-            f"HTTP error occurred: {http_err}", file=sys.stderr
-        )  # Erreur HTTP (par exemple, 404, 500, etc.)
+        print(f"HTTP error occurred: {http_err}", file=sys.stderr)
+        print(f"[DEBUG] request: HTTPError pour '{name}' -> None", file=sys.stderr)
     except Timeout as timeout_err:
-        print(
-            f"Timeout error occurred: {timeout_err}", file=sys.stderr
-        )  # La requête a expiré
+        print(f"Timeout error occurred: {timeout_err}", file=sys.stderr)
+        print(f"[DEBUG] request: Timeout pour '{name}' -> None", file=sys.stderr)
     except RequestException as req_err:
-        print(
-            f"Error occurred: {req_err}", file=sys.stderr
-        )  # Autres erreurs (par exemple, problèmes de connexion, etc.)
+        print(f"Error occurred: {req_err}", file=sys.stderr)
+        print(f"[DEBUG] request: RequestException pour '{name}' -> None", file=sys.stderr)
     else:
-        return response.json()
+        result = response.json()
+        nb_items = len(result.get("items", [])) if isinstance(result, dict) else "?"
+        print(
+            f"[DEBUG] request: '{name}' | status={response.status_code} | nb_items={nb_items}",
+            file=sys.stderr,
+        )
+        return result
 
 
 # Fonction d'appel de toutes les fonctions précédentes
@@ -131,12 +135,6 @@ def get_information(item):
 
 # Filtre la sortie de l'API ROR pour ne récupérer que ce qui intéresse
 def find_first(json, city=None, short=False):
-
-    # Si l'option short est activée, on retourne directement le dictionnaire JSON
-    if short:
-        json_dict = get_information(json["items"][0])
-        return json_dict
-
     if json == "Error":
         return {"status": "Error from ROR API"}
 
@@ -145,6 +143,11 @@ def find_first(json, city=None, short=False):
 
     if "items" not in json or len(json["items"]) == 0:
         return {"status": "No items found or empty list"}
+
+    # Si l'option short est activée, on retourne directement le dictionnaire JSON
+    if short:
+        json_dict = get_information(json["items"][0])
+        return json_dict
 
     if not city:
         return {"status": "No city found"}
@@ -184,6 +187,8 @@ def main():
         # Boucle pour l'affiliation courte (simple, on envoie tout)
         else:
             aff_short = request(affiliation)
+            if not aff_short or aff_short == "Error" or not aff_short.get("items"):
+                print(f"[EMPTY] affiliation={affiliation!r} -> {aff_short!r:.200}", file=sys.stderr)
             data["value"] = find_first(aff_short, short=True)
         sys.stdout.write(json.dumps(data, ensure_ascii=False))
         sys.stdout.write("\n")
