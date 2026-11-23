@@ -1,5 +1,5 @@
 # syntax=docker/dockerfile:1.2
-FROM cnrsinist/ezs-python-server:py3.10-no24-2.0.5
+FROM cnrsinist/ezs-python-server:py3.10-no24-2.0.6
 
 ENV EN_CORE_WEB_SM_VERSION=https://github.com/explosion/spacy-models/releases/download/en_core_web_sm-3.6.0/en_core_web_sm-3.6.0-py3-none-any.whl
 
