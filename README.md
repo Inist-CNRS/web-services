@@ -37,6 +37,7 @@ All contributing instructions are in [CONTRIBUTING](CONTRIBUTING.md).
 - [data-corpussummarize](./services/data-corpussummarize) [![Docker Pulls](https://img.shields.io/docker/pulls/cnrsinist/ws-data-corpussummarize.svg)](https://hub.docker.com/r/cnrsinist/ws-data-corpussummarize/)
 - [data-geonames](./services/data-geonames) [![Docker Pulls](https://img.shields.io/docker/pulls/cnrsinist/ws-data-geonames.svg)](https://hub.docker.com/r/cnrsinist/ws-data-geonames/)
 - [data-graph](./services/data-graph) [![Docker Pulls](https://img.shields.io/docker/pulls/cnrsinist/ws-data-graph.svg)](https://hub.docker.com/r/cnrsinist/ws-data-graph/)
+- [data-grobid](./services/data-grobid) [![Docker Pulls](https://img.shields.io/docker/pulls/cnrsinist/ws-data-grobid.svg)](https://hub.docker.com/r/cnrsinist/ws-data-grobid/)
 - [data-homogenise](./services/data-homogenise) [![Docker Pulls](https://img.shields.io/docker/pulls/cnrsinist/ws-data-homogenise.svg)](https://hub.docker.com/r/cnrsinist/ws-data-homogenise/)
 - [data-kwsimilarity](./services/data-kwsimilarity) [![Docker Pulls](https://img.shields.io/docker/pulls/cnrsinist/ws-data-kwsimilarity.svg)](https://hub.docker.com/r/cnrsinist/ws-data-kwsimilarity/)
 - [data-rapido](./services/data-rapido) [![Docker Pulls](https://img.shields.io/docker/pulls/cnrsinist/ws-data-rapido.svg)](https://hub.docker.com/r/cnrsinist/ws-data-rapido/)

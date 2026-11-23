@@ -56,6 +56,7 @@
     "services/data-corpussummarize",
     "services/data-geonames",
     "services/data-graph",
+    "services/data-grobid",
     "services/data-homogenise",
     "services/data-kwsimilarity",
     "services/data-rapido",
