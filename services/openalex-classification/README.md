@@ -1,4 +1,4 @@
-# ws-openalex-classification@1.0.5
+# ws-openalex-classification@1.0.6
 
 Classification hiérarchique (domains et fields) OpenAlex. 
 
