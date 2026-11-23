@@ -16,7 +16,7 @@ COPY ./v1/first-name/name_gender.pickle.dvc /dvc
 COPY ./v1/corporate/abbreviations.json.dvc /dvc
 RUN dvc pull -vv
 
-FROM cnrsinist/ezs-python-server:py3.10-no24-2.0.5
+FROM cnrsinist/ezs-python-server:py3.10-no24-2.0.6
 
 WORKDIR /app
 # Install all python dependencies

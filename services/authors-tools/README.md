@@ -1,4 +1,4 @@
-# ws-authors-tools@2.8.3
+# ws-authors-tools@2.8.4
 
 Les web services qui se lancent sur le champ `authors`
 
