@@ -1,4 +1,4 @@
-FROM cnrsinist/ezs-python-server:py3.10-no24-2.0.5
+FROM cnrsinist/ezs-python-server:py3.10-no24-2.0.6
 
 # USER daemon
 WORKDIR /app/public
