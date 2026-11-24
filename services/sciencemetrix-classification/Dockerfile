@@ -13,7 +13,7 @@ RUN --mount=type=secret,id=webdav_login \
 COPY ./v1/model.bin.dvc /dvc
 RUN dvc pull -v
 
-FROM cnrsinist/ezs-python-server:py3.10-no24-2.0.5
+FROM cnrsinist/ezs-python-server:py3.10-no24-2.0.6
 
 # Install pip dependencies
 RUN pip install --no-cache-dir \
