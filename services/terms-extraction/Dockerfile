@@ -1,4 +1,4 @@
-FROM cnrsinist/ezs-python-server:py3.10-no24-2.0.5
+FROM cnrsinist/ezs-python-server:py3.10-no24-2.0.6
 
 RUN apt-get update && \
     apt-get install -y --no-install-recommends locales=2.41-12+deb13u4 && \
