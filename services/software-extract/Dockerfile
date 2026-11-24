@@ -16,7 +16,7 @@ COPY ./v1/model-software.pt.dvc /dvc
 RUN dvc pull -v
 
 
-FROM cnrsinist/ezs-python-pytorch-server:py3.10-no24-2.0.2
+FROM cnrsinist/ezs-python-pytorch-server:py3.10-no24-2.0.3
 
 # Install all python dependencies
 RUN pip install --no-cache-dir \
