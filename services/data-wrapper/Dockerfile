@@ -1,5 +1,5 @@
 # syntax=docker/dockerfile:1.2
-FROM cnrsinist/ezs-python-saxon-server:py3.10-no24-2.1.1
+FROM cnrsinist/ezs-python-saxon-server:py3.10-no24-2.1.2
 
 WORKDIR /app
 
