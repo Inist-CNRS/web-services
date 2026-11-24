@@ -1,4 +1,4 @@
-# ws-data-wrapper@1.9.2
+# ws-data-wrapper@1.9.3
 
 Conversions en fichier corpus compressé
 
