@@ -17,7 +17,7 @@ RUN dvc pull -v && \
     rm data/x*
 
 
-FROM cnrsinist/ezs-python-pytorch-server:py3.10-no24-2.0.2
+FROM cnrsinist/ezs-python-pytorch-server:py3.10-no24-2.0.3
 WORKDIR /app
 
 RUN apt-get update && apt-get install -y --no-install-recommends curl=8.14.1-2+deb13u7 && apt-get clean && rm -rf /var/lib/apt/lists/*
