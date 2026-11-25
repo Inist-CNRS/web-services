@@ -1,4 +1,4 @@
-# ws-loterre-align@0.0.0
+# ws-loterre-align@0.0.1
 
 Alignement asynchrone de ressources SKOS avec les vocabulaires Loterre.
 

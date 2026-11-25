@@ -1,7 +1,7 @@
 {
   "private": true,
   "name": "ws-loterre-align",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "Alignement asynchrone de ressources SKOS avec Loterre",
   "repository": {
     "type": "git",

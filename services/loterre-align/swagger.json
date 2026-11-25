@@ -3,7 +3,7 @@
     "info": {
         "title": "loterre-align - Alignement asynchrone de ressources SKOS avec Loterre",
         "description": "Permet d'aligner une ressource SKOS téléversée avec une ressource Loterre, ou deux ressources Loterre (SBERT + LLM). Traitement asynchrone.",
-        "version": "0.0.0",
+        "version": "0.0.1",
         "termsOfService": "https://services.istex.fr/",
         "contact": {
             "name": "Inist-CNRS",
