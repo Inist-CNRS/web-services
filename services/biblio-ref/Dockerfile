@@ -20,7 +20,7 @@ WORKDIR /app/public
 COPY --chown=daemon:daemon . /app/public
 COPY --chown=daemon:daemon ./config.json /app/config.json
 
-# # Download the list of annulled papers from PPS + process it
-# RUN curl -go /tmp/pps.csv 'https://dbrech.irit.fr/pls/apex/f?p=9999:300::IR[allproblematicpapers]_CSV' && \
-#     python v1/csv2pickle.py /tmp/pps.csv && \
-#     rm /tmp/pps.csv
+# Download the list of annulled papers from PPS + process it
+RUN curl -go /tmp/pps.csv 'https://dbrech.irit.fr/pls/apex/f?p=9999:300::IR[allproblematicpapers]_CSV' && \
+    python v1/csv2pickle.py /tmp/pps.csv && \
+    rm /tmp/pps.csv
