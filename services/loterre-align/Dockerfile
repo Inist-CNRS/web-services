@@ -8,15 +8,15 @@ RUN uv pip install --system --no-cache dvc[webdav]==3.67.1 "pathspec==0.10.3"
 RUN --mount=type=secret,id=webdav_login \
     --mount=type=secret,id=webdav_password \
     --mount=type=secret,id=webdav_url \
-    git init
-    dvc init
-    dvc remote add -d webdav-remote "$(cat /run/secrets/webdav_url)"
-    dvc remote modify --local webdav-remote user "$(cat /run/secrets/webdav_login)"
+    git init && \
+    dvc init && \
+    dvc remote add -d webdav-remote "$(cat /run/secrets/webdav_url)" && \
+    dvc remote modify --local webdav-remote user "$(cat /run/secrets/webdav_login)" && \
     dvc remote modify --local webdav-remote password "$(cat /run/secrets/webdav_password)"
 COPY ./data/*.skos.dvc /dvc/data/
 COPY ./v1/model_split.dvc /dvc/v1/
-RUN (dvc pull -v -j 2 || (sleep 10 && dvc pull -v -j 2) || (sleep 10 && dvc pull -v -j 2) || (sleep 10 && dvc pull -v -j 2) || (sleep 10 && dvc pull -v -j 2))
-    cat v1/model_split/* > v1/loterre-align.gguf
+RUN (dvc pull -v -j 2 || (sleep 10 && dvc pull -v -j 2) || (sleep 10 && dvc pull -v -j 2) || (sleep 10 && dvc pull -v -j 2) || (sleep 10 && dvc pull -v -j 2)) && \
+    cat v1/model_split/* > v1/loterre-align.gguf && \
     rm -rf v1/model_split
 
 ##################################################################
@@ -24,8 +24,8 @@ RUN (dvc pull -v -j 2 || (sleep 10 && dvc pull -v -j 2) || (sleep 10 && dvc pull
 FROM cnrsinist/ezs-python-pytorch-server:py3.10-no24-2.0.2
 
 WORKDIR /app
-RUN apt-get update && apt-get -y --no-install-recommends install build-essential=12.12 make=4.4.1-2 gcc=4:14.2.0-1 cmake=3.31.6-2 pkg-config=1.8.1-4
-    apt-get clean && rm -rf /var/lib/apt/lists/*
+RUN apt-get update && apt-get -y --no-install-recommends install build-essential=12.12 make=4.4.1-2 gcc=4:14.2.0-1 cmake=3.31.6-2 pkg-config=1.8.1-4 && \
+    apt-get clean && rm -rf /var/lib/apt/lists/* && \
     uv pip install --system --no-cache \
     numpy==1.26.4 \
     sentence-transformers==3.0.1 \
@@ -34,7 +34,7 @@ RUN apt-get update && apt-get -y --no-install-recommends install build-essential
     defusedxml==0.7.1 \
     unidecode==1.3.8 \
     tqdm==4.66.5 \
-    llama-cpp-python==0.2.90
+    llama-cpp-python==0.2.90 && \
     python -c "from sentence_transformers import SentenceTransformer; SentenceTransformer('paraphrase-multilingual-MiniLM-L12-v2')"
 ENV HF_HUB_OFFLINE=1
 
