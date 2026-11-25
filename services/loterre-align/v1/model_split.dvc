@@ -1,0 +1,6 @@
+outs:
+- md5: d88c3c7fa64929523f10376ccf7dbcf1.dir
+  size: 4368439584
+  nfiles: 131
+  hash: md5
+  path: model_split

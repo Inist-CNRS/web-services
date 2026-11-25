@@ -1,0 +1,78 @@
+# These examples can be used directly in VSCode, using REST Client extension (humao.rest-client)
+# They are important, because used to generate the tests.hurl file.
+
+# Decommenter/commenter les lignes voulues pour tester localement
+@host=http://localhost:31976
+# @host=https://loterre-align.services.istex.fr
+
+###
+# @name v1AlignUploadVsLoterre
+# Alignement : ressource SKOS televersee (1 concept) avec la ressource Loterre SantePsy (2CX)
+POST {{host}}/v1/align?source=file&target=loterreID:2CX&min_score=0.7&top_k=5 HTTP/1.1
+Content-Type: application/json
+
+[
+  {
+    "skos": "<rdf:RDF xmlns:rdf=\"http://www.w3.org/1999/02/22-rdf-syntax-ns#\" xmlns:skos=\"http://www.w3.org/2004/02/skos/core#\"><skos:Concept rdf:about=\"http://ex.org/c1\"><skos:prefLabel xml:lang=\"fr\">mémoire</skos:prefLabel></skos:Concept></rdf:RDF>"
+  }
+]
+
+###
+# @name v1AlignTwoLoterre
+# Alignement de deux ressources Loterre (CogMemo P66 vs SantePsy 2CX), limite a 30 minutes
+POST {{host}}/v1/align?source=loterreID:P66&target=loterreID:2CX&max_minutes=30 HTTP/1.1
+Content-Type: application/json
+
+[{}]
+
+###
+# @name v1AlignWithWebhooks
+# Alignement avec notification par webhook (succes et echec)
+POST {{host}}/v1/align?source=file&target=loterreID:2CX HTTP/1.1
+Content-Type: application/json
+X-Webhook-Success: https://webhook.site/69300b22-a251-4c16-9905-f7ba218ae7e9
+X-Webhook-Failure: https://webhook.site/69300b22-a251-4c16-9905-f7ba218ae7e9
+
+[
+  {
+    "skos": "<rdf:RDF xmlns:rdf=\"http://www.w3.org/1999/02/22-rdf-syntax-ns#\" xmlns:skos=\"http://www.w3.org/2004/02/skos/core#\"><skos:Concept rdf:about=\"http://ex.org/c1\"><skos:prefLabel xml:lang=\"fr\">mémoire</skos:prefLabel></skos:Concept></rdf:RDF>"
+  }
+]
+
+###
+# @name v1AlignBadTarget
+# Erreur : identifiant Loterre inconnu
+POST {{host}}/v1/align?source=loterreID:XXXX&target=loterreID:2CX HTTP/1.1
+Content-Type: application/json
+
+[{}]
+
+###
+# @name v1RetrieveStatus
+# Statut du traitement (attendre "Process completed")
+POST {{host}}/v1/retrieve-status HTTP/1.1
+Content-Type: application/json
+
+[
+  { "value": "xMkWJX7GU" }
+]
+
+###
+# @name v1RetrieveRdf
+# Recuperation des alignements produits (RDF/XML SKOS)
+POST {{host}}/v1/retrieve-rdf HTTP/1.1
+Content-Type: application/json
+
+[
+  { "value": "xMkWJX7GU" }
+]
+
+###
+# @name v1RetrieveReport
+# Rapport JSON (statistiques du traitement)
+POST {{host}}/v1/retrieve-report?indent=true HTTP/1.1
+Content-Type: application/json
+
+[
+  { "value": "xMkWJX7GU" }
+]

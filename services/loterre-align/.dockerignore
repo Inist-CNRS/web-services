@@ -1,0 +1,10 @@
+# Ignore all files by default
+*
+
+# White list only the required files
+!config.json
+!data
+data/*.skos
+!v1
+v1/model_split/
+!swagger.json

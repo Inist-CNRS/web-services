@@ -72,6 +72,7 @@
     "services/hiddentext-detect",
     "services/infra-ner",
     "services/irc3-species",
+    "services/loterre-align",
     "services/loterre-annotate",
     "services/loterre-resolvers",
     "services/ner-tagger",
