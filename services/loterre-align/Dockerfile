@@ -24,9 +24,9 @@ RUN for i in 1 2 3 4 5; do dvc pull -v -j 2 && break; echo dvc pull attempt fail
 FROM cnrsinist/ezs-python-pytorch-server:py3.10-no24-2.0.2
 
 WORKDIR /app
-RUN uv pip install --system --no-cache \
-    --extra-index-url https://abetlen.github.io/llama-cpp-python/whl/cpu \
-    --index-strategy unsafe-best-match \
+RUN apt-get update && apt-get -y --no-install-recommends install build-essential=12.12 make=4.4.1-2 gcc=4:14.2.0-1 cmake=3.31.6-2 pkg-config=1.8.1-4 && \
+    apt-get clean && rm -rf /var/lib/apt/lists/* && \
+    uv pip install --system --no-cache --no-build-isolation \
     numpy==1.26.4 \
     sentence-transformers==3.0.1 \
     scikit-learn==1.5.2 \
@@ -35,7 +35,9 @@ RUN uv pip install --system --no-cache \
     unidecode==1.3.8 \
     tqdm==4.66.5 \
     llama-cpp-python==0.2.90 && \
-    python -c "from sentence_transformers import SentenceTransformer; SentenceTransformer('paraphrase-multilingual-MiniLM-L12-v2')"
+    python -c "from sentence_transformers import SentenceTransformer; SentenceTransformer('paraphrase-multilingual-MiniLM-L12-v2')" && \
+    apt-get remove -y --purge build-essential make gcc cmake pkg-config && \
+    apt-get autoremove -y
 ENV HF_HUB_OFFLINE=1
 
 WORKDIR /app/public
