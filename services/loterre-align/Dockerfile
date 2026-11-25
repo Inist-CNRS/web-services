@@ -15,7 +15,7 @@ RUN --mount=type=secret,id=webdav_login \
     dvc remote modify --local webdav-remote password "$(cat /run/secrets/webdav_password)"
 COPY ./data/*.skos.dvc /dvc/data/
 COPY ./v1/model_split.dvc /dvc/v1/
-RUN for i in 1 2 3 4 5; do dvc pull -v -j 2 && break; echo dvc pull attempt failed, retrying; sleep 10; done && \
+RUN (dvc pull -v -j 2 || (sleep 10 && dvc pull -v -j 2) || (sleep 10 && dvc pull -v -j 2) || (sleep 10 && dvc pull -v -j 2) || (sleep 10 && dvc pull -v -j 2)) && \
     cat v1/model_split/* > v1/loterre-align.gguf && \
     rm -rf v1/model_split
 
