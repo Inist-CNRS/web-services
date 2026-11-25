@@ -1,4 +1,4 @@
-# ws-transli-tal@1.1.1
+# ws-transli-tal@1.1.2
 
 TransliTAL is a suite of tools for producing and correcting romanizations for
 library records.  

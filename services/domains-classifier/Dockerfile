@@ -21,7 +21,7 @@ RUN dvc pull -vv
 ####
 # Build and install web services dependencies files
 ####
-FROM cnrsinist/ezs-python-server:py3.10-no24-2.0.5
+FROM cnrsinist/ezs-python-server:py3.10-no24-2.0.6
 
 WORKDIR /app
 # Install all python dependencies (all available as prebuilt wheels).

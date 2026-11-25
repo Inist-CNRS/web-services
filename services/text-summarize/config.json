@@ -10,6 +10,7 @@
         "EZS_VERBOSE": false,
         "NODE_OPTIONS": "--max_old_space_size=1024",
         "NODE_ENV": "production",
+        "NODE_USE_ENV_PROXY": 1,
         "GROBID_API_URL": "TRUE_GROBID_URL"
     }
 }

@@ -1,5 +1,5 @@
 # syntax=docker/dockerfile:1.2
-FROM cnrsinist/ezs-python-server:py3.10-no24-2.0.5
+FROM cnrsinist/ezs-python-server:py3.10-no24-2.0.6
 
 ENV EN_CORE_WEB_SM_VERSION=https://github.com/explosion/spacy-models/releases/download/en_core_web_sm-3.6.0/en_core_web_sm-3.6.0-py3-none-any.whl
 
@@ -7,7 +7,7 @@ ENV EN_CORE_WEB_SM_VERSION=https://github.com/explosion/spacy-models/releases/do
 # C++ compiler, then remove the build dependencies from the image.
 RUN apt-get update && apt-get install -y --no-install-recommends \
     g++=4:14.2.0-1 \
-    libc6-dev=2.41-12+deb13u4 \
+    libc6-dev=2.41-12+deb13u5 \
     libprotobuf-dev=3.21.12-11+deb13u1 \
     libprotobuf32t64=3.21.12-11+deb13u1 \
     make=4.4.1-2 \

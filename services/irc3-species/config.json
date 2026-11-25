@@ -13,6 +13,7 @@
         "IRC3SP_TABLE": "/app/public/v1/CoL.txt",
         "IRC3SP_CASE_SENSITIVE": true,
         "NODE_OPTIONS": "--max_old_space_size=1024",
-        "NODE_ENV": "production"
+        "NODE_ENV": "production",
+        "NODE_USE_ENV_PROXY": 1
     }
 }

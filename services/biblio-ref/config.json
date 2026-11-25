@@ -11,6 +11,7 @@
         "EZS_VERBOSE": false,
         "NODE_OPTIONS": "--max_old_space_size=1024",
         "NODE_ENV": "production",
+        "NODE_USE_ENV_PROXY": 1,
         "CROSSREF_API_KEY": "real_crossref_api_key",
         "GROBID_API_URL": "real_grobid_api_key",
         "METADORE_API_KEY": "real_metadore_key",

@@ -1,4 +1,4 @@
-# ws-software-extract@1.0.2
+# ws-software-extract@1.0.3
 
 Extrait des noms de logiciels dans un texte écrit en anglais.
 
