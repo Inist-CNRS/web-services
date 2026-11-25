@@ -26,7 +26,7 @@ FROM cnrsinist/ezs-python-pytorch-server:py3.10-no24-2.0.2
 WORKDIR /app
 RUN apt-get update && apt-get -y --no-install-recommends install build-essential=12.12 make=4.4.1-2 gcc=4:14.2.0-1 cmake=3.31.6-2 pkg-config=1.8.1-4 && \
     apt-get clean && rm -rf /var/lib/apt/lists/* && \
-    uv pip install --system --no-cache --no-build-isolation \
+    uv pip install --system --no-cache \
     numpy==1.26.4 \
     sentence-transformers==3.0.1 \
     scikit-learn==1.5.2 \
