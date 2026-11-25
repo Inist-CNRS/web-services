@@ -11,7 +11,7 @@ DATA_DIR="${ALIGN_DATA_DIR:-/app/data}"
 WORK="/tmp/upload/$IDENTIFIER"
 OUT="$WORK/out/$IDENTIFIER"
 LOG="/tmp/logs/$IDENTIFIER"
-mkdir -p "$WORK" "$OUT" /tmp/logs
+mkdir -p "$WORK" "$OUT" /tmp/logs /tmp/retrieve
 
 logline() { printf '{"timestamp":%s,"generator":"loterre-align","identifier":"%s","message":"%s"}\n' "$(date +%s000)" "$IDENTIFIER" "$1" >> "$LOG"; }
 
@@ -47,7 +47,7 @@ python3 "$APP_DIR/v1/align.py" "$SRC" "$TGT" \
 case "$EXIT" in
   0)
     [ -f "$OUT/report.json" ] || echo '{}' > "$OUT/report.json"
-    tar -czf "/tmp/retrieve/$IDENTIFIER" -C "$WORK/out" "$IDENTIFIER"
+    tar -czf "/tmp/retrieve/$IDENTIFIER" -C "$WORK/out" "$IDENTIFIER" || EXIT=$?
     logline "Process completed"
     printf '[{"id":"%s","value":"done"}]\n' "$IDENTIFIER"
     ;;
