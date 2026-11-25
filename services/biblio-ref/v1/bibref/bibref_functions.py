@@ -25,9 +25,10 @@ metadore_headers = {
 
 session_crossref = LimiterSession(per_second=10)
 session_metadore = LimiterSession(per_second=10)
-REQUEST_TIMEOUT = 10  # seconds.
+REQUEST_TIMEOUT = 15  # seconds. Without timeout, one request can block forever
 title_match_threshold = 0.84
 source_match_threshold = 0.8
+year_tolerance = 1  # years of difference accepted between the ref and the database
 
 
 def _load_doi_set(path):
@@ -117,6 +118,14 @@ def extract_year_from_ref(ref_biblio):
     year_match = _YEAR_RE.search(ref_biblio)
 
     return year_match.group(0) if year_match else None
+
+
+def extract_years_from_ref(ref_biblio):
+    """
+    Extrait TOUTES les années d'une référence bibliographique (année de publication,
+    date d'accès, etc.), sous forme d'entiers.
+    """
+    return [int(year) for year in _YEAR_RE.findall(ref_biblio)]
 
 
 def process_mismatches(mismatches_json):
@@ -412,16 +421,18 @@ def compare_pubinfo_refbiblio(item, ref_biblio):
         potential_different_content["title"] = item["title"]
 
     # Check first author
+    # Whole word(s) match : "li" must not match "clinical". Both strings are uniformized
+    # (single spaces), so padding with spaces is enough to delimit the words.
     first_author = uniformize(item["first_author_name"])
-    if first_author and first_author in ref_biblio:
+    if first_author and f" {first_author} " in f" {ref_biblio} ":
         items_score += 1
     else:
         potential_different_content["first_author_name"] = item["first_author_name"]
 
     # Date
-    ref_year = extract_year_from_ref(ref_biblio)
-
-    if item["date"] and item["date"] == ref_year:
+    # The year may differ by 1 (online vs print version)
+    if item["date"].isdigit() and any(abs(year - int(item["date"])) <= year_tolerance
+                                      for year in extract_years_from_ref(ref_biblio)):
         items_score += 1
     else:
         potential_different_content["date"] = item["date"]
@@ -445,8 +456,6 @@ def compare_pubinfo_refbiblio(item, ref_biblio):
     return items_score, title_score, doi, potential_different_content
 
 
-# This is the function to update if you want stronger or weaker criteria
-# For now, criteria is 2 or more matches on informations on title, authors, date and source except if it is date and source.
 def verify_biblio_without_doi(ref_biblio, headers=crossref_headers, wrong_doi=False):
     """
     check with crossref api if a biblio ref is correct.
@@ -492,11 +501,8 @@ def verify_biblio_without_doi(ref_biblio, headers=crossref_headers, wrong_doi=Fa
                 most_similar_item_info = item_info
                 continue
 
-            if match_items_score == 2 and title_score > 0.98:
-                return "found", doi, item_info, potential_different_content
-
-            # Here match_items_score =/= title that's why it's 2 either
-            if match_items_score == 2 and 0.6 < title_score < 0.9:
+            # title_score >= 0.6 here : so 2 criteria =/= title + partial title is accept
+            if match_items_score == 2:
                 return "found", doi, item_info, potential_different_content
 
         if wrong_doi:

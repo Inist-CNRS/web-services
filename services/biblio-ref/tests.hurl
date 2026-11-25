@@ -149,11 +149,11 @@ HTTP 200
             "url_pdf": "https://cnrs.hal.science/hal-04461354/file/anki-gaillard-revol.pdf"
         },
         {
-            "doi": "",
-            "status": "not_found",
-            "mismatches_detected": "",
+            "doi": "10.18653/v1/n19-1078",
+            "status": "found",
+            "mismatches_detected": "title ; source",
             "reference": "Akbik, A., D. Blythe, et R. Vollgraf (2018). Contextual string embeddings for sequence labe- ling.",
-            "reference_found": "",
+            "reference_found": "FROM CROSSREF > Akbik et al. (2019). Pooled Contextualized Embeddings for Named Entity Recognition. Proceedings of the 2019 Conference of the North American Chapter of the Association for Computational Linguistics: Human Language Technologies, Volume 1 (Long and Short Papers). 10.18653/v1/n19-1078.",
             "url_pdf": "https://cnrs.hal.science/hal-04461354/file/anki-gaillard-revol.pdf"
         },
         {
