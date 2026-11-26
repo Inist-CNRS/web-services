@@ -2,7 +2,7 @@ POST {{host}}/v1/expand?indent=true
 content-type: application/json
 [Options]
 # Uses two IP-protected web services in production
-skip: {{blocked}}
+# skip: {{blocked}}
 [
   { "value": "Baran, N (reprint author), Univ Zagreb, Dept Phys, Bijenieka Cesta 32, Zagreb 10000, Croatia."},
   { "value": "Harikane, Y (reprint author), Univ Tokyo, Inst Cosm Ray Res, 5-1-5 Kashiwanoha, Kashiwa, Chiba 2778582, Japan.; Harikane, Y (reprint author), Univ Tokyo, Grad Sch Sci, Dept Phys, Bunkyo Ku, 7-3-1 Hongo, Tokyo 1130033, Japan."},
@@ -569,6 +569,10 @@ content-type: application/json
   {
     "id": 3,
     "value": "Sphere Energy SAS, 250 Bis Boulevard Saint Germain, 75007, Paris, France"
+  },
+  {
+    "id": 4,
+    "value": "e-mail"
   }
 ]
 
@@ -633,5 +637,11 @@ HTTP 200
         "status": "No match found",
         "matching_string": "sphere energy sas",
         "information_ror": {}
+    }
+},
+{
+    "id": 4,
+    "value": {
+        "status": "No items found or empty list"
     }
 }]
