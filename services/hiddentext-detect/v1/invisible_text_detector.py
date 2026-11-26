@@ -3,8 +3,8 @@
 Ce script détecte et extrait le texte invisible dans les fichiers PDF.
 Il identifie plusieurs types de texte caché :
   - Texte positionné en dehors des limites de la page
-  - Texte de très petite taille (< 2 points)
-  - Texte blanc ou transparent
+  - Texte de très petite taille (< min_font_size points)
+  - Texte de la même couleur que son fond (blanc sur blanc, gris sur gris, etc.)
     
 Si aucun fichier n'est spécifié, le script renvoie: `{ "value": "No data to process" }`
 """
@@ -19,19 +19,22 @@ import json
 class InvisibleTextDetector:
     """Détecteur de texte invisible dans les PDFs"""
     
-    def __init__(self, min_font_size: float = 2.0, color_threshold: float = 0.95):
+    def __init__(self, min_font_size: float = 3.0, color_threshold: float = 0.95,
+                 color_tolerance: float = 0.05):
         """
         Initialise le détecteur
         
         Args:
             min_font_size: Taille minimale de police considérée comme visible (en points)
             color_threshold: Seuil pour détecter les couleurs claires (0-1)
+            color_tolerance: Écart maximal (0-1) entre la couleur du texte et celle
+                             du fond pour considérer qu'elles sont identiques
         """
         self.min_font_size = min_font_size
         self.color_threshold = color_threshold
+        self.color_tolerance = color_tolerance
     
     def is_outside_page(self, x0: float, y0: float, page_width: float, page_height: float) -> Tuple[bool, List[str]]:
-        # voir si le texte est en blanc ou transparent
         """
         Vérifie si un caractère est en dehors des limites de la page
         
@@ -62,60 +65,85 @@ class InvisibleTextDetector:
             return True, f"Taille du texte minuscule ({size:.2f}pt)"
         return False, ""
 
+    def normalize_color(self, col) -> Optional[Tuple[float, float, float]]:
+        """Ramène gris / RGB / CMYK au format (r, g, b) entre 0 et 1."""
+        if col is None:
+            return None
 
-    def is_char_in_same_color_rect(self, char: dict, page) -> Tuple[bool, str]:
-        
-        # Récupération de la couleur du caractère
-        char_color = char.get('non_stroking_color')
-        if char_color is None:
-            return False, ""
+        # Un seul nombre → gris
+        if isinstance(col, (int, float)):
+            return (col, col, col)
 
-        def normalize_color(col):
-            # Normalisation : toutes les couleurs sont ramenées au format [R, G, B]
-            if isinstance(col, (list, tuple)):
-                if len(col) == 1: return [col[0]]*3
-                if len(col) == 3: return list(col)
-            return [col, col, col] if isinstance(col, (int, float)) else None
+        if len(col) == 1:   # gris
+            return (col[0], col[0], col[0])
+        if len(col) == 3:   # RGB
+            return tuple(col)
+        if len(col) == 4:   # CMYK
+            c, m, y, k = col
+            return ((1 - c) * (1 - k), (1 - m) * (1 - k), (1 - y) * (1 - k))
 
-        # Normalisation de la couleur du caractère
-        char_rgb = normalize_color(char_color)
+        return None  # format inconnu
+
+    def get_filled_shapes(self, page) -> List[dict]:
+        """Récupère les formes remplies de la page avec leur couleur."""
+        shapes = []
+        for shape in page.rects + page.curves:
+            if not shape.get('fill', True):
+                continue
+
+            rgb = self.normalize_color(shape.get('non_stroking_color'))
+            if rgb is None:
+                continue
+
+            shapes.append({
+                'x0': shape['x0'], 'x1': shape['x1'],
+                'top': shape['top'], 'bottom': shape['bottom'],
+                'rgb': rgb,
+            })
+        return shapes
+    
+    def get_background_color(self, char: dict, shapes: List[dict]) -> Tuple[float, float, float]:
+        """
+        Renvoie la couleur du fond sous le centre du caractère (blanc par défaut).
+        ==> Trouver le fond
+        """
+        cx = (char['x0'] + char['x1']) / 2
+        cy = (char['top'] + char['bottom']) / 2
+
+        bg_rgb = (1, 1, 1)  # page blanche par défaut
+        for shape in shapes:
+            if shape['x0'] <= cx <= shape['x1'] and shape['top'] <= cy <= shape['bottom']:
+                bg_rgb = shape['rgb']  # la dernière forme est dessinée au-dessus
+        return bg_rgb
+
+    def same_color(self, rgb1, rgb2) -> bool:
+        """
+        Deux couleurs sont identiques si chaque composante diffère de moins que la tolérance.
+        ==> comparer deux couleurs
+        """
+        return all(abs(a - b) < self.color_tolerance for a, b in zip(rgb1, rgb2))
+
+    def is_char_in_same_color_rect(self, char: dict, shapes: List[dict]) -> Tuple[bool, str]:
+        """
+        Vérifie si un caractère a la même couleur que son fond.
+        ==> 
+        """
+        char_rgb = self.normalize_color(char.get('non_stroking_color'))
         if char_rgb is None:
             return False, ""
 
-        def is_white(rgb) -> bool:
-            return all(v >= 0.99 for v in rgb)
-
-        # On vérifie si la couleur (normalisée) du caractère est blanche ([1, 1, 1])
-        if not is_white(char_rgb):
+        # Texte blanc de grande taille : probablement un titre visible sur un fond foncé
+        is_white = all(v >= 0.99 for v in char_rgb)
+        if is_white and char.get('size', 0) > 20:
             return False, ""
 
-        # Texte blanc de grande taille → probablement visible sur fond coloré/image
-        if char.get('size', 0) > 20:
-            return False, ""
+        bg_rgb = self.get_background_color(char, shapes)
 
-        # Coordonnées du caractère pour vérifier sa position dans les rects
-        char_x0, char_y0, char_x1, char_y1 = char.get('x0'), char.get('y0'), char.get('x1'), char.get('y1')
+        if self.same_color(char_rgb, bg_rgb):
+            return True, "Texte de la même couleur que son fond"
+        return False, ""
 
-         # Récupération de toutes les shapes de la page
-        shapes = list(page.rects)
-        for curve in page.curves:
-            if curve.get('non_stroking_color') is not None:
-                shapes.append(curve)
-
-        # Parcours de tous les rects/shapes de la page pour vérifier si le caractère blanc est contenu dans une forme colorée non-blanche
-        for shape in shapes:
-            shape_x0, shape_y0, shape_x1, shape_y1 = shape.get('x0'), shape.get('y0'), shape.get('x1'), shape.get('y1')
-            
-            # Vérification que le caractère est bien à l'intérieur du rect
-            if (shape_x0 <= char_x0 and shape_x1 >= char_x1 and shape_y0 <= char_y0 and shape_y1 >= char_y1):
-                shape_rgb = normalize_color(shape.get('non_stroking_color'))
-                if shape_rgb and not is_white(shape_rgb):
-                    return False, ""
-
-        # Texte blanc, hors rect coloré → fond blanc par défaut → invisible
-        return True, "Texte blanc sur fond blanc"
-
-    def analyze_character(self, char: dict, page_width: float, page_height: float, page) -> Tuple[bool, List[str]]:
+    def analyze_character(self, char: dict, page_width: float, page_height: float, shapes: List[dict]) -> Tuple[bool, List[str]]:
         """
         Analyse un caractère pour déterminer s'il est invisible
         
@@ -123,6 +151,7 @@ class InvisibleTextDetector:
             char: Dictionnaire contenant les informations du caractère
             page_width: Largeur de la page
             page_height: Hauteur de la page
+            shapes: Formes remplies de la page (voir get_filled_shapes)
         
         Returns:
             Tuple (est_invisible, liste_des_raisons)
@@ -132,8 +161,6 @@ class InvisibleTextDetector:
         # Extraire les informations du caractère
         x0 = char.get('x0', 0)
         y0 = char.get('y0', 0)
-        x1 = char.get('x1', 0)
-        y1 = char.get('y1', 0)
         size = char.get('size', 0)
         
         # Vérifier la position
@@ -147,7 +174,7 @@ class InvisibleTextDetector:
             reasons.append(size_reason)
 
         # Vérifier la couleur
-        in_same_rect, rect_reason = self.is_char_in_same_color_rect(char, page)
+        in_same_rect, rect_reason = self.is_char_in_same_color_rect(char, shapes)
         if in_same_rect:
             reasons.append(rect_reason)
         
@@ -201,6 +228,7 @@ class InvisibleTextDetector:
         }
         
         chars = page.chars
+        shapes = self.get_filled_shapes(page)  # calculé une seule fois par page
         current_span = {'text': '', 'reasons': set(), 'positions': [], 'size': 0}
 
         for char in chars:
@@ -210,7 +238,7 @@ class InvisibleTextDetector:
             
             # Vérifier si le caractère est suspect (même pour les espaces)
             is_suspicious, reasons = self.analyze_character(
-                char, page.width, page.height, page
+                char, page.width, page.height, shapes
             )
             
             if is_suspicious:
@@ -261,14 +289,15 @@ def result_filter(dict) :
     res_list = []
     for page_items in res.values():
         for item in page_items:
-            res_list.append(item)
+            if len(item["Texte_suspect"]) > 4:
+                res_list.append(item)
     
     return res_list
 
 # Main program
 if __name__ == "__main__":
 
-    detector = InvisibleTextDetector(min_font_size=2.0, color_threshold=0.95)
+    detector = InvisibleTextDetector(min_font_size=3.0, color_threshold=0.95, color_tolerance=0.05)
     for line in sys.stdin:
         data = json.loads(line)
         if "filename" in data.keys():
