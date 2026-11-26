@@ -22,6 +22,27 @@ jsonpath "$[0].value[1]['Texte_suspect']" exists
 jsonpath "$[0].value[1].Motif" exists
 jsonpath "$[0].value[1].Motif[0]" == "Texte hors des limites de la page"
 
+# Cas pdfPlumber : Texte de la même couleur que son fond (ici, gris sur gris)
+POST {{host}}/v1/hiddentext?indent=true
+Content-Type: application/pdf
+[Options]
+skip: {{blocked}}
+file,examples/example_same_color_background.pdf;
+
+HTTP 200
+Content-Type: application/json
+[Asserts]
+jsonpath "$[0].value" exists
+jsonpath "$[0].value[0]['Page']" exists
+jsonpath "$[0].value[0]['Texte_suspect']" exists
+jsonpath "$[0].value[0].Motif" exists
+jsonpath "$[0].value[0].Motif[0]" == "Texte de la même couleur que son fond"
+
+jsonpath "$[0].value[1]['Page']" exists
+jsonpath "$[0].value[1]['Texte_suspect']" exists
+jsonpath "$[0].value[1].Motif" exists
+jsonpath "$[0].value[1].Motif[0]" == "Texte hors des limites de la page"
+
 # Cas pdfPlumber : Texte blanc sur fond blanc et taille du texte minuscule 
 POST {{host}}/v1/hiddentext?indent=true
 Content-Type: application/pdf
@@ -41,7 +62,7 @@ jsonpath "$[0].value[0].Motif[0]" == "Taille du texte minuscule (0.01pt)"
 jsonpath "$[0].value[1]['Page']" exists
 jsonpath "$[0].value[1]['Texte_suspect']" exists
 jsonpath "$[0].value[1].Motif" exists
-jsonpath "$[0].value[1].Motif[0]" == "Texte blanc sur fond blanc"
+jsonpath "$[0].value[1].Motif[0]" == "Texte de la même couleur que son fond"
 
 # Cas pyMuPDF : Texte noir caché sous une image opaque
 POST {{host}}/v1/hiddentext?indent=true
