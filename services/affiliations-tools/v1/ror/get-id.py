@@ -1,10 +1,13 @@
 #!/usr/bin/env python3
 import json
 import sys
+import os
 import requests
 from requests.exceptions import HTTPError, Timeout, RequestException
 from ratelimit import limits, RateLimitException
 from backoff import on_exception, expo
+
+EZS_VERBOSE = os.getenv("EZS_VERBOSE")
 
 # Normalisation ville (supprime " City" de la ville)
 def normalize_city(city):
@@ -49,12 +52,14 @@ def extract_city(affiliation_data):
 @limits(calls=5, period=1)
 def request(name):
     if not name.strip():
-        print(f"[DEBUG] request: nom vide -> 'Error'", file=sys.stderr)
+        if EZS_VERBOSE == "true":
+            print(f"[DEBUG] request: nom vide -> 'Error'", file=sys.stderr)
         return "Error"
 
     url = f"https://api.ror.org/organizations?affiliation={name.replace(' ', '%20')}"
     if url == "https://api.ror.org/organizations?affiliation=n/a":
-        print(f"[DEBUG] request: nom 'n/a' -> 'Error'", file=sys.stderr)
+        if EZS_VERBOSE == "true":
+            print(f"[DEBUG] request: nom 'n/a' -> 'Error'", file=sys.stderr)
         return "Error"
 
     try:
@@ -71,11 +76,12 @@ def request(name):
         print(f"[DEBUG] request: RequestException pour '{name}' -> None", file=sys.stderr)
     else:
         result = response.json()
-        nb_items = len(result.get("items", [])) if isinstance(result, dict) else "?"
-        print(
-            f"[DEBUG] request: '{name}' | status={response.status_code} | nb_items={nb_items}",
-            file=sys.stderr,
-        )
+        if EZS_VERBOSE == "true":
+            nb_items = len(result.get("items", [])) if isinstance(result, dict) else "?"
+            print(
+                f"[DEBUG] request: '{name}' | status={response.status_code} | nb_items={nb_items}",
+                file=sys.stderr,
+            )
         return result
 
 
