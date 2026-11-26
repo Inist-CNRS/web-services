@@ -6,6 +6,7 @@ import requests
 from requests.exceptions import HTTPError, Timeout, RequestException
 from ratelimit import limits, RateLimitException
 from backoff import on_exception, expo
+from urllib.parse import quote_plus
 
 EZS_VERBOSE = os.getenv("EZS_VERBOSE")
 
@@ -56,7 +57,8 @@ def request(name):
             print(f"[DEBUG] request: nom vide -> 'Error'", file=sys.stderr)
         return "Error"
 
-    url = f"https://api.ror.org/organizations?affiliation={name.replace(' ', '%20')}"
+    encode_name = quote_plus(name)
+    url = f"https://api.ror.org/organizations?affiliation={encode_name}"
     if url == "https://api.ror.org/organizations?affiliation=n/a":
         if EZS_VERBOSE == "true":
             print(f"[DEBUG] request: nom 'n/a' -> 'Error'", file=sys.stderr)
