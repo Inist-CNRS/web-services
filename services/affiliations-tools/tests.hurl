@@ -569,6 +569,10 @@ content-type: application/json
   {
     "id": 3,
     "value": "Sphere Energy SAS, 250 Bis Boulevard Saint Germain, 75007, Paris, France"
+  },
+  {
+    "id": 4,
+    "value": "e-mail"
   }
 ]
 
@@ -633,5 +637,11 @@ HTTP 200
         "status": "No match found",
         "matching_string": "sphere energy sas",
         "information_ror": {}
+    }
+},
+{
+    "id": 4,
+    "value": {
+        "status": "No items found or empty list"
     }
 }]
