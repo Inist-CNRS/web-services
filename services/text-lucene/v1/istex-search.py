@@ -10,12 +10,14 @@ import datetime
 
 api_key = os.getenv("ILAAS_API_KEY")
 model = "gemma-4-31b"
+current_date = datetime.date.today()
+current_year = current_date.year
 
 
 def construct_llm_prompt(user_prompt):
     with open("./v1/prompt.txt", "r", encoding="utf-8") as f:
         template = f.read()
-    return template.format(user_prompt=user_prompt)
+    return template.format(user_prompt=user_prompt, current_year=current_year)
 
 
 def generate_lucene(prompt: str, model_name: str) -> str:
@@ -23,11 +25,12 @@ def generate_lucene(prompt: str, model_name: str) -> str:
     headers = {
         "Authorization": f"Bearer {api_key}",
         "Content-Type": "application/json"
-    }
+        }
     payload = {
         "model": model_name,
         "messages": [{"role": "user", "content": f"{prompt}"}],
         "stream": False,
+        "temperature": 0,
         "max_completion_tokens": 12288
     }
     response = requests.post(
